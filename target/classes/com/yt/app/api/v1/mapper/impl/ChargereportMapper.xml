@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.ChargereportMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,snapshotid,statdatekey,statdatename,regionid,regionname,branchid,branchname,campusid,campusname,campusage,staffid,staffoaname,staffjobtype,staffjobname,staffage,grade,gradename,chargetype,chargetypename,chargemoney,lastchargemoney,chargemoneydiff,chargemoneyratio,chargepeople,lastchargepeople,chargepeoplediff,chargepeopleratio,chargeaverage,lastchargeaverage,chargeaveragediff,chargeaverageratio
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Chargereport">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="snapshotid" column="snapshotid" />
+         <id property="statdatekey" column="statdatekey" />
+         <id property="statdatename" column="statdatename" />
+         <id property="regionid" column="regionid" />
+         <id property="regionname" column="regionname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="campusage" column="campusage" />
+         <id property="staffid" column="staffid" />
+         <id property="staffoaname" column="staffoaname" />
+         <id property="staffjobtype" column="staffjobtype" />
+         <id property="staffjobname" column="staffjobname" />
+         <id property="staffage" column="staffage" />
+         <id property="grade" column="grade" />
+         <id property="gradename" column="gradename" />
+         <id property="chargetype" column="chargetype" />
+         <id property="chargetypename" column="chargetypename" />
+         <id property="chargemoney" column="chargemoney" />
+         <id property="lastchargemoney" column="lastchargemoney" />
+         <id property="chargemoneydiff" column="chargemoneydiff" />
+         <id property="chargemoneyratio" column="chargemoneyratio" />
+         <id property="chargepeople" column="chargepeople" />
+         <id property="lastchargepeople" column="lastchargepeople" />
+         <id property="chargepeoplediff" column="chargepeoplediff" />
+         <id property="chargepeopleratio" column="chargepeopleratio" />
+         <id property="chargeaverage" column="chargeaverage" />
+         <id property="lastchargeaverage" column="lastchargeaverage" />
+         <id property="chargeaveragediff" column="chargeaveragediff" />
+         <id property="chargeaverageratio" column="chargeaverageratio" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Chargereport">
+  insert into chargereport (id,snapshotid,statdatekey,statdatename,regionid,regionname,branchid,branchname,campusid,campusname,campusage,staffid,staffoaname,staffjobtype,staffjobname,staffage,grade,gradename,chargetype,chargetypename,chargemoney,lastchargemoney,chargemoneydiff,chargemoneyratio,chargepeople,lastchargepeople,chargepeoplediff,chargepeopleratio,chargeaverage,lastchargeaverage,chargeaveragediff,chargeaverageratio)
+         values (#{id},#{snapshotid},#{statdatekey},#{statdatename},#{regionid},#{regionname},#{branchid},#{branchname},#{campusid},#{campusname},#{campusage},#{staffid},#{staffoaname},#{staffjobtype},#{staffjobname},#{staffage},#{grade},#{gradename},#{chargetype},#{chargetypename},#{chargemoney},#{lastchargemoney},#{chargemoneydiff},#{chargemoneyratio},#{chargepeople},#{lastchargepeople},#{chargepeoplediff},#{chargepeopleratio},#{chargeaverage},#{lastchargeaverage},#{chargeaveragediff},#{chargeaverageratio})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from chargereport 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Chargereport">
+    update chargereport
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="snapshotid != null">
+                   snapshotid = #{snapshotid},
+             </if>
+             <if test="statdatekey != null">
+                   statdatekey = #{statdatekey},
+             </if>
+             <if test="statdatename != null">
+                   statdatename = #{statdatename},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionname != null">
+                   regionname = #{regionname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="campusage != null">
+                   campusage = #{campusage},
+             </if>
+             <if test="staffid != null">
+                   staffid = #{staffid},
+             </if>
+             <if test="staffoaname != null">
+                   staffoaname = #{staffoaname},
+             </if>
+             <if test="staffjobtype != null">
+                   staffjobtype = #{staffjobtype},
+             </if>
+             <if test="staffjobname != null">
+                   staffjobname = #{staffjobname},
+             </if>
+             <if test="staffage != null">
+                   staffage = #{staffage},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="gradename != null">
+                   gradename = #{gradename},
+             </if>
+             <if test="chargetype != null">
+                   chargetype = #{chargetype},
+             </if>
+             <if test="chargetypename != null">
+                   chargetypename = #{chargetypename},
+             </if>
+             <if test="chargemoney != null">
+                   chargemoney = #{chargemoney},
+             </if>
+             <if test="lastchargemoney != null">
+                   lastchargemoney = #{lastchargemoney},
+             </if>
+             <if test="chargemoneydiff != null">
+                   chargemoneydiff = #{chargemoneydiff},
+             </if>
+             <if test="chargemoneyratio != null">
+                   chargemoneyratio = #{chargemoneyratio},
+             </if>
+             <if test="chargepeople != null">
+                   chargepeople = #{chargepeople},
+             </if>
+             <if test="lastchargepeople != null">
+                   lastchargepeople = #{lastchargepeople},
+             </if>
+             <if test="chargepeoplediff != null">
+                   chargepeoplediff = #{chargepeoplediff},
+             </if>
+             <if test="chargepeopleratio != null">
+                   chargepeopleratio = #{chargepeopleratio},
+             </if>
+             <if test="chargeaverage != null">
+                   chargeaverage = #{chargeaverage},
+             </if>
+             <if test="lastchargeaverage != null">
+                   lastchargeaverage = #{lastchargeaverage},
+             </if>
+             <if test="chargeaveragediff != null">
+                   chargeaveragediff = #{chargeaveragediff},
+             </if>
+             <if test="chargeaverageratio != null">
+                   chargeaverageratio = #{chargeaverageratio}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from chargereport 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from chargereport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from chargereport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from chargereport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from chargereport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from chargereport 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomerbasestatMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,datekey,customerid,statlocaldate,campusid,consultantid,consultantname,consultantoacode,educatorid,educatorname,educatoroacode,newchargeamount,earlyendrenewamount,earlystudyrenew,laterendrenew,laterstudyrenew,earlyendrenewamountagain,totalrenewamount,totalnewchargeamount,totalchargeamount,dailynewchargeamount,dailyearlyendrenewamount,dailyearlystudyrenew,dailylaterendrenew,dailylaterstudyrenew,dailyearlyendrenewamountagain,dailytotalnewchargeamount,dailytotalchargeamount,regularinperiodrefundmoney,regularnotinperiodrefundmoney,regularrefundmoney,irregularinperiodrefundmoney,irregularnotinperiodrefundmoney,irregularrefundmoney,totalnormalrefundamount,extraregularinperiodrefundmoney,extraregularnotinperiodrefundmoney,extraregularrefundmoney,extrairregularinperiodrefundmoney,extrairregularnotinperiodrefundmoney,extrairregularrefundmoney,totalextrarefundamount,totalrefundamount,reallowancemoney,compensatemoney,lastestrefundverifytime,referralstaffid,referralcustomerid,currentgrade,entrancegrade,totalmoneytransferedout,totalmoneytransferedin,lastesttransferedintime,lastesttransferedouttime,lastestclasstime,lastestpaytime,earliestpaytime,verifytime,replytime,visittime,meetingtime,studentstatus,graduated,accountvalue,accountmoney,accountpriceandamount,onetooneamountinasset,classgroupamountinasset,youxueamountinasset,otheramountinasset,totalamountinasset,lessondurationvalue,onetooneassignedincome,classgroupassignedincome,assignedincome,youxueincome,otherproductincome,otherincome,assignedamount,assignedavgunitprice,assigneddurationhours,onetoonecoursetime,classgroupcoursetime,youxuecoursetime,othercoursetime,orderavgunitprice,orderrealamount,orderlessonhours,ordertotalprice,debookamount,debookmoney,debooklessonhours,returnedmoney,isavailable,isclasssuspended,isactive,isschoolsuspended,isclassfinished
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerbasestat">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="datekey" column="datekey" />
+         <id property="customerid" column="customerid" />
+         <id property="statlocaldate" column="statlocaldate" />
+         <id property="campusid" column="campusid" />
+         <id property="consultantid" column="consultantid" />
+         <id property="consultantname" column="consultantname" />
+         <id property="consultantoacode" column="consultantoacode" />
+         <id property="educatorid" column="educatorid" />
+         <id property="educatorname" column="educatorname" />
+         <id property="educatoroacode" column="educatoroacode" />
+         <id property="newchargeamount" column="newchargeamount" />
+         <id property="earlyendrenewamount" column="earlyendrenewamount" />
+         <id property="earlystudyrenew" column="earlystudyrenew" />
+         <id property="laterendrenew" column="laterendrenew" />
+         <id property="laterstudyrenew" column="laterstudyrenew" />
+         <id property="earlyendrenewamountagain" column="earlyendrenewamountagain" />
+         <id property="totalrenewamount" column="totalrenewamount" />
+         <id property="totalnewchargeamount" column="totalnewchargeamount" />
+         <id property="totalchargeamount" column="totalchargeamount" />
+         <id property="dailynewchargeamount" column="dailynewchargeamount" />
+         <id property="dailyearlyendrenewamount" column="dailyearlyendrenewamount" />
+         <id property="dailyearlystudyrenew" column="dailyearlystudyrenew" />
+         <id property="dailylaterendrenew" column="dailylaterendrenew" />
+         <id property="dailylaterstudyrenew" column="dailylaterstudyrenew" />
+         <id property="dailyearlyendrenewamountagain" column="dailyearlyendrenewamountagain" />
+         <id property="dailytotalnewchargeamount" column="dailytotalnewchargeamount" />
+         <id property="dailytotalchargeamount" column="dailytotalchargeamount" />
+         <id property="regularinperiodrefundmoney" column="regularinperiodrefundmoney" />
+         <id property="regularnotinperiodrefundmoney" column="regularnotinperiodrefundmoney" />
+         <id property="regularrefundmoney" column="regularrefundmoney" />
+         <id property="irregularinperiodrefundmoney" column="irregularinperiodrefundmoney" />
+         <id property="irregularnotinperiodrefundmoney" column="irregularnotinperiodrefundmoney" />
+         <id property="irregularrefundmoney" column="irregularrefundmoney" />
+         <id property="totalnormalrefundamount" column="totalnormalrefundamount" />
+         <id property="extraregularinperiodrefundmoney" column="extraregularinperiodrefundmoney" />
+         <id property="extraregularnotinperiodrefundmoney" column="extraregularnotinperiodrefundmoney" />
+         <id property="extraregularrefundmoney" column="extraregularrefundmoney" />
+         <id property="extrairregularinperiodrefundmoney" column="extrairregularinperiodrefundmoney" />
+         <id property="extrairregularnotinperiodrefundmoney" column="extrairregularnotinperiodrefundmoney" />
+         <id property="extrairregularrefundmoney" column="extrairregularrefundmoney" />
+         <id property="totalextrarefundamount" column="totalextrarefundamount" />
+         <id property="totalrefundamount" column="totalrefundamount" />
+         <id property="reallowancemoney" column="reallowancemoney" />
+         <id property="compensatemoney" column="compensatemoney" />
+         <id property="lastestrefundverifytime" column="lastestrefundverifytime" />
+         <id property="referralstaffid" column="referralstaffid" />
+         <id property="referralcustomerid" column="referralcustomerid" />
+         <id property="currentgrade" column="currentgrade" />
+         <id property="entrancegrade" column="entrancegrade" />
+         <id property="totalmoneytransferedout" column="totalmoneytransferedout" />
+         <id property="totalmoneytransferedin" column="totalmoneytransferedin" />
+         <id property="lastesttransferedintime" column="lastesttransferedintime" />
+         <id property="lastesttransferedouttime" column="lastesttransferedouttime" />
+         <id property="lastestclasstime" column="lastestclasstime" />
+         <id property="lastestpaytime" column="lastestpaytime" />
+         <id property="earliestpaytime" column="earliestpaytime" />
+         <id property="verifytime" column="verifytime" />
+         <id property="replytime" column="replytime" />
+         <id property="visittime" column="visittime" />
+         <id property="meetingtime" column="meetingtime" />
+         <id property="studentstatus" column="studentstatus" />
+         <id property="graduated" column="graduated" />
+         <id property="accountvalue" column="accountvalue" />
+         <id property="accountmoney" column="accountmoney" />
+         <id property="accountpriceandamount" column="accountpriceandamount" />
+         <id property="onetooneamountinasset" column="onetooneamountinasset" />
+         <id property="classgroupamountinasset" column="classgroupamountinasset" />
+         <id property="youxueamountinasset" column="youxueamountinasset" />
+         <id property="otheramountinasset" column="otheramountinasset" />
+         <id property="totalamountinasset" column="totalamountinasset" />
+         <id property="lessondurationvalue" column="lessondurationvalue" />
+         <id property="onetooneassignedincome" column="onetooneassignedincome" />
+         <id property="classgroupassignedincome" column="classgroupassignedincome" />
+         <id property="assignedincome" column="assignedincome" />
+         <id property="youxueincome" column="youxueincome" />
+         <id property="otherproductincome" column="otherproductincome" />
+         <id property="otherincome" column="otherincome" />
+         <id property="assignedamount" column="assignedamount" />
+         <id property="assignedavgunitprice" column="assignedavgunitprice" />
+         <id property="assigneddurationhours" column="assigneddurationhours" />
+         <id property="onetoonecoursetime" column="onetoonecoursetime" />
+         <id property="classgroupcoursetime" column="classgroupcoursetime" />
+         <id property="youxuecoursetime" column="youxuecoursetime" />
+         <id property="othercoursetime" column="othercoursetime" />
+         <id property="orderavgunitprice" column="orderavgunitprice" />
+         <id property="orderrealamount" column="orderrealamount" />
+         <id property="orderlessonhours" column="orderlessonhours" />
+         <id property="ordertotalprice" column="ordertotalprice" />
+         <id property="debookamount" column="debookamount" />
+         <id property="debookmoney" column="debookmoney" />
+         <id property="debooklessonhours" column="debooklessonhours" />
+         <id property="returnedmoney" column="returnedmoney" />
+         <id property="isavailable" column="isavailable" />
+         <id property="isclasssuspended" column="isclasssuspended" />
+         <id property="isactive" column="isactive" />
+         <id property="isschoolsuspended" column="isschoolsuspended" />
+         <id property="isclassfinished" column="isclassfinished" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerbasestat">
+  insert into customerbasestat (id,datekey,customerid,statlocaldate,campusid,consultantid,consultantname,consultantoacode,educatorid,educatorname,educatoroacode,newchargeamount,earlyendrenewamount,earlystudyrenew,laterendrenew,laterstudyrenew,earlyendrenewamountagain,totalrenewamount,totalnewchargeamount,totalchargeamount,dailynewchargeamount,dailyearlyendrenewamount,dailyearlystudyrenew,dailylaterendrenew,dailylaterstudyrenew,dailyearlyendrenewamountagain,dailytotalnewchargeamount,dailytotalchargeamount,regularinperiodrefundmoney,regularnotinperiodrefundmoney,regularrefundmoney,irregularinperiodrefundmoney,irregularnotinperiodrefundmoney,irregularrefundmoney,totalnormalrefundamount,extraregularinperiodrefundmoney,extraregularnotinperiodrefundmoney,extraregularrefundmoney,extrairregularinperiodrefundmoney,extrairregularnotinperiodrefundmoney,extrairregularrefundmoney,totalextrarefundamount,totalrefundamount,reallowancemoney,compensatemoney,lastestrefundverifytime,referralstaffid,referralcustomerid,currentgrade,entrancegrade,totalmoneytransferedout,totalmoneytransferedin,lastesttransferedintime,lastesttransferedouttime,lastestclasstime,lastestpaytime,earliestpaytime,verifytime,replytime,visittime,meetingtime,studentstatus,graduated,accountvalue,accountmoney,accountpriceandamount,onetooneamountinasset,classgroupamountinasset,youxueamountinasset,otheramountinasset,totalamountinasset,lessondurationvalue,onetooneassignedincome,classgroupassignedincome,assignedincome,youxueincome,otherproductincome,otherincome,assignedamount,assignedavgunitprice,assigneddurationhours,onetoonecoursetime,classgroupcoursetime,youxuecoursetime,othercoursetime,orderavgunitprice,orderrealamount,orderlessonhours,ordertotalprice,debookamount,debookmoney,debooklessonhours,returnedmoney,isavailable,isclasssuspended,isactive,isschoolsuspended,isclassfinished)
+         values (#{id},#{datekey},#{customerid},#{statlocaldate},#{campusid},#{consultantid},#{consultantname},#{consultantoacode},#{educatorid},#{educatorname},#{educatoroacode},#{newchargeamount},#{earlyendrenewamount},#{earlystudyrenew},#{laterendrenew},#{laterstudyrenew},#{earlyendrenewamountagain},#{totalrenewamount},#{totalnewchargeamount},#{totalchargeamount},#{dailynewchargeamount},#{dailyearlyendrenewamount},#{dailyearlystudyrenew},#{dailylaterendrenew},#{dailylaterstudyrenew},#{dailyearlyendrenewamountagain},#{dailytotalnewchargeamount},#{dailytotalchargeamount},#{regularinperiodrefundmoney},#{regularnotinperiodrefundmoney},#{regularrefundmoney},#{irregularinperiodrefundmoney},#{irregularnotinperiodrefundmoney},#{irregularrefundmoney},#{totalnormalrefundamount},#{extraregularinperiodrefundmoney},#{extraregularnotinperiodrefundmoney},#{extraregularrefundmoney},#{extrairregularinperiodrefundmoney},#{extrairregularnotinperiodrefundmoney},#{extrairregularrefundmoney},#{totalextrarefundamount},#{totalrefundamount},#{reallowancemoney},#{compensatemoney},#{lastestrefundverifytime},#{referralstaffid},#{referralcustomerid},#{currentgrade},#{entrancegrade},#{totalmoneytransferedout},#{totalmoneytransferedin},#{lastesttransferedintime},#{lastesttransferedouttime},#{lastestclasstime},#{lastestpaytime},#{earliestpaytime},#{verifytime},#{replytime},#{visittime},#{meetingtime},#{studentstatus},#{graduated},#{accountvalue},#{accountmoney},#{accountpriceandamount},#{onetooneamountinasset},#{classgroupamountinasset},#{youxueamountinasset},#{otheramountinasset},#{totalamountinasset},#{lessondurationvalue},#{onetooneassignedincome},#{classgroupassignedincome},#{assignedincome},#{youxueincome},#{otherproductincome},#{otherincome},#{assignedamount},#{assignedavgunitprice},#{assigneddurationhours},#{onetoonecoursetime},#{classgroupcoursetime},#{youxuecoursetime},#{othercoursetime},#{orderavgunitprice},#{orderrealamount},#{orderlessonhours},#{ordertotalprice},#{debookamount},#{debookmoney},#{debooklessonhours},#{returnedmoney},#{isavailable},#{isclasssuspended},#{isactive},#{isschoolsuspended},#{isclassfinished})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customerbasestat 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customerbasestat">
+    update customerbasestat
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="datekey != null">
+                   datekey = #{datekey},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="statlocaldate != null">
+                   statlocaldate = #{statlocaldate},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="consultantid != null">
+                   consultantid = #{consultantid},
+             </if>
+             <if test="consultantname != null">
+                   consultantname = #{consultantname},
+             </if>
+             <if test="consultantoacode != null">
+                   consultantoacode = #{consultantoacode},
+             </if>
+             <if test="educatorid != null">
+                   educatorid = #{educatorid},
+             </if>
+             <if test="educatorname != null">
+                   educatorname = #{educatorname},
+             </if>
+             <if test="educatoroacode != null">
+                   educatoroacode = #{educatoroacode},
+             </if>
+             <if test="newchargeamount != null">
+                   newchargeamount = #{newchargeamount},
+             </if>
+             <if test="earlyendrenewamount != null">
+                   earlyendrenewamount = #{earlyendrenewamount},
+             </if>
+             <if test="earlystudyrenew != null">
+                   earlystudyrenew = #{earlystudyrenew},
+             </if>
+             <if test="laterendrenew != null">
+                   laterendrenew = #{laterendrenew},
+             </if>
+             <if test="laterstudyrenew != null">
+                   laterstudyrenew = #{laterstudyrenew},
+             </if>
+             <if test="earlyendrenewamountagain != null">
+                   earlyendrenewamountagain = #{earlyendrenewamountagain},
+             </if>
+             <if test="totalrenewamount != null">
+                   totalrenewamount = #{totalrenewamount},
+             </if>
+             <if test="totalnewchargeamount != null">
+                   totalnewchargeamount = #{totalnewchargeamount},
+             </if>
+             <if test="totalchargeamount != null">
+                   totalchargeamount = #{totalchargeamount},
+             </if>
+             <if test="dailynewchargeamount != null">
+                   dailynewchargeamount = #{dailynewchargeamount},
+             </if>
+             <if test="dailyearlyendrenewamount != null">
+                   dailyearlyendrenewamount = #{dailyearlyendrenewamount},
+             </if>
+             <if test="dailyearlystudyrenew != null">
+                   dailyearlystudyrenew = #{dailyearlystudyrenew},
+             </if>
+             <if test="dailylaterendrenew != null">
+                   dailylaterendrenew = #{dailylaterendrenew},
+             </if>
+             <if test="dailylaterstudyrenew != null">
+                   dailylaterstudyrenew = #{dailylaterstudyrenew},
+             </if>
+             <if test="dailyearlyendrenewamountagain != null">
+                   dailyearlyendrenewamountagain = #{dailyearlyendrenewamountagain},
+             </if>
+             <if test="dailytotalnewchargeamount != null">
+                   dailytotalnewchargeamount = #{dailytotalnewchargeamount},
+             </if>
+             <if test="dailytotalchargeamount != null">
+                   dailytotalchargeamount = #{dailytotalchargeamount},
+             </if>
+             <if test="regularinperiodrefundmoney != null">
+                   regularinperiodrefundmoney = #{regularinperiodrefundmoney},
+             </if>
+             <if test="regularnotinperiodrefundmoney != null">
+                   regularnotinperiodrefundmoney = #{regularnotinperiodrefundmoney},
+             </if>
+             <if test="regularrefundmoney != null">
+                   regularrefundmoney = #{regularrefundmoney},
+             </if>
+             <if test="irregularinperiodrefundmoney != null">
+                   irregularinperiodrefundmoney = #{irregularinperiodrefundmoney},
+             </if>
+             <if test="irregularnotinperiodrefundmoney != null">
+                   irregularnotinperiodrefundmoney = #{irregularnotinperiodrefundmoney},
+             </if>
+             <if test="irregularrefundmoney != null">
+                   irregularrefundmoney = #{irregularrefundmoney},
+             </if>
+             <if test="totalnormalrefundamount != null">
+                   totalnormalrefundamount = #{totalnormalrefundamount},
+             </if>
+             <if test="extraregularinperiodrefundmoney != null">
+                   extraregularinperiodrefundmoney = #{extraregularinperiodrefundmoney},
+             </if>
+             <if test="extraregularnotinperiodrefundmoney != null">
+                   extraregularnotinperiodrefundmoney = #{extraregularnotinperiodrefundmoney},
+             </if>
+             <if test="extraregularrefundmoney != null">
+                   extraregularrefundmoney = #{extraregularrefundmoney},
+             </if>
+             <if test="extrairregularinperiodrefundmoney != null">
+                   extrairregularinperiodrefundmoney = #{extrairregularinperiodrefundmoney},
+             </if>
+             <if test="extrairregularnotinperiodrefundmoney != null">
+                   extrairregularnotinperiodrefundmoney = #{extrairregularnotinperiodrefundmoney},
+             </if>
+             <if test="extrairregularrefundmoney != null">
+                   extrairregularrefundmoney = #{extrairregularrefundmoney},
+             </if>
+             <if test="totalextrarefundamount != null">
+                   totalextrarefundamount = #{totalextrarefundamount},
+             </if>
+             <if test="totalrefundamount != null">
+                   totalrefundamount = #{totalrefundamount},
+             </if>
+             <if test="reallowancemoney != null">
+                   reallowancemoney = #{reallowancemoney},
+             </if>
+             <if test="compensatemoney != null">
+                   compensatemoney = #{compensatemoney},
+             </if>
+             <if test="lastestrefundverifytime != null">
+                   lastestrefundverifytime = #{lastestrefundverifytime},
+             </if>
+             <if test="referralstaffid != null">
+                   referralstaffid = #{referralstaffid},
+             </if>
+             <if test="referralcustomerid != null">
+                   referralcustomerid = #{referralcustomerid},
+             </if>
+             <if test="currentgrade != null">
+                   currentgrade = #{currentgrade},
+             </if>
+             <if test="entrancegrade != null">
+                   entrancegrade = #{entrancegrade},
+             </if>
+             <if test="totalmoneytransferedout != null">
+                   totalmoneytransferedout = #{totalmoneytransferedout},
+             </if>
+             <if test="totalmoneytransferedin != null">
+                   totalmoneytransferedin = #{totalmoneytransferedin},
+             </if>
+             <if test="lastesttransferedintime != null">
+                   lastesttransferedintime = #{lastesttransferedintime},
+             </if>
+             <if test="lastesttransferedouttime != null">
+                   lastesttransferedouttime = #{lastesttransferedouttime},
+             </if>
+             <if test="lastestclasstime != null">
+                   lastestclasstime = #{lastestclasstime},
+             </if>
+             <if test="lastestpaytime != null">
+                   lastestpaytime = #{lastestpaytime},
+             </if>
+             <if test="earliestpaytime != null">
+                   earliestpaytime = #{earliestpaytime},
+             </if>
+             <if test="verifytime != null">
+                   verifytime = #{verifytime},
+             </if>
+             <if test="replytime != null">
+                   replytime = #{replytime},
+             </if>
+             <if test="visittime != null">
+                   visittime = #{visittime},
+             </if>
+             <if test="meetingtime != null">
+                   meetingtime = #{meetingtime},
+             </if>
+             <if test="studentstatus != null">
+                   studentstatus = #{studentstatus},
+             </if>
+             <if test="graduated != null">
+                   graduated = #{graduated},
+             </if>
+             <if test="accountvalue != null">
+                   accountvalue = #{accountvalue},
+             </if>
+             <if test="accountmoney != null">
+                   accountmoney = #{accountmoney},
+             </if>
+             <if test="accountpriceandamount != null">
+                   accountpriceandamount = #{accountpriceandamount},
+             </if>
+             <if test="onetooneamountinasset != null">
+                   onetooneamountinasset = #{onetooneamountinasset},
+             </if>
+             <if test="classgroupamountinasset != null">
+                   classgroupamountinasset = #{classgroupamountinasset},
+             </if>
+             <if test="youxueamountinasset != null">
+                   youxueamountinasset = #{youxueamountinasset},
+             </if>
+             <if test="otheramountinasset != null">
+                   otheramountinasset = #{otheramountinasset},
+             </if>
+             <if test="totalamountinasset != null">
+                   totalamountinasset = #{totalamountinasset},
+             </if>
+             <if test="lessondurationvalue != null">
+                   lessondurationvalue = #{lessondurationvalue},
+             </if>
+             <if test="onetooneassignedincome != null">
+                   onetooneassignedincome = #{onetooneassignedincome},
+             </if>
+             <if test="classgroupassignedincome != null">
+                   classgroupassignedincome = #{classgroupassignedincome},
+             </if>
+             <if test="assignedincome != null">
+                   assignedincome = #{assignedincome},
+             </if>
+             <if test="youxueincome != null">
+                   youxueincome = #{youxueincome},
+             </if>
+             <if test="otherproductincome != null">
+                   otherproductincome = #{otherproductincome},
+             </if>
+             <if test="otherincome != null">
+                   otherincome = #{otherincome},
+             </if>
+             <if test="assignedamount != null">
+                   assignedamount = #{assignedamount},
+             </if>
+             <if test="assignedavgunitprice != null">
+                   assignedavgunitprice = #{assignedavgunitprice},
+             </if>
+             <if test="assigneddurationhours != null">
+                   assigneddurationhours = #{assigneddurationhours},
+             </if>
+             <if test="onetoonecoursetime != null">
+                   onetoonecoursetime = #{onetoonecoursetime},
+             </if>
+             <if test="classgroupcoursetime != null">
+                   classgroupcoursetime = #{classgroupcoursetime},
+             </if>
+             <if test="youxuecoursetime != null">
+                   youxuecoursetime = #{youxuecoursetime},
+             </if>
+             <if test="othercoursetime != null">
+                   othercoursetime = #{othercoursetime},
+             </if>
+             <if test="orderavgunitprice != null">
+                   orderavgunitprice = #{orderavgunitprice},
+             </if>
+             <if test="orderrealamount != null">
+                   orderrealamount = #{orderrealamount},
+             </if>
+             <if test="orderlessonhours != null">
+                   orderlessonhours = #{orderlessonhours},
+             </if>
+             <if test="ordertotalprice != null">
+                   ordertotalprice = #{ordertotalprice},
+             </if>
+             <if test="debookamount != null">
+                   debookamount = #{debookamount},
+             </if>
+             <if test="debookmoney != null">
+                   debookmoney = #{debookmoney},
+             </if>
+             <if test="debooklessonhours != null">
+                   debooklessonhours = #{debooklessonhours},
+             </if>
+             <if test="returnedmoney != null">
+                   returnedmoney = #{returnedmoney},
+             </if>
+             <if test="isavailable != null">
+                   isavailable = #{isavailable},
+             </if>
+             <if test="isclasssuspended != null">
+                   isclasssuspended = #{isclasssuspended},
+             </if>
+             <if test="isactive != null">
+                   isactive = #{isactive},
+             </if>
+             <if test="isschoolsuspended != null">
+                   isschoolsuspended = #{isschoolsuspended},
+             </if>
+             <if test="isclassfinished != null">
+                   isclassfinished = #{isclassfinished}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customerbasestat 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerbasestat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerbasestat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerbasestat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerbasestat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerbasestat 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

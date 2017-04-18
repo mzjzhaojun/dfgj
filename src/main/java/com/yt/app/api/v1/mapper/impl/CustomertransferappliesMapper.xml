@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomertransferappliesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,campusid,campusname,customerid,applyid,applystatus,applytime,applymemo,applierid,appliername,applierjobid,applierjobname,processstatus,processtime,processmemo,transfertype,tocampusid,tocampusname,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customertransferapplies">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="customerid" column="customerid" />
+         <id property="applyid" column="applyid" />
+         <id property="applystatus" column="applystatus" />
+         <id property="applytime" column="applytime" />
+         <id property="applymemo" column="applymemo" />
+         <id property="applierid" column="applierid" />
+         <id property="appliername" column="appliername" />
+         <id property="applierjobid" column="applierjobid" />
+         <id property="applierjobname" column="applierjobname" />
+         <id property="processstatus" column="processstatus" />
+         <id property="processtime" column="processtime" />
+         <id property="processmemo" column="processmemo" />
+         <id property="transfertype" column="transfertype" />
+         <id property="tocampusid" column="tocampusid" />
+         <id property="tocampusname" column="tocampusname" />
+         <id property="submitterid" column="submitterid" />
+         <id property="submittername" column="submittername" />
+         <id property="submitterjobid" column="submitterjobid" />
+         <id property="submitterjobname" column="submitterjobname" />
+         <id property="submittime" column="submittime" />
+         <id property="approverid" column="approverid" />
+         <id property="approvername" column="approvername" />
+         <id property="approverjobid" column="approverjobid" />
+         <id property="approverjobname" column="approverjobname" />
+         <id property="approvetime" column="approvetime" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customertransferapplies">
+  insert into customertransferapplies (id,campusid,campusname,customerid,applyid,applystatus,applytime,applymemo,applierid,appliername,applierjobid,applierjobname,processstatus,processtime,processmemo,transfertype,tocampusid,tocampusname,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{campusid},#{campusname},#{customerid},#{applyid},#{applystatus},#{applytime},#{applymemo},#{applierid},#{appliername},#{applierjobid},#{applierjobname},#{processstatus},#{processtime},#{processmemo},#{transfertype},#{tocampusid},#{tocampusname},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{submittime},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customertransferapplies 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customertransferapplies">
+    update customertransferapplies
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="applyid != null">
+                   applyid = #{applyid},
+             </if>
+             <if test="applystatus != null">
+                   applystatus = #{applystatus},
+             </if>
+             <if test="applytime != null">
+                   applytime = #{applytime},
+             </if>
+             <if test="applymemo != null">
+                   applymemo = #{applymemo},
+             </if>
+             <if test="applierid != null">
+                   applierid = #{applierid},
+             </if>
+             <if test="appliername != null">
+                   appliername = #{appliername},
+             </if>
+             <if test="applierjobid != null">
+                   applierjobid = #{applierjobid},
+             </if>
+             <if test="applierjobname != null">
+                   applierjobname = #{applierjobname},
+             </if>
+             <if test="processstatus != null">
+                   processstatus = #{processstatus},
+             </if>
+             <if test="processtime != null">
+                   processtime = #{processtime},
+             </if>
+             <if test="processmemo != null">
+                   processmemo = #{processmemo},
+             </if>
+             <if test="transfertype != null">
+                   transfertype = #{transfertype},
+             </if>
+             <if test="tocampusid != null">
+                   tocampusid = #{tocampusid},
+             </if>
+             <if test="tocampusname != null">
+                   tocampusname = #{tocampusname},
+             </if>
+             <if test="submitterid != null">
+                   submitterid = #{submitterid},
+             </if>
+             <if test="submittername != null">
+                   submittername = #{submittername},
+             </if>
+             <if test="submitterjobid != null">
+                   submitterjobid = #{submitterjobid},
+             </if>
+             <if test="submitterjobname != null">
+                   submitterjobname = #{submitterjobname},
+             </if>
+             <if test="submittime != null">
+                   submittime = #{submittime},
+             </if>
+             <if test="approverid != null">
+                   approverid = #{approverid},
+             </if>
+             <if test="approvername != null">
+                   approvername = #{approvername},
+             </if>
+             <if test="approverjobid != null">
+                   approverjobid = #{approverjobid},
+             </if>
+             <if test="approverjobname != null">
+                   approverjobname = #{approverjobname},
+             </if>
+             <if test="approvetime != null">
+                   approvetime = #{approvetime},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customertransferapplies 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customertransferapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customertransferapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customertransferapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customertransferapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customertransferapplies 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

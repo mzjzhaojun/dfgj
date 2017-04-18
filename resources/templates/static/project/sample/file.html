@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>上传文件</title>
+    <script type="text/javascript" src="../../resource/js/jquery-1.9.1.min.js"></script>
+<style>
+	
+</style>
+<script>
+	function change(obj)
+	{
+		if(obj.value==1)
+		{
+			$("#p1").show();
+			$("#p2").hide();
+		}
+		else if(obj.value==2)
+		{
+			$("#p2").show();
+			$("#p1").hide();
+		}
+		else
+			{
+			$("#p1").hide();$("#p2").hide();
+			}
+	}
+</script>
+</head>
+<body>
+	<p>
+		<form method="post" enctype="multipart/form-data" action="http://localhost:18005/file/file/v1/file/upload">
+		<input type="hidden" name="url" value=""/>
+		上传文件：
+		<input type="file" name="file"/>
+		<input type="submit" value="确定"/>
+		</form>
+	</p>
+	<hr/>
+	<p>
+		<form method="post" enctype="multipart/form-data" action="http://localhost:18005/file/file/v1/file/upload">
+		<input type="hidden" name="size" value="100000000000"/>
+		<input type="hidden" name="url" value="http://localhost:18005/file/file/v1/file/1877346394805248"/>
+		上传图片：
+		<input type="file" name="file"/>
+		<br/>
+		<br/>
+		类型：
+		<select name="type" onchange="change(this)">
+			<option value="" selected>不改变</option>
+			<option value="1" >大小</option>
+			<option  value="2">缩放</option>
+		</select>
+		<br/>
+		<br/>
+		<p id="p1" style="display: none;">
+		宽度：
+		<input type="text" name="width"/>
+		高度：
+		<input type="text" name="height"/>
+		<br/><br/>
+		</p>
+		<p style="display: none;" id="p2">
+		缩放：
+		<select name="scale">
+			<option value="0.25f" selected>25%</option>
+			<option value="0.5f" selected>50%</option>
+			<option value="1.5f" selected>150%</option>
+			<option value="2f" selected>200%</option>
+		</select>
+		<br/>
+		<br/></p>
+		质量：
+		<select name="quality">
+			<option value="0.25f" selected>25%的质量</option>
+			<option  value="1f">不变</option>
+		</select>
+		<br/>
+		<br/>
+		旋转：
+		<select name="rotate">
+		<option value="0" selected>0度</option>
+			<option value="90">顺时针90度</option>
+			<option  value="-90">逆时针90度</option>
+		</select>
+		<br/>
+		<br/>
+			格式：
+		<select name="format">
+			<option value="jpg" selected>jpg</option>
+			<option value="png" >png</option>
+			<option value="bmp">bmp</option>
+		</select>
+		<br/>
+		<br/>
+		<input type="submit" value="确定"/>
+		</form>
+	</p>
+	<hr/>
+</body>
+</html>

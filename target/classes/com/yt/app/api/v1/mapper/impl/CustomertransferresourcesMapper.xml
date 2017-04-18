@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomertransferresourcesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,orgid,orgname,orgtype,customerid,transferid,transfertime,transfermemo,transferorid,transferorname,transferorjobid,transferorjobname,toorgid,toorgname,toorgtype,creatorid,creatorname,createtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customertransferresources">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="orgid" column="orgid" />
+         <id property="orgname" column="orgname" />
+         <id property="orgtype" column="orgtype" />
+         <id property="customerid" column="customerid" />
+         <id property="transferid" column="transferid" />
+         <id property="transfertime" column="transfertime" />
+         <id property="transfermemo" column="transfermemo" />
+         <id property="transferorid" column="transferorid" />
+         <id property="transferorname" column="transferorname" />
+         <id property="transferorjobid" column="transferorjobid" />
+         <id property="transferorjobname" column="transferorjobname" />
+         <id property="toorgid" column="toorgid" />
+         <id property="toorgname" column="toorgname" />
+         <id property="toorgtype" column="toorgtype" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customertransferresources">
+  insert into customertransferresources (id,orgid,orgname,orgtype,customerid,transferid,transfertime,transfermemo,transferorid,transferorname,transferorjobid,transferorjobname,toorgid,toorgname,toorgtype,creatorid,creatorname,createtime)
+         values (#{id},#{orgid},#{orgname},#{orgtype},#{customerid},#{transferid},#{transfertime},#{transfermemo},#{transferorid},#{transferorname},#{transferorjobid},#{transferorjobname},#{toorgid},#{toorgname},#{toorgtype},#{creatorid},#{creatorname},#{createtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customertransferresources 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customertransferresources">
+    update customertransferresources
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="orgid != null">
+                   orgid = #{orgid},
+             </if>
+             <if test="orgname != null">
+                   orgname = #{orgname},
+             </if>
+             <if test="orgtype != null">
+                   orgtype = #{orgtype},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="transferid != null">
+                   transferid = #{transferid},
+             </if>
+             <if test="transfertime != null">
+                   transfertime = #{transfertime},
+             </if>
+             <if test="transfermemo != null">
+                   transfermemo = #{transfermemo},
+             </if>
+             <if test="transferorid != null">
+                   transferorid = #{transferorid},
+             </if>
+             <if test="transferorname != null">
+                   transferorname = #{transferorname},
+             </if>
+             <if test="transferorjobid != null">
+                   transferorjobid = #{transferorjobid},
+             </if>
+             <if test="transferorjobname != null">
+                   transferorjobname = #{transferorjobname},
+             </if>
+             <if test="toorgid != null">
+                   toorgid = #{toorgid},
+             </if>
+             <if test="toorgname != null">
+                   toorgname = #{toorgname},
+             </if>
+             <if test="toorgtype != null">
+                   toorgtype = #{toorgtype},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customertransferresources 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customertransferresources 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customertransferresources 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customertransferresources 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customertransferresources 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customertransferresources 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

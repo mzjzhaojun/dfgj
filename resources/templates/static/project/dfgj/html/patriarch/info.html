@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html ng-app="info">
+<head>
+<title>家长信息-查看</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/common.css">
+<script type="text/javascript"
+	src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery.cookie.js"></script>
+
+<script type="text/javascript">
+	var info = angular.module("info", []);
+	info.controller("infoController", function($scope, $http) {
+
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		$http({
+			url : parent.getFunctionLinksHref("self"),
+			method : 'GET',
+			dataType : "json",
+			withCredentials : true,
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			data : ''
+		}).success(function(data, status, headers, config) {
+			//响应成功
+			$scope.formData = data;
+		}).error(function(data, status, headers, config) {
+			//处理响应失败
+			response(status);
+		});
+
+	})
+</script>
+</head>
+<body ng-controller="infoController">
+	<!-- 操作按钮操作区 -->
+	<div class="col-lg-12 topActionPanel">
+		<div>
+			<button type="button" class="btn btn-primary" ng-click="onReturn()">返
+				回</button>
+		</div>
+	</div>
+	<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<input
+					type="hidden" class="form-control"
+					id="version" name="version" ng-model="formData.version">
+				<span class="input-group-addon text-right spanwidth">学员名称</span>
+				<input type="text" class="form-control" value="{{formData.name}}" disabled>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">性别</span>
+				<input type="text" class="form-control" value="{{formData.dsex}}" disabled>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">年级</span>
+				<input type="text" class="form-control" value="{{formData.dgrade}}" disabled>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">手机号</span>
+				<input type="text" class="form-control" value="{{formData.mobile}}" disabled>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">招生来源</span>
+				<input type="text" class="form-control" value="{{formData.dsource}}" disabled>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">负责人</span>
+				<input type="text" class="form-control" value="{{formData.dprincipal}}" disabled>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">状态</span>
+				<input type="text" class="form-control" value="{{formData.dstatus}}" disabled>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">家长类型</span>
+				<input type="text" class="form-control" value="{{formData.dtype}}" disabled>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">所在学校</span>
+				<input type="text" class="form-control" value="{{formData.dschool_id}}" disabled> 
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth"
+					style="height: 150px;">备&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<textarea class="txtVal form-control" style="height: 150px;"
+				disabled="disabled">{{formData.remark}}</textarea>
+			</div>
+		</div>
+		<div class="col-lg-6" style="position: relative;left: -50px;">
+			<div class="input-group input-group-sm" style="position: relative;left:0px;">
+				<span class="input-group-addon text-right spanwidth">意向课程</span>
+				<input type="text" class="form-control" value="{{formData.dsubject_id}}" disabled> 
+	        </div>
+	        <div class="input-group input-group-sm" style="position: relative;left:0px;">
+				<span class="input-group-addon text-right spanwidth">意向级别</span>
+				<input type="text" class="form-control" value="{{formData.dpurpost}}" disabled> 
+	        </div>
+	        <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">父亲职业</span>
+				<input type="text" class="form-control" value="{{formData.dfatherjobs}}" disabled> 
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">母亲职业</span> 
+				<input type="text" class="form-control" value="{{formData.dmotherjobs}}" disabled> 
+			</div>
+	        <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">父亲姓名</span> 
+					<input type="text" class="form-control" value="{{formData.fathername}}" disabled> 
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">母亲姓名</span> 
+					<input type="text" class="form-control" value="{{formData.mothername}}" disabled> 
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">父亲电话</span> 
+					<input type="text" class="form-control" value="{{formData.fathermobile}}" disabled> 
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">母亲电话</span>
+					<input type="text" class="form-control" value="{{formData.mothermobile}}" disabled> 
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">身份证号</span>
+					<input type="text" class="form-control" value="{{formData.cardid}}" disabled> 
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">居住地址</span>
+					<input type="text" class="form-control" value="{{formData.address}}" disabled> 
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">QQ号码</span> 
+					<input type="text" class="form-control" value="{{formData.qq}}" disabled> 
+			</div>
+		</div>
+</body>
+</html>

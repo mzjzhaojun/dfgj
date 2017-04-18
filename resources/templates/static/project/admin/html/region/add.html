@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html ng-app="add">
+  <head>
+    <title>地址管理-新增</title>
+	
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    
+     <link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/sysmenu.css">
+    
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.all-3.5.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+    
+    <script src="../../../../resource/js/date/js/eap.core.js"></script>
+	<!-- 表单验证 -->
+	<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css"/>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	
+	
+	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+	<script type="text/javascript">
+		
+		var add = angular.module("add", []);
+		add.controller("addController",function($scope, $http) {
+		
+			$scope.formData = {};
+			$http({
+				url:parent.getMenuLinksHref("listAll"),
+				method:'POST',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+				data: ""
+				}).success(function(data, status, headers, config){
+					$scope.syss  = data;
+		  							
+				}).error(function(data, status, headers, config){
+					//处理响应失败
+					response(status);
+				});
+		
+			
+  			//$("#orhidden1").hide();
+  			$("#orhidden2").hide();
+  			$("#orhidden3").hide();
+  			$("#orhidden4").hide();
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			//保存
+			$scope.onSave=function(){
+				var isValid = $("#saveForm").valid();
+				if(isValid){
+			      var regionpath;
+			      var regiongrade=2;
+			      var parentid = 0;;
+					if($scope.name1 != null){ //省
+						regionpath =","+$scope.name1;
+						regiongrade=3;
+						parentid = $scope.name1;
+						if($scope.name2 != null){  //市						
+							regionpath += ","+$scope.name2;
+							regiongrade=4;
+							parentid = $scope.name2;
+							if($scope.name3 != null){ //县区
+								regionpath += ","+$scope.name3;
+								regiongrade=5;
+								parentid = $scope.name3;
+							}
+						}
+					}
+					$scope.formData.region_path = regionpath;
+					$scope.formData.region_grade = regiongrade;
+					$scope.formData.parent_id = parentid;
+    				$http({
+    					url:parent.getMenuLinksHref("regionpost"),
+    					method:'POST',
+    					dataType : "json",
+    					withCredentials: true,
+    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    					data: JSON.stringify($scope.formData)
+    		  		}).success(function(data, status, headers, config){
+    		  			location.href="list.html";
+    		  		}).error(function(data, status, headers, config){
+						//处理响应失败
+    		  			response(status);
+					})
+    			
+			 }
+			}
+			
+			
+			//查询后台
+			$scope.select1 = function(data){
+			//alert("获取的值:"+$scope.name1 );
+		if($scope.name1 != null){
+			$("#orhidden2").show();	
+	
+				$http({
+					url:parent.getMenuLinksHref("getbyparentid")+$scope.name1,
+					method:'POST',
+					dataType : "json",
+					withCredentials: true,
+					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+					data: ""
+					}).success(function(data, status, headers, config){
+						$scope.syss2  = data;
+			  							
+					}).error(function(data, status, headers, config){
+						//处理响应失败
+						response(status);
+					});
+		}else{
+			$("#orhidden2").hide();
+			$("#orhidden3").hide();
+		}
+			}
+			//判断是否可选类型
+			$scope.select2 = function(data){
+				if($scope.name2 != null){
+					$("#orhidden3").show();	
+				
+				$http({
+					url:parent.getMenuLinksHref("getbyparentid")+$scope.name2,
+					method:'POST',
+					dataType : "json",
+					withCredentials: true,
+					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+					data: ""
+					}).success(function(data, status, headers, config){
+						$scope.syss3  = data;
+			  							
+					}).error(function(data, status, headers, config){
+						//处理响应失败
+						response(status);
+					});
+				}else{
+					$("#orhidden3").hide();
+				}
+			}
+			//判断是否可选类型
+			$scope.setIsShow3 = function(data){
+				if($scope.name3 != null ) {
+					$("#orhidden4").show();	
+				//	$scope.formData.region_path =+$scope.formData.name3;
+				}else{
+					$("#orhidden4").hide();
+				}
+			}
+		})
+	
+		
+	
+		
+	 
+		
+	</script>
+	
+	<style type="text/css">
+		div.zTreeDemoBackground {
+			width: 250px;
+			height: 302px;
+			text-align: left;
+		}
+		
+		ul.ztree {
+			
+			
+			height: 300px;
+			overflow-y: scroll;
+			overflow-x: auto;
+		}
+	</style>
+</head>
+  
+  <body ng-controller="addController">
+  	<form method="post" id="saveForm" action="">
+  		 <!-- 操作按钮操作区 -->
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+		    	<button type="button" class="btn btn-primary" ng-click="onSave()">确 定</button>
+	    	</div>
+	    	<div>
+		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+	    	</div>
+    	</div>
+   		<div class="col-lg-6">
+	   		
+	         <div class="input-group input-group-sm"  id="orhidden1">
+				<span class="input-group-addon text-right spanwidth">省&nbsp;&nbsp;&nbsp;&nbsp;份&nbsp;&nbsp;&nbsp;</span>
+					<select class="form-control "  ng-model="name1"  ng-change="select1(this)" ng-options='sys.id as sys.name for sys in syss | filter: {region_grade: "2"}'>
+					<option value="">请选择</option>
+				</select>
+			
+	        </div>
+	         <div class="input-group input-group-sm"  id="orhidden2">
+				<span class="input-group-addon text-right spanwidth">&nbsp;&nbsp;&nbsp;&nbsp;市&nbsp;&nbsp;&nbsp;</span>
+					<select class="form-control "  ng-model="name2" ng-change="select2(this)" ng-options='sys.id as sys.name for sys in syss2 | filter: {region_grade: "3"}'>
+					<option value="">请选择</option>
+				</select>
+			
+	        </div>
+	         <div class="input-group input-group-sm" id="orhidden3">
+				<span class="input-group-addon text-right spanwidth">县&nbsp;&nbsp;&nbsp;&nbsp;区&nbsp;&nbsp;&nbsp;</span>
+					<select class="form-control "  ng-model="name3" ng-options='sys.id as sys.name for sys in syss3 | filter: {region_grade: "4"}'>
+					<option value="">请选择</option>
+				</select>
+				
+	        </div>
+	         <div class="input-group input-group-sm">
+	            <span class="input-group-addon text-right spanwidth">名&nbsp;&nbsp;&nbsp;&nbsp;称&nbsp;&nbsp;&nbsp;</span>
+	           	<input type="text" class="form-control required" placeholder="请输入名称" name="name" ng-model="formData.name" maxlength="50">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        
+	     
+		   
+		<!--     <div class="input-group input-group-sm">
+	            <span class="input-group-addon text-right spanwidth">区&nbsp;&nbsp;&nbsp;&nbsp;号&nbsp;&nbsp;&nbsp;</span>	        
+	            <input type="text" class="form-control required"  value=" {{' '+formData.name1 + ' ' + formData.name2 +' '+formData.name3+' '+formData.name4}}">
+	        </div>
+		   
+	      	<div class="input-group input-group-sm">				
+				 <span class="input-group-addon text-right spanwidth">父级编号&nbsp;&nbsp;&nbsp;</span>
+						
+						   <input id="sysSel" type="text" readonly value="" class="form-control sysSel" style="width: 457px !important;"/>
+					&nbsp;<a id="menuBtn" href="#" onclick="showMenu(); return false;">选择</a>&nbsp;&nbsp;			
+					<span class="input-group-addon verifyprompt">*</span>
+				 </div>
+	         <div class="input-group input-group-sm">
+	            <span class="input-group-addon text-right spanwidth">区&nbsp;&nbsp;&nbsp;&nbsp;号&nbsp;&nbsp;&nbsp;</span>
+	           	<input type="text" class="form-control required" placeholder="请输入区号" name="region_path" ng-model="formData.region_path" >
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	         <div class="input-group input-group-sm">
+	            <span class="input-group-addon text-right spanwidth">级&nbsp;&nbsp;别&nbsp;&nbsp;号&nbsp;&nbsp;&nbsp;</span>
+	           	<input type="text" class="form-control required" placeholder="请输入级别号" name="region_grade" ng-model="formData.region_grade" maxlength="11">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+			--> 
+	         
+   		</div>
+    </form>
+    <div id="menuContent" class="menuContent" style="display:none; position: absolute;z-index: 3;">
+		<ul id="treeDemo" class="ztree" style="margin-top:0; width:455px;"></ul>
+	</div>
+  </body>
+</html>

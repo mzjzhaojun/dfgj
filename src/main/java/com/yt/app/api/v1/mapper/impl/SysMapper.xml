@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.SysMapper">
+	<!-- 数据库列 -->
+	<sql id="Base_Column_List">
+		id,parent_id,name,url,link_url,icon,remark,createtime,modifytime,level,version
+	</sql>
+	<!-- 基础返回对象封装 -->
+	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Sys">
+		<id property="id" column="id" />
+		<id property="parent_id" column="parent_id" />
+		<id property="name" column="name" />
+		<id property="url" column="url" />
+		<id property="linkUrl" column="link_url" />
+		<id property="icon" column="icon" />
+		<id property="remark" column="remark" />
+		<id property="createtime" column="createtime" />
+		<id property="modifytime" column="modifytime" />
+		<id property="level" column="level" />
+		<id property="version" column="version" />
+	</resultMap>
+	<!-- 默认新增 -->
+	<insert id="post" parameterType="com.yt.app.api.v1.entity.Sys">
+		insert into sys
+		(id,parent_id,name,url,icon,remark,link_url,createtime,level,modifytime)
+		values
+		(#{id},#{parent_id},#{name},#{url},#{icon},#{remark},#{linkUrl},#{createtime},#{level},#{modifytime})
+	</insert>
+	<!-- 默认删除id对象 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from sys
+		where id = #{id}
+	</delete>
+	<!-- 默认更新id对象 -->
+	<update id="put" parameterType="com.yt.app.api.v1.entity.Sys">
+		update sys
+		<set>
+			<if test="parent_id != null">
+				parent_id = #{parent_id},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="url != null">
+				url = #{url},
+			</if>
+			<if test="linkUrl != null">
+				link_url = #{linkUrl},
+			</if>
+			<if test="icon != null">
+				icon = #{icon},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>						
+			<if test="createtime != null">
+				createtime = #{createtime},
+			</if>
+			<if test="modifytime != null">
+				modifytime = #{modifytime},
+			</if>
+			<if test="version != null">
+				version = #{version}+1
+			</if>
+		</set>
+		where id = #{id} and version = #{version}
+	</update>
+	<!-- 默认获得id对象 -->
+	<select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys
+		where id = #{id}
+	</select>
+	<!-- 获得level=1数据 -->
+	<select id="listlevel" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys
+		where level = #{id}
+	</select>
+	<!-- 默认集合 -->
+	<select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys
+		<where>
+			1=1 and level != 1 
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合 -->
+	<select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认集合统计 -->
+	<select id="countlist" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from sys
+		<where>
+			1=1 and level != 1 
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合统计 -->
+	<select id="countmap" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from sys
+		<where>
+			1=1 and level != 1 
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认获取Ids的对象 -->
+	<select id="getByIds" parameterType="java.util.HashMap"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys
+		<where>
+			1=1
+			<if test="array != null and array != ''">
+				and id in
+				<foreach item="item" index="index" collection="array" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+<select id="sysmune" parameterType="java.util.HashMap" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sys
+		<where>
+			1=1
+			<if test="level != null and level != ''">
+				and level =#{level}
+			</if>
+			<if test="parent_id != null and parent_id != null">
+				and parent_id =#{parent_id}
+			</if>
+		
+		</where>
+	</select>
+</mapper>

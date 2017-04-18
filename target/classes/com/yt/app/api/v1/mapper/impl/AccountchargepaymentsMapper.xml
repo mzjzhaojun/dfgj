@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.AccountchargepaymentsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,applyid,sortno,payid,payno,paytime,paytype,payticket,paystatus,paymoney,paymemo,inputtime,swipetime,printstatus,salesman,payer,payeeid,payeename,payeejobid,payeejobname,checkerid,checkername,checkerjobid,checkerjobname,checkstatus,checktime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,issyn,syntime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accountchargepayments">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="applyid" column="applyid" />
+         <id property="sortno" column="sortno" />
+         <id property="payid" column="payid" />
+         <id property="payno" column="payno" />
+         <id property="paytime" column="paytime" />
+         <id property="paytype" column="paytype" />
+         <id property="payticket" column="payticket" />
+         <id property="paystatus" column="paystatus" />
+         <id property="paymoney" column="paymoney" />
+         <id property="paymemo" column="paymemo" />
+         <id property="inputtime" column="inputtime" />
+         <id property="swipetime" column="swipetime" />
+         <id property="printstatus" column="printstatus" />
+         <id property="salesman" column="salesman" />
+         <id property="payer" column="payer" />
+         <id property="payeeid" column="payeeid" />
+         <id property="payeename" column="payeename" />
+         <id property="payeejobid" column="payeejobid" />
+         <id property="payeejobname" column="payeejobname" />
+         <id property="checkerid" column="checkerid" />
+         <id property="checkername" column="checkername" />
+         <id property="checkerjobid" column="checkerjobid" />
+         <id property="checkerjobname" column="checkerjobname" />
+         <id property="checkstatus" column="checkstatus" />
+         <id property="checktime" column="checktime" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+         <id property="issyn" column="issyn" />
+         <id property="syntime" column="syntime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Accountchargepayments">
+  insert into accountchargepayments (id,applyid,sortno,payid,payno,paytime,paytype,payticket,paystatus,paymoney,paymemo,inputtime,swipetime,printstatus,salesman,payer,payeeid,payeename,payeejobid,payeejobname,checkerid,checkername,checkerjobid,checkerjobname,checkstatus,checktime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,issyn,syntime)
+         values (#{id},#{applyid},#{sortno},#{payid},#{payno},#{paytime},#{paytype},#{payticket},#{paystatus},#{paymoney},#{paymemo},#{inputtime},#{swipetime},#{printstatus},#{salesman},#{payer},#{payeeid},#{payeename},#{payeejobid},#{payeejobname},#{checkerid},#{checkername},#{checkerjobid},#{checkerjobname},#{checkstatus},#{checktime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{issyn},#{syntime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from accountchargepayments 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Accountchargepayments">
+    update accountchargepayments
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="applyid != null">
+                   applyid = #{applyid},
+             </if>
+             <if test="sortno != null">
+                   sortno = #{sortno},
+             </if>
+             <if test="payid != null">
+                   payid = #{payid},
+             </if>
+             <if test="payno != null">
+                   payno = #{payno},
+             </if>
+             <if test="paytime != null">
+                   paytime = #{paytime},
+             </if>
+             <if test="paytype != null">
+                   paytype = #{paytype},
+             </if>
+             <if test="payticket != null">
+                   payticket = #{payticket},
+             </if>
+             <if test="paystatus != null">
+                   paystatus = #{paystatus},
+             </if>
+             <if test="paymoney != null">
+                   paymoney = #{paymoney},
+             </if>
+             <if test="paymemo != null">
+                   paymemo = #{paymemo},
+             </if>
+             <if test="inputtime != null">
+                   inputtime = #{inputtime},
+             </if>
+             <if test="swipetime != null">
+                   swipetime = #{swipetime},
+             </if>
+             <if test="printstatus != null">
+                   printstatus = #{printstatus},
+             </if>
+             <if test="salesman != null">
+                   salesman = #{salesman},
+             </if>
+             <if test="payer != null">
+                   payer = #{payer},
+             </if>
+             <if test="payeeid != null">
+                   payeeid = #{payeeid},
+             </if>
+             <if test="payeename != null">
+                   payeename = #{payeename},
+             </if>
+             <if test="payeejobid != null">
+                   payeejobid = #{payeejobid},
+             </if>
+             <if test="payeejobname != null">
+                   payeejobname = #{payeejobname},
+             </if>
+             <if test="checkerid != null">
+                   checkerid = #{checkerid},
+             </if>
+             <if test="checkername != null">
+                   checkername = #{checkername},
+             </if>
+             <if test="checkerjobid != null">
+                   checkerjobid = #{checkerjobid},
+             </if>
+             <if test="checkerjobname != null">
+                   checkerjobname = #{checkerjobname},
+             </if>
+             <if test="checkstatus != null">
+                   checkstatus = #{checkstatus},
+             </if>
+             <if test="checktime != null">
+                   checktime = #{checktime},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime},
+             </if>
+             <if test="issyn != null">
+                   issyn = #{issyn},
+             </if>
+             <if test="syntime != null">
+                   syntime = #{syntime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from accountchargepayments 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountchargepayments 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountchargepayments 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accountchargepayments 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accountchargepayments 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountchargepayments 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

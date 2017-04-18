@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.ConsultcampusperfmonthsumMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,regionid,branchid,campusid,year,month,moneycount,moneybranchrank,moneycountryrank,peoplecount,peoplebranchrank,peoplecountryrank,newmoneytask,newmoney,newmoneybranchrank,newmoneycountryrank,newpeoplecount,newpeoplebranchrank,newpeoplecountryrank,newpeoplecounttask,createtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Consultcampusperfmonthsum">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="regionid" column="regionid" />
+         <id property="branchid" column="branchid" />
+         <id property="campusid" column="campusid" />
+         <id property="year" column="year" />
+         <id property="month" column="month" />
+         <id property="moneycount" column="moneycount" />
+         <id property="moneybranchrank" column="moneybranchrank" />
+         <id property="moneycountryrank" column="moneycountryrank" />
+         <id property="peoplecount" column="peoplecount" />
+         <id property="peoplebranchrank" column="peoplebranchrank" />
+         <id property="peoplecountryrank" column="peoplecountryrank" />
+         <id property="newmoneytask" column="newmoneytask" />
+         <id property="newmoney" column="newmoney" />
+         <id property="newmoneybranchrank" column="newmoneybranchrank" />
+         <id property="newmoneycountryrank" column="newmoneycountryrank" />
+         <id property="newpeoplecount" column="newpeoplecount" />
+         <id property="newpeoplebranchrank" column="newpeoplebranchrank" />
+         <id property="newpeoplecountryrank" column="newpeoplecountryrank" />
+         <id property="newpeoplecounttask" column="newpeoplecounttask" />
+         <id property="createtime" column="createtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Consultcampusperfmonthsum">
+  insert into consultcampusperfmonthsum (id,regionid,branchid,campusid,year,month,moneycount,moneybranchrank,moneycountryrank,peoplecount,peoplebranchrank,peoplecountryrank,newmoneytask,newmoney,newmoneybranchrank,newmoneycountryrank,newpeoplecount,newpeoplebranchrank,newpeoplecountryrank,newpeoplecounttask,createtime)
+         values (#{id},#{regionid},#{branchid},#{campusid},#{year},#{month},#{moneycount},#{moneybranchrank},#{moneycountryrank},#{peoplecount},#{peoplebranchrank},#{peoplecountryrank},#{newmoneytask},#{newmoney},#{newmoneybranchrank},#{newmoneycountryrank},#{newpeoplecount},#{newpeoplebranchrank},#{newpeoplecountryrank},#{newpeoplecounttask},#{createtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from consultcampusperfmonthsum 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Consultcampusperfmonthsum">
+    update consultcampusperfmonthsum
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="year != null">
+                   year = #{year},
+             </if>
+             <if test="month != null">
+                   month = #{month},
+             </if>
+             <if test="moneycount != null">
+                   moneycount = #{moneycount},
+             </if>
+             <if test="moneybranchrank != null">
+                   moneybranchrank = #{moneybranchrank},
+             </if>
+             <if test="moneycountryrank != null">
+                   moneycountryrank = #{moneycountryrank},
+             </if>
+             <if test="peoplecount != null">
+                   peoplecount = #{peoplecount},
+             </if>
+             <if test="peoplebranchrank != null">
+                   peoplebranchrank = #{peoplebranchrank},
+             </if>
+             <if test="peoplecountryrank != null">
+                   peoplecountryrank = #{peoplecountryrank},
+             </if>
+             <if test="newmoneytask != null">
+                   newmoneytask = #{newmoneytask},
+             </if>
+             <if test="newmoney != null">
+                   newmoney = #{newmoney},
+             </if>
+             <if test="newmoneybranchrank != null">
+                   newmoneybranchrank = #{newmoneybranchrank},
+             </if>
+             <if test="newmoneycountryrank != null">
+                   newmoneycountryrank = #{newmoneycountryrank},
+             </if>
+             <if test="newpeoplecount != null">
+                   newpeoplecount = #{newpeoplecount},
+             </if>
+             <if test="newpeoplebranchrank != null">
+                   newpeoplebranchrank = #{newpeoplebranchrank},
+             </if>
+             <if test="newpeoplecountryrank != null">
+                   newpeoplecountryrank = #{newpeoplecountryrank},
+             </if>
+             <if test="newpeoplecounttask != null">
+                   newpeoplecounttask = #{newpeoplecounttask},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from consultcampusperfmonthsum 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from consultcampusperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from consultcampusperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from consultcampusperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from consultcampusperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from consultcampusperfmonthsum 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

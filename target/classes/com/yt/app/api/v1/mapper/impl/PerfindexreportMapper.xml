@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.PerfindexreportMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,snapshotid,regionid,regionname,branchid,branchname,campusid,campusname,campusage,availables,classpersons,renewpersons,finishpersons,refundpersons,suspendpersons,chargemoney,refundmoney,hours,classrate,renewrate,dropoutrate,refundrate,churnrate,suspendrate,hourpervalid
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Perfindexreport">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="snapshotid" column="snapshotid" />
+         <id property="regionid" column="regionid" />
+         <id property="regionname" column="regionname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="campusage" column="campusage" />
+         <id property="availables" column="availables" />
+         <id property="classpersons" column="classpersons" />
+         <id property="renewpersons" column="renewpersons" />
+         <id property="finishpersons" column="finishpersons" />
+         <id property="refundpersons" column="refundpersons" />
+         <id property="suspendpersons" column="suspendpersons" />
+         <id property="chargemoney" column="chargemoney" />
+         <id property="refundmoney" column="refundmoney" />
+         <id property="hours" column="hours" />
+         <id property="classrate" column="classrate" />
+         <id property="renewrate" column="renewrate" />
+         <id property="dropoutrate" column="dropoutrate" />
+         <id property="refundrate" column="refundrate" />
+         <id property="churnrate" column="churnrate" />
+         <id property="suspendrate" column="suspendrate" />
+         <id property="hourpervalid" column="hourpervalid" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Perfindexreport">
+  insert into perfindexreport (id,snapshotid,regionid,regionname,branchid,branchname,campusid,campusname,campusage,availables,classpersons,renewpersons,finishpersons,refundpersons,suspendpersons,chargemoney,refundmoney,hours,classrate,renewrate,dropoutrate,refundrate,churnrate,suspendrate,hourpervalid)
+         values (#{id},#{snapshotid},#{regionid},#{regionname},#{branchid},#{branchname},#{campusid},#{campusname},#{campusage},#{availables},#{classpersons},#{renewpersons},#{finishpersons},#{refundpersons},#{suspendpersons},#{chargemoney},#{refundmoney},#{hours},#{classrate},#{renewrate},#{dropoutrate},#{refundrate},#{churnrate},#{suspendrate},#{hourpervalid})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from perfindexreport 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Perfindexreport">
+    update perfindexreport
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="snapshotid != null">
+                   snapshotid = #{snapshotid},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionname != null">
+                   regionname = #{regionname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="campusage != null">
+                   campusage = #{campusage},
+             </if>
+             <if test="availables != null">
+                   availables = #{availables},
+             </if>
+             <if test="classpersons != null">
+                   classpersons = #{classpersons},
+             </if>
+             <if test="renewpersons != null">
+                   renewpersons = #{renewpersons},
+             </if>
+             <if test="finishpersons != null">
+                   finishpersons = #{finishpersons},
+             </if>
+             <if test="refundpersons != null">
+                   refundpersons = #{refundpersons},
+             </if>
+             <if test="suspendpersons != null">
+                   suspendpersons = #{suspendpersons},
+             </if>
+             <if test="chargemoney != null">
+                   chargemoney = #{chargemoney},
+             </if>
+             <if test="refundmoney != null">
+                   refundmoney = #{refundmoney},
+             </if>
+             <if test="hours != null">
+                   hours = #{hours},
+             </if>
+             <if test="classrate != null">
+                   classrate = #{classrate},
+             </if>
+             <if test="renewrate != null">
+                   renewrate = #{renewrate},
+             </if>
+             <if test="dropoutrate != null">
+                   dropoutrate = #{dropoutrate},
+             </if>
+             <if test="refundrate != null">
+                   refundrate = #{refundrate},
+             </if>
+             <if test="churnrate != null">
+                   churnrate = #{churnrate},
+             </if>
+             <if test="suspendrate != null">
+                   suspendrate = #{suspendrate},
+             </if>
+             <if test="hourpervalid != null">
+                   hourpervalid = #{hourpervalid}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from perfindexreport 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from perfindexreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from perfindexreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from perfindexreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from perfindexreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from perfindexreport 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

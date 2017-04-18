@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.AccountrefundallotsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,applyid,sortno,allotid,teacherid,teachername,teacheroacode,teacherjobid,teacherjobname,isfulltimeteacher,subject,categorytype,allotamount,allotmoney
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accountrefundallots">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="applyid" column="applyid" />
+         <id property="sortno" column="sortno" />
+         <id property="allotid" column="allotid" />
+         <id property="teacherid" column="teacherid" />
+         <id property="teachername" column="teachername" />
+         <id property="teacheroacode" column="teacheroacode" />
+         <id property="teacherjobid" column="teacherjobid" />
+         <id property="teacherjobname" column="teacherjobname" />
+         <id property="isfulltimeteacher" column="isfulltimeteacher" />
+         <id property="subject" column="subject" />
+         <id property="categorytype" column="categorytype" />
+         <id property="allotamount" column="allotamount" />
+         <id property="allotmoney" column="allotmoney" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Accountrefundallots">
+  insert into accountrefundallots (id,applyid,sortno,allotid,teacherid,teachername,teacheroacode,teacherjobid,teacherjobname,isfulltimeteacher,subject,categorytype,allotamount,allotmoney)
+         values (#{id},#{applyid},#{sortno},#{allotid},#{teacherid},#{teachername},#{teacheroacode},#{teacherjobid},#{teacherjobname},#{isfulltimeteacher},#{subject},#{categorytype},#{allotamount},#{allotmoney})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from accountrefundallots 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Accountrefundallots">
+    update accountrefundallots
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="applyid != null">
+                   applyid = #{applyid},
+             </if>
+             <if test="sortno != null">
+                   sortno = #{sortno},
+             </if>
+             <if test="allotid != null">
+                   allotid = #{allotid},
+             </if>
+             <if test="teacherid != null">
+                   teacherid = #{teacherid},
+             </if>
+             <if test="teachername != null">
+                   teachername = #{teachername},
+             </if>
+             <if test="teacheroacode != null">
+                   teacheroacode = #{teacheroacode},
+             </if>
+             <if test="teacherjobid != null">
+                   teacherjobid = #{teacherjobid},
+             </if>
+             <if test="teacherjobname != null">
+                   teacherjobname = #{teacherjobname},
+             </if>
+             <if test="isfulltimeteacher != null">
+                   isfulltimeteacher = #{isfulltimeteacher},
+             </if>
+             <if test="subject != null">
+                   subject = #{subject},
+             </if>
+             <if test="categorytype != null">
+                   categorytype = #{categorytype},
+             </if>
+             <if test="allotamount != null">
+                   allotamount = #{allotamount},
+             </if>
+             <if test="allotmoney != null">
+                   allotmoney = #{allotmoney}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from accountrefundallots 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountrefundallots 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountrefundallots 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accountrefundallots 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accountrefundallots 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountrefundallots 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

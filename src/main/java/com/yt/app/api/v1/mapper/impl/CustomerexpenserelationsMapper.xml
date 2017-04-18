@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomerexpenserelationsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,customerid,expenseid,expensetype,expensemoney,accountid,orderid,creatorid,creatorname,createtime,tenantcode
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerexpenserelations">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="customerid" column="customerid" />
+         <id property="expenseid" column="expenseid" />
+         <id property="expensetype" column="expensetype" />
+         <id property="expensemoney" column="expensemoney" />
+         <id property="accountid" column="accountid" />
+         <id property="orderid" column="orderid" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="tenantcode" column="tenantcode" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerexpenserelations">
+  insert into customerexpenserelations (id,customerid,expenseid,expensetype,expensemoney,accountid,orderid,creatorid,creatorname,createtime,tenantcode)
+         values (#{id},#{customerid},#{expenseid},#{expensetype},#{expensemoney},#{accountid},#{orderid},#{creatorid},#{creatorname},#{createtime},#{tenantcode})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customerexpenserelations 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customerexpenserelations">
+    update customerexpenserelations
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="expenseid != null">
+                   expenseid = #{expenseid},
+             </if>
+             <if test="expensetype != null">
+                   expensetype = #{expensetype},
+             </if>
+             <if test="expensemoney != null">
+                   expensemoney = #{expensemoney},
+             </if>
+             <if test="accountid != null">
+                   accountid = #{accountid},
+             </if>
+             <if test="orderid != null">
+                   orderid = #{orderid},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="tenantcode != null">
+                   tenantcode = #{tenantcode}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customerexpenserelations 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerexpenserelations 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerexpenserelations 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerexpenserelations 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerexpenserelations 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerexpenserelations 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.AccountMapper">
+	<!-- 数据库列 -->
+	<sql id="Base_Column_List">
+		id,account,psw,position,mobile,mail,phone,state,flag,lockstatus,deletestatus,validstatus,picurl,birthday,name,card_id,type,endtime,lastlogin_time,lastlogin_ip,create_time,create_user,modify_time,client_id,version
+	</sql>
+	<!-- 基础返回对象封装 -->
+	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Account">
+		<id property="id" column="id" />
+		<id property="account" column="account" />
+		<id property="psw" column="psw" />
+		<id property="position" column="position" />
+		<id property="mobile" column="mobile" />
+		<id property="mail" column="mail" />
+		<id property="phone" column="phone" />
+		<id property="state" column="state" />
+		<id property="flag" column="flag" />
+		<id property="lockstatus" column="lockstatus" />
+		<id property="deletestatus" column="deletestatus" />
+		<id property="validstatus" column="validstatus" />
+		<id property="picurl" column="picurl" />
+		<id property="birthday" column="birthday" />
+		<id property="name" column="name" />
+		<id property="card_id" column="card_id" />
+		<id property="type" column="type" />
+		<id property="endtime" column="endtime" />
+		<id property="lastlogin_time" column="lastlogin_time" />
+		<id property="lastlogin_ip" column="lastlogin_ip" />
+		<id property="create_time" column="create_time" />
+		<id property="create_user" column="create_user" />
+		<id property="modify_time" column="modify_time" />
+		<id property="client_id" column="client_id" />
+		<id property="version" column="version" />
+	</resultMap>
+	<!-- 默认新增 -->
+	<insert id="post" parameterType="com.yt.app.api.v1.entity.Account">
+		insert into account
+		(id,account,psw,position,mobile,mail,phone,state,flag,lockstatus,deletestatus,validstatus,picurl,birthday,name,card_id,type,endtime,lastlogin_time,lastlogin_ip,create_time,create_user,modify_time,client_id)
+		values
+		(#{id},#{account},#{psw},#{position},#{mobile},#{mail},#{phone},#{state},#{flag},#{lockstatus},#{deletestatus},#{validstatus},#{picurl},#{birthday},#{name},#{card_id},#{type},#{endtime},#{lastlogin_time},#{lastlogin_ip},#{create_time},#{create_user},#{modify_time},#{client_id})
+	</insert>
+	<!-- 默认删除id对象 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from account
+		where id =
+		#{id}
+	</delete>
+	<!-- 默认更新id对象 -->
+	<update id="put" parameterType="com.yt.app.api.v1.entity.Account">
+		update account
+		<set>
+			<if test="account != null">
+				account = #{account},
+			</if>
+			<if test="psw != null">
+				psw = #{psw},
+			</if>
+			<if test="position != null">
+				position = #{position},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile},
+			</if>
+			<if test="mail != null">
+				mail = #{mail},
+			</if>
+			<if test="phone != null">
+				phone = #{phone},
+			</if>
+			<if test="state != null">
+				state = #{state},
+			</if>
+			<if test="flag != null">
+				flag = #{flag},
+			</if>
+			<if test="lockstatus != null">
+				lockstatus = #{lockstatus},
+			</if>
+			<if test="deletestatus != null">
+				deletestatus = #{deletestatus},
+			</if>
+			<if test="validstatus != null">
+				validstatus = #{validstatus},
+			</if>
+			<if test="picurl != null">
+				picurl = #{picurl},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="card_id != null">
+				card_id = #{card_id},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="endtime != null">
+				endtime = #{endtime},
+			</if>
+			<if test="lastlogin_time != null">
+				lastlogin_time = #{lastlogin_time},
+			</if>
+			<if test="lastlogin_ip != null">
+				lastlogin_ip = #{lastlogin_ip},
+			</if>
+			<if test="create_time != null">
+				create_time = #{create_time},
+			</if>
+			<if test="create_user != null">
+				create_user = #{create_user},
+			</if>
+			<if test="modify_time != null">
+				modify_time = #{modify_time},
+			</if>
+			<if test="client_id != null">
+				client_id = #{client_id},
+			</if>
+			<if test="version != null">
+				version = #{version}+1
+			</if>
+		</set>
+		where id = #{id} and version = #{version}
+	</update>
+	<!-- 默认获得id对象 -->
+	<select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from account
+		where id = #{id}
+	</select>
+	<!-- 默认集合 -->
+	<select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from account
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合 -->
+	<select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from account
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认集合统计 -->
+	<select id="countlist" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from account
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合统计 -->
+	<select id="countmap" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from account
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认获取Ids的对象 -->
+	<select id="getByIds" parameterType="java.util.HashMap"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from account
+		<where>
+			1=1
+			<if test="array != null and array != ''">
+				and id in
+				<foreach item="item" index="index" collection="array" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+	<!-- 根据账户名查询-->
+	<select id="getAccountByName" parameterType="java.lang.String"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from account
+		where account = #{account}
+	</select>
+</mapper>

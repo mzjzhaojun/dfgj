@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomerfollowsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,orgid,orgname,orgtype,customerid,followid,followtime,followerid,followername,followerjobid,followerjobname,followtype,followstage,followobject,followphone,followmemo,talkmainresult,talksubresult,customerlevel,invalidreason,purchaseintention,intensionsubjects,isvalidfiling,nextfollowtime,planverifytime,plansigndate,isstudythere,ispotential,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerfollows">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="orgid" column="orgid" />
+         <id property="orgname" column="orgname" />
+         <id property="orgtype" column="orgtype" />
+         <id property="customerid" column="customerid" />
+         <id property="followid" column="followid" />
+         <id property="followtime" column="followtime" />
+         <id property="followerid" column="followerid" />
+         <id property="followername" column="followername" />
+         <id property="followerjobid" column="followerjobid" />
+         <id property="followerjobname" column="followerjobname" />
+         <id property="followtype" column="followtype" />
+         <id property="followstage" column="followstage" />
+         <id property="followobject" column="followobject" />
+         <id property="followphone" column="followphone" />
+         <id property="followmemo" column="followmemo" />
+         <id property="talkmainresult" column="talkmainresult" />
+         <id property="talksubresult" column="talksubresult" />
+         <id property="customerlevel" column="customerlevel" />
+         <id property="invalidreason" column="invalidreason" />
+         <id property="purchaseintention" column="purchaseintention" />
+         <id property="intensionsubjects" column="intensionsubjects" />
+         <id property="isvalidfiling" column="isvalidfiling" />
+         <id property="nextfollowtime" column="nextfollowtime" />
+         <id property="planverifytime" column="planverifytime" />
+         <id property="plansigndate" column="plansigndate" />
+         <id property="isstudythere" column="isstudythere" />
+         <id property="ispotential" column="ispotential" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerfollows">
+  insert into customerfollows (id,orgid,orgname,orgtype,customerid,followid,followtime,followerid,followername,followerjobid,followerjobname,followtype,followstage,followobject,followphone,followmemo,talkmainresult,talksubresult,customerlevel,invalidreason,purchaseintention,intensionsubjects,isvalidfiling,nextfollowtime,planverifytime,plansigndate,isstudythere,ispotential,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{orgid},#{orgname},#{orgtype},#{customerid},#{followid},#{followtime},#{followerid},#{followername},#{followerjobid},#{followerjobname},#{followtype},#{followstage},#{followobject},#{followphone},#{followmemo},#{talkmainresult},#{talksubresult},#{customerlevel},#{invalidreason},#{purchaseintention},#{intensionsubjects},#{isvalidfiling},#{nextfollowtime},#{planverifytime},#{plansigndate},#{isstudythere},#{ispotential},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customerfollows 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customerfollows">
+    update customerfollows
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="orgid != null">
+                   orgid = #{orgid},
+             </if>
+             <if test="orgname != null">
+                   orgname = #{orgname},
+             </if>
+             <if test="orgtype != null">
+                   orgtype = #{orgtype},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="followid != null">
+                   followid = #{followid},
+             </if>
+             <if test="followtime != null">
+                   followtime = #{followtime},
+             </if>
+             <if test="followerid != null">
+                   followerid = #{followerid},
+             </if>
+             <if test="followername != null">
+                   followername = #{followername},
+             </if>
+             <if test="followerjobid != null">
+                   followerjobid = #{followerjobid},
+             </if>
+             <if test="followerjobname != null">
+                   followerjobname = #{followerjobname},
+             </if>
+             <if test="followtype != null">
+                   followtype = #{followtype},
+             </if>
+             <if test="followstage != null">
+                   followstage = #{followstage},
+             </if>
+             <if test="followobject != null">
+                   followobject = #{followobject},
+             </if>
+             <if test="followphone != null">
+                   followphone = #{followphone},
+             </if>
+             <if test="followmemo != null">
+                   followmemo = #{followmemo},
+             </if>
+             <if test="talkmainresult != null">
+                   talkmainresult = #{talkmainresult},
+             </if>
+             <if test="talksubresult != null">
+                   talksubresult = #{talksubresult},
+             </if>
+             <if test="customerlevel != null">
+                   customerlevel = #{customerlevel},
+             </if>
+             <if test="invalidreason != null">
+                   invalidreason = #{invalidreason},
+             </if>
+             <if test="purchaseintention != null">
+                   purchaseintention = #{purchaseintention},
+             </if>
+             <if test="intensionsubjects != null">
+                   intensionsubjects = #{intensionsubjects},
+             </if>
+             <if test="isvalidfiling != null">
+                   isvalidfiling = #{isvalidfiling},
+             </if>
+             <if test="nextfollowtime != null">
+                   nextfollowtime = #{nextfollowtime},
+             </if>
+             <if test="planverifytime != null">
+                   planverifytime = #{planverifytime},
+             </if>
+             <if test="plansigndate != null">
+                   plansigndate = #{plansigndate},
+             </if>
+             <if test="isstudythere != null">
+                   isstudythere = #{isstudythere},
+             </if>
+             <if test="ispotential != null">
+                   ispotential = #{ispotential},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customerfollows 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerfollows 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerfollows 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerfollows 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerfollows 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerfollows 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

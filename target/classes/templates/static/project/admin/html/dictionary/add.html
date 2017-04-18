@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html ng-app="add">
+  <head>
+    <title>字典管理-新增</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    
+     <link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/sysmenu.css">
+    
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.all-3.5.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+    
+    <script src="../../../../resource/js/date/js/eap.core.js"></script>
+	<!-- 表单验证 -->
+	<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css"/>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	
+	
+	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+	<script type="text/javascript">
+		
+		var add = angular.module("add", []);
+		add.controller("addController",function($scope, $http) {
+			
+			$http({
+				url:parent.getMenuLinksHref("menusys"),
+				method:'GET',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'}
+	  		}).success(function(data, status, headers, config){
+	  		//	var zNodes=data;
+	  			$scope.datas = data;
+	  			$scope.linkUrl =data[0].linkUrl;
+		//		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+	  		}).error(function(data, status, headers, config){
+				//处理响应失败
+	  			response(status);
+			})
+			$scope.formData = {};
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			//保存
+			$scope.onPreserved=function(){
+				var isValid = $("#saveForm").valid();
+					if(isValid){
+    				$http({
+    					url:$scope.linkUrl,
+    					method:'POST',
+    					dataType : "json",
+    					withCredentials: true,
+    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    					data: JSON.stringify($scope.formData)
+    		  		}).success(function(data, status, headers, config){
+    		  			location.href="list.html";
+    		  		}).error(function(data, status, headers, config){
+						//处理响应失败
+    		  			response(status);
+					})
+    			}
+			}
+		})
+		
+		
+		var setting = {
+				view: {
+					dblClickExpand: false
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				},
+				callback: {
+					beforeClick: beforeClick,
+					onClick: onClick
+				}
+			};
+		
+	 		function beforeClick(treeId, treeNode) {
+	 			var check = (treeNode && !treeNode.isParent);
+	 			if (!check) alert("只能选择子系统...");
+	 			return check;
+	 		}
+		 		
+		 		function onClick(e, treeId, treeNode) {
+		 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+					nodes = zTree.getSelectedNodes(),
+					v = "";
+					nodes.sort(function compare(a,b){return a.id-b.id;});
+					for (var i=0, l=nodes.length; i<l; i++) {
+						v += nodes[i].name + ",";
+					}
+					if (v.length > 0 ) v = v.substring(0, v.length-1);
+					var cityObj = $("#sysSel");
+					cityObj.attr("value", v);
+					//treeNode.linkUrl;
+					var appElement = document.querySelector('[ng-controller=addController]');
+					var $scope = angular.element(appElement).scope();
+					$scope.linkUrl=treeNode.linkUrl;
+		 			hideMenu();
+		 		}
+
+		 		function showMenu() {
+		 			var cityObj = $("#sysSel");
+		 			var cityOffset = $("#sysSel").offset();
+		 			$("#menuContent").css({left:cityOffset.left + "px", top:cityOffset.top + cityObj.outerHeight() + "px"}).slideDown("fast");
+		 			$("body").bind("mousedown", onBodyDown);
+		 		}
+		 		
+		 		function hideMenu() {
+		 			$("#menuContent").fadeOut("fast");
+		 			$("body").unbind("mousedown", onBodyDown);
+		 		}
+		 		
+		 		function onBodyDown(event) {
+					if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+						hideMenu();
+					}
+				}
+	</script>
+</head>
+  
+  <body ng-controller="addController">
+  	<form method="post" id="saveForm" action="">
+  		 <!-- 操作按钮操作区 -->
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+		    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+	    	</div>
+	    	<div>
+		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+	    	</div>
+    	</div>
+   		<div class="col-lg-6">
+   		 	<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统</span>
+			<select class="form-control"  id="linkUrl" ng-model="linkUrl" ng-options="sys.linkUrl as sys.name for sys in datas">
+				</select>
+				<!-- <input id="sysSel" type="text" readonly value="" class="sysSel"/>
+					&nbsp;<a id="menuBtn" href="#" onclick="showMenu(); return false;">选择</a>&nbsp;&nbsp;
+				  -->
+	        </div>
+	        
+	   		 <div class="input-group input-group-sm">
+	            <span class="input-group-addon text-right spanwidth">单项编码</span>
+	           	<input type="text" class="form-control required" placeholder="请输入单项编码" name="code" ng-model="formData.code" maxlength="16">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        <div class="input-group input-group-sm">
+	            <span class="input-group-addon text-right spanwidth">单项名称</span>
+	           	<input type="text" class="form-control required" name="name" placeholder="请输入单项名称" ng-model="formData.name">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        <div class="input-group input-group-sm">
+	            <span class="input-group-addon text-right spanwidth">类型编码</span>
+	           	<input type="text" class="form-control required" placeholder="请输入类型编码" name="typecode" ng-model="formData.typecode" maxlength="16">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">类型名称</span>
+				<input type="text" class="form-control required" placeholder="请输入类型名称" name="typename" ng-model="formData.typename">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        
+   		</div>
+    </form>
+    
+    <div id="menuContent" class="menuContent" style="display:none; position: absolute;z-index: 3;">
+		<ul id="treeDemo" class="ztree" style="margin-top:0; width:160px;"></ul>
+	</div>
+  </body>
+</html>

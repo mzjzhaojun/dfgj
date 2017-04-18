@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.OrganizationsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,organizationid,codename,name,shortname,departmenttype,legalentitycode,legalentity,managerid,orgtype,campusarea,campususingarea,cityid,cityname,fullpath,deliverdate,versionstarttime,versionendtime,bistatus,status
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Organizations">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="organizationid" column="organizationid" />
+         <id property="codename" column="codename" />
+         <id property="name" column="name" />
+         <id property="shortname" column="shortname" />
+         <id property="departmenttype" column="departmenttype" />
+         <id property="legalentitycode" column="legalentitycode" />
+         <id property="legalentity" column="legalentity" />
+         <id property="managerid" column="managerid" />
+         <id property="orgtype" column="orgtype" />
+         <id property="campusarea" column="campusarea" />
+         <id property="campususingarea" column="campususingarea" />
+         <id property="cityid" column="cityid" />
+         <id property="cityname" column="cityname" />
+         <id property="fullpath" column="fullpath" />
+         <id property="deliverdate" column="deliverdate" />
+         <id property="versionstarttime" column="versionstarttime" />
+         <id property="versionendtime" column="versionendtime" />
+         <id property="bistatus" column="bistatus" />
+         <id property="status" column="status" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Organizations">
+  insert into organizations (id,organizationid,codename,name,shortname,departmenttype,legalentitycode,legalentity,managerid,orgtype,campusarea,campususingarea,cityid,cityname,fullpath,deliverdate,versionstarttime,versionendtime,bistatus,status)
+         values (#{id},#{organizationid},#{codename},#{name},#{shortname},#{departmenttype},#{legalentitycode},#{legalentity},#{managerid},#{orgtype},#{campusarea},#{campususingarea},#{cityid},#{cityname},#{fullpath},#{deliverdate},#{versionstarttime},#{versionendtime},#{bistatus},#{status})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from organizations 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Organizations">
+    update organizations
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="organizationid != null">
+                   organizationid = #{organizationid},
+             </if>
+             <if test="codename != null">
+                   codename = #{codename},
+             </if>
+             <if test="name != null">
+                   name = #{name},
+             </if>
+             <if test="shortname != null">
+                   shortname = #{shortname},
+             </if>
+             <if test="departmenttype != null">
+                   departmenttype = #{departmenttype},
+             </if>
+             <if test="legalentitycode != null">
+                   legalentitycode = #{legalentitycode},
+             </if>
+             <if test="legalentity != null">
+                   legalentity = #{legalentity},
+             </if>
+             <if test="managerid != null">
+                   managerid = #{managerid},
+             </if>
+             <if test="orgtype != null">
+                   orgtype = #{orgtype},
+             </if>
+             <if test="campusarea != null">
+                   campusarea = #{campusarea},
+             </if>
+             <if test="campususingarea != null">
+                   campususingarea = #{campususingarea},
+             </if>
+             <if test="cityid != null">
+                   cityid = #{cityid},
+             </if>
+             <if test="cityname != null">
+                   cityname = #{cityname},
+             </if>
+             <if test="fullpath != null">
+                   fullpath = #{fullpath},
+             </if>
+             <if test="deliverdate != null">
+                   deliverdate = #{deliverdate},
+             </if>
+             <if test="versionstarttime != null">
+                   versionstarttime = #{versionstarttime},
+             </if>
+             <if test="versionendtime != null">
+                   versionendtime = #{versionendtime},
+             </if>
+             <if test="bistatus != null">
+                   bistatus = #{bistatus},
+             </if>
+             <if test="status != null">
+                   status = #{status}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from organizations 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from organizations 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from organizations 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from organizations 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from organizations 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from organizations 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

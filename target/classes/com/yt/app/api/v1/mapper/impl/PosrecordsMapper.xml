@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.PosrecordsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,transactiondate,settlementdate,transactiontimevalue,transactiontime,transactiontype,transactionid,cardnum,merchantid,posid,money,fromtype,isusered,createtime,receipttype
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Posrecords">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="transactiondate" column="transactiondate" />
+         <id property="settlementdate" column="settlementdate" />
+         <id property="transactiontimevalue" column="transactiontimevalue" />
+         <id property="transactiontime" column="transactiontime" />
+         <id property="transactiontype" column="transactiontype" />
+         <id property="transactionid" column="transactionid" />
+         <id property="cardnum" column="cardnum" />
+         <id property="merchantid" column="merchantid" />
+         <id property="posid" column="posid" />
+         <id property="money" column="money" />
+         <id property="fromtype" column="fromtype" />
+         <id property="isusered" column="isusered" />
+         <id property="createtime" column="createtime" />
+         <id property="receipttype" column="receipttype" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Posrecords">
+  insert into posrecords (id,transactiondate,settlementdate,transactiontimevalue,transactiontime,transactiontype,transactionid,cardnum,merchantid,posid,money,fromtype,isusered,createtime,receipttype)
+         values (#{id},#{transactiondate},#{settlementdate},#{transactiontimevalue},#{transactiontime},#{transactiontype},#{transactionid},#{cardnum},#{merchantid},#{posid},#{money},#{fromtype},#{isusered},#{createtime},#{receipttype})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from posrecords 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Posrecords">
+    update posrecords
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="transactiondate != null">
+                   transactiondate = #{transactiondate},
+             </if>
+             <if test="settlementdate != null">
+                   settlementdate = #{settlementdate},
+             </if>
+             <if test="transactiontimevalue != null">
+                   transactiontimevalue = #{transactiontimevalue},
+             </if>
+             <if test="transactiontime != null">
+                   transactiontime = #{transactiontime},
+             </if>
+             <if test="transactiontype != null">
+                   transactiontype = #{transactiontype},
+             </if>
+             <if test="transactionid != null">
+                   transactionid = #{transactionid},
+             </if>
+             <if test="cardnum != null">
+                   cardnum = #{cardnum},
+             </if>
+             <if test="merchantid != null">
+                   merchantid = #{merchantid},
+             </if>
+             <if test="posid != null">
+                   posid = #{posid},
+             </if>
+             <if test="money != null">
+                   money = #{money},
+             </if>
+             <if test="fromtype != null">
+                   fromtype = #{fromtype},
+             </if>
+             <if test="isusered != null">
+                   isusered = #{isusered},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="receipttype != null">
+                   receipttype = #{receipttype}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from posrecords 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from posrecords 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from posrecords 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from posrecords 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from posrecords 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from posrecords 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

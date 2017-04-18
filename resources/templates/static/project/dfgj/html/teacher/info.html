@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html ng-app="info">
+<head>
+<title>教师-查看</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/common.css">
+<script type="text/javascript"
+	src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery.cookie.js"></script>
+<!-- 公共的 -->
+<script type="text/javascript" src="../../../../resource/js/util.js"></script>
+<!-- 引用控制层插件样式 -->
+<link rel="stylesheet"
+	href="../../../../resource/css/zyfile/control/css/zyUpload.css"
+	type="text/css">
+<!-- 引用核心层插件 -->
+<script type="text/javascript"
+	src="../../../../resource/js/zyfile/core/zyFile.js"></script>
+<!-- 引用控制层插件 -->
+<script type="text/javascript"
+	src="../../../../resource/js/zyfile/control/js/zyUpload.js"></script>
+<script type="text/javascript">
+	var info = angular.module("info", []);
+	info
+			.controller(
+					"infoController",
+					function($scope, $http) {
+						//返回
+						$scope.onReturn = function() {
+							history.go(-1);
+						}
+						$http(
+								{
+									url : parent.getFunctionLinksHref("self"),
+									method : 'GET',
+									dataType : "json",
+									withCredentials : true,
+									headers : {
+										'Content-Type' : 'application/json;charset=UTF-8;'
+									},
+									data : ''
+								})
+								.success(
+										function(data, status, headers, config) {
+											//响应成功
+											$scope.tasks = data;
+											var headerimg = $scope.tasks.headerimg != null ? $scope.tasks.headerimg
+													: '';
+											// 初始化插件
+											$("#img")
+													.zyUpload(
+															{
+																width : "500px", // 宽度
+																height : "176px", // 宽度
+																itemWidth : "120px", // 文件项的宽度
+																itemHeight : "150px", // 文件项的高度
+																url : parent.sys.moreFileUrl, // 上传文件的路径
+																multiple : true, // 是否可以多个文件上传
+																dragDrop : false, // 是否可以拖动上传文件
+																del : true, // 是否可以删除文件
+																finishDel : false, // 是否在上传文件完成后删除预览
+																acitionType : "view", //info页面显示用的
+																uploadInput : $("#submit"),
+																onComplete : function(
+																		responseInfo) {
+																	//submitForm(); // 上传完成的回调方法
+																	$scope
+																			.onPreserved();
+																}
+															},
+															{
+																imgUrl : headerimg
+															});
+										})
+								.error(function(data, status, headers, config) {
+									//处理响应失败
+									response(status);
+								});
+					})
+</script>
+</head>
+<body ng-controller="infoController">
+	<!-- 操作按钮操作区 -->
+	<div class="col-lg-12 topActionPanel">
+		<div>
+			<button type="button" class="btn btn-primary" ng-click="onReturn()">返
+				回</button>
+		</div>
+	</div>
+	<div class="col-lg-6 viewFixedWidth">
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">名称</span> <input
+				type="text" class="form-control" value="{{tasks.name}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片&nbsp;&nbsp;&nbsp;</span>
+			<div id="img" class="img"></div>
+			<input type="hidden" id="headerimg" class="form-control inputchange"
+				ng-model="tasks.headerimg" />
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">年级</span> <input
+				type="text" class="form-control" value="{{tasks.dgrade}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">所属学校</span> <input
+				type="text" class="form-control" value="{{tasks.dschool_id}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">电话</span> <input
+				type="text" class="form-control" value="{{tasks.mobile}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">地址</span> <input
+				type="text" class="form-control" value="{{tasks.address}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">工作性质</span> <input
+				type="text" class="form-control" value="{{tasks.dtype}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">年龄</span> <input
+				type="text" class="form-control" value="{{tasks.dage}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">性别</span> <input
+				type="text" class="form-control" value="{{tasks.dsex}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth"
+				style="height: 150px;">备&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+			<textarea class="txtVal form-control" style="height: 150px;"
+				disabled="disabled">{{tasks.remark}}</textarea>
+		</div>
+</body>
+</html>

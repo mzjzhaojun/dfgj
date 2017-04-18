@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.FileMapper">
+	<sql id="Base_Column_List">
+		id,root_path,relative_path,file_type,suffix,file_size,createtime,modifytime,file_name,version
+	</sql>
+	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.File">
+		<id property="id" column="id" />
+		<id property="root_path" column="root_path" />
+		<id property="relative_path" column="relative_path" />
+		<id property="file_type" column="file_type" />
+		<id property="suffix" column="suffix" />
+		<id property="file_size" column="file_size" />
+		<id property="createtime" column="createtime" />
+		<id property="modifytime" column="modifytime" />
+		<id property="file_name" column="file_name" />
+		<id property="version" column="version" />
+	</resultMap>
+	<insert id="post" parameterType="com.yt.app.api.v1.entity.File">
+		insert into file
+		(id,root_path,relative_path,file_type,suffix,file_size,createtime,modifytime,file_name)
+		values
+		(#{id},#{root_path},#{relative_path},#{file_type},#{suffix},#{file_size},#{createtime},#{modifytime},#{file_name})
+	</insert>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from file
+		where id =
+		#{id}
+	</delete>
+	<update id="put" parameterType="com.yt.app.api.v1.entity.File">
+		update file
+		<set>
+			<if test="id != null">
+				id = #{id},
+			</if>
+			<if test="root_path != null">
+				root_path = #{root_path},
+			</if>
+			<if test="relative_path != null">
+				relative_path = #{relative_path},
+			</if>
+			<if test="file_type != null">
+				file_type = #{file_type},
+			</if>
+			<if test="suffix != null">
+				suffix = #{suffix},
+			</if>
+			<if test="file_size != null">
+				file_size = #{file_size},
+			</if>
+			<if test="createtime != null">
+				createtime = #{createtime},
+			</if>
+			<if test="modifytime != null">
+				modifytime = #{modifytime},
+			</if>
+			<if test="file_name != null">
+				file_name = #{file_name},
+			</if>
+			<if test="version != null">
+				version = #{version}+1
+			</if>
+		</set>
+		where id = #{id} and version = #{version}
+	</update>
+	<select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from file
+		where id = #{id}
+	</select>
+	<select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from file
+		<where>
+			1=1
+			<if test="file_name != null and file_name != ''">
+				and file_name like "%"#{file_name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from file
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<select id="countlist" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from file
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<select id="countmap" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from file
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<select id="selectFile" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from file
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+</mapper>

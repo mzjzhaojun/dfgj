@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.TeacherreportStaffMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,snapshotid,dt,regionid,regionname,branchid,branchname,campusid,campusname,orgid,orgname,campusmonth,jobname,jobnature,fulltimecount,fulltimeteachcount,parttimecount,parttimeteachcount,oacode,staffid,staffname,customercount,customerclasscount,customerg3classcount,customeravailablecount,customerg3availablecount,customerclasssuspendedcount,customerschoolsuspendedcount,customerclassfinishedcount,allteacherassignedamount,allteacherassignedamountvol,allteacherassignedamountyoydiff,allteacherassignedamountyoy,allteacherassignedamounttask,allteacherassignedamounttcr,allcustomerassignedamount,allcustomerassignedamountvol,allcustomerassignedamountyoydiff,allcustomerassignedamountyoy,allassignedincome,allassignedincomevol,allassignedincomeyoydiff,allassignedincomeyoy,onetooneassignedamount,onetooneassignedamountvol,onetooneassignedamountyoydiff,onetooneassignedamountyoy,onetooneassignedincome,onetooneassignedincomevol,onetooneassignedincomeyoydiff,onetooneassignedincomeyoy,onetoonecustomercount,onetoonecustomercountvol,onetoonecustomercountyoydiff,onetoonecustomercountyoy,teacherclassgroupassignedamount,teacherclassgroupassignedamountvol,teacherclassgroupassignedamountyoydiff,teacherclassgroupassignedamountyoy,customerclassgroupassignedamount,customerclassgroupassignedamountvol,customerclassgroupassignedamountyoydiff,customerclassgroupassignedamountyoy,classgroupassignedincome,classgroupassignedincomevol,classgroupassignedincomeyoydiff,classgroupassignedincomeyoy,classgroupcustomercount,classgroupcustomercountvol,classgroupcustomercountyoydiff,classgroupcustomercountyoy,customerrenewalrate,customeraveragehour,customeraverageaddignedamount,fulltimeteacheraveragehour,parttimeteacheraveragehourpercent,customerlossrate,customertransferintroductioncount,customersatisfactiondegree,rechargeamount,rechargecount,refundamount,refundcount
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.TeacherreportStaff">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="snapshotid" column="snapshotid" />
+         <id property="dt" column="dt" />
+         <id property="regionid" column="regionid" />
+         <id property="regionname" column="regionname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="orgid" column="orgid" />
+         <id property="orgname" column="orgname" />
+         <id property="campusmonth" column="campusmonth" />
+         <id property="jobname" column="jobname" />
+         <id property="jobnature" column="jobnature" />
+         <id property="fulltimecount" column="fulltimecount" />
+         <id property="fulltimeteachcount" column="fulltimeteachcount" />
+         <id property="parttimecount" column="parttimecount" />
+         <id property="parttimeteachcount" column="parttimeteachcount" />
+         <id property="oacode" column="oacode" />
+         <id property="staffid" column="staffid" />
+         <id property="staffname" column="staffname" />
+         <id property="customercount" column="customercount" />
+         <id property="customerclasscount" column="customerclasscount" />
+         <id property="customerg3classcount" column="customerg3classcount" />
+         <id property="customeravailablecount" column="customeravailablecount" />
+         <id property="customerg3availablecount" column="customerg3availablecount" />
+         <id property="customerclasssuspendedcount" column="customerclasssuspendedcount" />
+         <id property="customerschoolsuspendedcount" column="customerschoolsuspendedcount" />
+         <id property="customerclassfinishedcount" column="customerclassfinishedcount" />
+         <id property="allteacherassignedamount" column="allteacherassignedamount" />
+         <id property="allteacherassignedamountvol" column="allteacherassignedamountvol" />
+         <id property="allteacherassignedamountyoydiff" column="allteacherassignedamountyoydiff" />
+         <id property="allteacherassignedamountyoy" column="allteacherassignedamountyoy" />
+         <id property="allteacherassignedamounttask" column="allteacherassignedamounttask" />
+         <id property="allteacherassignedamounttcr" column="allteacherassignedamounttcr" />
+         <id property="allcustomerassignedamount" column="allcustomerassignedamount" />
+         <id property="allcustomerassignedamountvol" column="allcustomerassignedamountvol" />
+         <id property="allcustomerassignedamountyoydiff" column="allcustomerassignedamountyoydiff" />
+         <id property="allcustomerassignedamountyoy" column="allcustomerassignedamountyoy" />
+         <id property="allassignedincome" column="allassignedincome" />
+         <id property="allassignedincomevol" column="allassignedincomevol" />
+         <id property="allassignedincomeyoydiff" column="allassignedincomeyoydiff" />
+         <id property="allassignedincomeyoy" column="allassignedincomeyoy" />
+         <id property="onetooneassignedamount" column="onetooneassignedamount" />
+         <id property="onetooneassignedamountvol" column="onetooneassignedamountvol" />
+         <id property="onetooneassignedamountyoydiff" column="onetooneassignedamountyoydiff" />
+         <id property="onetooneassignedamountyoy" column="onetooneassignedamountyoy" />
+         <id property="onetooneassignedincome" column="onetooneassignedincome" />
+         <id property="onetooneassignedincomevol" column="onetooneassignedincomevol" />
+         <id property="onetooneassignedincomeyoydiff" column="onetooneassignedincomeyoydiff" />
+         <id property="onetooneassignedincomeyoy" column="onetooneassignedincomeyoy" />
+         <id property="onetoonecustomercount" column="onetoonecustomercount" />
+         <id property="onetoonecustomercountvol" column="onetoonecustomercountvol" />
+         <id property="onetoonecustomercountyoydiff" column="onetoonecustomercountyoydiff" />
+         <id property="onetoonecustomercountyoy" column="onetoonecustomercountyoy" />
+         <id property="teacherclassgroupassignedamount" column="teacherclassgroupassignedamount" />
+         <id property="teacherclassgroupassignedamountvol" column="teacherclassgroupassignedamountvol" />
+         <id property="teacherclassgroupassignedamountyoydiff" column="teacherclassgroupassignedamountyoydiff" />
+         <id property="teacherclassgroupassignedamountyoy" column="teacherclassgroupassignedamountyoy" />
+         <id property="customerclassgroupassignedamount" column="customerclassgroupassignedamount" />
+         <id property="customerclassgroupassignedamountvol" column="customerclassgroupassignedamountvol" />
+         <id property="customerclassgroupassignedamountyoydiff" column="customerclassgroupassignedamountyoydiff" />
+         <id property="customerclassgroupassignedamountyoy" column="customerclassgroupassignedamountyoy" />
+         <id property="classgroupassignedincome" column="classgroupassignedincome" />
+         <id property="classgroupassignedincomevol" column="classgroupassignedincomevol" />
+         <id property="classgroupassignedincomeyoydiff" column="classgroupassignedincomeyoydiff" />
+         <id property="classgroupassignedincomeyoy" column="classgroupassignedincomeyoy" />
+         <id property="classgroupcustomercount" column="classgroupcustomercount" />
+         <id property="classgroupcustomercountvol" column="classgroupcustomercountvol" />
+         <id property="classgroupcustomercountyoydiff" column="classgroupcustomercountyoydiff" />
+         <id property="classgroupcustomercountyoy" column="classgroupcustomercountyoy" />
+         <id property="customerrenewalrate" column="customerrenewalrate" />
+         <id property="customeraveragehour" column="customeraveragehour" />
+         <id property="customeraverageaddignedamount" column="customeraverageaddignedamount" />
+         <id property="fulltimeteacheraveragehour" column="fulltimeteacheraveragehour" />
+         <id property="parttimeteacheraveragehourpercent" column="parttimeteacheraveragehourpercent" />
+         <id property="customerlossrate" column="customerlossrate" />
+         <id property="customertransferintroductioncount" column="customertransferintroductioncount" />
+         <id property="customersatisfactiondegree" column="customersatisfactiondegree" />
+         <id property="rechargeamount" column="rechargeamount" />
+         <id property="rechargecount" column="rechargecount" />
+         <id property="refundamount" column="refundamount" />
+         <id property="refundcount" column="refundcount" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.TeacherreportStaff">
+  insert into teacherreport_staff (id,snapshotid,dt,regionid,regionname,branchid,branchname,campusid,campusname,orgid,orgname,campusmonth,jobname,jobnature,fulltimecount,fulltimeteachcount,parttimecount,parttimeteachcount,oacode,staffid,staffname,customercount,customerclasscount,customerg3classcount,customeravailablecount,customerg3availablecount,customerclasssuspendedcount,customerschoolsuspendedcount,customerclassfinishedcount,allteacherassignedamount,allteacherassignedamountvol,allteacherassignedamountyoydiff,allteacherassignedamountyoy,allteacherassignedamounttask,allteacherassignedamounttcr,allcustomerassignedamount,allcustomerassignedamountvol,allcustomerassignedamountyoydiff,allcustomerassignedamountyoy,allassignedincome,allassignedincomevol,allassignedincomeyoydiff,allassignedincomeyoy,onetooneassignedamount,onetooneassignedamountvol,onetooneassignedamountyoydiff,onetooneassignedamountyoy,onetooneassignedincome,onetooneassignedincomevol,onetooneassignedincomeyoydiff,onetooneassignedincomeyoy,onetoonecustomercount,onetoonecustomercountvol,onetoonecustomercountyoydiff,onetoonecustomercountyoy,teacherclassgroupassignedamount,teacherclassgroupassignedamountvol,teacherclassgroupassignedamountyoydiff,teacherclassgroupassignedamountyoy,customerclassgroupassignedamount,customerclassgroupassignedamountvol,customerclassgroupassignedamountyoydiff,customerclassgroupassignedamountyoy,classgroupassignedincome,classgroupassignedincomevol,classgroupassignedincomeyoydiff,classgroupassignedincomeyoy,classgroupcustomercount,classgroupcustomercountvol,classgroupcustomercountyoydiff,classgroupcustomercountyoy,customerrenewalrate,customeraveragehour,customeraverageaddignedamount,fulltimeteacheraveragehour,parttimeteacheraveragehourpercent,customerlossrate,customertransferintroductioncount,customersatisfactiondegree,rechargeamount,rechargecount,refundamount,refundcount)
+         values (#{id},#{snapshotid},#{dt},#{regionid},#{regionname},#{branchid},#{branchname},#{campusid},#{campusname},#{orgid},#{orgname},#{campusmonth},#{jobname},#{jobnature},#{fulltimecount},#{fulltimeteachcount},#{parttimecount},#{parttimeteachcount},#{oacode},#{staffid},#{staffname},#{customercount},#{customerclasscount},#{customerg3classcount},#{customeravailablecount},#{customerg3availablecount},#{customerclasssuspendedcount},#{customerschoolsuspendedcount},#{customerclassfinishedcount},#{allteacherassignedamount},#{allteacherassignedamountvol},#{allteacherassignedamountyoydiff},#{allteacherassignedamountyoy},#{allteacherassignedamounttask},#{allteacherassignedamounttcr},#{allcustomerassignedamount},#{allcustomerassignedamountvol},#{allcustomerassignedamountyoydiff},#{allcustomerassignedamountyoy},#{allassignedincome},#{allassignedincomevol},#{allassignedincomeyoydiff},#{allassignedincomeyoy},#{onetooneassignedamount},#{onetooneassignedamountvol},#{onetooneassignedamountyoydiff},#{onetooneassignedamountyoy},#{onetooneassignedincome},#{onetooneassignedincomevol},#{onetooneassignedincomeyoydiff},#{onetooneassignedincomeyoy},#{onetoonecustomercount},#{onetoonecustomercountvol},#{onetoonecustomercountyoydiff},#{onetoonecustomercountyoy},#{teacherclassgroupassignedamount},#{teacherclassgroupassignedamountvol},#{teacherclassgroupassignedamountyoydiff},#{teacherclassgroupassignedamountyoy},#{customerclassgroupassignedamount},#{customerclassgroupassignedamountvol},#{customerclassgroupassignedamountyoydiff},#{customerclassgroupassignedamountyoy},#{classgroupassignedincome},#{classgroupassignedincomevol},#{classgroupassignedincomeyoydiff},#{classgroupassignedincomeyoy},#{classgroupcustomercount},#{classgroupcustomercountvol},#{classgroupcustomercountyoydiff},#{classgroupcustomercountyoy},#{customerrenewalrate},#{customeraveragehour},#{customeraverageaddignedamount},#{fulltimeteacheraveragehour},#{parttimeteacheraveragehourpercent},#{customerlossrate},#{customertransferintroductioncount},#{customersatisfactiondegree},#{rechargeamount},#{rechargecount},#{refundamount},#{refundcount})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from teacherreport_staff 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.TeacherreportStaff">
+    update teacherreport_staff
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="snapshotid != null">
+                   snapshotid = #{snapshotid},
+             </if>
+             <if test="dt != null">
+                   dt = #{dt},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionname != null">
+                   regionname = #{regionname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="orgid != null">
+                   orgid = #{orgid},
+             </if>
+             <if test="orgname != null">
+                   orgname = #{orgname},
+             </if>
+             <if test="campusmonth != null">
+                   campusmonth = #{campusmonth},
+             </if>
+             <if test="jobname != null">
+                   jobname = #{jobname},
+             </if>
+             <if test="jobnature != null">
+                   jobnature = #{jobnature},
+             </if>
+             <if test="fulltimecount != null">
+                   fulltimecount = #{fulltimecount},
+             </if>
+             <if test="fulltimeteachcount != null">
+                   fulltimeteachcount = #{fulltimeteachcount},
+             </if>
+             <if test="parttimecount != null">
+                   parttimecount = #{parttimecount},
+             </if>
+             <if test="parttimeteachcount != null">
+                   parttimeteachcount = #{parttimeteachcount},
+             </if>
+             <if test="oacode != null">
+                   oacode = #{oacode},
+             </if>
+             <if test="staffid != null">
+                   staffid = #{staffid},
+             </if>
+             <if test="staffname != null">
+                   staffname = #{staffname},
+             </if>
+             <if test="customercount != null">
+                   customercount = #{customercount},
+             </if>
+             <if test="customerclasscount != null">
+                   customerclasscount = #{customerclasscount},
+             </if>
+             <if test="customerg3classcount != null">
+                   customerg3classcount = #{customerg3classcount},
+             </if>
+             <if test="customeravailablecount != null">
+                   customeravailablecount = #{customeravailablecount},
+             </if>
+             <if test="customerg3availablecount != null">
+                   customerg3availablecount = #{customerg3availablecount},
+             </if>
+             <if test="customerclasssuspendedcount != null">
+                   customerclasssuspendedcount = #{customerclasssuspendedcount},
+             </if>
+             <if test="customerschoolsuspendedcount != null">
+                   customerschoolsuspendedcount = #{customerschoolsuspendedcount},
+             </if>
+             <if test="customerclassfinishedcount != null">
+                   customerclassfinishedcount = #{customerclassfinishedcount},
+             </if>
+             <if test="allteacherassignedamount != null">
+                   allteacherassignedamount = #{allteacherassignedamount},
+             </if>
+             <if test="allteacherassignedamountvol != null">
+                   allteacherassignedamountvol = #{allteacherassignedamountvol},
+             </if>
+             <if test="allteacherassignedamountyoydiff != null">
+                   allteacherassignedamountyoydiff = #{allteacherassignedamountyoydiff},
+             </if>
+             <if test="allteacherassignedamountyoy != null">
+                   allteacherassignedamountyoy = #{allteacherassignedamountyoy},
+             </if>
+             <if test="allteacherassignedamounttask != null">
+                   allteacherassignedamounttask = #{allteacherassignedamounttask},
+             </if>
+             <if test="allteacherassignedamounttcr != null">
+                   allteacherassignedamounttcr = #{allteacherassignedamounttcr},
+             </if>
+             <if test="allcustomerassignedamount != null">
+                   allcustomerassignedamount = #{allcustomerassignedamount},
+             </if>
+             <if test="allcustomerassignedamountvol != null">
+                   allcustomerassignedamountvol = #{allcustomerassignedamountvol},
+             </if>
+             <if test="allcustomerassignedamountyoydiff != null">
+                   allcustomerassignedamountyoydiff = #{allcustomerassignedamountyoydiff},
+             </if>
+             <if test="allcustomerassignedamountyoy != null">
+                   allcustomerassignedamountyoy = #{allcustomerassignedamountyoy},
+             </if>
+             <if test="allassignedincome != null">
+                   allassignedincome = #{allassignedincome},
+             </if>
+             <if test="allassignedincomevol != null">
+                   allassignedincomevol = #{allassignedincomevol},
+             </if>
+             <if test="allassignedincomeyoydiff != null">
+                   allassignedincomeyoydiff = #{allassignedincomeyoydiff},
+             </if>
+             <if test="allassignedincomeyoy != null">
+                   allassignedincomeyoy = #{allassignedincomeyoy},
+             </if>
+             <if test="onetooneassignedamount != null">
+                   onetooneassignedamount = #{onetooneassignedamount},
+             </if>
+             <if test="onetooneassignedamountvol != null">
+                   onetooneassignedamountvol = #{onetooneassignedamountvol},
+             </if>
+             <if test="onetooneassignedamountyoydiff != null">
+                   onetooneassignedamountyoydiff = #{onetooneassignedamountyoydiff},
+             </if>
+             <if test="onetooneassignedamountyoy != null">
+                   onetooneassignedamountyoy = #{onetooneassignedamountyoy},
+             </if>
+             <if test="onetooneassignedincome != null">
+                   onetooneassignedincome = #{onetooneassignedincome},
+             </if>
+             <if test="onetooneassignedincomevol != null">
+                   onetooneassignedincomevol = #{onetooneassignedincomevol},
+             </if>
+             <if test="onetooneassignedincomeyoydiff != null">
+                   onetooneassignedincomeyoydiff = #{onetooneassignedincomeyoydiff},
+             </if>
+             <if test="onetooneassignedincomeyoy != null">
+                   onetooneassignedincomeyoy = #{onetooneassignedincomeyoy},
+             </if>
+             <if test="onetoonecustomercount != null">
+                   onetoonecustomercount = #{onetoonecustomercount},
+             </if>
+             <if test="onetoonecustomercountvol != null">
+                   onetoonecustomercountvol = #{onetoonecustomercountvol},
+             </if>
+             <if test="onetoonecustomercountyoydiff != null">
+                   onetoonecustomercountyoydiff = #{onetoonecustomercountyoydiff},
+             </if>
+             <if test="onetoonecustomercountyoy != null">
+                   onetoonecustomercountyoy = #{onetoonecustomercountyoy},
+             </if>
+             <if test="teacherclassgroupassignedamount != null">
+                   teacherclassgroupassignedamount = #{teacherclassgroupassignedamount},
+             </if>
+             <if test="teacherclassgroupassignedamountvol != null">
+                   teacherclassgroupassignedamountvol = #{teacherclassgroupassignedamountvol},
+             </if>
+             <if test="teacherclassgroupassignedamountyoydiff != null">
+                   teacherclassgroupassignedamountyoydiff = #{teacherclassgroupassignedamountyoydiff},
+             </if>
+             <if test="teacherclassgroupassignedamountyoy != null">
+                   teacherclassgroupassignedamountyoy = #{teacherclassgroupassignedamountyoy},
+             </if>
+             <if test="customerclassgroupassignedamount != null">
+                   customerclassgroupassignedamount = #{customerclassgroupassignedamount},
+             </if>
+             <if test="customerclassgroupassignedamountvol != null">
+                   customerclassgroupassignedamountvol = #{customerclassgroupassignedamountvol},
+             </if>
+             <if test="customerclassgroupassignedamountyoydiff != null">
+                   customerclassgroupassignedamountyoydiff = #{customerclassgroupassignedamountyoydiff},
+             </if>
+             <if test="customerclassgroupassignedamountyoy != null">
+                   customerclassgroupassignedamountyoy = #{customerclassgroupassignedamountyoy},
+             </if>
+             <if test="classgroupassignedincome != null">
+                   classgroupassignedincome = #{classgroupassignedincome},
+             </if>
+             <if test="classgroupassignedincomevol != null">
+                   classgroupassignedincomevol = #{classgroupassignedincomevol},
+             </if>
+             <if test="classgroupassignedincomeyoydiff != null">
+                   classgroupassignedincomeyoydiff = #{classgroupassignedincomeyoydiff},
+             </if>
+             <if test="classgroupassignedincomeyoy != null">
+                   classgroupassignedincomeyoy = #{classgroupassignedincomeyoy},
+             </if>
+             <if test="classgroupcustomercount != null">
+                   classgroupcustomercount = #{classgroupcustomercount},
+             </if>
+             <if test="classgroupcustomercountvol != null">
+                   classgroupcustomercountvol = #{classgroupcustomercountvol},
+             </if>
+             <if test="classgroupcustomercountyoydiff != null">
+                   classgroupcustomercountyoydiff = #{classgroupcustomercountyoydiff},
+             </if>
+             <if test="classgroupcustomercountyoy != null">
+                   classgroupcustomercountyoy = #{classgroupcustomercountyoy},
+             </if>
+             <if test="customerrenewalrate != null">
+                   customerrenewalrate = #{customerrenewalrate},
+             </if>
+             <if test="customeraveragehour != null">
+                   customeraveragehour = #{customeraveragehour},
+             </if>
+             <if test="customeraverageaddignedamount != null">
+                   customeraverageaddignedamount = #{customeraverageaddignedamount},
+             </if>
+             <if test="fulltimeteacheraveragehour != null">
+                   fulltimeteacheraveragehour = #{fulltimeteacheraveragehour},
+             </if>
+             <if test="parttimeteacheraveragehourpercent != null">
+                   parttimeteacheraveragehourpercent = #{parttimeteacheraveragehourpercent},
+             </if>
+             <if test="customerlossrate != null">
+                   customerlossrate = #{customerlossrate},
+             </if>
+             <if test="customertransferintroductioncount != null">
+                   customertransferintroductioncount = #{customertransferintroductioncount},
+             </if>
+             <if test="customersatisfactiondegree != null">
+                   customersatisfactiondegree = #{customersatisfactiondegree},
+             </if>
+             <if test="rechargeamount != null">
+                   rechargeamount = #{rechargeamount},
+             </if>
+             <if test="rechargecount != null">
+                   rechargecount = #{rechargecount},
+             </if>
+             <if test="refundamount != null">
+                   refundamount = #{refundamount},
+             </if>
+             <if test="refundcount != null">
+                   refundcount = #{refundcount}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from teacherreport_staff 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from teacherreport_staff 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from teacherreport_staff 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from teacherreport_staff 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from teacherreport_staff 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from teacherreport_staff 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

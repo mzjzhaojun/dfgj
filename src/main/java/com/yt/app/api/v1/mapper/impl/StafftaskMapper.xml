@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.StafftaskMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,staffid,campusid,statlocaldate,consultantmonthlynewchargeamount,educatordailynewchargeamount,educatorweeklynewchargeamount,teacherdailynewchargeamount,consultantmonthlynewchargenumber,educatordailynewchargenumber,educatorweeklynewchargenumber,teacherdailynewchargenumber,consultantmonthlyrenewamount,educatordailyrenewamount,educatorweeklyrenewamount,teacherdailyrenewamount,consultantmonthlyrenewnumber,educatordailyrenewnumber,educatorweeklyrenewnumber,teacherdailyrenewnumber,consultantmonthlyrefundamount,educatordailyrefundamount,educatorweeklyrefundamount,teacherdailyrefundamount,consultantmonthlyrefundnumber,educatordailyrefundnumber,educatorweeklyrefundnumber,teacherdailyrefundnumber,consultantmonthlytotalincome,educatordailytotalincome,educatorweeklytotalincome,teacherdailytotalincome,consultantmonthlytotalassignedincome,educatordailytotalassignedincome,educatorweeklytotalassignedincome,teacherdailytotalassignedincome,consultantmonthlyonetooneincome,educatordailyonetooneincome,educatorweeklyonetooneincome,teacherdailyonetooneincome,consultantmonthlyclassgroupincome,educatordailyclassgroupincome,educatorweeklyclassgroupincome,teacherdailyclassgroupincome,consultantmonthlyotherincome,educatordailyotherincome,educatorweeklyotherincome,teacherdailyotherincome,consultantmonthlytotalassignedamount,educatordailytotalassignedamount,educatorweeklytotalassignedamount,teacherdailytotalassignedamount,consultantmonthlyonetooneassignedamount,educatordailyonetooneassignedamount,educatorweeklyonetooneassignedamount,teacherdailyonetooneassignedamount,consultantmonthlyclassgroupassignedamount,educatordailyclassgroupassignedamount,educatorweeklyclassgroupassignedamount,teacherdailyclassgroupassignedamount,consultantmonthlyreactivenumber,educatordailyreactivenumber,educatorweeklyreactivenumber,teacherdailyreactivenumber
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Stafftask">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="staffid" column="staffid" />
+         <id property="campusid" column="campusid" />
+         <id property="statlocaldate" column="statlocaldate" />
+         <id property="consultantmonthlynewchargeamount" column="consultantmonthlynewchargeamount" />
+         <id property="educatordailynewchargeamount" column="educatordailynewchargeamount" />
+         <id property="educatorweeklynewchargeamount" column="educatorweeklynewchargeamount" />
+         <id property="teacherdailynewchargeamount" column="teacherdailynewchargeamount" />
+         <id property="consultantmonthlynewchargenumber" column="consultantmonthlynewchargenumber" />
+         <id property="educatordailynewchargenumber" column="educatordailynewchargenumber" />
+         <id property="educatorweeklynewchargenumber" column="educatorweeklynewchargenumber" />
+         <id property="teacherdailynewchargenumber" column="teacherdailynewchargenumber" />
+         <id property="consultantmonthlyrenewamount" column="consultantmonthlyrenewamount" />
+         <id property="educatordailyrenewamount" column="educatordailyrenewamount" />
+         <id property="educatorweeklyrenewamount" column="educatorweeklyrenewamount" />
+         <id property="teacherdailyrenewamount" column="teacherdailyrenewamount" />
+         <id property="consultantmonthlyrenewnumber" column="consultantmonthlyrenewnumber" />
+         <id property="educatordailyrenewnumber" column="educatordailyrenewnumber" />
+         <id property="educatorweeklyrenewnumber" column="educatorweeklyrenewnumber" />
+         <id property="teacherdailyrenewnumber" column="teacherdailyrenewnumber" />
+         <id property="consultantmonthlyrefundamount" column="consultantmonthlyrefundamount" />
+         <id property="educatordailyrefundamount" column="educatordailyrefundamount" />
+         <id property="educatorweeklyrefundamount" column="educatorweeklyrefundamount" />
+         <id property="teacherdailyrefundamount" column="teacherdailyrefundamount" />
+         <id property="consultantmonthlyrefundnumber" column="consultantmonthlyrefundnumber" />
+         <id property="educatordailyrefundnumber" column="educatordailyrefundnumber" />
+         <id property="educatorweeklyrefundnumber" column="educatorweeklyrefundnumber" />
+         <id property="teacherdailyrefundnumber" column="teacherdailyrefundnumber" />
+         <id property="consultantmonthlytotalincome" column="consultantmonthlytotalincome" />
+         <id property="educatordailytotalincome" column="educatordailytotalincome" />
+         <id property="educatorweeklytotalincome" column="educatorweeklytotalincome" />
+         <id property="teacherdailytotalincome" column="teacherdailytotalincome" />
+         <id property="consultantmonthlytotalassignedincome" column="consultantmonthlytotalassignedincome" />
+         <id property="educatordailytotalassignedincome" column="educatordailytotalassignedincome" />
+         <id property="educatorweeklytotalassignedincome" column="educatorweeklytotalassignedincome" />
+         <id property="teacherdailytotalassignedincome" column="teacherdailytotalassignedincome" />
+         <id property="consultantmonthlyonetooneincome" column="consultantmonthlyonetooneincome" />
+         <id property="educatordailyonetooneincome" column="educatordailyonetooneincome" />
+         <id property="educatorweeklyonetooneincome" column="educatorweeklyonetooneincome" />
+         <id property="teacherdailyonetooneincome" column="teacherdailyonetooneincome" />
+         <id property="consultantmonthlyclassgroupincome" column="consultantmonthlyclassgroupincome" />
+         <id property="educatordailyclassgroupincome" column="educatordailyclassgroupincome" />
+         <id property="educatorweeklyclassgroupincome" column="educatorweeklyclassgroupincome" />
+         <id property="teacherdailyclassgroupincome" column="teacherdailyclassgroupincome" />
+         <id property="consultantmonthlyotherincome" column="consultantmonthlyotherincome" />
+         <id property="educatordailyotherincome" column="educatordailyotherincome" />
+         <id property="educatorweeklyotherincome" column="educatorweeklyotherincome" />
+         <id property="teacherdailyotherincome" column="teacherdailyotherincome" />
+         <id property="consultantmonthlytotalassignedamount" column="consultantmonthlytotalassignedamount" />
+         <id property="educatordailytotalassignedamount" column="educatordailytotalassignedamount" />
+         <id property="educatorweeklytotalassignedamount" column="educatorweeklytotalassignedamount" />
+         <id property="teacherdailytotalassignedamount" column="teacherdailytotalassignedamount" />
+         <id property="consultantmonthlyonetooneassignedamount" column="consultantmonthlyonetooneassignedamount" />
+         <id property="educatordailyonetooneassignedamount" column="educatordailyonetooneassignedamount" />
+         <id property="educatorweeklyonetooneassignedamount" column="educatorweeklyonetooneassignedamount" />
+         <id property="teacherdailyonetooneassignedamount" column="teacherdailyonetooneassignedamount" />
+         <id property="consultantmonthlyclassgroupassignedamount" column="consultantmonthlyclassgroupassignedamount" />
+         <id property="educatordailyclassgroupassignedamount" column="educatordailyclassgroupassignedamount" />
+         <id property="educatorweeklyclassgroupassignedamount" column="educatorweeklyclassgroupassignedamount" />
+         <id property="teacherdailyclassgroupassignedamount" column="teacherdailyclassgroupassignedamount" />
+         <id property="consultantmonthlyreactivenumber" column="consultantmonthlyreactivenumber" />
+         <id property="educatordailyreactivenumber" column="educatordailyreactivenumber" />
+         <id property="educatorweeklyreactivenumber" column="educatorweeklyreactivenumber" />
+         <id property="teacherdailyreactivenumber" column="teacherdailyreactivenumber" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Stafftask">
+  insert into stafftask (id,staffid,campusid,statlocaldate,consultantmonthlynewchargeamount,educatordailynewchargeamount,educatorweeklynewchargeamount,teacherdailynewchargeamount,consultantmonthlynewchargenumber,educatordailynewchargenumber,educatorweeklynewchargenumber,teacherdailynewchargenumber,consultantmonthlyrenewamount,educatordailyrenewamount,educatorweeklyrenewamount,teacherdailyrenewamount,consultantmonthlyrenewnumber,educatordailyrenewnumber,educatorweeklyrenewnumber,teacherdailyrenewnumber,consultantmonthlyrefundamount,educatordailyrefundamount,educatorweeklyrefundamount,teacherdailyrefundamount,consultantmonthlyrefundnumber,educatordailyrefundnumber,educatorweeklyrefundnumber,teacherdailyrefundnumber,consultantmonthlytotalincome,educatordailytotalincome,educatorweeklytotalincome,teacherdailytotalincome,consultantmonthlytotalassignedincome,educatordailytotalassignedincome,educatorweeklytotalassignedincome,teacherdailytotalassignedincome,consultantmonthlyonetooneincome,educatordailyonetooneincome,educatorweeklyonetooneincome,teacherdailyonetooneincome,consultantmonthlyclassgroupincome,educatordailyclassgroupincome,educatorweeklyclassgroupincome,teacherdailyclassgroupincome,consultantmonthlyotherincome,educatordailyotherincome,educatorweeklyotherincome,teacherdailyotherincome,consultantmonthlytotalassignedamount,educatordailytotalassignedamount,educatorweeklytotalassignedamount,teacherdailytotalassignedamount,consultantmonthlyonetooneassignedamount,educatordailyonetooneassignedamount,educatorweeklyonetooneassignedamount,teacherdailyonetooneassignedamount,consultantmonthlyclassgroupassignedamount,educatordailyclassgroupassignedamount,educatorweeklyclassgroupassignedamount,teacherdailyclassgroupassignedamount,consultantmonthlyreactivenumber,educatordailyreactivenumber,educatorweeklyreactivenumber,teacherdailyreactivenumber)
+         values (#{id},#{staffid},#{campusid},#{statlocaldate},#{consultantmonthlynewchargeamount},#{educatordailynewchargeamount},#{educatorweeklynewchargeamount},#{teacherdailynewchargeamount},#{consultantmonthlynewchargenumber},#{educatordailynewchargenumber},#{educatorweeklynewchargenumber},#{teacherdailynewchargenumber},#{consultantmonthlyrenewamount},#{educatordailyrenewamount},#{educatorweeklyrenewamount},#{teacherdailyrenewamount},#{consultantmonthlyrenewnumber},#{educatordailyrenewnumber},#{educatorweeklyrenewnumber},#{teacherdailyrenewnumber},#{consultantmonthlyrefundamount},#{educatordailyrefundamount},#{educatorweeklyrefundamount},#{teacherdailyrefundamount},#{consultantmonthlyrefundnumber},#{educatordailyrefundnumber},#{educatorweeklyrefundnumber},#{teacherdailyrefundnumber},#{consultantmonthlytotalincome},#{educatordailytotalincome},#{educatorweeklytotalincome},#{teacherdailytotalincome},#{consultantmonthlytotalassignedincome},#{educatordailytotalassignedincome},#{educatorweeklytotalassignedincome},#{teacherdailytotalassignedincome},#{consultantmonthlyonetooneincome},#{educatordailyonetooneincome},#{educatorweeklyonetooneincome},#{teacherdailyonetooneincome},#{consultantmonthlyclassgroupincome},#{educatordailyclassgroupincome},#{educatorweeklyclassgroupincome},#{teacherdailyclassgroupincome},#{consultantmonthlyotherincome},#{educatordailyotherincome},#{educatorweeklyotherincome},#{teacherdailyotherincome},#{consultantmonthlytotalassignedamount},#{educatordailytotalassignedamount},#{educatorweeklytotalassignedamount},#{teacherdailytotalassignedamount},#{consultantmonthlyonetooneassignedamount},#{educatordailyonetooneassignedamount},#{educatorweeklyonetooneassignedamount},#{teacherdailyonetooneassignedamount},#{consultantmonthlyclassgroupassignedamount},#{educatordailyclassgroupassignedamount},#{educatorweeklyclassgroupassignedamount},#{teacherdailyclassgroupassignedamount},#{consultantmonthlyreactivenumber},#{educatordailyreactivenumber},#{educatorweeklyreactivenumber},#{teacherdailyreactivenumber})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from stafftask 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Stafftask">
+    update stafftask
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="staffid != null">
+                   staffid = #{staffid},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="statlocaldate != null">
+                   statlocaldate = #{statlocaldate},
+             </if>
+             <if test="consultantmonthlynewchargeamount != null">
+                   consultantmonthlynewchargeamount = #{consultantmonthlynewchargeamount},
+             </if>
+             <if test="educatordailynewchargeamount != null">
+                   educatordailynewchargeamount = #{educatordailynewchargeamount},
+             </if>
+             <if test="educatorweeklynewchargeamount != null">
+                   educatorweeklynewchargeamount = #{educatorweeklynewchargeamount},
+             </if>
+             <if test="teacherdailynewchargeamount != null">
+                   teacherdailynewchargeamount = #{teacherdailynewchargeamount},
+             </if>
+             <if test="consultantmonthlynewchargenumber != null">
+                   consultantmonthlynewchargenumber = #{consultantmonthlynewchargenumber},
+             </if>
+             <if test="educatordailynewchargenumber != null">
+                   educatordailynewchargenumber = #{educatordailynewchargenumber},
+             </if>
+             <if test="educatorweeklynewchargenumber != null">
+                   educatorweeklynewchargenumber = #{educatorweeklynewchargenumber},
+             </if>
+             <if test="teacherdailynewchargenumber != null">
+                   teacherdailynewchargenumber = #{teacherdailynewchargenumber},
+             </if>
+             <if test="consultantmonthlyrenewamount != null">
+                   consultantmonthlyrenewamount = #{consultantmonthlyrenewamount},
+             </if>
+             <if test="educatordailyrenewamount != null">
+                   educatordailyrenewamount = #{educatordailyrenewamount},
+             </if>
+             <if test="educatorweeklyrenewamount != null">
+                   educatorweeklyrenewamount = #{educatorweeklyrenewamount},
+             </if>
+             <if test="teacherdailyrenewamount != null">
+                   teacherdailyrenewamount = #{teacherdailyrenewamount},
+             </if>
+             <if test="consultantmonthlyrenewnumber != null">
+                   consultantmonthlyrenewnumber = #{consultantmonthlyrenewnumber},
+             </if>
+             <if test="educatordailyrenewnumber != null">
+                   educatordailyrenewnumber = #{educatordailyrenewnumber},
+             </if>
+             <if test="educatorweeklyrenewnumber != null">
+                   educatorweeklyrenewnumber = #{educatorweeklyrenewnumber},
+             </if>
+             <if test="teacherdailyrenewnumber != null">
+                   teacherdailyrenewnumber = #{teacherdailyrenewnumber},
+             </if>
+             <if test="consultantmonthlyrefundamount != null">
+                   consultantmonthlyrefundamount = #{consultantmonthlyrefundamount},
+             </if>
+             <if test="educatordailyrefundamount != null">
+                   educatordailyrefundamount = #{educatordailyrefundamount},
+             </if>
+             <if test="educatorweeklyrefundamount != null">
+                   educatorweeklyrefundamount = #{educatorweeklyrefundamount},
+             </if>
+             <if test="teacherdailyrefundamount != null">
+                   teacherdailyrefundamount = #{teacherdailyrefundamount},
+             </if>
+             <if test="consultantmonthlyrefundnumber != null">
+                   consultantmonthlyrefundnumber = #{consultantmonthlyrefundnumber},
+             </if>
+             <if test="educatordailyrefundnumber != null">
+                   educatordailyrefundnumber = #{educatordailyrefundnumber},
+             </if>
+             <if test="educatorweeklyrefundnumber != null">
+                   educatorweeklyrefundnumber = #{educatorweeklyrefundnumber},
+             </if>
+             <if test="teacherdailyrefundnumber != null">
+                   teacherdailyrefundnumber = #{teacherdailyrefundnumber},
+             </if>
+             <if test="consultantmonthlytotalincome != null">
+                   consultantmonthlytotalincome = #{consultantmonthlytotalincome},
+             </if>
+             <if test="educatordailytotalincome != null">
+                   educatordailytotalincome = #{educatordailytotalincome},
+             </if>
+             <if test="educatorweeklytotalincome != null">
+                   educatorweeklytotalincome = #{educatorweeklytotalincome},
+             </if>
+             <if test="teacherdailytotalincome != null">
+                   teacherdailytotalincome = #{teacherdailytotalincome},
+             </if>
+             <if test="consultantmonthlytotalassignedincome != null">
+                   consultantmonthlytotalassignedincome = #{consultantmonthlytotalassignedincome},
+             </if>
+             <if test="educatordailytotalassignedincome != null">
+                   educatordailytotalassignedincome = #{educatordailytotalassignedincome},
+             </if>
+             <if test="educatorweeklytotalassignedincome != null">
+                   educatorweeklytotalassignedincome = #{educatorweeklytotalassignedincome},
+             </if>
+             <if test="teacherdailytotalassignedincome != null">
+                   teacherdailytotalassignedincome = #{teacherdailytotalassignedincome},
+             </if>
+             <if test="consultantmonthlyonetooneincome != null">
+                   consultantmonthlyonetooneincome = #{consultantmonthlyonetooneincome},
+             </if>
+             <if test="educatordailyonetooneincome != null">
+                   educatordailyonetooneincome = #{educatordailyonetooneincome},
+             </if>
+             <if test="educatorweeklyonetooneincome != null">
+                   educatorweeklyonetooneincome = #{educatorweeklyonetooneincome},
+             </if>
+             <if test="teacherdailyonetooneincome != null">
+                   teacherdailyonetooneincome = #{teacherdailyonetooneincome},
+             </if>
+             <if test="consultantmonthlyclassgroupincome != null">
+                   consultantmonthlyclassgroupincome = #{consultantmonthlyclassgroupincome},
+             </if>
+             <if test="educatordailyclassgroupincome != null">
+                   educatordailyclassgroupincome = #{educatordailyclassgroupincome},
+             </if>
+             <if test="educatorweeklyclassgroupincome != null">
+                   educatorweeklyclassgroupincome = #{educatorweeklyclassgroupincome},
+             </if>
+             <if test="teacherdailyclassgroupincome != null">
+                   teacherdailyclassgroupincome = #{teacherdailyclassgroupincome},
+             </if>
+             <if test="consultantmonthlyotherincome != null">
+                   consultantmonthlyotherincome = #{consultantmonthlyotherincome},
+             </if>
+             <if test="educatordailyotherincome != null">
+                   educatordailyotherincome = #{educatordailyotherincome},
+             </if>
+             <if test="educatorweeklyotherincome != null">
+                   educatorweeklyotherincome = #{educatorweeklyotherincome},
+             </if>
+             <if test="teacherdailyotherincome != null">
+                   teacherdailyotherincome = #{teacherdailyotherincome},
+             </if>
+             <if test="consultantmonthlytotalassignedamount != null">
+                   consultantmonthlytotalassignedamount = #{consultantmonthlytotalassignedamount},
+             </if>
+             <if test="educatordailytotalassignedamount != null">
+                   educatordailytotalassignedamount = #{educatordailytotalassignedamount},
+             </if>
+             <if test="educatorweeklytotalassignedamount != null">
+                   educatorweeklytotalassignedamount = #{educatorweeklytotalassignedamount},
+             </if>
+             <if test="teacherdailytotalassignedamount != null">
+                   teacherdailytotalassignedamount = #{teacherdailytotalassignedamount},
+             </if>
+             <if test="consultantmonthlyonetooneassignedamount != null">
+                   consultantmonthlyonetooneassignedamount = #{consultantmonthlyonetooneassignedamount},
+             </if>
+             <if test="educatordailyonetooneassignedamount != null">
+                   educatordailyonetooneassignedamount = #{educatordailyonetooneassignedamount},
+             </if>
+             <if test="educatorweeklyonetooneassignedamount != null">
+                   educatorweeklyonetooneassignedamount = #{educatorweeklyonetooneassignedamount},
+             </if>
+             <if test="teacherdailyonetooneassignedamount != null">
+                   teacherdailyonetooneassignedamount = #{teacherdailyonetooneassignedamount},
+             </if>
+             <if test="consultantmonthlyclassgroupassignedamount != null">
+                   consultantmonthlyclassgroupassignedamount = #{consultantmonthlyclassgroupassignedamount},
+             </if>
+             <if test="educatordailyclassgroupassignedamount != null">
+                   educatordailyclassgroupassignedamount = #{educatordailyclassgroupassignedamount},
+             </if>
+             <if test="educatorweeklyclassgroupassignedamount != null">
+                   educatorweeklyclassgroupassignedamount = #{educatorweeklyclassgroupassignedamount},
+             </if>
+             <if test="teacherdailyclassgroupassignedamount != null">
+                   teacherdailyclassgroupassignedamount = #{teacherdailyclassgroupassignedamount},
+             </if>
+             <if test="consultantmonthlyreactivenumber != null">
+                   consultantmonthlyreactivenumber = #{consultantmonthlyreactivenumber},
+             </if>
+             <if test="educatordailyreactivenumber != null">
+                   educatordailyreactivenumber = #{educatordailyreactivenumber},
+             </if>
+             <if test="educatorweeklyreactivenumber != null">
+                   educatorweeklyreactivenumber = #{educatorweeklyreactivenumber},
+             </if>
+             <if test="teacherdailyreactivenumber != null">
+                   teacherdailyreactivenumber = #{teacherdailyreactivenumber}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from stafftask 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from stafftask 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from stafftask 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from stafftask 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from stafftask 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from stafftask 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

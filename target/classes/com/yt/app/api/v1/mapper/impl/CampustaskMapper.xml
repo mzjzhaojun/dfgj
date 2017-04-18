@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CampustaskMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,campusid,statlocaldate,campusmonthlynewchargeamount,campusdailynewchargeamount,campusmonthlynewchargenumber,campusdailynewchargenumber,campusmonthlyrenewamount,campusdailyrenewamount,campusmonthlyrenewnumber,campusdailyrenewnumber,campusmonthlyrefundamount,campusdailyrefundamount,campusmonthlyrefundnumber,campusdailyrefundnumber,campusmonthlytotalincome,campusdailytotalincome,campusmonthlytotalassignedincome,campusdailytotalassignedincome,campusmonthlyonetooneincome,campusdailyonetooneincome,campusmonthlyclassgroupincome,campusdailyclassgroupincome,campusmonthlyotherincome,campusdailyotherincome,campusmonthlytotalassignedamount,campusdailytotalassignedamount,campusmonthlyonetooneassignedamount,campusdailyonetooneassignedamount,campusmonthlyclassgroupassignedamount,campusdailyclassgroupassignedamount,campusmonthlyreactivenumber,campusdailyreactivenumber
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Campustask">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="campusid" column="campusid" />
+         <id property="statlocaldate" column="statlocaldate" />
+         <id property="campusmonthlynewchargeamount" column="campusmonthlynewchargeamount" />
+         <id property="campusdailynewchargeamount" column="campusdailynewchargeamount" />
+         <id property="campusmonthlynewchargenumber" column="campusmonthlynewchargenumber" />
+         <id property="campusdailynewchargenumber" column="campusdailynewchargenumber" />
+         <id property="campusmonthlyrenewamount" column="campusmonthlyrenewamount" />
+         <id property="campusdailyrenewamount" column="campusdailyrenewamount" />
+         <id property="campusmonthlyrenewnumber" column="campusmonthlyrenewnumber" />
+         <id property="campusdailyrenewnumber" column="campusdailyrenewnumber" />
+         <id property="campusmonthlyrefundamount" column="campusmonthlyrefundamount" />
+         <id property="campusdailyrefundamount" column="campusdailyrefundamount" />
+         <id property="campusmonthlyrefundnumber" column="campusmonthlyrefundnumber" />
+         <id property="campusdailyrefundnumber" column="campusdailyrefundnumber" />
+         <id property="campusmonthlytotalincome" column="campusmonthlytotalincome" />
+         <id property="campusdailytotalincome" column="campusdailytotalincome" />
+         <id property="campusmonthlytotalassignedincome" column="campusmonthlytotalassignedincome" />
+         <id property="campusdailytotalassignedincome" column="campusdailytotalassignedincome" />
+         <id property="campusmonthlyonetooneincome" column="campusmonthlyonetooneincome" />
+         <id property="campusdailyonetooneincome" column="campusdailyonetooneincome" />
+         <id property="campusmonthlyclassgroupincome" column="campusmonthlyclassgroupincome" />
+         <id property="campusdailyclassgroupincome" column="campusdailyclassgroupincome" />
+         <id property="campusmonthlyotherincome" column="campusmonthlyotherincome" />
+         <id property="campusdailyotherincome" column="campusdailyotherincome" />
+         <id property="campusmonthlytotalassignedamount" column="campusmonthlytotalassignedamount" />
+         <id property="campusdailytotalassignedamount" column="campusdailytotalassignedamount" />
+         <id property="campusmonthlyonetooneassignedamount" column="campusmonthlyonetooneassignedamount" />
+         <id property="campusdailyonetooneassignedamount" column="campusdailyonetooneassignedamount" />
+         <id property="campusmonthlyclassgroupassignedamount" column="campusmonthlyclassgroupassignedamount" />
+         <id property="campusdailyclassgroupassignedamount" column="campusdailyclassgroupassignedamount" />
+         <id property="campusmonthlyreactivenumber" column="campusmonthlyreactivenumber" />
+         <id property="campusdailyreactivenumber" column="campusdailyreactivenumber" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Campustask">
+  insert into campustask (id,campusid,statlocaldate,campusmonthlynewchargeamount,campusdailynewchargeamount,campusmonthlynewchargenumber,campusdailynewchargenumber,campusmonthlyrenewamount,campusdailyrenewamount,campusmonthlyrenewnumber,campusdailyrenewnumber,campusmonthlyrefundamount,campusdailyrefundamount,campusmonthlyrefundnumber,campusdailyrefundnumber,campusmonthlytotalincome,campusdailytotalincome,campusmonthlytotalassignedincome,campusdailytotalassignedincome,campusmonthlyonetooneincome,campusdailyonetooneincome,campusmonthlyclassgroupincome,campusdailyclassgroupincome,campusmonthlyotherincome,campusdailyotherincome,campusmonthlytotalassignedamount,campusdailytotalassignedamount,campusmonthlyonetooneassignedamount,campusdailyonetooneassignedamount,campusmonthlyclassgroupassignedamount,campusdailyclassgroupassignedamount,campusmonthlyreactivenumber,campusdailyreactivenumber)
+         values (#{id},#{campusid},#{statlocaldate},#{campusmonthlynewchargeamount},#{campusdailynewchargeamount},#{campusmonthlynewchargenumber},#{campusdailynewchargenumber},#{campusmonthlyrenewamount},#{campusdailyrenewamount},#{campusmonthlyrenewnumber},#{campusdailyrenewnumber},#{campusmonthlyrefundamount},#{campusdailyrefundamount},#{campusmonthlyrefundnumber},#{campusdailyrefundnumber},#{campusmonthlytotalincome},#{campusdailytotalincome},#{campusmonthlytotalassignedincome},#{campusdailytotalassignedincome},#{campusmonthlyonetooneincome},#{campusdailyonetooneincome},#{campusmonthlyclassgroupincome},#{campusdailyclassgroupincome},#{campusmonthlyotherincome},#{campusdailyotherincome},#{campusmonthlytotalassignedamount},#{campusdailytotalassignedamount},#{campusmonthlyonetooneassignedamount},#{campusdailyonetooneassignedamount},#{campusmonthlyclassgroupassignedamount},#{campusdailyclassgroupassignedamount},#{campusmonthlyreactivenumber},#{campusdailyreactivenumber})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from campustask 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Campustask">
+    update campustask
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="statlocaldate != null">
+                   statlocaldate = #{statlocaldate},
+             </if>
+             <if test="campusmonthlynewchargeamount != null">
+                   campusmonthlynewchargeamount = #{campusmonthlynewchargeamount},
+             </if>
+             <if test="campusdailynewchargeamount != null">
+                   campusdailynewchargeamount = #{campusdailynewchargeamount},
+             </if>
+             <if test="campusmonthlynewchargenumber != null">
+                   campusmonthlynewchargenumber = #{campusmonthlynewchargenumber},
+             </if>
+             <if test="campusdailynewchargenumber != null">
+                   campusdailynewchargenumber = #{campusdailynewchargenumber},
+             </if>
+             <if test="campusmonthlyrenewamount != null">
+                   campusmonthlyrenewamount = #{campusmonthlyrenewamount},
+             </if>
+             <if test="campusdailyrenewamount != null">
+                   campusdailyrenewamount = #{campusdailyrenewamount},
+             </if>
+             <if test="campusmonthlyrenewnumber != null">
+                   campusmonthlyrenewnumber = #{campusmonthlyrenewnumber},
+             </if>
+             <if test="campusdailyrenewnumber != null">
+                   campusdailyrenewnumber = #{campusdailyrenewnumber},
+             </if>
+             <if test="campusmonthlyrefundamount != null">
+                   campusmonthlyrefundamount = #{campusmonthlyrefundamount},
+             </if>
+             <if test="campusdailyrefundamount != null">
+                   campusdailyrefundamount = #{campusdailyrefundamount},
+             </if>
+             <if test="campusmonthlyrefundnumber != null">
+                   campusmonthlyrefundnumber = #{campusmonthlyrefundnumber},
+             </if>
+             <if test="campusdailyrefundnumber != null">
+                   campusdailyrefundnumber = #{campusdailyrefundnumber},
+             </if>
+             <if test="campusmonthlytotalincome != null">
+                   campusmonthlytotalincome = #{campusmonthlytotalincome},
+             </if>
+             <if test="campusdailytotalincome != null">
+                   campusdailytotalincome = #{campusdailytotalincome},
+             </if>
+             <if test="campusmonthlytotalassignedincome != null">
+                   campusmonthlytotalassignedincome = #{campusmonthlytotalassignedincome},
+             </if>
+             <if test="campusdailytotalassignedincome != null">
+                   campusdailytotalassignedincome = #{campusdailytotalassignedincome},
+             </if>
+             <if test="campusmonthlyonetooneincome != null">
+                   campusmonthlyonetooneincome = #{campusmonthlyonetooneincome},
+             </if>
+             <if test="campusdailyonetooneincome != null">
+                   campusdailyonetooneincome = #{campusdailyonetooneincome},
+             </if>
+             <if test="campusmonthlyclassgroupincome != null">
+                   campusmonthlyclassgroupincome = #{campusmonthlyclassgroupincome},
+             </if>
+             <if test="campusdailyclassgroupincome != null">
+                   campusdailyclassgroupincome = #{campusdailyclassgroupincome},
+             </if>
+             <if test="campusmonthlyotherincome != null">
+                   campusmonthlyotherincome = #{campusmonthlyotherincome},
+             </if>
+             <if test="campusdailyotherincome != null">
+                   campusdailyotherincome = #{campusdailyotherincome},
+             </if>
+             <if test="campusmonthlytotalassignedamount != null">
+                   campusmonthlytotalassignedamount = #{campusmonthlytotalassignedamount},
+             </if>
+             <if test="campusdailytotalassignedamount != null">
+                   campusdailytotalassignedamount = #{campusdailytotalassignedamount},
+             </if>
+             <if test="campusmonthlyonetooneassignedamount != null">
+                   campusmonthlyonetooneassignedamount = #{campusmonthlyonetooneassignedamount},
+             </if>
+             <if test="campusdailyonetooneassignedamount != null">
+                   campusdailyonetooneassignedamount = #{campusdailyonetooneassignedamount},
+             </if>
+             <if test="campusmonthlyclassgroupassignedamount != null">
+                   campusmonthlyclassgroupassignedamount = #{campusmonthlyclassgroupassignedamount},
+             </if>
+             <if test="campusdailyclassgroupassignedamount != null">
+                   campusdailyclassgroupassignedamount = #{campusdailyclassgroupassignedamount},
+             </if>
+             <if test="campusmonthlyreactivenumber != null">
+                   campusmonthlyreactivenumber = #{campusmonthlyreactivenumber},
+             </if>
+             <if test="campusdailyreactivenumber != null">
+                   campusdailyreactivenumber = #{campusdailyreactivenumber}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from campustask 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campustask 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from campustask 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campustask 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campustask 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campustask 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

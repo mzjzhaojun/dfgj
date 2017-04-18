@@ -1,0 +1,268 @@
+<html>
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>联系我们 - 东方国际教育</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link rel="stylesheet" href="../css/global.css">
+<style>
+#Contact {
+	background: url("sprite.gif") no-repeat 0 -228px;
+}
+</style>
+<script src="../js/jquery.js"></script>
+<script src="../js/unslider.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="/App/Tpl/Home/Default/Public/Js/fancybox/jquery.fancybox-1.3.4.css" />
+	<script type="text/javascript" src="/App/Tpl/Home/Default/Public/Js/fancybox/jquery.fancybox-1.3.4.js"></script> -->
+
+<script src="../js/map.js"></script>
+<style>
+#allmap {
+	width: 95%;
+	height: 460px;
+	overflow: hidden;
+	margin: 20px;
+	border: 1px solid black;
+}
+</style>
+</head>
+<body>
+	<div id="nav_bj">
+		<div id="nav">
+			<a href="index.htm">网站首页</a><a href="company.htm">学校简介</a><a
+				href="9.htm">师资力量</a><a href="product.htm">开设课程</a><a href="4.htm">新闻资讯</a><a
+				href="jobs.htm">人才招聘</a><a href="10.htm">学员风采</a><a
+				href="message.htm">在线留言</a><a href="contact.htm">联系我们</a>
+		</div>
+	</div>
+	<div id="banner1">
+		<script type="text/javascript" src="../js/jquery.jslides.js"></script>
+		<style>
+#full-screen-slider {
+	width: 100%;
+	height: 370px;
+	float: left;
+	position: relative
+}
+
+#slides {
+	display: block;
+	width: 100%;
+	height: 370px;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: relative
+}
+
+#slides li {
+	display: block;
+	width: 100%;
+	height: 100%;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	position: absolute
+}
+
+#slides li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-indent: -9999px
+}
+
+#pagination {
+	display: block;
+	list-style: none;
+	position: absolute;
+	left: 50%;
+	top: 340px;
+	z-index: 9900;
+	padding: 5px 15px 5px 0;
+	margin: 0
+}
+
+#pagination li {
+	display: block;
+	list-style: none;
+	width: 10px;
+	height: 10px;
+	float: left;
+	margin-left: 15px;
+	border-radius: 5px;
+	background: #fff;
+}
+
+#pagination li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	text-indent: -9999px;
+}
+
+#pagination li.current {
+	background: #008bdc;
+}
+</style>
+		<div id="full-screen-slider">
+			<ul id="slides">
+				<li
+					style="background: url('../img/558e75a77fb77.jpg') no-repeat center top"></li>
+				<li
+					style="background: url('../img/558e758018d95.jpg') no-repeat center top"></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="main">
+		<div id="sidebar">
+			<div id="kc_title_bj">
+				<div id="kc_title">开设课程</div>
+				<div class="more">
+					<a href="index-1.htm"><img src="../img/more.jpg"></a>
+				</div>
+			</div>
+			<ol id="pro_list">
+				<li><a href="7_8.htm">心理咨询辅导</a></li>
+				<li><a href="7_7.htm">高考提分计划</a></li>
+				<li><a href="7_6.htm">中考提分计划</a></li>
+				<li><a href="7_5.htm">艺体生辅导计划</a></li>
+				<li><a href="7_4.htm">小学1对1精品课程</a></li>
+				<li><a href="7_3.htm">中考冲刺1对1精品课程</a></li>
+				<li><a href="7_2.htm">高考冲刺1对1精品课程</a></li>
+				<li><a href="7_1.htm">个性化1对1辅导</a></li>
+			</ol>
+		</div>
+		<div id="main_right">
+			<div id="ssfc_title_bj">
+				<div id="ssfc_title">联系我们</div>
+			</div>
+			<div class="content">
+
+
+
+
+				<div id="allmap">
+					<script>
+						var map = new BMap.Map("allmap"); // 创建Map实例
+						var point = new BMap.Point(118.822467, 32.032426); // 创建点坐标
+						map.centerAndZoom(point, 6); // 初始化地图,设置中心点坐标和地图级别。
+						map.enableScrollWheelZoom(); //启用滚轮放大缩小
+
+						map.addControl(new BMap.NavigationControl());
+						map.addControl(new BMap.ScaleControl());
+						map.addControl(new BMap.OverviewMapControl());
+						var marker = new BMap.Marker(point);
+						map.addOverlay(marker);
+						var infoWinOpts = {}
+						var infoWin = new BMap.InfoWindow(
+								"<div style='text-align:left;color:#1A6DAF;'><p></p><p>联系人：刘老师</p><p>手　机：13868812137</p><p>电　话：025-82231999</p><p>邮　箱：2115825@qq.com</p><p>南京市秦淮区御道街56号正阳大厦101</p></div>",
+								infoWinOpts);
+						//marker.openInfoWindow(infoWin);
+						marker.addEventListener("click", function() {
+							this.openInfoWindow(infoWin);
+						});
+						
+						
+						var point2 = new BMap.Point(115.839251,32.892452);
+						
+						var marker2 = new BMap.Marker(point2);
+						map.addOverlay(marker2);
+						var infoWinOpts2 = {}
+						var infoWin2 = new BMap.InfoWindow(
+								"<div style='text-align:left;color:#1A6DAF;'><p></p><p>联系人：王老师</p><p></p><p>电　话：0558-3111115</p><p>邮　箱：2115825@qq.com</p><p>阜阳颍州区颍上南路莲花苑3幢203-204</p></div>",
+								infoWinOpts2);
+						marker2.openInfoWindow(infoWin2);
+						marker2.addEventListener("click", function() {
+							this.openInfoWindow(infoWin2);
+						});
+						
+						
+						var point3 = new BMap.Point(119.932752,31.686952);
+						
+						var marker3 = new BMap.Marker(point3);
+						map.addOverlay(marker3);
+						var infoWinOpts3 = {}
+						var infoWin3 = new BMap.InfoWindow(
+								"<div style='text-align:left;color:#1A6DAF;'><p></p><p>联系人：马老师</p><p></p><p>电　话：0519-89827666</p><p>邮　箱：2115825@qq.com</p><p>常州市武进区湖塘沟南工业园凤林北路28号</p></div>",
+								infoWinOpts3);
+						//marker3.openInfoWindow(infoWin3);
+						marker3.addEventListener("click", function() {
+							this.openInfoWindow(infoWin3);
+						});
+						
+						
+						var point4 = new BMap.Point(117.211127,34.278719);
+						
+						var marker4 = new BMap.Marker(point4);
+						map.addOverlay(marker4);
+						var infoWinOpts4 = {}
+						var infoWin4 = new BMap.InfoWindow(
+								"<div style='text-align:left;color:#1A6DAF;'><p></p><p>联系人：李老师</p><p></p><p>电　话：0516-80281777</p><p>邮　箱：2115825@qq.com</p><p>徐州靖宜宾馆坐落在江苏省徐州市复兴北路，四道街公交车站旁</p></div>",
+								infoWinOpts4);
+						//marker4.openInfoWindow(infoWin4);
+						marker4.addEventListener("click", function() {
+							this.openInfoWindow(infoWin4);
+						});
+						
+						
+						var point5 = new BMap.Point(117.291605,31.830377);
+						
+						var marker5 = new BMap.Marker(point5);
+						map.addOverlay(marker5);
+						var infoWinOpts5 = {}
+						var infoWin5 = new BMap.InfoWindow(
+								"<div style='text-align:left;color:#1A6DAF;'><p></p><p>联系人：李老师</p><p></p><p>电　话：0551-65452200</p><p>邮　箱：2115825@qq.com</p><p>合肥市包河区徽州大道1068号，徽州大道与望江路交界处南400米</p></div>",
+								infoWinOpts5);
+						//marker5.openInfoWindow(infoWin5);
+						marker5.addEventListener("click", function() {
+							this.openInfoWindow(infoWin5);
+						});
+						
+						
+						var point6 = new BMap.Point(120.721265,27.996786);
+						
+						var marker6 = new BMap.Marker(point6);
+						map.addOverlay(marker6);
+						var infoWinOpts6 = {}
+						var infoWin6 = new BMap.InfoWindow(
+								"<div style='text-align:left;color:#1A6DAF;'><p></p><p>联系人：曲老师</p><p></p><p>电　话：0577-88078899</p><p>邮　箱：2115825@qq.com</p><p>温州市龙湾区新城汤家桥巨龙大厦C2幢2楼</p></div>",
+								infoWinOpts6);
+						//marker6.openInfoWindow(infoWin6);
+						marker6.addEventListener("click", function() {
+							this.openInfoWindow(infoWin6);
+						});
+					</script>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+	<div id="end_bj">
+		<div id="end">
+			<div class="left">
+				<p style="background: url(../img/lx1.png) no-repeat left center;">阜阳校区地址：阜阳颍州区颍上南路莲花苑3幢203-204 </p>
+				<p style="background: url(../img/tel.jpg) no-repeat;">&nbsp;&nbsp;&nbsp;电话:0558-3111115</p>
+				<p style="background: url(../img/lx1.png) no-repeat left center;">南京校区地址：南京市秦淮区御道街56号正阳大厦1019</p>
+				<p style="background: url(../img/tel.jpg) no-repeat;">&nbsp;&nbsp;&nbsp;电话:025-8223199</p>
+				<p style="background: url(../img/lx1.png) no-repeat left center;">合肥校区地址：合肥市包河区徽州大道1068号，徽州大道与望江路交界处南400米 </p>
+				<p style="background: url(../img/tel.jpg) no-repeat;">&nbsp;&nbsp;&nbsp;电话:0551-65452200</p>
+				<p style="background: url(../img/lx1.png) no-repeat left center;">温州校区地址：温州市龙湾区新城汤家桥巨龙大厦C2幢2楼 </p>
+				<p style="background: url(../img/tel.jpg) no-repeat;">&nbsp;&nbsp;&nbsp;电话:0577-88078899</p>
+				<p style="background: url(../img/lx1.png) no-repeat left center;">徐州校区地址：徐州靖宜宾馆坐落在江苏省徐州市复兴北路，四道街公交车站旁  </p>
+				<p style="background: url(../img/tel.jpg) no-repeat;">&nbsp;&nbsp;&nbsp;电话:0516-80281777</p>
+				<p style="background: url(../img/lx1.png) no-repeat left center;">常州校区地址：常州市武进区湖塘沟南工业园凤林北路28号   </p>
+				<p style="background: url(../img/tel.jpg) no-repeat;">&nbsp;&nbsp;&nbsp;电话:0519-89827666</p>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.StudentstatusreportMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,snapshotid,regionid,regionshortname,branchid,branchshortname,campusid,campusshortname,campusage,earlyisreg,earlyhasnomoney,earlyhasmoney,earlyisavailable,earlyclasssuspended,earlyactive,earlyschoolsuspended,earlygraduated,curnewsign,currenewsign,graduatedrenewsign,schoolsuspendedrenewsign,classsuspendedrenewsign,activerenewsign,classfinishedrenewsign,newsignrenewsign,curassigned,graduateassigned,schoolsuspendedassigned,classsuspendedassigned,activeassigned,classfinishedassigned,newsignassigned,curtransferedin,curtransferedout,curtransferschooltransferedin,curtransferschooltransferedout,curclassfinished,refundclassfinished,assignedclassfinished,transferedoutclassfinished,newsignclassfinished,currefund,earlyhasmoneyrefund,activerefund,classsuspendedrefund,schoolsuspendedrefund,graduaterefund,earlyhasnomoneyrefund,newavailable,notregactive,graduateactive,schoolsuspendedactive,classfinishedactive,thismonthactive,endisreg,endhasmoney,endhasnomoney,endisavailable,endclasssuspended,newclasssuspended,endactive,endgraduate,newgraduate,schoolsuspendedgraduate,classsuspendedgraduate,activegraduate,classfinishedrenewsigngraduate,endschoolsuspended,newschoolsuspended,exitavailable,availablegraduate,classsuspendedschoolsuspended,classsuspendedclassfinished,activeclassfinished
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Studentstatusreport">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="snapshotid" column="snapshotid" />
+         <id property="regionid" column="regionid" />
+         <id property="regionshortname" column="regionshortname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchshortname" column="branchshortname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusshortname" column="campusshortname" />
+         <id property="campusage" column="campusage" />
+         <id property="earlyisreg" column="earlyisreg" />
+         <id property="earlyhasnomoney" column="earlyhasnomoney" />
+         <id property="earlyhasmoney" column="earlyhasmoney" />
+         <id property="earlyisavailable" column="earlyisavailable" />
+         <id property="earlyclasssuspended" column="earlyclasssuspended" />
+         <id property="earlyactive" column="earlyactive" />
+         <id property="earlyschoolsuspended" column="earlyschoolsuspended" />
+         <id property="earlygraduated" column="earlygraduated" />
+         <id property="curnewsign" column="curnewsign" />
+         <id property="currenewsign" column="currenewsign" />
+         <id property="graduatedrenewsign" column="graduatedrenewsign" />
+         <id property="schoolsuspendedrenewsign" column="schoolsuspendedrenewsign" />
+         <id property="classsuspendedrenewsign" column="classsuspendedrenewsign" />
+         <id property="activerenewsign" column="activerenewsign" />
+         <id property="classfinishedrenewsign" column="classfinishedrenewsign" />
+         <id property="newsignrenewsign" column="newsignrenewsign" />
+         <id property="curassigned" column="curassigned" />
+         <id property="graduateassigned" column="graduateassigned" />
+         <id property="schoolsuspendedassigned" column="schoolsuspendedassigned" />
+         <id property="classsuspendedassigned" column="classsuspendedassigned" />
+         <id property="activeassigned" column="activeassigned" />
+         <id property="classfinishedassigned" column="classfinishedassigned" />
+         <id property="newsignassigned" column="newsignassigned" />
+         <id property="curtransferedin" column="curtransferedin" />
+         <id property="curtransferedout" column="curtransferedout" />
+         <id property="curtransferschooltransferedin" column="curtransferschooltransferedin" />
+         <id property="curtransferschooltransferedout" column="curtransferschooltransferedout" />
+         <id property="curclassfinished" column="curclassfinished" />
+         <id property="refundclassfinished" column="refundclassfinished" />
+         <id property="assignedclassfinished" column="assignedclassfinished" />
+         <id property="transferedoutclassfinished" column="transferedoutclassfinished" />
+         <id property="newsignclassfinished" column="newsignclassfinished" />
+         <id property="currefund" column="currefund" />
+         <id property="earlyhasmoneyrefund" column="earlyhasmoneyrefund" />
+         <id property="activerefund" column="activerefund" />
+         <id property="classsuspendedrefund" column="classsuspendedrefund" />
+         <id property="schoolsuspendedrefund" column="schoolsuspendedrefund" />
+         <id property="graduaterefund" column="graduaterefund" />
+         <id property="earlyhasnomoneyrefund" column="earlyhasnomoneyrefund" />
+         <id property="newavailable" column="newavailable" />
+         <id property="notregactive" column="notregactive" />
+         <id property="graduateactive" column="graduateactive" />
+         <id property="schoolsuspendedactive" column="schoolsuspendedactive" />
+         <id property="classfinishedactive" column="classfinishedactive" />
+         <id property="thismonthactive" column="thismonthactive" />
+         <id property="endisreg" column="endisreg" />
+         <id property="endhasmoney" column="endhasmoney" />
+         <id property="endhasnomoney" column="endhasnomoney" />
+         <id property="endisavailable" column="endisavailable" />
+         <id property="endclasssuspended" column="endclasssuspended" />
+         <id property="newclasssuspended" column="newclasssuspended" />
+         <id property="endactive" column="endactive" />
+         <id property="endgraduate" column="endgraduate" />
+         <id property="newgraduate" column="newgraduate" />
+         <id property="schoolsuspendedgraduate" column="schoolsuspendedgraduate" />
+         <id property="classsuspendedgraduate" column="classsuspendedgraduate" />
+         <id property="activegraduate" column="activegraduate" />
+         <id property="classfinishedrenewsigngraduate" column="classfinishedrenewsigngraduate" />
+         <id property="endschoolsuspended" column="endschoolsuspended" />
+         <id property="newschoolsuspended" column="newschoolsuspended" />
+         <id property="exitavailable" column="exitavailable" />
+         <id property="availablegraduate" column="availablegraduate" />
+         <id property="classsuspendedschoolsuspended" column="classsuspendedschoolsuspended" />
+         <id property="classsuspendedclassfinished" column="classsuspendedclassfinished" />
+         <id property="activeclassfinished" column="activeclassfinished" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Studentstatusreport">
+  insert into studentstatusreport (id,snapshotid,regionid,regionshortname,branchid,branchshortname,campusid,campusshortname,campusage,earlyisreg,earlyhasnomoney,earlyhasmoney,earlyisavailable,earlyclasssuspended,earlyactive,earlyschoolsuspended,earlygraduated,curnewsign,currenewsign,graduatedrenewsign,schoolsuspendedrenewsign,classsuspendedrenewsign,activerenewsign,classfinishedrenewsign,newsignrenewsign,curassigned,graduateassigned,schoolsuspendedassigned,classsuspendedassigned,activeassigned,classfinishedassigned,newsignassigned,curtransferedin,curtransferedout,curtransferschooltransferedin,curtransferschooltransferedout,curclassfinished,refundclassfinished,assignedclassfinished,transferedoutclassfinished,newsignclassfinished,currefund,earlyhasmoneyrefund,activerefund,classsuspendedrefund,schoolsuspendedrefund,graduaterefund,earlyhasnomoneyrefund,newavailable,notregactive,graduateactive,schoolsuspendedactive,classfinishedactive,thismonthactive,endisreg,endhasmoney,endhasnomoney,endisavailable,endclasssuspended,newclasssuspended,endactive,endgraduate,newgraduate,schoolsuspendedgraduate,classsuspendedgraduate,activegraduate,classfinishedrenewsigngraduate,endschoolsuspended,newschoolsuspended,exitavailable,availablegraduate,classsuspendedschoolsuspended,classsuspendedclassfinished,activeclassfinished)
+         values (#{id},#{snapshotid},#{regionid},#{regionshortname},#{branchid},#{branchshortname},#{campusid},#{campusshortname},#{campusage},#{earlyisreg},#{earlyhasnomoney},#{earlyhasmoney},#{earlyisavailable},#{earlyclasssuspended},#{earlyactive},#{earlyschoolsuspended},#{earlygraduated},#{curnewsign},#{currenewsign},#{graduatedrenewsign},#{schoolsuspendedrenewsign},#{classsuspendedrenewsign},#{activerenewsign},#{classfinishedrenewsign},#{newsignrenewsign},#{curassigned},#{graduateassigned},#{schoolsuspendedassigned},#{classsuspendedassigned},#{activeassigned},#{classfinishedassigned},#{newsignassigned},#{curtransferedin},#{curtransferedout},#{curtransferschooltransferedin},#{curtransferschooltransferedout},#{curclassfinished},#{refundclassfinished},#{assignedclassfinished},#{transferedoutclassfinished},#{newsignclassfinished},#{currefund},#{earlyhasmoneyrefund},#{activerefund},#{classsuspendedrefund},#{schoolsuspendedrefund},#{graduaterefund},#{earlyhasnomoneyrefund},#{newavailable},#{notregactive},#{graduateactive},#{schoolsuspendedactive},#{classfinishedactive},#{thismonthactive},#{endisreg},#{endhasmoney},#{endhasnomoney},#{endisavailable},#{endclasssuspended},#{newclasssuspended},#{endactive},#{endgraduate},#{newgraduate},#{schoolsuspendedgraduate},#{classsuspendedgraduate},#{activegraduate},#{classfinishedrenewsigngraduate},#{endschoolsuspended},#{newschoolsuspended},#{exitavailable},#{availablegraduate},#{classsuspendedschoolsuspended},#{classsuspendedclassfinished},#{activeclassfinished})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from studentstatusreport 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Studentstatusreport">
+    update studentstatusreport
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="snapshotid != null">
+                   snapshotid = #{snapshotid},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionshortname != null">
+                   regionshortname = #{regionshortname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchshortname != null">
+                   branchshortname = #{branchshortname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusshortname != null">
+                   campusshortname = #{campusshortname},
+             </if>
+             <if test="campusage != null">
+                   campusage = #{campusage},
+             </if>
+             <if test="earlyisreg != null">
+                   earlyisreg = #{earlyisreg},
+             </if>
+             <if test="earlyhasnomoney != null">
+                   earlyhasnomoney = #{earlyhasnomoney},
+             </if>
+             <if test="earlyhasmoney != null">
+                   earlyhasmoney = #{earlyhasmoney},
+             </if>
+             <if test="earlyisavailable != null">
+                   earlyisavailable = #{earlyisavailable},
+             </if>
+             <if test="earlyclasssuspended != null">
+                   earlyclasssuspended = #{earlyclasssuspended},
+             </if>
+             <if test="earlyactive != null">
+                   earlyactive = #{earlyactive},
+             </if>
+             <if test="earlyschoolsuspended != null">
+                   earlyschoolsuspended = #{earlyschoolsuspended},
+             </if>
+             <if test="earlygraduated != null">
+                   earlygraduated = #{earlygraduated},
+             </if>
+             <if test="curnewsign != null">
+                   curnewsign = #{curnewsign},
+             </if>
+             <if test="currenewsign != null">
+                   currenewsign = #{currenewsign},
+             </if>
+             <if test="graduatedrenewsign != null">
+                   graduatedrenewsign = #{graduatedrenewsign},
+             </if>
+             <if test="schoolsuspendedrenewsign != null">
+                   schoolsuspendedrenewsign = #{schoolsuspendedrenewsign},
+             </if>
+             <if test="classsuspendedrenewsign != null">
+                   classsuspendedrenewsign = #{classsuspendedrenewsign},
+             </if>
+             <if test="activerenewsign != null">
+                   activerenewsign = #{activerenewsign},
+             </if>
+             <if test="classfinishedrenewsign != null">
+                   classfinishedrenewsign = #{classfinishedrenewsign},
+             </if>
+             <if test="newsignrenewsign != null">
+                   newsignrenewsign = #{newsignrenewsign},
+             </if>
+             <if test="curassigned != null">
+                   curassigned = #{curassigned},
+             </if>
+             <if test="graduateassigned != null">
+                   graduateassigned = #{graduateassigned},
+             </if>
+             <if test="schoolsuspendedassigned != null">
+                   schoolsuspendedassigned = #{schoolsuspendedassigned},
+             </if>
+             <if test="classsuspendedassigned != null">
+                   classsuspendedassigned = #{classsuspendedassigned},
+             </if>
+             <if test="activeassigned != null">
+                   activeassigned = #{activeassigned},
+             </if>
+             <if test="classfinishedassigned != null">
+                   classfinishedassigned = #{classfinishedassigned},
+             </if>
+             <if test="newsignassigned != null">
+                   newsignassigned = #{newsignassigned},
+             </if>
+             <if test="curtransferedin != null">
+                   curtransferedin = #{curtransferedin},
+             </if>
+             <if test="curtransferedout != null">
+                   curtransferedout = #{curtransferedout},
+             </if>
+             <if test="curtransferschooltransferedin != null">
+                   curtransferschooltransferedin = #{curtransferschooltransferedin},
+             </if>
+             <if test="curtransferschooltransferedout != null">
+                   curtransferschooltransferedout = #{curtransferschooltransferedout},
+             </if>
+             <if test="curclassfinished != null">
+                   curclassfinished = #{curclassfinished},
+             </if>
+             <if test="refundclassfinished != null">
+                   refundclassfinished = #{refundclassfinished},
+             </if>
+             <if test="assignedclassfinished != null">
+                   assignedclassfinished = #{assignedclassfinished},
+             </if>
+             <if test="transferedoutclassfinished != null">
+                   transferedoutclassfinished = #{transferedoutclassfinished},
+             </if>
+             <if test="newsignclassfinished != null">
+                   newsignclassfinished = #{newsignclassfinished},
+             </if>
+             <if test="currefund != null">
+                   currefund = #{currefund},
+             </if>
+             <if test="earlyhasmoneyrefund != null">
+                   earlyhasmoneyrefund = #{earlyhasmoneyrefund},
+             </if>
+             <if test="activerefund != null">
+                   activerefund = #{activerefund},
+             </if>
+             <if test="classsuspendedrefund != null">
+                   classsuspendedrefund = #{classsuspendedrefund},
+             </if>
+             <if test="schoolsuspendedrefund != null">
+                   schoolsuspendedrefund = #{schoolsuspendedrefund},
+             </if>
+             <if test="graduaterefund != null">
+                   graduaterefund = #{graduaterefund},
+             </if>
+             <if test="earlyhasnomoneyrefund != null">
+                   earlyhasnomoneyrefund = #{earlyhasnomoneyrefund},
+             </if>
+             <if test="newavailable != null">
+                   newavailable = #{newavailable},
+             </if>
+             <if test="notregactive != null">
+                   notregactive = #{notregactive},
+             </if>
+             <if test="graduateactive != null">
+                   graduateactive = #{graduateactive},
+             </if>
+             <if test="schoolsuspendedactive != null">
+                   schoolsuspendedactive = #{schoolsuspendedactive},
+             </if>
+             <if test="classfinishedactive != null">
+                   classfinishedactive = #{classfinishedactive},
+             </if>
+             <if test="thismonthactive != null">
+                   thismonthactive = #{thismonthactive},
+             </if>
+             <if test="endisreg != null">
+                   endisreg = #{endisreg},
+             </if>
+             <if test="endhasmoney != null">
+                   endhasmoney = #{endhasmoney},
+             </if>
+             <if test="endhasnomoney != null">
+                   endhasnomoney = #{endhasnomoney},
+             </if>
+             <if test="endisavailable != null">
+                   endisavailable = #{endisavailable},
+             </if>
+             <if test="endclasssuspended != null">
+                   endclasssuspended = #{endclasssuspended},
+             </if>
+             <if test="newclasssuspended != null">
+                   newclasssuspended = #{newclasssuspended},
+             </if>
+             <if test="endactive != null">
+                   endactive = #{endactive},
+             </if>
+             <if test="endgraduate != null">
+                   endgraduate = #{endgraduate},
+             </if>
+             <if test="newgraduate != null">
+                   newgraduate = #{newgraduate},
+             </if>
+             <if test="schoolsuspendedgraduate != null">
+                   schoolsuspendedgraduate = #{schoolsuspendedgraduate},
+             </if>
+             <if test="classsuspendedgraduate != null">
+                   classsuspendedgraduate = #{classsuspendedgraduate},
+             </if>
+             <if test="activegraduate != null">
+                   activegraduate = #{activegraduate},
+             </if>
+             <if test="classfinishedrenewsigngraduate != null">
+                   classfinishedrenewsigngraduate = #{classfinishedrenewsigngraduate},
+             </if>
+             <if test="endschoolsuspended != null">
+                   endschoolsuspended = #{endschoolsuspended},
+             </if>
+             <if test="newschoolsuspended != null">
+                   newschoolsuspended = #{newschoolsuspended},
+             </if>
+             <if test="exitavailable != null">
+                   exitavailable = #{exitavailable},
+             </if>
+             <if test="availablegraduate != null">
+                   availablegraduate = #{availablegraduate},
+             </if>
+             <if test="classsuspendedschoolsuspended != null">
+                   classsuspendedschoolsuspended = #{classsuspendedschoolsuspended},
+             </if>
+             <if test="classsuspendedclassfinished != null">
+                   classsuspendedclassfinished = #{classsuspendedclassfinished},
+             </if>
+             <if test="activeclassfinished != null">
+                   activeclassfinished = #{activeclassfinished}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from studentstatusreport 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from studentstatusreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from studentstatusreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from studentstatusreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from studentstatusreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from studentstatusreport 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

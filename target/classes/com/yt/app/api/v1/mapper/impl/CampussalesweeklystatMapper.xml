@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CampussalesweeklystatMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,yearkey,quarterkey,monthkey,weekkey,startdayofweek,enddayofweek,startdayoflastweek,enddayoflastweek,regionid,regionname,branchid,branchname,campusid,campusname,nsataskyear,nsayear,nsayearlastyear,nsataskquarter,nsaquarter,nsaquarterlastyear,nsataskmonth,nsamonth,nsamonthlastyear,nsntaskyear,nsnyear,nsnyearlastyear,nsntaskquarter,nsnquarter,nsnquarterlastyear,nsntaskmonth,nsnmonth,nsnmonthlastyear,nsatasklastweek,nsalastweek,nsaplanlastweek,nsayoylastweek,nsntasklastweek,nsnlastweek,nsnplanlastweek,nsnyoylastweek,nsataskthisweek,nsayoythisweek,nsaplanthisweek,nsntaskthisweek,nsnyoythisweek,nsnplanthisweek,potentialcustomernumber,verifynumberplan,signnumberplan,signamountplan
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Campussalesweeklystat">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="yearkey" column="yearkey" />
+         <id property="quarterkey" column="quarterkey" />
+         <id property="monthkey" column="monthkey" />
+         <id property="weekkey" column="weekkey" />
+         <id property="startdayofweek" column="startdayofweek" />
+         <id property="enddayofweek" column="enddayofweek" />
+         <id property="startdayoflastweek" column="startdayoflastweek" />
+         <id property="enddayoflastweek" column="enddayoflastweek" />
+         <id property="regionid" column="regionid" />
+         <id property="regionname" column="regionname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="nsataskyear" column="nsataskyear" />
+         <id property="nsayear" column="nsayear" />
+         <id property="nsayearlastyear" column="nsayearlastyear" />
+         <id property="nsataskquarter" column="nsataskquarter" />
+         <id property="nsaquarter" column="nsaquarter" />
+         <id property="nsaquarterlastyear" column="nsaquarterlastyear" />
+         <id property="nsataskmonth" column="nsataskmonth" />
+         <id property="nsamonth" column="nsamonth" />
+         <id property="nsamonthlastyear" column="nsamonthlastyear" />
+         <id property="nsntaskyear" column="nsntaskyear" />
+         <id property="nsnyear" column="nsnyear" />
+         <id property="nsnyearlastyear" column="nsnyearlastyear" />
+         <id property="nsntaskquarter" column="nsntaskquarter" />
+         <id property="nsnquarter" column="nsnquarter" />
+         <id property="nsnquarterlastyear" column="nsnquarterlastyear" />
+         <id property="nsntaskmonth" column="nsntaskmonth" />
+         <id property="nsnmonth" column="nsnmonth" />
+         <id property="nsnmonthlastyear" column="nsnmonthlastyear" />
+         <id property="nsatasklastweek" column="nsatasklastweek" />
+         <id property="nsalastweek" column="nsalastweek" />
+         <id property="nsaplanlastweek" column="nsaplanlastweek" />
+         <id property="nsayoylastweek" column="nsayoylastweek" />
+         <id property="nsntasklastweek" column="nsntasklastweek" />
+         <id property="nsnlastweek" column="nsnlastweek" />
+         <id property="nsnplanlastweek" column="nsnplanlastweek" />
+         <id property="nsnyoylastweek" column="nsnyoylastweek" />
+         <id property="nsataskthisweek" column="nsataskthisweek" />
+         <id property="nsayoythisweek" column="nsayoythisweek" />
+         <id property="nsaplanthisweek" column="nsaplanthisweek" />
+         <id property="nsntaskthisweek" column="nsntaskthisweek" />
+         <id property="nsnyoythisweek" column="nsnyoythisweek" />
+         <id property="nsnplanthisweek" column="nsnplanthisweek" />
+         <id property="potentialcustomernumber" column="potentialcustomernumber" />
+         <id property="verifynumberplan" column="verifynumberplan" />
+         <id property="signnumberplan" column="signnumberplan" />
+         <id property="signamountplan" column="signamountplan" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Campussalesweeklystat">
+  insert into campussalesweeklystat (id,yearkey,quarterkey,monthkey,weekkey,startdayofweek,enddayofweek,startdayoflastweek,enddayoflastweek,regionid,regionname,branchid,branchname,campusid,campusname,nsataskyear,nsayear,nsayearlastyear,nsataskquarter,nsaquarter,nsaquarterlastyear,nsataskmonth,nsamonth,nsamonthlastyear,nsntaskyear,nsnyear,nsnyearlastyear,nsntaskquarter,nsnquarter,nsnquarterlastyear,nsntaskmonth,nsnmonth,nsnmonthlastyear,nsatasklastweek,nsalastweek,nsaplanlastweek,nsayoylastweek,nsntasklastweek,nsnlastweek,nsnplanlastweek,nsnyoylastweek,nsataskthisweek,nsayoythisweek,nsaplanthisweek,nsntaskthisweek,nsnyoythisweek,nsnplanthisweek,potentialcustomernumber,verifynumberplan,signnumberplan,signamountplan)
+         values (#{id},#{yearkey},#{quarterkey},#{monthkey},#{weekkey},#{startdayofweek},#{enddayofweek},#{startdayoflastweek},#{enddayoflastweek},#{regionid},#{regionname},#{branchid},#{branchname},#{campusid},#{campusname},#{nsataskyear},#{nsayear},#{nsayearlastyear},#{nsataskquarter},#{nsaquarter},#{nsaquarterlastyear},#{nsataskmonth},#{nsamonth},#{nsamonthlastyear},#{nsntaskyear},#{nsnyear},#{nsnyearlastyear},#{nsntaskquarter},#{nsnquarter},#{nsnquarterlastyear},#{nsntaskmonth},#{nsnmonth},#{nsnmonthlastyear},#{nsatasklastweek},#{nsalastweek},#{nsaplanlastweek},#{nsayoylastweek},#{nsntasklastweek},#{nsnlastweek},#{nsnplanlastweek},#{nsnyoylastweek},#{nsataskthisweek},#{nsayoythisweek},#{nsaplanthisweek},#{nsntaskthisweek},#{nsnyoythisweek},#{nsnplanthisweek},#{potentialcustomernumber},#{verifynumberplan},#{signnumberplan},#{signamountplan})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from campussalesweeklystat 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Campussalesweeklystat">
+    update campussalesweeklystat
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="yearkey != null">
+                   yearkey = #{yearkey},
+             </if>
+             <if test="quarterkey != null">
+                   quarterkey = #{quarterkey},
+             </if>
+             <if test="monthkey != null">
+                   monthkey = #{monthkey},
+             </if>
+             <if test="weekkey != null">
+                   weekkey = #{weekkey},
+             </if>
+             <if test="startdayofweek != null">
+                   startdayofweek = #{startdayofweek},
+             </if>
+             <if test="enddayofweek != null">
+                   enddayofweek = #{enddayofweek},
+             </if>
+             <if test="startdayoflastweek != null">
+                   startdayoflastweek = #{startdayoflastweek},
+             </if>
+             <if test="enddayoflastweek != null">
+                   enddayoflastweek = #{enddayoflastweek},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionname != null">
+                   regionname = #{regionname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="nsataskyear != null">
+                   nsataskyear = #{nsataskyear},
+             </if>
+             <if test="nsayear != null">
+                   nsayear = #{nsayear},
+             </if>
+             <if test="nsayearlastyear != null">
+                   nsayearlastyear = #{nsayearlastyear},
+             </if>
+             <if test="nsataskquarter != null">
+                   nsataskquarter = #{nsataskquarter},
+             </if>
+             <if test="nsaquarter != null">
+                   nsaquarter = #{nsaquarter},
+             </if>
+             <if test="nsaquarterlastyear != null">
+                   nsaquarterlastyear = #{nsaquarterlastyear},
+             </if>
+             <if test="nsataskmonth != null">
+                   nsataskmonth = #{nsataskmonth},
+             </if>
+             <if test="nsamonth != null">
+                   nsamonth = #{nsamonth},
+             </if>
+             <if test="nsamonthlastyear != null">
+                   nsamonthlastyear = #{nsamonthlastyear},
+             </if>
+             <if test="nsntaskyear != null">
+                   nsntaskyear = #{nsntaskyear},
+             </if>
+             <if test="nsnyear != null">
+                   nsnyear = #{nsnyear},
+             </if>
+             <if test="nsnyearlastyear != null">
+                   nsnyearlastyear = #{nsnyearlastyear},
+             </if>
+             <if test="nsntaskquarter != null">
+                   nsntaskquarter = #{nsntaskquarter},
+             </if>
+             <if test="nsnquarter != null">
+                   nsnquarter = #{nsnquarter},
+             </if>
+             <if test="nsnquarterlastyear != null">
+                   nsnquarterlastyear = #{nsnquarterlastyear},
+             </if>
+             <if test="nsntaskmonth != null">
+                   nsntaskmonth = #{nsntaskmonth},
+             </if>
+             <if test="nsnmonth != null">
+                   nsnmonth = #{nsnmonth},
+             </if>
+             <if test="nsnmonthlastyear != null">
+                   nsnmonthlastyear = #{nsnmonthlastyear},
+             </if>
+             <if test="nsatasklastweek != null">
+                   nsatasklastweek = #{nsatasklastweek},
+             </if>
+             <if test="nsalastweek != null">
+                   nsalastweek = #{nsalastweek},
+             </if>
+             <if test="nsaplanlastweek != null">
+                   nsaplanlastweek = #{nsaplanlastweek},
+             </if>
+             <if test="nsayoylastweek != null">
+                   nsayoylastweek = #{nsayoylastweek},
+             </if>
+             <if test="nsntasklastweek != null">
+                   nsntasklastweek = #{nsntasklastweek},
+             </if>
+             <if test="nsnlastweek != null">
+                   nsnlastweek = #{nsnlastweek},
+             </if>
+             <if test="nsnplanlastweek != null">
+                   nsnplanlastweek = #{nsnplanlastweek},
+             </if>
+             <if test="nsnyoylastweek != null">
+                   nsnyoylastweek = #{nsnyoylastweek},
+             </if>
+             <if test="nsataskthisweek != null">
+                   nsataskthisweek = #{nsataskthisweek},
+             </if>
+             <if test="nsayoythisweek != null">
+                   nsayoythisweek = #{nsayoythisweek},
+             </if>
+             <if test="nsaplanthisweek != null">
+                   nsaplanthisweek = #{nsaplanthisweek},
+             </if>
+             <if test="nsntaskthisweek != null">
+                   nsntaskthisweek = #{nsntaskthisweek},
+             </if>
+             <if test="nsnyoythisweek != null">
+                   nsnyoythisweek = #{nsnyoythisweek},
+             </if>
+             <if test="nsnplanthisweek != null">
+                   nsnplanthisweek = #{nsnplanthisweek},
+             </if>
+             <if test="potentialcustomernumber != null">
+                   potentialcustomernumber = #{potentialcustomernumber},
+             </if>
+             <if test="verifynumberplan != null">
+                   verifynumberplan = #{verifynumberplan},
+             </if>
+             <if test="signnumberplan != null">
+                   signnumberplan = #{signnumberplan},
+             </if>
+             <if test="signamountplan != null">
+                   signamountplan = #{signamountplan}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from campussalesweeklystat 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campussalesweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from campussalesweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campussalesweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campussalesweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campussalesweeklystat 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

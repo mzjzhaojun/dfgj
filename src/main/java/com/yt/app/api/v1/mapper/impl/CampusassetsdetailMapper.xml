@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CampusassetsdetailMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,monthkey,statlocaldate,campusid,categorytype,grade,residualamount,residualmoney,dailyorderamount,dailyordermoney,dailydebookamount,dailydebookmoney,dailyincomeamount,dailyincomemoney
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Campusassetsdetail">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="monthkey" column="monthkey" />
+         <id property="statlocaldate" column="statlocaldate" />
+         <id property="campusid" column="campusid" />
+         <id property="categorytype" column="categorytype" />
+         <id property="grade" column="grade" />
+         <id property="residualamount" column="residualamount" />
+         <id property="residualmoney" column="residualmoney" />
+         <id property="dailyorderamount" column="dailyorderamount" />
+         <id property="dailyordermoney" column="dailyordermoney" />
+         <id property="dailydebookamount" column="dailydebookamount" />
+         <id property="dailydebookmoney" column="dailydebookmoney" />
+         <id property="dailyincomeamount" column="dailyincomeamount" />
+         <id property="dailyincomemoney" column="dailyincomemoney" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Campusassetsdetail">
+  insert into campusassetsdetail (id,monthkey,statlocaldate,campusid,categorytype,grade,residualamount,residualmoney,dailyorderamount,dailyordermoney,dailydebookamount,dailydebookmoney,dailyincomeamount,dailyincomemoney)
+         values (#{id},#{monthkey},#{statlocaldate},#{campusid},#{categorytype},#{grade},#{residualamount},#{residualmoney},#{dailyorderamount},#{dailyordermoney},#{dailydebookamount},#{dailydebookmoney},#{dailyincomeamount},#{dailyincomemoney})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from campusassetsdetail 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Campusassetsdetail">
+    update campusassetsdetail
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="monthkey != null">
+                   monthkey = #{monthkey},
+             </if>
+             <if test="statlocaldate != null">
+                   statlocaldate = #{statlocaldate},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="categorytype != null">
+                   categorytype = #{categorytype},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="residualamount != null">
+                   residualamount = #{residualamount},
+             </if>
+             <if test="residualmoney != null">
+                   residualmoney = #{residualmoney},
+             </if>
+             <if test="dailyorderamount != null">
+                   dailyorderamount = #{dailyorderamount},
+             </if>
+             <if test="dailyordermoney != null">
+                   dailyordermoney = #{dailyordermoney},
+             </if>
+             <if test="dailydebookamount != null">
+                   dailydebookamount = #{dailydebookamount},
+             </if>
+             <if test="dailydebookmoney != null">
+                   dailydebookmoney = #{dailydebookmoney},
+             </if>
+             <if test="dailyincomeamount != null">
+                   dailyincomeamount = #{dailyincomeamount},
+             </if>
+             <if test="dailyincomemoney != null">
+                   dailyincomemoney = #{dailyincomemoney}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from campusassetsdetail 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campusassetsdetail 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from campusassetsdetail 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campusassetsdetail 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campusassetsdetail 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campusassetsdetail 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

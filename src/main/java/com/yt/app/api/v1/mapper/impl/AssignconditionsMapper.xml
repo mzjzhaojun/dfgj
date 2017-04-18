@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.AssignconditionsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,conditionid,conditionname4customer,conditionname4teacher,customerid,customercode,customername,accountid,assetid,assetcode,productid,productcode,productname,categorytype,categorytypename,grade,gradename,subject,subjectname,roomid,roomcode,roomname,teacherid,teachername,teacheroacode,teacherjobid,teacherjoborgid,teacherjoborgname,isfulltimeteacher,courselevel,courselevelname,lessonduration,lessondurationvalue,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Assignconditions">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="conditionid" column="conditionid" />
+         <id property="conditionname4customer" column="conditionname4customer" />
+         <id property="conditionname4teacher" column="conditionname4teacher" />
+         <id property="customerid" column="customerid" />
+         <id property="customercode" column="customercode" />
+         <id property="customername" column="customername" />
+         <id property="accountid" column="accountid" />
+         <id property="assetid" column="assetid" />
+         <id property="assetcode" column="assetcode" />
+         <id property="productid" column="productid" />
+         <id property="productcode" column="productcode" />
+         <id property="productname" column="productname" />
+         <id property="categorytype" column="categorytype" />
+         <id property="categorytypename" column="categorytypename" />
+         <id property="grade" column="grade" />
+         <id property="gradename" column="gradename" />
+         <id property="subject" column="subject" />
+         <id property="subjectname" column="subjectname" />
+         <id property="roomid" column="roomid" />
+         <id property="roomcode" column="roomcode" />
+         <id property="roomname" column="roomname" />
+         <id property="teacherid" column="teacherid" />
+         <id property="teachername" column="teachername" />
+         <id property="teacheroacode" column="teacheroacode" />
+         <id property="teacherjobid" column="teacherjobid" />
+         <id property="teacherjoborgid" column="teacherjoborgid" />
+         <id property="teacherjoborgname" column="teacherjoborgname" />
+         <id property="isfulltimeteacher" column="isfulltimeteacher" />
+         <id property="courselevel" column="courselevel" />
+         <id property="courselevelname" column="courselevelname" />
+         <id property="lessonduration" column="lessonduration" />
+         <id property="lessondurationvalue" column="lessondurationvalue" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Assignconditions">
+  insert into assignconditions (id,conditionid,conditionname4customer,conditionname4teacher,customerid,customercode,customername,accountid,assetid,assetcode,productid,productcode,productname,categorytype,categorytypename,grade,gradename,subject,subjectname,roomid,roomcode,roomname,teacherid,teachername,teacheroacode,teacherjobid,teacherjoborgid,teacherjoborgname,isfulltimeteacher,courselevel,courselevelname,lessonduration,lessondurationvalue,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{conditionid},#{conditionname4customer},#{conditionname4teacher},#{customerid},#{customercode},#{customername},#{accountid},#{assetid},#{assetcode},#{productid},#{productcode},#{productname},#{categorytype},#{categorytypename},#{grade},#{gradename},#{subject},#{subjectname},#{roomid},#{roomcode},#{roomname},#{teacherid},#{teachername},#{teacheroacode},#{teacherjobid},#{teacherjoborgid},#{teacherjoborgname},#{isfulltimeteacher},#{courselevel},#{courselevelname},#{lessonduration},#{lessondurationvalue},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from assignconditions 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Assignconditions">
+    update assignconditions
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="conditionid != null">
+                   conditionid = #{conditionid},
+             </if>
+             <if test="conditionname4customer != null">
+                   conditionname4customer = #{conditionname4customer},
+             </if>
+             <if test="conditionname4teacher != null">
+                   conditionname4teacher = #{conditionname4teacher},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="customercode != null">
+                   customercode = #{customercode},
+             </if>
+             <if test="customername != null">
+                   customername = #{customername},
+             </if>
+             <if test="accountid != null">
+                   accountid = #{accountid},
+             </if>
+             <if test="assetid != null">
+                   assetid = #{assetid},
+             </if>
+             <if test="assetcode != null">
+                   assetcode = #{assetcode},
+             </if>
+             <if test="productid != null">
+                   productid = #{productid},
+             </if>
+             <if test="productcode != null">
+                   productcode = #{productcode},
+             </if>
+             <if test="productname != null">
+                   productname = #{productname},
+             </if>
+             <if test="categorytype != null">
+                   categorytype = #{categorytype},
+             </if>
+             <if test="categorytypename != null">
+                   categorytypename = #{categorytypename},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="gradename != null">
+                   gradename = #{gradename},
+             </if>
+             <if test="subject != null">
+                   subject = #{subject},
+             </if>
+             <if test="subjectname != null">
+                   subjectname = #{subjectname},
+             </if>
+             <if test="roomid != null">
+                   roomid = #{roomid},
+             </if>
+             <if test="roomcode != null">
+                   roomcode = #{roomcode},
+             </if>
+             <if test="roomname != null">
+                   roomname = #{roomname},
+             </if>
+             <if test="teacherid != null">
+                   teacherid = #{teacherid},
+             </if>
+             <if test="teachername != null">
+                   teachername = #{teachername},
+             </if>
+             <if test="teacheroacode != null">
+                   teacheroacode = #{teacheroacode},
+             </if>
+             <if test="teacherjobid != null">
+                   teacherjobid = #{teacherjobid},
+             </if>
+             <if test="teacherjoborgid != null">
+                   teacherjoborgid = #{teacherjoborgid},
+             </if>
+             <if test="teacherjoborgname != null">
+                   teacherjoborgname = #{teacherjoborgname},
+             </if>
+             <if test="isfulltimeteacher != null">
+                   isfulltimeteacher = #{isfulltimeteacher},
+             </if>
+             <if test="courselevel != null">
+                   courselevel = #{courselevel},
+             </if>
+             <if test="courselevelname != null">
+                   courselevelname = #{courselevelname},
+             </if>
+             <if test="lessonduration != null">
+                   lessonduration = #{lessonduration},
+             </if>
+             <if test="lessondurationvalue != null">
+                   lessondurationvalue = #{lessondurationvalue},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from assignconditions 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from assignconditions 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from assignconditions 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from assignconditions 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from assignconditions 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from assignconditions 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

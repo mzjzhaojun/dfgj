@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html ng-app="add">
+<head>
+<title>学校-新增</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/common.css">
+<script type="text/javascript"
+	src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery.cookie.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/bootstrap.min.js"></script>
+<script src="../../../../resource/js/date/js/eap.core.js"></script>
+<!-- 表单验证 -->
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/js/validate/css/validate.css" />
+<script type="text/javascript"
+	src="../../../../resource/js/validate/js/eap.tip.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/validate/js/eap.validate.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+
+
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add.controller("addController", function($scope, $http) {
+		$scope.inittype = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 50
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarytype = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+
+		$scope.initnum = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 100
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarynum = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		$scope.formData = {};
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		//保存
+		$scope.onPreserved = function() {
+			var isValid = $("#saveForm").valid();
+			if (isValid) {
+				$http({
+					url : parent.getMenuLinksHref("schoolpost"),
+					method : 'POST',
+					dataType : "json",
+					withCredentials : true,
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					data : JSON.stringify($scope.formData)
+				}).success(function(data, status, headers, config) {
+					if (data == -1) {
+						alert("链接别名重复，请重新输入。")
+					} else if (data != -1) {
+						location.href = "list.html";
+					}
+				}).error(function(data, status, headers, config) {
+					//处理响应失败
+					response(status);
+				})
+			}
+		}
+
+		$scope.inittype();
+		$scope.initnum();
+	})
+</script>
+</head>
+
+<body ng-controller="addController">
+	<form method="post" id="saveForm" action="">
+		<!-- 操作按钮操作区 -->
+		<div class="col-lg-12 topActionPanel">
+			<div>
+				<button type="button" class="btn btn-primary"
+					ng-click="onPreserved()">确 定</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()">返
+					回</button>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学校名称</span> <input
+					type="text" class="form-control required" placeholder="请输入名称"
+					name="name" ng-model="formData.name" maxlength="32"> <span
+					class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学校地址</span> <input
+					type="text" class="form-control required" name="address"
+					placeholder="请输入学校地址" ng-model="formData.address" maxlength="150">
+				<span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学校规模</span> <input
+					type="text" class="form-control required" placeholder="请输入规模"
+					name="scale" ng-model="formData.scale" maxlength="50"> <span
+					class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学校类型</span> <select
+					class="form-control" ng-model="formData.type" id="type" name="type"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarytype">
+					<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">小学班级数</span> <select
+					class="form-control" ng-model="formData.primaryschool" id="primaryschool" name="primaryschool"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarynum">
+					<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">初中班级数</span> <select
+					class="form-control" ng-model="formData.middleschool" id="middleschool" name="middleschool"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarynum">
+					<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">高中班级数</span> <select
+					class="form-control" ng-model="formData.highschool" id="highschool" name="highschool"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarynum">
+					<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth"
+					style="height: 150px;">备&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+				<textarea class="txtVal form-control" style="height: 150px;"
+					ng-model="formData.remark"></textarea>
+
+			</div>
+		</div>
+
+		</div>
+	</form>
+</body>
+</html>

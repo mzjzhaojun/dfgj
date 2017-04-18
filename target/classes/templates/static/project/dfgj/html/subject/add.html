@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html ng-app="add">
+<head>
+<title>学科管理-新增</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/common.css">
+<script type="text/javascript"
+	src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery.cookie.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/bootstrap.min.js"></script>
+<script src="../../../../resource/js/date/js/eap.core.js"></script>
+<!-- 表单验证 -->
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/js/validate/css/validate.css" />
+<script type="text/javascript"
+	src="../../../../resource/js/validate/js/eap.tip.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/validate/js/eap.validate.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+
+<!-- <script type="text/javascript" src="../../../../js/logonValidate.js"></script> -->
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add.controller("addController", function($scope, $http) {
+		$scope.inittype = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 400
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarytype = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+
+		$scope.initteachtype = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 500
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionaryteach = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		$scope.initstype = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode :1100
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarystype = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		$scope.initsdate = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode :1300
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarysdate = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		$scope.inityear = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode :1200
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionaryyear = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		$scope.initbilltype = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 1000
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarybilltype = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		
+		$scope.initgrade = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 300
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarygrade = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		$scope.formData = {};
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		//保存
+		$scope.onPreserved = function() {
+			var isValid = $("#saveForm").valid();
+			if (isValid) {
+				$http({
+					url : parent.getMenuLinksHref("subjectpost"),
+					method : 'POST',
+					dataType : "json",
+					withCredentials : true,
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					data : JSON.stringify($scope.formData)
+				}).success(function(data, status, headers, config) {
+					if (data == -1) {
+						alert("链接别名重复，请重新输入。")
+					} else if (data != -1) {
+						location.href = "list.html";
+					}
+				}).error(function(data, status, headers, config) {
+					//处理响应失败
+					response(status);
+				})
+			}
+		}
+
+		$scope.inittype();
+		$scope.initteachtype();
+		$scope.initgrade();
+		$scope.initbilltype();
+		$scope.initstype();
+		$scope.inityear();
+		$scope.initsdate();
+	})
+</script>
+</head>
+
+<body ng-controller="addController">
+	<form method="post" id="saveForm" action="">
+		<!-- 操作按钮操作区 -->
+		<div class="col-lg-12 topActionPanel">
+			<div>
+				<button type="button" class="btn btn-primary"
+					ng-click="onPreserved()">确 定</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()">返
+					回</button>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学科名称</span> <input
+					type="text" class="form-control required" placeholder="请输入学科名称"
+					name="name" ng-model="formData.name" maxlength="32"> <span
+					class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">年级</span> 
+				<select class="form-control required " ng-model="formData.grade" id="type" name="grade"
+			    ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarygrade">
+			    <option value="">请选择</option>
+			    </select>
+			<span class="input-group-addon verifyprompt">*</span>
+					
+		</div>
+		    <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">年&nbsp;&nbsp;&nbsp;&nbsp;份&nbsp;&nbsp;&nbsp;&nbsp;</span> <select
+					class="form-control required" ng-model="formData.year" id="year" name="year"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionaryyear">
+						<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">期&nbsp;&nbsp;&nbsp;&nbsp;段&nbsp;&nbsp;&nbsp;&nbsp;</span> <select
+					class="form-control required" ng-model="formData.sdate" id="sdate" name="sdate"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarysdate">
+						<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学科类型</span> <select
+					class="form-control required" ng-model="formData.type" id="type" name="type"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarytype">
+						<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">课程类型</span> <select
+					class="form-control required" ng-model="formData.stype" id="stype" name="stype"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarystype">
+						<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">计费类型</span> <select
+					class="form-control required" ng-model="formData.billingtype" id="billingtype" name="billingtype"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarybilltype">
+						<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">授课方式</span> <select
+					class="form-control required" ng-model="formData.teach_type" id="teach_type" name="teach_type"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionaryteach">
+					<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">课时金额</span> <input
+					type="text" class="form-control required number" placeholder="请输入金额"
+					name="price" ng-model="formData.price" maxlength="10"> <span
+					class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth"
+					style="height: 150px;">备&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;</span>
+				<textarea class="txtVal form-control" style="height: 150px;"
+					ng-model="formData.remark"></textarea>
+
+			</div>
+		</div>
+
+	</form>
+</body>
+</html>

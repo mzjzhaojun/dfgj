@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.JobsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,jobid,jobname,orgid,staffid,parentid,isprimary,isfulltime,jobcodeid,fullpath,versionstarttime,versionendtime,status,bistatus
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Jobs">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="jobid" column="jobid" />
+         <id property="jobname" column="jobname" />
+         <id property="orgid" column="orgid" />
+         <id property="staffid" column="staffid" />
+         <id property="parentid" column="parentid" />
+         <id property="isprimary" column="isprimary" />
+         <id property="isfulltime" column="isfulltime" />
+         <id property="jobcodeid" column="jobcodeid" />
+         <id property="fullpath" column="fullpath" />
+         <id property="versionstarttime" column="versionstarttime" />
+         <id property="versionendtime" column="versionendtime" />
+         <id property="status" column="status" />
+         <id property="bistatus" column="bistatus" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Jobs">
+  insert into jobs (id,jobid,jobname,orgid,staffid,parentid,isprimary,isfulltime,jobcodeid,fullpath,versionstarttime,versionendtime,status,bistatus)
+         values (#{id},#{jobid},#{jobname},#{orgid},#{staffid},#{parentid},#{isprimary},#{isfulltime},#{jobcodeid},#{fullpath},#{versionstarttime},#{versionendtime},#{status},#{bistatus})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from jobs 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Jobs">
+    update jobs
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="jobid != null">
+                   jobid = #{jobid},
+             </if>
+             <if test="jobname != null">
+                   jobname = #{jobname},
+             </if>
+             <if test="orgid != null">
+                   orgid = #{orgid},
+             </if>
+             <if test="staffid != null">
+                   staffid = #{staffid},
+             </if>
+             <if test="parentid != null">
+                   parentid = #{parentid},
+             </if>
+             <if test="isprimary != null">
+                   isprimary = #{isprimary},
+             </if>
+             <if test="isfulltime != null">
+                   isfulltime = #{isfulltime},
+             </if>
+             <if test="jobcodeid != null">
+                   jobcodeid = #{jobcodeid},
+             </if>
+             <if test="fullpath != null">
+                   fullpath = #{fullpath},
+             </if>
+             <if test="versionstarttime != null">
+                   versionstarttime = #{versionstarttime},
+             </if>
+             <if test="versionendtime != null">
+                   versionendtime = #{versionendtime},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="bistatus != null">
+                   bistatus = #{bistatus}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from jobs 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from jobs 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from jobs 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from jobs 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from jobs 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from jobs 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

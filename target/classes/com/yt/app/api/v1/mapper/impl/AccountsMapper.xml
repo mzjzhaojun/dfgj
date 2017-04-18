@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.AccountsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,customerid,accountid,accountcode,accounttype,accountmemo,accountstatus,accountmoney,discountid,discountcode,discountrate,discountbase,chargeapplyid,chargepaytime,firstchargepaytime,firstchargeapplyid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,versionstarttime,versionendtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accounts">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="customerid" column="customerid" />
+         <id property="accountid" column="accountid" />
+         <id property="accountcode" column="accountcode" />
+         <id property="accounttype" column="accounttype" />
+         <id property="accountmemo" column="accountmemo" />
+         <id property="accountstatus" column="accountstatus" />
+         <id property="accountmoney" column="accountmoney" />
+         <id property="discountid" column="discountid" />
+         <id property="discountcode" column="discountcode" />
+         <id property="discountrate" column="discountrate" />
+         <id property="discountbase" column="discountbase" />
+         <id property="chargeapplyid" column="chargeapplyid" />
+         <id property="chargepaytime" column="chargepaytime" />
+         <id property="firstchargepaytime" column="firstchargepaytime" />
+         <id property="firstchargeapplyid" column="firstchargeapplyid" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+         <id property="versionstarttime" column="versionstarttime" />
+         <id property="versionendtime" column="versionendtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Accounts">
+  insert into accounts (id,customerid,accountid,accountcode,accounttype,accountmemo,accountstatus,accountmoney,discountid,discountcode,discountrate,discountbase,chargeapplyid,chargepaytime,firstchargepaytime,firstchargeapplyid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,versionstarttime,versionendtime)
+         values (#{id},#{customerid},#{accountid},#{accountcode},#{accounttype},#{accountmemo},#{accountstatus},#{accountmoney},#{discountid},#{discountcode},#{discountrate},#{discountbase},#{chargeapplyid},#{chargepaytime},#{firstchargepaytime},#{firstchargeapplyid},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{versionstarttime},#{versionendtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from accounts 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Accounts">
+    update accounts
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="accountid != null">
+                   accountid = #{accountid},
+             </if>
+             <if test="accountcode != null">
+                   accountcode = #{accountcode},
+             </if>
+             <if test="accounttype != null">
+                   accounttype = #{accounttype},
+             </if>
+             <if test="accountmemo != null">
+                   accountmemo = #{accountmemo},
+             </if>
+             <if test="accountstatus != null">
+                   accountstatus = #{accountstatus},
+             </if>
+             <if test="accountmoney != null">
+                   accountmoney = #{accountmoney},
+             </if>
+             <if test="discountid != null">
+                   discountid = #{discountid},
+             </if>
+             <if test="discountcode != null">
+                   discountcode = #{discountcode},
+             </if>
+             <if test="discountrate != null">
+                   discountrate = #{discountrate},
+             </if>
+             <if test="discountbase != null">
+                   discountbase = #{discountbase},
+             </if>
+             <if test="chargeapplyid != null">
+                   chargeapplyid = #{chargeapplyid},
+             </if>
+             <if test="chargepaytime != null">
+                   chargepaytime = #{chargepaytime},
+             </if>
+             <if test="firstchargepaytime != null">
+                   firstchargepaytime = #{firstchargepaytime},
+             </if>
+             <if test="firstchargeapplyid != null">
+                   firstchargeapplyid = #{firstchargeapplyid},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime},
+             </if>
+             <if test="versionstarttime != null">
+                   versionstarttime = #{versionstarttime},
+             </if>
+             <if test="versionendtime != null">
+                   versionendtime = #{versionendtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from accounts 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accounts 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from accounts 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accounts 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accounts 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accounts 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

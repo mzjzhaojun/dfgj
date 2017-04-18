@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html ng-app="add">
+<head>
+<title>家长信息-新增</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<!--  -->
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+<script src="../../../../resource/js/date/js/eap.core.js"></script>
+<!-- 表单验证 -->
+<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css" />
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+<script type="text/javascript" src=""></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<script src="../../../../resource/js/artDialog/artDialog.js"></script>
+<script src="../../../../resource/js/artDialog/plugins/iframeTools.js"></script>
+<style type="text/css">
+		.panel{margin-bottom:-5px;}
+		.input-group-sm > i{
+			position:absolute;
+			left:610px;
+			top:80px;
+		}
+</style>
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add.controller("addController", function($scope, $http) {
+		//字典获取来源
+		$scope.initsource = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 560
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarysource = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		
+		//字典获取来源
+		$scope.initpurpose = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 830
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarypurpose = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		
+		
+		
+		//字典获取来源
+		$scope.initsubject = function() {
+			$http({
+				url : parent.getMenuLinksHref("subjectlist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.subjects = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		
+		//字典获取来源
+		$scope.initprincipal = function() {
+			$http({
+				url : parent.getMenuLinksHref("accountself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.accounts = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		
+		$scope.initjobs = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 820
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionaryjobs = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		
+		$scope.initgrade = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 300
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarygrade = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		
+		
+		$scope.initsex = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 900
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarysex = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		
+		//字典获取家长状态
+		$scope.initstatus = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 570
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarystatus = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		//字典获取家长类型
+		$scope.inittype = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 590
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionarytype = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		//获取学校
+		$scope.initschool = function() {
+			$http({
+				url : parent.getMenuLinksHref("schoollist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.dictionaryschool = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		
+		$scope.formData = {};
+		$http({
+			url:parent.getFunctionLinksHref("self"),
+			method:'GET',
+			dataType : "json",
+			withCredentials: true,
+			headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+			data: ''
+			}).success(function(data, status, headers, config){
+				//响应成功
+				$scope.formData= data
+			}).error(function(data, status, headers, config){
+				//处理响应失败
+				response(status);
+			});
+		
+		//返回
+		$scope.onReturn=function(){
+			history.go(-1);
+		}
+		$scope.formData = {};
+		//保存
+		//保存
+		$scope.onPreserved=function(){
+			var isValid = $("#saveForm").valid();
+				if(isValid){
+				$http({
+					url:parent.getFunctionLinksHref("self"),
+					method:'PUT',
+					dataType : "json",
+					withCredentials: true,
+					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+					data: JSON.stringify($scope.formData)
+		  		}).success(function(data, status, headers, config){
+		  			location.href="list.html";
+		  		}).error(function(data, status, headers, config){
+					//处理响应失败
+		  			response(status);
+				})
+			}
+		}
+		
+		/* //搜索资源
+		$scope.onfind = function(){
+			art.dialog.open('../html/patriarch/subjectlist.html',
+					{
+						title : '资源搜索',
+						width : 1000,
+						height : 600,
+						close : showWindow,
+						lock:true,
+						resize:false,
+						id : "showWindow",
+						lock:true
+					});
+			art.dialog.data("dialogId", "showWindow");//给弹出框赋值ID
+		}
+		
+		function showWindow(){
+			var data = art.dialog.data("data");	
+			if(data != undefined){
+				var html="";
+				for(var i = 0;i<data.length;i++){
+					 var obj = angular.fromJson(data[i]);  
+					 html +='<label><i class="icon-remove"></i><span id="'+obj.subject.id+'">'+obj.subject.name+'</span></label>';
+					
+				}
+				$(".panel").append(html);
+				art.dialog.removeData("data");
+			}
+			
+		}
+		
+		$scope.checklinks = function(){
+			var linkIds = "";
+			var ele = $(".panel").find("label>span");
+			for(var i = 0;i<ele.length;i++){
+				linkIds +=$(ele[i]).attr("id")+",";
+			} 
+			return linkIds;
+		} */
+
+		$scope.initsource();
+		$scope.initstatus();
+		$scope.inittype();
+		$scope.initschool();
+		$scope.initjobs();
+		$scope.initsex();
+		$scope.initgrade();
+		$scope.initpurpose();
+		$scope.initsubject();
+		$scope.initprincipal();
+	})
+	
+	
+	
+</script>
+</head>
+<body ng-controller="addController">
+	<form method="post" id="saveForm" action="">
+		<!-- 操作按钮操作区 -->
+		<div class="col-lg-12 topActionPanel">
+			<div>
+				<button type="button" class="btn btn-primary"
+					ng-click="onPreserved()">确 定</button>
+			</div>
+			<div>
+		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+	    	</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<input
+					type="hidden" class="form-control"
+					id="version" name="version" ng-model="formData.version">
+				<span class="input-group-addon text-right spanwidth">学员名称</span> <input
+					type="text" class="form-control required" placeholder="请输入名称"
+					id="name" name="name" ng-model="formData.name" maxlength="32"> <span
+					class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">性别</span> <select
+					class="form-control required" ng-model="formData.sex" id="sex" name="sex"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarysex">
+					<option value="">请选择</option>
+				</select><span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">年级</span> <select
+					class="form-control required" ng-model="formData.grade" id="grade" name="grade"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarygrade">
+					<option value="">请选择</option>
+				</select><span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">手机号</span> <input
+					type="text" class="form-control required mobile" id="mobile" name="mobile"
+					placeholder="请输入手机号" ng-model="formData.mobile" maxlength="12">
+				<span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">招生来源</span> <select
+					class="form-control required" ng-model="formData.source" id="source" name="source"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarysource">
+					<option value="">请选择</option>
+				</select><span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">负责人</span> <select
+					class="form-control required" ng-model="formData.principal" id="principal" name="principal"
+					ng-options="dic.account.id as dic.account.name for dic in accounts">
+					<option value="">请选择</option>
+				</select><span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">状态</span> <select
+					class="form-control required" ng-model="formData.status" id="status" name="status"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarystatus">
+					<option value="">请选择</option>
+				</select><span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">家长类型</span> <select
+					class="form-control required" ng-model="formData.type" id="type" name="type"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarytype">
+					<option value="">请选择</option>
+				</select><span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">所在学校</span> <select
+					class="form-control required" ng-model="formData.school_id" id="school_id" name="school_id"
+					ng-options="dic.school.id as dic.school.name for dic in dictionaryschool">
+					<option value="">请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth"
+					style="height: 150px;">备&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+				<textarea class="txtVal form-control" style="height: 150px;"
+					ng-model="formData.remark"></textarea>
+			</div>
+		</div>
+		<div class="col-lg-6" style="position: relative;left: -50px;">
+			<div class="input-group input-group-sm" style="position: relative;left:0px;">
+				<span class="input-group-addon text-right spanwidth">意向课程</span> <select
+					class="form-control required" ng-model="formData.subject_id" id="subject_id" name="subject_id"
+					ng-options="dic.subject.id as dic.subject.name for dic in subjects">
+					<option value="">请选择</option>
+				</select><span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        <div class="input-group input-group-sm" style="position: relative;left:0px;">
+				<span class="input-group-addon text-right spanwidth">意向级别</span> <select
+					class="form-control required" ng-model="formData.purpose" id="purpose" name="purpose"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarypurpose">
+					<option value="">请选择</option>
+				</select><span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">父亲职业</span> <select
+					class="form-control required" ng-model="formData.fatherjobs" id="fatherjobs" name="fatherjobs"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionaryjobs">
+					<option value="">请选择</option>
+				</select><span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">母亲职业</span> <select
+					class="form-control required" ng-model="formData.motherjobs" id="motherjobs" name="motherjobs"
+					ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionaryjobs">
+					<option value="">请选择</option>
+				</select><span class="input-group-addon verifyprompt">*</span>
+			</div>
+	        <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">父亲姓名</span> 
+				<input type="text" class="form-control" placeholder="请输入父亲姓名"
+					id="fathername" name="fathername" ng-model="formData.fathername" maxlength="16">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">母亲姓名</span> 
+				<input type="text" class="form-control" placeholder="请输入母亲姓名"
+					id="mothername" name="mothername" ng-model="formData.mothername" maxlength="16">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">父亲电话</span> <input
+					type="text" class="form-control mobile" name="fathermobile"
+					placeholder="请输入父亲电话" ng-model="formData.fathermobile" maxlength="12">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">母亲电话</span> <input
+					type="text" class="form-control mobile" name="mothermobile"
+					placeholder="请输入母亲电话" ng-model="formData.mothermobile" maxlength="12">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">身份证号</span> <input
+					type="text" class="form-control" placeholder="请输入身份证号"
+					id="cardid" name="cardid" ng-model="formData.cardid" maxlength="20">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">居住地址</span> <input
+					type="text" class="form-control" name="address"
+					placeholder="请输入居住地址" ng-model="formData.address" maxlength="150">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">QQ号码</span> 
+				<input type="text" class="form-control" placeholder="请输入QQ"
+					id="qq" name="qq" ng-model="formData.qq" maxlength="12">
+			</div>
+		</div>
+	</form>
+</body>
+<script type="text/javascript">
+  $(function(){
+	   $(document).on("click",".panel>label>i",function(){//删除选中的值
+			var ele = $(this).parent();
+			$(ele).remove();
+		}); 
+		
+	})
+  </script>
+</html>

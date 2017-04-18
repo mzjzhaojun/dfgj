@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomerstopalertsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,alertid,alerttype,alerttime,alertreason,alertreasonname,operatorid,operatorname,operatorjobid,operatorjobname,customerid
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerstopalerts">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="alertid" column="alertid" />
+         <id property="alerttype" column="alerttype" />
+         <id property="alerttime" column="alerttime" />
+         <id property="alertreason" column="alertreason" />
+         <id property="alertreasonname" column="alertreasonname" />
+         <id property="operatorid" column="operatorid" />
+         <id property="operatorname" column="operatorname" />
+         <id property="operatorjobid" column="operatorjobid" />
+         <id property="operatorjobname" column="operatorjobname" />
+         <id property="customerid" column="customerid" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerstopalerts">
+  insert into customerstopalerts (id,alertid,alerttype,alerttime,alertreason,alertreasonname,operatorid,operatorname,operatorjobid,operatorjobname,customerid)
+         values (#{id},#{alertid},#{alerttype},#{alerttime},#{alertreason},#{alertreasonname},#{operatorid},#{operatorname},#{operatorjobid},#{operatorjobname},#{customerid})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customerstopalerts 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customerstopalerts">
+    update customerstopalerts
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="alertid != null">
+                   alertid = #{alertid},
+             </if>
+             <if test="alerttype != null">
+                   alerttype = #{alerttype},
+             </if>
+             <if test="alerttime != null">
+                   alerttime = #{alerttime},
+             </if>
+             <if test="alertreason != null">
+                   alertreason = #{alertreason},
+             </if>
+             <if test="alertreasonname != null">
+                   alertreasonname = #{alertreasonname},
+             </if>
+             <if test="operatorid != null">
+                   operatorid = #{operatorid},
+             </if>
+             <if test="operatorname != null">
+                   operatorname = #{operatorname},
+             </if>
+             <if test="operatorjobid != null">
+                   operatorjobid = #{operatorjobid},
+             </if>
+             <if test="operatorjobname != null">
+                   operatorjobname = #{operatorjobname},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customerstopalerts 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerstopalerts 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerstopalerts 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerstopalerts 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerstopalerts 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerstopalerts 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.MenuMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,name,parent_id,level,url,icon,sys_id,order_no,sortno,is_show,version
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Menu">
+         <id property="id" column="id" />
+         <id property="name" column="name" />
+         <id property="parent_id" column="parent_id" />
+         <id property="level" column="level" />
+         <id property="url" column="url" />
+         <id property="icon" column="icon" />
+         <id property="sys_id" column="sys_id" />
+         <id property="order_no" column="order_no" />
+         <id property="sortno" column="sortno" />
+         <id property="is_show" column="is_show" />
+         <id property="version" column="version" />
+         <id property="pId" column="pId" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Menu">
+  insert into menu (id,name,parent_id,level,url,icon,sys_id,order_no,sortno,is_show)
+         values (#{id},#{name},#{parent_id},#{level},#{url},#{icon},#{sys_id},#{order_no},#{sortno},#{is_show})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from menu 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Menu">
+    update menu
+         <set>
+             <if test="name != null">
+                   name = #{name},
+             </if>
+             <if test="parent_id != null">
+                   parent_id = #{parent_id},
+             </if>
+             <if test="level != null">
+                   level = #{level},
+             </if>
+             <if test="url != null">
+                   url = #{url},
+             </if>
+             <if test="icon != null">
+                   icon = #{icon},
+             </if>
+             <if test="sys_id != null">
+                   sys_id = #{sys_id},
+             </if>
+             <if test="order_no != null">
+                   order_no = #{order_no},
+             </if>
+             <if test="sortno != null">
+                   sortno = #{sortno},
+             </if>
+             <if test="is_show != null">
+                   is_show = #{is_show},
+             </if>
+             <if test="version != null">
+                   version = #{version}+1
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from menu 
+        where id = #{id}
+ </select>
+  <!--获得菜单权限对象 -->
+  <select id="getlist" parameterType="map" resultMap="ResultMap">
+    select id, name,sys_id,level, if(isnull(PARENT_ID),-1,PARENT_ID)  as pId from menu  order by sortno
+  </select>
+  <!--获得菜单权限对象 -->
+  <select id="getlistlevel" parameterType="map" resultMap="ResultMap">
+    select id, name,sys_id,level, if(isnull(PARENT_ID),-1,PARENT_ID)  as pId from menu  
+    where level = 31 order by sortno
+  </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from menu 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from menu 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from menu 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from menu 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="getByIds" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from menu 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+ <select id="sysmenu" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from menu 
+        <where>
+        			1=1
+             <if test="sys_id != null and sys_id != ''">
+           		and sys_id=#{sys_id}
+             </if>
+             <if test="level != null and level != null">
+           		and level=#{level}
+             </if>
+             <if test="parent_id != null and parent_id != null">
+           		and parent_id=#{parent_id}
+             </if>
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+             order by sortno
+        </where>
+ </select>
+ <update id="updatestorn" parameterType="java.util.HashMap">
+    update menu
+         <set>
+             <if test="add != null and add !=''">
+                   sortno =sortno +1,
+             </if>
+             <if test="sub != null and sub !=''">
+                   sortno =sortno -1,
+             </if>
+             <if test="version != null">
+                   version = #{version}+1
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+</mapper>

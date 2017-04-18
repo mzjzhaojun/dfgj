@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CampusincomeweeklystatMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,yearkey,quarterkey,monthkey,weekkey,startdayofweek,enddayofweek,startdayoflastweek,enddayoflastweek,startdayofnextweek,enddayofnextweek,regionid,regionname,branchid,branchname,campusid,campusname,availablecustomernumber,incometaskyear,onetooneincomeyear,classgroupincomeyear,otherincomeyear,totalincomeyearlastyear,incometaskquarter,onetooneincomequarter,classgroupincomequarter,otherincomequarter,totalincomequarterlastyear,incometaskmonth,onetooneincomemonth,classgroupincomemonth,otherincomemonth,totalincomemonthlastyear,incometasklastweek,onetooneincomelastweek,classgroupincomelastweek,otherincomelastweek,totalassignmoneylastweek,totalincomelastweeklastyear,incometaskthisweek,incomethisweeklastyear,assignnumberthisweek,assignamountthisweek,assignmoneythisweek,nonassignnumberthisweek,totalavailableordermoneythisweek,expectassignamountthisweek,expectincomethisweek,incometasknextweek,incomenextweeklastyear,assignnumbernextweek,assignamountnextweek,assignmoneynextweek,nonassignnumbernextweek,totalavailableordermoneynextweek,expectassignamountnextweek,expectincomenextweek,remainassignmoneythismonth,totalassignmoneythismonth,incometaskthismonth,incomeplannextmonth,incometasknextmonth,incomeplanmonthafternextmonth,incometaskmonthafternextmonth
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Campusincomeweeklystat">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="yearkey" column="yearkey" />
+         <id property="quarterkey" column="quarterkey" />
+         <id property="monthkey" column="monthkey" />
+         <id property="weekkey" column="weekkey" />
+         <id property="startdayofweek" column="startdayofweek" />
+         <id property="enddayofweek" column="enddayofweek" />
+         <id property="startdayoflastweek" column="startdayoflastweek" />
+         <id property="enddayoflastweek" column="enddayoflastweek" />
+         <id property="startdayofnextweek" column="startdayofnextweek" />
+         <id property="enddayofnextweek" column="enddayofnextweek" />
+         <id property="regionid" column="regionid" />
+         <id property="regionname" column="regionname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="availablecustomernumber" column="availablecustomernumber" />
+         <id property="incometaskyear" column="incometaskyear" />
+         <id property="onetooneincomeyear" column="onetooneincomeyear" />
+         <id property="classgroupincomeyear" column="classgroupincomeyear" />
+         <id property="otherincomeyear" column="otherincomeyear" />
+         <id property="totalincomeyearlastyear" column="totalincomeyearlastyear" />
+         <id property="incometaskquarter" column="incometaskquarter" />
+         <id property="onetooneincomequarter" column="onetooneincomequarter" />
+         <id property="classgroupincomequarter" column="classgroupincomequarter" />
+         <id property="otherincomequarter" column="otherincomequarter" />
+         <id property="totalincomequarterlastyear" column="totalincomequarterlastyear" />
+         <id property="incometaskmonth" column="incometaskmonth" />
+         <id property="onetooneincomemonth" column="onetooneincomemonth" />
+         <id property="classgroupincomemonth" column="classgroupincomemonth" />
+         <id property="otherincomemonth" column="otherincomemonth" />
+         <id property="totalincomemonthlastyear" column="totalincomemonthlastyear" />
+         <id property="incometasklastweek" column="incometasklastweek" />
+         <id property="onetooneincomelastweek" column="onetooneincomelastweek" />
+         <id property="classgroupincomelastweek" column="classgroupincomelastweek" />
+         <id property="otherincomelastweek" column="otherincomelastweek" />
+         <id property="totalassignmoneylastweek" column="totalassignmoneylastweek" />
+         <id property="totalincomelastweeklastyear" column="totalincomelastweeklastyear" />
+         <id property="incometaskthisweek" column="incometaskthisweek" />
+         <id property="incomethisweeklastyear" column="incomethisweeklastyear" />
+         <id property="assignnumberthisweek" column="assignnumberthisweek" />
+         <id property="assignamountthisweek" column="assignamountthisweek" />
+         <id property="assignmoneythisweek" column="assignmoneythisweek" />
+         <id property="nonassignnumberthisweek" column="nonassignnumberthisweek" />
+         <id property="totalavailableordermoneythisweek" column="totalavailableordermoneythisweek" />
+         <id property="expectassignamountthisweek" column="expectassignamountthisweek" />
+         <id property="expectincomethisweek" column="expectincomethisweek" />
+         <id property="incometasknextweek" column="incometasknextweek" />
+         <id property="incomenextweeklastyear" column="incomenextweeklastyear" />
+         <id property="assignnumbernextweek" column="assignnumbernextweek" />
+         <id property="assignamountnextweek" column="assignamountnextweek" />
+         <id property="assignmoneynextweek" column="assignmoneynextweek" />
+         <id property="nonassignnumbernextweek" column="nonassignnumbernextweek" />
+         <id property="totalavailableordermoneynextweek" column="totalavailableordermoneynextweek" />
+         <id property="expectassignamountnextweek" column="expectassignamountnextweek" />
+         <id property="expectincomenextweek" column="expectincomenextweek" />
+         <id property="remainassignmoneythismonth" column="remainassignmoneythismonth" />
+         <id property="totalassignmoneythismonth" column="totalassignmoneythismonth" />
+         <id property="incometaskthismonth" column="incometaskthismonth" />
+         <id property="incomeplannextmonth" column="incomeplannextmonth" />
+         <id property="incometasknextmonth" column="incometasknextmonth" />
+         <id property="incomeplanmonthafternextmonth" column="incomeplanmonthafternextmonth" />
+         <id property="incometaskmonthafternextmonth" column="incometaskmonthafternextmonth" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Campusincomeweeklystat">
+  insert into campusincomeweeklystat (id,yearkey,quarterkey,monthkey,weekkey,startdayofweek,enddayofweek,startdayoflastweek,enddayoflastweek,startdayofnextweek,enddayofnextweek,regionid,regionname,branchid,branchname,campusid,campusname,availablecustomernumber,incometaskyear,onetooneincomeyear,classgroupincomeyear,otherincomeyear,totalincomeyearlastyear,incometaskquarter,onetooneincomequarter,classgroupincomequarter,otherincomequarter,totalincomequarterlastyear,incometaskmonth,onetooneincomemonth,classgroupincomemonth,otherincomemonth,totalincomemonthlastyear,incometasklastweek,onetooneincomelastweek,classgroupincomelastweek,otherincomelastweek,totalassignmoneylastweek,totalincomelastweeklastyear,incometaskthisweek,incomethisweeklastyear,assignnumberthisweek,assignamountthisweek,assignmoneythisweek,nonassignnumberthisweek,totalavailableordermoneythisweek,expectassignamountthisweek,expectincomethisweek,incometasknextweek,incomenextweeklastyear,assignnumbernextweek,assignamountnextweek,assignmoneynextweek,nonassignnumbernextweek,totalavailableordermoneynextweek,expectassignamountnextweek,expectincomenextweek,remainassignmoneythismonth,totalassignmoneythismonth,incometaskthismonth,incomeplannextmonth,incometasknextmonth,incomeplanmonthafternextmonth,incometaskmonthafternextmonth)
+         values (#{id},#{yearkey},#{quarterkey},#{monthkey},#{weekkey},#{startdayofweek},#{enddayofweek},#{startdayoflastweek},#{enddayoflastweek},#{startdayofnextweek},#{enddayofnextweek},#{regionid},#{regionname},#{branchid},#{branchname},#{campusid},#{campusname},#{availablecustomernumber},#{incometaskyear},#{onetooneincomeyear},#{classgroupincomeyear},#{otherincomeyear},#{totalincomeyearlastyear},#{incometaskquarter},#{onetooneincomequarter},#{classgroupincomequarter},#{otherincomequarter},#{totalincomequarterlastyear},#{incometaskmonth},#{onetooneincomemonth},#{classgroupincomemonth},#{otherincomemonth},#{totalincomemonthlastyear},#{incometasklastweek},#{onetooneincomelastweek},#{classgroupincomelastweek},#{otherincomelastweek},#{totalassignmoneylastweek},#{totalincomelastweeklastyear},#{incometaskthisweek},#{incomethisweeklastyear},#{assignnumberthisweek},#{assignamountthisweek},#{assignmoneythisweek},#{nonassignnumberthisweek},#{totalavailableordermoneythisweek},#{expectassignamountthisweek},#{expectincomethisweek},#{incometasknextweek},#{incomenextweeklastyear},#{assignnumbernextweek},#{assignamountnextweek},#{assignmoneynextweek},#{nonassignnumbernextweek},#{totalavailableordermoneynextweek},#{expectassignamountnextweek},#{expectincomenextweek},#{remainassignmoneythismonth},#{totalassignmoneythismonth},#{incometaskthismonth},#{incomeplannextmonth},#{incometasknextmonth},#{incomeplanmonthafternextmonth},#{incometaskmonthafternextmonth})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from campusincomeweeklystat 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Campusincomeweeklystat">
+    update campusincomeweeklystat
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="yearkey != null">
+                   yearkey = #{yearkey},
+             </if>
+             <if test="quarterkey != null">
+                   quarterkey = #{quarterkey},
+             </if>
+             <if test="monthkey != null">
+                   monthkey = #{monthkey},
+             </if>
+             <if test="weekkey != null">
+                   weekkey = #{weekkey},
+             </if>
+             <if test="startdayofweek != null">
+                   startdayofweek = #{startdayofweek},
+             </if>
+             <if test="enddayofweek != null">
+                   enddayofweek = #{enddayofweek},
+             </if>
+             <if test="startdayoflastweek != null">
+                   startdayoflastweek = #{startdayoflastweek},
+             </if>
+             <if test="enddayoflastweek != null">
+                   enddayoflastweek = #{enddayoflastweek},
+             </if>
+             <if test="startdayofnextweek != null">
+                   startdayofnextweek = #{startdayofnextweek},
+             </if>
+             <if test="enddayofnextweek != null">
+                   enddayofnextweek = #{enddayofnextweek},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionname != null">
+                   regionname = #{regionname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="availablecustomernumber != null">
+                   availablecustomernumber = #{availablecustomernumber},
+             </if>
+             <if test="incometaskyear != null">
+                   incometaskyear = #{incometaskyear},
+             </if>
+             <if test="onetooneincomeyear != null">
+                   onetooneincomeyear = #{onetooneincomeyear},
+             </if>
+             <if test="classgroupincomeyear != null">
+                   classgroupincomeyear = #{classgroupincomeyear},
+             </if>
+             <if test="otherincomeyear != null">
+                   otherincomeyear = #{otherincomeyear},
+             </if>
+             <if test="totalincomeyearlastyear != null">
+                   totalincomeyearlastyear = #{totalincomeyearlastyear},
+             </if>
+             <if test="incometaskquarter != null">
+                   incometaskquarter = #{incometaskquarter},
+             </if>
+             <if test="onetooneincomequarter != null">
+                   onetooneincomequarter = #{onetooneincomequarter},
+             </if>
+             <if test="classgroupincomequarter != null">
+                   classgroupincomequarter = #{classgroupincomequarter},
+             </if>
+             <if test="otherincomequarter != null">
+                   otherincomequarter = #{otherincomequarter},
+             </if>
+             <if test="totalincomequarterlastyear != null">
+                   totalincomequarterlastyear = #{totalincomequarterlastyear},
+             </if>
+             <if test="incometaskmonth != null">
+                   incometaskmonth = #{incometaskmonth},
+             </if>
+             <if test="onetooneincomemonth != null">
+                   onetooneincomemonth = #{onetooneincomemonth},
+             </if>
+             <if test="classgroupincomemonth != null">
+                   classgroupincomemonth = #{classgroupincomemonth},
+             </if>
+             <if test="otherincomemonth != null">
+                   otherincomemonth = #{otherincomemonth},
+             </if>
+             <if test="totalincomemonthlastyear != null">
+                   totalincomemonthlastyear = #{totalincomemonthlastyear},
+             </if>
+             <if test="incometasklastweek != null">
+                   incometasklastweek = #{incometasklastweek},
+             </if>
+             <if test="onetooneincomelastweek != null">
+                   onetooneincomelastweek = #{onetooneincomelastweek},
+             </if>
+             <if test="classgroupincomelastweek != null">
+                   classgroupincomelastweek = #{classgroupincomelastweek},
+             </if>
+             <if test="otherincomelastweek != null">
+                   otherincomelastweek = #{otherincomelastweek},
+             </if>
+             <if test="totalassignmoneylastweek != null">
+                   totalassignmoneylastweek = #{totalassignmoneylastweek},
+             </if>
+             <if test="totalincomelastweeklastyear != null">
+                   totalincomelastweeklastyear = #{totalincomelastweeklastyear},
+             </if>
+             <if test="incometaskthisweek != null">
+                   incometaskthisweek = #{incometaskthisweek},
+             </if>
+             <if test="incomethisweeklastyear != null">
+                   incomethisweeklastyear = #{incomethisweeklastyear},
+             </if>
+             <if test="assignnumberthisweek != null">
+                   assignnumberthisweek = #{assignnumberthisweek},
+             </if>
+             <if test="assignamountthisweek != null">
+                   assignamountthisweek = #{assignamountthisweek},
+             </if>
+             <if test="assignmoneythisweek != null">
+                   assignmoneythisweek = #{assignmoneythisweek},
+             </if>
+             <if test="nonassignnumberthisweek != null">
+                   nonassignnumberthisweek = #{nonassignnumberthisweek},
+             </if>
+             <if test="totalavailableordermoneythisweek != null">
+                   totalavailableordermoneythisweek = #{totalavailableordermoneythisweek},
+             </if>
+             <if test="expectassignamountthisweek != null">
+                   expectassignamountthisweek = #{expectassignamountthisweek},
+             </if>
+             <if test="expectincomethisweek != null">
+                   expectincomethisweek = #{expectincomethisweek},
+             </if>
+             <if test="incometasknextweek != null">
+                   incometasknextweek = #{incometasknextweek},
+             </if>
+             <if test="incomenextweeklastyear != null">
+                   incomenextweeklastyear = #{incomenextweeklastyear},
+             </if>
+             <if test="assignnumbernextweek != null">
+                   assignnumbernextweek = #{assignnumbernextweek},
+             </if>
+             <if test="assignamountnextweek != null">
+                   assignamountnextweek = #{assignamountnextweek},
+             </if>
+             <if test="assignmoneynextweek != null">
+                   assignmoneynextweek = #{assignmoneynextweek},
+             </if>
+             <if test="nonassignnumbernextweek != null">
+                   nonassignnumbernextweek = #{nonassignnumbernextweek},
+             </if>
+             <if test="totalavailableordermoneynextweek != null">
+                   totalavailableordermoneynextweek = #{totalavailableordermoneynextweek},
+             </if>
+             <if test="expectassignamountnextweek != null">
+                   expectassignamountnextweek = #{expectassignamountnextweek},
+             </if>
+             <if test="expectincomenextweek != null">
+                   expectincomenextweek = #{expectincomenextweek},
+             </if>
+             <if test="remainassignmoneythismonth != null">
+                   remainassignmoneythismonth = #{remainassignmoneythismonth},
+             </if>
+             <if test="totalassignmoneythismonth != null">
+                   totalassignmoneythismonth = #{totalassignmoneythismonth},
+             </if>
+             <if test="incometaskthismonth != null">
+                   incometaskthismonth = #{incometaskthismonth},
+             </if>
+             <if test="incomeplannextmonth != null">
+                   incomeplannextmonth = #{incomeplannextmonth},
+             </if>
+             <if test="incometasknextmonth != null">
+                   incometasknextmonth = #{incometasknextmonth},
+             </if>
+             <if test="incomeplanmonthafternextmonth != null">
+                   incomeplanmonthafternextmonth = #{incomeplanmonthafternextmonth},
+             </if>
+             <if test="incometaskmonthafternextmonth != null">
+                   incometaskmonthafternextmonth = #{incometaskmonthafternextmonth}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from campusincomeweeklystat 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campusincomeweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from campusincomeweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campusincomeweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campusincomeweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campusincomeweeklystat 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

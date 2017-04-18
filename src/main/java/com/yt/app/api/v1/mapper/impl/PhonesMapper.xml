@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.PhonesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,ownerid,itemid,isprimary,phonetype,countrycode,areanumber,phonenumber,extension,creatorid,creatorname,createtime,tenantcode,versionstarttime,versionendtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Phones">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="ownerid" column="ownerid" />
+         <id property="itemid" column="itemid" />
+         <id property="isprimary" column="isprimary" />
+         <id property="phonetype" column="phonetype" />
+         <id property="countrycode" column="countrycode" />
+         <id property="areanumber" column="areanumber" />
+         <id property="phonenumber" column="phonenumber" />
+         <id property="extension" column="extension" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="tenantcode" column="tenantcode" />
+         <id property="versionstarttime" column="versionstarttime" />
+         <id property="versionendtime" column="versionendtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Phones">
+  insert into phones (id,ownerid,itemid,isprimary,phonetype,countrycode,areanumber,phonenumber,extension,creatorid,creatorname,createtime,tenantcode,versionstarttime,versionendtime)
+         values (#{id},#{ownerid},#{itemid},#{isprimary},#{phonetype},#{countrycode},#{areanumber},#{phonenumber},#{extension},#{creatorid},#{creatorname},#{createtime},#{tenantcode},#{versionstarttime},#{versionendtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from phones 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Phones">
+    update phones
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="ownerid != null">
+                   ownerid = #{ownerid},
+             </if>
+             <if test="itemid != null">
+                   itemid = #{itemid},
+             </if>
+             <if test="isprimary != null">
+                   isprimary = #{isprimary},
+             </if>
+             <if test="phonetype != null">
+                   phonetype = #{phonetype},
+             </if>
+             <if test="countrycode != null">
+                   countrycode = #{countrycode},
+             </if>
+             <if test="areanumber != null">
+                   areanumber = #{areanumber},
+             </if>
+             <if test="phonenumber != null">
+                   phonenumber = #{phonenumber},
+             </if>
+             <if test="extension != null">
+                   extension = #{extension},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="tenantcode != null">
+                   tenantcode = #{tenantcode},
+             </if>
+             <if test="versionstarttime != null">
+                   versionstarttime = #{versionstarttime},
+             </if>
+             <if test="versionendtime != null">
+                   versionendtime = #{versionendtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from phones 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from phones 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from phones 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from phones 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from phones 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from phones 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

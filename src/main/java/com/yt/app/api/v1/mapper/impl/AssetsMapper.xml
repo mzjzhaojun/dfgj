@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.AssetsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,assetid,assetcode,assetname,assettype,assetreftype,assetrefpid,assetrefid,accountid,customerid,customercode,customername,productid,productcode,productname,productunit,productunitname,grade,gradename,subject,subjectname,catalog,catalogname,categorytype,categorytypename,courselevel,courselevelname,lessonduration,lessondurationvalue,orderprice,orderamount,presentamount,tunlandrate,specialrate,discounttype,discountrate,realprice,realamount,expirationdate,assignedamount,confirmedamount,exchangedamount,debookedamount,confirmedmoney,returnedmoney,amount,price,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,versionstarttime,versionendtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Assets">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="assetid" column="assetid" />
+         <id property="assetcode" column="assetcode" />
+         <id property="assetname" column="assetname" />
+         <id property="assettype" column="assettype" />
+         <id property="assetreftype" column="assetreftype" />
+         <id property="assetrefpid" column="assetrefpid" />
+         <id property="assetrefid" column="assetrefid" />
+         <id property="accountid" column="accountid" />
+         <id property="customerid" column="customerid" />
+         <id property="customercode" column="customercode" />
+         <id property="customername" column="customername" />
+         <id property="productid" column="productid" />
+         <id property="productcode" column="productcode" />
+         <id property="productname" column="productname" />
+         <id property="productunit" column="productunit" />
+         <id property="productunitname" column="productunitname" />
+         <id property="grade" column="grade" />
+         <id property="gradename" column="gradename" />
+         <id property="subject" column="subject" />
+         <id property="subjectname" column="subjectname" />
+         <id property="catalog" column="catalog" />
+         <id property="catalogname" column="catalogname" />
+         <id property="categorytype" column="categorytype" />
+         <id property="categorytypename" column="categorytypename" />
+         <id property="courselevel" column="courselevel" />
+         <id property="courselevelname" column="courselevelname" />
+         <id property="lessonduration" column="lessonduration" />
+         <id property="lessondurationvalue" column="lessondurationvalue" />
+         <id property="orderprice" column="orderprice" />
+         <id property="orderamount" column="orderamount" />
+         <id property="presentamount" column="presentamount" />
+         <id property="tunlandrate" column="tunlandrate" />
+         <id property="specialrate" column="specialrate" />
+         <id property="discounttype" column="discounttype" />
+         <id property="discountrate" column="discountrate" />
+         <id property="realprice" column="realprice" />
+         <id property="realamount" column="realamount" />
+         <id property="expirationdate" column="expirationdate" />
+         <id property="assignedamount" column="assignedamount" />
+         <id property="confirmedamount" column="confirmedamount" />
+         <id property="exchangedamount" column="exchangedamount" />
+         <id property="debookedamount" column="debookedamount" />
+         <id property="confirmedmoney" column="confirmedmoney" />
+         <id property="returnedmoney" column="returnedmoney" />
+         <id property="amount" column="amount" />
+         <id property="price" column="price" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+         <id property="versionstarttime" column="versionstarttime" />
+         <id property="versionendtime" column="versionendtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Assets">
+  insert into assets (id,assetid,assetcode,assetname,assettype,assetreftype,assetrefpid,assetrefid,accountid,customerid,customercode,customername,productid,productcode,productname,productunit,productunitname,grade,gradename,subject,subjectname,catalog,catalogname,categorytype,categorytypename,courselevel,courselevelname,lessonduration,lessondurationvalue,orderprice,orderamount,presentamount,tunlandrate,specialrate,discounttype,discountrate,realprice,realamount,expirationdate,assignedamount,confirmedamount,exchangedamount,debookedamount,confirmedmoney,returnedmoney,amount,price,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,versionstarttime,versionendtime)
+         values (#{id},#{assetid},#{assetcode},#{assetname},#{assettype},#{assetreftype},#{assetrefpid},#{assetrefid},#{accountid},#{customerid},#{customercode},#{customername},#{productid},#{productcode},#{productname},#{productunit},#{productunitname},#{grade},#{gradename},#{subject},#{subjectname},#{catalog},#{catalogname},#{categorytype},#{categorytypename},#{courselevel},#{courselevelname},#{lessonduration},#{lessondurationvalue},#{orderprice},#{orderamount},#{presentamount},#{tunlandrate},#{specialrate},#{discounttype},#{discountrate},#{realprice},#{realamount},#{expirationdate},#{assignedamount},#{confirmedamount},#{exchangedamount},#{debookedamount},#{confirmedmoney},#{returnedmoney},#{amount},#{price},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{versionstarttime},#{versionendtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from assets 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Assets">
+    update assets
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="assetid != null">
+                   assetid = #{assetid},
+             </if>
+             <if test="assetcode != null">
+                   assetcode = #{assetcode},
+             </if>
+             <if test="assetname != null">
+                   assetname = #{assetname},
+             </if>
+             <if test="assettype != null">
+                   assettype = #{assettype},
+             </if>
+             <if test="assetreftype != null">
+                   assetreftype = #{assetreftype},
+             </if>
+             <if test="assetrefpid != null">
+                   assetrefpid = #{assetrefpid},
+             </if>
+             <if test="assetrefid != null">
+                   assetrefid = #{assetrefid},
+             </if>
+             <if test="accountid != null">
+                   accountid = #{accountid},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="customercode != null">
+                   customercode = #{customercode},
+             </if>
+             <if test="customername != null">
+                   customername = #{customername},
+             </if>
+             <if test="productid != null">
+                   productid = #{productid},
+             </if>
+             <if test="productcode != null">
+                   productcode = #{productcode},
+             </if>
+             <if test="productname != null">
+                   productname = #{productname},
+             </if>
+             <if test="productunit != null">
+                   productunit = #{productunit},
+             </if>
+             <if test="productunitname != null">
+                   productunitname = #{productunitname},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="gradename != null">
+                   gradename = #{gradename},
+             </if>
+             <if test="subject != null">
+                   subject = #{subject},
+             </if>
+             <if test="subjectname != null">
+                   subjectname = #{subjectname},
+             </if>
+             <if test="catalog != null">
+                   catalog = #{catalog},
+             </if>
+             <if test="catalogname != null">
+                   catalogname = #{catalogname},
+             </if>
+             <if test="categorytype != null">
+                   categorytype = #{categorytype},
+             </if>
+             <if test="categorytypename != null">
+                   categorytypename = #{categorytypename},
+             </if>
+             <if test="courselevel != null">
+                   courselevel = #{courselevel},
+             </if>
+             <if test="courselevelname != null">
+                   courselevelname = #{courselevelname},
+             </if>
+             <if test="lessonduration != null">
+                   lessonduration = #{lessonduration},
+             </if>
+             <if test="lessondurationvalue != null">
+                   lessondurationvalue = #{lessondurationvalue},
+             </if>
+             <if test="orderprice != null">
+                   orderprice = #{orderprice},
+             </if>
+             <if test="orderamount != null">
+                   orderamount = #{orderamount},
+             </if>
+             <if test="presentamount != null">
+                   presentamount = #{presentamount},
+             </if>
+             <if test="tunlandrate != null">
+                   tunlandrate = #{tunlandrate},
+             </if>
+             <if test="specialrate != null">
+                   specialrate = #{specialrate},
+             </if>
+             <if test="discounttype != null">
+                   discounttype = #{discounttype},
+             </if>
+             <if test="discountrate != null">
+                   discountrate = #{discountrate},
+             </if>
+             <if test="realprice != null">
+                   realprice = #{realprice},
+             </if>
+             <if test="realamount != null">
+                   realamount = #{realamount},
+             </if>
+             <if test="expirationdate != null">
+                   expirationdate = #{expirationdate},
+             </if>
+             <if test="assignedamount != null">
+                   assignedamount = #{assignedamount},
+             </if>
+             <if test="confirmedamount != null">
+                   confirmedamount = #{confirmedamount},
+             </if>
+             <if test="exchangedamount != null">
+                   exchangedamount = #{exchangedamount},
+             </if>
+             <if test="debookedamount != null">
+                   debookedamount = #{debookedamount},
+             </if>
+             <if test="confirmedmoney != null">
+                   confirmedmoney = #{confirmedmoney},
+             </if>
+             <if test="returnedmoney != null">
+                   returnedmoney = #{returnedmoney},
+             </if>
+             <if test="amount != null">
+                   amount = #{amount},
+             </if>
+             <if test="price != null">
+                   price = #{price},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime},
+             </if>
+             <if test="versionstarttime != null">
+                   versionstarttime = #{versionstarttime},
+             </if>
+             <if test="versionendtime != null">
+                   versionendtime = #{versionendtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from assets 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from assets 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from assets 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from assets 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from assets 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from assets 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

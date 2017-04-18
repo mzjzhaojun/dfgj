@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="info">
+<head>
+<title>查看</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/common.css">
+<link rel="stylesheet"
+	href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css"
+	type="text/css">
+<script type="text/javascript"
+	src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+
+<script type="text/javascript"
+	src="../../../../resource/js/zTree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/zTree/js/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery.cookie.js"></script>
+<!-- 复文本 -->
+<script src="../../../../resource/js/kindeditor/kindeditor.js"
+	type="text/javascript"></script>
+<script src="../../../../resource/js/kindeditor/lang/zh_CN.js"
+	type="text/javascript"></script>
+<script type="text/javascript">
+	var info = angular.module("info", []);
+	info.controller("infoController", function($scope, $http) {
+		var sysId;
+		$scope.tasks = {};
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		$http({
+			url : parent.getFunctionLinksHref("self"),
+			method : 'GET',
+			dataType : "json",
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			data : ''
+		}).success(function(data, status, headers, config) {
+			//响应成功
+			$scope.tasks = data;
+		}).error(function(data, status, headers, config) {
+			//处理响应失败
+			response(status);
+		});
+	})
+</script>
+</head>
+<body ng-controller="infoController">
+	<!-- 操作按钮操作区 -->
+	<div class="col-lg-12 topActionPanel">
+		<div>
+			<button type="button" class="btn btn-primary" ng-click="onReturn()">返
+				回</button>
+		</div>
+	</div>
+	<div class="col-lg-6 viewFixedWidth">
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">会员昵称：</span> <input
+				type="text" class="form-control" value="{{tasks.uname}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">注册时间：</span> <input
+				type="text" class="form-control" value="{{tasks.regtime}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">联系电话：</span> <input
+				type="text" class="form-control" value="{{tasks.mobile}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">邮箱：</span> <input
+				type="text" class="form-control" value="{{tasks.mail}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">最后登录时间：</span> <input
+				type="text" class="form-control" value="{{tasks.lastlogin}}" disabled>
+		</div>
+	</div>
+</body>
+</html>

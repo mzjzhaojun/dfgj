@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.AccounttransferappliesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,applyid,applyno,applystatus,applymemo,applytime,applierid,appliername,applierjobid,applierjobname,processstatus,processtime,processmemo,transfertype,transfermoney,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,campusid,campusname,customerid,customercode,customername,accountid,accountcode,accounttype,thatdiscountid,thatdiscountcode,thatdiscountbase,thatdiscountrate,thataccountvalue,thataccountmoney,thisdiscountid,thisdiscountcode,thisdiscountbase,thisdiscountrate,thisaccountvalue,thisaccountmoney,bizcampusid,bizcampusname,bizcustomerid,bizcustomercode,bizcustomername,bizaccountid,bizaccountcode,bizaccounttype,bizthatdiscountid,bizthatdiscountcode,bizthatdiscountbase,bizthatdiscountrate,bizthataccountvalue,bizthataccountmoney,bizthisdiscountid,bizthisdiscountcode,bizthisdiscountbase,bizthisdiscountrate,bizthisaccountvalue,bizthisaccountmoney,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accounttransferapplies">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="applyid" column="applyid" />
+         <id property="applyno" column="applyno" />
+         <id property="applystatus" column="applystatus" />
+         <id property="applymemo" column="applymemo" />
+         <id property="applytime" column="applytime" />
+         <id property="applierid" column="applierid" />
+         <id property="appliername" column="appliername" />
+         <id property="applierjobid" column="applierjobid" />
+         <id property="applierjobname" column="applierjobname" />
+         <id property="processstatus" column="processstatus" />
+         <id property="processtime" column="processtime" />
+         <id property="processmemo" column="processmemo" />
+         <id property="transfertype" column="transfertype" />
+         <id property="transfermoney" column="transfermoney" />
+         <id property="submitterid" column="submitterid" />
+         <id property="submittername" column="submittername" />
+         <id property="submitterjobid" column="submitterjobid" />
+         <id property="submitterjobname" column="submitterjobname" />
+         <id property="submittime" column="submittime" />
+         <id property="approverid" column="approverid" />
+         <id property="approvername" column="approvername" />
+         <id property="approverjobid" column="approverjobid" />
+         <id property="approverjobname" column="approverjobname" />
+         <id property="approvetime" column="approvetime" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="customerid" column="customerid" />
+         <id property="customercode" column="customercode" />
+         <id property="customername" column="customername" />
+         <id property="accountid" column="accountid" />
+         <id property="accountcode" column="accountcode" />
+         <id property="accounttype" column="accounttype" />
+         <id property="thatdiscountid" column="thatdiscountid" />
+         <id property="thatdiscountcode" column="thatdiscountcode" />
+         <id property="thatdiscountbase" column="thatdiscountbase" />
+         <id property="thatdiscountrate" column="thatdiscountrate" />
+         <id property="thataccountvalue" column="thataccountvalue" />
+         <id property="thataccountmoney" column="thataccountmoney" />
+         <id property="thisdiscountid" column="thisdiscountid" />
+         <id property="thisdiscountcode" column="thisdiscountcode" />
+         <id property="thisdiscountbase" column="thisdiscountbase" />
+         <id property="thisdiscountrate" column="thisdiscountrate" />
+         <id property="thisaccountvalue" column="thisaccountvalue" />
+         <id property="thisaccountmoney" column="thisaccountmoney" />
+         <id property="bizcampusid" column="bizcampusid" />
+         <id property="bizcampusname" column="bizcampusname" />
+         <id property="bizcustomerid" column="bizcustomerid" />
+         <id property="bizcustomercode" column="bizcustomercode" />
+         <id property="bizcustomername" column="bizcustomername" />
+         <id property="bizaccountid" column="bizaccountid" />
+         <id property="bizaccountcode" column="bizaccountcode" />
+         <id property="bizaccounttype" column="bizaccounttype" />
+         <id property="bizthatdiscountid" column="bizthatdiscountid" />
+         <id property="bizthatdiscountcode" column="bizthatdiscountcode" />
+         <id property="bizthatdiscountbase" column="bizthatdiscountbase" />
+         <id property="bizthatdiscountrate" column="bizthatdiscountrate" />
+         <id property="bizthataccountvalue" column="bizthataccountvalue" />
+         <id property="bizthataccountmoney" column="bizthataccountmoney" />
+         <id property="bizthisdiscountid" column="bizthisdiscountid" />
+         <id property="bizthisdiscountcode" column="bizthisdiscountcode" />
+         <id property="bizthisdiscountbase" column="bizthisdiscountbase" />
+         <id property="bizthisdiscountrate" column="bizthisdiscountrate" />
+         <id property="bizthisaccountvalue" column="bizthisaccountvalue" />
+         <id property="bizthisaccountmoney" column="bizthisaccountmoney" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Accounttransferapplies">
+  insert into accounttransferapplies (id,applyid,applyno,applystatus,applymemo,applytime,applierid,appliername,applierjobid,applierjobname,processstatus,processtime,processmemo,transfertype,transfermoney,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,campusid,campusname,customerid,customercode,customername,accountid,accountcode,accounttype,thatdiscountid,thatdiscountcode,thatdiscountbase,thatdiscountrate,thataccountvalue,thataccountmoney,thisdiscountid,thisdiscountcode,thisdiscountbase,thisdiscountrate,thisaccountvalue,thisaccountmoney,bizcampusid,bizcampusname,bizcustomerid,bizcustomercode,bizcustomername,bizaccountid,bizaccountcode,bizaccounttype,bizthatdiscountid,bizthatdiscountcode,bizthatdiscountbase,bizthatdiscountrate,bizthataccountvalue,bizthataccountmoney,bizthisdiscountid,bizthisdiscountcode,bizthisdiscountbase,bizthisdiscountrate,bizthisaccountvalue,bizthisaccountmoney,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{applyid},#{applyno},#{applystatus},#{applymemo},#{applytime},#{applierid},#{appliername},#{applierjobid},#{applierjobname},#{processstatus},#{processtime},#{processmemo},#{transfertype},#{transfermoney},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{submittime},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{campusid},#{campusname},#{customerid},#{customercode},#{customername},#{accountid},#{accountcode},#{accounttype},#{thatdiscountid},#{thatdiscountcode},#{thatdiscountbase},#{thatdiscountrate},#{thataccountvalue},#{thataccountmoney},#{thisdiscountid},#{thisdiscountcode},#{thisdiscountbase},#{thisdiscountrate},#{thisaccountvalue},#{thisaccountmoney},#{bizcampusid},#{bizcampusname},#{bizcustomerid},#{bizcustomercode},#{bizcustomername},#{bizaccountid},#{bizaccountcode},#{bizaccounttype},#{bizthatdiscountid},#{bizthatdiscountcode},#{bizthatdiscountbase},#{bizthatdiscountrate},#{bizthataccountvalue},#{bizthataccountmoney},#{bizthisdiscountid},#{bizthisdiscountcode},#{bizthisdiscountbase},#{bizthisdiscountrate},#{bizthisaccountvalue},#{bizthisaccountmoney},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from accounttransferapplies 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Accounttransferapplies">
+    update accounttransferapplies
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="applyid != null">
+                   applyid = #{applyid},
+             </if>
+             <if test="applyno != null">
+                   applyno = #{applyno},
+             </if>
+             <if test="applystatus != null">
+                   applystatus = #{applystatus},
+             </if>
+             <if test="applymemo != null">
+                   applymemo = #{applymemo},
+             </if>
+             <if test="applytime != null">
+                   applytime = #{applytime},
+             </if>
+             <if test="applierid != null">
+                   applierid = #{applierid},
+             </if>
+             <if test="appliername != null">
+                   appliername = #{appliername},
+             </if>
+             <if test="applierjobid != null">
+                   applierjobid = #{applierjobid},
+             </if>
+             <if test="applierjobname != null">
+                   applierjobname = #{applierjobname},
+             </if>
+             <if test="processstatus != null">
+                   processstatus = #{processstatus},
+             </if>
+             <if test="processtime != null">
+                   processtime = #{processtime},
+             </if>
+             <if test="processmemo != null">
+                   processmemo = #{processmemo},
+             </if>
+             <if test="transfertype != null">
+                   transfertype = #{transfertype},
+             </if>
+             <if test="transfermoney != null">
+                   transfermoney = #{transfermoney},
+             </if>
+             <if test="submitterid != null">
+                   submitterid = #{submitterid},
+             </if>
+             <if test="submittername != null">
+                   submittername = #{submittername},
+             </if>
+             <if test="submitterjobid != null">
+                   submitterjobid = #{submitterjobid},
+             </if>
+             <if test="submitterjobname != null">
+                   submitterjobname = #{submitterjobname},
+             </if>
+             <if test="submittime != null">
+                   submittime = #{submittime},
+             </if>
+             <if test="approverid != null">
+                   approverid = #{approverid},
+             </if>
+             <if test="approvername != null">
+                   approvername = #{approvername},
+             </if>
+             <if test="approverjobid != null">
+                   approverjobid = #{approverjobid},
+             </if>
+             <if test="approverjobname != null">
+                   approverjobname = #{approverjobname},
+             </if>
+             <if test="approvetime != null">
+                   approvetime = #{approvetime},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="customercode != null">
+                   customercode = #{customercode},
+             </if>
+             <if test="customername != null">
+                   customername = #{customername},
+             </if>
+             <if test="accountid != null">
+                   accountid = #{accountid},
+             </if>
+             <if test="accountcode != null">
+                   accountcode = #{accountcode},
+             </if>
+             <if test="accounttype != null">
+                   accounttype = #{accounttype},
+             </if>
+             <if test="thatdiscountid != null">
+                   thatdiscountid = #{thatdiscountid},
+             </if>
+             <if test="thatdiscountcode != null">
+                   thatdiscountcode = #{thatdiscountcode},
+             </if>
+             <if test="thatdiscountbase != null">
+                   thatdiscountbase = #{thatdiscountbase},
+             </if>
+             <if test="thatdiscountrate != null">
+                   thatdiscountrate = #{thatdiscountrate},
+             </if>
+             <if test="thataccountvalue != null">
+                   thataccountvalue = #{thataccountvalue},
+             </if>
+             <if test="thataccountmoney != null">
+                   thataccountmoney = #{thataccountmoney},
+             </if>
+             <if test="thisdiscountid != null">
+                   thisdiscountid = #{thisdiscountid},
+             </if>
+             <if test="thisdiscountcode != null">
+                   thisdiscountcode = #{thisdiscountcode},
+             </if>
+             <if test="thisdiscountbase != null">
+                   thisdiscountbase = #{thisdiscountbase},
+             </if>
+             <if test="thisdiscountrate != null">
+                   thisdiscountrate = #{thisdiscountrate},
+             </if>
+             <if test="thisaccountvalue != null">
+                   thisaccountvalue = #{thisaccountvalue},
+             </if>
+             <if test="thisaccountmoney != null">
+                   thisaccountmoney = #{thisaccountmoney},
+             </if>
+             <if test="bizcampusid != null">
+                   bizcampusid = #{bizcampusid},
+             </if>
+             <if test="bizcampusname != null">
+                   bizcampusname = #{bizcampusname},
+             </if>
+             <if test="bizcustomerid != null">
+                   bizcustomerid = #{bizcustomerid},
+             </if>
+             <if test="bizcustomercode != null">
+                   bizcustomercode = #{bizcustomercode},
+             </if>
+             <if test="bizcustomername != null">
+                   bizcustomername = #{bizcustomername},
+             </if>
+             <if test="bizaccountid != null">
+                   bizaccountid = #{bizaccountid},
+             </if>
+             <if test="bizaccountcode != null">
+                   bizaccountcode = #{bizaccountcode},
+             </if>
+             <if test="bizaccounttype != null">
+                   bizaccounttype = #{bizaccounttype},
+             </if>
+             <if test="bizthatdiscountid != null">
+                   bizthatdiscountid = #{bizthatdiscountid},
+             </if>
+             <if test="bizthatdiscountcode != null">
+                   bizthatdiscountcode = #{bizthatdiscountcode},
+             </if>
+             <if test="bizthatdiscountbase != null">
+                   bizthatdiscountbase = #{bizthatdiscountbase},
+             </if>
+             <if test="bizthatdiscountrate != null">
+                   bizthatdiscountrate = #{bizthatdiscountrate},
+             </if>
+             <if test="bizthataccountvalue != null">
+                   bizthataccountvalue = #{bizthataccountvalue},
+             </if>
+             <if test="bizthataccountmoney != null">
+                   bizthataccountmoney = #{bizthataccountmoney},
+             </if>
+             <if test="bizthisdiscountid != null">
+                   bizthisdiscountid = #{bizthisdiscountid},
+             </if>
+             <if test="bizthisdiscountcode != null">
+                   bizthisdiscountcode = #{bizthisdiscountcode},
+             </if>
+             <if test="bizthisdiscountbase != null">
+                   bizthisdiscountbase = #{bizthisdiscountbase},
+             </if>
+             <if test="bizthisdiscountrate != null">
+                   bizthisdiscountrate = #{bizthisdiscountrate},
+             </if>
+             <if test="bizthisaccountvalue != null">
+                   bizthisaccountvalue = #{bizthisaccountvalue},
+             </if>
+             <if test="bizthisaccountmoney != null">
+                   bizthisaccountmoney = #{bizthisaccountmoney},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from accounttransferapplies 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accounttransferapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from accounttransferapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accounttransferapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accounttransferapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accounttransferapplies 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

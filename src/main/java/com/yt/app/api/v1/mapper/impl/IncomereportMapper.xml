@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.IncomereportMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,snapshotid,statdatekey,statdatename,regionid,regionname,branchid,branchname,campusid,campusname,campusage,jobnature,jobnaturename,incometype,incometypename,producttype,producttypename,grade,gradename,subject,subjectname,persons,periods,hours,income,priceperperiod,priceperhour,periodperperson,hourperperson,returnmoney
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Incomereport">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="snapshotid" column="snapshotid" />
+         <id property="statdatekey" column="statdatekey" />
+         <id property="statdatename" column="statdatename" />
+         <id property="regionid" column="regionid" />
+         <id property="regionname" column="regionname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="campusage" column="campusage" />
+         <id property="jobnature" column="jobnature" />
+         <id property="jobnaturename" column="jobnaturename" />
+         <id property="incometype" column="incometype" />
+         <id property="incometypename" column="incometypename" />
+         <id property="producttype" column="producttype" />
+         <id property="producttypename" column="producttypename" />
+         <id property="grade" column="grade" />
+         <id property="gradename" column="gradename" />
+         <id property="subject" column="subject" />
+         <id property="subjectname" column="subjectname" />
+         <id property="persons" column="persons" />
+         <id property="periods" column="periods" />
+         <id property="hours" column="hours" />
+         <id property="income" column="income" />
+         <id property="priceperperiod" column="priceperperiod" />
+         <id property="priceperhour" column="priceperhour" />
+         <id property="periodperperson" column="periodperperson" />
+         <id property="hourperperson" column="hourperperson" />
+         <id property="returnmoney" column="returnmoney" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Incomereport">
+  insert into incomereport (id,snapshotid,statdatekey,statdatename,regionid,regionname,branchid,branchname,campusid,campusname,campusage,jobnature,jobnaturename,incometype,incometypename,producttype,producttypename,grade,gradename,subject,subjectname,persons,periods,hours,income,priceperperiod,priceperhour,periodperperson,hourperperson,returnmoney)
+         values (#{id},#{snapshotid},#{statdatekey},#{statdatename},#{regionid},#{regionname},#{branchid},#{branchname},#{campusid},#{campusname},#{campusage},#{jobnature},#{jobnaturename},#{incometype},#{incometypename},#{producttype},#{producttypename},#{grade},#{gradename},#{subject},#{subjectname},#{persons},#{periods},#{hours},#{income},#{priceperperiod},#{priceperhour},#{periodperperson},#{hourperperson},#{returnmoney})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from incomereport 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Incomereport">
+    update incomereport
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="snapshotid != null">
+                   snapshotid = #{snapshotid},
+             </if>
+             <if test="statdatekey != null">
+                   statdatekey = #{statdatekey},
+             </if>
+             <if test="statdatename != null">
+                   statdatename = #{statdatename},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionname != null">
+                   regionname = #{regionname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="campusage != null">
+                   campusage = #{campusage},
+             </if>
+             <if test="jobnature != null">
+                   jobnature = #{jobnature},
+             </if>
+             <if test="jobnaturename != null">
+                   jobnaturename = #{jobnaturename},
+             </if>
+             <if test="incometype != null">
+                   incometype = #{incometype},
+             </if>
+             <if test="incometypename != null">
+                   incometypename = #{incometypename},
+             </if>
+             <if test="producttype != null">
+                   producttype = #{producttype},
+             </if>
+             <if test="producttypename != null">
+                   producttypename = #{producttypename},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="gradename != null">
+                   gradename = #{gradename},
+             </if>
+             <if test="subject != null">
+                   subject = #{subject},
+             </if>
+             <if test="subjectname != null">
+                   subjectname = #{subjectname},
+             </if>
+             <if test="persons != null">
+                   persons = #{persons},
+             </if>
+             <if test="periods != null">
+                   periods = #{periods},
+             </if>
+             <if test="hours != null">
+                   hours = #{hours},
+             </if>
+             <if test="income != null">
+                   income = #{income},
+             </if>
+             <if test="priceperperiod != null">
+                   priceperperiod = #{priceperperiod},
+             </if>
+             <if test="priceperhour != null">
+                   priceperhour = #{priceperhour},
+             </if>
+             <if test="periodperperson != null">
+                   periodperperson = #{periodperperson},
+             </if>
+             <if test="hourperperson != null">
+                   hourperperson = #{hourperperson},
+             </if>
+             <if test="returnmoney != null">
+                   returnmoney = #{returnmoney}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from incomereport 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from incomereport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from incomereport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from incomereport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from incomereport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from incomereport 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

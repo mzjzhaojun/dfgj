@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.EmailMessagesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,message_id,body,body_encoding,headers_encoding,is_body_html,priority,subject,subject_encoding,status,status_text,sent_time
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.EmailMessages">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="message_id" column="message_id" />
+         <id property="body" column="body" />
+         <id property="body_encoding" column="body_encoding" />
+         <id property="headers_encoding" column="headers_encoding" />
+         <id property="is_body_html" column="is_body_html" />
+         <id property="priority" column="priority" />
+         <id property="subject" column="subject" />
+         <id property="subject_encoding" column="subject_encoding" />
+         <id property="status" column="status" />
+         <id property="status_text" column="status_text" />
+         <id property="sent_time" column="sent_time" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.EmailMessages">
+  insert into email_messages (id,message_id,body,body_encoding,headers_encoding,is_body_html,priority,subject,subject_encoding,status,status_text,sent_time)
+         values (#{id},#{message_id},#{body},#{body_encoding},#{headers_encoding},#{is_body_html},#{priority},#{subject},#{subject_encoding},#{status},#{status_text},#{sent_time})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from email_messages 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.EmailMessages">
+    update email_messages
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="message_id != null">
+                   message_id = #{message_id},
+             </if>
+             <if test="body != null">
+                   body = #{body},
+             </if>
+             <if test="body_encoding != null">
+                   body_encoding = #{body_encoding},
+             </if>
+             <if test="headers_encoding != null">
+                   headers_encoding = #{headers_encoding},
+             </if>
+             <if test="is_body_html != null">
+                   is_body_html = #{is_body_html},
+             </if>
+             <if test="priority != null">
+                   priority = #{priority},
+             </if>
+             <if test="subject != null">
+                   subject = #{subject},
+             </if>
+             <if test="subject_encoding != null">
+                   subject_encoding = #{subject_encoding},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="status_text != null">
+                   status_text = #{status_text},
+             </if>
+             <if test="sent_time != null">
+                   sent_time = #{sent_time}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from email_messages 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from email_messages 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from email_messages 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from email_messages 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from email_messages 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from email_messages 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

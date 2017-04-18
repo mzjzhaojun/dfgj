@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomerMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,campusid,campusname,parentid,parentcode,parentname,customerid,customercode,customername,customerlevel,customerstatus,studentstatus,isoneparent,describes,birthdays,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,schoolid,schoolname,isstudyagain,firstsigntime,firstsignerid,firstsignername,invalidreason,schoolyear,referralcount,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,locked,lockmemo,graduated,graduateyear,creatorid,creatorname,creatoroacode,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,consultantid,consultantname,consultantoacode,consultantjobid,educatorid,educatorname,educatoroacode,educatorjobid,callcenterid,callcenteroacode,callcentername,callcenterjobid,marketingid,marketingname,marketingoacode,marketingjobid,assignteachernum,parentidtype,parentidnumber,parentrole,customerrole,customerprimaryphonetype,customerprimaryphonenumber,customersecondaryphonetype,customersecondaryphonenumber,parentprimaryphonetype,parentprimaryphonenumber,parentsecondaryphonetype,parentsecondaryphonenumber,followstage,followtime,followedcount,followedcountofthismonth,nextfollowtime,planverifytime,plansigntime,verifytime,verifiedcount,visittime,visitedcount,visitedcountofthismonth,nextvisittime,accountmoney,accountdiscountrate,accountdiscountbase,accountnewsigntime,accountnewsignmoney,accountrenewsigntime,accountrenewsignmoney,accountchargetime,accountchargemoney,accountrefundtime,accountrefundmoney,accounttransferedinmoney,accounttransferintime,accounttransferedoutmoney,accounttransferouttime,signedmoney,signedcount,assetonetooneamount,assetclassamount,assetotheramount,assetonetoonemoney,assetclassmoney,assetothermoney,assetonetooneassignedamount,assetclassassignedamount,assetonetooneassignedmoney,assetclassassignedmoney,assetonetooneconfirmedamount,assetclassconfirmedamount,assetotherconfirmedamount,assetonetooneconfirmedmoney,assetclassconfirmedmoney,assetotherconfirmedmoney,assetpresentamount,ordertime,debooktime,assigntime,starttime,starttimeofonetoone,starttimeofclass,confirmtime,confirmtimeofonetoone,confirmtimeofclass,confirmedsubjectsofrecent,confirmedhoursofthismonth,allocateconsultanttime,allocateteachercount,hasexpense,expensetime,expensefee,completetime,servicecreatetime,servicemodifytime,customersearchcontent,parentsearchcontent
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customer">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="parentid" column="parentid" />
+         <id property="parentcode" column="parentcode" />
+         <id property="parentname" column="parentname" />
+         <id property="customerid" column="customerid" />
+         <id property="customercode" column="customercode" />
+         <id property="customername" column="customername" />
+         <id property="customerlevel" column="customerlevel" />
+         <id property="customerstatus" column="customerstatus" />
+         <id property="studentstatus" column="studentstatus" />
+         <id property="isoneparent" column="isoneparent" />
+         <id property="describes" column="describes" />
+         <id property="birthdays" column="birthdays" />
+         <id property="gender" column="gender" />
+         <id property="email" column="email" />
+         <id property="idtype" column="idtype" />
+         <id property="idnumber" column="idnumber" />
+         <id property="viptype" column="viptype" />
+         <id property="viplevel" column="viplevel" />
+         <id property="entrancegrade" column="entrancegrade" />
+         <id property="grade" column="grade" />
+         <id property="subjecttype" column="subjecttype" />
+         <id property="studenttype" column="studenttype" />
+         <id property="contacttype" column="contacttype" />
+         <id property="sourcemaintype" column="sourcemaintype" />
+         <id property="sourcesubtype" column="sourcesubtype" />
+         <id property="sourcesystem" column="sourcesystem" />
+         <id property="schoolid" column="schoolid" />
+         <id property="schoolname" column="schoolname" />
+         <id property="isstudyagain" column="isstudyagain" />
+         <id property="firstsigntime" column="firstsigntime" />
+         <id property="firstsignerid" column="firstsignerid" />
+         <id property="firstsignername" column="firstsignername" />
+         <id property="invalidreason" column="invalidreason" />
+         <id property="schoolyear" column="schoolyear" />
+         <id property="referralcount" column="referralcount" />
+         <id property="referralstaffid" column="referralstaffid" />
+         <id property="referralstaffname" column="referralstaffname" />
+         <id property="referralstaffjobid" column="referralstaffjobid" />
+         <id property="referralstaffjobname" column="referralstaffjobname" />
+         <id property="referralstaffoacode" column="referralstaffoacode" />
+         <id property="referralcustomerid" column="referralcustomerid" />
+         <id property="referralcustomercode" column="referralcustomercode" />
+         <id property="referralcustomername" column="referralcustomername" />
+         <id property="purchaseintention" column="purchaseintention" />
+         <id property="locked" column="locked" />
+         <id property="lockmemo" column="lockmemo" />
+         <id property="graduated" column="graduated" />
+         <id property="graduateyear" column="graduateyear" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="creatoroacode" column="creatoroacode" />
+         <id property="creatorjobid" column="creatorjobid" />
+         <id property="creatorjobname" column="creatorjobname" />
+         <id property="creatorjobtype" column="creatorjobtype" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+         <id property="consultantid" column="consultantid" />
+         <id property="consultantname" column="consultantname" />
+         <id property="consultantoacode" column="consultantoacode" />
+         <id property="consultantjobid" column="consultantjobid" />
+         <id property="educatorid" column="educatorid" />
+         <id property="educatorname" column="educatorname" />
+         <id property="educatoroacode" column="educatoroacode" />
+         <id property="educatorjobid" column="educatorjobid" />
+         <id property="callcenterid" column="callcenterid" />
+         <id property="callcenteroacode" column="callcenteroacode" />
+         <id property="callcentername" column="callcentername" />
+         <id property="callcenterjobid" column="callcenterjobid" />
+         <id property="marketingid" column="marketingid" />
+         <id property="marketingname" column="marketingname" />
+         <id property="marketingoacode" column="marketingoacode" />
+         <id property="marketingjobid" column="marketingjobid" />
+         <id property="assignteachernum" column="assignteachernum" />
+         <id property="parentidtype" column="parentidtype" />
+         <id property="parentidnumber" column="parentidnumber" />
+         <id property="parentrole" column="parentrole" />
+         <id property="customerrole" column="customerrole" />
+         <id property="customerprimaryphonetype" column="customerprimaryphonetype" />
+         <id property="customerprimaryphonenumber" column="customerprimaryphonenumber" />
+         <id property="customersecondaryphonetype" column="customersecondaryphonetype" />
+         <id property="customersecondaryphonenumber" column="customersecondaryphonenumber" />
+         <id property="parentprimaryphonetype" column="parentprimaryphonetype" />
+         <id property="parentprimaryphonenumber" column="parentprimaryphonenumber" />
+         <id property="parentsecondaryphonetype" column="parentsecondaryphonetype" />
+         <id property="parentsecondaryphonenumber" column="parentsecondaryphonenumber" />
+         <id property="followstage" column="followstage" />
+         <id property="followtime" column="followtime" />
+         <id property="followedcount" column="followedcount" />
+         <id property="followedcountofthismonth" column="followedcountofthismonth" />
+         <id property="nextfollowtime" column="nextfollowtime" />
+         <id property="planverifytime" column="planverifytime" />
+         <id property="plansigntime" column="plansigntime" />
+         <id property="verifytime" column="verifytime" />
+         <id property="verifiedcount" column="verifiedcount" />
+         <id property="visittime" column="visittime" />
+         <id property="visitedcount" column="visitedcount" />
+         <id property="visitedcountofthismonth" column="visitedcountofthismonth" />
+         <id property="nextvisittime" column="nextvisittime" />
+         <id property="accountmoney" column="accountmoney" />
+         <id property="accountdiscountrate" column="accountdiscountrate" />
+         <id property="accountdiscountbase" column="accountdiscountbase" />
+         <id property="accountnewsigntime" column="accountnewsigntime" />
+         <id property="accountnewsignmoney" column="accountnewsignmoney" />
+         <id property="accountrenewsigntime" column="accountrenewsigntime" />
+         <id property="accountrenewsignmoney" column="accountrenewsignmoney" />
+         <id property="accountchargetime" column="accountchargetime" />
+         <id property="accountchargemoney" column="accountchargemoney" />
+         <id property="accountrefundtime" column="accountrefundtime" />
+         <id property="accountrefundmoney" column="accountrefundmoney" />
+         <id property="accounttransferedinmoney" column="accounttransferedinmoney" />
+         <id property="accounttransferintime" column="accounttransferintime" />
+         <id property="accounttransferedoutmoney" column="accounttransferedoutmoney" />
+         <id property="accounttransferouttime" column="accounttransferouttime" />
+         <id property="signedmoney" column="signedmoney" />
+         <id property="signedcount" column="signedcount" />
+         <id property="assetonetooneamount" column="assetonetooneamount" />
+         <id property="assetclassamount" column="assetclassamount" />
+         <id property="assetotheramount" column="assetotheramount" />
+         <id property="assetonetoonemoney" column="assetonetoonemoney" />
+         <id property="assetclassmoney" column="assetclassmoney" />
+         <id property="assetothermoney" column="assetothermoney" />
+         <id property="assetonetooneassignedamount" column="assetonetooneassignedamount" />
+         <id property="assetclassassignedamount" column="assetclassassignedamount" />
+         <id property="assetonetooneassignedmoney" column="assetonetooneassignedmoney" />
+         <id property="assetclassassignedmoney" column="assetclassassignedmoney" />
+         <id property="assetonetooneconfirmedamount" column="assetonetooneconfirmedamount" />
+         <id property="assetclassconfirmedamount" column="assetclassconfirmedamount" />
+         <id property="assetotherconfirmedamount" column="assetotherconfirmedamount" />
+         <id property="assetonetooneconfirmedmoney" column="assetonetooneconfirmedmoney" />
+         <id property="assetclassconfirmedmoney" column="assetclassconfirmedmoney" />
+         <id property="assetotherconfirmedmoney" column="assetotherconfirmedmoney" />
+         <id property="assetpresentamount" column="assetpresentamount" />
+         <id property="ordertime" column="ordertime" />
+         <id property="debooktime" column="debooktime" />
+         <id property="assigntime" column="assigntime" />
+         <id property="starttime" column="starttime" />
+         <id property="starttimeofonetoone" column="starttimeofonetoone" />
+         <id property="starttimeofclass" column="starttimeofclass" />
+         <id property="confirmtime" column="confirmtime" />
+         <id property="confirmtimeofonetoone" column="confirmtimeofonetoone" />
+         <id property="confirmtimeofclass" column="confirmtimeofclass" />
+         <id property="confirmedsubjectsofrecent" column="confirmedsubjectsofrecent" />
+         <id property="confirmedhoursofthismonth" column="confirmedhoursofthismonth" />
+         <id property="allocateconsultanttime" column="allocateconsultanttime" />
+         <id property="allocateteachercount" column="allocateteachercount" />
+         <id property="hasexpense" column="hasexpense" />
+         <id property="expensetime" column="expensetime" />
+         <id property="expensefee" column="expensefee" />
+         <id property="completetime" column="completetime" />
+         <id property="servicecreatetime" column="servicecreatetime" />
+         <id property="servicemodifytime" column="servicemodifytime" />
+         <id property="customersearchcontent" column="customersearchcontent" />
+         <id property="parentsearchcontent" column="parentsearchcontent" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customer">
+  insert into customer (id,campusid,campusname,parentid,parentcode,parentname,customerid,customercode,customername,customerlevel,customerstatus,studentstatus,isoneparent,describes,birthdays,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,schoolid,schoolname,isstudyagain,firstsigntime,firstsignerid,firstsignername,invalidreason,schoolyear,referralcount,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,locked,lockmemo,graduated,graduateyear,creatorid,creatorname,creatoroacode,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,consultantid,consultantname,consultantoacode,consultantjobid,educatorid,educatorname,educatoroacode,educatorjobid,callcenterid,callcenteroacode,callcentername,callcenterjobid,marketingid,marketingname,marketingoacode,marketingjobid,assignteachernum,parentidtype,parentidnumber,parentrole,customerrole,customerprimaryphonetype,customerprimaryphonenumber,customersecondaryphonetype,customersecondaryphonenumber,parentprimaryphonetype,parentprimaryphonenumber,parentsecondaryphonetype,parentsecondaryphonenumber,followstage,followtime,followedcount,followedcountofthismonth,nextfollowtime,planverifytime,plansigntime,verifytime,verifiedcount,visittime,visitedcount,visitedcountofthismonth,nextvisittime,accountmoney,accountdiscountrate,accountdiscountbase,accountnewsigntime,accountnewsignmoney,accountrenewsigntime,accountrenewsignmoney,accountchargetime,accountchargemoney,accountrefundtime,accountrefundmoney,accounttransferedinmoney,accounttransferintime,accounttransferedoutmoney,accounttransferouttime,signedmoney,signedcount,assetonetooneamount,assetclassamount,assetotheramount,assetonetoonemoney,assetclassmoney,assetothermoney,assetonetooneassignedamount,assetclassassignedamount,assetonetooneassignedmoney,assetclassassignedmoney,assetonetooneconfirmedamount,assetclassconfirmedamount,assetotherconfirmedamount,assetonetooneconfirmedmoney,assetclassconfirmedmoney,assetotherconfirmedmoney,assetpresentamount,ordertime,debooktime,assigntime,starttime,starttimeofonetoone,starttimeofclass,confirmtime,confirmtimeofonetoone,confirmtimeofclass,confirmedsubjectsofrecent,confirmedhoursofthismonth,allocateconsultanttime,allocateteachercount,hasexpense,expensetime,expensefee,completetime,servicecreatetime,servicemodifytime,customersearchcontent,parentsearchcontent)
+         values (#{id},#{campusid},#{campusname},#{parentid},#{parentcode},#{parentname},#{customerid},#{customercode},#{customername},#{customerlevel},#{customerstatus},#{studentstatus},#{isoneparent},#{describes},#{birthdays},#{gender},#{email},#{idtype},#{idnumber},#{viptype},#{viplevel},#{entrancegrade},#{grade},#{subjecttype},#{studenttype},#{contacttype},#{sourcemaintype},#{sourcesubtype},#{sourcesystem},#{schoolid},#{schoolname},#{isstudyagain},#{firstsigntime},#{firstsignerid},#{firstsignername},#{invalidreason},#{schoolyear},#{referralcount},#{referralstaffid},#{referralstaffname},#{referralstaffjobid},#{referralstaffjobname},#{referralstaffoacode},#{referralcustomerid},#{referralcustomercode},#{referralcustomername},#{purchaseintention},#{locked},#{lockmemo},#{graduated},#{graduateyear},#{creatorid},#{creatorname},#{creatoroacode},#{creatorjobid},#{creatorjobname},#{creatorjobtype},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{consultantid},#{consultantname},#{consultantoacode},#{consultantjobid},#{educatorid},#{educatorname},#{educatoroacode},#{educatorjobid},#{callcenterid},#{callcenteroacode},#{callcentername},#{callcenterjobid},#{marketingid},#{marketingname},#{marketingoacode},#{marketingjobid},#{assignteachernum},#{parentidtype},#{parentidnumber},#{parentrole},#{customerrole},#{customerprimaryphonetype},#{customerprimaryphonenumber},#{customersecondaryphonetype},#{customersecondaryphonenumber},#{parentprimaryphonetype},#{parentprimaryphonenumber},#{parentsecondaryphonetype},#{parentsecondaryphonenumber},#{followstage},#{followtime},#{followedcount},#{followedcountofthismonth},#{nextfollowtime},#{planverifytime},#{plansigntime},#{verifytime},#{verifiedcount},#{visittime},#{visitedcount},#{visitedcountofthismonth},#{nextvisittime},#{accountmoney},#{accountdiscountrate},#{accountdiscountbase},#{accountnewsigntime},#{accountnewsignmoney},#{accountrenewsigntime},#{accountrenewsignmoney},#{accountchargetime},#{accountchargemoney},#{accountrefundtime},#{accountrefundmoney},#{accounttransferedinmoney},#{accounttransferintime},#{accounttransferedoutmoney},#{accounttransferouttime},#{signedmoney},#{signedcount},#{assetonetooneamount},#{assetclassamount},#{assetotheramount},#{assetonetoonemoney},#{assetclassmoney},#{assetothermoney},#{assetonetooneassignedamount},#{assetclassassignedamount},#{assetonetooneassignedmoney},#{assetclassassignedmoney},#{assetonetooneconfirmedamount},#{assetclassconfirmedamount},#{assetotherconfirmedamount},#{assetonetooneconfirmedmoney},#{assetclassconfirmedmoney},#{assetotherconfirmedmoney},#{assetpresentamount},#{ordertime},#{debooktime},#{assigntime},#{starttime},#{starttimeofonetoone},#{starttimeofclass},#{confirmtime},#{confirmtimeofonetoone},#{confirmtimeofclass},#{confirmedsubjectsofrecent},#{confirmedhoursofthismonth},#{allocateconsultanttime},#{allocateteachercount},#{hasexpense},#{expensetime},#{expensefee},#{completetime},#{servicecreatetime},#{servicemodifytime},#{customersearchcontent},#{parentsearchcontent})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customer 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customer">
+    update customer
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="parentid != null">
+                   parentid = #{parentid},
+             </if>
+             <if test="parentcode != null">
+                   parentcode = #{parentcode},
+             </if>
+             <if test="parentname != null">
+                   parentname = #{parentname},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="customercode != null">
+                   customercode = #{customercode},
+             </if>
+             <if test="customername != null">
+                   customername = #{customername},
+             </if>
+             <if test="customerlevel != null">
+                   customerlevel = #{customerlevel},
+             </if>
+             <if test="customerstatus != null">
+                   customerstatus = #{customerstatus},
+             </if>
+             <if test="studentstatus != null">
+                   studentstatus = #{studentstatus},
+             </if>
+             <if test="isoneparent != null">
+                   isoneparent = #{isoneparent},
+             </if>
+             <if test="describes != null">
+                   describes = #{describes},
+             </if>
+             <if test="birthdays != null">
+                   birthdays = #{birthdays},
+             </if>
+             <if test="gender != null">
+                   gender = #{gender},
+             </if>
+             <if test="email != null">
+                   email = #{email},
+             </if>
+             <if test="idtype != null">
+                   idtype = #{idtype},
+             </if>
+             <if test="idnumber != null">
+                   idnumber = #{idnumber},
+             </if>
+             <if test="viptype != null">
+                   viptype = #{viptype},
+             </if>
+             <if test="viplevel != null">
+                   viplevel = #{viplevel},
+             </if>
+             <if test="entrancegrade != null">
+                   entrancegrade = #{entrancegrade},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="subjecttype != null">
+                   subjecttype = #{subjecttype},
+             </if>
+             <if test="studenttype != null">
+                   studenttype = #{studenttype},
+             </if>
+             <if test="contacttype != null">
+                   contacttype = #{contacttype},
+             </if>
+             <if test="sourcemaintype != null">
+                   sourcemaintype = #{sourcemaintype},
+             </if>
+             <if test="sourcesubtype != null">
+                   sourcesubtype = #{sourcesubtype},
+             </if>
+             <if test="sourcesystem != null">
+                   sourcesystem = #{sourcesystem},
+             </if>
+             <if test="schoolid != null">
+                   schoolid = #{schoolid},
+             </if>
+             <if test="schoolname != null">
+                   schoolname = #{schoolname},
+             </if>
+             <if test="isstudyagain != null">
+                   isstudyagain = #{isstudyagain},
+             </if>
+             <if test="firstsigntime != null">
+                   firstsigntime = #{firstsigntime},
+             </if>
+             <if test="firstsignerid != null">
+                   firstsignerid = #{firstsignerid},
+             </if>
+             <if test="firstsignername != null">
+                   firstsignername = #{firstsignername},
+             </if>
+             <if test="invalidreason != null">
+                   invalidreason = #{invalidreason},
+             </if>
+             <if test="schoolyear != null">
+                   schoolyear = #{schoolyear},
+             </if>
+             <if test="referralcount != null">
+                   referralcount = #{referralcount},
+             </if>
+             <if test="referralstaffid != null">
+                   referralstaffid = #{referralstaffid},
+             </if>
+             <if test="referralstaffname != null">
+                   referralstaffname = #{referralstaffname},
+             </if>
+             <if test="referralstaffjobid != null">
+                   referralstaffjobid = #{referralstaffjobid},
+             </if>
+             <if test="referralstaffjobname != null">
+                   referralstaffjobname = #{referralstaffjobname},
+             </if>
+             <if test="referralstaffoacode != null">
+                   referralstaffoacode = #{referralstaffoacode},
+             </if>
+             <if test="referralcustomerid != null">
+                   referralcustomerid = #{referralcustomerid},
+             </if>
+             <if test="referralcustomercode != null">
+                   referralcustomercode = #{referralcustomercode},
+             </if>
+             <if test="referralcustomername != null">
+                   referralcustomername = #{referralcustomername},
+             </if>
+             <if test="purchaseintention != null">
+                   purchaseintention = #{purchaseintention},
+             </if>
+             <if test="locked != null">
+                   locked = #{locked},
+             </if>
+             <if test="lockmemo != null">
+                   lockmemo = #{lockmemo},
+             </if>
+             <if test="graduated != null">
+                   graduated = #{graduated},
+             </if>
+             <if test="graduateyear != null">
+                   graduateyear = #{graduateyear},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="creatoroacode != null">
+                   creatoroacode = #{creatoroacode},
+             </if>
+             <if test="creatorjobid != null">
+                   creatorjobid = #{creatorjobid},
+             </if>
+             <if test="creatorjobname != null">
+                   creatorjobname = #{creatorjobname},
+             </if>
+             <if test="creatorjobtype != null">
+                   creatorjobtype = #{creatorjobtype},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime},
+             </if>
+             <if test="consultantid != null">
+                   consultantid = #{consultantid},
+             </if>
+             <if test="consultantname != null">
+                   consultantname = #{consultantname},
+             </if>
+             <if test="consultantoacode != null">
+                   consultantoacode = #{consultantoacode},
+             </if>
+             <if test="consultantjobid != null">
+                   consultantjobid = #{consultantjobid},
+             </if>
+             <if test="educatorid != null">
+                   educatorid = #{educatorid},
+             </if>
+             <if test="educatorname != null">
+                   educatorname = #{educatorname},
+             </if>
+             <if test="educatoroacode != null">
+                   educatoroacode = #{educatoroacode},
+             </if>
+             <if test="educatorjobid != null">
+                   educatorjobid = #{educatorjobid},
+             </if>
+             <if test="callcenterid != null">
+                   callcenterid = #{callcenterid},
+             </if>
+             <if test="callcenteroacode != null">
+                   callcenteroacode = #{callcenteroacode},
+             </if>
+             <if test="callcentername != null">
+                   callcentername = #{callcentername},
+             </if>
+             <if test="callcenterjobid != null">
+                   callcenterjobid = #{callcenterjobid},
+             </if>
+             <if test="marketingid != null">
+                   marketingid = #{marketingid},
+             </if>
+             <if test="marketingname != null">
+                   marketingname = #{marketingname},
+             </if>
+             <if test="marketingoacode != null">
+                   marketingoacode = #{marketingoacode},
+             </if>
+             <if test="marketingjobid != null">
+                   marketingjobid = #{marketingjobid},
+             </if>
+             <if test="assignteachernum != null">
+                   assignteachernum = #{assignteachernum},
+             </if>
+             <if test="parentidtype != null">
+                   parentidtype = #{parentidtype},
+             </if>
+             <if test="parentidnumber != null">
+                   parentidnumber = #{parentidnumber},
+             </if>
+             <if test="parentrole != null">
+                   parentrole = #{parentrole},
+             </if>
+             <if test="customerrole != null">
+                   customerrole = #{customerrole},
+             </if>
+             <if test="customerprimaryphonetype != null">
+                   customerprimaryphonetype = #{customerprimaryphonetype},
+             </if>
+             <if test="customerprimaryphonenumber != null">
+                   customerprimaryphonenumber = #{customerprimaryphonenumber},
+             </if>
+             <if test="customersecondaryphonetype != null">
+                   customersecondaryphonetype = #{customersecondaryphonetype},
+             </if>
+             <if test="customersecondaryphonenumber != null">
+                   customersecondaryphonenumber = #{customersecondaryphonenumber},
+             </if>
+             <if test="parentprimaryphonetype != null">
+                   parentprimaryphonetype = #{parentprimaryphonetype},
+             </if>
+             <if test="parentprimaryphonenumber != null">
+                   parentprimaryphonenumber = #{parentprimaryphonenumber},
+             </if>
+             <if test="parentsecondaryphonetype != null">
+                   parentsecondaryphonetype = #{parentsecondaryphonetype},
+             </if>
+             <if test="parentsecondaryphonenumber != null">
+                   parentsecondaryphonenumber = #{parentsecondaryphonenumber},
+             </if>
+             <if test="followstage != null">
+                   followstage = #{followstage},
+             </if>
+             <if test="followtime != null">
+                   followtime = #{followtime},
+             </if>
+             <if test="followedcount != null">
+                   followedcount = #{followedcount},
+             </if>
+             <if test="followedcountofthismonth != null">
+                   followedcountofthismonth = #{followedcountofthismonth},
+             </if>
+             <if test="nextfollowtime != null">
+                   nextfollowtime = #{nextfollowtime},
+             </if>
+             <if test="planverifytime != null">
+                   planverifytime = #{planverifytime},
+             </if>
+             <if test="plansigntime != null">
+                   plansigntime = #{plansigntime},
+             </if>
+             <if test="verifytime != null">
+                   verifytime = #{verifytime},
+             </if>
+             <if test="verifiedcount != null">
+                   verifiedcount = #{verifiedcount},
+             </if>
+             <if test="visittime != null">
+                   visittime = #{visittime},
+             </if>
+             <if test="visitedcount != null">
+                   visitedcount = #{visitedcount},
+             </if>
+             <if test="visitedcountofthismonth != null">
+                   visitedcountofthismonth = #{visitedcountofthismonth},
+             </if>
+             <if test="nextvisittime != null">
+                   nextvisittime = #{nextvisittime},
+             </if>
+             <if test="accountmoney != null">
+                   accountmoney = #{accountmoney},
+             </if>
+             <if test="accountdiscountrate != null">
+                   accountdiscountrate = #{accountdiscountrate},
+             </if>
+             <if test="accountdiscountbase != null">
+                   accountdiscountbase = #{accountdiscountbase},
+             </if>
+             <if test="accountnewsigntime != null">
+                   accountnewsigntime = #{accountnewsigntime},
+             </if>
+             <if test="accountnewsignmoney != null">
+                   accountnewsignmoney = #{accountnewsignmoney},
+             </if>
+             <if test="accountrenewsigntime != null">
+                   accountrenewsigntime = #{accountrenewsigntime},
+             </if>
+             <if test="accountrenewsignmoney != null">
+                   accountrenewsignmoney = #{accountrenewsignmoney},
+             </if>
+             <if test="accountchargetime != null">
+                   accountchargetime = #{accountchargetime},
+             </if>
+             <if test="accountchargemoney != null">
+                   accountchargemoney = #{accountchargemoney},
+             </if>
+             <if test="accountrefundtime != null">
+                   accountrefundtime = #{accountrefundtime},
+             </if>
+             <if test="accountrefundmoney != null">
+                   accountrefundmoney = #{accountrefundmoney},
+             </if>
+             <if test="accounttransferedinmoney != null">
+                   accounttransferedinmoney = #{accounttransferedinmoney},
+             </if>
+             <if test="accounttransferintime != null">
+                   accounttransferintime = #{accounttransferintime},
+             </if>
+             <if test="accounttransferedoutmoney != null">
+                   accounttransferedoutmoney = #{accounttransferedoutmoney},
+             </if>
+             <if test="accounttransferouttime != null">
+                   accounttransferouttime = #{accounttransferouttime},
+             </if>
+             <if test="signedmoney != null">
+                   signedmoney = #{signedmoney},
+             </if>
+             <if test="signedcount != null">
+                   signedcount = #{signedcount},
+             </if>
+             <if test="assetonetooneamount != null">
+                   assetonetooneamount = #{assetonetooneamount},
+             </if>
+             <if test="assetclassamount != null">
+                   assetclassamount = #{assetclassamount},
+             </if>
+             <if test="assetotheramount != null">
+                   assetotheramount = #{assetotheramount},
+             </if>
+             <if test="assetonetoonemoney != null">
+                   assetonetoonemoney = #{assetonetoonemoney},
+             </if>
+             <if test="assetclassmoney != null">
+                   assetclassmoney = #{assetclassmoney},
+             </if>
+             <if test="assetothermoney != null">
+                   assetothermoney = #{assetothermoney},
+             </if>
+             <if test="assetonetooneassignedamount != null">
+                   assetonetooneassignedamount = #{assetonetooneassignedamount},
+             </if>
+             <if test="assetclassassignedamount != null">
+                   assetclassassignedamount = #{assetclassassignedamount},
+             </if>
+             <if test="assetonetooneassignedmoney != null">
+                   assetonetooneassignedmoney = #{assetonetooneassignedmoney},
+             </if>
+             <if test="assetclassassignedmoney != null">
+                   assetclassassignedmoney = #{assetclassassignedmoney},
+             </if>
+             <if test="assetonetooneconfirmedamount != null">
+                   assetonetooneconfirmedamount = #{assetonetooneconfirmedamount},
+             </if>
+             <if test="assetclassconfirmedamount != null">
+                   assetclassconfirmedamount = #{assetclassconfirmedamount},
+             </if>
+             <if test="assetotherconfirmedamount != null">
+                   assetotherconfirmedamount = #{assetotherconfirmedamount},
+             </if>
+             <if test="assetonetooneconfirmedmoney != null">
+                   assetonetooneconfirmedmoney = #{assetonetooneconfirmedmoney},
+             </if>
+             <if test="assetclassconfirmedmoney != null">
+                   assetclassconfirmedmoney = #{assetclassconfirmedmoney},
+             </if>
+             <if test="assetotherconfirmedmoney != null">
+                   assetotherconfirmedmoney = #{assetotherconfirmedmoney},
+             </if>
+             <if test="assetpresentamount != null">
+                   assetpresentamount = #{assetpresentamount},
+             </if>
+             <if test="ordertime != null">
+                   ordertime = #{ordertime},
+             </if>
+             <if test="debooktime != null">
+                   debooktime = #{debooktime},
+             </if>
+             <if test="assigntime != null">
+                   assigntime = #{assigntime},
+             </if>
+             <if test="starttime != null">
+                   starttime = #{starttime},
+             </if>
+             <if test="starttimeofonetoone != null">
+                   starttimeofonetoone = #{starttimeofonetoone},
+             </if>
+             <if test="starttimeofclass != null">
+                   starttimeofclass = #{starttimeofclass},
+             </if>
+             <if test="confirmtime != null">
+                   confirmtime = #{confirmtime},
+             </if>
+             <if test="confirmtimeofonetoone != null">
+                   confirmtimeofonetoone = #{confirmtimeofonetoone},
+             </if>
+             <if test="confirmtimeofclass != null">
+                   confirmtimeofclass = #{confirmtimeofclass},
+             </if>
+             <if test="confirmedsubjectsofrecent != null">
+                   confirmedsubjectsofrecent = #{confirmedsubjectsofrecent},
+             </if>
+             <if test="confirmedhoursofthismonth != null">
+                   confirmedhoursofthismonth = #{confirmedhoursofthismonth},
+             </if>
+             <if test="allocateconsultanttime != null">
+                   allocateconsultanttime = #{allocateconsultanttime},
+             </if>
+             <if test="allocateteachercount != null">
+                   allocateteachercount = #{allocateteachercount},
+             </if>
+             <if test="hasexpense != null">
+                   hasexpense = #{hasexpense},
+             </if>
+             <if test="expensetime != null">
+                   expensetime = #{expensetime},
+             </if>
+             <if test="expensefee != null">
+                   expensefee = #{expensefee},
+             </if>
+             <if test="completetime != null">
+                   completetime = #{completetime},
+             </if>
+             <if test="servicecreatetime != null">
+                   servicecreatetime = #{servicecreatetime},
+             </if>
+             <if test="servicemodifytime != null">
+                   servicemodifytime = #{servicemodifytime},
+             </if>
+             <if test="customersearchcontent != null">
+                   customersearchcontent = #{customersearchcontent},
+             </if>
+             <if test="parentsearchcontent != null">
+                   parentsearchcontent = #{parentsearchcontent}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customer 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customer 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customer 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customer 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customer 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customer 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

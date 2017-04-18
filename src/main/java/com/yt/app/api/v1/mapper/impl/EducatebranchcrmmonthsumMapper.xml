@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.EducatebranchcrmmonthsumMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,regionid,branchid,year,month,classpeoplecount,initialeffective,neweffective,classhours,finaleffective,renewalcount,endclasscount,refundcount,remaininghourscount,outschoolwarningcount,closedwarningcount,refundwarningcount,waitvisitingcount,waitweekfeedbackcount,waitmeetingcount,waitordercount,birthdaytoday,birthdayfuture,managestudentcount,validstudentcount,noclassstudentcount,closedstudentcount,outschoolstudentcount,onlystudentcount,noorderstudentcount,introducecount,switchcount,receivecount,newclosedcount,closedactivationcount,newoutschoolcount,outschoolactivationcount,createtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Educatebranchcrmmonthsum">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="regionid" column="regionid" />
+         <id property="branchid" column="branchid" />
+         <id property="year" column="year" />
+         <id property="month" column="month" />
+         <id property="classpeoplecount" column="classpeoplecount" />
+         <id property="initialeffective" column="initialeffective" />
+         <id property="neweffective" column="neweffective" />
+         <id property="classhours" column="classhours" />
+         <id property="finaleffective" column="finaleffective" />
+         <id property="renewalcount" column="renewalcount" />
+         <id property="endclasscount" column="endclasscount" />
+         <id property="refundcount" column="refundcount" />
+         <id property="remaininghourscount" column="remaininghourscount" />
+         <id property="outschoolwarningcount" column="outschoolwarningcount" />
+         <id property="closedwarningcount" column="closedwarningcount" />
+         <id property="refundwarningcount" column="refundwarningcount" />
+         <id property="waitvisitingcount" column="waitvisitingcount" />
+         <id property="waitweekfeedbackcount" column="waitweekfeedbackcount" />
+         <id property="waitmeetingcount" column="waitmeetingcount" />
+         <id property="waitordercount" column="waitordercount" />
+         <id property="birthdaytoday" column="birthdaytoday" />
+         <id property="birthdayfuture" column="birthdayfuture" />
+         <id property="managestudentcount" column="managestudentcount" />
+         <id property="validstudentcount" column="validstudentcount" />
+         <id property="noclassstudentcount" column="noclassstudentcount" />
+         <id property="closedstudentcount" column="closedstudentcount" />
+         <id property="outschoolstudentcount" column="outschoolstudentcount" />
+         <id property="onlystudentcount" column="onlystudentcount" />
+         <id property="noorderstudentcount" column="noorderstudentcount" />
+         <id property="introducecount" column="introducecount" />
+         <id property="switchcount" column="switchcount" />
+         <id property="receivecount" column="receivecount" />
+         <id property="newclosedcount" column="newclosedcount" />
+         <id property="closedactivationcount" column="closedactivationcount" />
+         <id property="newoutschoolcount" column="newoutschoolcount" />
+         <id property="outschoolactivationcount" column="outschoolactivationcount" />
+         <id property="createtime" column="createtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Educatebranchcrmmonthsum">
+  insert into educatebranchcrmmonthsum (id,regionid,branchid,year,month,classpeoplecount,initialeffective,neweffective,classhours,finaleffective,renewalcount,endclasscount,refundcount,remaininghourscount,outschoolwarningcount,closedwarningcount,refundwarningcount,waitvisitingcount,waitweekfeedbackcount,waitmeetingcount,waitordercount,birthdaytoday,birthdayfuture,managestudentcount,validstudentcount,noclassstudentcount,closedstudentcount,outschoolstudentcount,onlystudentcount,noorderstudentcount,introducecount,switchcount,receivecount,newclosedcount,closedactivationcount,newoutschoolcount,outschoolactivationcount,createtime)
+         values (#{id},#{regionid},#{branchid},#{year},#{month},#{classpeoplecount},#{initialeffective},#{neweffective},#{classhours},#{finaleffective},#{renewalcount},#{endclasscount},#{refundcount},#{remaininghourscount},#{outschoolwarningcount},#{closedwarningcount},#{refundwarningcount},#{waitvisitingcount},#{waitweekfeedbackcount},#{waitmeetingcount},#{waitordercount},#{birthdaytoday},#{birthdayfuture},#{managestudentcount},#{validstudentcount},#{noclassstudentcount},#{closedstudentcount},#{outschoolstudentcount},#{onlystudentcount},#{noorderstudentcount},#{introducecount},#{switchcount},#{receivecount},#{newclosedcount},#{closedactivationcount},#{newoutschoolcount},#{outschoolactivationcount},#{createtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from educatebranchcrmmonthsum 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Educatebranchcrmmonthsum">
+    update educatebranchcrmmonthsum
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="year != null">
+                   year = #{year},
+             </if>
+             <if test="month != null">
+                   month = #{month},
+             </if>
+             <if test="classpeoplecount != null">
+                   classpeoplecount = #{classpeoplecount},
+             </if>
+             <if test="initialeffective != null">
+                   initialeffective = #{initialeffective},
+             </if>
+             <if test="neweffective != null">
+                   neweffective = #{neweffective},
+             </if>
+             <if test="classhours != null">
+                   classhours = #{classhours},
+             </if>
+             <if test="finaleffective != null">
+                   finaleffective = #{finaleffective},
+             </if>
+             <if test="renewalcount != null">
+                   renewalcount = #{renewalcount},
+             </if>
+             <if test="endclasscount != null">
+                   endclasscount = #{endclasscount},
+             </if>
+             <if test="refundcount != null">
+                   refundcount = #{refundcount},
+             </if>
+             <if test="remaininghourscount != null">
+                   remaininghourscount = #{remaininghourscount},
+             </if>
+             <if test="outschoolwarningcount != null">
+                   outschoolwarningcount = #{outschoolwarningcount},
+             </if>
+             <if test="closedwarningcount != null">
+                   closedwarningcount = #{closedwarningcount},
+             </if>
+             <if test="refundwarningcount != null">
+                   refundwarningcount = #{refundwarningcount},
+             </if>
+             <if test="waitvisitingcount != null">
+                   waitvisitingcount = #{waitvisitingcount},
+             </if>
+             <if test="waitweekfeedbackcount != null">
+                   waitweekfeedbackcount = #{waitweekfeedbackcount},
+             </if>
+             <if test="waitmeetingcount != null">
+                   waitmeetingcount = #{waitmeetingcount},
+             </if>
+             <if test="waitordercount != null">
+                   waitordercount = #{waitordercount},
+             </if>
+             <if test="birthdaytoday != null">
+                   birthdaytoday = #{birthdaytoday},
+             </if>
+             <if test="birthdayfuture != null">
+                   birthdayfuture = #{birthdayfuture},
+             </if>
+             <if test="managestudentcount != null">
+                   managestudentcount = #{managestudentcount},
+             </if>
+             <if test="validstudentcount != null">
+                   validstudentcount = #{validstudentcount},
+             </if>
+             <if test="noclassstudentcount != null">
+                   noclassstudentcount = #{noclassstudentcount},
+             </if>
+             <if test="closedstudentcount != null">
+                   closedstudentcount = #{closedstudentcount},
+             </if>
+             <if test="outschoolstudentcount != null">
+                   outschoolstudentcount = #{outschoolstudentcount},
+             </if>
+             <if test="onlystudentcount != null">
+                   onlystudentcount = #{onlystudentcount},
+             </if>
+             <if test="noorderstudentcount != null">
+                   noorderstudentcount = #{noorderstudentcount},
+             </if>
+             <if test="introducecount != null">
+                   introducecount = #{introducecount},
+             </if>
+             <if test="switchcount != null">
+                   switchcount = #{switchcount},
+             </if>
+             <if test="receivecount != null">
+                   receivecount = #{receivecount},
+             </if>
+             <if test="newclosedcount != null">
+                   newclosedcount = #{newclosedcount},
+             </if>
+             <if test="closedactivationcount != null">
+                   closedactivationcount = #{closedactivationcount},
+             </if>
+             <if test="newoutschoolcount != null">
+                   newoutschoolcount = #{newoutschoolcount},
+             </if>
+             <if test="outschoolactivationcount != null">
+                   outschoolactivationcount = #{outschoolactivationcount},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from educatebranchcrmmonthsum 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from educatebranchcrmmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from educatebranchcrmmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from educatebranchcrmmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from educatebranchcrmmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from educatebranchcrmmonthsum 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

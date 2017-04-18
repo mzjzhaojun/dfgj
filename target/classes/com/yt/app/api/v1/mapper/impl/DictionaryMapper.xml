@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.DictionaryMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,code,name,typecode,typename,parent_id,level,version
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Dictionary">
+         <id property="id" column="id" />
+         <id property="code" column="code" />
+         <id property="name" column="name" />
+         <id property="typecode" column="typecode" />
+         <id property="typename" column="typename" />
+         <id property="parent_id" column="parent_id" />
+         <id property="level" column="level" />
+         <id property="version" column="version" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Dictionary">
+  insert into dictionary (id,code,name,typecode,typename,parent_id,level)
+         values (#{id},#{code},#{name},#{typecode},#{typename},#{parent_id},#{level})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from dictionary 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Dictionary">
+    update dictionary
+         <set>
+             <if test="code != null">
+                   code = #{code},
+             </if>
+             <if test="name != null">
+                   name = #{name},
+             </if>
+             <if test="typecode != null">
+                   typecode = #{typecode},
+             </if>
+             <if test="typename != null">
+                   typename = #{typename},
+             </if>
+             <if test="parent_id != null">
+                   parent_id = #{parent_id},
+             </if>
+             <if test="level != null">
+                   level = #{level},
+             </if>
+             <if test="version != null">
+                   version = #{version}+1
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from dictionary 
+        where id = #{id}
+ </select>
+  <!-- 默认获得id对象 -->
+ <select id="getBycode" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from dictionary 
+        where typecode = #{typecode}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from dictionary 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="typecode != null and typecode != ''">
+           		and typecode=#{typecode}
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+          <include refid="Base_Column_List" />
+        from dictionary 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from dictionary 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from dictionary 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="getByIds" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from dictionary 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and code in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

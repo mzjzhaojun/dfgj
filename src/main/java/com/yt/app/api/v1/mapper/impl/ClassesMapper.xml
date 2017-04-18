@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.ClassesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,campusid,campusname,productid,productcode,productname,classid,classcode,classname,classstatus,roomid,roomcode,roomname,classtype,classtypename,grade,gradename,subject,subjectname,starttime,endtime,lessoncount,invalidlessons,finishedlessons,lessondurationvalue,perioddurationvalue,periodsoflesson,classpeoples,secondpeoples,latestpeoples,teachernames,confirmedmoney,minpeoples,maxpeoples,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Classes">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="productid" column="productid" />
+         <id property="productcode" column="productcode" />
+         <id property="productname" column="productname" />
+         <id property="classid" column="classid" />
+         <id property="classcode" column="classcode" />
+         <id property="classname" column="classname" />
+         <id property="classstatus" column="classstatus" />
+         <id property="roomid" column="roomid" />
+         <id property="roomcode" column="roomcode" />
+         <id property="roomname" column="roomname" />
+         <id property="classtype" column="classtype" />
+         <id property="classtypename" column="classtypename" />
+         <id property="grade" column="grade" />
+         <id property="gradename" column="gradename" />
+         <id property="subject" column="subject" />
+         <id property="subjectname" column="subjectname" />
+         <id property="starttime" column="starttime" />
+         <id property="endtime" column="endtime" />
+         <id property="lessoncount" column="lessoncount" />
+         <id property="invalidlessons" column="invalidlessons" />
+         <id property="finishedlessons" column="finishedlessons" />
+         <id property="lessondurationvalue" column="lessondurationvalue" />
+         <id property="perioddurationvalue" column="perioddurationvalue" />
+         <id property="periodsoflesson" column="periodsoflesson" />
+         <id property="classpeoples" column="classpeoples" />
+         <id property="secondpeoples" column="secondpeoples" />
+         <id property="latestpeoples" column="latestpeoples" />
+         <id property="teachernames" column="teachernames" />
+         <id property="confirmedmoney" column="confirmedmoney" />
+         <id property="minpeoples" column="minpeoples" />
+         <id property="maxpeoples" column="maxpeoples" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Classes">
+  insert into classes (id,campusid,campusname,productid,productcode,productname,classid,classcode,classname,classstatus,roomid,roomcode,roomname,classtype,classtypename,grade,gradename,subject,subjectname,starttime,endtime,lessoncount,invalidlessons,finishedlessons,lessondurationvalue,perioddurationvalue,periodsoflesson,classpeoples,secondpeoples,latestpeoples,teachernames,confirmedmoney,minpeoples,maxpeoples,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{campusid},#{campusname},#{productid},#{productcode},#{productname},#{classid},#{classcode},#{classname},#{classstatus},#{roomid},#{roomcode},#{roomname},#{classtype},#{classtypename},#{grade},#{gradename},#{subject},#{subjectname},#{starttime},#{endtime},#{lessoncount},#{invalidlessons},#{finishedlessons},#{lessondurationvalue},#{perioddurationvalue},#{periodsoflesson},#{classpeoples},#{secondpeoples},#{latestpeoples},#{teachernames},#{confirmedmoney},#{minpeoples},#{maxpeoples},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from classes 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Classes">
+    update classes
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="productid != null">
+                   productid = #{productid},
+             </if>
+             <if test="productcode != null">
+                   productcode = #{productcode},
+             </if>
+             <if test="productname != null">
+                   productname = #{productname},
+             </if>
+             <if test="classid != null">
+                   classid = #{classid},
+             </if>
+             <if test="classcode != null">
+                   classcode = #{classcode},
+             </if>
+             <if test="classname != null">
+                   classname = #{classname},
+             </if>
+             <if test="classstatus != null">
+                   classstatus = #{classstatus},
+             </if>
+             <if test="roomid != null">
+                   roomid = #{roomid},
+             </if>
+             <if test="roomcode != null">
+                   roomcode = #{roomcode},
+             </if>
+             <if test="roomname != null">
+                   roomname = #{roomname},
+             </if>
+             <if test="classtype != null">
+                   classtype = #{classtype},
+             </if>
+             <if test="classtypename != null">
+                   classtypename = #{classtypename},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="gradename != null">
+                   gradename = #{gradename},
+             </if>
+             <if test="subject != null">
+                   subject = #{subject},
+             </if>
+             <if test="subjectname != null">
+                   subjectname = #{subjectname},
+             </if>
+             <if test="starttime != null">
+                   starttime = #{starttime},
+             </if>
+             <if test="endtime != null">
+                   endtime = #{endtime},
+             </if>
+             <if test="lessoncount != null">
+                   lessoncount = #{lessoncount},
+             </if>
+             <if test="invalidlessons != null">
+                   invalidlessons = #{invalidlessons},
+             </if>
+             <if test="finishedlessons != null">
+                   finishedlessons = #{finishedlessons},
+             </if>
+             <if test="lessondurationvalue != null">
+                   lessondurationvalue = #{lessondurationvalue},
+             </if>
+             <if test="perioddurationvalue != null">
+                   perioddurationvalue = #{perioddurationvalue},
+             </if>
+             <if test="periodsoflesson != null">
+                   periodsoflesson = #{periodsoflesson},
+             </if>
+             <if test="classpeoples != null">
+                   classpeoples = #{classpeoples},
+             </if>
+             <if test="secondpeoples != null">
+                   secondpeoples = #{secondpeoples},
+             </if>
+             <if test="latestpeoples != null">
+                   latestpeoples = #{latestpeoples},
+             </if>
+             <if test="teachernames != null">
+                   teachernames = #{teachernames},
+             </if>
+             <if test="confirmedmoney != null">
+                   confirmedmoney = #{confirmedmoney},
+             </if>
+             <if test="minpeoples != null">
+                   minpeoples = #{minpeoples},
+             </if>
+             <if test="maxpeoples != null">
+                   maxpeoples = #{maxpeoples},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from classes 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from classes 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from classes 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from classes 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from classes 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from classes 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

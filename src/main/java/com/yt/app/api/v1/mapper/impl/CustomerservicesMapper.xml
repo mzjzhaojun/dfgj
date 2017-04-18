@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomerservicesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,branchid,branchname,campusid,campusname,customerid,customerkind,customercode,customername,serviceid,servicetype,servicestatus,servicememo,accepttime,acceptlimit,acceptlimitvalue,acceptmemo,accepterid,acceptername,accepterjobid,accepterjobname,appealmemo,consultantid,consultantname,consultantjobid,consultantjobname,educatorid,educatorname,educatorjobid,educatorjobname,consulttype,consultmemo,complainttimes,complaintlevel,complaintupgrade,isupgradehandle,handlerid,handlername,handlerjobname,handlerjobtype,handleadvice,issendemail,handleremail,issendmessage,handlerphone,calltime,voiceid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerservices">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="customerid" column="customerid" />
+         <id property="customerkind" column="customerkind" />
+         <id property="customercode" column="customercode" />
+         <id property="customername" column="customername" />
+         <id property="serviceid" column="serviceid" />
+         <id property="servicetype" column="servicetype" />
+         <id property="servicestatus" column="servicestatus" />
+         <id property="servicememo" column="servicememo" />
+         <id property="accepttime" column="accepttime" />
+         <id property="acceptlimit" column="acceptlimit" />
+         <id property="acceptlimitvalue" column="acceptlimitvalue" />
+         <id property="acceptmemo" column="acceptmemo" />
+         <id property="accepterid" column="accepterid" />
+         <id property="acceptername" column="acceptername" />
+         <id property="accepterjobid" column="accepterjobid" />
+         <id property="accepterjobname" column="accepterjobname" />
+         <id property="appealmemo" column="appealmemo" />
+         <id property="consultantid" column="consultantid" />
+         <id property="consultantname" column="consultantname" />
+         <id property="consultantjobid" column="consultantjobid" />
+         <id property="consultantjobname" column="consultantjobname" />
+         <id property="educatorid" column="educatorid" />
+         <id property="educatorname" column="educatorname" />
+         <id property="educatorjobid" column="educatorjobid" />
+         <id property="educatorjobname" column="educatorjobname" />
+         <id property="consulttype" column="consulttype" />
+         <id property="consultmemo" column="consultmemo" />
+         <id property="complainttimes" column="complainttimes" />
+         <id property="complaintlevel" column="complaintlevel" />
+         <id property="complaintupgrade" column="complaintupgrade" />
+         <id property="isupgradehandle" column="isupgradehandle" />
+         <id property="handlerid" column="handlerid" />
+         <id property="handlername" column="handlername" />
+         <id property="handlerjobname" column="handlerjobname" />
+         <id property="handlerjobtype" column="handlerjobtype" />
+         <id property="handleadvice" column="handleadvice" />
+         <id property="issendemail" column="issendemail" />
+         <id property="handleremail" column="handleremail" />
+         <id property="issendmessage" column="issendmessage" />
+         <id property="handlerphone" column="handlerphone" />
+         <id property="calltime" column="calltime" />
+         <id property="voiceid" column="voiceid" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerservices">
+  insert into customerservices (id,branchid,branchname,campusid,campusname,customerid,customerkind,customercode,customername,serviceid,servicetype,servicestatus,servicememo,accepttime,acceptlimit,acceptlimitvalue,acceptmemo,accepterid,acceptername,accepterjobid,accepterjobname,appealmemo,consultantid,consultantname,consultantjobid,consultantjobname,educatorid,educatorname,educatorjobid,educatorjobname,consulttype,consultmemo,complainttimes,complaintlevel,complaintupgrade,isupgradehandle,handlerid,handlername,handlerjobname,handlerjobtype,handleadvice,issendemail,handleremail,issendmessage,handlerphone,calltime,voiceid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{branchid},#{branchname},#{campusid},#{campusname},#{customerid},#{customerkind},#{customercode},#{customername},#{serviceid},#{servicetype},#{servicestatus},#{servicememo},#{accepttime},#{acceptlimit},#{acceptlimitvalue},#{acceptmemo},#{accepterid},#{acceptername},#{accepterjobid},#{accepterjobname},#{appealmemo},#{consultantid},#{consultantname},#{consultantjobid},#{consultantjobname},#{educatorid},#{educatorname},#{educatorjobid},#{educatorjobname},#{consulttype},#{consultmemo},#{complainttimes},#{complaintlevel},#{complaintupgrade},#{isupgradehandle},#{handlerid},#{handlername},#{handlerjobname},#{handlerjobtype},#{handleadvice},#{issendemail},#{handleremail},#{issendmessage},#{handlerphone},#{calltime},#{voiceid},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customerservices 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customerservices">
+    update customerservices
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="customerkind != null">
+                   customerkind = #{customerkind},
+             </if>
+             <if test="customercode != null">
+                   customercode = #{customercode},
+             </if>
+             <if test="customername != null">
+                   customername = #{customername},
+             </if>
+             <if test="serviceid != null">
+                   serviceid = #{serviceid},
+             </if>
+             <if test="servicetype != null">
+                   servicetype = #{servicetype},
+             </if>
+             <if test="servicestatus != null">
+                   servicestatus = #{servicestatus},
+             </if>
+             <if test="servicememo != null">
+                   servicememo = #{servicememo},
+             </if>
+             <if test="accepttime != null">
+                   accepttime = #{accepttime},
+             </if>
+             <if test="acceptlimit != null">
+                   acceptlimit = #{acceptlimit},
+             </if>
+             <if test="acceptlimitvalue != null">
+                   acceptlimitvalue = #{acceptlimitvalue},
+             </if>
+             <if test="acceptmemo != null">
+                   acceptmemo = #{acceptmemo},
+             </if>
+             <if test="accepterid != null">
+                   accepterid = #{accepterid},
+             </if>
+             <if test="acceptername != null">
+                   acceptername = #{acceptername},
+             </if>
+             <if test="accepterjobid != null">
+                   accepterjobid = #{accepterjobid},
+             </if>
+             <if test="accepterjobname != null">
+                   accepterjobname = #{accepterjobname},
+             </if>
+             <if test="appealmemo != null">
+                   appealmemo = #{appealmemo},
+             </if>
+             <if test="consultantid != null">
+                   consultantid = #{consultantid},
+             </if>
+             <if test="consultantname != null">
+                   consultantname = #{consultantname},
+             </if>
+             <if test="consultantjobid != null">
+                   consultantjobid = #{consultantjobid},
+             </if>
+             <if test="consultantjobname != null">
+                   consultantjobname = #{consultantjobname},
+             </if>
+             <if test="educatorid != null">
+                   educatorid = #{educatorid},
+             </if>
+             <if test="educatorname != null">
+                   educatorname = #{educatorname},
+             </if>
+             <if test="educatorjobid != null">
+                   educatorjobid = #{educatorjobid},
+             </if>
+             <if test="educatorjobname != null">
+                   educatorjobname = #{educatorjobname},
+             </if>
+             <if test="consulttype != null">
+                   consulttype = #{consulttype},
+             </if>
+             <if test="consultmemo != null">
+                   consultmemo = #{consultmemo},
+             </if>
+             <if test="complainttimes != null">
+                   complainttimes = #{complainttimes},
+             </if>
+             <if test="complaintlevel != null">
+                   complaintlevel = #{complaintlevel},
+             </if>
+             <if test="complaintupgrade != null">
+                   complaintupgrade = #{complaintupgrade},
+             </if>
+             <if test="isupgradehandle != null">
+                   isupgradehandle = #{isupgradehandle},
+             </if>
+             <if test="handlerid != null">
+                   handlerid = #{handlerid},
+             </if>
+             <if test="handlername != null">
+                   handlername = #{handlername},
+             </if>
+             <if test="handlerjobname != null">
+                   handlerjobname = #{handlerjobname},
+             </if>
+             <if test="handlerjobtype != null">
+                   handlerjobtype = #{handlerjobtype},
+             </if>
+             <if test="handleadvice != null">
+                   handleadvice = #{handleadvice},
+             </if>
+             <if test="issendemail != null">
+                   issendemail = #{issendemail},
+             </if>
+             <if test="handleremail != null">
+                   handleremail = #{handleremail},
+             </if>
+             <if test="issendmessage != null">
+                   issendmessage = #{issendmessage},
+             </if>
+             <if test="handlerphone != null">
+                   handlerphone = #{handlerphone},
+             </if>
+             <if test="calltime != null">
+                   calltime = #{calltime},
+             </if>
+             <if test="voiceid != null">
+                   voiceid = #{voiceid},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customerservices 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerservices 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerservices 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerservices 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerservices 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerservices 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

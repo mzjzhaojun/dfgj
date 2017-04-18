@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomerteacherassignappliesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,customerteacherrelationid,applytype,campusid,campusname,customerid,oldteacherid,oldteacherjobid,oldteacherjobname,oldteacheroacode,oldteachername,oldteacherjoborgid,oldteacherjoborgname,oldisfulltimeteacher,newteacherid,newteacherjobid,newteacherjobname,newteacheroacode,newteachername,newteacherjoborgid,newteacherjoborgname,newisfulltimeteacher,reason,reasondescription,status,creatorid,creatorname,createtime,tenantcode
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerteacherassignapplies">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="customerteacherrelationid" column="customerteacherrelationid" />
+         <id property="applytype" column="applytype" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="customerid" column="customerid" />
+         <id property="oldteacherid" column="oldteacherid" />
+         <id property="oldteacherjobid" column="oldteacherjobid" />
+         <id property="oldteacherjobname" column="oldteacherjobname" />
+         <id property="oldteacheroacode" column="oldteacheroacode" />
+         <id property="oldteachername" column="oldteachername" />
+         <id property="oldteacherjoborgid" column="oldteacherjoborgid" />
+         <id property="oldteacherjoborgname" column="oldteacherjoborgname" />
+         <id property="oldisfulltimeteacher" column="oldisfulltimeteacher" />
+         <id property="newteacherid" column="newteacherid" />
+         <id property="newteacherjobid" column="newteacherjobid" />
+         <id property="newteacherjobname" column="newteacherjobname" />
+         <id property="newteacheroacode" column="newteacheroacode" />
+         <id property="newteachername" column="newteachername" />
+         <id property="newteacherjoborgid" column="newteacherjoborgid" />
+         <id property="newteacherjoborgname" column="newteacherjoborgname" />
+         <id property="newisfulltimeteacher" column="newisfulltimeteacher" />
+         <id property="reason" column="reason" />
+         <id property="reasondescription" column="reasondescription" />
+         <id property="status" column="status" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="tenantcode" column="tenantcode" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerteacherassignapplies">
+  insert into customerteacherassignapplies (id,customerteacherrelationid,applytype,campusid,campusname,customerid,oldteacherid,oldteacherjobid,oldteacherjobname,oldteacheroacode,oldteachername,oldteacherjoborgid,oldteacherjoborgname,oldisfulltimeteacher,newteacherid,newteacherjobid,newteacherjobname,newteacheroacode,newteachername,newteacherjoborgid,newteacherjoborgname,newisfulltimeteacher,reason,reasondescription,status,creatorid,creatorname,createtime,tenantcode)
+         values (#{id},#{customerteacherrelationid},#{applytype},#{campusid},#{campusname},#{customerid},#{oldteacherid},#{oldteacherjobid},#{oldteacherjobname},#{oldteacheroacode},#{oldteachername},#{oldteacherjoborgid},#{oldteacherjoborgname},#{oldisfulltimeteacher},#{newteacherid},#{newteacherjobid},#{newteacherjobname},#{newteacheroacode},#{newteachername},#{newteacherjoborgid},#{newteacherjoborgname},#{newisfulltimeteacher},#{reason},#{reasondescription},#{status},#{creatorid},#{creatorname},#{createtime},#{tenantcode})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customerteacherassignapplies 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customerteacherassignapplies">
+    update customerteacherassignapplies
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="customerteacherrelationid != null">
+                   customerteacherrelationid = #{customerteacherrelationid},
+             </if>
+             <if test="applytype != null">
+                   applytype = #{applytype},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="oldteacherid != null">
+                   oldteacherid = #{oldteacherid},
+             </if>
+             <if test="oldteacherjobid != null">
+                   oldteacherjobid = #{oldteacherjobid},
+             </if>
+             <if test="oldteacherjobname != null">
+                   oldteacherjobname = #{oldteacherjobname},
+             </if>
+             <if test="oldteacheroacode != null">
+                   oldteacheroacode = #{oldteacheroacode},
+             </if>
+             <if test="oldteachername != null">
+                   oldteachername = #{oldteachername},
+             </if>
+             <if test="oldteacherjoborgid != null">
+                   oldteacherjoborgid = #{oldteacherjoborgid},
+             </if>
+             <if test="oldteacherjoborgname != null">
+                   oldteacherjoborgname = #{oldteacherjoborgname},
+             </if>
+             <if test="oldisfulltimeteacher != null">
+                   oldisfulltimeteacher = #{oldisfulltimeteacher},
+             </if>
+             <if test="newteacherid != null">
+                   newteacherid = #{newteacherid},
+             </if>
+             <if test="newteacherjobid != null">
+                   newteacherjobid = #{newteacherjobid},
+             </if>
+             <if test="newteacherjobname != null">
+                   newteacherjobname = #{newteacherjobname},
+             </if>
+             <if test="newteacheroacode != null">
+                   newteacheroacode = #{newteacheroacode},
+             </if>
+             <if test="newteachername != null">
+                   newteachername = #{newteachername},
+             </if>
+             <if test="newteacherjoborgid != null">
+                   newteacherjoborgid = #{newteacherjoborgid},
+             </if>
+             <if test="newteacherjoborgname != null">
+                   newteacherjoborgname = #{newteacherjoborgname},
+             </if>
+             <if test="newisfulltimeteacher != null">
+                   newisfulltimeteacher = #{newisfulltimeteacher},
+             </if>
+             <if test="reason != null">
+                   reason = #{reason},
+             </if>
+             <if test="reasondescription != null">
+                   reasondescription = #{reasondescription},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="tenantcode != null">
+                   tenantcode = #{tenantcode}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customerteacherassignapplies 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerteacherassignapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerteacherassignapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerteacherassignapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerteacherassignapplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerteacherassignapplies 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

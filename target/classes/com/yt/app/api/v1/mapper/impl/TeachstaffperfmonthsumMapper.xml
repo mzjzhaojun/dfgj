@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.TeachstaffperfmonthsumMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,regionid,branchid,campusid,groupid,staffid,staffjobid,year,month,hourcount,hourcounttask,renewalmoney,refundmoney,onetoonehourcount,onetoonecampusrank,onetoonebranchrank,onetoonecountryrank,grouphourcount,groupcampusrank,groupbranchrank,groupcountryrank,createtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Teachstaffperfmonthsum">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="regionid" column="regionid" />
+         <id property="branchid" column="branchid" />
+         <id property="campusid" column="campusid" />
+         <id property="groupid" column="groupid" />
+         <id property="staffid" column="staffid" />
+         <id property="staffjobid" column="staffjobid" />
+         <id property="year" column="year" />
+         <id property="month" column="month" />
+         <id property="hourcount" column="hourcount" />
+         <id property="hourcounttask" column="hourcounttask" />
+         <id property="renewalmoney" column="renewalmoney" />
+         <id property="refundmoney" column="refundmoney" />
+         <id property="onetoonehourcount" column="onetoonehourcount" />
+         <id property="onetoonecampusrank" column="onetoonecampusrank" />
+         <id property="onetoonebranchrank" column="onetoonebranchrank" />
+         <id property="onetoonecountryrank" column="onetoonecountryrank" />
+         <id property="grouphourcount" column="grouphourcount" />
+         <id property="groupcampusrank" column="groupcampusrank" />
+         <id property="groupbranchrank" column="groupbranchrank" />
+         <id property="groupcountryrank" column="groupcountryrank" />
+         <id property="createtime" column="createtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Teachstaffperfmonthsum">
+  insert into teachstaffperfmonthsum (id,regionid,branchid,campusid,groupid,staffid,staffjobid,year,month,hourcount,hourcounttask,renewalmoney,refundmoney,onetoonehourcount,onetoonecampusrank,onetoonebranchrank,onetoonecountryrank,grouphourcount,groupcampusrank,groupbranchrank,groupcountryrank,createtime)
+         values (#{id},#{regionid},#{branchid},#{campusid},#{groupid},#{staffid},#{staffjobid},#{year},#{month},#{hourcount},#{hourcounttask},#{renewalmoney},#{refundmoney},#{onetoonehourcount},#{onetoonecampusrank},#{onetoonebranchrank},#{onetoonecountryrank},#{grouphourcount},#{groupcampusrank},#{groupbranchrank},#{groupcountryrank},#{createtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from teachstaffperfmonthsum 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Teachstaffperfmonthsum">
+    update teachstaffperfmonthsum
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="groupid != null">
+                   groupid = #{groupid},
+             </if>
+             <if test="staffid != null">
+                   staffid = #{staffid},
+             </if>
+             <if test="staffjobid != null">
+                   staffjobid = #{staffjobid},
+             </if>
+             <if test="year != null">
+                   year = #{year},
+             </if>
+             <if test="month != null">
+                   month = #{month},
+             </if>
+             <if test="hourcount != null">
+                   hourcount = #{hourcount},
+             </if>
+             <if test="hourcounttask != null">
+                   hourcounttask = #{hourcounttask},
+             </if>
+             <if test="renewalmoney != null">
+                   renewalmoney = #{renewalmoney},
+             </if>
+             <if test="refundmoney != null">
+                   refundmoney = #{refundmoney},
+             </if>
+             <if test="onetoonehourcount != null">
+                   onetoonehourcount = #{onetoonehourcount},
+             </if>
+             <if test="onetoonecampusrank != null">
+                   onetoonecampusrank = #{onetoonecampusrank},
+             </if>
+             <if test="onetoonebranchrank != null">
+                   onetoonebranchrank = #{onetoonebranchrank},
+             </if>
+             <if test="onetoonecountryrank != null">
+                   onetoonecountryrank = #{onetoonecountryrank},
+             </if>
+             <if test="grouphourcount != null">
+                   grouphourcount = #{grouphourcount},
+             </if>
+             <if test="groupcampusrank != null">
+                   groupcampusrank = #{groupcampusrank},
+             </if>
+             <if test="groupbranchrank != null">
+                   groupbranchrank = #{groupbranchrank},
+             </if>
+             <if test="groupcountryrank != null">
+                   groupcountryrank = #{groupcountryrank},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from teachstaffperfmonthsum 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from teachstaffperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from teachstaffperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from teachstaffperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from teachstaffperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from teachstaffperfmonthsum 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

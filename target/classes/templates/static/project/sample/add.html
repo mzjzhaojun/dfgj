@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>新增</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="../../css/zyUpload.css">
+<script type="text/javascript" src="../../js/jquery-1.9.1.min.js"></script>
+
+<script type="text/javascript" src="zyFile.js"></script>
+<script type="text/javascript" src="zyUpload.js"></script>
+<script type="text/javascript" type="text/javascript">
+	G = function(objId) {
+		return document.getElementById(objId)
+	};
+	Gn = function(objName) {
+		return document.getElementsByName(objName)
+	};
+
+	var imgurl = "";
+	window.onload = function() {
+		init();
+		$("#img").zyUpload({
+			width : "100%px", // 宽度
+			height : "100%px", // 宽度
+			itemWidth : "120px", // 文件项的宽度
+			itemHeight : "100px", // 文件项的高度
+			url : "/rest/app/upload", // 上传文件的路径
+			multiple : true, // 是否可以多个文件上传
+			dragDrop : false, // 是否可以拖动上传文件
+			del : true, // 是否可以删除文件
+			finishDel : true, // 是否在上传文件完成后删除预览
+			needFlage : "0",//是否必须选择图片0是是，1是否
+			uploadInput : $("#button1"),
+			/* 外部获得的回调接口 */
+			onSuccess : function(response) {
+				var data = JSONUTIL.decode(response); // 文件上传成功的回调方法
+				if (data.succeed) {
+					if (data.statusCode == "200") {
+						var url = data.result[0];
+						imgurl += url + "|";
+					}
+				}
+			},
+			onComplete : function(responseInfo) {
+				submitForm(); // 上传完成的回调方法
+			}
+		});
+	};
+
+	function init() {
+		url = "/rest/app/dictionaries/type/D__ey5wyw3xsguy";
+		REQ.GET(url, callResultBack, parent.ac);
+		url = "/rest/app/dictionaries/type/D__1u3h8r0jke78";
+		REQ.GET(url, callResultBack1, parent.ac);
+	}
+
+	function callResultBack(data) {
+		if (data.succeed) {
+			if (data.statusCode == "200") {
+				var list = data.result;
+				var len = list.length;
+				$("#coupontype").html("");
+				for (var i = 0; i < len; i++) {
+					$("#coupontype").append(
+							$("<option value='"+list[i].code+"'>"
+									+ list[i].name + "</option>"));
+				}
+			}
+		}
+	}
+
+	function callResultBack1(data) {
+		if (data.succeed) {
+			if (data.statusCode == "200") {
+				var list = data.result;
+				var len = list.length;
+				$("#status").html("");
+				for (var i = 0; i < len; i++) {
+					$("#status").append(
+							$("<option value='"+list[i].code+"'>"
+									+ list[i].name + "</option>"));
+				}
+			}
+		}
+	}
+
+	function submitForm() {
+		$("#form").validate({
+			rules : {
+				"name" : {
+					required : true,
+					maxlength : 32
+				},
+				"detail" : {
+					required : true,
+					maxlength : 500
+				},
+				"count" : {
+					required : true,
+					digits : true,
+					maxlength : 11
+				},
+				"price" : {
+					required : true,
+					number : true,
+					maxlength : 9
+				},
+				"sellprice" : {
+					required : true,
+					number : true,
+					maxlength : 9
+				}
+			}
+		});
+		var isValid = $("#form").valid();
+		if (!isValid) {
+			imgurl = "";
+			return;
+		}
+		var name = $("#name").val();
+		var detail = $("#detail").val();
+		var coupontype = $("#coupontype").val();
+		var instructions = $("#instructions").val();
+		var count = $("#count").val();
+		var price = $("#price").val();
+		var status = $("#status").val();
+		var sellprice = $("#sellprice").val();
+		var remark = $("#remark").val();
+
+		var parameter = {
+			name : name,
+			detail : detail,
+			instructions : instructions,
+			status : status,
+			count : count,
+			price : price,
+			sellprice : sellprice,
+			remark : remark,
+			coupontype : coupontype,
+			couponimg : imgurl.substring(0, imgurl.length - 1)
+		};
+		url = "/rest/app/coupon";
+		REQ.POST(url, parameter, callSubmitBack, parent.ac);
+
+	}
+
+	function callSubmitBack(data) {
+		if (data.succeed) {
+			if (data.statusCode == "200") {
+				window.location.href = "list.html";
+			}
+		}
+
+	}
+</script>
+
+</head>
+
+<body>
+	<form name="form" method="post" action="" enctype="multipart/form-data"
+		id="form">
+		<div class="form_box">
+			<table width="100%" border="0" class="table">
+				<tr>
+					<td class="td">劵名称：</td>
+					<td><input type="text" class="input_text equired" id="name"
+						name="name"><span class="span">*</span></td>
+					<td class="td">状态：</td>
+					<td><select name="status" id="status"></select><span
+						class="span">*</span></td>
+				</tr>
+				<tr>
+					<td class="td">劵类型：</td>
+					<td><select name="coupontype" id="coupontype"
+						name="coupontype"></select> <span class="span">*</span></td>
+					<td class="td">总数量：</td>
+					<td><input type="text" class="input_text equired" id="count"
+						name="count"> <span class="span">*</span></td>
+				</tr>
+				<tr>
+					<td class="td">劵面值金额：</td>
+					<td><input type="text" class="input_text equired" id="price"
+						name="price"> <span class="span">*</span></td>
+					<td class="td">劵售卖金额：</td>
+					<td><input type="text" class="input_text equired"
+						id="sellprice" name="sellprice"> <span class="span">*</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="td">劵内容：</td>
+					<td><textArea name="detail" id="detail" cols="90%" rows="7"></textArea>
+						<span class="span">*</span></td>
+				</tr>
+				<tr>
+					<td class="td2">说明：</td>
+					<td colspan="3"><textArea name="instructions"
+							id="instructions" cols="90%" rows="7"></textArea></td>
+				</tr>
+				<tr>
+					<td class="td2">备注：</td>
+					<td colspan="3"><textArea name="remark" id="remark" cols="90%"
+							rows="7"></textArea></td>
+				</tr>
+				<tr>
+					<td class="td2">券图片：</td>
+					<td colspan="3">
+						<div id="img" class="img">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" class="td3" align="center">
+						<button type="button" id="button1" class="button1">保存提交</button>
+						<button type="button" class="button2" onclick="history.go(-1)">取消返回</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</form>
+</body>
+</html>

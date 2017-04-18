@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html ng-app="add">
+  <head>
+    <title>弹出框</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../../resource/css/bootstrap.min.css">
+    <link type="text/css" href="../../../resource/js/artDialog/skins/black.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../../resource/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../../../resource/css/common.css">
+    <script type="text/javascript" src="../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../resource/js/bootstrap.min.js"></script>
+    <script src="../../../resource/js/date/js/eap.core.js"></script>
+	<!-- 弹出框  -->
+	<script src="../../../resource/js/artDialog/artDialog.js"></script>
+	<script src="../../../resource/js/artDialog/plugins/iframeTools.js"></script>
+	<script type="text/javascript">
+		
+		var add = angular.module("add", []);
+		add.controller("addController",function($scope, $http) {
+			//搜索资源
+			$scope.onfind = function(){
+					art.dialog.open('../dialog/linklist.html',
+							{
+								title : '资源搜索',
+								width : 1000,
+								height : 600,
+								close : showWindow,
+								lock:true,
+								resize:false,
+								id : "showWindow",
+								lock:true
+							});
+					art.dialog.data("dialogId", "showWindow");//给弹出框赋值ID
+				}
+			//搜索资源
+			$scope.onfind1 = function(){
+					art.dialog.open('../dialog/list.html',
+							{
+								title : '资源搜索',
+								width : 1000,
+								height : 600,
+								close : showWindow,
+								lock:true,
+								resize:false,
+								id : "showWindow",
+								lock:true
+							});
+					art.dialog.data("dialogId", "showWindow");//给弹出框赋值ID
+				}
+				var linkIds="";
+				function showWindow(){
+					linkIds="";//调用时清空
+					var data = art.dialog.data("data");	
+					if(data != undefined){
+						var len = data.length;
+						var html = "";
+						//初始化选中的数据
+						for(var i = 0;i<len;i++){
+							html +='<label><i class="icon-remove"></i><span>sum_'+data[i]+'</span></label>';
+						}
+						$(".panel").append(html);
+						art.dialog.removeData("data");
+					}
+				}
+		})
+		
+		
+		
+	</script>
+	<style type="text/css">
+		.spanlabel{width: 100px;}
+		.spanbutton{margin:20px;padding:0px 10px;background: #ccc;width: 50px;}
+		.panel{width: 300px;border: solid 1px #ccc;margin:1px;}
+		label{padding:1px 2px;border: solid 1px #ccc;border-radius:2px;margin: 0px 1px 0px 1px;cursor: pointer;}
+	</style>
+</head>
+  
+  <body ng-controller="addController">
+  	<form method="post" id="saveForm" action="">
+    	<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon spanlabel">单一选择链接</span>
+				<span class="input-group-addon spanbutton" ng-click="onfind()">搜索</span>
+				<span class="input-group-addon spanbutton getvalue">获取值</span>
+	        </div>
+	        <div class="panel">
+			      <label><i class="icon-remove"></i><span>123</span></label>
+			      <label><i class="icon-remove"></i><span>23</span></label>
+			      <label><i class="icon-remove"></i><span>123233</span></label>
+			</div>
+			<!-- <span style="color: red;">选中的值会出现在之前的面板中</span> -->
+	        <div class="input-group input-group-sm">
+				<span class="input-group-addon spanlabel">多个选择链接</span>
+				<label></label>
+				<span class="input-group-addon spanbutton" ng-click="onfind1()">搜索</span>
+	        </div>
+	    </div>
+    </form>
+  </body>
+  <script type="text/javascript">
+  	$(function(){
+		$(document).on("click",".panel>label>i",function(){//删除选中的值
+			var ele = $(this).parent();
+			$(ele).remove();
+		});
+		$(document).on("click",".getvalue",function(){//提交选中的值或提示现有的值
+			var ele = $(".panel").find("label>span");
+			var val = "";
+			for(var i = 0;i<ele.length;i++){
+				val += $(ele[i]).html()+",";
+			} 
+			val = val.substring(0,val.length-1);
+			alert(val)
+		}) 
+  	})
+  </script>
+</html>

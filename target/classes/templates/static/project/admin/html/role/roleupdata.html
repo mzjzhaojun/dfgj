@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html ng-app="update">
+<head>
+<title>角色管理-修改</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css"
+	type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="../../../../resource/css/common.css">
+<script type="text/javascript"
+	src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/getUrlParam.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/jquery.cookie.js"></script>
+<!-- 树形控件 -->
+<script type="text/javascript"
+	src="../../../../resource/js/validate/js/jqueryTree/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript"
+	src="../../../../resource/js/validate/js/jqueryTree/jquery.ztree.excheck-3.5.js"></script>
+
+<script type="text/javascript">
+	var update = angular.module("update", []);
+	update.controller("updateController", function($scope, $http) {
+		//		var ids = UrlParm.parm("id");	
+		$scope.inittype = function() {
+			$http({
+				url : parent.getMenuLinksHref("roledicttype"),
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ""
+			}).success(function(data, status, headers, config) {
+				$scope.syss = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		$scope.inittree = function() {
+			$http({
+				url : parent.getFunctionLinksHref("self"),
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				//响应成功
+				$scope.formData = data.role;
+				$scope.formData.type = data.role.type;
+				var zNodes = data.listmeun;
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+				//	initData(data.listmeun);
+
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			});
+		}
+		$scope.formData = {};
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		//保存
+		$scope.onSave = function() {
+
+			//获取角色对应的菜单权限
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+			var nodes = treeObj.getCheckedNodes(true);
+			var modules = "";
+			var code = "";
+			for (var i = 0; i < nodes.length; i++) {
+				modules += nodes[i].id + ",";
+			}
+			if (modules != "") {
+				code = modules.substring(0, modules.length - 1);
+			} else {
+				alert('请选择权限!');
+				return;
+			}
+
+			$scope.formData.menucode = code;
+			$http({
+				url : parent.getFunctionLinksHref("self"),
+				method : 'PUT',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify($scope.formData)
+			}).success(function(data, status, headers, config) {
+				location.href = "rolelist.html";
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+
+		}
+
+		$scope.inittype();
+		$scope.inittree();
+	})
+
+	var setting = {
+		check : {
+			enable : true
+		},
+		data : {
+			simpleData : {
+				enable : true
+			}
+		},
+		view : {
+
+		}
+	};
+	var zNodes;
+	var uid = 1;
+	var url = parent.getMenuLinksHref("menuptree");
+	//初始化所有菜单
+	function initMenu() {
+		$.post(url, function(data) {
+			var zNodes = data;
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+			var nodes = treeObj.getCheckedNodes();
+			for (var i = 0; i < nodes.length; i++) {
+				if (nodes[i].checked)
+					treeObj.checkNode(nodes[i], true, true);
+			}
+		}, 'json');
+	}
+	//	$(function(){
+	//		initMenu();
+	//	})
+
+	function initData(data) {
+		//角色对应的菜单模块
+		var zNodes = data;
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+		var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+		var nodes = treeObj.getChangeCheckedNodes();
+
+		for (var i = 0; i < nodes.length; i++) {
+
+			if (nodes[i].pId != null) {
+				if (nodes[i].checked) {
+					treeObj.checkNode(nodes[i], true, true);
+				}
+			}
+		}
+	}
+</script>
+
+<style type="text/css">
+div.zTreeDemoBackground {
+	width: 250px;
+	height: 302px;
+	text-align: left;
+}
+
+ul.ztree {
+	height: 300px;
+	overflow-y: scroll;
+	overflow-x: auto;
+}
+</style>
+</head>
+
+<body ng-controller="updateController">
+	<form method="post" id="saveForm" action="">
+		<!-- 操作按钮操作区 -->
+		<div class="col-lg-12 topActionPanel">
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onSave()">确
+					定</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()">返
+					回</button>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<input type="hidden" class="form-control required" name="id"
+				ng-model="formData.id" value="{{formData.id}}" maxlength="50">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">角&nbsp;&nbsp;色&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;</span>
+				<input type="text" class="form-control required" name="name"
+					ng-model="formData.name" value="{{formData.roleName}}"
+					maxlength="50"> <span
+					class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">角色类型&nbsp;&nbsp;</span>
+				<select class="form-control required" name="type"
+					ng-model="formData.type"
+					ng-options="sys.code as sys.name for sys in syss">
+					<option value="">请选择类型</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+
+			<div class="input-group input-group-sm">
+
+				<span class="input-group-addon text-right spanwidth">菜单权限&nbsp;&nbsp;&nbsp;</span>
+				<input type="hidden" name="add_menucode" id="add_menucode">
+				<div class=" form-control"
+					style="position: relative; z-index: 1; height: 100%">
+					<ul id="treeDemo" class="ztree"></ul>
+				</div>
+			</div>
+
+
+		</div>
+	</form>
+</body>
+</html>

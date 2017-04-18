@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.ConsultcampusperfdaysumMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,regionid,branchid,campusid,year,month,day,moneycount,peoplecount,newmoneycount,newpeoplecount,createtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Consultcampusperfdaysum">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="regionid" column="regionid" />
+         <id property="branchid" column="branchid" />
+         <id property="campusid" column="campusid" />
+         <id property="year" column="year" />
+         <id property="month" column="month" />
+         <id property="day" column="day" />
+         <id property="moneycount" column="moneycount" />
+         <id property="peoplecount" column="peoplecount" />
+         <id property="newmoneycount" column="newmoneycount" />
+         <id property="newpeoplecount" column="newpeoplecount" />
+         <id property="createtime" column="createtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Consultcampusperfdaysum">
+  insert into consultcampusperfdaysum (id,regionid,branchid,campusid,year,month,day,moneycount,peoplecount,newmoneycount,newpeoplecount,createtime)
+         values (#{id},#{regionid},#{branchid},#{campusid},#{year},#{month},#{day},#{moneycount},#{peoplecount},#{newmoneycount},#{newpeoplecount},#{createtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from consultcampusperfdaysum 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Consultcampusperfdaysum">
+    update consultcampusperfdaysum
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="year != null">
+                   year = #{year},
+             </if>
+             <if test="month != null">
+                   month = #{month},
+             </if>
+             <if test="day != null">
+                   day = #{day},
+             </if>
+             <if test="moneycount != null">
+                   moneycount = #{moneycount},
+             </if>
+             <if test="peoplecount != null">
+                   peoplecount = #{peoplecount},
+             </if>
+             <if test="newmoneycount != null">
+                   newmoneycount = #{newmoneycount},
+             </if>
+             <if test="newpeoplecount != null">
+                   newpeoplecount = #{newpeoplecount},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from consultcampusperfdaysum 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from consultcampusperfdaysum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from consultcampusperfdaysum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from consultcampusperfdaysum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from consultcampusperfdaysum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from consultcampusperfdaysum 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

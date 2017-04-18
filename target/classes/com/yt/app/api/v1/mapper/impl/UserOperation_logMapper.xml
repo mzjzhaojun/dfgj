@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.UserOperation_logMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,resource_id,subject,application_name,program_name,process_id,activity_id,activity_name,operator_id,operator_name,top_dept_id,top_dept_name,real_user_id,real_user_name,operate_datetime,operate_name,operate_type,operate_description,http_context,correlation_id
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.UserOperation_log">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="resource_id" column="resource_id" />
+         <id property="subject" column="subject" />
+         <id property="application_name" column="application_name" />
+         <id property="program_name" column="program_name" />
+         <id property="process_id" column="process_id" />
+         <id property="activity_id" column="activity_id" />
+         <id property="activity_name" column="activity_name" />
+         <id property="operator_id" column="operator_id" />
+         <id property="operator_name" column="operator_name" />
+         <id property="top_dept_id" column="top_dept_id" />
+         <id property="top_dept_name" column="top_dept_name" />
+         <id property="real_user_id" column="real_user_id" />
+         <id property="real_user_name" column="real_user_name" />
+         <id property="operate_datetime" column="operate_datetime" />
+         <id property="operate_name" column="operate_name" />
+         <id property="operate_type" column="operate_type" />
+         <id property="operate_description" column="operate_description" />
+         <id property="http_context" column="http_context" />
+         <id property="correlation_id" column="correlation_id" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.UserOperation_log">
+  insert into user_operation_log (id,resource_id,subject,application_name,program_name,process_id,activity_id,activity_name,operator_id,operator_name,top_dept_id,top_dept_name,real_user_id,real_user_name,operate_datetime,operate_name,operate_type,operate_description,http_context,correlation_id)
+         values (#{id},#{resource_id},#{subject},#{application_name},#{program_name},#{process_id},#{activity_id},#{activity_name},#{operator_id},#{operator_name},#{top_dept_id},#{top_dept_name},#{real_user_id},#{real_user_name},#{operate_datetime},#{operate_name},#{operate_type},#{operate_description},#{http_context},#{correlation_id})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from user_operation_log 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.UserOperation_log">
+    update user_operation_log
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="resource_id != null">
+                   resource_id = #{resource_id},
+             </if>
+             <if test="subject != null">
+                   subject = #{subject},
+             </if>
+             <if test="application_name != null">
+                   application_name = #{application_name},
+             </if>
+             <if test="program_name != null">
+                   program_name = #{program_name},
+             </if>
+             <if test="process_id != null">
+                   process_id = #{process_id},
+             </if>
+             <if test="activity_id != null">
+                   activity_id = #{activity_id},
+             </if>
+             <if test="activity_name != null">
+                   activity_name = #{activity_name},
+             </if>
+             <if test="operator_id != null">
+                   operator_id = #{operator_id},
+             </if>
+             <if test="operator_name != null">
+                   operator_name = #{operator_name},
+             </if>
+             <if test="top_dept_id != null">
+                   top_dept_id = #{top_dept_id},
+             </if>
+             <if test="top_dept_name != null">
+                   top_dept_name = #{top_dept_name},
+             </if>
+             <if test="real_user_id != null">
+                   real_user_id = #{real_user_id},
+             </if>
+             <if test="real_user_name != null">
+                   real_user_name = #{real_user_name},
+             </if>
+             <if test="operate_datetime != null">
+                   operate_datetime = #{operate_datetime},
+             </if>
+             <if test="operate_name != null">
+                   operate_name = #{operate_name},
+             </if>
+             <if test="operate_type != null">
+                   operate_type = #{operate_type},
+             </if>
+             <if test="operate_description != null">
+                   operate_description = #{operate_description},
+             </if>
+             <if test="http_context != null">
+                   http_context = #{http_context},
+             </if>
+             <if test="correlation_id != null">
+                   correlation_id = #{correlation_id}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from user_operation_log 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from user_operation_log 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from user_operation_log 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from user_operation_log 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from user_operation_log 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from user_operation_log 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

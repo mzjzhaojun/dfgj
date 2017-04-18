@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.UserTaskMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,task_guid,application_name,program_name,task_level,task_title,resource_id,process_id,activity_id,url,data,emergency,purpose,status,task_start_time,expire_time,source_id,source_name,send_to_user,send_to_user_name,read_time,category_guid,top_flag,draft_department_name,deliver_time,draft_user_id,draft_user_name,operation_type,operation_name,from_transition_key,from_transition_name,from_activity_id,from_activity_key,to_activity_key
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.UserTask">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="task_guid" column="task_guid" />
+         <id property="application_name" column="application_name" />
+         <id property="program_name" column="program_name" />
+         <id property="task_level" column="task_level" />
+         <id property="task_title" column="task_title" />
+         <id property="resource_id" column="resource_id" />
+         <id property="process_id" column="process_id" />
+         <id property="activity_id" column="activity_id" />
+         <id property="url" column="url" />
+         <id property="data" column="data" />
+         <id property="emergency" column="emergency" />
+         <id property="purpose" column="purpose" />
+         <id property="status" column="status" />
+         <id property="task_start_time" column="task_start_time" />
+         <id property="expire_time" column="expire_time" />
+         <id property="source_id" column="source_id" />
+         <id property="source_name" column="source_name" />
+         <id property="send_to_user" column="send_to_user" />
+         <id property="send_to_user_name" column="send_to_user_name" />
+         <id property="read_time" column="read_time" />
+         <id property="category_guid" column="category_guid" />
+         <id property="top_flag" column="top_flag" />
+         <id property="draft_department_name" column="draft_department_name" />
+         <id property="deliver_time" column="deliver_time" />
+         <id property="draft_user_id" column="draft_user_id" />
+         <id property="draft_user_name" column="draft_user_name" />
+         <id property="operation_type" column="operation_type" />
+         <id property="operation_name" column="operation_name" />
+         <id property="from_transition_key" column="from_transition_key" />
+         <id property="from_transition_name" column="from_transition_name" />
+         <id property="from_activity_id" column="from_activity_id" />
+         <id property="from_activity_key" column="from_activity_key" />
+         <id property="to_activity_key" column="to_activity_key" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.UserTask">
+  insert into user_task (id,task_guid,application_name,program_name,task_level,task_title,resource_id,process_id,activity_id,url,data,emergency,purpose,status,task_start_time,expire_time,source_id,source_name,send_to_user,send_to_user_name,read_time,category_guid,top_flag,draft_department_name,deliver_time,draft_user_id,draft_user_name,operation_type,operation_name,from_transition_key,from_transition_name,from_activity_id,from_activity_key,to_activity_key)
+         values (#{id},#{task_guid},#{application_name},#{program_name},#{task_level},#{task_title},#{resource_id},#{process_id},#{activity_id},#{url},#{data},#{emergency},#{purpose},#{status},#{task_start_time},#{expire_time},#{source_id},#{source_name},#{send_to_user},#{send_to_user_name},#{read_time},#{category_guid},#{top_flag},#{draft_department_name},#{deliver_time},#{draft_user_id},#{draft_user_name},#{operation_type},#{operation_name},#{from_transition_key},#{from_transition_name},#{from_activity_id},#{from_activity_key},#{to_activity_key})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from user_task 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.UserTask">
+    update user_task
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="task_guid != null">
+                   task_guid = #{task_guid},
+             </if>
+             <if test="application_name != null">
+                   application_name = #{application_name},
+             </if>
+             <if test="program_name != null">
+                   program_name = #{program_name},
+             </if>
+             <if test="task_level != null">
+                   task_level = #{task_level},
+             </if>
+             <if test="task_title != null">
+                   task_title = #{task_title},
+             </if>
+             <if test="resource_id != null">
+                   resource_id = #{resource_id},
+             </if>
+             <if test="process_id != null">
+                   process_id = #{process_id},
+             </if>
+             <if test="activity_id != null">
+                   activity_id = #{activity_id},
+             </if>
+             <if test="url != null">
+                   url = #{url},
+             </if>
+             <if test="data != null">
+                   data = #{data},
+             </if>
+             <if test="emergency != null">
+                   emergency = #{emergency},
+             </if>
+             <if test="purpose != null">
+                   purpose = #{purpose},
+             </if>
+             <if test="status != null">
+                   status = #{status},
+             </if>
+             <if test="task_start_time != null">
+                   task_start_time = #{task_start_time},
+             </if>
+             <if test="expire_time != null">
+                   expire_time = #{expire_time},
+             </if>
+             <if test="source_id != null">
+                   source_id = #{source_id},
+             </if>
+             <if test="source_name != null">
+                   source_name = #{source_name},
+             </if>
+             <if test="send_to_user != null">
+                   send_to_user = #{send_to_user},
+             </if>
+             <if test="send_to_user_name != null">
+                   send_to_user_name = #{send_to_user_name},
+             </if>
+             <if test="read_time != null">
+                   read_time = #{read_time},
+             </if>
+             <if test="category_guid != null">
+                   category_guid = #{category_guid},
+             </if>
+             <if test="top_flag != null">
+                   top_flag = #{top_flag},
+             </if>
+             <if test="draft_department_name != null">
+                   draft_department_name = #{draft_department_name},
+             </if>
+             <if test="deliver_time != null">
+                   deliver_time = #{deliver_time},
+             </if>
+             <if test="draft_user_id != null">
+                   draft_user_id = #{draft_user_id},
+             </if>
+             <if test="draft_user_name != null">
+                   draft_user_name = #{draft_user_name},
+             </if>
+             <if test="operation_type != null">
+                   operation_type = #{operation_type},
+             </if>
+             <if test="operation_name != null">
+                   operation_name = #{operation_name},
+             </if>
+             <if test="from_transition_key != null">
+                   from_transition_key = #{from_transition_key},
+             </if>
+             <if test="from_transition_name != null">
+                   from_transition_name = #{from_transition_name},
+             </if>
+             <if test="from_activity_id != null">
+                   from_activity_id = #{from_activity_id},
+             </if>
+             <if test="from_activity_key != null">
+                   from_activity_key = #{from_activity_key},
+             </if>
+             <if test="to_activity_key != null">
+                   to_activity_key = #{to_activity_key}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from user_task 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from user_task 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from user_task 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from user_task 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from user_task 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from user_task 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

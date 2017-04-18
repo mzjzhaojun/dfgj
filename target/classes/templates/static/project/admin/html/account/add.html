@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html ng-app="add">
+<head>
+<title>用户管理-新增</title>
+
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+   <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+        <link rel="stylesheet" type="text/css" href="../../../../resource/css/font-awesome.css">
+     <link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/sysmenu.css">
+    
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.all-3.5.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+    
+    <script src="../../../../resource/js/date/js/eap.core.js"></script>
+	<!-- 表单验证 -->
+	<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css"/>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	
+	
+	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<!-- 时间 -->
+    <link rel="stylesheet" type="text/css"href="../../../../resource/js/date/css/date.css">
+    <script src="../../../../resource/js/date/js/eap.util.date.js"></script>
+    <script src="../../../../resource/js/date/js/eap.simpleDatepicker.js"></script>
+  
+  <!-- 树形控件 -->
+    <script type="text/javascript"src="../../../../resource/js/validate/js/jqueryTree/jquery.ztree.core-3.5.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/validate/js/jqueryTree/jquery.ztree.excheck-3.5.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js?skin=default"></script>
+    <script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add.controller("addController", function($scope, $http) {
+
+		$scope.formData = {};
+		
+		$scope.initcode = function() {
+			$http({
+				url : parent.getMenuLinksHref("admindictionaryself"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify({
+					typecode : 10
+				})
+			}).success(function(data, status, headers, config) {
+				$scope.syss = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+		}
+		
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		//保存
+		$scope.onSave = function() {
+			var isValid = $("#saveForm").valid();
+			if(isValid){
+			$scope.formData.create_time = $("#createtime").val();
+			$scope.formData.endtime = $("#endtime").val();
+			$scope.formData.roleid = $("#id").val();
+			$http({
+				url : parent.getMenuLinksHref("accountpost"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials: true,
+				headers : {'Content-Type' : 'application/json;charset=UTF-8;'},
+				data : JSON.stringify($scope.formData)
+			}).success(function(data, status, headers, config) {
+				location.href = "list.html";
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+			}
+		}
+
+		/****************弹出框--商品类型************************/
+		$scope.selectOrgType = function() {
+			artdialogIframe("account/typelist.html", null, backfn, 900, 600,
+					true);
+		}
+		
+		$scope.initcode();
+
+	})
+
+	$(function() {
+		var expiration = new Date();
+		$("#createtime").val(expiration.formatDate("yyyy-MM-dd HH:mm:ss"));
+		$("#createtime").simpleDatepicker({
+			pattern : "yyyy-MM-dd HH:mm:ss"
+		});
+
+	});
+
+	$(function() {
+		var expiration = new Date();
+		$("#endtime").val(expiration.formatDate("yyyy-MM-dd HH:mm:ss"));
+		$("#endtime").simpleDatepicker({
+			pattern : "yyyy-MM-dd HH:mm:ss"
+		});
+
+	});
+	
+	function backfn() {
+		if (parent.getDateChild().id != undefined) {
+			document.getElementById("id").value = parent.getDateChild().id;
+		}
+		if (parent.getDateChild().name != undefined) {
+			document.getElementById("name").value = parent.getDateChild().name;
+		}
+
+		var parm = {};
+		parm.id = "";
+		parm.name = "";
+		setDateChild(parm);
+	}
+</script>
+
+<style type="text/css">
+.fontselect {
+	border: 1px solid #ccc;
+	background-color: #fff;
+	background-image: none;
+	color: #555;
+	height: 30px;
+	width: 80%;
+}
+</style>
+</head>
+
+<body ng-controller="addController">
+	<form method="post" id="saveForm" action="">
+		<!-- 操作按钮操作区 -->
+		<div class="col-lg-12 topActionPanel">
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onSave()">确
+					定</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()">返
+					回</button>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<input style="width: 55%; height: 30px;" type="hidden" id="createtime"
+					ng-model="formData.create_time" class="form-control dates"
+					readonly="readonly">
+		
+			<div class="input-group input-group-sm">
+				<input type="hidden" id="id"ng-model="formData.id" />
+				<span class="input-group-addon text-right spanwidth">角色类型&nbsp;</span>
+				<input type="text" id="name" name="name"
+					ng-model="formData.rolename" readonly="readonly"
+					class="form-control required"> 
+					<i id="type_name" ng-click="selectOrgType()" class="icon-search img_div" title="选择"></i>
+			</div>
+
+		
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;</span>
+				<input type="text" class="form-control required" name="account" style="width: 55%;" name="url" ng-model="formData.account" maxlength="32">
+				<span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码&nbsp;&nbsp;</span>
+				<input type="text" class="form-control required" name="psw" style="width: 55%;" name="url" ng-model="formData.psw" maxlength="128">
+			   <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">账号对应类型&nbsp;&nbsp;</span>
+				<select class="form-control"  ng-model="formData.type" ng-options="dic.dictionary.code as dic.dictionary.name for dic in syss">
+				
+				</select>
+	            <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;</span>
+				<input type="text" class="form-control required" style="width: 55%;" name="name" ng-model="formData.name" maxlength="20">
+				<span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务&nbsp;&nbsp;</span>
+				<input style="width: 55%; height: 30px;" type="text" id="position"	ng-model="formData.position" class="form-control ">
+
+			</div>
+         						
+			 <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">手&nbsp;机&nbsp;号&nbsp;&nbsp;</span>
+				<input  class="form-control mobile" style="width: 55%; height: 30px;" type="text" name="mobile" id="mobile" ng-model="formData.mobile" >
+			</div>
+   		    <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱&nbsp;&nbsp;</span>
+				<input  class="form-control email" style="width: 55%; height: 30px;" type="text" id="position"  ng-model="formData.mail" >
+
+			</div>
+   		    <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日&nbsp;&nbsp;</span>
+				<input  style="width: 55%; height: 30px;" type="text" name="birthday" id="birthday"  ng-model="formData.birthday" class="form-control ">
+
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">身份证号&nbsp;&nbsp;</span>
+				<input  class="form-control idCard" style="width: 55%; height: 30px;" type="text" name="card_id" id="card_id"  ng-model="formData.card_id">
+
+			</div>
+			
+		</div>
+	</form>
+</body>
+</html>

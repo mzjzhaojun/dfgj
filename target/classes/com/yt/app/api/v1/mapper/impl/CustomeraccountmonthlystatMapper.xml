@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomeraccountmonthlystatMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,monthkey,customerid,customername,accountvaluebegin,accountmoneybegin,chargeamountplmccm,chargeamountcm,debookamountcm,debookreturnamountcm,nerefundamountcm,orderamountcm,deductamountcm,returnamountcm,accountmoneyend,assetsmoneybegin,dlreturnmoneycm,assignamountplmccm,assignamountcm,assetsmoneyend,accountvalueend
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customeraccountmonthlystat">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="monthkey" column="monthkey" />
+         <id property="customerid" column="customerid" />
+         <id property="customername" column="customername" />
+         <id property="accountvaluebegin" column="accountvaluebegin" />
+         <id property="accountmoneybegin" column="accountmoneybegin" />
+         <id property="chargeamountplmccm" column="chargeamountplmccm" />
+         <id property="chargeamountcm" column="chargeamountcm" />
+         <id property="debookamountcm" column="debookamountcm" />
+         <id property="debookreturnamountcm" column="debookreturnamountcm" />
+         <id property="nerefundamountcm" column="nerefundamountcm" />
+         <id property="orderamountcm" column="orderamountcm" />
+         <id property="deductamountcm" column="deductamountcm" />
+         <id property="returnamountcm" column="returnamountcm" />
+         <id property="accountmoneyend" column="accountmoneyend" />
+         <id property="assetsmoneybegin" column="assetsmoneybegin" />
+         <id property="dlreturnmoneycm" column="dlreturnmoneycm" />
+         <id property="assignamountplmccm" column="assignamountplmccm" />
+         <id property="assignamountcm" column="assignamountcm" />
+         <id property="assetsmoneyend" column="assetsmoneyend" />
+         <id property="accountvalueend" column="accountvalueend" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customeraccountmonthlystat">
+  insert into customeraccountmonthlystat (id,monthkey,customerid,customername,accountvaluebegin,accountmoneybegin,chargeamountplmccm,chargeamountcm,debookamountcm,debookreturnamountcm,nerefundamountcm,orderamountcm,deductamountcm,returnamountcm,accountmoneyend,assetsmoneybegin,dlreturnmoneycm,assignamountplmccm,assignamountcm,assetsmoneyend,accountvalueend)
+         values (#{id},#{monthkey},#{customerid},#{customername},#{accountvaluebegin},#{accountmoneybegin},#{chargeamountplmccm},#{chargeamountcm},#{debookamountcm},#{debookreturnamountcm},#{nerefundamountcm},#{orderamountcm},#{deductamountcm},#{returnamountcm},#{accountmoneyend},#{assetsmoneybegin},#{dlreturnmoneycm},#{assignamountplmccm},#{assignamountcm},#{assetsmoneyend},#{accountvalueend})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customeraccountmonthlystat 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customeraccountmonthlystat">
+    update customeraccountmonthlystat
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="monthkey != null">
+                   monthkey = #{monthkey},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="customername != null">
+                   customername = #{customername},
+             </if>
+             <if test="accountvaluebegin != null">
+                   accountvaluebegin = #{accountvaluebegin},
+             </if>
+             <if test="accountmoneybegin != null">
+                   accountmoneybegin = #{accountmoneybegin},
+             </if>
+             <if test="chargeamountplmccm != null">
+                   chargeamountplmccm = #{chargeamountplmccm},
+             </if>
+             <if test="chargeamountcm != null">
+                   chargeamountcm = #{chargeamountcm},
+             </if>
+             <if test="debookamountcm != null">
+                   debookamountcm = #{debookamountcm},
+             </if>
+             <if test="debookreturnamountcm != null">
+                   debookreturnamountcm = #{debookreturnamountcm},
+             </if>
+             <if test="nerefundamountcm != null">
+                   nerefundamountcm = #{nerefundamountcm},
+             </if>
+             <if test="orderamountcm != null">
+                   orderamountcm = #{orderamountcm},
+             </if>
+             <if test="deductamountcm != null">
+                   deductamountcm = #{deductamountcm},
+             </if>
+             <if test="returnamountcm != null">
+                   returnamountcm = #{returnamountcm},
+             </if>
+             <if test="accountmoneyend != null">
+                   accountmoneyend = #{accountmoneyend},
+             </if>
+             <if test="assetsmoneybegin != null">
+                   assetsmoneybegin = #{assetsmoneybegin},
+             </if>
+             <if test="dlreturnmoneycm != null">
+                   dlreturnmoneycm = #{dlreturnmoneycm},
+             </if>
+             <if test="assignamountplmccm != null">
+                   assignamountplmccm = #{assignamountplmccm},
+             </if>
+             <if test="assignamountcm != null">
+                   assignamountcm = #{assignamountcm},
+             </if>
+             <if test="assetsmoneyend != null">
+                   assetsmoneyend = #{assetsmoneyend},
+             </if>
+             <if test="accountvalueend != null">
+                   accountvalueend = #{accountvalueend}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customeraccountmonthlystat 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customeraccountmonthlystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customeraccountmonthlystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customeraccountmonthlystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customeraccountmonthlystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customeraccountmonthlystat 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

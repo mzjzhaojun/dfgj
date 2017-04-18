@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.AccountrecordsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,campusid,customerid,accountid,recordid,recordtime,recordtype,recordflag,billid,billno,billparentid,billparentno,billrelateid,billrelateno,billtime,billtype,billtypename,billmoney,billmemo,billerid,billername,billerjobid,billerjobname
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accountrecords">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="campusid" column="campusid" />
+         <id property="customerid" column="customerid" />
+         <id property="accountid" column="accountid" />
+         <id property="recordid" column="recordid" />
+         <id property="recordtime" column="recordtime" />
+         <id property="recordtype" column="recordtype" />
+         <id property="recordflag" column="recordflag" />
+         <id property="billid" column="billid" />
+         <id property="billno" column="billno" />
+         <id property="billparentid" column="billparentid" />
+         <id property="billparentno" column="billparentno" />
+         <id property="billrelateid" column="billrelateid" />
+         <id property="billrelateno" column="billrelateno" />
+         <id property="billtime" column="billtime" />
+         <id property="billtype" column="billtype" />
+         <id property="billtypename" column="billtypename" />
+         <id property="billmoney" column="billmoney" />
+         <id property="billmemo" column="billmemo" />
+         <id property="billerid" column="billerid" />
+         <id property="billername" column="billername" />
+         <id property="billerjobid" column="billerjobid" />
+         <id property="billerjobname" column="billerjobname" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Accountrecords">
+  insert into accountrecords (id,campusid,customerid,accountid,recordid,recordtime,recordtype,recordflag,billid,billno,billparentid,billparentno,billrelateid,billrelateno,billtime,billtype,billtypename,billmoney,billmemo,billerid,billername,billerjobid,billerjobname)
+         values (#{id},#{campusid},#{customerid},#{accountid},#{recordid},#{recordtime},#{recordtype},#{recordflag},#{billid},#{billno},#{billparentid},#{billparentno},#{billrelateid},#{billrelateno},#{billtime},#{billtype},#{billtypename},#{billmoney},#{billmemo},#{billerid},#{billername},#{billerjobid},#{billerjobname})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from accountrecords 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Accountrecords">
+    update accountrecords
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="accountid != null">
+                   accountid = #{accountid},
+             </if>
+             <if test="recordid != null">
+                   recordid = #{recordid},
+             </if>
+             <if test="recordtime != null">
+                   recordtime = #{recordtime},
+             </if>
+             <if test="recordtype != null">
+                   recordtype = #{recordtype},
+             </if>
+             <if test="recordflag != null">
+                   recordflag = #{recordflag},
+             </if>
+             <if test="billid != null">
+                   billid = #{billid},
+             </if>
+             <if test="billno != null">
+                   billno = #{billno},
+             </if>
+             <if test="billparentid != null">
+                   billparentid = #{billparentid},
+             </if>
+             <if test="billparentno != null">
+                   billparentno = #{billparentno},
+             </if>
+             <if test="billrelateid != null">
+                   billrelateid = #{billrelateid},
+             </if>
+             <if test="billrelateno != null">
+                   billrelateno = #{billrelateno},
+             </if>
+             <if test="billtime != null">
+                   billtime = #{billtime},
+             </if>
+             <if test="billtype != null">
+                   billtype = #{billtype},
+             </if>
+             <if test="billtypename != null">
+                   billtypename = #{billtypename},
+             </if>
+             <if test="billmoney != null">
+                   billmoney = #{billmoney},
+             </if>
+             <if test="billmemo != null">
+                   billmemo = #{billmemo},
+             </if>
+             <if test="billerid != null">
+                   billerid = #{billerid},
+             </if>
+             <if test="billername != null">
+                   billername = #{billername},
+             </if>
+             <if test="billerjobid != null">
+                   billerjobid = #{billerjobid},
+             </if>
+             <if test="billerjobname != null">
+                   billerjobname = #{billerjobname}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from accountrecords 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountrecords 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountrecords 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accountrecords 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accountrecords 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountrecords 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

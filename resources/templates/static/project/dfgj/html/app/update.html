@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html ng-app="update">
+  <head>
+    <title>应用管理-修改</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+ <link rel="stylesheet" type="text/css"href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"href="../../../../resource/css/common.css">
+<script type="text/javascript"src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript"src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"src="../../../../resource/js/jquery.cookie.js"></script>
+<script type="text/javascript"src="../../../../resource/js/bootstrap.min.js"></script>
+<script src="../../../../resource/js/date/js/eap.core.js"></script>
+<!-- 表单验证 -->
+<link rel="stylesheet" type="text/css"href="../../../../resource/js/validate/css/validate.css" />
+<script type="text/javascript"src="../../../../resource/js/validate/js/eap.tip.js"></script>
+<script type="text/javascript"src="../../../../resource/js/validate/js/eap.validate.js"></script>
+<script type="text/javascript"src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+
+<!-- 公共的 -->
+<script type="text/javascript" src="../../../../resource/js/util.js"></script>
+<!-- 引用控制层插件样式 -->
+<link rel="stylesheet"href="../../../../resource/css/zyfile/control/css/zyUpload.css"type="text/css">
+<!-- 引用核心层插件 -->
+<script type="text/javascript"src="../../../../resource/js/zyfile/core/zyFile.js"></script>
+<!-- 引用控制层插件 -->
+<script type="text/javascript"src="../../../../resource/js/zyfile/control/js/zyUpload.js"></script>
+	<script type="text/javascript">
+		
+		var update = angular.module("update", []);
+		update.controller("updateController",function($scope, $http) {
+			
+			//$scope.formData = {};
+			
+			//$scope.formData.visable=1;
+			$scope.getdata=function(){
+				$http({
+					url:parent.getFunctionLinksHref("self"),
+					method:'GET',
+					dataType : "json",
+					withCredentials: true,
+					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+					data: ''
+					}).success(function(data, status, headers, config){
+						//响应成功
+						console.log(data);
+						
+						$scope.formData= data;					
+
+						// 初始化插件
+						$("#img").zyUpload(
+															{
+																width : "500px", // 宽度
+																height : "176.5px", // 宽度
+																itemWidth : "120px", // 文件项的宽度
+																itemHeight : "150px", // 文件项的高度
+																url : parent.sys.moreFileUrl, // 上传文件的路径
+																multiple : false, // 是否可以多个文件上传
+																dragDrop : false, // 是否可以拖动上传文件
+																del : true, // 是否可以删除文件
+																finishDel : false, // 是否在上传文件完成后删除预览
+																needFlage : "1", //是否必须选择文件 0是是，1是否 
+																acitionType : "update", //update页面控制按钮隐藏
+																uploadInput : $("#submit"),
+																onComplete : function(
+																		responseInfo) {
+																	//submitForm(); // 上传完成的回调方法
+																	var appElement = document.querySelector('[ng-controller=updateController]');
+																	var $scope = angular.element(appElement).scope();
+																	$scope.onPreserved();
+																}
+															},
+															{
+																imgUrl : $scope.formData.iconurl,
+																inputId : "headerimg"
+															});
+						formData.visable=data.visable;
+						formData.type=data.type;
+				
+					}).error(function(data, status, headers, config){
+						//处理响应失败
+						response(status);
+					});
+				}
+			
+			$scope.initvisable = function() {
+				$http({
+					url : parent.getMenuLinksHref("admindictionaryself"),
+					method : 'POST',
+					dataType : "json",
+					withCredentials : true,
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					data : JSON.stringify({
+						typecode : 40
+					})
+				}).success(function(data, status, headers, config) {
+					
+					$scope.dictionaryvisable = data;	
+				//	$scope.formData.sex = data[0].dictionary.code; //默认第一个显示出来
+			
+				}).error(function(data, status, headers, config) {
+					//处理响应失败
+					response(status);
+				})
+			}
+			$scope.inittype = function() {
+				$http({
+					url : parent.getMenuLinksHref("admindictionaryself"),
+					method : 'POST',
+					dataType : "json",
+					withCredentials : true,
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					data : JSON.stringify({
+						typecode : 800
+					})
+				}).success(function(data, status, headers, config) {
+					$scope.dictionarytype = data;
+				}).error(function(data, status, headers, config) {
+					//处理响应失败
+					response(status);
+				})
+			}
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			//保存
+			$scope.onPreserved=function(){
+				initbind("updateController");
+				var isValid = $("#saveForm").valid();
+			//	$scope.formData.iconurl=$("#img_default").val();
+					if(isValid){
+    				$http({
+    					url:parent.getFunctionLinksHref("self"),
+    					method:'PUT',
+    					dataType : "json",
+    					withCredentials: true,
+    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    					data: JSON.stringify($scope.formData)
+    		  		}).success(function(data, status, headers, config){
+    		  			location.href="list.html";
+    		  		}).error(function(data, status, headers, config){
+						//处理响应失败
+    		  			response(status);
+					})
+    			}
+			}
+			
+			$scope.getdata();
+			$scope.initvisable();
+			$scope.inittype();
+		})
+		
+		
+		
+	</script>
+</head>
+  
+  <body ng-controller="updateController">
+  	<form method="post" id="saveForm" action="">
+  		 <!-- 操作按钮操作区 -->
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+		    	<button type="button" class="btn btn-primary"  id="submit">确 定</button>
+	    	</div>
+	    	<div>
+		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+	    	</div>
+    	</div>
+   		<div class="col-lg-6">
+	        
+	   		 <div class="input-group input-group-sm">
+	            <span class="input-group-addon text-right spanwidth">应用名称</span>
+	           	<input type="text" class="form-control required" placeholder="请输入应用名称" name="name" ng-model="formData.name" maxlength="16">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        <div class="input-group input-group-sm">
+	            <span class="input-group-addon text-right spanwidth">应用图标</span>
+	     	<div id="img" class="img"></div>
+				<input type="hidden" id="headerimg" class="form-control inputchange"ng-model="formData.iconurl" />
+	        </div>
+	       
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">是否显示</span>
+				<select class="form-control required" name="app_code" ng-model="formData.visable" ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionaryvisable">					
+				</select>
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">应用类型</span>
+				<select class="form-control required" name="app_type" ng-model="formData.type" ng-options="dic.dictionary.code as dic.dictionary.name for dic in dictionarytype">
+					
+				</select>
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">应用排序</span>
+				<input type="text" class="form-control required" placeholder="请输入类型名称" name="orderby" ng-model="formData.orderby">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+   		</div>
+    </form>
+    
+  </body>
+ 
+</html>

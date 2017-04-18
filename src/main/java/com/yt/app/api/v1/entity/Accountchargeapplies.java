@@ -1,0 +1,182 @@
+package com.yt.app.api.v1.entity;
+
+import lombok.Getter;
+import lombok.Setter;
+import java.io.Serializable;
+/**
+* @author zj    default  
+* 
+* @version v1
+* @createdate  2017-04-17 17:44:00
+*/
+@Getter
+@Setter
+public class Accountchargeapplies implements Serializable{
+
+  private static final long serialVersionUID=1L;
+
+  Long id;
+  Integer version;
+  String campusid;
+  String campusname;
+  String parentid;
+  String parentname;
+  String customerid;
+  String customercode;
+  String customername;
+  String customergrade;
+  String accountid;
+  String accountcode;
+  String applyid;
+  String applyno;
+  String applystatus;
+  String applymemo;
+  String applytime;
+  String applierid;
+  String appliername;
+  String applierjobid;
+  String applierjobname;
+  String applierjobtype;
+  String processstatus;
+  String processtime;
+  String processmemo;
+  String chargetype;
+  String chargeflag;
+  Object chargemoney;
+  Object paidmoney;
+  String paystatus;
+  String paytime;
+  String swipetime;
+  String actualtime;
+  String thatdiscountid;
+  String thatdiscountcode;
+  Object thatdiscountbase;
+  Object thatdiscountrate;
+  Object thataccountvalue;
+  Object thataccountmoney;
+  String thisdiscountid;
+  String thisdiscountcode;
+  Object thisdiscountbase;
+  Object thisdiscountrate;
+  Object thisaccountvalue;
+  Object thisaccountmoney;
+  String consultantid;
+  String consultantname;
+  String consultantjobid;
+  String educatorid;
+  String educatorname;
+  String educatorjobid;
+  String submitterid;
+  String submittername;
+  String submitterjobid;
+  String submitterjobname;
+  String submitterjobtype;
+  String submittime;
+  String approverid;
+  String approvername;
+  String approverjobid;
+  String approverjobname;
+  String approvetime;
+  String auditorid;
+  String auditorname;
+  String auditorjobid;
+  String auditorjobname;
+  String auditstatus;
+  String audittime;
+  Integer auditstate1;
+  Integer auditstate2;
+  Integer auditstate3;
+  Integer auditstate4;
+  Integer auditstate5;
+  String creatorid;
+  String creatorname;
+  String createtime;
+  String modifierid;
+  String modifiername;
+  String modifytime;
+  String allotsubjects;
+  public Accountchargeapplies(){
+  }
+  public Accountchargeapplies(Long id,Integer version,String campusid,String campusname,String parentid,String parentname,String customerid,String customercode,String customername,String customergrade,String accountid,String accountcode,String applyid,String applyno,String applystatus,String applymemo,String applytime,String applierid,String appliername,String applierjobid,String applierjobname,String applierjobtype,String processstatus,String processtime,String processmemo,String chargetype,String chargeflag,Object chargemoney,Object paidmoney,String paystatus,String paytime,String swipetime,String actualtime,String thatdiscountid,String thatdiscountcode,Object thatdiscountbase,Object thatdiscountrate,Object thataccountvalue,Object thataccountmoney,String thisdiscountid,String thisdiscountcode,Object thisdiscountbase,Object thisdiscountrate,Object thisaccountvalue,Object thisaccountmoney,String consultantid,String consultantname,String consultantjobid,String educatorid,String educatorname,String educatorjobid,String submitterid,String submittername,String submitterjobid,String submitterjobname,String submitterjobtype,String submittime,String approverid,String approvername,String approverjobid,String approverjobname,String approvetime,String auditorid,String auditorname,String auditorjobid,String auditorjobname,String auditstatus,String audittime,Integer auditstate1,Integer auditstate2,Integer auditstate3,Integer auditstate4,Integer auditstate5,String creatorid,String creatorname,String createtime,String modifierid,String modifiername,String modifytime,String allotsubjects){
+      this.id=id;
+      this.version=version;
+      this.campusid=campusid;
+      this.campusname=campusname;
+      this.parentid=parentid;
+      this.parentname=parentname;
+      this.customerid=customerid;
+      this.customercode=customercode;
+      this.customername=customername;
+      this.customergrade=customergrade;
+      this.accountid=accountid;
+      this.accountcode=accountcode;
+      this.applyid=applyid;
+      this.applyno=applyno;
+      this.applystatus=applystatus;
+      this.applymemo=applymemo;
+      this.applytime=applytime;
+      this.applierid=applierid;
+      this.appliername=appliername;
+      this.applierjobid=applierjobid;
+      this.applierjobname=applierjobname;
+      this.applierjobtype=applierjobtype;
+      this.processstatus=processstatus;
+      this.processtime=processtime;
+      this.processmemo=processmemo;
+      this.chargetype=chargetype;
+      this.chargeflag=chargeflag;
+      this.chargemoney=chargemoney;
+      this.paidmoney=paidmoney;
+      this.paystatus=paystatus;
+      this.paytime=paytime;
+      this.swipetime=swipetime;
+      this.actualtime=actualtime;
+      this.thatdiscountid=thatdiscountid;
+      this.thatdiscountcode=thatdiscountcode;
+      this.thatdiscountbase=thatdiscountbase;
+      this.thatdiscountrate=thatdiscountrate;
+      this.thataccountvalue=thataccountvalue;
+      this.thataccountmoney=thataccountmoney;
+      this.thisdiscountid=thisdiscountid;
+      this.thisdiscountcode=thisdiscountcode;
+      this.thisdiscountbase=thisdiscountbase;
+      this.thisdiscountrate=thisdiscountrate;
+      this.thisaccountvalue=thisaccountvalue;
+      this.thisaccountmoney=thisaccountmoney;
+      this.consultantid=consultantid;
+      this.consultantname=consultantname;
+      this.consultantjobid=consultantjobid;
+      this.educatorid=educatorid;
+      this.educatorname=educatorname;
+      this.educatorjobid=educatorjobid;
+      this.submitterid=submitterid;
+      this.submittername=submittername;
+      this.submitterjobid=submitterjobid;
+      this.submitterjobname=submitterjobname;
+      this.submitterjobtype=submitterjobtype;
+      this.submittime=submittime;
+      this.approverid=approverid;
+      this.approvername=approvername;
+      this.approverjobid=approverjobid;
+      this.approverjobname=approverjobname;
+      this.approvetime=approvetime;
+      this.auditorid=auditorid;
+      this.auditorname=auditorname;
+      this.auditorjobid=auditorjobid;
+      this.auditorjobname=auditorjobname;
+      this.auditstatus=auditstatus;
+      this.audittime=audittime;
+      this.auditstate1=auditstate1;
+      this.auditstate2=auditstate2;
+      this.auditstate3=auditstate3;
+      this.auditstate4=auditstate4;
+      this.auditstate5=auditstate5;
+      this.creatorid=creatorid;
+      this.creatorname=creatorname;
+      this.createtime=createtime;
+      this.modifierid=modifierid;
+      this.modifiername=modifiername;
+      this.modifytime=modifytime;
+      this.allotsubjects=allotsubjects;
+  }
+}

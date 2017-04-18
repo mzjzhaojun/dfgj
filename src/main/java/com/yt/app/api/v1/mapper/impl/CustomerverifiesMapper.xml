@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomerverifiesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,campusid,campusname,customerid,verifyid,verifytime,verifierid,verifiername,verifierjobid,verifierjobname,verifypeoples,verifyrelations,planverifytime,isinvited,issigned,creatorid,creatorname,createtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerverifies">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="customerid" column="customerid" />
+         <id property="verifyid" column="verifyid" />
+         <id property="verifytime" column="verifytime" />
+         <id property="verifierid" column="verifierid" />
+         <id property="verifiername" column="verifiername" />
+         <id property="verifierjobid" column="verifierjobid" />
+         <id property="verifierjobname" column="verifierjobname" />
+         <id property="verifypeoples" column="verifypeoples" />
+         <id property="verifyrelations" column="verifyrelations" />
+         <id property="planverifytime" column="planverifytime" />
+         <id property="isinvited" column="isinvited" />
+         <id property="issigned" column="issigned" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerverifies">
+  insert into customerverifies (id,campusid,campusname,customerid,verifyid,verifytime,verifierid,verifiername,verifierjobid,verifierjobname,verifypeoples,verifyrelations,planverifytime,isinvited,issigned,creatorid,creatorname,createtime)
+         values (#{id},#{campusid},#{campusname},#{customerid},#{verifyid},#{verifytime},#{verifierid},#{verifiername},#{verifierjobid},#{verifierjobname},#{verifypeoples},#{verifyrelations},#{planverifytime},#{isinvited},#{issigned},#{creatorid},#{creatorname},#{createtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customerverifies 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customerverifies">
+    update customerverifies
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="verifyid != null">
+                   verifyid = #{verifyid},
+             </if>
+             <if test="verifytime != null">
+                   verifytime = #{verifytime},
+             </if>
+             <if test="verifierid != null">
+                   verifierid = #{verifierid},
+             </if>
+             <if test="verifiername != null">
+                   verifiername = #{verifiername},
+             </if>
+             <if test="verifierjobid != null">
+                   verifierjobid = #{verifierjobid},
+             </if>
+             <if test="verifierjobname != null">
+                   verifierjobname = #{verifierjobname},
+             </if>
+             <if test="verifypeoples != null">
+                   verifypeoples = #{verifypeoples},
+             </if>
+             <if test="verifyrelations != null">
+                   verifyrelations = #{verifyrelations},
+             </if>
+             <if test="planverifytime != null">
+                   planverifytime = #{planverifytime},
+             </if>
+             <if test="isinvited != null">
+                   isinvited = #{isinvited},
+             </if>
+             <if test="issigned != null">
+                   issigned = #{issigned},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customerverifies 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerverifies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerverifies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerverifies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerverifies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerverifies 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

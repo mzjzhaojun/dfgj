@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CustomerrepliesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,replyid,branchid,branchname,campusid,campusname,customerid,customername,parentid,parentpassportid,parentname,phonenumber,replytime,replyobject,replycontent,replyfrom,replierid,replierjobid,repliername,poster,creatorid,creatorname,createtime,fromsystemid,status
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerreplies">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="replyid" column="replyid" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="customerid" column="customerid" />
+         <id property="customername" column="customername" />
+         <id property="parentid" column="parentid" />
+         <id property="parentpassportid" column="parentpassportid" />
+         <id property="parentname" column="parentname" />
+         <id property="phonenumber" column="phonenumber" />
+         <id property="replytime" column="replytime" />
+         <id property="replyobject" column="replyobject" />
+         <id property="replycontent" column="replycontent" />
+         <id property="replyfrom" column="replyfrom" />
+         <id property="replierid" column="replierid" />
+         <id property="replierjobid" column="replierjobid" />
+         <id property="repliername" column="repliername" />
+         <id property="poster" column="poster" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="fromsystemid" column="fromsystemid" />
+         <id property="status" column="status" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerreplies">
+  insert into customerreplies (id,replyid,branchid,branchname,campusid,campusname,customerid,customername,parentid,parentpassportid,parentname,phonenumber,replytime,replyobject,replycontent,replyfrom,replierid,replierjobid,repliername,poster,creatorid,creatorname,createtime,fromsystemid,status)
+         values (#{id},#{replyid},#{branchid},#{branchname},#{campusid},#{campusname},#{customerid},#{customername},#{parentid},#{parentpassportid},#{parentname},#{phonenumber},#{replytime},#{replyobject},#{replycontent},#{replyfrom},#{replierid},#{replierjobid},#{repliername},#{poster},#{creatorid},#{creatorname},#{createtime},#{fromsystemid},#{status})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from customerreplies 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Customerreplies">
+    update customerreplies
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="replyid != null">
+                   replyid = #{replyid},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="customername != null">
+                   customername = #{customername},
+             </if>
+             <if test="parentid != null">
+                   parentid = #{parentid},
+             </if>
+             <if test="parentpassportid != null">
+                   parentpassportid = #{parentpassportid},
+             </if>
+             <if test="parentname != null">
+                   parentname = #{parentname},
+             </if>
+             <if test="phonenumber != null">
+                   phonenumber = #{phonenumber},
+             </if>
+             <if test="replytime != null">
+                   replytime = #{replytime},
+             </if>
+             <if test="replyobject != null">
+                   replyobject = #{replyobject},
+             </if>
+             <if test="replycontent != null">
+                   replycontent = #{replycontent},
+             </if>
+             <if test="replyfrom != null">
+                   replyfrom = #{replyfrom},
+             </if>
+             <if test="replierid != null">
+                   replierid = #{replierid},
+             </if>
+             <if test="replierjobid != null">
+                   replierjobid = #{replierjobid},
+             </if>
+             <if test="repliername != null">
+                   repliername = #{repliername},
+             </if>
+             <if test="poster != null">
+                   poster = #{poster},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="fromsystemid != null">
+                   fromsystemid = #{fromsystemid},
+             </if>
+             <if test="status != null">
+                   status = #{status}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from customerreplies 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerreplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerreplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerreplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from customerreplies 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from customerreplies 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

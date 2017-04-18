@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.ClasslessonsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,classid,sortno,lessonid,lessoncode,lessonstatus,starttime,endtime,confirmstatus,confirmtime,confirmedpeoples,confirmedmoney,lessonpeoples,roomid,roomcode,roomname,teacherid,teachername,teacheroacode,teacherjobid,teacherjoborgid,teacherjoborgname,isfulltimeteacher,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Classlessons">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="classid" column="classid" />
+         <id property="sortno" column="sortno" />
+         <id property="lessonid" column="lessonid" />
+         <id property="lessoncode" column="lessoncode" />
+         <id property="lessonstatus" column="lessonstatus" />
+         <id property="starttime" column="starttime" />
+         <id property="endtime" column="endtime" />
+         <id property="confirmstatus" column="confirmstatus" />
+         <id property="confirmtime" column="confirmtime" />
+         <id property="confirmedpeoples" column="confirmedpeoples" />
+         <id property="confirmedmoney" column="confirmedmoney" />
+         <id property="lessonpeoples" column="lessonpeoples" />
+         <id property="roomid" column="roomid" />
+         <id property="roomcode" column="roomcode" />
+         <id property="roomname" column="roomname" />
+         <id property="teacherid" column="teacherid" />
+         <id property="teachername" column="teachername" />
+         <id property="teacheroacode" column="teacheroacode" />
+         <id property="teacherjobid" column="teacherjobid" />
+         <id property="teacherjoborgid" column="teacherjoborgid" />
+         <id property="teacherjoborgname" column="teacherjoborgname" />
+         <id property="isfulltimeteacher" column="isfulltimeteacher" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Classlessons">
+  insert into classlessons (id,classid,sortno,lessonid,lessoncode,lessonstatus,starttime,endtime,confirmstatus,confirmtime,confirmedpeoples,confirmedmoney,lessonpeoples,roomid,roomcode,roomname,teacherid,teachername,teacheroacode,teacherjobid,teacherjoborgid,teacherjoborgname,isfulltimeteacher,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{classid},#{sortno},#{lessonid},#{lessoncode},#{lessonstatus},#{starttime},#{endtime},#{confirmstatus},#{confirmtime},#{confirmedpeoples},#{confirmedmoney},#{lessonpeoples},#{roomid},#{roomcode},#{roomname},#{teacherid},#{teachername},#{teacheroacode},#{teacherjobid},#{teacherjoborgid},#{teacherjoborgname},#{isfulltimeteacher},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from classlessons 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Classlessons">
+    update classlessons
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="classid != null">
+                   classid = #{classid},
+             </if>
+             <if test="sortno != null">
+                   sortno = #{sortno},
+             </if>
+             <if test="lessonid != null">
+                   lessonid = #{lessonid},
+             </if>
+             <if test="lessoncode != null">
+                   lessoncode = #{lessoncode},
+             </if>
+             <if test="lessonstatus != null">
+                   lessonstatus = #{lessonstatus},
+             </if>
+             <if test="starttime != null">
+                   starttime = #{starttime},
+             </if>
+             <if test="endtime != null">
+                   endtime = #{endtime},
+             </if>
+             <if test="confirmstatus != null">
+                   confirmstatus = #{confirmstatus},
+             </if>
+             <if test="confirmtime != null">
+                   confirmtime = #{confirmtime},
+             </if>
+             <if test="confirmedpeoples != null">
+                   confirmedpeoples = #{confirmedpeoples},
+             </if>
+             <if test="confirmedmoney != null">
+                   confirmedmoney = #{confirmedmoney},
+             </if>
+             <if test="lessonpeoples != null">
+                   lessonpeoples = #{lessonpeoples},
+             </if>
+             <if test="roomid != null">
+                   roomid = #{roomid},
+             </if>
+             <if test="roomcode != null">
+                   roomcode = #{roomcode},
+             </if>
+             <if test="roomname != null">
+                   roomname = #{roomname},
+             </if>
+             <if test="teacherid != null">
+                   teacherid = #{teacherid},
+             </if>
+             <if test="teachername != null">
+                   teachername = #{teachername},
+             </if>
+             <if test="teacheroacode != null">
+                   teacheroacode = #{teacheroacode},
+             </if>
+             <if test="teacherjobid != null">
+                   teacherjobid = #{teacherjobid},
+             </if>
+             <if test="teacherjoborgid != null">
+                   teacherjoborgid = #{teacherjoborgid},
+             </if>
+             <if test="teacherjoborgname != null">
+                   teacherjoborgname = #{teacherjoborgname},
+             </if>
+             <if test="isfulltimeteacher != null">
+                   isfulltimeteacher = #{isfulltimeteacher},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from classlessons 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from classlessons 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from classlessons 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from classlessons 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from classlessons 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from classlessons 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

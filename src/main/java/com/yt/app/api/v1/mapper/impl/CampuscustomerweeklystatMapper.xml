@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CampuscustomerweeklystatMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,yearkey,monthkey,weekkey,startdayofweek,enddayofweek,regionid,regionname,branchid,branchname,campusid,campusname,availablecustomernumberyear,availablecustomernumbermb,accountvaluemb,accountmoneymb,assetsmoneymb,newassignnumbertm,cfrcnumbertm,ssanumbertm,othernewavailablenumbertm,totalnewavailablenumbertm,csssnumbertm,cfnrcnumbertm,cfrfnumbertm,othernoneavailablenumbertm,totalnoneavailablenumbertm,netavailablechangenumbertm,availablecustomernumbercurrent,accountvaluecurrent,accountmoneycurrent,assetsmoneycurrent,renewchargenumbertm,renewratetm,renewratety,csanumbertm,ncsnumbertm,netcsnumbertm,totalcsnumber,ssnm1numbercurrent,ssm1numbercurrent,csratecurrent,classcustomernumbertm,classratetm
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Campuscustomerweeklystat">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="yearkey" column="yearkey" />
+         <id property="monthkey" column="monthkey" />
+         <id property="weekkey" column="weekkey" />
+         <id property="startdayofweek" column="startdayofweek" />
+         <id property="enddayofweek" column="enddayofweek" />
+         <id property="regionid" column="regionid" />
+         <id property="regionname" column="regionname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="availablecustomernumberyear" column="availablecustomernumberyear" />
+         <id property="availablecustomernumbermb" column="availablecustomernumbermb" />
+         <id property="accountvaluemb" column="accountvaluemb" />
+         <id property="accountmoneymb" column="accountmoneymb" />
+         <id property="assetsmoneymb" column="assetsmoneymb" />
+         <id property="newassignnumbertm" column="newassignnumbertm" />
+         <id property="cfrcnumbertm" column="cfrcnumbertm" />
+         <id property="ssanumbertm" column="ssanumbertm" />
+         <id property="othernewavailablenumbertm" column="othernewavailablenumbertm" />
+         <id property="totalnewavailablenumbertm" column="totalnewavailablenumbertm" />
+         <id property="csssnumbertm" column="csssnumbertm" />
+         <id property="cfnrcnumbertm" column="cfnrcnumbertm" />
+         <id property="cfrfnumbertm" column="cfrfnumbertm" />
+         <id property="othernoneavailablenumbertm" column="othernoneavailablenumbertm" />
+         <id property="totalnoneavailablenumbertm" column="totalnoneavailablenumbertm" />
+         <id property="netavailablechangenumbertm" column="netavailablechangenumbertm" />
+         <id property="availablecustomernumbercurrent" column="availablecustomernumbercurrent" />
+         <id property="accountvaluecurrent" column="accountvaluecurrent" />
+         <id property="accountmoneycurrent" column="accountmoneycurrent" />
+         <id property="assetsmoneycurrent" column="assetsmoneycurrent" />
+         <id property="renewchargenumbertm" column="renewchargenumbertm" />
+         <id property="renewratetm" column="renewratetm" />
+         <id property="renewratety" column="renewratety" />
+         <id property="csanumbertm" column="csanumbertm" />
+         <id property="ncsnumbertm" column="ncsnumbertm" />
+         <id property="netcsnumbertm" column="netcsnumbertm" />
+         <id property="totalcsnumber" column="totalcsnumber" />
+         <id property="ssnm1numbercurrent" column="ssnm1numbercurrent" />
+         <id property="ssm1numbercurrent" column="ssm1numbercurrent" />
+         <id property="csratecurrent" column="csratecurrent" />
+         <id property="classcustomernumbertm" column="classcustomernumbertm" />
+         <id property="classratetm" column="classratetm" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Campuscustomerweeklystat">
+  insert into campuscustomerweeklystat (id,yearkey,monthkey,weekkey,startdayofweek,enddayofweek,regionid,regionname,branchid,branchname,campusid,campusname,availablecustomernumberyear,availablecustomernumbermb,accountvaluemb,accountmoneymb,assetsmoneymb,newassignnumbertm,cfrcnumbertm,ssanumbertm,othernewavailablenumbertm,totalnewavailablenumbertm,csssnumbertm,cfnrcnumbertm,cfrfnumbertm,othernoneavailablenumbertm,totalnoneavailablenumbertm,netavailablechangenumbertm,availablecustomernumbercurrent,accountvaluecurrent,accountmoneycurrent,assetsmoneycurrent,renewchargenumbertm,renewratetm,renewratety,csanumbertm,ncsnumbertm,netcsnumbertm,totalcsnumber,ssnm1numbercurrent,ssm1numbercurrent,csratecurrent,classcustomernumbertm,classratetm)
+         values (#{id},#{yearkey},#{monthkey},#{weekkey},#{startdayofweek},#{enddayofweek},#{regionid},#{regionname},#{branchid},#{branchname},#{campusid},#{campusname},#{availablecustomernumberyear},#{availablecustomernumbermb},#{accountvaluemb},#{accountmoneymb},#{assetsmoneymb},#{newassignnumbertm},#{cfrcnumbertm},#{ssanumbertm},#{othernewavailablenumbertm},#{totalnewavailablenumbertm},#{csssnumbertm},#{cfnrcnumbertm},#{cfrfnumbertm},#{othernoneavailablenumbertm},#{totalnoneavailablenumbertm},#{netavailablechangenumbertm},#{availablecustomernumbercurrent},#{accountvaluecurrent},#{accountmoneycurrent},#{assetsmoneycurrent},#{renewchargenumbertm},#{renewratetm},#{renewratety},#{csanumbertm},#{ncsnumbertm},#{netcsnumbertm},#{totalcsnumber},#{ssnm1numbercurrent},#{ssm1numbercurrent},#{csratecurrent},#{classcustomernumbertm},#{classratetm})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from campuscustomerweeklystat 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Campuscustomerweeklystat">
+    update campuscustomerweeklystat
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="yearkey != null">
+                   yearkey = #{yearkey},
+             </if>
+             <if test="monthkey != null">
+                   monthkey = #{monthkey},
+             </if>
+             <if test="weekkey != null">
+                   weekkey = #{weekkey},
+             </if>
+             <if test="startdayofweek != null">
+                   startdayofweek = #{startdayofweek},
+             </if>
+             <if test="enddayofweek != null">
+                   enddayofweek = #{enddayofweek},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionname != null">
+                   regionname = #{regionname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="availablecustomernumberyear != null">
+                   availablecustomernumberyear = #{availablecustomernumberyear},
+             </if>
+             <if test="availablecustomernumbermb != null">
+                   availablecustomernumbermb = #{availablecustomernumbermb},
+             </if>
+             <if test="accountvaluemb != null">
+                   accountvaluemb = #{accountvaluemb},
+             </if>
+             <if test="accountmoneymb != null">
+                   accountmoneymb = #{accountmoneymb},
+             </if>
+             <if test="assetsmoneymb != null">
+                   assetsmoneymb = #{assetsmoneymb},
+             </if>
+             <if test="newassignnumbertm != null">
+                   newassignnumbertm = #{newassignnumbertm},
+             </if>
+             <if test="cfrcnumbertm != null">
+                   cfrcnumbertm = #{cfrcnumbertm},
+             </if>
+             <if test="ssanumbertm != null">
+                   ssanumbertm = #{ssanumbertm},
+             </if>
+             <if test="othernewavailablenumbertm != null">
+                   othernewavailablenumbertm = #{othernewavailablenumbertm},
+             </if>
+             <if test="totalnewavailablenumbertm != null">
+                   totalnewavailablenumbertm = #{totalnewavailablenumbertm},
+             </if>
+             <if test="csssnumbertm != null">
+                   csssnumbertm = #{csssnumbertm},
+             </if>
+             <if test="cfnrcnumbertm != null">
+                   cfnrcnumbertm = #{cfnrcnumbertm},
+             </if>
+             <if test="cfrfnumbertm != null">
+                   cfrfnumbertm = #{cfrfnumbertm},
+             </if>
+             <if test="othernoneavailablenumbertm != null">
+                   othernoneavailablenumbertm = #{othernoneavailablenumbertm},
+             </if>
+             <if test="totalnoneavailablenumbertm != null">
+                   totalnoneavailablenumbertm = #{totalnoneavailablenumbertm},
+             </if>
+             <if test="netavailablechangenumbertm != null">
+                   netavailablechangenumbertm = #{netavailablechangenumbertm},
+             </if>
+             <if test="availablecustomernumbercurrent != null">
+                   availablecustomernumbercurrent = #{availablecustomernumbercurrent},
+             </if>
+             <if test="accountvaluecurrent != null">
+                   accountvaluecurrent = #{accountvaluecurrent},
+             </if>
+             <if test="accountmoneycurrent != null">
+                   accountmoneycurrent = #{accountmoneycurrent},
+             </if>
+             <if test="assetsmoneycurrent != null">
+                   assetsmoneycurrent = #{assetsmoneycurrent},
+             </if>
+             <if test="renewchargenumbertm != null">
+                   renewchargenumbertm = #{renewchargenumbertm},
+             </if>
+             <if test="renewratetm != null">
+                   renewratetm = #{renewratetm},
+             </if>
+             <if test="renewratety != null">
+                   renewratety = #{renewratety},
+             </if>
+             <if test="csanumbertm != null">
+                   csanumbertm = #{csanumbertm},
+             </if>
+             <if test="ncsnumbertm != null">
+                   ncsnumbertm = #{ncsnumbertm},
+             </if>
+             <if test="netcsnumbertm != null">
+                   netcsnumbertm = #{netcsnumbertm},
+             </if>
+             <if test="totalcsnumber != null">
+                   totalcsnumber = #{totalcsnumber},
+             </if>
+             <if test="ssnm1numbercurrent != null">
+                   ssnm1numbercurrent = #{ssnm1numbercurrent},
+             </if>
+             <if test="ssm1numbercurrent != null">
+                   ssm1numbercurrent = #{ssm1numbercurrent},
+             </if>
+             <if test="csratecurrent != null">
+                   csratecurrent = #{csratecurrent},
+             </if>
+             <if test="classcustomernumbertm != null">
+                   classcustomernumbertm = #{classcustomernumbertm},
+             </if>
+             <if test="classratetm != null">
+                   classratetm = #{classratetm}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from campuscustomerweeklystat 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campuscustomerweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from campuscustomerweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campuscustomerweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campuscustomerweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campuscustomerweeklystat 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

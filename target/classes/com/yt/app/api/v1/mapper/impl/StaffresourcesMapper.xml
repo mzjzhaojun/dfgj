@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.StaffresourcesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,customerid,staffid,statlocaldate,campusid,relationtype,istodayfollow,istodayverify,istodaysigned,customerlevel,verifytime,followtime,followstage,referralstaffid,firstsigntime,firstsignerid
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Staffresources">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="customerid" column="customerid" />
+         <id property="staffid" column="staffid" />
+         <id property="statlocaldate" column="statlocaldate" />
+         <id property="campusid" column="campusid" />
+         <id property="relationtype" column="relationtype" />
+         <id property="istodayfollow" column="istodayfollow" />
+         <id property="istodayverify" column="istodayverify" />
+         <id property="istodaysigned" column="istodaysigned" />
+         <id property="customerlevel" column="customerlevel" />
+         <id property="verifytime" column="verifytime" />
+         <id property="followtime" column="followtime" />
+         <id property="followstage" column="followstage" />
+         <id property="referralstaffid" column="referralstaffid" />
+         <id property="firstsigntime" column="firstsigntime" />
+         <id property="firstsignerid" column="firstsignerid" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Staffresources">
+  insert into staffresources (id,customerid,staffid,statlocaldate,campusid,relationtype,istodayfollow,istodayverify,istodaysigned,customerlevel,verifytime,followtime,followstage,referralstaffid,firstsigntime,firstsignerid)
+         values (#{id},#{customerid},#{staffid},#{statlocaldate},#{campusid},#{relationtype},#{istodayfollow},#{istodayverify},#{istodaysigned},#{customerlevel},#{verifytime},#{followtime},#{followstage},#{referralstaffid},#{firstsigntime},#{firstsignerid})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from staffresources 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Staffresources">
+    update staffresources
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="staffid != null">
+                   staffid = #{staffid},
+             </if>
+             <if test="statlocaldate != null">
+                   statlocaldate = #{statlocaldate},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="relationtype != null">
+                   relationtype = #{relationtype},
+             </if>
+             <if test="istodayfollow != null">
+                   istodayfollow = #{istodayfollow},
+             </if>
+             <if test="istodayverify != null">
+                   istodayverify = #{istodayverify},
+             </if>
+             <if test="istodaysigned != null">
+                   istodaysigned = #{istodaysigned},
+             </if>
+             <if test="customerlevel != null">
+                   customerlevel = #{customerlevel},
+             </if>
+             <if test="verifytime != null">
+                   verifytime = #{verifytime},
+             </if>
+             <if test="followtime != null">
+                   followtime = #{followtime},
+             </if>
+             <if test="followstage != null">
+                   followstage = #{followstage},
+             </if>
+             <if test="referralstaffid != null">
+                   referralstaffid = #{referralstaffid},
+             </if>
+             <if test="firstsigntime != null">
+                   firstsigntime = #{firstsigntime},
+             </if>
+             <if test="firstsignerid != null">
+                   firstsignerid = #{firstsignerid}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from staffresources 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from staffresources 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from staffresources 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from staffresources 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from staffresources 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from staffresources 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

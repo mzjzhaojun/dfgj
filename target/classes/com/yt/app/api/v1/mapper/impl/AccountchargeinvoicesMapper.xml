@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.AccountchargeinvoicesMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,applyid,invoiceid,invoiceno,invoicemoney,invoiceclauses,invoiceheader,invoicetime,invoicememo,invoicestatus,isdiscarded,returntime,returnmemo,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accountchargeinvoices">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="applyid" column="applyid" />
+         <id property="invoiceid" column="invoiceid" />
+         <id property="invoiceno" column="invoiceno" />
+         <id property="invoicemoney" column="invoicemoney" />
+         <id property="invoiceclauses" column="invoiceclauses" />
+         <id property="invoiceheader" column="invoiceheader" />
+         <id property="invoicetime" column="invoicetime" />
+         <id property="invoicememo" column="invoicememo" />
+         <id property="invoicestatus" column="invoicestatus" />
+         <id property="isdiscarded" column="isdiscarded" />
+         <id property="returntime" column="returntime" />
+         <id property="returnmemo" column="returnmemo" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Accountchargeinvoices">
+  insert into accountchargeinvoices (id,applyid,invoiceid,invoiceno,invoicemoney,invoiceclauses,invoiceheader,invoicetime,invoicememo,invoicestatus,isdiscarded,returntime,returnmemo,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{applyid},#{invoiceid},#{invoiceno},#{invoicemoney},#{invoiceclauses},#{invoiceheader},#{invoicetime},#{invoicememo},#{invoicestatus},#{isdiscarded},#{returntime},#{returnmemo},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from accountchargeinvoices 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Accountchargeinvoices">
+    update accountchargeinvoices
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="applyid != null">
+                   applyid = #{applyid},
+             </if>
+             <if test="invoiceid != null">
+                   invoiceid = #{invoiceid},
+             </if>
+             <if test="invoiceno != null">
+                   invoiceno = #{invoiceno},
+             </if>
+             <if test="invoicemoney != null">
+                   invoicemoney = #{invoicemoney},
+             </if>
+             <if test="invoiceclauses != null">
+                   invoiceclauses = #{invoiceclauses},
+             </if>
+             <if test="invoiceheader != null">
+                   invoiceheader = #{invoiceheader},
+             </if>
+             <if test="invoicetime != null">
+                   invoicetime = #{invoicetime},
+             </if>
+             <if test="invoicememo != null">
+                   invoicememo = #{invoicememo},
+             </if>
+             <if test="invoicestatus != null">
+                   invoicestatus = #{invoicestatus},
+             </if>
+             <if test="isdiscarded != null">
+                   isdiscarded = #{isdiscarded},
+             </if>
+             <if test="returntime != null">
+                   returntime = #{returntime},
+             </if>
+             <if test="returnmemo != null">
+                   returnmemo = #{returnmemo},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from accountchargeinvoices 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountchargeinvoices 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountchargeinvoices 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accountchargeinvoices 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from accountchargeinvoices 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from accountchargeinvoices 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

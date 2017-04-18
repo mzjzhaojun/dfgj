@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html ng-app="add">
+  <head>
+    <title>菜单管理-新增</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
+    <link type="text/css" href="../../../../resource/js/artDialog/skins/black.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/font-awesome.css">
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+    <script src="../../../../resource/js/date/js/eap.core.js"></script>
+	<!-- 表单验证 -->
+	<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css"/>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	
+	<!-- <script type="text/javascript" src="../../js/logonValidate.js"></script> -->
+	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.excheck-3.5.js"></script>
+	 <!-- 文件上传 -->  
+	<script src="../../../../resource/js/upload/ajaxupload.3.6.js" type="text/javascript"></script>
+	<script src="../../../../resource/js/upload/upload.js" type="text/javascript"></script>
+	<!-- 弹出框  -->
+	
+	<script src="../../../../resource/js/artDialog/artDialog.js"></script>
+	<script src="../../../../resource/js/artDialog/plugins/iframeTools.js"></script>
+	 <script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+	<script type="text/javascript">
+		
+		var add = angular.module("add", []);
+		add.controller("addController",function($scope, $http) {
+			
+			$scope.formData = {};
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			/*加载系 统*/
+			$http.get(parent.getMenuLinksHref("menusys"),{headers:{'Content-Type': 'application/json;charset=UTF-8;'}}).success( function(response) {
+				$scope.syss = response;
+				$("#select").empty();
+			});
+			//保存
+			$scope.onPreserved=function(){
+			    
+			    var isValid = $("#saveForm").valid();
+			    $scope.checklinks();//处理页面上选择的关联链接数据
+			    $scope.formData.links_id=linkIds;
+			    $scope.formData.parent_id=pid;
+					if(isValid){
+    				$http({
+    					url:parent.getMenuLinksHref("menupost"),
+    					method:'POST',
+    					dataType : "json",
+    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    					withCredentials: true,
+    					data: JSON.stringify($scope.formData)
+    		  		}).success(function(data, status, headers, config){
+    		  			location.href="list.html";
+    		  		}).error(function(data, status, headers, config){
+						//处理响应失败
+    		  			response(status);
+					})
+    			}
+				
+			}
+			var setting = {
+				check: {
+					enable: true
+				},
+				data: {
+					simpleData: {
+						enable: true
+					}
+				}
+				
+			};
+			
+			/* 生成父级树 */	
+			var settingp = {
+					check: {
+						enable: true,
+						chkStyle: "radio",
+						radioType: "all"
+					},
+					data: {
+						simpleData: {
+							enable: true
+						}
+					},
+					callback: {
+						onCheck: changeNodep
+					}
+				};
+					
+				$scope.onTreep=function(){
+					var zNodesp;
+					$http({
+						url:parent.getMenuLinksHref("menuptree"),
+						method:'POST',
+						dataType : "json",
+						headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+						withCredentials: true,
+						data: JSON.stringify($scope.formData)
+			  		}).success(function(data, status, headers, config){
+			  			zNodesp=data;
+			  			$.fn.zTree.init($("#ptree"), settingp, zNodesp);
+			  		}).error(function(data, status, headers, config){
+						//处理响应失败
+			  			response(status);
+					})
+					
+				}
+				$scope.onTreep();
+				var pid="";
+				function changeNodep(){
+					linkIds="";//每次点选后重置重新获取
+					var zTree = $.fn.zTree.getZTreeObj("ptree");
+					var checkNode = zTree.getCheckedNodes(); 
+					pid=checkNode[0].id;
+					
+				}
+				
+				
+				$scope.setIsShow = function(data){
+					if($scope.formData.level != '31') {//建立一级菜单则不展示父菜单树
+						$("#pt").show();
+					} else {
+						$("#pt").hide();
+					}
+				}
+				//搜索资源
+				$scope.onfind = function(){
+					art.dialog.open('../html/menu/linklist.html',
+							{
+								title : '资源搜索',
+								width : 1000,
+								height : 600,
+								close : showWindow,
+								lock:true,
+								resize:false,
+								id : "showWindow",
+								lock:true
+							});
+					art.dialog.data("dialogId", "showWindow");//给弹出框赋值ID
+				}
+				
+				function showWindow(){
+					var data = art.dialog.data("data");	
+					if(data != undefined){
+						var html="";
+						for(var i = 0;i<data.length;i++){
+							 var obj = angular.fromJson(data[i]);  
+							 html +='<label><i class="icon-remove"></i><span id="'+obj.link.id+'">'+obj.link.name+'</span></label>';
+							
+						}
+						$(".panel").append(html);
+						art.dialog.removeData("data");
+					}
+					
+				}
+				/* 处理多选链接 */
+				var linkIds="";
+				$scope.checklinks = function(){
+					var ele = $(".panel").find("label>span");
+					for(var i = 0;i<ele.length;i++){
+						linkIds +=$(ele[i]).attr("id")+",";
+					} 
+				}
+				/* 字典加载 */
+				$http({//菜单等级
+					url:parent.getMenuLinksHref("admindictionaryself"),
+					method:'POST',
+					dataType : "json",
+					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+					withCredentials: true,
+					data: JSON.stringify({"typecode":30})
+					}).success(function(data, status, headers, config){
+						$scope.paytstaust = data;
+						/* for(var i in $scope.status){
+							if(paystatusid==$scope.status[i].dictionary.code){
+								$scope.formData.paystatus =$scope.dictionary.code;
+							}
+			               
+			            }  */
+					}).error(function(data, status, headers, config){
+						//处理响应失败
+						response(status);
+					});	
+				$http({//是否显示
+					url:parent.getMenuLinksHref("admindictionaryself"),
+					method:'POST',
+					dataType : "json",
+					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+					withCredentials: true,
+					data: JSON.stringify({"typecode":40})
+					}).success(function(data, status, headers, config){
+						$scope.isShow = data;
+						/* for(var i in $scope.status){
+							if(paystatusid==$scope.status[i].dictionary.code){
+								$scope.formData.paystatus =$scope.dictionary.code;
+							}
+			               
+			            }  */
+					}).error(function(data, status, headers, config){
+						//处理响应失败
+						response(status);
+					});	
+		})
+		
+	</script>
+	<style type="text/css">
+		.panel{margin-bottom:-5px;}
+		.input-group-sm > i{
+			position:absolute;
+			left:610px;
+			top:80px;
+		}
+	</style>
+</head>
+  
+  <body ng-controller="addController">
+  	<form method="post" id="saveForm" action="">
+  	
+  	 <!-- 操作按钮操作区 -->
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+		    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+	    	</div>
+	    	<div>
+		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+	    	</div>
+    	</div>
+   
+    	<div class="col-lg-6">
+				
+		    <div class="input-group input-group-sm">
+	            <span  class="input-group-addon text-right spanwidth">菜单名称</span>
+	        <input  class="form-control required"  style="height: 30px;" type="text" name="name" ng-model="formData.name"  maxlength="11">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	         <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统</span>
+				<select class="form-control required" name="sys_id" ng-model="formData.sys_id" ng-options="sys.id as sys.name for sys in syss">
+					<option value="">请选择系统</option>
+				</select>
+				<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">菜单等级</span>
+				<select class="form-control required" ng-model="formData.level" id="level" name="level" ng-change="setIsShow(this)" ng-options="dic.dictionary.code as dic.dictionary.name for dic in paytstaust">
+					<option value="">请选择菜单等级</option>
+				</select>
+				<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+		    <div id="pt" class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth ">父级菜单</span>
+				<ul id="ptree" class="ztree" style="width:260px; overflow:auto;height: 100px"></ul>
+	        </div>
+	       
+			<div class="input-group input-group-sm" style="position: relative;left:0px;">
+				<span class="input-group-addon text-right spanwidth">关联链接</span>
+				 <div class="panel" style="width:500px;min-height: 150px;display: inline-block;">
+			      
+			     </div>
+				<i id="linkid" ng-click="onfind()" class="icon-search img_div"></i>
+	        </div>
+			
+			 <div class="input-group input-group-sm">
+	            <span  class="input-group-addon text-right spanwidth"> 菜单链接</span>
+	        	<input  class="form-control"  style="height: 30px;" type="text" name="url" ng-model="formData.url"  maxlength="100">
+	        	
+	        </div>	
+		    <!-- <div class="input-group input-group-sm">
+	            <span  class="input-group-addon text-right spanwidth">菜单图标</span>
+	            <input class="form-control inputchange" type="hidden" name="img_default" id="img_default" ng-model="formData.icon"/> 
+	        </div>
+	        <div class="input-group input-group-sm imgseat">
+	            <img id="image" class="img0" src="../../../../resource/img/default_icon.png"/>
+	        </div> -->
+	          <div class="input-group input-group-sm">
+	            <span  class="input-group-addon text-right spanwidth">同级顺序</span>
+	        <input  class="form-control required"  style="height: 30px;" type="text" name="order_no" ng-model="formData.order_no"  maxlength="11">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	          <div class="input-group input-group-sm">
+	            <span  class="input-group-addon text-right spanwidth">菜单顺序</span>
+	        <input  class="form-control required"  style="height: 30px;" type="text" name="sortno" ng-model="formData.sortno"  maxlength="11">
+	        	<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	       <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">是否显示</span>
+				<select class="form-control required" ng-model="formData.is_show"  name="is_show" ng-options="dic.dictionary.code as dic.dictionary.name for dic in isShow">
+					<option value="">请选择是否显示</option>
+				</select>
+				<span class="input-group-addon verifyprompt">*</span>
+	        </div>
+    	</div>
+    
+
+    </form>
+  </body>
+  <script type="text/javascript">
+  /* upload(parent.sys.fileUrl,"img_default","image","image"); */
+  $(function(){
+	   $(document).on("click",".panel>label>i",function(){//删除选中的值
+			var ele = $(this).parent();
+			$(ele).remove();
+		}); 
+		
+	})
+  </script>
+</html>

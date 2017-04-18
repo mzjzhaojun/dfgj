@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>多人发言评论模板</title>
+<link rel="stylesheet" type="text/css" href="../../../resource/css/bootstrap.min.css">
+<link type="text/css" href="../../../resource/js/artDialog/skins/black.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="../../../resource/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="../../../resource/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../resource/css/list.css">
+<script type="text/javascript" src="../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../resource/js/bootstrap.min.js"></script>
+<script src="../../../resource/js/date/js/eap.core.js"></script>
+<style type="text/css">
+	.table i{font-size: 18px;margin:0px 5px;color: #99DFF8;cursor: pointer;}
+	.icon-minus{display: none;}
+	.table1{width: 100%;margin: 0px;}
+	.table1>thead>tr>th{background:#E3EEFF;font-weight: normal;font-size: 10px;line-height:30px;}
+	.table1 tr{line-height:35px;/* background-color: #F8F8F8; */border:solid 1px #ddd;}
+	.table1 th{padding:0px 10px;}
+	.table1 td{padding:0px 10px;}
+	.row_date{display: none;}
+	.row_date>td{padding: 2px !important;}
+</style>
+</head>
+<body>
+	<table class="table">
+		<thead>
+			<tr>
+				<th width="10"></th>
+				<th width="10"><div id="all" class="checkbox"></div></th>
+				<th>序号</th>
+				<th>数据项</th>
+				<th>数据项</th>
+				<th>数据项</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<i class="icon-minus"></i>
+					<i class="icon-plus"></i>
+				</td>
+				<td><div class="checkbox1 check_box"></div></td>
+				<td>1</td>
+				<td>2</td>
+				<td>2</td>
+				<td>3</td>
+				<td>
+					<i class="icon-remove"></i>
+					<i class="icon-ok"></i>
+					<i class="icon-check"></i>
+				</td>
+			</tr>
+			<tr class="row_date">
+				<td></td>
+				<td></td>
+				<td colspan="5">
+					<table class="table1">
+						<thead>
+							<tr>
+								<th width="10"><div class="children"></div></th>
+								<th>序号</th>
+								<th>数据项</th>
+								<th>数据项</th>
+								<th>数据项</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div class="checkbox2"></div></td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td> 
+								<td>
+									<i class="icon-remove"></i>
+									<i class="icon-ok"></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<i class="icon-minus"></i>
+					<i class="icon-plus"></i>
+				</td>
+				<td><div class="checkbox1 check_box"></div></td>
+				<td>1</td>
+				<td>2</td>
+				<td>2</td>
+				<td>3</td>
+				<td>
+					<i class="icon-remove"></i>
+					<i class="icon-ok"></i>
+					<i class="icon-check"></i>
+				</td>
+			</tr>
+			<tr class="row_date">
+				<td></td>
+				<td></td>
+				<td colspan="5">
+					<table class="table1">
+						<thead>
+							<tr>
+								<th width="10"><div class="children"></div></th>
+								<th>序号</th>
+								<th>数据项</th>
+								<th>数据项</th>
+								<th>数据项</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><div class="checkbox2"></div></td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>1</td>
+								<td>
+									<i class="icon-remove"></i>
+									<i class="icon-ok"></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+<script type="text/javascript">
+	$(function(){
+		/* 折叠 */
+		$(document).on("click",".icon-minus",function(){
+			//$(".icon-plus").hide();
+			$(this).next().show();
+			$(this).parent().parent().next().hide();
+			$(this).hide();
+		})
+		/* 展开 */
+		$(document).on("click",".icon-plus",function(){
+			//$(".icon-minus").hide();
+			$(this).prev().show();
+			$(this).parent().parent().next().show();
+			$(this).hide();
+		})
+		/* 单条提交 */
+		$(document).on("click",".icon-ok",function(){
+			$(this).parent().parent().addClass("btn-success");
+		})
+		/* 多条提交 */
+		$(document).on("click",".icon-check",function(){
+			var ele = $(this).parent().parent();
+			var checkbox = $(ele).next().find("tr");
+			$.each( checkbox, function( index, ele1 ) {
+					$(ele1).addClass("btn-success");
+				}
+			)
+		})
+		$(document).on("click","#all",function(){
+			var className = $(this).attr("class");
+			if(className == "checkbox"){//全选
+				$(this).removeClass("checkbox").addClass("checked");
+				$(".checkbox1").addClass("checked1").removeClass("check_box");
+			}else{//全部取消
+				$(this).removeClass("checked").addClass("checkbox");
+				$(".checkbox1").addClass("check_box").removeClass("checked1");
+			}
+		}) 
+		$(document).on("click",".checkbox1",function(){
+			var className = $(this).attr("class");
+			if(className == "checkbox1 check_box"){//选中
+				$(this).removeClass("check_box").addClass("checked1");
+			}else{//取消
+				$(this).addClass("check_box").removeClass("checked1");
+			}
+		})
+		$(document).on("click",".children",function(){
+			var className = $(this).attr("class");
+			if(className == "children checked2"){//取消
+				$(this).removeClass("checked2");
+				var ele = $(this).parent().parent().parent().parent();
+				var checkbox = $(ele).find(".checkbox2");
+				$.each( checkbox, function( index, ele1 ) {
+						$(ele1).removeClass("checked2");
+					}
+				)
+			}else{//全选
+				$(this).addClass("checked2");
+				var ele = $(this).parent().parent().parent().parent();
+				var checkbox = $(ele).find(".checkbox2");
+				$.each( checkbox, function( index, ele1 ) {
+						$(ele1).addClass("checked2");
+					}
+				)
+			}
+			
+		})
+		$(document).on("click",".checkbox2",function(){
+			var className = $(this).attr("class");
+			if(className == "checkbox2 checked2"){//取消
+				$(this).removeClass("checked2");
+			}else{//选中
+				$(this).addClass("checked2");
+			}
+			
+		})
+	})
+</script>
+</html>

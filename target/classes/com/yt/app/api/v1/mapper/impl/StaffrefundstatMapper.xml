@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.StaffrefundstatMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,statlocaldate,customerid,staffid,staffoacode,staffoaname,campusid,campusname,campusshortname,branchid,branchname,branchshortname,regionid,regionname,regionshortname,hqid,hqname,hqshortname,campusdeliverdate,campusage,staffjobtype,staffjobname,grade,gradename,refundtype,refundtypename,applyrefundmoney,realrefundmoney
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Staffrefundstat">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="statlocaldate" column="statlocaldate" />
+         <id property="customerid" column="customerid" />
+         <id property="staffid" column="staffid" />
+         <id property="staffoacode" column="staffoacode" />
+         <id property="staffoaname" column="staffoaname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="campusshortname" column="campusshortname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="branchshortname" column="branchshortname" />
+         <id property="regionid" column="regionid" />
+         <id property="regionname" column="regionname" />
+         <id property="regionshortname" column="regionshortname" />
+         <id property="hqid" column="hqid" />
+         <id property="hqname" column="hqname" />
+         <id property="hqshortname" column="hqshortname" />
+         <id property="campusdeliverdate" column="campusdeliverdate" />
+         <id property="campusage" column="campusage" />
+         <id property="staffjobtype" column="staffjobtype" />
+         <id property="staffjobname" column="staffjobname" />
+         <id property="grade" column="grade" />
+         <id property="gradename" column="gradename" />
+         <id property="refundtype" column="refundtype" />
+         <id property="refundtypename" column="refundtypename" />
+         <id property="applyrefundmoney" column="applyrefundmoney" />
+         <id property="realrefundmoney" column="realrefundmoney" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Staffrefundstat">
+  insert into staffrefundstat (id,statlocaldate,customerid,staffid,staffoacode,staffoaname,campusid,campusname,campusshortname,branchid,branchname,branchshortname,regionid,regionname,regionshortname,hqid,hqname,hqshortname,campusdeliverdate,campusage,staffjobtype,staffjobname,grade,gradename,refundtype,refundtypename,applyrefundmoney,realrefundmoney)
+         values (#{id},#{statlocaldate},#{customerid},#{staffid},#{staffoacode},#{staffoaname},#{campusid},#{campusname},#{campusshortname},#{branchid},#{branchname},#{branchshortname},#{regionid},#{regionname},#{regionshortname},#{hqid},#{hqname},#{hqshortname},#{campusdeliverdate},#{campusage},#{staffjobtype},#{staffjobname},#{grade},#{gradename},#{refundtype},#{refundtypename},#{applyrefundmoney},#{realrefundmoney})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from staffrefundstat 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Staffrefundstat">
+    update staffrefundstat
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="statlocaldate != null">
+                   statlocaldate = #{statlocaldate},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="staffid != null">
+                   staffid = #{staffid},
+             </if>
+             <if test="staffoacode != null">
+                   staffoacode = #{staffoacode},
+             </if>
+             <if test="staffoaname != null">
+                   staffoaname = #{staffoaname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="campusshortname != null">
+                   campusshortname = #{campusshortname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="branchshortname != null">
+                   branchshortname = #{branchshortname},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionname != null">
+                   regionname = #{regionname},
+             </if>
+             <if test="regionshortname != null">
+                   regionshortname = #{regionshortname},
+             </if>
+             <if test="hqid != null">
+                   hqid = #{hqid},
+             </if>
+             <if test="hqname != null">
+                   hqname = #{hqname},
+             </if>
+             <if test="hqshortname != null">
+                   hqshortname = #{hqshortname},
+             </if>
+             <if test="campusdeliverdate != null">
+                   campusdeliverdate = #{campusdeliverdate},
+             </if>
+             <if test="campusage != null">
+                   campusage = #{campusage},
+             </if>
+             <if test="staffjobtype != null">
+                   staffjobtype = #{staffjobtype},
+             </if>
+             <if test="staffjobname != null">
+                   staffjobname = #{staffjobname},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="gradename != null">
+                   gradename = #{gradename},
+             </if>
+             <if test="refundtype != null">
+                   refundtype = #{refundtype},
+             </if>
+             <if test="refundtypename != null">
+                   refundtypename = #{refundtypename},
+             </if>
+             <if test="applyrefundmoney != null">
+                   applyrefundmoney = #{applyrefundmoney},
+             </if>
+             <if test="realrefundmoney != null">
+                   realrefundmoney = #{realrefundmoney}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from staffrefundstat 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from staffrefundstat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from staffrefundstat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from staffrefundstat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from staffrefundstat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from staffrefundstat 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

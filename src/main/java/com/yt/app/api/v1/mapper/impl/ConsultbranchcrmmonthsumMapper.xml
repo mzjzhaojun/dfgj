@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.ConsultbranchcrmmonthsumMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,regionid,branchid,year,month,followingcountofpotential,followingcountofstudent,verifyingcount,signingcount,unfollowcountofpotential,unfollowcountofstudent,unverifycount,unsigncount,followedcountofpotential,followedcountofstudent,verifiedcount,signedcount,newpotentialcount,convertedratio,verifiedratio,signedratio,createtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Consultbranchcrmmonthsum">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="regionid" column="regionid" />
+         <id property="branchid" column="branchid" />
+         <id property="year" column="year" />
+         <id property="month" column="month" />
+         <id property="followingcountofpotential" column="followingcountofpotential" />
+         <id property="followingcountofstudent" column="followingcountofstudent" />
+         <id property="verifyingcount" column="verifyingcount" />
+         <id property="signingcount" column="signingcount" />
+         <id property="unfollowcountofpotential" column="unfollowcountofpotential" />
+         <id property="unfollowcountofstudent" column="unfollowcountofstudent" />
+         <id property="unverifycount" column="unverifycount" />
+         <id property="unsigncount" column="unsigncount" />
+         <id property="followedcountofpotential" column="followedcountofpotential" />
+         <id property="followedcountofstudent" column="followedcountofstudent" />
+         <id property="verifiedcount" column="verifiedcount" />
+         <id property="signedcount" column="signedcount" />
+         <id property="newpotentialcount" column="newpotentialcount" />
+         <id property="convertedratio" column="convertedratio" />
+         <id property="verifiedratio" column="verifiedratio" />
+         <id property="signedratio" column="signedratio" />
+         <id property="createtime" column="createtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Consultbranchcrmmonthsum">
+  insert into consultbranchcrmmonthsum (id,regionid,branchid,year,month,followingcountofpotential,followingcountofstudent,verifyingcount,signingcount,unfollowcountofpotential,unfollowcountofstudent,unverifycount,unsigncount,followedcountofpotential,followedcountofstudent,verifiedcount,signedcount,newpotentialcount,convertedratio,verifiedratio,signedratio,createtime)
+         values (#{id},#{regionid},#{branchid},#{year},#{month},#{followingcountofpotential},#{followingcountofstudent},#{verifyingcount},#{signingcount},#{unfollowcountofpotential},#{unfollowcountofstudent},#{unverifycount},#{unsigncount},#{followedcountofpotential},#{followedcountofstudent},#{verifiedcount},#{signedcount},#{newpotentialcount},#{convertedratio},#{verifiedratio},#{signedratio},#{createtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from consultbranchcrmmonthsum 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Consultbranchcrmmonthsum">
+    update consultbranchcrmmonthsum
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="year != null">
+                   year = #{year},
+             </if>
+             <if test="month != null">
+                   month = #{month},
+             </if>
+             <if test="followingcountofpotential != null">
+                   followingcountofpotential = #{followingcountofpotential},
+             </if>
+             <if test="followingcountofstudent != null">
+                   followingcountofstudent = #{followingcountofstudent},
+             </if>
+             <if test="verifyingcount != null">
+                   verifyingcount = #{verifyingcount},
+             </if>
+             <if test="signingcount != null">
+                   signingcount = #{signingcount},
+             </if>
+             <if test="unfollowcountofpotential != null">
+                   unfollowcountofpotential = #{unfollowcountofpotential},
+             </if>
+             <if test="unfollowcountofstudent != null">
+                   unfollowcountofstudent = #{unfollowcountofstudent},
+             </if>
+             <if test="unverifycount != null">
+                   unverifycount = #{unverifycount},
+             </if>
+             <if test="unsigncount != null">
+                   unsigncount = #{unsigncount},
+             </if>
+             <if test="followedcountofpotential != null">
+                   followedcountofpotential = #{followedcountofpotential},
+             </if>
+             <if test="followedcountofstudent != null">
+                   followedcountofstudent = #{followedcountofstudent},
+             </if>
+             <if test="verifiedcount != null">
+                   verifiedcount = #{verifiedcount},
+             </if>
+             <if test="signedcount != null">
+                   signedcount = #{signedcount},
+             </if>
+             <if test="newpotentialcount != null">
+                   newpotentialcount = #{newpotentialcount},
+             </if>
+             <if test="convertedratio != null">
+                   convertedratio = #{convertedratio},
+             </if>
+             <if test="verifiedratio != null">
+                   verifiedratio = #{verifiedratio},
+             </if>
+             <if test="signedratio != null">
+                   signedratio = #{signedratio},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from consultbranchcrmmonthsum 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from consultbranchcrmmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from consultbranchcrmmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from consultbranchcrmmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from consultbranchcrmmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from consultbranchcrmmonthsum 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

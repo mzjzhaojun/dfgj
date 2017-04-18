@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html ng-app="login">
+<head>
+<title>后台管理-登录</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css"
+	href="../../../resource/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"
+	src="../../../resource/js/jquery.cookie.js"></script>
+<!-- 地址配置  -->
+<script type="text/javascript" src="../../../resource/js/config.js"></script>
+<script type="text/javascript">
+	var login = angular.module("login", []);
+	login
+			.controller(
+					"logon",
+					function($scope, $http) {
+						$scope.promptName = false;
+						$scope.promptPassword = false;
+						$scope.prompt = false;
+						$scope.onLogon = function() {
+							var name = $scope.name;
+							var password = $scope.password;
+							$scope.info = true;
+							if (name != "" && name != undefined
+									&& password != "" && password != undefined) {
+								$http(
+										{
+											url : sys.loginUrl + "?username="
+													+ name + "&password="
+													+ password,
+											method : 'POST',
+											headers : {
+												'Content-Type' : 'application/x-www-form-urlencoded;'
+											}
+										})
+										.success(
+												function(data, status, headers,
+														config) {
+													location.href = "../../../project/admin/html/index.html";
+												})
+										.error(
+												function(response) {
+													var message = response.message;
+													if (message != undefined
+															&& message != "") {
+														message = message
+																.split("Authentication Failed: ")[1];
+														$(".prompt_div").html(
+																message);
+													}
+												});
+							}
+						}
+					});
+
+	$(function() {
+		$(document)
+				.keypress(
+						function(event) {
+							var keycode = (event.keyCode ? event.keyCode
+									: event.which);
+							if (keycode == '13') {
+								var appElement = document
+										.querySelector('[ng-controller=logon]');
+								var $scope = angular.element(appElement)
+										.scope();
+								$scope.onLogon();
+							}
+						});
+	});
+</script>
+
+</head>
+
+<body ng-controller="logon">
+	<div class="login" style="margin: 220px auto;">
+		<div class="logon">
+			<h1 class="text-center" style="color: #fff;">管理系统</h1>
+			<div style="padding: 10px 100px 10px;">
+				<form class="bs-example bs-example-form" role="form">
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon">账号</span> <input type="text"
+							class="form-control" placeholder="请输入账号" ng-model="name">
+					</div>
+					<br>
+					<div class="input-group input-group-lg">
+						<span class="input-group-addon">密码</span> <input type="password"
+							class="form-control" placeholder="请输入密码" ng-model="password">
+					</div>
+					<br> <a class="btn btn-primary btn-lg"
+						style="display: block; margin: 0px auto;" href="#" role="button"
+						ng-click="onLogon()">登&nbsp;&nbsp;录</a>
+				</form>
+			</div>
+			<h5 class="text-center" style="color: #000;">Copyright
+				&nbsp;2016 &nbsp;&copy; &nbsp;综合管理系统&nbsp; 版权所有</h5>
+
+		</div>
+	</div>
+
+</body>
+</html>

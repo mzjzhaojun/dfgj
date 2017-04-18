@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.DebookorderitemsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,debookid,sortno,itemid,assetid,accountid,accountcode,debookamount,debookmoney,presentamountofdebook,returnmoney,confirmedamount,confirmedmoney,assignedamount,assignedmoney
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Debookorderitems">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="debookid" column="debookid" />
+         <id property="sortno" column="sortno" />
+         <id property="itemid" column="itemid" />
+         <id property="assetid" column="assetid" />
+         <id property="accountid" column="accountid" />
+         <id property="accountcode" column="accountcode" />
+         <id property="debookamount" column="debookamount" />
+         <id property="debookmoney" column="debookmoney" />
+         <id property="presentamountofdebook" column="presentamountofdebook" />
+         <id property="returnmoney" column="returnmoney" />
+         <id property="confirmedamount" column="confirmedamount" />
+         <id property="confirmedmoney" column="confirmedmoney" />
+         <id property="assignedamount" column="assignedamount" />
+         <id property="assignedmoney" column="assignedmoney" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Debookorderitems">
+  insert into debookorderitems (id,debookid,sortno,itemid,assetid,accountid,accountcode,debookamount,debookmoney,presentamountofdebook,returnmoney,confirmedamount,confirmedmoney,assignedamount,assignedmoney)
+         values (#{id},#{debookid},#{sortno},#{itemid},#{assetid},#{accountid},#{accountcode},#{debookamount},#{debookmoney},#{presentamountofdebook},#{returnmoney},#{confirmedamount},#{confirmedmoney},#{assignedamount},#{assignedmoney})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from debookorderitems 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Debookorderitems">
+    update debookorderitems
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="debookid != null">
+                   debookid = #{debookid},
+             </if>
+             <if test="sortno != null">
+                   sortno = #{sortno},
+             </if>
+             <if test="itemid != null">
+                   itemid = #{itemid},
+             </if>
+             <if test="assetid != null">
+                   assetid = #{assetid},
+             </if>
+             <if test="accountid != null">
+                   accountid = #{accountid},
+             </if>
+             <if test="accountcode != null">
+                   accountcode = #{accountcode},
+             </if>
+             <if test="debookamount != null">
+                   debookamount = #{debookamount},
+             </if>
+             <if test="debookmoney != null">
+                   debookmoney = #{debookmoney},
+             </if>
+             <if test="presentamountofdebook != null">
+                   presentamountofdebook = #{presentamountofdebook},
+             </if>
+             <if test="returnmoney != null">
+                   returnmoney = #{returnmoney},
+             </if>
+             <if test="confirmedamount != null">
+                   confirmedamount = #{confirmedamount},
+             </if>
+             <if test="confirmedmoney != null">
+                   confirmedmoney = #{confirmedmoney},
+             </if>
+             <if test="assignedamount != null">
+                   assignedamount = #{assignedamount},
+             </if>
+             <if test="assignedmoney != null">
+                   assignedmoney = #{assignedmoney}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from debookorderitems 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from debookorderitems 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from debookorderitems 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from debookorderitems 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from debookorderitems 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from debookorderitems 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

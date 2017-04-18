@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html ng-app="list">
+  <head>
+    <title>菜单管理-list</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/list.css">
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+   <!-- 弹出框 -->
+   
+	<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/getUrlParam.js"></script>
+    
+    <!-- 分页 -->
+		<script type="text/javascript" src="../../../../resource/js/paging.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+	 <script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+    <script type="text/javascript">
+		
+		var list = angular.module("list", []);
+		list.controller("listController",function($scope, $http) {
+			
+			var ids = "";
+			//详情
+			$scope.toInfo=function(task){
+				var links = task.links == null?task._links:task.links;
+				parent.setFunctionLinksHref(links);
+				location.href="info.html";
+			}
+			$scope.toUpdate=function(task){
+				var links = task.links == null?task._links:task.links;
+				parent.setFunctionLinksHref(links);
+				location.href="update.html";
+			}
+			$scope.toDelete=function(task){	
+				var links = task.links == null?task._links:task.links;
+				parent.setFunctionLinksHref(links);
+				parent.onPopupDelete();
+			}
+			//新增
+			$scope.onAdd=function(){
+				location.href="add.html";
+			}
+			//搜索
+			$scope.onSearch=function(){
+				$scope.pageList();
+			}
+			//翻页	
+			$scope.changePage=function(){
+				$scope.pageList();
+			} 
+			
+			$scope.pageList = function(){
+				pageNo = parent.currentPage;
+			    var data = {"name":$("#name").val()};
+				$http({
+					url:parent.getMenuLinksHref("menuself"),
+					method:'POST',
+					dataType : "json",
+					headers: {'Content-Type': 'application/json;charset=UTF-8;',"pageNo":pageNo,"pageSize":pageSize,"orderby":"sys_id,sortno","dir":" "},//,"pageSize":"10"
+					data: JSON.stringify(data)
+					}).success(function(data, status, headers, config){
+						//响应成功
+						totalCount = headers('totalCount');
+						pageCount = headers('pageCount');
+						$scope.tasks= data;
+						paging();
+						initPage();
+					}).error(function(data, status, headers, config){
+						//处理响应失败
+						response(status);
+					});
+			}
+		
+			$scope.pageList();						
+			$scope.onDelete = function(){
+             	$http({
+						url:parent.getFunctionLinksHref("self"),
+						method:'DELETE',
+						dataType : "json",
+						withCredentials: true,
+						headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+						data: ""
+						}).success(function(data, status, headers, config){
+							//响应成功
+							$scope.pageList();
+						}).error(function(data, status, headers, config){
+							//处理响应失败
+							response(status);
+						});
+				
+				}
+			 $scope.putsortno = function(task,i){
+				    var data;
+				    if(i==1){//减操作
+				    	if(task.sortno<=1){
+				    		alert("该菜单已是最高位置！");
+				    		return;
+				    	}else{
+				    		data = {"sub":"sub","id":task.id,"version":task.version};
+				    	}
+				    	
+				    }else{//加操作
+				    	data = {"add":"add","id":task.id,"version":task.version};
+				    }
+					$http({
+						url:parent.getMenuLinksHref("putsortno"),
+						method:'POST',
+						dataType : "json",
+						headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+						data: JSON.stringify(data)
+						}).success(function(data, status, headers, config){
+							//响应成功刷新列表
+							$scope.pageList();
+						}).error(function(data, status, headers, config){
+							//处理响应失败
+							response(status);
+						});
+				}					
+			
+		})
+		
+		function confirmDeletion(){
+			 var appElement = document.querySelector('[ng-controller=listController]');
+			var $scope = angular.element(appElement).scope(); 
+			$scope.onDelete();
+		}
+	</script>
+  </head>
+  
+  <body ng-controller="listController">
+  
+  
+    	<h5>	
+    	    <span class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ></span>
+  		    <input type="text" id="name" class="form-control" value="" placeholder="请输入需要查找的菜单名称" style="width: 20%;display: inline;">
+  		    <i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i>
+  		    <a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onSearch()">快速搜索</a>
+    		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onAdd()">
+    			添加
+    		</a>
+    	</h5>
+    	
+  
+    		<table  class="table">
+    			<tr class="info">
+					<th>序号</th>
+					<th>菜单名称</th>
+					<th>菜单等级</th>
+					<th>所属系统</th>
+					<th>菜单url</th>
+					<th>排序位置</th>
+					<th>快捷排序</th>
+					<th>相关操作</th>
+				  </tr>
+				  <tr ng-repeat="task in tasks" class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
+					<td ng-bind="$index+1">1</td>
+					<td ng-dblclick="toInfo(task)">{{task.menu.name}}</td>
+					<td ng-dblclick="toInfo(task)">{{task.menu.level_name}}</td>
+					<td ng-dblclick="toInfo(task)">{{task.menu.sys_name}}</td>
+					<td ng-dblclick="toInfo(task)">{{task.menu.url}}</td>
+					<td ng-dblclick="toInfo(task)">{{task.menu.sortno}}</td>
+					<td>
+					    <i class="icon-arrow-up" ng-click="putsortno(task.menu,1)"></i>
+					    <i class="icon-arrow-down" ng-click="putsortno(task.menu,2)"></i>
+					</td>
+					<td>
+						<h4 ng-click="toInfo(task)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" title="查看"></h4>
+						<h4 ng-click="toUpdate(task)" class="glyphicon glyphicon-pencil"  style="margin:0px 5px;color:#99DFF8;" title="修改"></h4>
+	    		        <h4 ng-click="toDelete(task)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;" title="删除"></h4>
+					</td>
+				  </tr>
+    		</table>
+    	
+    	
+  	<!-- 分页区 -->
+	<div class="pagepanel">
+		<span class="text-info" style="position:relative;top:-10px;">共<label id="totalCount"></label>条</span>
+		<ul class="pagination" style="margin: 0px 10px;padding:0px;">
+		</ul>
+		<span class="text-info" style="position:relative;top:-10px;">第<label id="pageNo"></label>页/共<label id="pageCount"></label>页</span>
+		<select id="pageSize" class="form-control" style="width: 70px;float: right;">
+		</select>
+		<span class="text-info" style="position:relative;top:6px;float: right;margin: 0px 5px;">每页显示</span>
+	</div>
+    	
+    
+  </body>
+</html>

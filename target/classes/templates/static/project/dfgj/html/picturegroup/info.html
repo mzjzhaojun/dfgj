@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="info">
+  <head>
+    <title>图片集管理-查看</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+       <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/sysmenu.css">
+    
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.all-3.5.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+    <script src="../../../../resource/js/date/js/eap.core.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src=""></script>
+	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+	<!-- 引用控制层插件样式 -->
+	<link rel="stylesheet" href="../../../../resource/css/zyfile/control/css/zyUpload.css" type="text/css">
+	<!-- 引用核心层插件 -->
+	<script type="text/javascript" src="../../../../resource/js/zyfile/core/zyFile.js"></script>
+	<!-- 引用控制层插件 -->
+	<script type="text/javascript" src="../../../../resource/js/zyfile/control/js/zyUpload.js"></script>
+    
+    <script type="text/javascript">
+		var info = angular.module("info", []);
+		info.controller("infoController",function($scope, $http) {
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			$http({
+					url:parent.getFunctionLinksHref("self"),
+					method:'GET',
+					dataType : "json",
+					withCredentials: true,
+					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+					data: ''
+					}).success(function(data, status, headers, config){
+						//响应成功
+						$scope.tasks= data;
+						var icon = $scope.tasks.url != null ? $scope.tasks.url : '';
+						$("#img").zyUpload({
+							width            :   "500px",                 // 宽度
+							height           :   "176px",                 // 宽度
+							itemWidth        :   "120px",                 // 文件项的宽度
+							itemHeight       :   "150px",                 // 文件项的高度
+							url              :   parent.sys.moreFileUrl,  // 上传文件的路径
+							multiple         :   true,                    // 是否可以多个文件上传
+							dragDrop         :   false,                    // 是否可以拖动上传文件
+							del              :   true,                    // 是否可以删除文件
+							finishDel        :   false, 				  // 是否在上传文件完成后删除预览
+							acitionType:"view", //info页面显示用的
+							uploadInput : $("#submit"),
+							onComplete : function(responseInfo) {
+								//submitForm(); // 上传完成的回调方法
+								//$scope.onPreserved();
+							}
+						},{imgUrl:icon});
+					}).error(function(data, status, headers, config){
+						//处理响应失败
+						response(status);
+					});
+		})
+	</script>
+  </head>
+  <body ng-controller="infoController">
+  		 <!-- 操作按钮操作区 -->
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    		</div>
+    	</div>
+   		<div class="col-lg-6 viewFixedWidth">
+<!--   		 <div class="input-group input-group-sm">
+            <span class="input-group-addon text-right spanwidth">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</span>
+           	<input type="text" class="form-control" value="{{tasks.type}}" disabled>
+        </div> --> 
+   		 <div class="input-group input-group-sm">
+            <span class="input-group-addon text-right spanwidth">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片</span>
+            <div id="img" class="img"></div>  
+	    		<input type="hidden" id="icon" class="form-control inputchange"  ng-model="tasks.url"/>
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon text-right spanwidth">详&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;情</span>
+            <input type="text" class="form-control" value="{{tasks.detail}}" disabled>
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon text-right spanwidth">创建时间</span>
+            <input type="text" class="form-control" value="{{tasks.create_time}}" disabled>
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon text-right spanwidth">点击地址</span>
+            <input type="text" class="form-control" value="{{tasks.click_url}}" disabled>
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon text-right spanwidth">排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序</span>
+            <input type="text" class="form-control" value="{{tasks.orderby}}" disabled>
+        </div>
+   	</div>
+  </body>
+</html>

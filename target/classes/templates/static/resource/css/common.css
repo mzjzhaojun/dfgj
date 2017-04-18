@@ -1,0 +1,27 @@
+/*新增页面操作按钮区样式*/
+.topActionPanel{height: 60px;line-height:60px; border-bottom:solid 1px #e5e5e5;border-top:solid 1px #e5e5e5;}
+.topActionPanel button{width: 80px;margin:0px 10px;}
+.topActionPanel>div{float:left;}
+.col-lg-6>div{margin:10px 10px;padding:10px 0px;}
+/* 必填验证框 */
+.verifyprompt{color: red;background: #fff;width: 20px}
+/*span 的宽度*/
+.spanwidth{width: 100px;}
+.rowspanwidth{width: 40px;}
+/*input 的宽度*/
+.form-control{width:500px !important;}
+/*图标字体*/
+.input-group>i{position: relative;top:5px;left:5px;}
+.input-group>.i{float: left;top:-8px !important;}
+.img0{width: 40px;height:40px;border:solid 1px #ccc;}
+.img1{width: 50px;height:50px;border:solid 1px #ccc;z-index: 2}
+.img2{width: 60px;height:60px;border:solid 1px #ccc;z-index: 2}
+.img3{width: 70px;height:70px;border:solid 1px #ccc;z-index: 2}
+.img100{height: 100px;width: 100px;border: solid 1px #ccc;}
+.imgseat{position:relative; top:-55px;margin: 0px !important;padding:0px  !important;}
+.imgseat>img{position:absolute;left: 120px;}
+.spanlabel{width: 100px;}
+.spanbutton{margin:20px;padding:0px 10px;background: #ccc;width: 50px;}
+.panel{width: 300px;border: solid 1px #ccc;margin:1px;}
+label{padding:1px 2px;border: solid 1px #ccc;border-radius:2px;margin: 0px 1px 0px 1px;cursor: pointer;}
+

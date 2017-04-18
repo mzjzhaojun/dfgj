@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.RefundreportMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,snapshotid,statdatekey,statdatename,regionid,regionname,branchid,branchname,campusid,campusname,campusage,staffid,staffoaname,staffjobtype,staffjobname,staffage,grade,gradename,refundtype,refundtypename,applyrefundmoney,realrefundmoney,refundpeople,refundaverage
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Refundreport">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="snapshotid" column="snapshotid" />
+         <id property="statdatekey" column="statdatekey" />
+         <id property="statdatename" column="statdatename" />
+         <id property="regionid" column="regionid" />
+         <id property="regionname" column="regionname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="campusage" column="campusage" />
+         <id property="staffid" column="staffid" />
+         <id property="staffoaname" column="staffoaname" />
+         <id property="staffjobtype" column="staffjobtype" />
+         <id property="staffjobname" column="staffjobname" />
+         <id property="staffage" column="staffage" />
+         <id property="grade" column="grade" />
+         <id property="gradename" column="gradename" />
+         <id property="refundtype" column="refundtype" />
+         <id property="refundtypename" column="refundtypename" />
+         <id property="applyrefundmoney" column="applyrefundmoney" />
+         <id property="realrefundmoney" column="realrefundmoney" />
+         <id property="refundpeople" column="refundpeople" />
+         <id property="refundaverage" column="refundaverage" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Refundreport">
+  insert into refundreport (id,snapshotid,statdatekey,statdatename,regionid,regionname,branchid,branchname,campusid,campusname,campusage,staffid,staffoaname,staffjobtype,staffjobname,staffage,grade,gradename,refundtype,refundtypename,applyrefundmoney,realrefundmoney,refundpeople,refundaverage)
+         values (#{id},#{snapshotid},#{statdatekey},#{statdatename},#{regionid},#{regionname},#{branchid},#{branchname},#{campusid},#{campusname},#{campusage},#{staffid},#{staffoaname},#{staffjobtype},#{staffjobname},#{staffage},#{grade},#{gradename},#{refundtype},#{refundtypename},#{applyrefundmoney},#{realrefundmoney},#{refundpeople},#{refundaverage})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from refundreport 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Refundreport">
+    update refundreport
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="snapshotid != null">
+                   snapshotid = #{snapshotid},
+             </if>
+             <if test="statdatekey != null">
+                   statdatekey = #{statdatekey},
+             </if>
+             <if test="statdatename != null">
+                   statdatename = #{statdatename},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionname != null">
+                   regionname = #{regionname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="campusage != null">
+                   campusage = #{campusage},
+             </if>
+             <if test="staffid != null">
+                   staffid = #{staffid},
+             </if>
+             <if test="staffoaname != null">
+                   staffoaname = #{staffoaname},
+             </if>
+             <if test="staffjobtype != null">
+                   staffjobtype = #{staffjobtype},
+             </if>
+             <if test="staffjobname != null">
+                   staffjobname = #{staffjobname},
+             </if>
+             <if test="staffage != null">
+                   staffage = #{staffage},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="gradename != null">
+                   gradename = #{gradename},
+             </if>
+             <if test="refundtype != null">
+                   refundtype = #{refundtype},
+             </if>
+             <if test="refundtypename != null">
+                   refundtypename = #{refundtypename},
+             </if>
+             <if test="applyrefundmoney != null">
+                   applyrefundmoney = #{applyrefundmoney},
+             </if>
+             <if test="realrefundmoney != null">
+                   realrefundmoney = #{realrefundmoney},
+             </if>
+             <if test="refundpeople != null">
+                   refundpeople = #{refundpeople},
+             </if>
+             <if test="refundaverage != null">
+                   refundaverage = #{refundaverage}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from refundreport 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from refundreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from refundreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from refundreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from refundreport 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from refundreport 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.PresentsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,presentid,presentcode,presentname,presentstatus,applystartdate,startdate,branchid,branchname,submittime,submitterid,submittername,submitterjobid,submitterjobname,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Presents">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="presentid" column="presentid" />
+         <id property="presentcode" column="presentcode" />
+         <id property="presentname" column="presentname" />
+         <id property="presentstatus" column="presentstatus" />
+         <id property="applystartdate" column="applystartdate" />
+         <id property="startdate" column="startdate" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="submittime" column="submittime" />
+         <id property="submitterid" column="submitterid" />
+         <id property="submittername" column="submittername" />
+         <id property="submitterjobid" column="submitterjobid" />
+         <id property="submitterjobname" column="submitterjobname" />
+         <id property="approverid" column="approverid" />
+         <id property="approvername" column="approvername" />
+         <id property="approverjobid" column="approverjobid" />
+         <id property="approverjobname" column="approverjobname" />
+         <id property="approvetime" column="approvetime" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Presents">
+  insert into presents (id,presentid,presentcode,presentname,presentstatus,applystartdate,startdate,branchid,branchname,submittime,submitterid,submittername,submitterjobid,submitterjobname,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{presentid},#{presentcode},#{presentname},#{presentstatus},#{applystartdate},#{startdate},#{branchid},#{branchname},#{submittime},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from presents 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Presents">
+    update presents
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="presentid != null">
+                   presentid = #{presentid},
+             </if>
+             <if test="presentcode != null">
+                   presentcode = #{presentcode},
+             </if>
+             <if test="presentname != null">
+                   presentname = #{presentname},
+             </if>
+             <if test="presentstatus != null">
+                   presentstatus = #{presentstatus},
+             </if>
+             <if test="applystartdate != null">
+                   applystartdate = #{applystartdate},
+             </if>
+             <if test="startdate != null">
+                   startdate = #{startdate},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="submittime != null">
+                   submittime = #{submittime},
+             </if>
+             <if test="submitterid != null">
+                   submitterid = #{submitterid},
+             </if>
+             <if test="submittername != null">
+                   submittername = #{submittername},
+             </if>
+             <if test="submitterjobid != null">
+                   submitterjobid = #{submitterjobid},
+             </if>
+             <if test="submitterjobname != null">
+                   submitterjobname = #{submitterjobname},
+             </if>
+             <if test="approverid != null">
+                   approverid = #{approverid},
+             </if>
+             <if test="approvername != null">
+                   approvername = #{approvername},
+             </if>
+             <if test="approverjobid != null">
+                   approverjobid = #{approverjobid},
+             </if>
+             <if test="approverjobname != null">
+                   approverjobname = #{approverjobname},
+             </if>
+             <if test="approvetime != null">
+                   approvetime = #{approvetime},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from presents 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from presents 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from presents 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from presents 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from presents 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from presents 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

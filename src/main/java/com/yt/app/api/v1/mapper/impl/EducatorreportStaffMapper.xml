@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.EducatorreportStaffMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,snapshotid,regionid,regionshortname,branchid,branchshortname,campusid,campusshortname,campusage,staffid,staffname,staffoacode,staffoaname,employmentperiod,belongnumber,managenumber,availablenumber,assignednumber,classsuspendednumber,schoolsuspendednumber,refundmoneynumber,classfinishednumber,renewsignmoney,renewsignmoneyvol,renewsignmoneydiffyoy,renewsignmoneyyoyrate,renewsignmoneytask,renewsignmoneytcr,renewsignnumber,renewsignnumbervol,renewsignnumberyoydiff,renewsignnumberyoyrate,renewsignnumberrask,renewsignnumbertcr,renewsignsingle,renewsignsinglevol,renewsignsingleyoydiff,renewsignsingleyoyrate,refundmoney,refundmoneyvol,refundmoneyyoydiff,refundmoneyyoyrate,refundmoneytask,refundmoneytcr,refundnumber,refundnumbervol,refundnumberyoydiff,refundnumberyoyrate,refundnumbertask,refundnumbertcr,assignnumber,assignnumbervol,assignnumberyoydiff,assignnumberyoyrate,assignnumbertask,assignnumbertcr,courseincome,courseincomevol,courseincomeyoydiff,courseincomeyoyrate,attendnumber,attendnumbervol,attendnumberyoydiff,attendnumberyoyrate,attendnumberrate,classsuspendedrate,onetooneaveragehours,onetooneaverageassignedamount,availableaveragehours,availableaverageassignedamount,onetooneassignnumber,onetooneassignnumbervol,onetooneassignnumberyoydiff,onetooneassignnumberyoyrate,onetoonecourseincome,onetoonecourseincomevol,onetoonecourseincomeyoydiff,onetoonecourseincomeyoyrate,onetooneattendnumber,onetooneattendnumbervol,onetooneattendnumberyoydiff,onetooneattendnumberyoyrate,classassignnumber,classassignnumbervol,classassignnumberyoydiff,classassignnumberyoyrate,classassignnumbertask,classassignnumbertcr,classcourseincome,classcourseincomevol,classcourseincomeyoydiff,classcourseincomeyoyrate,classattendnumber,classattendnumbervol,classattendnumberyoydiff,classattendnumberyoyrate,renewrate,refundrate,lossrate,retainedrate,referralnumber,visitnumber,meetingnumber,replynumber,scorestatistics
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.EducatorreportStaff">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="snapshotid" column="snapshotid" />
+         <id property="regionid" column="regionid" />
+         <id property="regionshortname" column="regionshortname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchshortname" column="branchshortname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusshortname" column="campusshortname" />
+         <id property="campusage" column="campusage" />
+         <id property="staffid" column="staffid" />
+         <id property="staffname" column="staffname" />
+         <id property="staffoacode" column="staffoacode" />
+         <id property="staffoaname" column="staffoaname" />
+         <id property="employmentperiod" column="employmentperiod" />
+         <id property="belongnumber" column="belongnumber" />
+         <id property="managenumber" column="managenumber" />
+         <id property="availablenumber" column="availablenumber" />
+         <id property="assignednumber" column="assignednumber" />
+         <id property="classsuspendednumber" column="classsuspendednumber" />
+         <id property="schoolsuspendednumber" column="schoolsuspendednumber" />
+         <id property="refundmoneynumber" column="refundmoneynumber" />
+         <id property="classfinishednumber" column="classfinishednumber" />
+         <id property="renewsignmoney" column="renewsignmoney" />
+         <id property="renewsignmoneyvol" column="renewsignmoneyvol" />
+         <id property="renewsignmoneydiffyoy" column="renewsignmoneydiffyoy" />
+         <id property="renewsignmoneyyoyrate" column="renewsignmoneyyoyrate" />
+         <id property="renewsignmoneytask" column="renewsignmoneytask" />
+         <id property="renewsignmoneytcr" column="renewsignmoneytcr" />
+         <id property="renewsignnumber" column="renewsignnumber" />
+         <id property="renewsignnumbervol" column="renewsignnumbervol" />
+         <id property="renewsignnumberyoydiff" column="renewsignnumberyoydiff" />
+         <id property="renewsignnumberyoyrate" column="renewsignnumberyoyrate" />
+         <id property="renewsignnumberrask" column="renewsignnumberrask" />
+         <id property="renewsignnumbertcr" column="renewsignnumbertcr" />
+         <id property="renewsignsingle" column="renewsignsingle" />
+         <id property="renewsignsinglevol" column="renewsignsinglevol" />
+         <id property="renewsignsingleyoydiff" column="renewsignsingleyoydiff" />
+         <id property="renewsignsingleyoyrate" column="renewsignsingleyoyrate" />
+         <id property="refundmoney" column="refundmoney" />
+         <id property="refundmoneyvol" column="refundmoneyvol" />
+         <id property="refundmoneyyoydiff" column="refundmoneyyoydiff" />
+         <id property="refundmoneyyoyrate" column="refundmoneyyoyrate" />
+         <id property="refundmoneytask" column="refundmoneytask" />
+         <id property="refundmoneytcr" column="refundmoneytcr" />
+         <id property="refundnumber" column="refundnumber" />
+         <id property="refundnumbervol" column="refundnumbervol" />
+         <id property="refundnumberyoydiff" column="refundnumberyoydiff" />
+         <id property="refundnumberyoyrate" column="refundnumberyoyrate" />
+         <id property="refundnumbertask" column="refundnumbertask" />
+         <id property="refundnumbertcr" column="refundnumbertcr" />
+         <id property="assignnumber" column="assignnumber" />
+         <id property="assignnumbervol" column="assignnumbervol" />
+         <id property="assignnumberyoydiff" column="assignnumberyoydiff" />
+         <id property="assignnumberyoyrate" column="assignnumberyoyrate" />
+         <id property="assignnumbertask" column="assignnumbertask" />
+         <id property="assignnumbertcr" column="assignnumbertcr" />
+         <id property="courseincome" column="courseincome" />
+         <id property="courseincomevol" column="courseincomevol" />
+         <id property="courseincomeyoydiff" column="courseincomeyoydiff" />
+         <id property="courseincomeyoyrate" column="courseincomeyoyrate" />
+         <id property="attendnumber" column="attendnumber" />
+         <id property="attendnumbervol" column="attendnumbervol" />
+         <id property="attendnumberyoydiff" column="attendnumberyoydiff" />
+         <id property="attendnumberyoyrate" column="attendnumberyoyrate" />
+         <id property="attendnumberrate" column="attendnumberrate" />
+         <id property="classsuspendedrate" column="classsuspendedrate" />
+         <id property="onetooneaveragehours" column="onetooneaveragehours" />
+         <id property="onetooneaverageassignedamount" column="onetooneaverageassignedamount" />
+         <id property="availableaveragehours" column="availableaveragehours" />
+         <id property="availableaverageassignedamount" column="availableaverageassignedamount" />
+         <id property="onetooneassignnumber" column="onetooneassignnumber" />
+         <id property="onetooneassignnumbervol" column="onetooneassignnumbervol" />
+         <id property="onetooneassignnumberyoydiff" column="onetooneassignnumberyoydiff" />
+         <id property="onetooneassignnumberyoyrate" column="onetooneassignnumberyoyrate" />
+         <id property="onetoonecourseincome" column="onetoonecourseincome" />
+         <id property="onetoonecourseincomevol" column="onetoonecourseincomevol" />
+         <id property="onetoonecourseincomeyoydiff" column="onetoonecourseincomeyoydiff" />
+         <id property="onetoonecourseincomeyoyrate" column="onetoonecourseincomeyoyrate" />
+         <id property="onetooneattendnumber" column="onetooneattendnumber" />
+         <id property="onetooneattendnumbervol" column="onetooneattendnumbervol" />
+         <id property="onetooneattendnumberyoydiff" column="onetooneattendnumberyoydiff" />
+         <id property="onetooneattendnumberyoyrate" column="onetooneattendnumberyoyrate" />
+         <id property="classassignnumber" column="classassignnumber" />
+         <id property="classassignnumbervol" column="classassignnumbervol" />
+         <id property="classassignnumberyoydiff" column="classassignnumberyoydiff" />
+         <id property="classassignnumberyoyrate" column="classassignnumberyoyrate" />
+         <id property="classassignnumbertask" column="classassignnumbertask" />
+         <id property="classassignnumbertcr" column="classassignnumbertcr" />
+         <id property="classcourseincome" column="classcourseincome" />
+         <id property="classcourseincomevol" column="classcourseincomevol" />
+         <id property="classcourseincomeyoydiff" column="classcourseincomeyoydiff" />
+         <id property="classcourseincomeyoyrate" column="classcourseincomeyoyrate" />
+         <id property="classattendnumber" column="classattendnumber" />
+         <id property="classattendnumbervol" column="classattendnumbervol" />
+         <id property="classattendnumberyoydiff" column="classattendnumberyoydiff" />
+         <id property="classattendnumberyoyrate" column="classattendnumberyoyrate" />
+         <id property="renewrate" column="renewrate" />
+         <id property="refundrate" column="refundrate" />
+         <id property="lossrate" column="lossrate" />
+         <id property="retainedrate" column="retainedrate" />
+         <id property="referralnumber" column="referralnumber" />
+         <id property="visitnumber" column="visitnumber" />
+         <id property="meetingnumber" column="meetingnumber" />
+         <id property="replynumber" column="replynumber" />
+         <id property="scorestatistics" column="scorestatistics" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.EducatorreportStaff">
+  insert into educatorreport_staff (id,snapshotid,regionid,regionshortname,branchid,branchshortname,campusid,campusshortname,campusage,staffid,staffname,staffoacode,staffoaname,employmentperiod,belongnumber,managenumber,availablenumber,assignednumber,classsuspendednumber,schoolsuspendednumber,refundmoneynumber,classfinishednumber,renewsignmoney,renewsignmoneyvol,renewsignmoneydiffyoy,renewsignmoneyyoyrate,renewsignmoneytask,renewsignmoneytcr,renewsignnumber,renewsignnumbervol,renewsignnumberyoydiff,renewsignnumberyoyrate,renewsignnumberrask,renewsignnumbertcr,renewsignsingle,renewsignsinglevol,renewsignsingleyoydiff,renewsignsingleyoyrate,refundmoney,refundmoneyvol,refundmoneyyoydiff,refundmoneyyoyrate,refundmoneytask,refundmoneytcr,refundnumber,refundnumbervol,refundnumberyoydiff,refundnumberyoyrate,refundnumbertask,refundnumbertcr,assignnumber,assignnumbervol,assignnumberyoydiff,assignnumberyoyrate,assignnumbertask,assignnumbertcr,courseincome,courseincomevol,courseincomeyoydiff,courseincomeyoyrate,attendnumber,attendnumbervol,attendnumberyoydiff,attendnumberyoyrate,attendnumberrate,classsuspendedrate,onetooneaveragehours,onetooneaverageassignedamount,availableaveragehours,availableaverageassignedamount,onetooneassignnumber,onetooneassignnumbervol,onetooneassignnumberyoydiff,onetooneassignnumberyoyrate,onetoonecourseincome,onetoonecourseincomevol,onetoonecourseincomeyoydiff,onetoonecourseincomeyoyrate,onetooneattendnumber,onetooneattendnumbervol,onetooneattendnumberyoydiff,onetooneattendnumberyoyrate,classassignnumber,classassignnumbervol,classassignnumberyoydiff,classassignnumberyoyrate,classassignnumbertask,classassignnumbertcr,classcourseincome,classcourseincomevol,classcourseincomeyoydiff,classcourseincomeyoyrate,classattendnumber,classattendnumbervol,classattendnumberyoydiff,classattendnumberyoyrate,renewrate,refundrate,lossrate,retainedrate,referralnumber,visitnumber,meetingnumber,replynumber,scorestatistics)
+         values (#{id},#{snapshotid},#{regionid},#{regionshortname},#{branchid},#{branchshortname},#{campusid},#{campusshortname},#{campusage},#{staffid},#{staffname},#{staffoacode},#{staffoaname},#{employmentperiod},#{belongnumber},#{managenumber},#{availablenumber},#{assignednumber},#{classsuspendednumber},#{schoolsuspendednumber},#{refundmoneynumber},#{classfinishednumber},#{renewsignmoney},#{renewsignmoneyvol},#{renewsignmoneydiffyoy},#{renewsignmoneyyoyrate},#{renewsignmoneytask},#{renewsignmoneytcr},#{renewsignnumber},#{renewsignnumbervol},#{renewsignnumberyoydiff},#{renewsignnumberyoyrate},#{renewsignnumberrask},#{renewsignnumbertcr},#{renewsignsingle},#{renewsignsinglevol},#{renewsignsingleyoydiff},#{renewsignsingleyoyrate},#{refundmoney},#{refundmoneyvol},#{refundmoneyyoydiff},#{refundmoneyyoyrate},#{refundmoneytask},#{refundmoneytcr},#{refundnumber},#{refundnumbervol},#{refundnumberyoydiff},#{refundnumberyoyrate},#{refundnumbertask},#{refundnumbertcr},#{assignnumber},#{assignnumbervol},#{assignnumberyoydiff},#{assignnumberyoyrate},#{assignnumbertask},#{assignnumbertcr},#{courseincome},#{courseincomevol},#{courseincomeyoydiff},#{courseincomeyoyrate},#{attendnumber},#{attendnumbervol},#{attendnumberyoydiff},#{attendnumberyoyrate},#{attendnumberrate},#{classsuspendedrate},#{onetooneaveragehours},#{onetooneaverageassignedamount},#{availableaveragehours},#{availableaverageassignedamount},#{onetooneassignnumber},#{onetooneassignnumbervol},#{onetooneassignnumberyoydiff},#{onetooneassignnumberyoyrate},#{onetoonecourseincome},#{onetoonecourseincomevol},#{onetoonecourseincomeyoydiff},#{onetoonecourseincomeyoyrate},#{onetooneattendnumber},#{onetooneattendnumbervol},#{onetooneattendnumberyoydiff},#{onetooneattendnumberyoyrate},#{classassignnumber},#{classassignnumbervol},#{classassignnumberyoydiff},#{classassignnumberyoyrate},#{classassignnumbertask},#{classassignnumbertcr},#{classcourseincome},#{classcourseincomevol},#{classcourseincomeyoydiff},#{classcourseincomeyoyrate},#{classattendnumber},#{classattendnumbervol},#{classattendnumberyoydiff},#{classattendnumberyoyrate},#{renewrate},#{refundrate},#{lossrate},#{retainedrate},#{referralnumber},#{visitnumber},#{meetingnumber},#{replynumber},#{scorestatistics})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from educatorreport_staff 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.EducatorreportStaff">
+    update educatorreport_staff
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="snapshotid != null">
+                   snapshotid = #{snapshotid},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionshortname != null">
+                   regionshortname = #{regionshortname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchshortname != null">
+                   branchshortname = #{branchshortname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusshortname != null">
+                   campusshortname = #{campusshortname},
+             </if>
+             <if test="campusage != null">
+                   campusage = #{campusage},
+             </if>
+             <if test="staffid != null">
+                   staffid = #{staffid},
+             </if>
+             <if test="staffname != null">
+                   staffname = #{staffname},
+             </if>
+             <if test="staffoacode != null">
+                   staffoacode = #{staffoacode},
+             </if>
+             <if test="staffoaname != null">
+                   staffoaname = #{staffoaname},
+             </if>
+             <if test="employmentperiod != null">
+                   employmentperiod = #{employmentperiod},
+             </if>
+             <if test="belongnumber != null">
+                   belongnumber = #{belongnumber},
+             </if>
+             <if test="managenumber != null">
+                   managenumber = #{managenumber},
+             </if>
+             <if test="availablenumber != null">
+                   availablenumber = #{availablenumber},
+             </if>
+             <if test="assignednumber != null">
+                   assignednumber = #{assignednumber},
+             </if>
+             <if test="classsuspendednumber != null">
+                   classsuspendednumber = #{classsuspendednumber},
+             </if>
+             <if test="schoolsuspendednumber != null">
+                   schoolsuspendednumber = #{schoolsuspendednumber},
+             </if>
+             <if test="refundmoneynumber != null">
+                   refundmoneynumber = #{refundmoneynumber},
+             </if>
+             <if test="classfinishednumber != null">
+                   classfinishednumber = #{classfinishednumber},
+             </if>
+             <if test="renewsignmoney != null">
+                   renewsignmoney = #{renewsignmoney},
+             </if>
+             <if test="renewsignmoneyvol != null">
+                   renewsignmoneyvol = #{renewsignmoneyvol},
+             </if>
+             <if test="renewsignmoneydiffyoy != null">
+                   renewsignmoneydiffyoy = #{renewsignmoneydiffyoy},
+             </if>
+             <if test="renewsignmoneyyoyrate != null">
+                   renewsignmoneyyoyrate = #{renewsignmoneyyoyrate},
+             </if>
+             <if test="renewsignmoneytask != null">
+                   renewsignmoneytask = #{renewsignmoneytask},
+             </if>
+             <if test="renewsignmoneytcr != null">
+                   renewsignmoneytcr = #{renewsignmoneytcr},
+             </if>
+             <if test="renewsignnumber != null">
+                   renewsignnumber = #{renewsignnumber},
+             </if>
+             <if test="renewsignnumbervol != null">
+                   renewsignnumbervol = #{renewsignnumbervol},
+             </if>
+             <if test="renewsignnumberyoydiff != null">
+                   renewsignnumberyoydiff = #{renewsignnumberyoydiff},
+             </if>
+             <if test="renewsignnumberyoyrate != null">
+                   renewsignnumberyoyrate = #{renewsignnumberyoyrate},
+             </if>
+             <if test="renewsignnumberrask != null">
+                   renewsignnumberrask = #{renewsignnumberrask},
+             </if>
+             <if test="renewsignnumbertcr != null">
+                   renewsignnumbertcr = #{renewsignnumbertcr},
+             </if>
+             <if test="renewsignsingle != null">
+                   renewsignsingle = #{renewsignsingle},
+             </if>
+             <if test="renewsignsinglevol != null">
+                   renewsignsinglevol = #{renewsignsinglevol},
+             </if>
+             <if test="renewsignsingleyoydiff != null">
+                   renewsignsingleyoydiff = #{renewsignsingleyoydiff},
+             </if>
+             <if test="renewsignsingleyoyrate != null">
+                   renewsignsingleyoyrate = #{renewsignsingleyoyrate},
+             </if>
+             <if test="refundmoney != null">
+                   refundmoney = #{refundmoney},
+             </if>
+             <if test="refundmoneyvol != null">
+                   refundmoneyvol = #{refundmoneyvol},
+             </if>
+             <if test="refundmoneyyoydiff != null">
+                   refundmoneyyoydiff = #{refundmoneyyoydiff},
+             </if>
+             <if test="refundmoneyyoyrate != null">
+                   refundmoneyyoyrate = #{refundmoneyyoyrate},
+             </if>
+             <if test="refundmoneytask != null">
+                   refundmoneytask = #{refundmoneytask},
+             </if>
+             <if test="refundmoneytcr != null">
+                   refundmoneytcr = #{refundmoneytcr},
+             </if>
+             <if test="refundnumber != null">
+                   refundnumber = #{refundnumber},
+             </if>
+             <if test="refundnumbervol != null">
+                   refundnumbervol = #{refundnumbervol},
+             </if>
+             <if test="refundnumberyoydiff != null">
+                   refundnumberyoydiff = #{refundnumberyoydiff},
+             </if>
+             <if test="refundnumberyoyrate != null">
+                   refundnumberyoyrate = #{refundnumberyoyrate},
+             </if>
+             <if test="refundnumbertask != null">
+                   refundnumbertask = #{refundnumbertask},
+             </if>
+             <if test="refundnumbertcr != null">
+                   refundnumbertcr = #{refundnumbertcr},
+             </if>
+             <if test="assignnumber != null">
+                   assignnumber = #{assignnumber},
+             </if>
+             <if test="assignnumbervol != null">
+                   assignnumbervol = #{assignnumbervol},
+             </if>
+             <if test="assignnumberyoydiff != null">
+                   assignnumberyoydiff = #{assignnumberyoydiff},
+             </if>
+             <if test="assignnumberyoyrate != null">
+                   assignnumberyoyrate = #{assignnumberyoyrate},
+             </if>
+             <if test="assignnumbertask != null">
+                   assignnumbertask = #{assignnumbertask},
+             </if>
+             <if test="assignnumbertcr != null">
+                   assignnumbertcr = #{assignnumbertcr},
+             </if>
+             <if test="courseincome != null">
+                   courseincome = #{courseincome},
+             </if>
+             <if test="courseincomevol != null">
+                   courseincomevol = #{courseincomevol},
+             </if>
+             <if test="courseincomeyoydiff != null">
+                   courseincomeyoydiff = #{courseincomeyoydiff},
+             </if>
+             <if test="courseincomeyoyrate != null">
+                   courseincomeyoyrate = #{courseincomeyoyrate},
+             </if>
+             <if test="attendnumber != null">
+                   attendnumber = #{attendnumber},
+             </if>
+             <if test="attendnumbervol != null">
+                   attendnumbervol = #{attendnumbervol},
+             </if>
+             <if test="attendnumberyoydiff != null">
+                   attendnumberyoydiff = #{attendnumberyoydiff},
+             </if>
+             <if test="attendnumberyoyrate != null">
+                   attendnumberyoyrate = #{attendnumberyoyrate},
+             </if>
+             <if test="attendnumberrate != null">
+                   attendnumberrate = #{attendnumberrate},
+             </if>
+             <if test="classsuspendedrate != null">
+                   classsuspendedrate = #{classsuspendedrate},
+             </if>
+             <if test="onetooneaveragehours != null">
+                   onetooneaveragehours = #{onetooneaveragehours},
+             </if>
+             <if test="onetooneaverageassignedamount != null">
+                   onetooneaverageassignedamount = #{onetooneaverageassignedamount},
+             </if>
+             <if test="availableaveragehours != null">
+                   availableaveragehours = #{availableaveragehours},
+             </if>
+             <if test="availableaverageassignedamount != null">
+                   availableaverageassignedamount = #{availableaverageassignedamount},
+             </if>
+             <if test="onetooneassignnumber != null">
+                   onetooneassignnumber = #{onetooneassignnumber},
+             </if>
+             <if test="onetooneassignnumbervol != null">
+                   onetooneassignnumbervol = #{onetooneassignnumbervol},
+             </if>
+             <if test="onetooneassignnumberyoydiff != null">
+                   onetooneassignnumberyoydiff = #{onetooneassignnumberyoydiff},
+             </if>
+             <if test="onetooneassignnumberyoyrate != null">
+                   onetooneassignnumberyoyrate = #{onetooneassignnumberyoyrate},
+             </if>
+             <if test="onetoonecourseincome != null">
+                   onetoonecourseincome = #{onetoonecourseincome},
+             </if>
+             <if test="onetoonecourseincomevol != null">
+                   onetoonecourseincomevol = #{onetoonecourseincomevol},
+             </if>
+             <if test="onetoonecourseincomeyoydiff != null">
+                   onetoonecourseincomeyoydiff = #{onetoonecourseincomeyoydiff},
+             </if>
+             <if test="onetoonecourseincomeyoyrate != null">
+                   onetoonecourseincomeyoyrate = #{onetoonecourseincomeyoyrate},
+             </if>
+             <if test="onetooneattendnumber != null">
+                   onetooneattendnumber = #{onetooneattendnumber},
+             </if>
+             <if test="onetooneattendnumbervol != null">
+                   onetooneattendnumbervol = #{onetooneattendnumbervol},
+             </if>
+             <if test="onetooneattendnumberyoydiff != null">
+                   onetooneattendnumberyoydiff = #{onetooneattendnumberyoydiff},
+             </if>
+             <if test="onetooneattendnumberyoyrate != null">
+                   onetooneattendnumberyoyrate = #{onetooneattendnumberyoyrate},
+             </if>
+             <if test="classassignnumber != null">
+                   classassignnumber = #{classassignnumber},
+             </if>
+             <if test="classassignnumbervol != null">
+                   classassignnumbervol = #{classassignnumbervol},
+             </if>
+             <if test="classassignnumberyoydiff != null">
+                   classassignnumberyoydiff = #{classassignnumberyoydiff},
+             </if>
+             <if test="classassignnumberyoyrate != null">
+                   classassignnumberyoyrate = #{classassignnumberyoyrate},
+             </if>
+             <if test="classassignnumbertask != null">
+                   classassignnumbertask = #{classassignnumbertask},
+             </if>
+             <if test="classassignnumbertcr != null">
+                   classassignnumbertcr = #{classassignnumbertcr},
+             </if>
+             <if test="classcourseincome != null">
+                   classcourseincome = #{classcourseincome},
+             </if>
+             <if test="classcourseincomevol != null">
+                   classcourseincomevol = #{classcourseincomevol},
+             </if>
+             <if test="classcourseincomeyoydiff != null">
+                   classcourseincomeyoydiff = #{classcourseincomeyoydiff},
+             </if>
+             <if test="classcourseincomeyoyrate != null">
+                   classcourseincomeyoyrate = #{classcourseincomeyoyrate},
+             </if>
+             <if test="classattendnumber != null">
+                   classattendnumber = #{classattendnumber},
+             </if>
+             <if test="classattendnumbervol != null">
+                   classattendnumbervol = #{classattendnumbervol},
+             </if>
+             <if test="classattendnumberyoydiff != null">
+                   classattendnumberyoydiff = #{classattendnumberyoydiff},
+             </if>
+             <if test="classattendnumberyoyrate != null">
+                   classattendnumberyoyrate = #{classattendnumberyoyrate},
+             </if>
+             <if test="renewrate != null">
+                   renewrate = #{renewrate},
+             </if>
+             <if test="refundrate != null">
+                   refundrate = #{refundrate},
+             </if>
+             <if test="lossrate != null">
+                   lossrate = #{lossrate},
+             </if>
+             <if test="retainedrate != null">
+                   retainedrate = #{retainedrate},
+             </if>
+             <if test="referralnumber != null">
+                   referralnumber = #{referralnumber},
+             </if>
+             <if test="visitnumber != null">
+                   visitnumber = #{visitnumber},
+             </if>
+             <if test="meetingnumber != null">
+                   meetingnumber = #{meetingnumber},
+             </if>
+             <if test="replynumber != null">
+                   replynumber = #{replynumber},
+             </if>
+             <if test="scorestatistics != null">
+                   scorestatistics = #{scorestatistics}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from educatorreport_staff 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from educatorreport_staff 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from educatorreport_staff 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from educatorreport_staff 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from educatorreport_staff 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from educatorreport_staff 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.EducatecountryperfmonthsumMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,year,month,onetoonehourcount,onetoonehourincome,grouphourcount,grouphourincome,renewalmoney,refundmoney,hourcounttask,renewalmoneytask,hourincometask,refundmoneytask,createtime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Educatecountryperfmonthsum">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="year" column="year" />
+         <id property="month" column="month" />
+         <id property="onetoonehourcount" column="onetoonehourcount" />
+         <id property="onetoonehourincome" column="onetoonehourincome" />
+         <id property="grouphourcount" column="grouphourcount" />
+         <id property="grouphourincome" column="grouphourincome" />
+         <id property="renewalmoney" column="renewalmoney" />
+         <id property="refundmoney" column="refundmoney" />
+         <id property="hourcounttask" column="hourcounttask" />
+         <id property="renewalmoneytask" column="renewalmoneytask" />
+         <id property="hourincometask" column="hourincometask" />
+         <id property="refundmoneytask" column="refundmoneytask" />
+         <id property="createtime" column="createtime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Educatecountryperfmonthsum">
+  insert into educatecountryperfmonthsum (id,year,month,onetoonehourcount,onetoonehourincome,grouphourcount,grouphourincome,renewalmoney,refundmoney,hourcounttask,renewalmoneytask,hourincometask,refundmoneytask,createtime)
+         values (#{id},#{year},#{month},#{onetoonehourcount},#{onetoonehourincome},#{grouphourcount},#{grouphourincome},#{renewalmoney},#{refundmoney},#{hourcounttask},#{renewalmoneytask},#{hourincometask},#{refundmoneytask},#{createtime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from educatecountryperfmonthsum 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Educatecountryperfmonthsum">
+    update educatecountryperfmonthsum
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="year != null">
+                   year = #{year},
+             </if>
+             <if test="month != null">
+                   month = #{month},
+             </if>
+             <if test="onetoonehourcount != null">
+                   onetoonehourcount = #{onetoonehourcount},
+             </if>
+             <if test="onetoonehourincome != null">
+                   onetoonehourincome = #{onetoonehourincome},
+             </if>
+             <if test="grouphourcount != null">
+                   grouphourcount = #{grouphourcount},
+             </if>
+             <if test="grouphourincome != null">
+                   grouphourincome = #{grouphourincome},
+             </if>
+             <if test="renewalmoney != null">
+                   renewalmoney = #{renewalmoney},
+             </if>
+             <if test="refundmoney != null">
+                   refundmoney = #{refundmoney},
+             </if>
+             <if test="hourcounttask != null">
+                   hourcounttask = #{hourcounttask},
+             </if>
+             <if test="renewalmoneytask != null">
+                   renewalmoneytask = #{renewalmoneytask},
+             </if>
+             <if test="hourincometask != null">
+                   hourincometask = #{hourincometask},
+             </if>
+             <if test="refundmoneytask != null">
+                   refundmoneytask = #{refundmoneytask},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from educatecountryperfmonthsum 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from educatecountryperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from educatecountryperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from educatecountryperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from educatecountryperfmonthsum 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from educatecountryperfmonthsum 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

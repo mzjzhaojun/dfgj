@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.HrB_assignsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,assignid,teacherid,isfulltimeteacher,educatorid,consultantid,customerid,customercode,campusid,starttime,endtime,categorytype,classtype,ps_classtype,courselevel,subject,grade,amount,durationvalue,confirmprice,confirmmoney,amountperhour,priceperhour,createtime,taskid
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.HrB_assigns">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="assignid" column="assignid" />
+         <id property="teacherid" column="teacherid" />
+         <id property="isfulltimeteacher" column="isfulltimeteacher" />
+         <id property="educatorid" column="educatorid" />
+         <id property="consultantid" column="consultantid" />
+         <id property="customerid" column="customerid" />
+         <id property="customercode" column="customercode" />
+         <id property="campusid" column="campusid" />
+         <id property="starttime" column="starttime" />
+         <id property="endtime" column="endtime" />
+         <id property="categorytype" column="categorytype" />
+         <id property="classtype" column="classtype" />
+         <id property="ps_classtype" column="ps_classtype" />
+         <id property="courselevel" column="courselevel" />
+         <id property="subject" column="subject" />
+         <id property="grade" column="grade" />
+         <id property="amount" column="amount" />
+         <id property="durationvalue" column="durationvalue" />
+         <id property="confirmprice" column="confirmprice" />
+         <id property="confirmmoney" column="confirmmoney" />
+         <id property="amountperhour" column="amountperhour" />
+         <id property="priceperhour" column="priceperhour" />
+         <id property="createtime" column="createtime" />
+         <id property="taskid" column="taskid" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.HrB_assigns">
+  insert into hr_b_assigns (id,assignid,teacherid,isfulltimeteacher,educatorid,consultantid,customerid,customercode,campusid,starttime,endtime,categorytype,classtype,ps_classtype,courselevel,subject,grade,amount,durationvalue,confirmprice,confirmmoney,amountperhour,priceperhour,createtime,taskid)
+         values (#{id},#{assignid},#{teacherid},#{isfulltimeteacher},#{educatorid},#{consultantid},#{customerid},#{customercode},#{campusid},#{starttime},#{endtime},#{categorytype},#{classtype},#{ps_classtype},#{courselevel},#{subject},#{grade},#{amount},#{durationvalue},#{confirmprice},#{confirmmoney},#{amountperhour},#{priceperhour},#{createtime},#{taskid})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from hr_b_assigns 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.HrB_assigns">
+    update hr_b_assigns
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="assignid != null">
+                   assignid = #{assignid},
+             </if>
+             <if test="teacherid != null">
+                   teacherid = #{teacherid},
+             </if>
+             <if test="isfulltimeteacher != null">
+                   isfulltimeteacher = #{isfulltimeteacher},
+             </if>
+             <if test="educatorid != null">
+                   educatorid = #{educatorid},
+             </if>
+             <if test="consultantid != null">
+                   consultantid = #{consultantid},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="customercode != null">
+                   customercode = #{customercode},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="starttime != null">
+                   starttime = #{starttime},
+             </if>
+             <if test="endtime != null">
+                   endtime = #{endtime},
+             </if>
+             <if test="categorytype != null">
+                   categorytype = #{categorytype},
+             </if>
+             <if test="classtype != null">
+                   classtype = #{classtype},
+             </if>
+             <if test="ps_classtype != null">
+                   ps_classtype = #{ps_classtype},
+             </if>
+             <if test="courselevel != null">
+                   courselevel = #{courselevel},
+             </if>
+             <if test="subject != null">
+                   subject = #{subject},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="amount != null">
+                   amount = #{amount},
+             </if>
+             <if test="durationvalue != null">
+                   durationvalue = #{durationvalue},
+             </if>
+             <if test="confirmprice != null">
+                   confirmprice = #{confirmprice},
+             </if>
+             <if test="confirmmoney != null">
+                   confirmmoney = #{confirmmoney},
+             </if>
+             <if test="amountperhour != null">
+                   amountperhour = #{amountperhour},
+             </if>
+             <if test="priceperhour != null">
+                   priceperhour = #{priceperhour},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="taskid != null">
+                   taskid = #{taskid}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from hr_b_assigns 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from hr_b_assigns 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from hr_b_assigns 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from hr_b_assigns 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from hr_b_assigns 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from hr_b_assigns 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

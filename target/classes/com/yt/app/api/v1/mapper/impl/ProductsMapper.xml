@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.ProductsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,rdorgid,rdorgname,productid,productcode,productname,productmemo,productstatus,productversion,productprice,productcost,productunit,targetprice,targetpricememo,catalog,subject,grade,year,season,startdate,enddate,partnerid,partnerratio,partnername,specialallowed,tunlandallowed,presentallowed,promotionallowed,promotionquota,confirmstartdate,confirmenddate,confirmmode,confirmstaging,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Products">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="rdorgid" column="rdorgid" />
+         <id property="rdorgname" column="rdorgname" />
+         <id property="productid" column="productid" />
+         <id property="productcode" column="productcode" />
+         <id property="productname" column="productname" />
+         <id property="productmemo" column="productmemo" />
+         <id property="productstatus" column="productstatus" />
+         <id property="productversion" column="productversion" />
+         <id property="productprice" column="productprice" />
+         <id property="productcost" column="productcost" />
+         <id property="productunit" column="productunit" />
+         <id property="targetprice" column="targetprice" />
+         <id property="targetpricememo" column="targetpricememo" />
+         <id property="catalog" column="catalog" />
+         <id property="subject" column="subject" />
+         <id property="grade" column="grade" />
+         <id property="year" column="year" />
+         <id property="season" column="season" />
+         <id property="startdate" column="startdate" />
+         <id property="enddate" column="enddate" />
+         <id property="partnerid" column="partnerid" />
+         <id property="partnerratio" column="partnerratio" />
+         <id property="partnername" column="partnername" />
+         <id property="specialallowed" column="specialallowed" />
+         <id property="tunlandallowed" column="tunlandallowed" />
+         <id property="presentallowed" column="presentallowed" />
+         <id property="promotionallowed" column="promotionallowed" />
+         <id property="promotionquota" column="promotionquota" />
+         <id property="confirmstartdate" column="confirmstartdate" />
+         <id property="confirmenddate" column="confirmenddate" />
+         <id property="confirmmode" column="confirmmode" />
+         <id property="confirmstaging" column="confirmstaging" />
+         <id property="submitterid" column="submitterid" />
+         <id property="submittername" column="submittername" />
+         <id property="submitterjobid" column="submitterjobid" />
+         <id property="submitterjobname" column="submitterjobname" />
+         <id property="submittime" column="submittime" />
+         <id property="approverid" column="approverid" />
+         <id property="approvername" column="approvername" />
+         <id property="approverjobid" column="approverjobid" />
+         <id property="approverjobname" column="approverjobname" />
+         <id property="approvetime" column="approvetime" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Products">
+  insert into products (id,rdorgid,rdorgname,productid,productcode,productname,productmemo,productstatus,productversion,productprice,productcost,productunit,targetprice,targetpricememo,catalog,subject,grade,year,season,startdate,enddate,partnerid,partnerratio,partnername,specialallowed,tunlandallowed,presentallowed,promotionallowed,promotionquota,confirmstartdate,confirmenddate,confirmmode,confirmstaging,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{rdorgid},#{rdorgname},#{productid},#{productcode},#{productname},#{productmemo},#{productstatus},#{productversion},#{productprice},#{productcost},#{productunit},#{targetprice},#{targetpricememo},#{catalog},#{subject},#{grade},#{year},#{season},#{startdate},#{enddate},#{partnerid},#{partnerratio},#{partnername},#{specialallowed},#{tunlandallowed},#{presentallowed},#{promotionallowed},#{promotionquota},#{confirmstartdate},#{confirmenddate},#{confirmmode},#{confirmstaging},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{submittime},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from products 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Products">
+    update products
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="rdorgid != null">
+                   rdorgid = #{rdorgid},
+             </if>
+             <if test="rdorgname != null">
+                   rdorgname = #{rdorgname},
+             </if>
+             <if test="productid != null">
+                   productid = #{productid},
+             </if>
+             <if test="productcode != null">
+                   productcode = #{productcode},
+             </if>
+             <if test="productname != null">
+                   productname = #{productname},
+             </if>
+             <if test="productmemo != null">
+                   productmemo = #{productmemo},
+             </if>
+             <if test="productstatus != null">
+                   productstatus = #{productstatus},
+             </if>
+             <if test="productversion != null">
+                   productversion = #{productversion},
+             </if>
+             <if test="productprice != null">
+                   productprice = #{productprice},
+             </if>
+             <if test="productcost != null">
+                   productcost = #{productcost},
+             </if>
+             <if test="productunit != null">
+                   productunit = #{productunit},
+             </if>
+             <if test="targetprice != null">
+                   targetprice = #{targetprice},
+             </if>
+             <if test="targetpricememo != null">
+                   targetpricememo = #{targetpricememo},
+             </if>
+             <if test="catalog != null">
+                   catalog = #{catalog},
+             </if>
+             <if test="subject != null">
+                   subject = #{subject},
+             </if>
+             <if test="grade != null">
+                   grade = #{grade},
+             </if>
+             <if test="year != null">
+                   year = #{year},
+             </if>
+             <if test="season != null">
+                   season = #{season},
+             </if>
+             <if test="startdate != null">
+                   startdate = #{startdate},
+             </if>
+             <if test="enddate != null">
+                   enddate = #{enddate},
+             </if>
+             <if test="partnerid != null">
+                   partnerid = #{partnerid},
+             </if>
+             <if test="partnerratio != null">
+                   partnerratio = #{partnerratio},
+             </if>
+             <if test="partnername != null">
+                   partnername = #{partnername},
+             </if>
+             <if test="specialallowed != null">
+                   specialallowed = #{specialallowed},
+             </if>
+             <if test="tunlandallowed != null">
+                   tunlandallowed = #{tunlandallowed},
+             </if>
+             <if test="presentallowed != null">
+                   presentallowed = #{presentallowed},
+             </if>
+             <if test="promotionallowed != null">
+                   promotionallowed = #{promotionallowed},
+             </if>
+             <if test="promotionquota != null">
+                   promotionquota = #{promotionquota},
+             </if>
+             <if test="confirmstartdate != null">
+                   confirmstartdate = #{confirmstartdate},
+             </if>
+             <if test="confirmenddate != null">
+                   confirmenddate = #{confirmenddate},
+             </if>
+             <if test="confirmmode != null">
+                   confirmmode = #{confirmmode},
+             </if>
+             <if test="confirmstaging != null">
+                   confirmstaging = #{confirmstaging},
+             </if>
+             <if test="submitterid != null">
+                   submitterid = #{submitterid},
+             </if>
+             <if test="submittername != null">
+                   submittername = #{submittername},
+             </if>
+             <if test="submitterjobid != null">
+                   submitterjobid = #{submitterjobid},
+             </if>
+             <if test="submitterjobname != null">
+                   submitterjobname = #{submitterjobname},
+             </if>
+             <if test="submittime != null">
+                   submittime = #{submittime},
+             </if>
+             <if test="approverid != null">
+                   approverid = #{approverid},
+             </if>
+             <if test="approvername != null">
+                   approvername = #{approvername},
+             </if>
+             <if test="approverjobid != null">
+                   approverjobid = #{approverjobid},
+             </if>
+             <if test="approverjobname != null">
+                   approverjobname = #{approverjobname},
+             </if>
+             <if test="approvetime != null">
+                   approvetime = #{approvetime},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from products 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from products 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from products 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from products 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from products 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from products 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

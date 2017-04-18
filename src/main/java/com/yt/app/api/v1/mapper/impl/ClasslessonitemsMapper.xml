@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.ClasslessonitemsMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,lessonid,sortno,assignid,assigntime,assignstatus,assignprice,confirmtime,confirmstatus,confirmprice,assetid,assetcode,customerid,customercode,customername,customergrade,customergradename,customercampusid,customercampusname,isjoinclass,isoutercampus,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Classlessonitems">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="lessonid" column="lessonid" />
+         <id property="sortno" column="sortno" />
+         <id property="assignid" column="assignid" />
+         <id property="assigntime" column="assigntime" />
+         <id property="assignstatus" column="assignstatus" />
+         <id property="assignprice" column="assignprice" />
+         <id property="confirmtime" column="confirmtime" />
+         <id property="confirmstatus" column="confirmstatus" />
+         <id property="confirmprice" column="confirmprice" />
+         <id property="assetid" column="assetid" />
+         <id property="assetcode" column="assetcode" />
+         <id property="customerid" column="customerid" />
+         <id property="customercode" column="customercode" />
+         <id property="customername" column="customername" />
+         <id property="customergrade" column="customergrade" />
+         <id property="customergradename" column="customergradename" />
+         <id property="customercampusid" column="customercampusid" />
+         <id property="customercampusname" column="customercampusname" />
+         <id property="isjoinclass" column="isjoinclass" />
+         <id property="isoutercampus" column="isoutercampus" />
+         <id property="consultantid" column="consultantid" />
+         <id property="consultantname" column="consultantname" />
+         <id property="consultantjobid" column="consultantjobid" />
+         <id property="educatorid" column="educatorid" />
+         <id property="educatorname" column="educatorname" />
+         <id property="educatorjobid" column="educatorjobid" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="createtime" column="createtime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifytime" column="modifytime" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Classlessonitems">
+  insert into classlessonitems (id,lessonid,sortno,assignid,assigntime,assignstatus,assignprice,confirmtime,confirmstatus,confirmprice,assetid,assetcode,customerid,customercode,customername,customergrade,customergradename,customercampusid,customercampusname,isjoinclass,isoutercampus,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{lessonid},#{sortno},#{assignid},#{assigntime},#{assignstatus},#{assignprice},#{confirmtime},#{confirmstatus},#{confirmprice},#{assetid},#{assetcode},#{customerid},#{customercode},#{customername},#{customergrade},#{customergradename},#{customercampusid},#{customercampusname},#{isjoinclass},#{isoutercampus},#{consultantid},#{consultantname},#{consultantjobid},#{educatorid},#{educatorname},#{educatorjobid},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from classlessonitems 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Classlessonitems">
+    update classlessonitems
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="lessonid != null">
+                   lessonid = #{lessonid},
+             </if>
+             <if test="sortno != null">
+                   sortno = #{sortno},
+             </if>
+             <if test="assignid != null">
+                   assignid = #{assignid},
+             </if>
+             <if test="assigntime != null">
+                   assigntime = #{assigntime},
+             </if>
+             <if test="assignstatus != null">
+                   assignstatus = #{assignstatus},
+             </if>
+             <if test="assignprice != null">
+                   assignprice = #{assignprice},
+             </if>
+             <if test="confirmtime != null">
+                   confirmtime = #{confirmtime},
+             </if>
+             <if test="confirmstatus != null">
+                   confirmstatus = #{confirmstatus},
+             </if>
+             <if test="confirmprice != null">
+                   confirmprice = #{confirmprice},
+             </if>
+             <if test="assetid != null">
+                   assetid = #{assetid},
+             </if>
+             <if test="assetcode != null">
+                   assetcode = #{assetcode},
+             </if>
+             <if test="customerid != null">
+                   customerid = #{customerid},
+             </if>
+             <if test="customercode != null">
+                   customercode = #{customercode},
+             </if>
+             <if test="customername != null">
+                   customername = #{customername},
+             </if>
+             <if test="customergrade != null">
+                   customergrade = #{customergrade},
+             </if>
+             <if test="customergradename != null">
+                   customergradename = #{customergradename},
+             </if>
+             <if test="customercampusid != null">
+                   customercampusid = #{customercampusid},
+             </if>
+             <if test="customercampusname != null">
+                   customercampusname = #{customercampusname},
+             </if>
+             <if test="isjoinclass != null">
+                   isjoinclass = #{isjoinclass},
+             </if>
+             <if test="isoutercampus != null">
+                   isoutercampus = #{isoutercampus},
+             </if>
+             <if test="consultantid != null">
+                   consultantid = #{consultantid},
+             </if>
+             <if test="consultantname != null">
+                   consultantname = #{consultantname},
+             </if>
+             <if test="consultantjobid != null">
+                   consultantjobid = #{consultantjobid},
+             </if>
+             <if test="educatorid != null">
+                   educatorid = #{educatorid},
+             </if>
+             <if test="educatorname != null">
+                   educatorname = #{educatorname},
+             </if>
+             <if test="educatorjobid != null">
+                   educatorjobid = #{educatorjobid},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from classlessonitems 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from classlessonitems 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from classlessonitems 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from classlessonitems 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from classlessonitems 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from classlessonitems 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CampusrenewweeklystatMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,yearkey,quarterkey,monthkey,weekkey,startdayofweek,enddayofweek,startdayoflastweek,enddayoflastweek,regionid,regionname,branchid,branchname,campusid,campusname,availablecustomernumber,rataskyear,rayear,rafinishrateyear,rayoyyear,rayoyrateyear,rnyear,rnyoyyear,rnyoyrateyear,rataskquarter,raquarter,rafinishratequarter,rayoyquarter,rayoyratequarter,rnquarter,rnyoyquarter,rnyoyratequarter,rataskmonth,ramonth,rafinishratemonth,rayoymonth,rayoyratemonth,rnmonth,rnyoymonth,rnyoyratemonth,ratasklastweek,ralastweek,rafinishratelastweek,raplanlastweek,raplandifflastweek,rayoylastweek,rayoyratelastweek,rntasklastweek,rnlastweek,rnfinishratelastweek,rnplanlastweek,rnplandifflastweek,rnyoylastweek,rnyoyratelastweek,rataskthisweek,rayoythisweek,raplanthisweek,raplandiffthisweek,rntaskthisweek,rnyoythisweek,rnplanthisweek,rnplandiffthisweek,cfnrcustomernumber,customernumberav2000,rnplan,raplan
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Campusrenewweeklystat">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="yearkey" column="yearkey" />
+         <id property="quarterkey" column="quarterkey" />
+         <id property="monthkey" column="monthkey" />
+         <id property="weekkey" column="weekkey" />
+         <id property="startdayofweek" column="startdayofweek" />
+         <id property="enddayofweek" column="enddayofweek" />
+         <id property="startdayoflastweek" column="startdayoflastweek" />
+         <id property="enddayoflastweek" column="enddayoflastweek" />
+         <id property="regionid" column="regionid" />
+         <id property="regionname" column="regionname" />
+         <id property="branchid" column="branchid" />
+         <id property="branchname" column="branchname" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="availablecustomernumber" column="availablecustomernumber" />
+         <id property="rataskyear" column="rataskyear" />
+         <id property="rayear" column="rayear" />
+         <id property="rafinishrateyear" column="rafinishrateyear" />
+         <id property="rayoyyear" column="rayoyyear" />
+         <id property="rayoyrateyear" column="rayoyrateyear" />
+         <id property="rnyear" column="rnyear" />
+         <id property="rnyoyyear" column="rnyoyyear" />
+         <id property="rnyoyrateyear" column="rnyoyrateyear" />
+         <id property="rataskquarter" column="rataskquarter" />
+         <id property="raquarter" column="raquarter" />
+         <id property="rafinishratequarter" column="rafinishratequarter" />
+         <id property="rayoyquarter" column="rayoyquarter" />
+         <id property="rayoyratequarter" column="rayoyratequarter" />
+         <id property="rnquarter" column="rnquarter" />
+         <id property="rnyoyquarter" column="rnyoyquarter" />
+         <id property="rnyoyratequarter" column="rnyoyratequarter" />
+         <id property="rataskmonth" column="rataskmonth" />
+         <id property="ramonth" column="ramonth" />
+         <id property="rafinishratemonth" column="rafinishratemonth" />
+         <id property="rayoymonth" column="rayoymonth" />
+         <id property="rayoyratemonth" column="rayoyratemonth" />
+         <id property="rnmonth" column="rnmonth" />
+         <id property="rnyoymonth" column="rnyoymonth" />
+         <id property="rnyoyratemonth" column="rnyoyratemonth" />
+         <id property="ratasklastweek" column="ratasklastweek" />
+         <id property="ralastweek" column="ralastweek" />
+         <id property="rafinishratelastweek" column="rafinishratelastweek" />
+         <id property="raplanlastweek" column="raplanlastweek" />
+         <id property="raplandifflastweek" column="raplandifflastweek" />
+         <id property="rayoylastweek" column="rayoylastweek" />
+         <id property="rayoyratelastweek" column="rayoyratelastweek" />
+         <id property="rntasklastweek" column="rntasklastweek" />
+         <id property="rnlastweek" column="rnlastweek" />
+         <id property="rnfinishratelastweek" column="rnfinishratelastweek" />
+         <id property="rnplanlastweek" column="rnplanlastweek" />
+         <id property="rnplandifflastweek" column="rnplandifflastweek" />
+         <id property="rnyoylastweek" column="rnyoylastweek" />
+         <id property="rnyoyratelastweek" column="rnyoyratelastweek" />
+         <id property="rataskthisweek" column="rataskthisweek" />
+         <id property="rayoythisweek" column="rayoythisweek" />
+         <id property="raplanthisweek" column="raplanthisweek" />
+         <id property="raplandiffthisweek" column="raplandiffthisweek" />
+         <id property="rntaskthisweek" column="rntaskthisweek" />
+         <id property="rnyoythisweek" column="rnyoythisweek" />
+         <id property="rnplanthisweek" column="rnplanthisweek" />
+         <id property="rnplandiffthisweek" column="rnplandiffthisweek" />
+         <id property="cfnrcustomernumber" column="cfnrcustomernumber" />
+         <id property="customernumberav2000" column="customernumberav2000" />
+         <id property="rnplan" column="rnplan" />
+         <id property="raplan" column="raplan" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.Campusrenewweeklystat">
+  insert into campusrenewweeklystat (id,yearkey,quarterkey,monthkey,weekkey,startdayofweek,enddayofweek,startdayoflastweek,enddayoflastweek,regionid,regionname,branchid,branchname,campusid,campusname,availablecustomernumber,rataskyear,rayear,rafinishrateyear,rayoyyear,rayoyrateyear,rnyear,rnyoyyear,rnyoyrateyear,rataskquarter,raquarter,rafinishratequarter,rayoyquarter,rayoyratequarter,rnquarter,rnyoyquarter,rnyoyratequarter,rataskmonth,ramonth,rafinishratemonth,rayoymonth,rayoyratemonth,rnmonth,rnyoymonth,rnyoyratemonth,ratasklastweek,ralastweek,rafinishratelastweek,raplanlastweek,raplandifflastweek,rayoylastweek,rayoyratelastweek,rntasklastweek,rnlastweek,rnfinishratelastweek,rnplanlastweek,rnplandifflastweek,rnyoylastweek,rnyoyratelastweek,rataskthisweek,rayoythisweek,raplanthisweek,raplandiffthisweek,rntaskthisweek,rnyoythisweek,rnplanthisweek,rnplandiffthisweek,cfnrcustomernumber,customernumberav2000,rnplan,raplan)
+         values (#{id},#{yearkey},#{quarterkey},#{monthkey},#{weekkey},#{startdayofweek},#{enddayofweek},#{startdayoflastweek},#{enddayoflastweek},#{regionid},#{regionname},#{branchid},#{branchname},#{campusid},#{campusname},#{availablecustomernumber},#{rataskyear},#{rayear},#{rafinishrateyear},#{rayoyyear},#{rayoyrateyear},#{rnyear},#{rnyoyyear},#{rnyoyrateyear},#{rataskquarter},#{raquarter},#{rafinishratequarter},#{rayoyquarter},#{rayoyratequarter},#{rnquarter},#{rnyoyquarter},#{rnyoyratequarter},#{rataskmonth},#{ramonth},#{rafinishratemonth},#{rayoymonth},#{rayoyratemonth},#{rnmonth},#{rnyoymonth},#{rnyoyratemonth},#{ratasklastweek},#{ralastweek},#{rafinishratelastweek},#{raplanlastweek},#{raplandifflastweek},#{rayoylastweek},#{rayoyratelastweek},#{rntasklastweek},#{rnlastweek},#{rnfinishratelastweek},#{rnplanlastweek},#{rnplandifflastweek},#{rnyoylastweek},#{rnyoyratelastweek},#{rataskthisweek},#{rayoythisweek},#{raplanthisweek},#{raplandiffthisweek},#{rntaskthisweek},#{rnyoythisweek},#{rnplanthisweek},#{rnplandiffthisweek},#{cfnrcustomernumber},#{customernumberav2000},#{rnplan},#{raplan})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from campusrenewweeklystat 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.Campusrenewweeklystat">
+    update campusrenewweeklystat
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="yearkey != null">
+                   yearkey = #{yearkey},
+             </if>
+             <if test="quarterkey != null">
+                   quarterkey = #{quarterkey},
+             </if>
+             <if test="monthkey != null">
+                   monthkey = #{monthkey},
+             </if>
+             <if test="weekkey != null">
+                   weekkey = #{weekkey},
+             </if>
+             <if test="startdayofweek != null">
+                   startdayofweek = #{startdayofweek},
+             </if>
+             <if test="enddayofweek != null">
+                   enddayofweek = #{enddayofweek},
+             </if>
+             <if test="startdayoflastweek != null">
+                   startdayoflastweek = #{startdayoflastweek},
+             </if>
+             <if test="enddayoflastweek != null">
+                   enddayoflastweek = #{enddayoflastweek},
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="regionname != null">
+                   regionname = #{regionname},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="branchname != null">
+                   branchname = #{branchname},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="availablecustomernumber != null">
+                   availablecustomernumber = #{availablecustomernumber},
+             </if>
+             <if test="rataskyear != null">
+                   rataskyear = #{rataskyear},
+             </if>
+             <if test="rayear != null">
+                   rayear = #{rayear},
+             </if>
+             <if test="rafinishrateyear != null">
+                   rafinishrateyear = #{rafinishrateyear},
+             </if>
+             <if test="rayoyyear != null">
+                   rayoyyear = #{rayoyyear},
+             </if>
+             <if test="rayoyrateyear != null">
+                   rayoyrateyear = #{rayoyrateyear},
+             </if>
+             <if test="rnyear != null">
+                   rnyear = #{rnyear},
+             </if>
+             <if test="rnyoyyear != null">
+                   rnyoyyear = #{rnyoyyear},
+             </if>
+             <if test="rnyoyrateyear != null">
+                   rnyoyrateyear = #{rnyoyrateyear},
+             </if>
+             <if test="rataskquarter != null">
+                   rataskquarter = #{rataskquarter},
+             </if>
+             <if test="raquarter != null">
+                   raquarter = #{raquarter},
+             </if>
+             <if test="rafinishratequarter != null">
+                   rafinishratequarter = #{rafinishratequarter},
+             </if>
+             <if test="rayoyquarter != null">
+                   rayoyquarter = #{rayoyquarter},
+             </if>
+             <if test="rayoyratequarter != null">
+                   rayoyratequarter = #{rayoyratequarter},
+             </if>
+             <if test="rnquarter != null">
+                   rnquarter = #{rnquarter},
+             </if>
+             <if test="rnyoyquarter != null">
+                   rnyoyquarter = #{rnyoyquarter},
+             </if>
+             <if test="rnyoyratequarter != null">
+                   rnyoyratequarter = #{rnyoyratequarter},
+             </if>
+             <if test="rataskmonth != null">
+                   rataskmonth = #{rataskmonth},
+             </if>
+             <if test="ramonth != null">
+                   ramonth = #{ramonth},
+             </if>
+             <if test="rafinishratemonth != null">
+                   rafinishratemonth = #{rafinishratemonth},
+             </if>
+             <if test="rayoymonth != null">
+                   rayoymonth = #{rayoymonth},
+             </if>
+             <if test="rayoyratemonth != null">
+                   rayoyratemonth = #{rayoyratemonth},
+             </if>
+             <if test="rnmonth != null">
+                   rnmonth = #{rnmonth},
+             </if>
+             <if test="rnyoymonth != null">
+                   rnyoymonth = #{rnyoymonth},
+             </if>
+             <if test="rnyoyratemonth != null">
+                   rnyoyratemonth = #{rnyoyratemonth},
+             </if>
+             <if test="ratasklastweek != null">
+                   ratasklastweek = #{ratasklastweek},
+             </if>
+             <if test="ralastweek != null">
+                   ralastweek = #{ralastweek},
+             </if>
+             <if test="rafinishratelastweek != null">
+                   rafinishratelastweek = #{rafinishratelastweek},
+             </if>
+             <if test="raplanlastweek != null">
+                   raplanlastweek = #{raplanlastweek},
+             </if>
+             <if test="raplandifflastweek != null">
+                   raplandifflastweek = #{raplandifflastweek},
+             </if>
+             <if test="rayoylastweek != null">
+                   rayoylastweek = #{rayoylastweek},
+             </if>
+             <if test="rayoyratelastweek != null">
+                   rayoyratelastweek = #{rayoyratelastweek},
+             </if>
+             <if test="rntasklastweek != null">
+                   rntasklastweek = #{rntasklastweek},
+             </if>
+             <if test="rnlastweek != null">
+                   rnlastweek = #{rnlastweek},
+             </if>
+             <if test="rnfinishratelastweek != null">
+                   rnfinishratelastweek = #{rnfinishratelastweek},
+             </if>
+             <if test="rnplanlastweek != null">
+                   rnplanlastweek = #{rnplanlastweek},
+             </if>
+             <if test="rnplandifflastweek != null">
+                   rnplandifflastweek = #{rnplandifflastweek},
+             </if>
+             <if test="rnyoylastweek != null">
+                   rnyoylastweek = #{rnyoylastweek},
+             </if>
+             <if test="rnyoyratelastweek != null">
+                   rnyoyratelastweek = #{rnyoyratelastweek},
+             </if>
+             <if test="rataskthisweek != null">
+                   rataskthisweek = #{rataskthisweek},
+             </if>
+             <if test="rayoythisweek != null">
+                   rayoythisweek = #{rayoythisweek},
+             </if>
+             <if test="raplanthisweek != null">
+                   raplanthisweek = #{raplanthisweek},
+             </if>
+             <if test="raplandiffthisweek != null">
+                   raplandiffthisweek = #{raplandiffthisweek},
+             </if>
+             <if test="rntaskthisweek != null">
+                   rntaskthisweek = #{rntaskthisweek},
+             </if>
+             <if test="rnyoythisweek != null">
+                   rnyoythisweek = #{rnyoythisweek},
+             </if>
+             <if test="rnplanthisweek != null">
+                   rnplanthisweek = #{rnplanthisweek},
+             </if>
+             <if test="rnplandiffthisweek != null">
+                   rnplandiffthisweek = #{rnplandiffthisweek},
+             </if>
+             <if test="cfnrcustomernumber != null">
+                   cfnrcustomernumber = #{cfnrcustomernumber},
+             </if>
+             <if test="customernumberav2000 != null">
+                   customernumberav2000 = #{customernumberav2000},
+             </if>
+             <if test="rnplan != null">
+                   rnplan = #{rnplan},
+             </if>
+             <if test="raplan != null">
+                   raplan = #{raplan}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from campusrenewweeklystat 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campusrenewweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from campusrenewweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campusrenewweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campusrenewweeklystat 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campusrenewweeklystat 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>
