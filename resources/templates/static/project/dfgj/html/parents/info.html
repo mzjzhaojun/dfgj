@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html ng-app="info">
+  <head>
+    <title>查看</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- 基础样式 -->
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+    <!-- 初始化 -->
+    <script type="text/javascript">
+		var info = angular.module("info", []);
+		info.controller("infoController",function($scope, $http) {
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			$http({
+				url:parent.getFunctionLinksHref("self"),
+				method:'GET',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+				data: ''
+				}).success(function(data, status, headers, config){
+					$scope.formData= data;
+				}).error(function(data, status, headers, config){
+					response(status);
+				});
+		})
+	</script>
+  </head>
+  <body ng-controller="infoController">
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    		</div>
+    	</div>
+   		<div class="col-lg-6 viewFixedWidth">
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">ID</span>
+           	<input type="text" class="form-control" value="{{formData.id}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">客户ID命名规则：家长P+年份后两位+月+日+999999，学生S+年份后两位+月份+日期+999999</span>
+           	<input type="text" class="form-control" value="{{formData.parentcode}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">家长名称</span>
+           	<input type="text" class="form-control" value="{{formData.parentname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">性别(C_CODE_ABBR_GENDER)。1--男，2--女</span>
+           	<input type="text" class="form-control" value="{{formData.gender}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth"></span>
+           	<input type="text" class="form-control" value="{{formData.email}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">所属行业(C_CODE_ABBR_INDUSTRY)</span>
+           	<input type="text" class="form-control" value="{{formData.industry}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">从事职业</span>
+           	<input type="text" class="form-control" value="{{formData.career}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">家庭年收入(C_CODE_ABBR_HOMEINCOME)</span>
+           	<input type="text" class="form-control" value="{{formData.income}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">家长生日</span>
+           	<input type="text" class="form-control" value="{{formData.birthday}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">证件类型(C_CODE_ABBR_BO_Customer_CertificateType)</span>
+           	<input type="text" class="form-control" value="{{formData.idtype}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">证件号码</span>
+           	<input type="text" class="form-control" value="{{formData.idnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">国家(C_CODE_ABBR_COUNTRY)。默认是中国1004115</span>
+           	<input type="text" class="form-control" value="{{formData.country}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">省份(C_CODE_ABBR_LOCATION)</span>
+           	<input type="text" class="form-control" value="{{formData.province}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">城市(C_CODE_ABBR_LOCATION)</span>
+           	<input type="text" class="form-control" value="{{formData.city}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">区县(C_CODE_ABBR_LOCATION)</span>
+           	<input type="text" class="form-control" value="{{formData.county}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">街道名称</span>
+           	<input type="text" class="form-control" value="{{formData.streetname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">完整详细地址</span>
+           	<input type="text" class="form-control" value="{{formData.addressdetail}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建者ID</span>
+           	<input type="text" class="form-control" value="{{formData.creatorid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建者名称</span>
+           	<input type="text" class="form-control" value="{{formData.creatorname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建时间</span>
+           	<input type="text" class="form-control" value="{{formData.createtime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">最后修改人</span>
+           	<input type="text" class="form-control" value="{{formData.modifierid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">最后修改人名称</span>
+           	<input type="text" class="form-control" value="{{formData.modifiername}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">最后修改时间</span>
+           	<input type="text" class="form-control" value="{{formData.modifytime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">租户的ID</span>
+           	<input type="text" class="form-control" value="{{formData.tenantcode}}" disabled>
+           </div>
+   	</div>
+  </body>
+</html>

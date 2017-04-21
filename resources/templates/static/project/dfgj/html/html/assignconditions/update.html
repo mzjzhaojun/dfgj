@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html ng-app="add">
+  <head>
+    <title>修改</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css"/>
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+	<!-- 表单验证 -->
+	<script src="../../../../resource/js/date/js/eap.core.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	<!-- 初始化 -->
+	<script type="text/javascript">
+		var add = angular.module("add", []);
+		add.controller("addController",function($scope, $http) {
+			$scope.formData = {};
+			$http({
+				url:parent.getFunctionLinksHref("self"),
+				method:'GET',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+				data: ''
+				}).success(function(data, status, headers, config){
+					$scope.formData= data
+				}).error(function(data, status, headers, config){
+					response(status);
+				});
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			$scope.onPreserved=function(){
+				var isValid = $("#saveForm").valid();
+					if(isValid){
+    				$http({
+    					url:parent.getFunctionLinksHref("self"),
+    					method:'PUT',
+    					dataType : "json",
+    					withCredentials: true,
+    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    					data: JSON.stringify($scope.formData)
+    		  		}).success(function(data, status, headers, config){
+    		  			location.href="list.html";
+    		  		}).error(function(data, status, headers, config){
+    		  			response(status);
+					})
+    			}
+			}
+		})
+	</script>
+</head>
+  <body ng-controller="addController">
+  	<form method="post" id="saveForm" action="">
+  		 <!-- 操作按钮操作区 -->
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+		    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+	    	</div>
+	    	<div>
+		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+	    	</div>
+    	</div>
+   		<div class="col-lg-6">
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入ID" name="id" ng-model="formData.id" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">学员视图排课条件名称（资产编码+科目+老师+年级）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入学员视图排课条件名称（资产编码+科目+老师+年级）" name="conditionname4customer" ng-model="formData.conditionname4customer" maxlength="128">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教师视图排课条件名称（资产编码+科目+学员+年级）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入教师视图排课条件名称（资产编码+科目+学员+年级）" name="conditionname4teacher" ng-model="formData.conditionname4teacher" maxlength="128">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">学员ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入学员ID" name="customerid" ng-model="formData.customerid" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">学员编码</span>
+	           		<input type="text" class="form-control required" placeholder="请输入学员编码" name="customercode" ng-model="formData.customercode" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">学员名称</span>
+	           		<input type="text" class="form-control required" placeholder="请输入学员名称" name="customername" ng-model="formData.customername" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">账户ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入账户ID" name="accountid" ng-model="formData.accountid" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">资产ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入资产ID" name="assetid" ng-model="formData.assetid" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">资产编码</span>
+	           		<input type="text" class="form-control required" placeholder="请输入资产编码" name="assetcode" ng-model="formData.assetcode" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">产品ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入产品ID" name="productid" ng-model="formData.productid" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">产品编码</span>
+	           		<input type="text" class="form-control required" placeholder="请输入产品编码" name="productcode" ng-model="formData.productcode" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">产品名称</span>
+	           		<input type="text" class="form-control required" placeholder="请输入产品名称" name="productname" ng-model="formData.productname" maxlength="128">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">产品类型（也叫课时类型）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入产品类型（也叫课时类型）" name="categorytype" ng-model="formData.categorytype" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">产品类型名称</span>
+	           		<input type="text" class="form-control required" placeholder="请输入产品类型名称" name="categorytypename" ng-model="formData.categorytypename" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">年级代码</span>
+	           		<input type="text" class="form-control required" placeholder="请输入年级代码" name="grade" ng-model="formData.grade" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">年级名称</span>
+	           		<input type="text" class="form-control required" placeholder="请输入年级名称" name="gradename" ng-model="formData.gradename" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">科目代码</span>
+	           		<input type="text" class="form-control required" placeholder="请输入科目代码" name="subject" ng-model="formData.subject" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">科目名称</span>
+	           		<input type="text" class="form-control required" placeholder="请输入科目名称" name="subjectname" ng-model="formData.subjectname" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教室ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入教室ID" name="roomid" ng-model="formData.roomid" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教室编码</span>
+	           		<input type="text" class="form-control required" placeholder="请输入教室编码" name="roomcode" ng-model="formData.roomcode" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教室名称</span>
+	           		<input type="text" class="form-control required" placeholder="请输入教室名称" name="roomname" ng-model="formData.roomname" maxlength="128">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教师ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入教师ID" name="teacherid" ng-model="formData.teacherid" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教师姓名</span>
+	           		<input type="text" class="form-control required" placeholder="请输入教师姓名" name="teachername" ng-model="formData.teachername" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教师OACode</span>
+	           		<input type="text" class="form-control required" placeholder="请输入教师OACode" name="teacheroacode" ng-model="formData.teacheroacode" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教师岗位ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入教师岗位ID" name="teacherjobid" ng-model="formData.teacherjobid" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教师学科组ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入教师学科组ID" name="teacherjoborgid" ng-model="formData.teacherjoborgid" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教师学科组名称</span>
+	           		<input type="text" class="form-control required" placeholder="请输入教师学科组名称" name="teacherjoborgname" ng-model="formData.teacherjoborgname" maxlength="128">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">是否全职教师</span>
+	           		<input type="text" class="form-control required" placeholder="请输入是否全职教师" name="isfulltimeteacher" ng-model="formData.isfulltimeteacher" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课程级别代码</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课程级别代码" name="courselevel" ng-model="formData.courselevel" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课程级别名称</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课程级别名称" name="courselevelname" ng-model="formData.courselevelname" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课次时长代码</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课次时长代码" name="lessonduration" ng-model="formData.lessonduration" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课次时长值</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课次时长值" name="lessondurationvalue" ng-model="formData.lessondurationvalue" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">创建人ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入创建人ID" name="creatorid" ng-model="formData.creatorid" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">创建人姓名</span>
+	           		<input type="text" class="form-control required" placeholder="请输入创建人姓名" name="creatorname" ng-model="formData.creatorname" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">创建时间</span>
+	           		<input type="text" class="form-control required" placeholder="请输入创建时间" name="createtime" ng-model="formData.createtime" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">最后修改人ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入最后修改人ID" name="modifierid" ng-model="formData.modifierid" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">最后修改人姓名</span>
+	           		<input type="text" class="form-control required" placeholder="请输入最后修改人姓名" name="modifiername" ng-model="formData.modifiername" maxlength="64">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">最后修改时间</span>
+	           		<input type="text" class="form-control required" placeholder="请输入最后修改时间" name="modifytime" ng-model="formData.modifytime" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+   		</div>
+    </form>
+  </body>
+</html>

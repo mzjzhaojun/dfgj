@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html ng-app="list">
+  <head>
+    <title>列表</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- 基础样式 -->
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/list.css">
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+   <!-- 弹出框 -->
+	<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/getUrlParam.js"></script>
+    <!-- 分页 -->
+	<script type="text/javascript" src="../../../../resource/js/paging.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+    <script type="text/javascript">
+		var flag = true;
+		var list = angular.module("list", []);
+		list.controller("listController",function($scope, $http) {	
+			$scope.toInfo=function(data){
+				parent.setFunctionLinksHref(data.links==null?data._links:data.links);
+				location.href="info.html";
+			}
+			$scope.toUpdate=function(data){
+				parent.setFunctionLinksHref(data.links==null?data._links:data.links);
+				location.href="update.html";
+			}
+			$scope.toDelete=function(data){	
+				parent.setFunctionLinksHref(data.links==null?data._links:data.links);
+				parent.onPopupDelete();
+			}
+			$scope.onSearch=function(){
+				$scope.pageList();
+			}
+			$scope.changePage=function(){
+				$scope.pageList();
+			}
+			$scope.onAdd=function(){
+				location.href="add.html";
+			}
+			$scope.pageList = function(){
+				pageNo = parent.currentPage;
+			    var data = {"name":$("#name").val()};
+				$http({
+					url:parent.getMenuLinksHref("assetslist"),
+					method:'POST',
+					dataType : "json",
+					withCredentials: true,
+					headers: {'Content-Type': 'application/json;charset=UTF-8;',"pageNo":pageNo,"pageSize":pageSize,"orderby":"id","dir":"desc"},
+					data: JSON.stringify(data)
+					}).success(function(data, status, headers, config){
+						totalCount = headers('totalCount');
+						pageCount = headers('pageCount');
+						$scope.datalist= data;
+						paging();
+						initPage();
+					}).error(function(data, status, headers, config){
+						response(status);
+					});
+			}
+			$scope.pageList();
+			$scope.onDelete = function(){
+                $http({
+					url:parent.getFunctionLinksHref("self"),
+					method:'DELETE',
+					dataType : "json",
+					withCredentials: true,
+					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+					data: ""
+					}).success(function(data, status, headers, config){
+						$scope.pageList();
+					}).error(function(data, status, headers, config){
+						response(status);
+					});
+				}
+		})
+		
+		function confirmDeletion(){
+			var appElement = document.querySelector('[ng-controller=listController]');
+			var $scope = angular.element(appElement).scope();
+			$scope.onDelete();
+		}
+	</script>
+  </head> 
+  <body ng-controller="listController" style="color: #000;">
+  	<!-- 基本操作区 -->
+  	<h5>
+  		<span class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ></span>
+  		<input type="text" id="name" class="form-control" value="" placeholder="请输入需要查找的名称" style="width: 20%;display: inline;">
+  		<i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i>
+  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onSearch()">搜索</a>
+  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onAdd()">添加</a>
+  	</h5>
+  	<!-- 列表区 -->
+  	<table class="table">
+	  <thead>
+	    <tr class="info">
+	      <th>序号</th>
+	      <th>ID</th>
+	      <th>资产编码</th>
+	      <th>资产名称（资产编号+产品名称）</th>
+	      <th>资产类型（0-课程，1-非课程）</th>
+	      <th>资产来源（0-订购单）</th>
+	      <th>资产来源PID（订购单ID）</th>
+	      <th>资产来源ID（订购单明细ID）</th>
+	      <th>账户ID</th>
+	      <th>学员ID</th>
+	      <th>学员编码</th>
+	      <th>学员名称</th>
+	      <th>产品ID</th>
+	      <th>产品编码</th>
+	      <th>产品名称</th>
+	      <th>颗粒度代码</th>
+	      <th>颗粒度名称</th>
+	      <th>产品年级代码</th>
+	      <th>产品年级名称</th>
+	      <th>产品科目代码</th>
+	      <th>产品科目名称</th>
+	      <th>产品分类代码</th>
+	      <th>产品分类名称</th>
+	      <th>产品类型代码</th>
+	      <th>产品类型名称</th>
+	      <th>课程级别代码</th>
+	      <th>课程级别名称</th>
+	      <th>课次时长代码</th>
+	      <th>课次时长名称</th>
+	      <th>订购的原始单价</th>
+	      <th>订购的数量</th>
+	      <th>赠送的数量</th>
+	      <th>拓路折扣率</th>
+	      <th>特殊折扣率</th>
+	      <th>折扣类型（参考订购明细）</th>
+	      <th>折扣率</th>
+	      <th>订购的实际单价</th>
+	      <th>订购的实际数量</th>
+	      <th>过期日期</th>
+	      <th>累计已排数量（课程资产用，排课+，取消-，确认-）</th>
+	      <th>累计确认数量（即已上数量，课程资产用，确认+，删除-）</th>
+	      <th>累计已兑换数量（课程资产用）</th>
+	      <th>累计已退数量（课程资产用，退订+）</th>
+	      <th>累计已确认金额（课程资产与非课程资产用，确认+，删除-）</th>
+	      <th>累计返还金额（课程资产用，买赠退订时使用）</th>
+	      <th>剩余资产数量（未上的数量，确认-，删除+）</th>
+	      <th>剩余资产单价（目前与实际单价相同）</th>
+	      <th>创建人ID</th>
+	      <th>创建人姓名</th>
+	      <th>创建时间</th>
+	      <th>最后修改人ID</th>
+	      <th>最后修改人姓名</th>
+	      <th>最后修改时间</th>
+	      <th>相关操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
+		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.id}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.assetcode}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.assetname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.assettype}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.assetreftype}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.assetrefpid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.assetrefid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.accountid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.customerid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.customercode}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.customername}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.productid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.productcode}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.productname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.productunit}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.productunitname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.grade}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.gradename}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.subject}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.subjectname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.catalog}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.catalogname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.categorytype}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.categorytypename}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.courselevel}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.courselevelname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.lessonduration}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.lessondurationvalue}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.orderprice}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.orderamount}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.presentamount}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.tunlandrate}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.specialrate}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.discounttype}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.discountrate}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.realprice}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.realamount}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.expirationdate}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.assignedamount}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.confirmedamount}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.exchangedamount}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.debookedamount}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.confirmedmoney}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.returnedmoney}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.amount}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.price}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.creatorid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.creatorname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.createtime}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.modifierid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.modifiername}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.assets.modifytime}}</td>
+			<td>
+	    		<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" title="查看"></h4>
+	    		<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil"  style="margin:0px 5px;color:#99DFF8;" title="修改"></h4>
+	    		<h4 ng-click="toDelete(data)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;" title="删除"></h4>
+			</td>
+	    </tr>
+	  </tbody>
+	</table>
+ 	<!-- 分页区 -->
+	<div class="pagepanel">
+		<span class="text-info" style="position:relative;top:-10px;">共<label id="totalCount"></label>条</span>
+		<ul class="pagination" style="margin: 0px 10px;padding:0px;">
+		</ul>
+		<span class="text-info" style="position:relative;top:-10px;">第<label id="pageNo"></label>页/共<label id="pageCount"></label>页</span>
+		<select id="pageSize" class="form-control" style="width: 70px;float: right;">
+		</select>
+		<span class="text-info" style="position:relative;top:6px;float: right;margin: 0px 5px;">每页显示</span>
+	</div>
+  </body>
+</html>

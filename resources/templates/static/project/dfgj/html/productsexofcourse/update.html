@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html ng-app="add">
+  <head>
+    <title>修改</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css"/>
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+	<!-- 表单验证 -->
+	<script src="../../../../resource/js/date/js/eap.core.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	<!-- 初始化 -->
+	<script type="text/javascript">
+		var add = angular.module("add", []);
+		add.controller("addController",function($scope, $http) {
+			$scope.formData = {};
+			$http({
+				url:parent.getFunctionLinksHref("self"),
+				method:'GET',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+				data: ''
+				}).success(function(data, status, headers, config){
+					$scope.formData= data
+				}).error(function(data, status, headers, config){
+					response(status);
+				});
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			$scope.onPreserved=function(){
+				var isValid = $("#saveForm").valid();
+					if(isValid){
+    				$http({
+    					url:parent.getFunctionLinksHref("self"),
+    					method:'PUT',
+    					dataType : "json",
+    					withCredentials: true,
+    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    					data: JSON.stringify($scope.formData)
+    		  		}).success(function(data, status, headers, config){
+    		  			location.href="list.html";
+    		  		}).error(function(data, status, headers, config){
+    		  			response(status);
+					})
+    			}
+			}
+		})
+	</script>
+</head>
+  <body ng-controller="addController">
+  	<form method="post" id="saveForm" action="">
+  		 <!-- 操作按钮操作区 -->
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+		    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+	    	</div>
+	    	<div>
+		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+	    	</div>
+    	</div>
+   		<div class="col-lg-6">
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">ID</span>
+	           		<input type="text" class="form-control required" placeholder="请输入ID" name="id" ng-model="formData.id" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课次数量（班组用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课次数量（班组用）" name="lessoncount" ng-model="formData.lessoncount" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课次时长代码（通用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课次时长代码（通用）" name="lessonduration" ng-model="formData.lessonduration" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课次时长（通用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课次时长（通用）" name="lessondurationvalue" ng-model="formData.lessondurationvalue" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课时时长代码 （通用）对于一对一和课次一样</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课时时长代码 （通用）对于一对一和课次一样" name="periodduration" ng-model="formData.periodduration" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课时时长 （通用）对于一对一和课次一样</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课时时长 （通用）对于一对一和课次一样" name="perioddurationvalue" ng-model="formData.perioddurationvalue" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课次课时数 （通用）对于一对一值为1</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课次课时数 （通用）对于一对一值为1" name="periodsoflesson" ng-model="formData.periodsoflesson" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课程级别代码（普通、1A、3A）  【班组和一对一不一样，考虑拉平】（通用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入课程级别代码（普通、1A、3A）  【班组和一对一不一样，考虑拉平】（通用）" name="courselevel" ng-model="formData.courselevel" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">辅导类型代码（常规，自主招生）（班组用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入辅导类型代码（常规，自主招生）（班组用）" name="coachtype" ng-model="formData.coachtype" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">班组类型代码（长期，阶段性）（班组用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入班组类型代码（长期，阶段性）（班组用）" name="grouptype" ng-model="formData.grouptype" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">班级类型代码（大班，小班）（班组用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入班级类型代码（大班，小班）（班组用）" name="classtype" ng-model="formData.classtype" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">开班人数（班组用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入开班人数（班组用）" name="minpeoples" ng-model="formData.minpeoples" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">满班人数（班组用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入满班人数（班组用）" name="maxpeoples" ng-model="formData.maxpeoples" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">跨校区收入归属（C表示学员，T表示老师）（班组用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入跨校区收入归属（C表示学员，T表示老师）（班组用）" name="incomebelonging" ng-model="formData.incomebelonging" maxlength="32">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+	   		 	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">是否跨校区班组（班组用）</span>
+	           		<input type="text" class="form-control required" placeholder="请输入是否跨校区班组（班组用）" name="iscrosscampus" ng-model="formData.iscrosscampus" maxlength="">
+	        		<span class="input-group-addon verifyprompt">*</span>
+	       		 </div>
+   		</div>
+    </form>
+  </body>
+</html>

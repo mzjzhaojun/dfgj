@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html ng-app="info">
+  <head>
+    <title>查看</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- 基础样式 -->
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+    <!-- 初始化 -->
+    <script type="text/javascript">
+		var info = angular.module("info", []);
+		info.controller("infoController",function($scope, $http) {
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			$http({
+				url:parent.getFunctionLinksHref("self"),
+				method:'GET',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+				data: ''
+				}).success(function(data, status, headers, config){
+					$scope.formData= data;
+				}).error(function(data, status, headers, config){
+					response(status);
+				});
+		})
+	</script>
+  </head>
+  <body ng-controller="infoController">
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    		</div>
+    	</div>
+   		<div class="col-lg-6 viewFixedWidth">
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">ID</span>
+           	<input type="text" class="form-control" value="{{formData.id}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">分公司ID</span>
+           	<input type="text" class="form-control" value="{{formData.branchid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">分公司名称</span>
+           	<input type="text" class="form-control" value="{{formData.branchname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">校区ID</span>
+           	<input type="text" class="form-control" value="{{formData.campusid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">校区名称</span>
+           	<input type="text" class="form-control" value="{{formData.campusname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学员ID</span>
+           	<input type="text" class="form-control" value="{{formData.customerid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">客户类型（1-系统客户，2-非系统客户）</span>
+           	<input type="text" class="form-control" value="{{formData.customerkind}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学员编码</span>
+           	<input type="text" class="form-control" value="{{formData.customercode}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学员姓名</span>
+           	<input type="text" class="form-control" value="{{formData.customername}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">服务类型（投诉，退费，咨询，其它）</span>
+           	<input type="text" class="form-control" value="{{formData.servicetype}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">服务状态</span>
+           	<input type="text" class="form-control" value="{{formData.servicestatus}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">备注</span>
+           	<input type="text" class="form-control" value="{{formData.servicememo}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">受理时间</span>
+           	<input type="text" class="form-control" value="{{formData.accepttime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">要求分客服受理并回复时间限制代码（2小时内，6小时内，12小时内，24小时内）</span>
+           	<input type="text" class="form-control" value="{{formData.acceptlimit}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">分客服受理并回复时间限制值</span>
+           	<input type="text" class="form-control" value="{{formData.acceptlimitvalue}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">受理描述</span>
+           	<input type="text" class="form-control" value="{{formData.acceptmemo}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">受理人ID</span>
+           	<input type="text" class="form-control" value="{{formData.accepterid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">受理人姓名</span>
+           	<input type="text" class="form-control" value="{{formData.acceptername}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">受理人岗位ID</span>
+           	<input type="text" class="form-control" value="{{formData.accepterjobid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">受理人岗位名称</span>
+           	<input type="text" class="form-control" value="{{formData.accepterjobname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">客户诉求</span>
+           	<input type="text" class="form-control" value="{{formData.appealmemo}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">咨询师ID</span>
+           	<input type="text" class="form-control" value="{{formData.consultantid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">咨询师姓名</span>
+           	<input type="text" class="form-control" value="{{formData.consultantname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">咨询师岗位ID</span>
+           	<input type="text" class="form-control" value="{{formData.consultantjobid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">咨询师岗位名称</span>
+           	<input type="text" class="form-control" value="{{formData.consultantjobname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学管师ID</span>
+           	<input type="text" class="form-control" value="{{formData.educatorid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学管师姓名</span>
+           	<input type="text" class="form-control" value="{{formData.educatorname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学管师岗位ID</span>
+           	<input type="text" class="form-control" value="{{formData.educatorjobid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学管师岗位名称</span>
+           	<input type="text" class="form-control" value="{{formData.educatorjobname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">咨询类型代码（校区相关，退费相关，加盟，其它）</span>
+           	<input type="text" class="form-control" value="{{formData.consulttype}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">如果咨询类型是其它，则录入该内容</span>
+           	<input type="text" class="form-control" value="{{formData.consultmemo}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">投诉次数代码（一次，二次，三次，三次以上...)</span>
+           	<input type="text" class="form-control" value="{{formData.complainttimes}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">严重程度代码（普通，严重，紧急）</span>
+           	<input type="text" class="form-control" value="{{formData.complaintlevel}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">投诉升级代码（二级，三级，特级）</span>
+           	<input type="text" class="form-control" value="{{formData.complaintupgrade}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">是否升级处理</span>
+           	<input type="text" class="form-control" value="{{formData.isupgradehandle}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">下一个处理人ID</span>
+           	<input type="text" class="form-control" value="{{formData.handlerid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">下一个处理人姓名</span>
+           	<input type="text" class="form-control" value="{{formData.handlername}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">下一个处理人岗名称（分客服专员，分客服经理，总客服经理...）</span>
+           	<input type="text" class="form-control" value="{{formData.handlerjobname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">下一个处理人岗位类型</span>
+           	<input type="text" class="form-control" value="{{formData.handlerjobtype}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">处理意见</span>
+           	<input type="text" class="form-control" value="{{formData.handleadvice}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">是否发送邮件</span>
+           	<input type="text" class="form-control" value="{{formData.issendemail}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">处理人邮箱</span>
+           	<input type="text" class="form-control" value="{{formData.handleremail}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">是否发送短信</span>
+           	<input type="text" class="form-control" value="{{formData.issendmessage}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">处理人手机</span>
+           	<input type="text" class="form-control" value="{{formData.handlerphone}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">来电时间</span>
+           	<input type="text" class="form-control" value="{{formData.calltime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">语音文件ID</span>
+           	<input type="text" class="form-control" value="{{formData.voiceid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建人ID</span>
+           	<input type="text" class="form-control" value="{{formData.creatorid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建人姓名</span>
+           	<input type="text" class="form-control" value="{{formData.creatorname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建时间</span>
+           	<input type="text" class="form-control" value="{{formData.createtime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">最后修改人ID</span>
+           	<input type="text" class="form-control" value="{{formData.modifierid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">最后修改人姓名</span>
+           	<input type="text" class="form-control" value="{{formData.modifiername}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">最后修改时间</span>
+           	<input type="text" class="form-control" value="{{formData.modifytime}}" disabled>
+           </div>
+   	</div>
+  </body>
+</html>

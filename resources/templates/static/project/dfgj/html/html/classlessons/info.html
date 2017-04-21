@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html ng-app="info">
+  <head>
+    <title>查看</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- 基础样式 -->
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+    <!-- 初始化 -->
+    <script type="text/javascript">
+		var info = angular.module("info", []);
+		info.controller("infoController",function($scope, $http) {
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			$http({
+				url:parent.getFunctionLinksHref("self"),
+				method:'GET',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+				data: ''
+				}).success(function(data, status, headers, config){
+					$scope.formData= data;
+				}).error(function(data, status, headers, config){
+					response(status);
+				});
+		})
+	</script>
+  </head>
+  <body ng-controller="infoController">
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    		</div>
+    	</div>
+   		<div class="col-lg-6 viewFixedWidth">
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">ID</span>
+           	<input type="text" class="form-control" value="{{formData.id}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班级ID</span>
+           	<input type="text" class="form-control" value="{{formData.classid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课次编号</span>
+           	<input type="text" class="form-control" value="{{formData.lessoncode}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课次状态（1-排定，3-已上，9-已删除）</span>
+           	<input type="text" class="form-control" value="{{formData.lessonstatus}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">开始时间</span>
+           	<input type="text" class="form-control" value="{{formData.starttime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">结束时间</span>
+           	<input type="text" class="form-control" value="{{formData.endtime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认状态（参考排课确认状态）</span>
+           	<input type="text" class="form-control" value="{{formData.confirmstatus}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">最后确认时间</span>
+           	<input type="text" class="form-control" value="{{formData.confirmtime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">已确认的人数（已上课）</span>
+           	<input type="text" class="form-control" value="{{formData.confirmedpeoples}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">已确认的课时费（已上课）</span>
+           	<input type="text" class="form-control" value="{{formData.confirmedmoney}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次课包含人数</span>
+           	<input type="text" class="form-control" value="{{formData.lessonpeoples}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次课教室ID</span>
+           	<input type="text" class="form-control" value="{{formData.roomid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次课教室编码</span>
+           	<input type="text" class="form-control" value="{{formData.roomcode}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次课教室名称</span>
+           	<input type="text" class="form-control" value="{{formData.roomname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次课教师ID</span>
+           	<input type="text" class="form-control" value="{{formData.teacherid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次课教师名称</span>
+           	<input type="text" class="form-control" value="{{formData.teachername}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次教师OACode</span>
+           	<input type="text" class="form-control" value="{{formData.teacheroacode}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次教师岗位ID</span>
+           	<input type="text" class="form-control" value="{{formData.teacherjobid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次教师岗位所属学科组ID</span>
+           	<input type="text" class="form-control" value="{{formData.teacherjoborgid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次教师岗位所属学科组名称</span>
+           	<input type="text" class="form-control" value="{{formData.teacherjoborgname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本次是否全职教师</span>
+           	<input type="text" class="form-control" value="{{formData.isfulltimeteacher}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建人ID</span>
+           	<input type="text" class="form-control" value="{{formData.creatorid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建人姓名</span>
+           	<input type="text" class="form-control" value="{{formData.creatorname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建时间</span>
+           	<input type="text" class="form-control" value="{{formData.createtime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">最后修改人ID</span>
+           	<input type="text" class="form-control" value="{{formData.modifierid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">最后修改人姓名</span>
+           	<input type="text" class="form-control" value="{{formData.modifiername}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">最后修改时间</span>
+           	<input type="text" class="form-control" value="{{formData.modifytime}}" disabled>
+           </div>
+   	</div>
+  </body>
+</html>

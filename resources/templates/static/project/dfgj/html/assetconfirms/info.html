@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html ng-app="info">
+  <head>
+    <title>查看</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- 基础样式 -->
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+    <!-- 初始化 -->
+    <script type="text/javascript">
+		var info = angular.module("info", []);
+		info.controller("infoController",function($scope, $http) {
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			$http({
+				url:parent.getFunctionLinksHref("self"),
+				method:'GET',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+				data: ''
+				}).success(function(data, status, headers, config){
+					$scope.formData= data;
+				}).error(function(data, status, headers, config){
+					response(status);
+				});
+		})
+	</script>
+  </head>
+  <body ng-controller="infoController">
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    		</div>
+    	</div>
+   		<div class="col-lg-6 viewFixedWidth">
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">ID</span>
+           	<input type="text" class="form-control" value="{{formData.id}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">收入归属校区ID</span>
+           	<input type="text" class="form-control" value="{{formData.campusid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">收入归属校区名称</span>
+           	<input type="text" class="form-control" value="{{formData.campusname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学员ID</span>
+           	<input type="text" class="form-control" value="{{formData.customerid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学员编码</span>
+           	<input type="text" class="form-control" value="{{formData.customercode}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学员姓名</span>
+           	<input type="text" class="form-control" value="{{formData.customername}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">账户ID</span>
+           	<input type="text" class="form-control" value="{{formData.accountid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">资产ID</span>
+           	<input type="text" class="form-control" value="{{formData.assetid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">资产编码</span>
+           	<input type="text" class="form-control" value="{{formData.assetcode}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">资产类型（参考资产表）</span>
+           	<input type="text" class="form-control" value="{{formData.assettype}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">资产来源类型</span>
+           	<input type="text" class="form-control" value="{{formData.assetreftype}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">资产来源PID（存放订购单ID）</span>
+           	<input type="text" class="form-control" value="{{formData.assetrefpid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">资产来源ID（存放订购明细ID）</span>
+           	<input type="text" class="form-control" value="{{formData.assetrefid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">之前资产剩余价值</span>
+           	<input type="text" class="form-control" value="{{formData.assetmoney}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">排课ID</span>
+           	<input type="text" class="form-control" value="{{formData.assignid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认标志（1-收入确认，-1收入取消）</span>
+           	<input type="text" class="form-control" value="{{formData.confirmflag}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认金额</span>
+           	<input type="text" class="form-control" value="{{formData.confirmmoney}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认说明</span>
+           	<input type="text" class="form-control" value="{{formData.confirmmemo}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认状态（1-已确认，3-已删除 ）参考排课</span>
+           	<input type="text" class="form-control" value="{{formData.confirmstatus}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认时间</span>
+           	<input type="text" class="form-control" value="{{formData.confirmtime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认人ID</span>
+           	<input type="text" class="form-control" value="{{formData.confirmerid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认人姓名</span>
+           	<input type="text" class="form-control" value="{{formData.confirmername}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认人岗位ID</span>
+           	<input type="text" class="form-control" value="{{formData.confirmerjobid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认人岗位名称</span>
+           	<input type="text" class="form-control" value="{{formData.confirmerjobname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">确认人岗位类型代码</span>
+           	<input type="text" class="form-control" value="{{formData.confirmerjobtype}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">异步处理状态（参考订购）</span>
+           	<input type="text" class="form-control" value="{{formData.processstatus}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">异步处理时间</span>
+           	<input type="text" class="form-control" value="{{formData.processtime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">异步处理说明</span>
+           	<input type="text" class="form-control" value="{{formData.processmemo}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">咨询师ID</span>
+           	<input type="text" class="form-control" value="{{formData.consultantid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">咨询师姓名</span>
+           	<input type="text" class="form-control" value="{{formData.consultantname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">咨询师岗位ID</span>
+           	<input type="text" class="form-control" value="{{formData.consultantjobid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学管师ID</span>
+           	<input type="text" class="form-control" value="{{formData.educatorid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学管师姓名</span>
+           	<input type="text" class="form-control" value="{{formData.educatorname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">学管师岗位ID</span>
+           	<input type="text" class="form-control" value="{{formData.educatorjobid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">教师ID</span>
+           	<input type="text" class="form-control" value="{{formData.teacherid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">教师姓名</span>
+           	<input type="text" class="form-control" value="{{formData.teachername}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">教师岗位ID</span>
+           	<input type="text" class="form-control" value="{{formData.teacherjobid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上课开始时间</span>
+           	<input type="text" class="form-control" value="{{formData.starttime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上课结束时间</span>
+           	<input type="text" class="form-control" value="{{formData.endtime}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课次时长</span>
+           	<input type="text" class="form-control" value="{{formData.durationvalue}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课次数</span>
+           	<input type="text" class="form-control" value="{{formData.amount}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课次单价</span>
+           	<input type="text" class="form-control" value="{{formData.price}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建人ID</span>
+           	<input type="text" class="form-control" value="{{formData.creatorid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建人姓名</span>
+           	<input type="text" class="form-control" value="{{formData.creatorname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">创建时间</span>
+           	<input type="text" class="form-control" value="{{formData.createtime}}" disabled>
+           </div>
+   	</div>
+  </body>
+</html>

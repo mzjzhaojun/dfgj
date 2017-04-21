@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html ng-app="info">
+  <head>
+    <title>查看</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- 基础样式 -->
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+    <!-- 初始化 -->
+    <script type="text/javascript">
+		var info = angular.module("info", []);
+		info.controller("infoController",function($scope, $http) {
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			$http({
+				url:parent.getFunctionLinksHref("self"),
+				method:'GET',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+				data: ''
+				}).success(function(data, status, headers, config){
+					$scope.formData= data;
+				}).error(function(data, status, headers, config){
+					response(status);
+				});
+		})
+	</script>
+  </head>
+  <body ng-controller="infoController">
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    		</div>
+    	</div>
+   		<div class="col-lg-6 viewFixedWidth">
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">ID</span>
+           	<input type="text" class="form-control" value="{{formData.id}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">快照ID</span>
+           	<input type="text" class="form-control" value="{{formData.snapshotid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">大区ID</span>
+           	<input type="text" class="form-control" value="{{formData.regionid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">大区名称</span>
+           	<input type="text" class="form-control" value="{{formData.regionname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">分公司ID</span>
+           	<input type="text" class="form-control" value="{{formData.branchid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">分工司名称</span>
+           	<input type="text" class="form-control" value="{{formData.branchname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">校区ID</span>
+           	<input type="text" class="form-control" value="{{formData.campusid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">校区名称</span>
+           	<input type="text" class="form-control" value="{{formData.campusname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">校龄</span>
+           	<input type="text" class="form-control" value="{{formData.campusage}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">期初有效+新增有效</span>
+           	<input type="text" class="form-control" value="{{formData.availables}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上课人数</span>
+           	<input type="text" class="form-control" value="{{formData.classpersons}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.renewpersons}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">期末结课人数</span>
+           	<input type="text" class="form-control" value="{{formData.finishpersons}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费人数</span>
+           	<input type="text" class="form-control" value="{{formData.refundpersons}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">期末停课人数</span>
+           	<input type="text" class="form-control" value="{{formData.suspendpersons}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">新签金额+续费金额</span>
+           	<input type="text" class="form-control" value="{{formData.chargemoney}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费金额</span>
+           	<input type="text" class="form-control" value="{{formData.refundmoney}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">小时数</span>
+           	<input type="text" class="form-control" value="{{formData.hours}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上课率=上课人数/（期初有效+新增有效）</span>
+           	<input type="text" class="form-control" value="{{formData.classrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续生率=续费人数/（续费人数+期末结课人数）</span>
+           	<input type="text" class="form-control" value="{{formData.renewrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退生率=退费人数/（期初有效+新增有效）</span>
+           	<input type="text" class="form-control" value="{{formData.dropoutrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费率=退费金额/（新签金额+续费金额）</span>
+           	<input type="text" class="form-control" value="{{formData.refundrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">流失率=期末结课人数/（期初有效+新增有效）</span>
+           	<input type="text" class="form-control" value="{{formData.churnrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">停课率=期末停课人数/（期初有效+新增有效）</span>
+           	<input type="text" class="form-control" value="{{formData.suspendrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">有效学生生均小时</span>
+           	<input type="text" class="form-control" value="{{formData.hourpervalid}}" disabled>
+           </div>
+   	</div>
+  </body>
+</html>

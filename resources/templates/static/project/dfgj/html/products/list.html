@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html ng-app="list">
+  <head>
+    <title>列表</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- 基础样式 -->
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/list.css">
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+   <!-- 弹出框 -->
+	<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/getUrlParam.js"></script>
+    <!-- 分页 -->
+	<script type="text/javascript" src="../../../../resource/js/paging.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+    <script type="text/javascript">
+		var flag = true;
+		var list = angular.module("list", []);
+		list.controller("listController",function($scope, $http) {	
+			$scope.toInfo=function(data){
+				parent.setFunctionLinksHref(data.links==null?data._links:data.links);
+				location.href="info.html";
+			}
+			$scope.toUpdate=function(data){
+				parent.setFunctionLinksHref(data.links==null?data._links:data.links);
+				location.href="update.html";
+			}
+			$scope.toDelete=function(data){	
+				parent.setFunctionLinksHref(data.links==null?data._links:data.links);
+				parent.onPopupDelete();
+			}
+			$scope.onSearch=function(){
+				$scope.pageList();
+			}
+			$scope.changePage=function(){
+				$scope.pageList();
+			}
+			$scope.onAdd=function(){
+				location.href="add.html";
+			}
+			$scope.pageList = function(){
+				pageNo = parent.currentPage;
+			    var data = {"name":$("#name").val()};
+				$http({
+					url:parent.getMenuLinksHref("productslist"),
+					method:'POST',
+					dataType : "json",
+					withCredentials: true,
+					headers: {'Content-Type': 'application/json;charset=UTF-8;',"pageNo":pageNo,"pageSize":pageSize,"orderby":"id","dir":"desc"},
+					data: JSON.stringify(data)
+					}).success(function(data, status, headers, config){
+						totalCount = headers('totalCount');
+						pageCount = headers('pageCount');
+						$scope.datalist= data;
+						paging();
+						initPage();
+					}).error(function(data, status, headers, config){
+						response(status);
+					});
+			}
+			$scope.pageList();
+			$scope.onDelete = function(){
+                $http({
+					url:parent.getFunctionLinksHref("self"),
+					method:'DELETE',
+					dataType : "json",
+					withCredentials: true,
+					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+					data: ""
+					}).success(function(data, status, headers, config){
+						$scope.pageList();
+					}).error(function(data, status, headers, config){
+						response(status);
+					});
+				}
+		})
+		
+		function confirmDeletion(){
+			var appElement = document.querySelector('[ng-controller=listController]');
+			var $scope = angular.element(appElement).scope();
+			$scope.onDelete();
+		}
+	</script>
+  </head> 
+  <body ng-controller="listController" style="color: #000;">
+  	<!-- 基本操作区 -->
+  	<h5>
+  		<span class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ></span>
+  		<input type="text" id="name" class="form-control" value="" placeholder="请输入需要查找的名称" style="width: 20%;display: inline;">
+  		<i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i>
+  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onSearch()">搜索</a>
+  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onAdd()">添加</a>
+  	</h5>
+  	<!-- 列表区 -->
+  	<table class="table">
+	  <thead>
+	    <tr class="info">
+	      <th>序号</th>
+	      <th>ID</th>
+	      <th>研发机构ID</th>
+	      <th>研发机构名称</th>
+	      <th>产品编码</th>
+	      <th>产品名称</th>
+	      <th>产品描述</th>
+	      <th>状态（审批中，已完成，已拒绝）</th>
+	      <th>产品版本代码（0-合同产品，1-新产品）</th>
+	      <th>单价</th>
+	      <th>成本</th>
+	      <th>颗粒度代码</th>
+	      <th>目标价格</th>
+	      <th>目标单价描述</th>
+	      <th>分类代码</th>
+	      <th>科目代码</th>
+	      <th>年级代码</th>
+	      <th>年度代码</th>
+	      <th>季度代码</th>
+	      <th>启售日期</th>
+	      <th>停售日期</th>
+	      <th>合作方ID</th>
+	      <th>给合作方分成比率</th>
+	      <th>合作方名称</th>
+	      <th>是否允许特殊折扣</th>
+	      <th>是否允许拓路折扣</th>
+	      <th>是否允许买赠折扣</th>
+	      <th>是否允许促销优惠</th>
+	      <th>促销优惠限额</th>
+	      <th>收入确认开始日期</th>
+	      <th>收入确认结束日期</th>
+	      <th>确认方式（1-手工确认，2-自动确认）</th>
+	      <th>确认分期月份，即分几个月确认</th>
+	      <th>提交人ID</th>
+	      <th>提交人姓名</th>
+	      <th>提交人岗位ID</th>
+	      <th>提交人岗位名称</th>
+	      <th>提交时间</th>
+	      <th>最后审批人ID</th>
+	      <th>最后审批人姓名</th>
+	      <th>最后审批人岗位ID</th>
+	      <th>最后审批人岗位名称</th>
+	      <th>最后审批时间</th>
+	      <th>创建人ID</th>
+	      <th>创建人姓名</th>
+	      <th>创建时间</th>
+	      <th>最后修改人ID</th>
+	      <th>最后修改人姓名</th>
+	      <th>最后修改时间</th>
+	      <th>相关操作</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
+		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.id}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.rdorgid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.rdorgname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.productcode}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.productname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.productmemo}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.productstatus}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.productversion}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.productprice}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.productcost}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.productunit}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.targetprice}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.targetpricememo}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.catalog}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.subject}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.grade}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.year}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.season}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.startdate}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.enddate}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.partnerid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.partnerratio}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.partnername}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.specialallowed}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.tunlandallowed}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.presentallowed}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.promotionallowed}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.promotionquota}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.confirmstartdate}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.confirmenddate}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.confirmmode}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.confirmstaging}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.submitterid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.submittername}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.submitterjobid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.submitterjobname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.submittime}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.approverid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.approvername}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.approverjobid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.approverjobname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.approvetime}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.creatorid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.creatorname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.createtime}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.modifierid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.modifiername}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.products.modifytime}}</td>
+			<td>
+	    		<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" title="查看"></h4>
+	    		<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil"  style="margin:0px 5px;color:#99DFF8;" title="修改"></h4>
+	    		<h4 ng-click="toDelete(data)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;" title="删除"></h4>
+			</td>
+	    </tr>
+	  </tbody>
+	</table>
+ 	<!-- 分页区 -->
+	<div class="pagepanel">
+		<span class="text-info" style="position:relative;top:-10px;">共<label id="totalCount"></label>条</span>
+		<ul class="pagination" style="margin: 0px 10px;padding:0px;">
+		</ul>
+		<span class="text-info" style="position:relative;top:-10px;">第<label id="pageNo"></label>页/共<label id="pageCount"></label>页</span>
+		<select id="pageSize" class="form-control" style="width: 70px;float: right;">
+		</select>
+		<span class="text-info" style="position:relative;top:6px;float: right;margin: 0px 5px;">每页显示</span>
+	</div>
+  </body>
+</html>

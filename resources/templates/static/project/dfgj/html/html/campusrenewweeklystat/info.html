@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html ng-app="info">
+  <head>
+    <title>查看</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- 基础样式 -->
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+    <!-- 初始化 -->
+    <script type="text/javascript">
+		var info = angular.module("info", []);
+		info.controller("infoController",function($scope, $http) {
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			$http({
+				url:parent.getFunctionLinksHref("self"),
+				method:'GET',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+				data: ''
+				}).success(function(data, status, headers, config){
+					$scope.formData= data;
+				}).error(function(data, status, headers, config){
+					response(status);
+				});
+		})
+	</script>
+  </head>
+  <body ng-controller="infoController">
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    		</div>
+    	</div>
+   		<div class="col-lg-6 viewFixedWidth">
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">ID</span>
+           	<input type="text" class="form-control" value="{{formData.id}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">年度</span>
+           	<input type="text" class="form-control" value="{{formData.yearkey}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">季度</span>
+           	<input type="text" class="form-control" value="{{formData.quarterkey}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">月份</span>
+           	<input type="text" class="form-control" value="{{formData.monthkey}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">周</span>
+           	<input type="text" class="form-control" value="{{formData.weekkey}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本周开始日期</span>
+           	<input type="text" class="form-control" value="{{formData.startdayofweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本周结束日期</span>
+           	<input type="text" class="form-control" value="{{formData.enddayofweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周开始日期</span>
+           	<input type="text" class="form-control" value="{{formData.startdayoflastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周结束日期</span>
+           	<input type="text" class="form-control" value="{{formData.enddayoflastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">大区ID</span>
+           	<input type="text" class="form-control" value="{{formData.regionid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">大区</span>
+           	<input type="text" class="form-control" value="{{formData.regionname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">分公司ID</span>
+           	<input type="text" class="form-control" value="{{formData.branchid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">分公司</span>
+           	<input type="text" class="form-control" value="{{formData.branchname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">校区ID</span>
+           	<input type="text" class="form-control" value="{{formData.campusid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">校区</span>
+           	<input type="text" class="form-control" value="{{formData.campusname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">目前有效学生数</span>
+           	<input type="text" class="form-control" value="{{formData.availablecustomernumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">年度续费金额预算任务</span>
+           	<input type="text" class="form-control" value="{{formData.rataskyear}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">年度续费金额累计完成额</span>
+           	<input type="text" class="form-control" value="{{formData.rayear}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">年度续费金额完成率</span>
+           	<input type="text" class="form-control" value="{{formData.rafinishrateyear}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">年度续费金额去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.rayoyyear}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">年度续费金额同比</span>
+           	<input type="text" class="form-control" value="{{formData.rayoyrateyear}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">年度累计续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.rnyear}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">年度去年同期续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.rnyoyyear}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">年度续费人数同比</span>
+           	<input type="text" class="form-control" value="{{formData.rnyoyrateyear}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">季度续费金额预算任务</span>
+           	<input type="text" class="form-control" value="{{formData.rataskquarter}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">季度续费金额累计完成额</span>
+           	<input type="text" class="form-control" value="{{formData.raquarter}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">季度续费金额完成率</span>
+           	<input type="text" class="form-control" value="{{formData.rafinishratequarter}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">季度续费金额去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.rayoyquarter}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">季度续费金额同比</span>
+           	<input type="text" class="form-control" value="{{formData.rayoyratequarter}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">季度累计续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.rnquarter}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">季度去年同期续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.rnyoyquarter}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">季度续费人数同比</span>
+           	<input type="text" class="form-control" value="{{formData.rnyoyratequarter}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">月度续费金额预算任务</span>
+           	<input type="text" class="form-control" value="{{formData.rataskmonth}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">月度续费金额累计完成额</span>
+           	<input type="text" class="form-control" value="{{formData.ramonth}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">月度续费金额完成率</span>
+           	<input type="text" class="form-control" value="{{formData.rafinishratemonth}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">月度续费金额去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.rayoymonth}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">月度续费金额同比</span>
+           	<input type="text" class="form-control" value="{{formData.rayoyratemonth}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">月度累计续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.rnmonth}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">月度去年同期续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.rnyoymonth}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">月度续费人数同比</span>
+           	<input type="text" class="form-control" value="{{formData.rnyoyratemonth}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周续费金额预算任务</span>
+           	<input type="text" class="form-control" value="{{formData.ratasklastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周续费金额累计完成额</span>
+           	<input type="text" class="form-control" value="{{formData.ralastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周续费金额完成率</span>
+           	<input type="text" class="form-control" value="{{formData.rafinishratelastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周预计续费金额</span>
+           	<input type="text" class="form-control" value="{{formData.raplanlastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周实际续费金额与预计续费金额差额</span>
+           	<input type="text" class="form-control" value="{{formData.raplandifflastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周续费金额去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.rayoylastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周续费金额同比</span>
+           	<input type="text" class="form-control" value="{{formData.rayoyratelastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周续费人数预算任务</span>
+           	<input type="text" class="form-control" value="{{formData.rntasklastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周续费人数累计完成额</span>
+           	<input type="text" class="form-control" value="{{formData.rnlastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周续费人数完成率</span>
+           	<input type="text" class="form-control" value="{{formData.rnfinishratelastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周预计续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.rnplanlastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周实际续费人数与预计续费人数差额</span>
+           	<input type="text" class="form-control" value="{{formData.rnplandifflastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周续费人数去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.rnyoylastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上周续费人数同比</span>
+           	<input type="text" class="form-control" value="{{formData.rnyoyratelastweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本周续费金额预算任务</span>
+           	<input type="text" class="form-control" value="{{formData.rataskthisweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本周续费金额去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.rayoythisweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本周预计续费金额</span>
+           	<input type="text" class="form-control" value="{{formData.raplanthisweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本周续费金额任务缺口</span>
+           	<input type="text" class="form-control" value="{{formData.raplandiffthisweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本周续费人数预算任务</span>
+           	<input type="text" class="form-control" value="{{formData.rntaskthisweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本周续费人数去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.rnyoythisweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本周预计续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.rnplanthisweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">本周续费人数任务缺口</span>
+           	<input type="text" class="form-control" value="{{formData.rnplandiffthisweek}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">过去90天结课未续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.cfnrcustomernumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">账户价值不足2000元人数</span>
+           	<input type="text" class="form-control" value="{{formData.customernumberav2000}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">预估续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.rnplan}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">预估续费金额</span>
+           	<input type="text" class="form-control" value="{{formData.raplan}}" disabled>
+           </div>
+   	</div>
+  </body>
+</html>

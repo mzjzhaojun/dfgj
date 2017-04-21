@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.CampusMonthtaskMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,regionid,branchid,campusid,campusname,tasktype,year,m01,m02,m03,m04,m05,m06,m07,m08,m09,m10,m11,m12,createtime,creatorid,creatorname,creatorjobname,modifytime,modifierid,modifiername,modifierjobname
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.CampusMonthtask">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="regionid" column="regionid" />
+         <id property="branchid" column="branchid" />
+         <id property="campusid" column="campusid" />
+         <id property="campusname" column="campusname" />
+         <id property="tasktype" column="tasktype" />
+         <id property="year" column="year" />
+         <id property="m01" column="m01" />
+         <id property="m02" column="m02" />
+         <id property="m03" column="m03" />
+         <id property="m04" column="m04" />
+         <id property="m05" column="m05" />
+         <id property="m06" column="m06" />
+         <id property="m07" column="m07" />
+         <id property="m08" column="m08" />
+         <id property="m09" column="m09" />
+         <id property="m10" column="m10" />
+         <id property="m11" column="m11" />
+         <id property="m12" column="m12" />
+         <id property="createtime" column="createtime" />
+         <id property="creatorid" column="creatorid" />
+         <id property="creatorname" column="creatorname" />
+         <id property="creatorjobname" column="creatorjobname" />
+         <id property="modifytime" column="modifytime" />
+         <id property="modifierid" column="modifierid" />
+         <id property="modifiername" column="modifiername" />
+         <id property="modifierjobname" column="modifierjobname" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.CampusMonthtask">
+  insert into campus_month_task (id,regionid,branchid,campusid,campusname,tasktype,year,m01,m02,m03,m04,m05,m06,m07,m08,m09,m10,m11,m12,createtime,creatorid,creatorname,creatorjobname,modifytime,modifierid,modifiername,modifierjobname)
+         values (#{id},#{regionid},#{branchid},#{campusid},#{campusname},#{tasktype},#{year},#{m01},#{m02},#{m03},#{m04},#{m05},#{m06},#{m07},#{m08},#{m09},#{m10},#{m11},#{m12},#{createtime},#{creatorid},#{creatorname},#{creatorjobname},#{modifytime},#{modifierid},#{modifiername},#{modifierjobname})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from campus_month_task 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.CampusMonthtask">
+    update campus_month_task
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="regionid != null">
+                   regionid = #{regionid},
+             </if>
+             <if test="branchid != null">
+                   branchid = #{branchid},
+             </if>
+             <if test="campusid != null">
+                   campusid = #{campusid},
+             </if>
+             <if test="campusname != null">
+                   campusname = #{campusname},
+             </if>
+             <if test="tasktype != null">
+                   tasktype = #{tasktype},
+             </if>
+             <if test="year != null">
+                   year = #{year},
+             </if>
+             <if test="m01 != null">
+                   m01 = #{m01},
+             </if>
+             <if test="m02 != null">
+                   m02 = #{m02},
+             </if>
+             <if test="m03 != null">
+                   m03 = #{m03},
+             </if>
+             <if test="m04 != null">
+                   m04 = #{m04},
+             </if>
+             <if test="m05 != null">
+                   m05 = #{m05},
+             </if>
+             <if test="m06 != null">
+                   m06 = #{m06},
+             </if>
+             <if test="m07 != null">
+                   m07 = #{m07},
+             </if>
+             <if test="m08 != null">
+                   m08 = #{m08},
+             </if>
+             <if test="m09 != null">
+                   m09 = #{m09},
+             </if>
+             <if test="m10 != null">
+                   m10 = #{m10},
+             </if>
+             <if test="m11 != null">
+                   m11 = #{m11},
+             </if>
+             <if test="m12 != null">
+                   m12 = #{m12},
+             </if>
+             <if test="createtime != null">
+                   createtime = #{createtime},
+             </if>
+             <if test="creatorid != null">
+                   creatorid = #{creatorid},
+             </if>
+             <if test="creatorname != null">
+                   creatorname = #{creatorname},
+             </if>
+             <if test="creatorjobname != null">
+                   creatorjobname = #{creatorjobname},
+             </if>
+             <if test="modifytime != null">
+                   modifytime = #{modifytime},
+             </if>
+             <if test="modifierid != null">
+                   modifierid = #{modifierid},
+             </if>
+             <if test="modifiername != null">
+                   modifiername = #{modifiername},
+             </if>
+             <if test="modifierjobname != null">
+                   modifierjobname = #{modifierjobname}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from campus_month_task 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campus_month_task 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from campus_month_task 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campus_month_task 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from campus_month_task 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from campus_month_task 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>

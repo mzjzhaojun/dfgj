@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html ng-app="info">
+  <head>
+    <title>查看</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- 基础样式 -->
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+    <!-- 初始化 -->
+    <script type="text/javascript">
+		var info = angular.module("info", []);
+		info.controller("infoController",function($scope, $http) {
+			//返回
+			$scope.onReturn=function(){
+				history.go(-1);
+			}
+			$http({
+				url:parent.getFunctionLinksHref("self"),
+				method:'GET',
+				dataType : "json",
+				withCredentials: true,
+				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+				data: ''
+				}).success(function(data, status, headers, config){
+					$scope.formData= data;
+				}).error(function(data, status, headers, config){
+					response(status);
+				});
+		})
+	</script>
+  </head>
+  <body ng-controller="infoController">
+  		 <div class="col-lg-12 topActionPanel">
+	        <div>
+	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    		</div>
+    	</div>
+   		<div class="col-lg-6 viewFixedWidth">
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">ID</span>
+           	<input type="text" class="form-control" value="{{formData.id}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth"></span>
+           	<input type="text" class="form-control" value="{{formData.snapshotid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth"></span>
+           	<input type="text" class="form-control" value="{{formData.regionid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth"></span>
+           	<input type="text" class="form-control" value="{{formData.regionshortname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth"></span>
+           	<input type="text" class="form-control" value="{{formData.branchid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth"></span>
+           	<input type="text" class="form-control" value="{{formData.branchshortname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth"></span>
+           	<input type="text" class="form-control" value="{{formData.campusid}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth"></span>
+           	<input type="text" class="form-control" value="{{formData.campusshortname}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth"></span>
+           	<input type="text" class="form-control" value="{{formData.campusage}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">归属人数</span>
+           	<input type="text" class="form-control" value="{{formData.belongnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">管理人数</span>
+           	<input type="text" class="form-control" value="{{formData.managenumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">有效人数</span>
+           	<input type="text" class="form-control" value="{{formData.availablenumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上课人数</span>
+           	<input type="text" class="form-control" value="{{formData.assignednumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">停课人数</span>
+           	<input type="text" class="form-control" value="{{formData.classsuspendednumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">休学人数</span>
+           	<input type="text" class="form-control" value="{{formData.schoolsuspendednumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费人数</span>
+           	<input type="text" class="form-control" value="{{formData.refundmoneynumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">结课人数</span>
+           	<input type="text" class="form-control" value="{{formData.classfinishednumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费金额</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignmoney}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费金额-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignmoneyvol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费金额-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignmoneydiffyoy}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费金额-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignmoneyyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费金额-任务</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignmoneytask}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">完成率-续费金额</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignmoneytcr}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费人数</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费人数-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignnumbervol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费人数-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignnumberyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费人数-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignnumberyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费人数-任务</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignnumberrask}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费人数-完成率</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignnumbertcr}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费单笔</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignsingle}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费单笔-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignsinglevol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费单笔-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignsingleyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续费单笔-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.renewsignsingleyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费金额</span>
+           	<input type="text" class="form-control" value="{{formData.refundmoney}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费金额-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.refundmoneyvol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费金额-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.refundmoneyyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费金额-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.refundmoneyyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费金额-任务</span>
+           	<input type="text" class="form-control" value="{{formData.refundmoneytask}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费金额-完成率</span>
+           	<input type="text" class="form-control" value="{{formData.refundmoneytcr}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费人数</span>
+           	<input type="text" class="form-control" value="{{formData.refundnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费人数-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.refundnumbervol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费人数-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.refundnumberyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费人数-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.refundnumberyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费人数-任务</span>
+           	<input type="text" class="form-control" value="{{formData.refundnumbertask}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退费人数-完成率</span>
+           	<input type="text" class="form-control" value="{{formData.refundnumbertcr}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课时量</span>
+           	<input type="text" class="form-control" value="{{formData.assignnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课时量-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.assignnumbervol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课时量-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.assignnumberyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课时量-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.assignnumberyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课时量任务</span>
+           	<input type="text" class="form-control" value="{{formData.assignnumbertask}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课时量-完成率</span>
+           	<input type="text" class="form-control" value="{{formData.assignnumbertcr}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课时收入</span>
+           	<input type="text" class="form-control" value="{{formData.courseincome}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课时收入-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.courseincomevol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课时收入-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.courseincomeyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">课时收入-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.courseincomeyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上课人数</span>
+           	<input type="text" class="form-control" value="{{formData.attendnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上课人数-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.attendnumbervol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上课人数-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.attendnumberyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上课人数-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.attendnumberyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">上课率</span>
+           	<input type="text" class="form-control" value="{{formData.attendnumberrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">停课率</span>
+           	<input type="text" class="form-control" value="{{formData.classsuspendedrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1生均小时</span>
+           	<input type="text" class="form-control" value="{{formData.onetooneaveragehours}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1生均课时</span>
+           	<input type="text" class="form-control" value="{{formData.onetooneaverageassignedamount}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">有效生均小时</span>
+           	<input type="text" class="form-control" value="{{formData.availableaveragehours}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">有效生均课时</span>
+           	<input type="text" class="form-control" value="{{formData.availableaverageassignedamount}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1课时量</span>
+           	<input type="text" class="form-control" value="{{formData.onetooneassignnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1课时量-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.onetooneassignnumbervol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1课时量-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.onetooneassignnumberyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1课时量-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.onetooneassignnumberyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1课时收入</span>
+           	<input type="text" class="form-control" value="{{formData.onetoonecourseincome}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1课时收入-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.onetoonecourseincomevol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1课时收入-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.onetoonecourseincomeyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1课时收入-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.onetoonecourseincomeyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1上课人数</span>
+           	<input type="text" class="form-control" value="{{formData.onetooneattendnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1上课人数-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.onetooneattendnumbervol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1上课人数-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.onetooneattendnumberyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">1对1上课人数-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.onetooneattendnumberyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组课时量</span>
+           	<input type="text" class="form-control" value="{{formData.classassignnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组课时量-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.classassignnumbervol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组课时量-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.classassignnumberyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组课时量-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.classassignnumberyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组课时量-课时量任务</span>
+           	<input type="text" class="form-control" value="{{formData.classassignnumbertask}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组课时量-完成率</span>
+           	<input type="text" class="form-control" value="{{formData.classassignnumbertcr}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组课时收入</span>
+           	<input type="text" class="form-control" value="{{formData.classcourseincome}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组课时收入-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.classcourseincomevol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组课时收入-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.classcourseincomeyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组课时收入-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.classcourseincomeyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组上课人数</span>
+           	<input type="text" class="form-control" value="{{formData.classattendnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组上课人数-去年同期</span>
+           	<input type="text" class="form-control" value="{{formData.classattendnumbervol}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组上课人数-同比差额</span>
+           	<input type="text" class="form-control" value="{{formData.classattendnumberyoydiff}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">班组上课人数-同比率</span>
+           	<input type="text" class="form-control" value="{{formData.classattendnumberyoyrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">续生率</span>
+           	<input type="text" class="form-control" value="{{formData.renewrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">退生率</span>
+           	<input type="text" class="form-control" value="{{formData.refundrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">流失率</span>
+           	<input type="text" class="form-control" value="{{formData.lossrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">留存率</span>
+           	<input type="text" class="form-control" value="{{formData.retainedrate}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">转介绍人数</span>
+           	<input type="text" class="form-control" value="{{formData.referralnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">回访人数</span>
+           	<input type="text" class="form-control" value="{{formData.visitnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">教学服务会</span>
+           	<input type="text" class="form-control" value="{{formData.meetingnumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">周反馈</span>
+           	<input type="text" class="form-control" value="{{formData.replynumber}}" disabled>
+           </div>
+   		 <div class="input-group input-group-sm">
+             <span class="input-group-addon text-right spanwidth">成绩统计</span>
+           	<input type="text" class="form-control" value="{{formData.scorestatistics}}" disabled>
+           </div>
+   	</div>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.LogSysinfoMapper">
+  <!-- 数据库列 -->
+  <sql id="Base_Column_List">
+     id,version,username,userid,userdn,hostaddress,hostname,iever,winver,killinfo,environment,log_date
+  </sql>
+  <!-- 基础返回对象封装 -->
+  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.LogSysinfo">
+         <id property="id" column="id" />
+         <id property="version" column="version" />
+         <id property="username" column="username" />
+         <id property="userid" column="userid" />
+         <id property="userdn" column="userdn" />
+         <id property="hostaddress" column="hostaddress" />
+         <id property="hostname" column="hostname" />
+         <id property="iever" column="iever" />
+         <id property="winver" column="winver" />
+         <id property="killinfo" column="killinfo" />
+         <id property="environment" column="environment" />
+         <id property="log_date" column="log_date" />
+  </resultMap>
+  <!-- 默认新增 -->
+  <insert id="post" parameterType="com.yt.app.api.v1.entity.LogSysinfo">
+  insert into log_sys_info (id,username,userid,userdn,hostaddress,hostname,iever,winver,killinfo,environment,log_date)
+         values (#{id},#{username},#{userid},#{userdn},#{hostaddress},#{hostname},#{iever},#{winver},#{killinfo},#{environment},#{log_date})
+  </insert>
+  <!-- 默认删除id对象 -->
+ <delete id="delete" parameterType="java.lang.String">
+     delete from log_sys_info 
+     where id = #{id}
+ </delete>
+  <!-- 默认更新id对象 -->
+ <update id="put" parameterType="com.yt.app.api.v1.entity.LogSysinfo">
+    update log_sys_info
+         <set>
+             <if test="version != null">
+                   version = #{version}+1,
+             </if>
+             <if test="username != null">
+                   username = #{username},
+             </if>
+             <if test="userid != null">
+                   userid = #{userid},
+             </if>
+             <if test="userdn != null">
+                   userdn = #{userdn},
+             </if>
+             <if test="hostaddress != null">
+                   hostaddress = #{hostaddress},
+             </if>
+             <if test="hostname != null">
+                   hostname = #{hostname},
+             </if>
+             <if test="iever != null">
+                   iever = #{iever},
+             </if>
+             <if test="winver != null">
+                   winver = #{winver},
+             </if>
+             <if test="killinfo != null">
+                   killinfo = #{killinfo},
+             </if>
+             <if test="environment != null">
+                   environment = #{environment},
+             </if>
+             <if test="log_date != null">
+                   log_date = #{log_date}
+             </if>
+          </set>
+     where id = #{id} and  version = #{version}
+ </update>
+  <!-- 默认获得id对象 -->
+ <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+     select
+        <include refid="Base_Column_List" />
+        from log_sys_info 
+        where id = #{id}
+ </select>
+  <!-- 默认集合 -->
+ <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from log_sys_info 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合 -->
+ <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+       select
+        <include refid="Base_Column_List" />
+        from log_sys_info 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+             <if test="orderby != null and dir != null">
+           		order by ${orderby} ${dir}
+             </if>
+             <if test="pageStart != null and pageEnd != null">
+           		LIMIT #{pageStart},#{pageEnd}
+             </if>
+        </where>
+ </select>
+  <!-- 默认集合统计 -->
+ <select id="countlist" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from log_sys_info 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认返回MAP集合统计 -->
+ <select id="countmap" parameterType="java.util.HashMap" resultType="int">
+       select count(*) from log_sys_info 
+        <where>
+        			1=1
+             <if test="name != null and name != ''">
+           		and name like "%"#{name}"%"
+             </if>
+        </where>
+ </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from log_sys_info 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and id in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
+</mapper>
