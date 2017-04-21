@@ -39,7 +39,7 @@ import com.yt.app.api.v1.entity.Dictionary;
  */
 
 @RestController
-@RequestMapping("/dfgj/v1/account")
+@RequestMapping("/rest/v1/account")
 public class AccountController extends BaseControllerImpl<Account, Long> {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -49,6 +49,8 @@ public class AccountController extends BaseControllerImpl<Account, Long> {
 	@RequestMapping(value = "/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> user(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
 		AccountSecurityUser acu = RequestAccount.requestGetAccount(request);
+		if (acu == null)
+			return new ResponseEntity<Object>(HttpStatus.UNAUTHORIZED);
 		return new ResponseEntity<Object>(acu.getAccount(), HttpStatus.OK);
 	}
 

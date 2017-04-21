@@ -3,21 +3,20 @@
 <mapper namespace="com.yt.app.api.v1.mapper.TeacherteachingsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,teacherid,teachingid,subject,grade
+     id,version,teacherid,subject,grade
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Teacherteachings">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="teacherid" column="teacherid" />
-         <id property="teachingid" column="teachingid" />
          <id property="subject" column="subject" />
          <id property="grade" column="grade" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Teacherteachings">
-  insert into teacherteachings (id,teacherid,teachingid,subject,grade)
-         values (#{id},#{teacherid},#{teachingid},#{subject},#{grade})
+  insert into teacherteachings (id,teacherid,subject,grade)
+         values (#{id},#{teacherid},#{subject},#{grade})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -33,9 +32,6 @@
              </if>
              <if test="teacherid != null">
                    teacherid = #{teacherid},
-             </if>
-             <if test="teachingid != null">
-                   teachingid = #{teachingid},
              </if>
              <if test="subject != null">
                    subject = #{subject},

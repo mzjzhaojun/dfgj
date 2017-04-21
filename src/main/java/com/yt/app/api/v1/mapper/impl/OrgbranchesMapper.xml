@@ -3,20 +3,19 @@
 <mapper namespace="com.yt.app.api.v1.mapper.OrgbranchesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,regionid,branchid,branchname
+     id,version,regionid,branchname
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Orgbranches">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="regionid" column="regionid" />
-         <id property="branchid" column="branchid" />
          <id property="branchname" column="branchname" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Orgbranches">
-  insert into orgbranches (id,regionid,branchid,branchname)
-         values (#{id},#{regionid},#{branchid},#{branchname})
+  insert into orgbranches (id,regionid,branchname)
+         values (#{id},#{regionid},#{branchname})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -32,9 +31,6 @@
              </if>
              <if test="regionid != null">
                    regionid = #{regionid},
-             </if>
-             <if test="branchid != null">
-                   branchid = #{branchid},
              </if>
              <if test="branchname != null">
                    branchname = #{branchname}

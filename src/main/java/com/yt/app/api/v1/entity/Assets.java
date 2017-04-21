@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:18
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Assets implements Serializable{
 
   Long id;
   Integer version;
-  Long assetid;
   String assetcode;
   String assetname;
   String assettype;
@@ -54,7 +53,7 @@ public class Assets implements Serializable{
   Object discountrate;
   Object realprice;
   Object realamount;
-  String expirationdate;
+  java.util.Date expirationdate;
   Object assignedamount;
   Object confirmedamount;
   Object exchangedamount;
@@ -65,18 +64,15 @@ public class Assets implements Serializable{
   Object price;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
-  String versionstarttime;
-  String versionendtime;
+  java.util.Date modifytime;
   public Assets(){
   }
-  public Assets(Long id,Integer version,Long assetid,String assetcode,String assetname,String assettype,String assetreftype,String assetrefpid,String assetrefid,Long accountid,Long customerid,String customercode,String customername,Long productid,String productcode,String productname,String productunit,String productunitname,String grade,String gradename,String subject,Long subjectname,String catalog,String catalogname,String categorytype,String categorytypename,String courselevel,String courselevelname,String lessonduration,Object lessondurationvalue,Object orderprice,Object orderamount,Object presentamount,Object tunlandrate,Object specialrate,String discounttype,Object discountrate,Object realprice,Object realamount,String expirationdate,Object assignedamount,Object confirmedamount,Object exchangedamount,Object debookedamount,Object confirmedmoney,Object returnedmoney,Object amount,Object price,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime,String versionstarttime,String versionendtime){
+  public Assets(Long id,Integer version,String assetcode,String assetname,String assettype,String assetreftype,String assetrefpid,String assetrefid,Long accountid,Long customerid,String customercode,String customername,Long productid,String productcode,String productname,String productunit,String productunitname,String grade,String gradename,String subject,Long subjectname,String catalog,String catalogname,String categorytype,String categorytypename,String courselevel,String courselevelname,String lessonduration,Object lessondurationvalue,Object orderprice,Object orderamount,Object presentamount,Object tunlandrate,Object specialrate,String discounttype,Object discountrate,Object realprice,Object realamount,java.util.Date expirationdate,Object assignedamount,Object confirmedamount,Object exchangedamount,Object debookedamount,Object confirmedmoney,Object returnedmoney,Object amount,Object price,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
-      this.assetid=assetid;
       this.assetcode=assetcode;
       this.assetname=assetname;
       this.assettype=assettype;
@@ -128,7 +124,5 @@ public class Assets implements Serializable{
       this.modifierid=modifierid;
       this.modifiername=modifiername;
       this.modifytime=modifytime;
-      this.versionstarttime=versionstarttime;
-      this.versionendtime=versionendtime;
   }
 }

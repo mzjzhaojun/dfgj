@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:38
 */
 @Getter
 @Setter
@@ -20,33 +20,31 @@ public class Customervisits implements Serializable{
   Long campusid;
   String campusname;
   Long customerid;
-  Long visitid;
   String visittype;
   String visitway;
   String visitcontent;
-  String visittime;
+  java.util.Date visittime;
   Long visitorid;
   String visitorname;
   Long visitorjobid;
   String visitorjobname;
-  String nextvisittime;
+  java.util.Date nextvisittime;
   String satisficing;
-  String remindtime;
+  java.util.Date remindtime;
   String creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Customervisits(){
   }
-  public Customervisits(Long id,Integer version,Long campusid,String campusname,Long customerid,Long visitid,String visittype,String visitway,String visitcontent,String visittime,Long visitorid,String visitorname,Long visitorjobid,String visitorjobname,String nextvisittime,String satisficing,String remindtime,String creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Customervisits(Long id,Integer version,Long campusid,String campusname,Long customerid,String visittype,String visitway,String visitcontent,java.util.Date visittime,Long visitorid,String visitorname,Long visitorjobid,String visitorjobname,java.util.Date nextvisittime,String satisficing,java.util.Date remindtime,String creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
       this.campusname=campusname;
       this.customerid=customerid;
-      this.visitid=visitid;
       this.visittype=visittype;
       this.visitway=visitway;
       this.visitcontent=visitcontent;

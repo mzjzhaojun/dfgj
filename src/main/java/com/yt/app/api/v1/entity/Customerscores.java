@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:34
 */
 @Getter
 @Setter
@@ -20,7 +20,6 @@ public class Customerscores implements Serializable{
   Long campusid;
   String campusname;
   Long customerid;
-  Long scoreid;
   String scoretype;
   String scoregrade;
   String studyyear;
@@ -37,19 +36,18 @@ public class Customerscores implements Serializable{
   Integer examinemonth;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Customerscores(){
   }
-  public Customerscores(Long id,Integer version,Long campusid,String campusname,Long customerid,Long scoreid,String scoretype,String scoregrade,String studyyear,String studyterm,String studystage,Integer classpeoples,String satisficing,String studenttype,String admissiontype,String admissionschool,String otherscoretypename,Integer iskeycollege,Integer isalladded,Integer examinemonth,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Customerscores(Long id,Integer version,Long campusid,String campusname,Long customerid,String scoretype,String scoregrade,String studyyear,String studyterm,String studystage,Integer classpeoples,String satisficing,String studenttype,String admissiontype,String admissionschool,String otherscoretypename,Integer iskeycollege,Integer isalladded,Integer examinemonth,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
       this.campusname=campusname;
       this.customerid=customerid;
-      this.scoreid=scoreid;
       this.scoretype=scoretype;
       this.scoregrade=scoregrade;
       this.studyyear=studyyear;

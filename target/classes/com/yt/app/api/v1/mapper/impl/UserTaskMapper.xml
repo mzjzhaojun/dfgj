@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.UserTaskMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,task_guid,application_name,program_name,task_level,task_title,resource_id,process_id,activity_id,url,data,emergency,purpose,status,task_start_time,expire_time,source_id,source_name,send_to_user,send_to_user_name,read_time,category_guid,top_flag,draft_department_name,deliver_time,draft_user_id,draft_user_name,operation_type,operation_name,from_transition_key,from_transition_name,from_activity_id,from_activity_key,to_activity_key
+     id,version,application_name,program_name,task_level,task_title,resource_id,process_id,activity_id,url,data,emergency,purpose,status,task_start_time,expire_time,source_id,source_name,send_to_user,send_to_user_name,read_time,category_guid,top_flag,draft_department_name,deliver_time,draft_user_id,draft_user_name,operation_type,operation_name,from_transition_key,from_transition_name,from_activity_id,from_activity_key,to_activity_key
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.UserTask">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="task_guid" column="task_guid" />
          <id property="application_name" column="application_name" />
          <id property="program_name" column="program_name" />
          <id property="task_level" column="task_level" />
@@ -45,8 +44,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.UserTask">
-  insert into user_task (id,task_guid,application_name,program_name,task_level,task_title,resource_id,process_id,activity_id,url,data,emergency,purpose,status,task_start_time,expire_time,source_id,source_name,send_to_user,send_to_user_name,read_time,category_guid,top_flag,draft_department_name,deliver_time,draft_user_id,draft_user_name,operation_type,operation_name,from_transition_key,from_transition_name,from_activity_id,from_activity_key,to_activity_key)
-         values (#{id},#{task_guid},#{application_name},#{program_name},#{task_level},#{task_title},#{resource_id},#{process_id},#{activity_id},#{url},#{data},#{emergency},#{purpose},#{status},#{task_start_time},#{expire_time},#{source_id},#{source_name},#{send_to_user},#{send_to_user_name},#{read_time},#{category_guid},#{top_flag},#{draft_department_name},#{deliver_time},#{draft_user_id},#{draft_user_name},#{operation_type},#{operation_name},#{from_transition_key},#{from_transition_name},#{from_activity_id},#{from_activity_key},#{to_activity_key})
+  insert into user_task (id,application_name,program_name,task_level,task_title,resource_id,process_id,activity_id,url,data,emergency,purpose,status,task_start_time,expire_time,source_id,source_name,send_to_user,send_to_user_name,read_time,category_guid,top_flag,draft_department_name,deliver_time,draft_user_id,draft_user_name,operation_type,operation_name,from_transition_key,from_transition_name,from_activity_id,from_activity_key,to_activity_key)
+         values (#{id},#{application_name},#{program_name},#{task_level},#{task_title},#{resource_id},#{process_id},#{activity_id},#{url},#{data},#{emergency},#{purpose},#{status},#{task_start_time},#{expire_time},#{source_id},#{source_name},#{send_to_user},#{send_to_user_name},#{read_time},#{category_guid},#{top_flag},#{draft_department_name},#{deliver_time},#{draft_user_id},#{draft_user_name},#{operation_type},#{operation_name},#{from_transition_key},#{from_transition_name},#{from_activity_id},#{from_activity_key},#{to_activity_key})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -59,9 +58,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="task_guid != null">
-                   task_guid = #{task_guid},
              </if>
              <if test="application_name != null">
                    application_name = #{application_name},

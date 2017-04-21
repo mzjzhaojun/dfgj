@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:41
 */
 @Getter
 @Setter
@@ -36,10 +36,10 @@ public class Educatecampusperfmonthsum implements Serializable{
   Object refundmoney;
   Integer hourcounttask;
   Object renewalmoneytask;
-  String createtime;
+  java.util.Date createtime;
   public Educatecampusperfmonthsum(){
   }
-  public Educatecampusperfmonthsum(Long id,Integer version,Long regionid,Long branchid,Long campusid,Integer year,Integer month,Integer onetoonehourcount,Object onetoonehourincome,Integer onetoonebranchrank,Integer onetoonecountryrank,Integer grouphourcount,Object grouphourincome,Integer groupbranchrank,Integer groupcountryrank,Object renewalmoney,Integer renewalbranchrank,Integer renewalcountryrank,Object refundmoney,Integer hourcounttask,Object renewalmoneytask,String createtime){
+  public Educatecampusperfmonthsum(Long id,Integer version,Long regionid,Long branchid,Long campusid,Integer year,Integer month,Integer onetoonehourcount,Object onetoonehourincome,Integer onetoonebranchrank,Integer onetoonecountryrank,Integer grouphourcount,Object grouphourincome,Integer groupbranchrank,Integer groupcountryrank,Object renewalmoney,Integer renewalbranchrank,Integer renewalcountryrank,Object refundmoney,Integer hourcounttask,Object renewalmoneytask,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.regionid=regionid;

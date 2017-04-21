@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:38
 */
 @Getter
 @Setter
@@ -18,8 +18,6 @@ public class Debookorderitems implements Serializable{
   Long id;
   Integer version;
   Long debookid;
-  Integer sortno;
-  Long itemid;
   Long assetid;
   Long accountid;
   String accountcode;
@@ -33,12 +31,10 @@ public class Debookorderitems implements Serializable{
   Object assignedmoney;
   public Debookorderitems(){
   }
-  public Debookorderitems(Long id,Integer version,Long debookid,Integer sortno,Long itemid,Long assetid,Long accountid,String accountcode,Object debookamount,Object debookmoney,Object presentamountofdebook,Object returnmoney,Object confirmedamount,Object confirmedmoney,Object assignedamount,Object assignedmoney){
+  public Debookorderitems(Long id,Integer version,Long debookid,Long assetid,Long accountid,String accountcode,Object debookamount,Object debookmoney,Object presentamountofdebook,Object returnmoney,Object confirmedamount,Object confirmedmoney,Object assignedamount,Object assignedmoney){
       this.id=id;
       this.version=version;
       this.debookid=debookid;
-      this.sortno=sortno;
-      this.itemid=itemid;
       this.assetid=assetid;
       this.accountid=accountid;
       this.accountcode=accountcode;

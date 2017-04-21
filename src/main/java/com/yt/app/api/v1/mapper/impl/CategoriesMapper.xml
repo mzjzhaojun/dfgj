@@ -3,20 +3,18 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CategoriesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,categoryid,category,categoryname,categorytype,hascourse,caninput,enabled,sortno,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,category,categoryname,categorytype,hascourse,caninput,enabled,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Categories">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="categoryid" column="categoryid" />
          <id property="category" column="category" />
          <id property="categoryname" column="categoryname" />
          <id property="categorytype" column="categorytype" />
          <id property="hascourse" column="hascourse" />
          <id property="caninput" column="caninput" />
          <id property="enabled" column="enabled" />
-         <id property="sortno" column="sortno" />
          <id property="creatorid" column="creatorid" />
          <id property="creatorname" column="creatorname" />
          <id property="createtime" column="createtime" />
@@ -26,8 +24,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Categories">
-  insert into categories (id,categoryid,category,categoryname,categorytype,hascourse,caninput,enabled,sortno,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{categoryid},#{category},#{categoryname},#{categorytype},#{hascourse},#{caninput},#{enabled},#{sortno},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into categories (id,category,categoryname,categorytype,hascourse,caninput,enabled,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{category},#{categoryname},#{categorytype},#{hascourse},#{caninput},#{enabled},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -40,9 +38,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="categoryid != null">
-                   categoryid = #{categoryid},
              </if>
              <if test="category != null">
                    category = #{category},
@@ -61,9 +56,6 @@
              </if>
              <if test="enabled != null">
                    enabled = #{enabled},
-             </if>
-             <if test="sortno != null">
-                   sortno = #{sortno},
              </if>
              <if test="creatorid != null">
                    creatorid = #{creatorid},

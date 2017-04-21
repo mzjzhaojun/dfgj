@@ -34,7 +34,7 @@ import com.yt.app.api.v1.entity.Region;
 
 
 @RestController
-@RequestMapping("/dfgj/v1/region")
+@RequestMapping("/rest/v1/region")
 public class RegionController extends BaseControllerImpl<Region, Long> {
 
 

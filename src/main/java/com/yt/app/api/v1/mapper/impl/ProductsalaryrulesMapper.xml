@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.ProductsalaryrulesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,ruleid,productid,ruleobject,moneyperhour,moneyperperiod
+     id,version,productid,ruleobject,moneyperhour,moneyperperiod
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Productsalaryrules">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="ruleid" column="ruleid" />
          <id property="productid" column="productid" />
          <id property="ruleobject" column="ruleobject" />
          <id property="moneyperhour" column="moneyperhour" />
@@ -17,8 +16,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Productsalaryrules">
-  insert into productsalaryrules (id,ruleid,productid,ruleobject,moneyperhour,moneyperperiod)
-         values (#{id},#{ruleid},#{productid},#{ruleobject},#{moneyperhour},#{moneyperperiod})
+  insert into productsalaryrules (id,productid,ruleobject,moneyperhour,moneyperperiod)
+         values (#{id},#{productid},#{ruleobject},#{moneyperhour},#{moneyperperiod})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -31,9 +30,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="ruleid != null">
-                   ruleid = #{ruleid},
              </if>
              <if test="productid != null">
                    productid = #{productid},

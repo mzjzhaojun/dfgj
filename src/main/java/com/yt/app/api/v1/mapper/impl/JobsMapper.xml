@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.JobsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,jobid,jobname,orgid,staffid,parentid,isprimary,isfulltime,jobcodeid,fullpath,versionstarttime,versionendtime,status,bistatus
+     id,version,jobname,orgid,staffid,parentid,isprimary,isfulltime,jobcodeid,fullpath,status,bistatus
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Jobs">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="jobid" column="jobid" />
          <id property="jobname" column="jobname" />
          <id property="orgid" column="orgid" />
          <id property="staffid" column="staffid" />
@@ -18,15 +17,13 @@
          <id property="isfulltime" column="isfulltime" />
          <id property="jobcodeid" column="jobcodeid" />
          <id property="fullpath" column="fullpath" />
-         <id property="versionstarttime" column="versionstarttime" />
-         <id property="versionendtime" column="versionendtime" />
          <id property="status" column="status" />
          <id property="bistatus" column="bistatus" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Jobs">
-  insert into jobs (id,jobid,jobname,orgid,staffid,parentid,isprimary,isfulltime,jobcodeid,fullpath,versionstarttime,versionendtime,status,bistatus)
-         values (#{id},#{jobid},#{jobname},#{orgid},#{staffid},#{parentid},#{isprimary},#{isfulltime},#{jobcodeid},#{fullpath},#{versionstarttime},#{versionendtime},#{status},#{bistatus})
+  insert into jobs (id,jobname,orgid,staffid,parentid,isprimary,isfulltime,jobcodeid,fullpath,status,bistatus)
+         values (#{id},#{jobname},#{orgid},#{staffid},#{parentid},#{isprimary},#{isfulltime},#{jobcodeid},#{fullpath},#{status},#{bistatus})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -39,9 +36,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="jobid != null">
-                   jobid = #{jobid},
              </if>
              <if test="jobname != null">
                    jobname = #{jobname},
@@ -66,12 +60,6 @@
              </if>
              <if test="fullpath != null">
                    fullpath = #{fullpath},
-             </if>
-             <if test="versionstarttime != null">
-                   versionstarttime = #{versionstarttime},
-             </if>
-             <if test="versionendtime != null">
-                   versionendtime = #{versionendtime},
              </if>
              <if test="status != null">
                    status = #{status},

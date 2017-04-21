@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:18
 */
 @Getter
 @Setter
@@ -17,17 +17,16 @@ public class Accounttransferapplies implements Serializable{
 
   Long id;
   Integer version;
-  Long applyid;
   String applyno;
   String applystatus;
   String applymemo;
-  String applytime;
+  java.util.Date applytime;
   Long applierid;
   String appliername;
   Long applierjobid;
   String applierjobname;
   String processstatus;
-  String processtime;
+  java.util.Date processtime;
   String processmemo;
   String transfertype;
   Object transfermoney;
@@ -35,12 +34,12 @@ public class Accounttransferapplies implements Serializable{
   String submittername;
   Long submitterjobid;
   String submitterjobname;
-  String submittime;
+  java.util.Date submittime;
   Long approverid;
   String approvername;
   Long approverjobid;
   String approverjobname;
-  String approvetime;
+  java.util.Date approvetime;
   Long campusid;
   String campusname;
   Long customerid;
@@ -83,16 +82,15 @@ public class Accounttransferapplies implements Serializable{
   Object bizthisaccountmoney;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Accounttransferapplies(){
   }
-  public Accounttransferapplies(Long id,Integer version,Long applyid,String applyno,String applystatus,String applymemo,String applytime,Long applierid,String appliername,Long applierjobid,String applierjobname,String processstatus,String processtime,String processmemo,String transfertype,Object transfermoney,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,String submittime,Long approverid,String approvername,Long approverjobid,String approverjobname,String approvetime,Long campusid,String campusname,Long customerid,String customercode,String customername,Long accountid,String accountcode,String accounttype,Long thatdiscountid,String thatdiscountcode,Object thatdiscountbase,Object thatdiscountrate,Object thataccountvalue,Object thataccountmoney,Long thisdiscountid,String thisdiscountcode,Object thisdiscountbase,Object thisdiscountrate,Object thisaccountvalue,Object thisaccountmoney,Long bizcampusid,String bizcampusname,Long bizcustomerid,String bizcustomercode,String bizcustomername,Long bizaccountid,String bizaccountcode,String bizaccounttype,Long bizthatdiscountid,String bizthatdiscountcode,Object bizthatdiscountbase,Object bizthatdiscountrate,Object bizthataccountvalue,Object bizthataccountmoney,Long bizthisdiscountid,String bizthisdiscountcode,Object bizthisdiscountbase,Object bizthisdiscountrate,Object bizthisaccountvalue,Object bizthisaccountmoney,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Accounttransferapplies(Long id,Integer version,String applyno,String applystatus,String applymemo,java.util.Date applytime,Long applierid,String appliername,Long applierjobid,String applierjobname,String processstatus,java.util.Date processtime,String processmemo,String transfertype,Object transfermoney,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,java.util.Date submittime,Long approverid,String approvername,Long approverjobid,String approverjobname,java.util.Date approvetime,Long campusid,String campusname,Long customerid,String customercode,String customername,Long accountid,String accountcode,String accounttype,Long thatdiscountid,String thatdiscountcode,Object thatdiscountbase,Object thatdiscountrate,Object thataccountvalue,Object thataccountmoney,Long thisdiscountid,String thisdiscountcode,Object thisdiscountbase,Object thisdiscountrate,Object thisaccountvalue,Object thisaccountmoney,Long bizcampusid,String bizcampusname,Long bizcustomerid,String bizcustomercode,String bizcustomername,Long bizaccountid,String bizaccountcode,String bizaccounttype,Long bizthatdiscountid,String bizthatdiscountcode,Object bizthatdiscountbase,Object bizthatdiscountrate,Object bizthataccountvalue,Object bizthataccountmoney,Long bizthisdiscountid,String bizthisdiscountcode,Object bizthisdiscountbase,Object bizthisdiscountrate,Object bizthisaccountvalue,Object bizthisaccountmoney,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
-      this.applyid=applyid;
       this.applyno=applyno;
       this.applystatus=applystatus;
       this.applymemo=applymemo;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:49
 */
 @Getter
 @Setter
@@ -19,16 +19,14 @@ public class Orgcampuses implements Serializable{
   Integer version;
   Long regionid;
   Long branchid;
-  Long campusid;
   String campusname;
   public Orgcampuses(){
   }
-  public Orgcampuses(Long id,Integer version,Long regionid,Long branchid,Long campusid,String campusname){
+  public Orgcampuses(Long id,Integer version,Long regionid,Long branchid,String campusname){
       this.id=id;
       this.version=version;
       this.regionid=regionid;
       this.branchid=branchid;
-      this.campusid=campusid;
       this.campusname=campusname;
   }
 }

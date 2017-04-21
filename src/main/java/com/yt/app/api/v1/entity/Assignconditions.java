@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:19
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Assignconditions implements Serializable{
 
   Long id;
   Integer version;
-  Long conditionid;
   String conditionname4customer;
   String conditionname4teacher;
   Long customerid;
@@ -51,16 +50,15 @@ public class Assignconditions implements Serializable{
   Object lessondurationvalue;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Assignconditions(){
   }
-  public Assignconditions(Long id,Integer version,Long conditionid,String conditionname4customer,String conditionname4teacher,Long customerid,String customercode,String customername,Long accountid,Long assetid,String assetcode,Long productid,String productcode,String productname,String categorytype,String categorytypename,String grade,String gradename,String subject,String subjectname,Long roomid,String roomcode,String roomname,Long teacherid,String teachername,String teacheroacode,Long teacherjobid,Long teacherjoborgid,String teacherjoborgname,Integer isfulltimeteacher,String courselevel,String courselevelname,String lessonduration,Object lessondurationvalue,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Assignconditions(Long id,Integer version,String conditionname4customer,String conditionname4teacher,Long customerid,String customercode,String customername,Long accountid,Long assetid,String assetcode,Long productid,String productcode,String productname,String categorytype,String categorytypename,String grade,String gradename,String subject,String subjectname,Long roomid,String roomcode,String roomname,Long teacherid,String teachername,String teacheroacode,Long teacherjobid,Long teacherjoborgid,String teacherjoborgname,Integer isfulltimeteacher,String courselevel,String courselevelname,String lessonduration,Object lessondurationvalue,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
-      this.conditionid=conditionid;
       this.conditionname4customer=conditionname4customer;
       this.conditionname4teacher=conditionname4teacher;
       this.customerid=customerid;

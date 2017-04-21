@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerassetsdetailsourceMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,statlocaldate,assetid,categorytype,grade,orderid,confirmedamount,confirmedmoney
+     id,version,assetid,categorytype,grade,orderid,confirmedamount,confirmedmoney
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerassetsdetailsource">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="statlocaldate" column="statlocaldate" />
          <id property="assetid" column="assetid" />
          <id property="categorytype" column="categorytype" />
          <id property="grade" column="grade" />
@@ -19,8 +18,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerassetsdetailsource">
-  insert into customerassetsdetailsource (id,statlocaldate,assetid,categorytype,grade,orderid,confirmedamount,confirmedmoney)
-         values (#{id},#{statlocaldate},#{assetid},#{categorytype},#{grade},#{orderid},#{confirmedamount},#{confirmedmoney})
+  insert into customerassetsdetailsource (id,assetid,categorytype,grade,orderid,confirmedamount,confirmedmoney)
+         values (#{id},#{assetid},#{categorytype},#{grade},#{orderid},#{confirmedamount},#{confirmedmoney})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -33,9 +32,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="statlocaldate != null">
-                   statlocaldate = #{statlocaldate},
              </if>
              <if test="assetid != null">
                    assetid = #{assetid},

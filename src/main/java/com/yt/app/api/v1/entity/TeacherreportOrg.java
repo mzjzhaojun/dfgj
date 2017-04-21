@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:03
+* @createdate  2017-04-20 13:49:01
 */
 @Getter
 @Setter
@@ -19,13 +19,13 @@ public class TeacherreportOrg implements Serializable{
   Integer version;
   Long snapshotid;
   String dt;
-  String regionid;
+  Long regionid;
   String regionname;
-  String branchid;
+  Long branchid;
   String branchname;
-  String campusid;
+  Long campusid;
   String campusname;
-  String orgid;
+  Long orgid;
   String orgname;
   Integer campusmonth;
   String jobname;
@@ -99,7 +99,7 @@ public class TeacherreportOrg implements Serializable{
   Integer refundcount;
   public TeacherreportOrg(){
   }
-  public TeacherreportOrg(Long id,Integer version,Long snapshotid,String dt,String regionid,String regionname,String branchid,String branchname,String campusid,String campusname,String orgid,String orgname,Integer campusmonth,String jobname,String jobnature,Integer fulltimecount,Integer fulltimeteachcount,Integer parttimecount,Integer parttimeteachcount,String staffname,Integer customercount,Integer customerclasscount,Integer customerg3classcount,Integer customeravailablecount,Integer customerg3availablecount,Integer customerclasssuspendedcount,Integer customerschoolsuspendedcount,Integer customerclassfinishedcount,Object allteacherassignedamount,Object allteacherassignedamountvol,Object allteacherassignedamountyoydiff,Object allteacherassignedamountyoy,Object allteacherassignedamounttask,Object allteacherassignedamounttcr,Object allcustomerassignedamount,Object allcustomerassignedamountvol,Object allcustomerassignedamountyoydiff,Object allcustomerassignedamountyoy,Object allassignedincome,Object allassignedincomevol,Object allassignedincomeyoydiff,Object allassignedincomeyoy,Object onetooneassignedamount,Object onetooneassignedamountvol,Object onetooneassignedamountyoydiff,Object onetooneassignedamountyoy,Object onetooneassignedincome,Object onetooneassignedincomevol,Object onetooneassignedincomeyoydiff,Object onetooneassignedincomeyoy,Object onetoonecustomercount,Object onetoonecustomercountvol,Object onetoonecustomercountyoydiff,Object onetoonecustomercountyoy,Object teacherclassgroupassignedamount,Object teacherclassgroupassignedamountvol,Object teacherclassgroupassignedamountyoydiff,Object teacherclassgroupassignedamountyoy,Object customerclassgroupassignedamount,Object customerclassgroupassignedamountvol,Object customerclassgroupassignedamountyoydiff,Object customerclassgroupassignedamountyoy,Object classgroupassignedincome,Object classgroupassignedincomevol,Object classgroupassignedincomeyoydiff,Object classgroupassignedincomeyoy,Object classgroupcustomercount,Object classgroupcustomercountvol,Object classgroupcustomercountyoydiff,String classgroupcustomercountyoy,Object customerrenewalrate,Object customeraveragehour,Object customeraverageaddignedamount,Object fulltimeteacheraveragehour,Object parttimeteacheraveragehourpercent,Object customerlossrate,Integer customertransferintroductioncount,Object customersatisfactiondegree,Object rechargeamount,Integer rechargecount,Object refundamount,Integer refundcount){
+  public TeacherreportOrg(Long id,Integer version,Long snapshotid,String dt,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Long orgid,String orgname,Integer campusmonth,String jobname,String jobnature,Integer fulltimecount,Integer fulltimeteachcount,Integer parttimecount,Integer parttimeteachcount,String staffname,Integer customercount,Integer customerclasscount,Integer customerg3classcount,Integer customeravailablecount,Integer customerg3availablecount,Integer customerclasssuspendedcount,Integer customerschoolsuspendedcount,Integer customerclassfinishedcount,Object allteacherassignedamount,Object allteacherassignedamountvol,Object allteacherassignedamountyoydiff,Object allteacherassignedamountyoy,Object allteacherassignedamounttask,Object allteacherassignedamounttcr,Object allcustomerassignedamount,Object allcustomerassignedamountvol,Object allcustomerassignedamountyoydiff,Object allcustomerassignedamountyoy,Object allassignedincome,Object allassignedincomevol,Object allassignedincomeyoydiff,Object allassignedincomeyoy,Object onetooneassignedamount,Object onetooneassignedamountvol,Object onetooneassignedamountyoydiff,Object onetooneassignedamountyoy,Object onetooneassignedincome,Object onetooneassignedincomevol,Object onetooneassignedincomeyoydiff,Object onetooneassignedincomeyoy,Object onetoonecustomercount,Object onetoonecustomercountvol,Object onetoonecustomercountyoydiff,Object onetoonecustomercountyoy,Object teacherclassgroupassignedamount,Object teacherclassgroupassignedamountvol,Object teacherclassgroupassignedamountyoydiff,Object teacherclassgroupassignedamountyoy,Object customerclassgroupassignedamount,Object customerclassgroupassignedamountvol,Object customerclassgroupassignedamountyoydiff,Object customerclassgroupassignedamountyoy,Object classgroupassignedincome,Object classgroupassignedincomevol,Object classgroupassignedincomeyoydiff,Object classgroupassignedincomeyoy,Object classgroupcustomercount,Object classgroupcustomercountvol,Object classgroupcustomercountyoydiff,String classgroupcustomercountyoy,Object customerrenewalrate,Object customeraveragehour,Object customeraverageaddignedamount,Object fulltimeteacheraveragehour,Object parttimeteacheraveragehourpercent,Object customerlossrate,Integer customertransferintroductioncount,Object customersatisfactiondegree,Object rechargeamount,Integer rechargecount,Object refundamount,Integer refundcount){
       this.id=id;
       this.version=version;
       this.snapshotid=snapshotid;

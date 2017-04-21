@@ -11,7 +11,7 @@ import com.yt.app.api.v1.entity.Products;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:54
 */
 
 public class ProductsResourceAssembler extends ResourceAssemblerSupport<Products, ProductsResource> {

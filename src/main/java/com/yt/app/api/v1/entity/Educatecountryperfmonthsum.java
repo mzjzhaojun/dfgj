@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:42
 */
 @Getter
 @Setter
@@ -29,10 +29,10 @@ public class Educatecountryperfmonthsum implements Serializable{
   Object renewalmoneytask;
   Object hourincometask;
   Object refundmoneytask;
-  String createtime;
+  java.util.Date createtime;
   public Educatecountryperfmonthsum(){
   }
-  public Educatecountryperfmonthsum(Long id,Integer version,Integer year,Integer month,Integer onetoonehourcount,Object onetoonehourincome,Integer grouphourcount,Object grouphourincome,Object renewalmoney,Object refundmoney,Integer hourcounttask,Object renewalmoneytask,Object hourincometask,Object refundmoneytask,String createtime){
+  public Educatecountryperfmonthsum(Long id,Integer version,Integer year,Integer month,Integer onetoonehourcount,Object onetoonehourincome,Integer grouphourcount,Object grouphourincome,Object renewalmoney,Object refundmoney,Integer hourcounttask,Object renewalmoneytask,Object hourincometask,Object refundmoneytask,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.year=year;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:36
 */
 @Getter
 @Setter
@@ -28,12 +28,10 @@ public class Customerteacherrelations implements Serializable{
   Integer isfulltimeteacher;
   Long creatorid;
   String creatorname;
-  String createtime;
-  String versionstarttime;
-  String versionendtime;
+  java.util.Date createtime;
   public Customerteacherrelations(){
   }
-  public Customerteacherrelations(Long id,Integer version,Long customerid,Long teacherid,String teachername,Long teacherjobid,String teacherjobname,String teacheroacode,Long teacherjoborgid,String teacherjoborgname,Integer isfulltimeteacher,Long creatorid,String creatorname,String createtime,String versionstarttime,String versionendtime){
+  public Customerteacherrelations(Long id,Integer version,Long customerid,Long teacherid,String teachername,Long teacherjobid,String teacherjobname,String teacheroacode,Long teacherjoborgid,String teacherjoborgname,Integer isfulltimeteacher,Long creatorid,String creatorname,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.customerid=customerid;
@@ -48,7 +46,5 @@ public class Customerteacherrelations implements Serializable{
       this.creatorid=creatorid;
       this.creatorname=creatorname;
       this.createtime=createtime;
-      this.versionstarttime=versionstarttime;
-      this.versionendtime=versionendtime;
   }
 }

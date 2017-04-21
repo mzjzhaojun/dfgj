@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.ParentsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,parentid,parentcode,parentname,gender,email,industry,career,income,birthday,idtype,idnumber,country,province,city,county,streetname,addressdetail,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode,versionstarttime,versionendtime
+     id,version,parentcode,parentname,gender,email,industry,career,income,birthday,idtype,idnumber,country,province,city,county,streetname,addressdetail,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Parents">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="parentid" column="parentid" />
          <id property="parentcode" column="parentcode" />
          <id property="parentname" column="parentname" />
          <id property="gender" column="gender" />
@@ -33,13 +32,11 @@
          <id property="modifiername" column="modifiername" />
          <id property="modifytime" column="modifytime" />
          <id property="tenantcode" column="tenantcode" />
-         <id property="versionstarttime" column="versionstarttime" />
-         <id property="versionendtime" column="versionendtime" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Parents">
-  insert into parents (id,parentid,parentcode,parentname,gender,email,industry,career,income,birthday,idtype,idnumber,country,province,city,county,streetname,addressdetail,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode,versionstarttime,versionendtime)
-         values (#{id},#{parentid},#{parentcode},#{parentname},#{gender},#{email},#{industry},#{career},#{income},#{birthday},#{idtype},#{idnumber},#{country},#{province},#{city},#{county},#{streetname},#{addressdetail},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{tenantcode},#{versionstarttime},#{versionendtime})
+  insert into parents (id,parentcode,parentname,gender,email,industry,career,income,birthday,idtype,idnumber,country,province,city,county,streetname,addressdetail,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode)
+         values (#{id},#{parentcode},#{parentname},#{gender},#{email},#{industry},#{career},#{income},#{birthday},#{idtype},#{idnumber},#{country},#{province},#{city},#{county},#{streetname},#{addressdetail},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{tenantcode})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -52,9 +49,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="parentid != null">
-                   parentid = #{parentid},
              </if>
              <if test="parentcode != null">
                    parentcode = #{parentcode},
@@ -123,13 +117,7 @@
                    modifytime = #{modifytime},
              </if>
              <if test="tenantcode != null">
-                   tenantcode = #{tenantcode},
-             </if>
-             <if test="versionstarttime != null">
-                   versionstarttime = #{versionstarttime},
-             </if>
-             <if test="versionendtime != null">
-                   versionendtime = #{versionendtime}
+                   tenantcode = #{tenantcode}
              </if>
           </set>
      where id = #{id} and  version = #{version}

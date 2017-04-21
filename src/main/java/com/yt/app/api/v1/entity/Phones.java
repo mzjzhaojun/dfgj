@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:52
 */
 @Getter
 @Setter
@@ -27,13 +27,11 @@ public class Phones implements Serializable{
   String extension;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long tenantcode;
-  String versionstarttime;
-  String versionendtime;
   public Phones(){
   }
-  public Phones(Long id,Integer version,Long ownerid,Integer itemid,Integer isprimary,String phonetype,String countrycode,String areanumber,String phonenumber,String extension,Long creatorid,String creatorname,String createtime,Long tenantcode,String versionstarttime,String versionendtime){
+  public Phones(Long id,Integer version,Long ownerid,Integer itemid,Integer isprimary,String phonetype,String countrycode,String areanumber,String phonenumber,String extension,Long creatorid,String creatorname,java.util.Date createtime,Long tenantcode){
       this.id=id;
       this.version=version;
       this.ownerid=ownerid;
@@ -48,7 +46,5 @@ public class Phones implements Serializable{
       this.creatorname=creatorname;
       this.createtime=createtime;
       this.tenantcode=tenantcode;
-      this.versionstarttime=versionstarttime;
-      this.versionendtime=versionendtime;
   }
 }

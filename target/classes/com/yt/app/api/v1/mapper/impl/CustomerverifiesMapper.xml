@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerverifiesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,campusid,campusname,customerid,verifyid,verifytime,verifierid,verifiername,verifierjobid,verifierjobname,verifypeoples,verifyrelations,planverifytime,isinvited,issigned,creatorid,creatorname,createtime
+     id,version,campusid,campusname,customerid,verifytime,verifierid,verifiername,verifierjobid,verifierjobname,verifypeoples,verifyrelations,planverifytime,isinvited,issigned,creatorid,creatorname,createtime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerverifies">
@@ -12,7 +12,6 @@
          <id property="campusid" column="campusid" />
          <id property="campusname" column="campusname" />
          <id property="customerid" column="customerid" />
-         <id property="verifyid" column="verifyid" />
          <id property="verifytime" column="verifytime" />
          <id property="verifierid" column="verifierid" />
          <id property="verifiername" column="verifiername" />
@@ -29,8 +28,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerverifies">
-  insert into customerverifies (id,campusid,campusname,customerid,verifyid,verifytime,verifierid,verifiername,verifierjobid,verifierjobname,verifypeoples,verifyrelations,planverifytime,isinvited,issigned,creatorid,creatorname,createtime)
-         values (#{id},#{campusid},#{campusname},#{customerid},#{verifyid},#{verifytime},#{verifierid},#{verifiername},#{verifierjobid},#{verifierjobname},#{verifypeoples},#{verifyrelations},#{planverifytime},#{isinvited},#{issigned},#{creatorid},#{creatorname},#{createtime})
+  insert into customerverifies (id,campusid,campusname,customerid,verifytime,verifierid,verifiername,verifierjobid,verifierjobname,verifypeoples,verifyrelations,planverifytime,isinvited,issigned,creatorid,creatorname,createtime)
+         values (#{id},#{campusid},#{campusname},#{customerid},#{verifytime},#{verifierid},#{verifiername},#{verifierjobid},#{verifierjobname},#{verifypeoples},#{verifyrelations},#{planverifytime},#{isinvited},#{issigned},#{creatorid},#{creatorname},#{createtime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -52,9 +51,6 @@
              </if>
              <if test="customerid != null">
                    customerid = #{customerid},
-             </if>
-             <if test="verifyid != null">
-                   verifyid = #{verifyid},
              </if>
              <if test="verifytime != null">
                    verifytime = #{verifytime},

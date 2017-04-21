@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:31
 */
 @Getter
 @Setter
@@ -18,18 +18,16 @@ public class Customermeetingitems implements Serializable{
   Long id;
   Integer version;
   Long meetingid;
-  Long itemid;
   String objecttype;
   String objectname;
   String contenttype;
   String contentdata;
   public Customermeetingitems(){
   }
-  public Customermeetingitems(Long id,Integer version,Long meetingid,Long itemid,String objecttype,String objectname,String contenttype,String contentdata){
+  public Customermeetingitems(Long id,Integer version,Long meetingid,String objecttype,String objectname,String contenttype,String contentdata){
       this.id=id;
       this.version=version;
       this.meetingid=meetingid;
-      this.itemid=itemid;
       this.objecttype=objecttype;
       this.objectname=objectname;
       this.contenttype=contenttype;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:17
 */
 @Getter
 @Setter
@@ -24,19 +24,18 @@ public class Accountrefundapplies implements Serializable{
   String customername;
   Long accountid;
   String accountcode;
-  Long applyid;
   String applyno;
   String applystatus;
   String applymemotype;
   String applymemo;
-  String applytime;
+  java.util.Date applytime;
   Long applierid;
   String appliername;
   Long applierjobid;
   String applierjobname;
   String applierjobtype;
   String processstatus;
-  String processtime;
+  java.util.Date processtime;
   String processmemo;
   String refundtype;
   Integer isperiodrefund;
@@ -73,36 +72,36 @@ public class Accountrefundapplies implements Serializable{
   Long submitterjobid;
   String submitterjobname;
   String submitterjobtype;
-  String submittime;
+  java.util.Date submittime;
   Long approverid;
   String approvername;
   Long approverjobid;
   String approverjobname;
-  String approvetime;
+  java.util.Date approvetime;
   Long verifierid;
   String verifiername;
   Long verifierjobid;
   String verifierjobname;
   String verifystatus;
-  String verifytime;
+  java.util.Date verifytime;
   Long checkerid;
   String checkername;
   Long checkerjobid;
   String checkerjobname;
   String checkstatus;
-  String checktime;
+  java.util.Date checktime;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   Long tenantcode;
   String issyn;
-  String syntime;
+  java.util.Date syntime;
   public Accountrefundapplies(){
   }
-  public Accountrefundapplies(Long id,Integer version,Long campusid,String campusname,Long customerid,String customercode,String customername,Long accountid,String accountcode,Long applyid,String applyno,String applystatus,String applymemotype,String applymemo,String applytime,Long applierid,String appliername,Long applierjobid,String applierjobname,String applierjobtype,String processstatus,String processtime,String processmemo,String refundtype,Integer isperiodrefund,Integer isextrarefund,Object applyrefundmoney,Object oughtrefundmoney,Object realrefundmoney,Object consumptionvalue,Object reallowancemoney,String extrarefundtype,Object extrarefundmoney,Object compensatemoney,Long thatdiscountid,String thatdiscountcode,Object thatdiscountbase,Object thatdiscountrate,Object thataccountvalue,Object thataccountmoney,Long thisdiscountid,String thisdiscountcode,Object thisdiscountbase,Object thisdiscountrate,Object thisaccountvalue,Object thisaccountmoney,String drawer,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,String submitterjobtype,String submittime,Long approverid,String approvername,Long approverjobid,String approverjobname,String approvetime,Long verifierid,String verifiername,Long verifierjobid,String verifierjobname,String verifystatus,String verifytime,Long checkerid,String checkername,Long checkerjobid,String checkerjobname,String checkstatus,String checktime,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime,Long tenantcode,String issyn,String syntime){
+  public Accountrefundapplies(Long id,Integer version,Long campusid,String campusname,Long customerid,String customercode,String customername,Long accountid,String accountcode,String applyno,String applystatus,String applymemotype,String applymemo,java.util.Date applytime,Long applierid,String appliername,Long applierjobid,String applierjobname,String applierjobtype,String processstatus,java.util.Date processtime,String processmemo,String refundtype,Integer isperiodrefund,Integer isextrarefund,Object applyrefundmoney,Object oughtrefundmoney,Object realrefundmoney,Object consumptionvalue,Object reallowancemoney,String extrarefundtype,Object extrarefundmoney,Object compensatemoney,Long thatdiscountid,String thatdiscountcode,Object thatdiscountbase,Object thatdiscountrate,Object thataccountvalue,Object thataccountmoney,Long thisdiscountid,String thisdiscountcode,Object thisdiscountbase,Object thisdiscountrate,Object thisaccountvalue,Object thisaccountmoney,String drawer,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,String submitterjobtype,java.util.Date submittime,Long approverid,String approvername,Long approverjobid,String approverjobname,java.util.Date approvetime,Long verifierid,String verifiername,Long verifierjobid,String verifierjobname,String verifystatus,java.util.Date verifytime,Long checkerid,String checkername,Long checkerjobid,String checkerjobname,String checkstatus,java.util.Date checktime,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime,Long tenantcode,String issyn,java.util.Date syntime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
@@ -112,7 +111,6 @@ public class Accountrefundapplies implements Serializable{
       this.customername=customername;
       this.accountid=accountid;
       this.accountcode=accountcode;
-      this.applyid=applyid;
       this.applyno=applyno;
       this.applystatus=applystatus;
       this.applymemotype=applymemotype;

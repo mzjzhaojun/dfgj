@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:37
 */
 @Getter
 @Setter
@@ -21,8 +21,7 @@ public class Customertransferresources implements Serializable{
   String orgname;
   String orgtype;
   Long customerid;
-  Long transferid;
-  String transfertime;
+  java.util.Date transfertime;
   String transfermemo;
   Long transferorid;
   String transferorname;
@@ -33,17 +32,16 @@ public class Customertransferresources implements Serializable{
   String toorgtype;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   public Customertransferresources(){
   }
-  public Customertransferresources(Long id,Integer version,Long orgid,String orgname,String orgtype,Long customerid,Long transferid,String transfertime,String transfermemo,Long transferorid,String transferorname,Long transferorjobid,String transferorjobname,Long toorgid,String toorgname,String toorgtype,Long creatorid,String creatorname,String createtime){
+  public Customertransferresources(Long id,Integer version,Long orgid,String orgname,String orgtype,Long customerid,java.util.Date transfertime,String transfermemo,Long transferorid,String transferorname,Long transferorjobid,String transferorjobname,Long toorgid,String toorgname,String toorgtype,Long creatorid,String creatorname,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.orgid=orgid;
       this.orgname=orgname;
       this.orgtype=orgtype;
       this.customerid=customerid;
-      this.transferid=transferid;
       this.transfertime=transfertime;
       this.transfermemo=transfermemo;
       this.transferorid=transferorid;

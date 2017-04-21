@@ -11,7 +11,7 @@ import com.yt.app.api.v1.entity.Debookorders;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:38
 */
 
 public class DebookordersResourceAssembler extends ResourceAssemblerSupport<Debookorders, DebookordersResource> {

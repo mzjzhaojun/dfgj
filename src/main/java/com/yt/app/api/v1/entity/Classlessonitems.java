@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:24
 */
 @Getter
 @Setter
@@ -18,12 +18,10 @@ public class Classlessonitems implements Serializable{
   Long id;
   Integer version;
   Long lessonid;
-  Integer sortno;
-  Long assignid;
-  String assigntime;
+  java.util.Date assigntime;
   String assignstatus;
   Object assignprice;
-  String confirmtime;
+  java.util.Date confirmtime;
   String confirmstatus;
   Object confirmprice;
   Long assetid;
@@ -45,18 +43,16 @@ public class Classlessonitems implements Serializable{
   Long educatorjobid;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Classlessonitems(){
   }
-  public Classlessonitems(Long id,Integer version,Long lessonid,Integer sortno,Long assignid,String assigntime,String assignstatus,Object assignprice,String confirmtime,String confirmstatus,Object confirmprice,Long assetid,String assetcode,Long customerid,String customercode,String customername,Long customergrade,String customergradename,Long customercampusid,String customercampusname,Integer isjoinclass,Integer isoutercampus,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Classlessonitems(Long id,Integer version,Long lessonid,java.util.Date assigntime,String assignstatus,Object assignprice,java.util.Date confirmtime,String confirmstatus,Object confirmprice,Long assetid,String assetcode,Long customerid,String customercode,String customername,Long customergrade,String customergradename,Long customercampusid,String customercampusname,Integer isjoinclass,Integer isoutercampus,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.lessonid=lessonid;
-      this.sortno=sortno;
-      this.assignid=assignid;
       this.assigntime=assigntime;
       this.assignstatus=assignstatus;
       this.assignprice=assignprice;

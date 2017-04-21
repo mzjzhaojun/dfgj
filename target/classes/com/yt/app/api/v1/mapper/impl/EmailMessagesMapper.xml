@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.EmailMessagesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,message_id,body,body_encoding,headers_encoding,is_body_html,priority,subject,subject_encoding,status,status_text,sent_time
+     id,version,body,body_encoding,headers_encoding,is_body_html,priority,subject,subject_encoding,status,status_text,sent_time
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.EmailMessages">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="message_id" column="message_id" />
          <id property="body" column="body" />
          <id property="body_encoding" column="body_encoding" />
          <id property="headers_encoding" column="headers_encoding" />
@@ -23,8 +22,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.EmailMessages">
-  insert into email_messages (id,message_id,body,body_encoding,headers_encoding,is_body_html,priority,subject,subject_encoding,status,status_text,sent_time)
-         values (#{id},#{message_id},#{body},#{body_encoding},#{headers_encoding},#{is_body_html},#{priority},#{subject},#{subject_encoding},#{status},#{status_text},#{sent_time})
+  insert into email_messages (id,body,body_encoding,headers_encoding,is_body_html,priority,subject,subject_encoding,status,status_text,sent_time)
+         values (#{id},#{body},#{body_encoding},#{headers_encoding},#{is_body_html},#{priority},#{subject},#{subject_encoding},#{status},#{status_text},#{sent_time})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -37,9 +36,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="message_id != null">
-                   message_id = #{message_id},
              </if>
              <if test="body != null">
                    body = #{body},

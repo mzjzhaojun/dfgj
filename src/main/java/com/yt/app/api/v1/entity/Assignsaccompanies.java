@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:19
 */
 @Getter
 @Setter
@@ -17,8 +17,7 @@ public class Assignsaccompanies implements Serializable{
 
   Long id;
   Integer version;
-  Long assignid;
-  String assigntime;
+  java.util.Date assigntime;
   String assignstatus;
   Long campusid;
   String campusname;
@@ -27,7 +26,7 @@ public class Assignsaccompanies implements Serializable{
   String assignmemo;
   Integer copyallowed;
   Long confirmid;
-  String confirmtime;
+  java.util.Date confirmtime;
   String confirmstatus;
   Object confirmprice;
   Long assetid;
@@ -63,20 +62,19 @@ public class Assignsaccompanies implements Serializable{
   String subjectname;
   Object durationvalue;
   Object amount;
-  String starttime;
-  String endtime;
+  java.util.Date starttime;
+  java.util.Date endtime;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Assignsaccompanies(){
   }
-  public Assignsaccompanies(Long id,Integer version,Long assignid,String assigntime,String assignstatus,Long campusid,String campusname,Object assignprice,String assignsource,String assignmemo,Integer copyallowed,Long confirmid,String confirmtime,String confirmstatus,Object confirmprice,Long assetid,String assetcode,Long customerid,Long accountid,String customercode,String customername,Long productid,String productcode,String productname,String categorytype,String categorytypename,Long roomid,String roomcode,String roomname,Long teacherid,String teachername,Long teacherjobid,Long teacherjoborgid,String teacherjoborgname,String teacheroacode,Integer isfulltimeteacher,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,String grade,String gradename,String subject,String subjectname,Object durationvalue,Object amount,String starttime,String endtime,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Assignsaccompanies(Long id,Integer version,java.util.Date assigntime,String assignstatus,Long campusid,String campusname,Object assignprice,String assignsource,String assignmemo,Integer copyallowed,Long confirmid,java.util.Date confirmtime,String confirmstatus,Object confirmprice,Long assetid,String assetcode,Long customerid,Long accountid,String customercode,String customername,Long productid,String productcode,String productname,String categorytype,String categorytypename,Long roomid,String roomcode,String roomname,Long teacherid,String teachername,Long teacherjobid,Long teacherjoborgid,String teacherjoborgname,String teacheroacode,Integer isfulltimeteacher,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,String grade,String gradename,String subject,String subjectname,Object durationvalue,Object amount,java.util.Date starttime,java.util.Date endtime,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
-      this.assignid=assignid;
       this.assigntime=assigntime;
       this.assignstatus=assignstatus;
       this.campusid=campusid;

@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomervisitsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,campusid,campusname,customerid,visitid,visittype,visitway,visitcontent,visittime,visitorid,visitorname,visitorjobid,visitorjobname,nextvisittime,satisficing,remindtime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,campusid,campusname,customerid,visittype,visitway,visitcontent,visittime,visitorid,visitorname,visitorjobid,visitorjobname,nextvisittime,satisficing,remindtime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customervisits">
@@ -12,7 +12,6 @@
          <id property="campusid" column="campusid" />
          <id property="campusname" column="campusname" />
          <id property="customerid" column="customerid" />
-         <id property="visitid" column="visitid" />
          <id property="visittype" column="visittype" />
          <id property="visitway" column="visitway" />
          <id property="visitcontent" column="visitcontent" />
@@ -33,8 +32,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customervisits">
-  insert into customervisits (id,campusid,campusname,customerid,visitid,visittype,visitway,visitcontent,visittime,visitorid,visitorname,visitorjobid,visitorjobname,nextvisittime,satisficing,remindtime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{campusid},#{campusname},#{customerid},#{visitid},#{visittype},#{visitway},#{visitcontent},#{visittime},#{visitorid},#{visitorname},#{visitorjobid},#{visitorjobname},#{nextvisittime},#{satisficing},#{remindtime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into customervisits (id,campusid,campusname,customerid,visittype,visitway,visitcontent,visittime,visitorid,visitorname,visitorjobid,visitorjobname,nextvisittime,satisficing,remindtime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{campusid},#{campusname},#{customerid},#{visittype},#{visitway},#{visitcontent},#{visittime},#{visitorid},#{visitorname},#{visitorjobid},#{visitorjobname},#{nextvisittime},#{satisficing},#{remindtime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -56,9 +55,6 @@
              </if>
              <if test="customerid != null">
                    customerid = #{customerid},
-             </if>
-             <if test="visitid != null">
-                   visitid = #{visitid},
              </if>
              <if test="visittype != null">
                    visittype = #{visittype},

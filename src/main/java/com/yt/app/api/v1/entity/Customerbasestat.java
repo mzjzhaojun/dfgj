@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:29
 */
 @Getter
 @Setter
@@ -19,7 +19,7 @@ public class Customerbasestat implements Serializable{
   Integer version;
   Integer datekey;
   Long customerid;
-  String statlocaldate;
+  java.util.Date statlocaldate;
   Long campusid;
   Long consultantid;
   String consultantname;
@@ -61,22 +61,22 @@ public class Customerbasestat implements Serializable{
   Object totalrefundamount;
   Object reallowancemoney;
   Object compensatemoney;
-  String lastestrefundverifytime;
+  java.util.Date lastestrefundverifytime;
   Long referralstaffid;
   Long referralcustomerid;
   String currentgrade;
   String entrancegrade;
   Object totalmoneytransferedout;
   Object totalmoneytransferedin;
-  String lastesttransferedintime;
-  String lastesttransferedouttime;
-  String lastestclasstime;
-  String lastestpaytime;
-  String earliestpaytime;
-  String verifytime;
-  String replytime;
-  String visittime;
-  String meetingtime;
+  java.util.Date lastesttransferedintime;
+  java.util.Date lastesttransferedouttime;
+  java.util.Date lastestclasstime;
+  java.util.Date lastestpaytime;
+  java.util.Date earliestpaytime;
+  java.util.Date verifytime;
+  java.util.Date replytime;
+  java.util.Date visittime;
+  java.util.Date meetingtime;
   String studentstatus;
   Integer graduated;
   Object accountvalue;
@@ -97,10 +97,10 @@ public class Customerbasestat implements Serializable{
   Object assignedamount;
   Object assignedavgunitprice;
   Object assigneddurationhours;
-  String onetoonecoursetime;
-  String classgroupcoursetime;
-  String youxuecoursetime;
-  String othercoursetime;
+  java.util.Date onetoonecoursetime;
+  java.util.Date classgroupcoursetime;
+  java.util.Date youxuecoursetime;
+  java.util.Date othercoursetime;
   Object orderavgunitprice;
   Object orderrealamount;
   Object orderlessonhours;
@@ -116,7 +116,7 @@ public class Customerbasestat implements Serializable{
   Integer isclassfinished;
   public Customerbasestat(){
   }
-  public Customerbasestat(Long id,Integer version,Integer datekey,Long customerid,String statlocaldate,Long campusid,Long consultantid,String consultantname,Long consultantoacode,Long educatorid,String educatorname,Long educatoroacode,Object newchargeamount,Object earlyendrenewamount,Object earlystudyrenew,Object laterendrenew,Object laterstudyrenew,Object earlyendrenewamountagain,Object totalrenewamount,Object totalnewchargeamount,Object totalchargeamount,Object dailynewchargeamount,Object dailyearlyendrenewamount,Object dailyearlystudyrenew,Object dailylaterendrenew,Object dailylaterstudyrenew,Object dailyearlyendrenewamountagain,Object dailytotalnewchargeamount,Object dailytotalchargeamount,Object regularinperiodrefundmoney,Object regularnotinperiodrefundmoney,Object regularrefundmoney,Object irregularinperiodrefundmoney,Object irregularnotinperiodrefundmoney,Object irregularrefundmoney,Object totalnormalrefundamount,Object extraregularinperiodrefundmoney,Object extraregularnotinperiodrefundmoney,Object extraregularrefundmoney,Object extrairregularinperiodrefundmoney,Object extrairregularnotinperiodrefundmoney,Object extrairregularrefundmoney,Object totalextrarefundamount,Object totalrefundamount,Object reallowancemoney,Object compensatemoney,String lastestrefundverifytime,Long referralstaffid,Long referralcustomerid,String currentgrade,String entrancegrade,Object totalmoneytransferedout,Object totalmoneytransferedin,String lastesttransferedintime,String lastesttransferedouttime,String lastestclasstime,String lastestpaytime,String earliestpaytime,String verifytime,String replytime,String visittime,String meetingtime,String studentstatus,Integer graduated,Object accountvalue,Object accountmoney,Object accountpriceandamount,Object onetooneamountinasset,Object classgroupamountinasset,Object youxueamountinasset,Object otheramountinasset,Object totalamountinasset,Object lessondurationvalue,Object onetooneassignedincome,Object classgroupassignedincome,Object assignedincome,Object youxueincome,Object otherproductincome,Object otherincome,Object assignedamount,Object assignedavgunitprice,Object assigneddurationhours,String onetoonecoursetime,String classgroupcoursetime,String youxuecoursetime,String othercoursetime,Object orderavgunitprice,Object orderrealamount,Object orderlessonhours,Object ordertotalprice,Object debookamount,Object debookmoney,Object debooklessonhours,Object returnedmoney,Integer isavailable,Integer isclasssuspended,Integer isactive,Integer isschoolsuspended,Integer isclassfinished){
+  public Customerbasestat(Long id,Integer version,Integer datekey,Long customerid,java.util.Date statlocaldate,Long campusid,Long consultantid,String consultantname,Long consultantoacode,Long educatorid,String educatorname,Long educatoroacode,Object newchargeamount,Object earlyendrenewamount,Object earlystudyrenew,Object laterendrenew,Object laterstudyrenew,Object earlyendrenewamountagain,Object totalrenewamount,Object totalnewchargeamount,Object totalchargeamount,Object dailynewchargeamount,Object dailyearlyendrenewamount,Object dailyearlystudyrenew,Object dailylaterendrenew,Object dailylaterstudyrenew,Object dailyearlyendrenewamountagain,Object dailytotalnewchargeamount,Object dailytotalchargeamount,Object regularinperiodrefundmoney,Object regularnotinperiodrefundmoney,Object regularrefundmoney,Object irregularinperiodrefundmoney,Object irregularnotinperiodrefundmoney,Object irregularrefundmoney,Object totalnormalrefundamount,Object extraregularinperiodrefundmoney,Object extraregularnotinperiodrefundmoney,Object extraregularrefundmoney,Object extrairregularinperiodrefundmoney,Object extrairregularnotinperiodrefundmoney,Object extrairregularrefundmoney,Object totalextrarefundamount,Object totalrefundamount,Object reallowancemoney,Object compensatemoney,java.util.Date lastestrefundverifytime,Long referralstaffid,Long referralcustomerid,String currentgrade,String entrancegrade,Object totalmoneytransferedout,Object totalmoneytransferedin,java.util.Date lastesttransferedintime,java.util.Date lastesttransferedouttime,java.util.Date lastestclasstime,java.util.Date lastestpaytime,java.util.Date earliestpaytime,java.util.Date verifytime,java.util.Date replytime,java.util.Date visittime,java.util.Date meetingtime,String studentstatus,Integer graduated,Object accountvalue,Object accountmoney,Object accountpriceandamount,Object onetooneamountinasset,Object classgroupamountinasset,Object youxueamountinasset,Object otheramountinasset,Object totalamountinasset,Object lessondurationvalue,Object onetooneassignedincome,Object classgroupassignedincome,Object assignedincome,Object youxueincome,Object otherproductincome,Object otherincome,Object assignedamount,Object assignedavgunitprice,Object assigneddurationhours,java.util.Date onetoonecoursetime,java.util.Date classgroupcoursetime,java.util.Date youxuecoursetime,java.util.Date othercoursetime,Object orderavgunitprice,Object orderrealamount,Object orderlessonhours,Object ordertotalprice,Object debookamount,Object debookmoney,Object debooklessonhours,Object returnedmoney,Integer isavailable,Integer isclasssuspended,Integer isactive,Integer isschoolsuspended,Integer isclassfinished){
       this.id=id;
       this.version=version;
       this.datekey=datekey;

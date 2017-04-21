@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.AssetconfirmsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,campusid,campusname,customerid,customercode,customername,accountid,assetid,assetcode,assettype,assetreftype,assetrefpid,assetrefid,assetmoney,confirmid,assignid,confirmflag,confirmmoney,confirmmemo,confirmstatus,confirmtime,confirmerid,confirmername,confirmerjobid,confirmerjobname,confirmerjobtype,processstatus,processtime,processmemo,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,teacherid,teachername,teacherjobid,starttime,endtime,durationvalue,amount,price,creatorid,creatorname,createtime
+     id,version,campusid,campusname,customerid,customercode,customername,accountid,assetid,assetcode,assettype,assetreftype,assetrefpid,assetrefid,assetmoney,assignid,confirmflag,confirmmoney,confirmmemo,confirmstatus,confirmtime,confirmerid,confirmername,confirmerjobid,confirmerjobname,confirmerjobtype,processstatus,processtime,processmemo,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,teacherid,teachername,teacherjobid,starttime,endtime,durationvalue,amount,price,creatorid,creatorname,createtime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Assetconfirms">
@@ -22,7 +22,6 @@
          <id property="assetrefpid" column="assetrefpid" />
          <id property="assetrefid" column="assetrefid" />
          <id property="assetmoney" column="assetmoney" />
-         <id property="confirmid" column="confirmid" />
          <id property="assignid" column="assignid" />
          <id property="confirmflag" column="confirmflag" />
          <id property="confirmmoney" column="confirmmoney" />
@@ -57,8 +56,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Assetconfirms">
-  insert into assetconfirms (id,campusid,campusname,customerid,customercode,customername,accountid,assetid,assetcode,assettype,assetreftype,assetrefpid,assetrefid,assetmoney,confirmid,assignid,confirmflag,confirmmoney,confirmmemo,confirmstatus,confirmtime,confirmerid,confirmername,confirmerjobid,confirmerjobname,confirmerjobtype,processstatus,processtime,processmemo,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,teacherid,teachername,teacherjobid,starttime,endtime,durationvalue,amount,price,creatorid,creatorname,createtime)
-         values (#{id},#{campusid},#{campusname},#{customerid},#{customercode},#{customername},#{accountid},#{assetid},#{assetcode},#{assettype},#{assetreftype},#{assetrefpid},#{assetrefid},#{assetmoney},#{confirmid},#{assignid},#{confirmflag},#{confirmmoney},#{confirmmemo},#{confirmstatus},#{confirmtime},#{confirmerid},#{confirmername},#{confirmerjobid},#{confirmerjobname},#{confirmerjobtype},#{processstatus},#{processtime},#{processmemo},#{consultantid},#{consultantname},#{consultantjobid},#{educatorid},#{educatorname},#{educatorjobid},#{teacherid},#{teachername},#{teacherjobid},#{starttime},#{endtime},#{durationvalue},#{amount},#{price},#{creatorid},#{creatorname},#{createtime})
+  insert into assetconfirms (id,campusid,campusname,customerid,customercode,customername,accountid,assetid,assetcode,assettype,assetreftype,assetrefpid,assetrefid,assetmoney,assignid,confirmflag,confirmmoney,confirmmemo,confirmstatus,confirmtime,confirmerid,confirmername,confirmerjobid,confirmerjobname,confirmerjobtype,processstatus,processtime,processmemo,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,teacherid,teachername,teacherjobid,starttime,endtime,durationvalue,amount,price,creatorid,creatorname,createtime)
+         values (#{id},#{campusid},#{campusname},#{customerid},#{customercode},#{customername},#{accountid},#{assetid},#{assetcode},#{assettype},#{assetreftype},#{assetrefpid},#{assetrefid},#{assetmoney},#{assignid},#{confirmflag},#{confirmmoney},#{confirmmemo},#{confirmstatus},#{confirmtime},#{confirmerid},#{confirmername},#{confirmerjobid},#{confirmerjobname},#{confirmerjobtype},#{processstatus},#{processtime},#{processmemo},#{consultantid},#{consultantname},#{consultantjobid},#{educatorid},#{educatorname},#{educatorjobid},#{teacherid},#{teachername},#{teacherjobid},#{starttime},#{endtime},#{durationvalue},#{amount},#{price},#{creatorid},#{creatorname},#{createtime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -110,9 +109,6 @@
              </if>
              <if test="assetmoney != null">
                    assetmoney = #{assetmoney},
-             </if>
-             <if test="confirmid != null">
-                   confirmid = #{confirmid},
              </if>
              <if test="assignid != null">
                    assignid = #{assignid},

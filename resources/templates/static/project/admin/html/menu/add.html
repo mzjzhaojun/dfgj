@@ -7,7 +7,7 @@
     <meta http-equiv="description" content="this is my page">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
     <link rel="stylesheet" href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
     <link type="text/css" href="../../../../resource/js/artDialog/skins/black.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
@@ -33,7 +33,7 @@
 	
 	<script src="../../../../resource/js/artDialog/artDialog.js"></script>
 	<script src="../../../../resource/js/artDialog/plugins/iframeTools.js"></script>
-	 <script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+	 
 	<script type="text/javascript">
 		
 		var add = angular.module("add", []);
@@ -178,7 +178,7 @@
 				}
 				/* 字典加载 */
 				$http({//菜单等级
-					url:parent.getMenuLinksHref("admindictionaryself"),
+					url:parent.getMenuLinksHref("admindictionarylist"),
 					method:'POST',
 					dataType : "json",
 					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
@@ -197,7 +197,7 @@
 						response(status);
 					});	
 				$http({//是否显示
-					url:parent.getMenuLinksHref("admindictionaryself"),
+					url:parent.getMenuLinksHref("admindictionarylist"),
 					method:'POST',
 					dataType : "json",
 					headers: {'Content-Type': 'application/json;charset=UTF-8;'},

@@ -3,14 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.AccountrefundverifyingsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,applyid,verifyid,verifytime,verifyaction,verifymemo,verifierid,verifiername,verifierjobid,verifierjobname,verifierorgid,verifierorgname,creatorid,creatorname,createtime
+     id,version,applyid,verifytime,verifyaction,verifymemo,verifierid,verifiername,verifierjobid,verifierjobname,verifierorgid,verifierorgname,creatorid,creatorname,createtime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accountrefundverifyings">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="applyid" column="applyid" />
-         <id property="verifyid" column="verifyid" />
          <id property="verifytime" column="verifytime" />
          <id property="verifyaction" column="verifyaction" />
          <id property="verifymemo" column="verifymemo" />
@@ -26,8 +25,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Accountrefundverifyings">
-  insert into accountrefundverifyings (id,applyid,verifyid,verifytime,verifyaction,verifymemo,verifierid,verifiername,verifierjobid,verifierjobname,verifierorgid,verifierorgname,creatorid,creatorname,createtime)
-         values (#{id},#{applyid},#{verifyid},#{verifytime},#{verifyaction},#{verifymemo},#{verifierid},#{verifiername},#{verifierjobid},#{verifierjobname},#{verifierorgid},#{verifierorgname},#{creatorid},#{creatorname},#{createtime})
+  insert into accountrefundverifyings (id,applyid,verifytime,verifyaction,verifymemo,verifierid,verifiername,verifierjobid,verifierjobname,verifierorgid,verifierorgname,creatorid,creatorname,createtime)
+         values (#{id},#{applyid},#{verifytime},#{verifyaction},#{verifymemo},#{verifierid},#{verifiername},#{verifierjobid},#{verifierjobname},#{verifierorgid},#{verifierorgname},#{creatorid},#{creatorname},#{createtime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -43,9 +42,6 @@
              </if>
              <if test="applyid != null">
                    applyid = #{applyid},
-             </if>
-             <if test="verifyid != null">
-                   verifyid = #{verifyid},
              </if>
              <if test="verifytime != null">
                    verifytime = #{verifytime},

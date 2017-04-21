@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:52
 */
 @Getter
 @Setter
@@ -17,10 +17,10 @@ public class Posrecords implements Serializable{
 
   Long id;
   Integer version;
-  String transactiondate;
-  String settlementdate;
+  java.util.Date transactiondate;
+  java.util.Date settlementdate;
   String transactiontimevalue;
-  String transactiontime;
+  java.util.Date transactiontime;
   String transactiontype;
   Long transactionid;
   String cardnum;
@@ -29,11 +29,11 @@ public class Posrecords implements Serializable{
   Object money;
   String fromtype;
   Integer isusered;
-  String createtime;
+  java.util.Date createtime;
   String receipttype;
   public Posrecords(){
   }
-  public Posrecords(Long id,Integer version,String transactiondate,String settlementdate,String transactiontimevalue,String transactiontime,String transactiontype,Long transactionid,String cardnum,Long merchantid,Long posid,Object money,String fromtype,Integer isusered,String createtime,String receipttype){
+  public Posrecords(Long id,Integer version,java.util.Date transactiondate,java.util.Date settlementdate,String transactiontimevalue,java.util.Date transactiontime,String transactiontype,Long transactionid,String cardnum,Long merchantid,Long posid,Object money,String fromtype,Integer isusered,java.util.Date createtime,String receipttype){
       this.id=id;
       this.version=version;
       this.transactiondate=transactiondate;

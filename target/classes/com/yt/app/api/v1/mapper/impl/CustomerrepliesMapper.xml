@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerrepliesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,replyid,branchid,branchname,campusid,campusname,customerid,customername,parentid,parentpassportid,parentname,phonenumber,replytime,replyobject,replycontent,replyfrom,replierid,replierjobid,repliername,poster,creatorid,creatorname,createtime,fromsystemid,status
+     id,version,branchid,branchname,campusid,campusname,customerid,customername,parentid,parentpassportid,parentname,phonenumber,replytime,replyobject,replycontent,replyfrom,replierid,replierjobid,repliername,poster,creatorid,creatorname,createtime,fromsystemid,status
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerreplies">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="replyid" column="replyid" />
          <id property="branchid" column="branchid" />
          <id property="branchname" column="branchname" />
          <id property="campusid" column="campusid" />
@@ -36,8 +35,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerreplies">
-  insert into customerreplies (id,replyid,branchid,branchname,campusid,campusname,customerid,customername,parentid,parentpassportid,parentname,phonenumber,replytime,replyobject,replycontent,replyfrom,replierid,replierjobid,repliername,poster,creatorid,creatorname,createtime,fromsystemid,status)
-         values (#{id},#{replyid},#{branchid},#{branchname},#{campusid},#{campusname},#{customerid},#{customername},#{parentid},#{parentpassportid},#{parentname},#{phonenumber},#{replytime},#{replyobject},#{replycontent},#{replyfrom},#{replierid},#{replierjobid},#{repliername},#{poster},#{creatorid},#{creatorname},#{createtime},#{fromsystemid},#{status})
+  insert into customerreplies (id,branchid,branchname,campusid,campusname,customerid,customername,parentid,parentpassportid,parentname,phonenumber,replytime,replyobject,replycontent,replyfrom,replierid,replierjobid,repliername,poster,creatorid,creatorname,createtime,fromsystemid,status)
+         values (#{id},#{branchid},#{branchname},#{campusid},#{campusname},#{customerid},#{customername},#{parentid},#{parentpassportid},#{parentname},#{phonenumber},#{replytime},#{replyobject},#{replycontent},#{replyfrom},#{replierid},#{replierjobid},#{repliername},#{poster},#{creatorid},#{creatorname},#{createtime},#{fromsystemid},#{status})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -50,9 +49,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="replyid != null">
-                   replyid = #{replyid},
              </if>
              <if test="branchid != null">
                    branchid = #{branchid},

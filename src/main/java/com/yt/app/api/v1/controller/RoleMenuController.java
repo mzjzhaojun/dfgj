@@ -27,7 +27,7 @@ import com.yt.app.api.v1.entity.RoleMenu;
 
 
 @RestController
-@RequestMapping("/dfgj/v1/rolemenu")
+@RequestMapping("/rest/v1/rolemenu")
 public class RoleMenuController extends BaseControllerImpl<RoleMenu, Long> {
 
 

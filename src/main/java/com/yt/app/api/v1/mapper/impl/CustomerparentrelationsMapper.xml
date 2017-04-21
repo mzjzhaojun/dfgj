@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerparentrelationsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,customerid,customerrole,parentid,parentrole,isprimary,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,versionstarttime,versionendtime,tenantcode
+     id,version,customerid,customerrole,parentid,parentrole,isprimary,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerparentrelations">
@@ -20,14 +20,12 @@
          <id property="modifierid" column="modifierid" />
          <id property="modifiername" column="modifiername" />
          <id property="modifytime" column="modifytime" />
-         <id property="versionstarttime" column="versionstarttime" />
-         <id property="versionendtime" column="versionendtime" />
          <id property="tenantcode" column="tenantcode" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerparentrelations">
-  insert into customerparentrelations (id,customerid,customerrole,parentid,parentrole,isprimary,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,versionstarttime,versionendtime,tenantcode)
-         values (#{id},#{customerid},#{customerrole},#{parentid},#{parentrole},#{isprimary},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{versionstarttime},#{versionendtime},#{tenantcode})
+  insert into customerparentrelations (id,customerid,customerrole,parentid,parentrole,isprimary,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode)
+         values (#{id},#{customerid},#{customerrole},#{parentid},#{parentrole},#{isprimary},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{tenantcode})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -73,12 +71,6 @@
              </if>
              <if test="modifytime != null">
                    modifytime = #{modifytime},
-             </if>
-             <if test="versionstarttime != null">
-                   versionstarttime = #{versionstarttime},
-             </if>
-             <if test="versionendtime != null">
-                   versionendtime = #{versionendtime},
              </if>
              <if test="tenantcode != null">
                    tenantcode = #{tenantcode}

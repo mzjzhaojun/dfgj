@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:31
 */
 @Getter
 @Setter
@@ -24,16 +24,14 @@ public class Customerparentrelations implements Serializable{
   Integer isprimary;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
-  String versionstarttime;
-  String versionendtime;
+  java.util.Date modifytime;
   Long tenantcode;
   public Customerparentrelations(){
   }
-  public Customerparentrelations(Long id,Integer version,Long customerid,String customerrole,Long parentid,String parentrole,Integer isprimary,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime,String versionstarttime,String versionendtime,Long tenantcode){
+  public Customerparentrelations(Long id,Integer version,Long customerid,String customerrole,Long parentid,String parentrole,Integer isprimary,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime,Long tenantcode){
       this.id=id;
       this.version=version;
       this.customerid=customerid;
@@ -47,8 +45,6 @@ public class Customerparentrelations implements Serializable{
       this.modifierid=modifierid;
       this.modifiername=modifiername;
       this.modifytime=modifytime;
-      this.versionstarttime=versionstarttime;
-      this.versionendtime=versionendtime;
       this.tenantcode=tenantcode;
   }
 }

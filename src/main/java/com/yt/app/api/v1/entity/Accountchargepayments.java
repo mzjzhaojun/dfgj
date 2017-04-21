@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:16
 */
 @Getter
 @Setter
@@ -18,17 +18,15 @@ public class Accountchargepayments implements Serializable{
   Long id;
   Integer version;
   Long applyid;
-  Integer sortno;
-  Long payid;
   String payno;
-  String paytime;
+  java.util.Date paytime;
   String paytype;
   String payticket;
   String paystatus;
   Object paymoney;
   String paymemo;
-  String inputtime;
-  String swipetime;
+  java.util.Date inputtime;
+  java.util.Date swipetime;
   String printstatus;
   String salesman;
   String payer;
@@ -41,23 +39,21 @@ public class Accountchargepayments implements Serializable{
   Long checkerjobid;
   String checkerjobname;
   String checkstatus;
-  String checktime;
+  java.util.Date checktime;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   String issyn;
-  String syntime;
+  java.util.Date syntime;
   public Accountchargepayments(){
   }
-  public Accountchargepayments(Long id,Integer version,Long applyid,Integer sortno,Long payid,String payno,String paytime,String paytype,String payticket,String paystatus,Object paymoney,String paymemo,String inputtime,String swipetime,String printstatus,String salesman,String payer,Long payeeid,String payeename,Long payeejobid,String payeejobname,Long checkerid,String checkername,Long checkerjobid,String checkerjobname,String checkstatus,String checktime,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime,String issyn,String syntime){
+  public Accountchargepayments(Long id,Integer version,Long applyid,String payno,java.util.Date paytime,String paytype,String payticket,String paystatus,Object paymoney,String paymemo,java.util.Date inputtime,java.util.Date swipetime,String printstatus,String salesman,String payer,Long payeeid,String payeename,Long payeejobid,String payeejobname,Long checkerid,String checkername,Long checkerjobid,String checkerjobname,String checkstatus,java.util.Date checktime,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime,String issyn,java.util.Date syntime){
       this.id=id;
       this.version=version;
       this.applyid=applyid;
-      this.sortno=sortno;
-      this.payid=payid;
       this.payno=payno;
       this.paytime=paytime;
       this.paytype=paytype;

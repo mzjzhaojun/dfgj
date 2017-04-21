@@ -38,7 +38,7 @@ public class Account implements Serializable{
   String create_time;
   String create_user;
   String modify_time;
-  Long client_id;
+  Long staffid;
   Integer version;
   //新增字段
   Long roleid;
@@ -46,7 +46,7 @@ public class Account implements Serializable{
   String typename;
   public Account(){
   }
-  public Account(Long id,String account,String psw,String position,String phone,String mobile,String mail,Integer state,Integer flag,Integer lockstatus,Integer deletestatus,Integer validstatus,String picurl,String birthday,String name,String card_id,Integer type,String endtime,String lastlogin_time,String lastlogin_ip,String create_time,String create_user,String modify_time,Long client_id,Integer version){
+  public Account(Long id,String account,String psw,String position,String phone,String mobile,String mail,Integer state,Integer flag,Integer lockstatus,Integer deletestatus,Integer validstatus,String picurl,String birthday,String name,String card_id,Integer type,String endtime,String lastlogin_time,String lastlogin_ip,String create_time,String create_user,String modify_time,Long staffid,Integer version){
       this.id=id;
       this.account=account;
       this.psw=psw;
@@ -70,7 +70,7 @@ public class Account implements Serializable{
       this.create_time=create_time;
       this.create_user=create_user;
       this.modify_time=modify_time;
-      this.client_id=client_id;
+		this.staffid = staffid;
       this.version=version;
   }
 }

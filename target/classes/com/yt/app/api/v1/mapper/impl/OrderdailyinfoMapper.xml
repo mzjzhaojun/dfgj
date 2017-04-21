@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.OrderdailyinfoMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,customerid,orderid,consultantid,ordertime,realamount,versionstarttime,versionendtime
+     id,version,customerid,orderid,consultantid,ordertime,realamount
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Orderdailyinfo">
@@ -14,13 +14,11 @@
          <id property="consultantid" column="consultantid" />
          <id property="ordertime" column="ordertime" />
          <id property="realamount" column="realamount" />
-         <id property="versionstarttime" column="versionstarttime" />
-         <id property="versionendtime" column="versionendtime" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Orderdailyinfo">
-  insert into orderdailyinfo (id,customerid,orderid,consultantid,ordertime,realamount,versionstarttime,versionendtime)
-         values (#{id},#{customerid},#{orderid},#{consultantid},#{ordertime},#{realamount},#{versionstarttime},#{versionendtime})
+  insert into orderdailyinfo (id,customerid,orderid,consultantid,ordertime,realamount)
+         values (#{id},#{customerid},#{orderid},#{consultantid},#{ordertime},#{realamount})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -47,13 +45,7 @@
                    ordertime = #{ordertime},
              </if>
              <if test="realamount != null">
-                   realamount = #{realamount},
-             </if>
-             <if test="versionstarttime != null">
-                   versionstarttime = #{versionstarttime},
-             </if>
-             <if test="versionendtime != null">
-                   versionendtime = #{versionendtime}
+                   realamount = #{realamount}
              </if>
           </set>
      where id = #{id} and  version = #{version}

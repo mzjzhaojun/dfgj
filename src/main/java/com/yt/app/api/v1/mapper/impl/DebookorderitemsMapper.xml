@@ -3,15 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.DebookorderitemsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,debookid,sortno,itemid,assetid,accountid,accountcode,debookamount,debookmoney,presentamountofdebook,returnmoney,confirmedamount,confirmedmoney,assignedamount,assignedmoney
+     id,version,debookid,assetid,accountid,accountcode,debookamount,debookmoney,presentamountofdebook,returnmoney,confirmedamount,confirmedmoney,assignedamount,assignedmoney
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Debookorderitems">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="debookid" column="debookid" />
-         <id property="sortno" column="sortno" />
-         <id property="itemid" column="itemid" />
          <id property="assetid" column="assetid" />
          <id property="accountid" column="accountid" />
          <id property="accountcode" column="accountcode" />
@@ -26,8 +24,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Debookorderitems">
-  insert into debookorderitems (id,debookid,sortno,itemid,assetid,accountid,accountcode,debookamount,debookmoney,presentamountofdebook,returnmoney,confirmedamount,confirmedmoney,assignedamount,assignedmoney)
-         values (#{id},#{debookid},#{sortno},#{itemid},#{assetid},#{accountid},#{accountcode},#{debookamount},#{debookmoney},#{presentamountofdebook},#{returnmoney},#{confirmedamount},#{confirmedmoney},#{assignedamount},#{assignedmoney})
+  insert into debookorderitems (id,debookid,assetid,accountid,accountcode,debookamount,debookmoney,presentamountofdebook,returnmoney,confirmedamount,confirmedmoney,assignedamount,assignedmoney)
+         values (#{id},#{debookid},#{assetid},#{accountid},#{accountcode},#{debookamount},#{debookmoney},#{presentamountofdebook},#{returnmoney},#{confirmedamount},#{confirmedmoney},#{assignedamount},#{assignedmoney})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -43,12 +41,6 @@
              </if>
              <if test="debookid != null">
                    debookid = #{debookid},
-             </if>
-             <if test="sortno != null">
-                   sortno = #{sortno},
-             </if>
-             <if test="itemid != null">
-                   itemid = #{itemid},
              </if>
              <if test="assetid != null">
                    assetid = #{assetid},

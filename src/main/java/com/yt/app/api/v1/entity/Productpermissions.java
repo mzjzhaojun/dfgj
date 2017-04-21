@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:54
 */
 @Getter
 @Setter
@@ -21,10 +21,10 @@ public class Productpermissions implements Serializable{
   Long productid;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   public Productpermissions(){
   }
-  public Productpermissions(Long id,Integer version,Long campusid,Long productid,Long creatorid,String creatorname,String createtime){
+  public Productpermissions(Long id,Integer version,Long campusid,Long productid,Long creatorid,String creatorname,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;

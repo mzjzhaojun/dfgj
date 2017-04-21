@@ -39,7 +39,7 @@ import com.yt.app.api.v1.entity.Sys;
  */
 
 @RestController
-@RequestMapping("/dfgj/v1/sys")
+@RequestMapping("/rest/v1/sys")
 public class SysController extends BaseControllerImpl<Sys, Long> {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());

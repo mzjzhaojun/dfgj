@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:31
 */
 @Getter
 @Setter
@@ -20,9 +20,8 @@ public class Customermeetings implements Serializable{
   Long campusid;
   String campusname;
   Long customerid;
-  Long meetingid;
-  String meetingtime;
-  String meetingendtime;
+  java.util.Date meetingtime;
+  java.util.Date meetingendtime;
   String meetingduration;
   Object meetingdurationvalue;
   String meetingtype;
@@ -33,23 +32,22 @@ public class Customermeetings implements Serializable{
   String organizername;
   Long organizerjobid;
   String organizerjobname;
-  String nextmeetingtime;
+  java.util.Date nextmeetingtime;
   String participants;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Customermeetings(){
   }
-  public Customermeetings(Long id,Integer version,Long campusid,String campusname,Long customerid,Long meetingid,String meetingtime,String meetingendtime,String meetingduration,Object meetingdurationvalue,String meetingtype,String meetingevent,String meetingtitle,String satisficing,Long organizerid,String organizername,Long organizerjobid,String organizerjobname,String nextmeetingtime,String participants,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Customermeetings(Long id,Integer version,Long campusid,String campusname,Long customerid,java.util.Date meetingtime,java.util.Date meetingendtime,String meetingduration,Object meetingdurationvalue,String meetingtype,String meetingevent,String meetingtitle,String satisficing,Long organizerid,String organizername,Long organizerjobid,String organizerjobname,java.util.Date nextmeetingtime,String participants,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
       this.campusname=campusname;
       this.customerid=customerid;
-      this.meetingid=meetingid;
       this.meetingtime=meetingtime;
       this.meetingendtime=meetingendtime;
       this.meetingduration=meetingduration;

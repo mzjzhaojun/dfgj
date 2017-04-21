@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:48
 */
 @Getter
 @Setter
@@ -18,8 +18,6 @@ public class Orderitems implements Serializable{
   Long id;
   Integer version;
   Long orderid;
-  Integer sortno;
-  Long itemid;
   String itemno;
   Long productid;
   String productcode;
@@ -58,22 +56,20 @@ public class Orderitems implements Serializable{
   Object realprice;
   Object realamount;
   Object promotionquota;
-  String expirationdate;
+  java.util.Date expirationdate;
   Long joinedclassid;
   Long relatedassetid;
   String relatedassetcode;
-  String confirmstartdate;
-  String confirmenddate;
+  java.util.Date confirmstartdate;
+  java.util.Date confirmenddate;
   String confirmmode;
   Integer confirmstaging;
   public Orderitems(){
   }
-  public Orderitems(Long id,Integer version,Long orderid,Integer sortno,Long itemid,String itemno,Long productid,String productcode,String productname,String productunit,String productunitname,Long productcampusid,String productcampusname,String grade,String gradename,String subject,Long subjectname,String catalog,String catalogname,String category,String categoryname,String categorytype,String categorytypename,String courselevel,String courselevelname,Integer lessoncount,String lessonduration,Object lessondurationvalue,String periodduration,Object perioddurationvalue,Object periodsoflesson,Object orderprice,Object orderamount,Long presentid,Object presentquato,Object presentamount,Object tunlandrate,Object specialrate,String discounttype,Object discountrate,Object realprice,Object realamount,Object promotionquota,String expirationdate,Long joinedclassid,Long relatedassetid,String relatedassetcode,String confirmstartdate,String confirmenddate,String confirmmode,Integer confirmstaging){
+  public Orderitems(Long id,Integer version,Long orderid,String itemno,Long productid,String productcode,String productname,String productunit,String productunitname,Long productcampusid,String productcampusname,String grade,String gradename,String subject,Long subjectname,String catalog,String catalogname,String category,String categoryname,String categorytype,String categorytypename,String courselevel,String courselevelname,Integer lessoncount,String lessonduration,Object lessondurationvalue,String periodduration,Object perioddurationvalue,Object periodsoflesson,Object orderprice,Object orderamount,Long presentid,Object presentquato,Object presentamount,Object tunlandrate,Object specialrate,String discounttype,Object discountrate,Object realprice,Object realamount,Object promotionquota,java.util.Date expirationdate,Long joinedclassid,Long relatedassetid,String relatedassetcode,java.util.Date confirmstartdate,java.util.Date confirmenddate,String confirmmode,Integer confirmstaging){
       this.id=id;
       this.version=version;
       this.orderid=orderid;
-      this.sortno=sortno;
-      this.itemid=itemid;
       this.itemno=itemno;
       this.productid=productid;
       this.productcode=productcode;

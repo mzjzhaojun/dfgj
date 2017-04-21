@@ -3,15 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.ClasslessonitemsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,lessonid,sortno,assignid,assigntime,assignstatus,assignprice,confirmtime,confirmstatus,confirmprice,assetid,assetcode,customerid,customercode,customername,customergrade,customergradename,customercampusid,customercampusname,isjoinclass,isoutercampus,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,lessonid,assigntime,assignstatus,assignprice,confirmtime,confirmstatus,confirmprice,assetid,assetcode,customerid,customercode,customername,customergrade,customergradename,customercampusid,customercampusname,isjoinclass,isoutercampus,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Classlessonitems">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="lessonid" column="lessonid" />
-         <id property="sortno" column="sortno" />
-         <id property="assignid" column="assignid" />
          <id property="assigntime" column="assigntime" />
          <id property="assignstatus" column="assignstatus" />
          <id property="assignprice" column="assignprice" />
@@ -44,8 +42,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Classlessonitems">
-  insert into classlessonitems (id,lessonid,sortno,assignid,assigntime,assignstatus,assignprice,confirmtime,confirmstatus,confirmprice,assetid,assetcode,customerid,customercode,customername,customergrade,customergradename,customercampusid,customercampusname,isjoinclass,isoutercampus,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{lessonid},#{sortno},#{assignid},#{assigntime},#{assignstatus},#{assignprice},#{confirmtime},#{confirmstatus},#{confirmprice},#{assetid},#{assetcode},#{customerid},#{customercode},#{customername},#{customergrade},#{customergradename},#{customercampusid},#{customercampusname},#{isjoinclass},#{isoutercampus},#{consultantid},#{consultantname},#{consultantjobid},#{educatorid},#{educatorname},#{educatorjobid},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into classlessonitems (id,lessonid,assigntime,assignstatus,assignprice,confirmtime,confirmstatus,confirmprice,assetid,assetcode,customerid,customercode,customername,customergrade,customergradename,customercampusid,customercampusname,isjoinclass,isoutercampus,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{lessonid},#{assigntime},#{assignstatus},#{assignprice},#{confirmtime},#{confirmstatus},#{confirmprice},#{assetid},#{assetcode},#{customerid},#{customercode},#{customername},#{customergrade},#{customergradename},#{customercampusid},#{customercampusname},#{isjoinclass},#{isoutercampus},#{consultantid},#{consultantname},#{consultantjobid},#{educatorid},#{educatorname},#{educatorjobid},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -61,12 +59,6 @@
              </if>
              <if test="lessonid != null">
                    lessonid = #{lessonid},
-             </if>
-             <if test="sortno != null">
-                   sortno = #{sortno},
-             </if>
-             <if test="assignid != null">
-                   assignid = #{assignid},
              </if>
              <if test="assigntime != null">
                    assigntime = #{assigntime},

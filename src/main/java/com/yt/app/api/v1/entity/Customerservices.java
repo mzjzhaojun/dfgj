@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:34
 */
 @Getter
 @Setter
@@ -25,11 +25,10 @@ public class Customerservices implements Serializable{
   String customerkind;
   String customercode;
   String customername;
-  Long serviceid;
   String servicetype;
   String servicestatus;
   String servicememo;
-  String accepttime;
+  java.util.Date accepttime;
   String acceptlimit;
   Object acceptlimitvalue;
   String acceptmemo;
@@ -61,17 +60,17 @@ public class Customerservices implements Serializable{
   String handleremail;
   Integer issendmessage;
   String handlerphone;
-  String calltime;
+  java.util.Date calltime;
   Long voiceid;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Customerservices(){
   }
-  public Customerservices(Long id,Integer version,Long branchid,String branchname,Long campusid,String campusname,Long customerid,String customerkind,String customercode,String customername,Long serviceid,String servicetype,String servicestatus,String servicememo,String accepttime,String acceptlimit,Object acceptlimitvalue,String acceptmemo,Long accepterid,String acceptername,Long accepterjobid,String accepterjobname,String appealmemo,Long consultantid,String consultantname,Long consultantjobid,String consultantjobname,Long educatorid,String educatorname,Long educatorjobid,String educatorjobname,String consulttype,String consultmemo,String complainttimes,String complaintlevel,String complaintupgrade,Integer isupgradehandle,Long handlerid,String handlername,String handlerjobname,String handlerjobtype,String handleadvice,Integer issendemail,String handleremail,Integer issendmessage,String handlerphone,String calltime,Long voiceid,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Customerservices(Long id,Integer version,Long branchid,String branchname,Long campusid,String campusname,Long customerid,String customerkind,String customercode,String customername,String servicetype,String servicestatus,String servicememo,java.util.Date accepttime,String acceptlimit,Object acceptlimitvalue,String acceptmemo,Long accepterid,String acceptername,Long accepterjobid,String accepterjobname,String appealmemo,Long consultantid,String consultantname,Long consultantjobid,String consultantjobname,Long educatorid,String educatorname,Long educatorjobid,String educatorjobname,String consulttype,String consultmemo,String complainttimes,String complaintlevel,String complaintupgrade,Integer isupgradehandle,Long handlerid,String handlername,String handlerjobname,String handlerjobtype,String handleadvice,Integer issendemail,String handleremail,Integer issendmessage,String handlerphone,java.util.Date calltime,Long voiceid,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.branchid=branchid;
@@ -82,7 +81,6 @@ public class Customerservices implements Serializable{
       this.customerkind=customerkind;
       this.customercode=customercode;
       this.customername=customername;
-      this.serviceid=serviceid;
       this.servicetype=servicetype;
       this.servicestatus=servicestatus;
       this.servicememo=servicememo;

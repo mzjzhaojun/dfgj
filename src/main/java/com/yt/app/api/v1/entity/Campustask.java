@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:22
 */
 @Getter
 @Setter
@@ -18,7 +18,7 @@ public class Campustask implements Serializable{
   Long id;
   Integer version;
   Long campusid;
-  String statlocaldate;
+  java.util.Date statlocaldate;
   Object campusmonthlynewchargeamount;
   Object campusdailynewchargeamount;
   Object campusmonthlynewchargenumber;
@@ -51,7 +51,7 @@ public class Campustask implements Serializable{
   Object campusdailyreactivenumber;
   public Campustask(){
   }
-  public Campustask(Long id,Integer version,Long campusid,String statlocaldate,Object campusmonthlynewchargeamount,Object campusdailynewchargeamount,Object campusmonthlynewchargenumber,Object campusdailynewchargenumber,Object campusmonthlyrenewamount,Object campusdailyrenewamount,Object campusmonthlyrenewnumber,Object campusdailyrenewnumber,Object campusmonthlyrefundamount,Object campusdailyrefundamount,Object campusmonthlyrefundnumber,Object campusdailyrefundnumber,Object campusmonthlytotalincome,Object campusdailytotalincome,Object campusmonthlytotalassignedincome,Object campusdailytotalassignedincome,Object campusmonthlyonetooneincome,Object campusdailyonetooneincome,Object campusmonthlyclassgroupincome,Object campusdailyclassgroupincome,Object campusmonthlyotherincome,Object campusdailyotherincome,Object campusmonthlytotalassignedamount,Object campusdailytotalassignedamount,Object campusmonthlyonetooneassignedamount,Object campusdailyonetooneassignedamount,Object campusmonthlyclassgroupassignedamount,Object campusdailyclassgroupassignedamount,Object campusmonthlyreactivenumber,Object campusdailyreactivenumber){
+  public Campustask(Long id,Integer version,Long campusid,java.util.Date statlocaldate,Object campusmonthlynewchargeamount,Object campusdailynewchargeamount,Object campusmonthlynewchargenumber,Object campusdailynewchargenumber,Object campusmonthlyrenewamount,Object campusdailyrenewamount,Object campusmonthlyrenewnumber,Object campusdailyrenewnumber,Object campusmonthlyrefundamount,Object campusdailyrefundamount,Object campusmonthlyrefundnumber,Object campusdailyrefundnumber,Object campusmonthlytotalincome,Object campusdailytotalincome,Object campusmonthlytotalassignedincome,Object campusdailytotalassignedincome,Object campusmonthlyonetooneincome,Object campusdailyonetooneincome,Object campusmonthlyclassgroupincome,Object campusdailyclassgroupincome,Object campusmonthlyotherincome,Object campusdailyotherincome,Object campusmonthlytotalassignedamount,Object campusdailytotalassignedamount,Object campusmonthlyonetooneassignedamount,Object campusdailyonetooneassignedamount,Object campusmonthlyclassgroupassignedamount,Object campusdailyclassgroupassignedamount,Object campusmonthlyreactivenumber,Object campusdailyreactivenumber){
       this.id=id;
       this.version=version;
       this.campusid=campusid;

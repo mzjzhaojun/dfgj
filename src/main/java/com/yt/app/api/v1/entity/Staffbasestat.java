@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:56
 */
 @Getter
 @Setter
@@ -19,7 +19,7 @@ public class Staffbasestat implements Serializable{
   Integer version;
   Long staffid;
   Long campusid;
-  String statlocaldate;
+  java.util.Date statlocaldate;
   Object ftonetooneassignedamount;
   Object ptonetooneassignedamount;
   Object ftonetoonelessondurationvalue;
@@ -40,11 +40,11 @@ public class Staffbasestat implements Serializable{
   Object achievementstatistics;
   Object achievementstatisticscustomernumber;
   Object customersatisfaction;
-  String employmentdate;
-  String dimissiondate;
+  java.util.Date employmentdate;
+  java.util.Date dimissiondate;
   public Staffbasestat(){
   }
-  public Staffbasestat(Long id,Integer version,Long staffid,Long campusid,String statlocaldate,Object ftonetooneassignedamount,Object ptonetooneassignedamount,Object ftonetoonelessondurationvalue,Object ptonetoonelessondurationvalue,Object ftclassgroupassignedamount,Object ptclassgroupassignedamount,Object ftclassgrouplessondurationvalue,Object ptclassgrouplessondurationvalue,Object newchargeamount,Object renewamount,Object refundamount,Object visitnumber,Object visitcustomernumber,Object meetingnumber,Object meetingcustomernumber,Object replynumber,Object replycustomernumber,Object achievementstatistics,Object achievementstatisticscustomernumber,Object customersatisfaction,String employmentdate,String dimissiondate){
+  public Staffbasestat(Long id,Integer version,Long staffid,Long campusid,java.util.Date statlocaldate,Object ftonetooneassignedamount,Object ptonetooneassignedamount,Object ftonetoonelessondurationvalue,Object ptonetoonelessondurationvalue,Object ftclassgroupassignedamount,Object ptclassgroupassignedamount,Object ftclassgrouplessondurationvalue,Object ptclassgrouplessondurationvalue,Object newchargeamount,Object renewamount,Object refundamount,Object visitnumber,Object visitcustomernumber,Object meetingnumber,Object meetingcustomernumber,Object replynumber,Object replycustomernumber,Object achievementstatistics,Object achievementstatisticscustomernumber,Object customersatisfaction,java.util.Date employmentdate,java.util.Date dimissiondate){
       this.id=id;
       this.version=version;
       this.staffid=staffid;

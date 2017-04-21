@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:23
 */
 @Getter
 @Setter
@@ -17,33 +17,29 @@ public class Categories implements Serializable{
 
   Long id;
   Integer version;
-  Long categoryid;
   String category;
   String categoryname;
   String categorytype;
   Integer hascourse;
   Integer caninput;
   Integer enabled;
-  Integer sortno;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Categories(){
   }
-  public Categories(Long id,Integer version,Long categoryid,String category,String categoryname,String categorytype,Integer hascourse,Integer caninput,Integer enabled,Integer sortno,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Categories(Long id,Integer version,String category,String categoryname,String categorytype,Integer hascourse,Integer caninput,Integer enabled,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
-      this.categoryid=categoryid;
       this.category=category;
       this.categoryname=categoryname;
       this.categorytype=categorytype;
       this.hascourse=hascourse;
       this.caninput=caninput;
       this.enabled=enabled;
-      this.sortno=sortno;
       this.creatorid=creatorid;
       this.creatorname=creatorname;
       this.createtime=createtime;

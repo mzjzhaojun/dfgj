@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:33
 */
 @Getter
 @Setter
@@ -18,8 +18,6 @@ public class Customerscoreitems implements Serializable{
   Long id;
   Integer version;
   Long scoreid;
-  Long itemid;
-  Integer sortno;
   String subject;
   Long teacherid;
   String teachername;
@@ -32,15 +30,13 @@ public class Customerscoreitems implements Serializable{
   Integer classrank;
   String satisficing;
   Integer isstudyhere;
-  String createtime;
+  java.util.Date createtime;
   public Customerscoreitems(){
   }
-  public Customerscoreitems(Long id,Integer version,Long scoreid,Long itemid,Integer sortno,String subject,Long teacherid,String teachername,Long teacherorgid,String teacherorgname,String scorechangetype,Object paperscore,Object realscore,Integer graderank,Integer classrank,String satisficing,Integer isstudyhere,String createtime){
+  public Customerscoreitems(Long id,Integer version,Long scoreid,String subject,Long teacherid,String teachername,Long teacherorgid,String teacherorgname,String scorechangetype,Object paperscore,Object realscore,Integer graderank,Integer classrank,String satisficing,Integer isstudyhere,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.scoreid=scoreid;
-      this.itemid=itemid;
-      this.sortno=sortno;
       this.subject=subject;
       this.teacherid=teacherid;
       this.teachername=teachername;

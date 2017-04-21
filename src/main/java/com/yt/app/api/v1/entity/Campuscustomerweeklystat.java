@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:20
 */
 @Getter
 @Setter
@@ -20,8 +20,8 @@ public class Campuscustomerweeklystat implements Serializable{
   Integer yearkey;
   Integer monthkey;
   Integer weekkey;
-  String startdayofweek;
-  String enddayofweek;
+  java.util.Date startdayofweek;
+  java.util.Date enddayofweek;
   Long regionid;
   String regionname;
   Long branchid;
@@ -62,7 +62,7 @@ public class Campuscustomerweeklystat implements Serializable{
   Object classratetm;
   public Campuscustomerweeklystat(){
   }
-  public Campuscustomerweeklystat(Long id,Integer version,Integer yearkey,Integer monthkey,Integer weekkey,String startdayofweek,String enddayofweek,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Integer availablecustomernumberyear,Integer availablecustomernumbermb,Object accountvaluemb,Object accountmoneymb,Object assetsmoneymb,Integer newassignnumbertm,Integer cfrcnumbertm,Integer ssanumbertm,Integer othernewavailablenumbertm,Integer totalnewavailablenumbertm,Integer csssnumbertm,Integer cfnrcnumbertm,Integer cfrfnumbertm,Integer othernoneavailablenumbertm,Integer totalnoneavailablenumbertm,Integer netavailablechangenumbertm,Integer availablecustomernumbercurrent,Object accountvaluecurrent,Object accountmoneycurrent,Object assetsmoneycurrent,Integer renewchargenumbertm,Object renewratetm,Object renewratety,Integer csanumbertm,Integer ncsnumbertm,Integer netcsnumbertm,Integer totalcsnumber,Integer ssnm1numbercurrent,Integer ssm1numbercurrent,Object csratecurrent,Integer classcustomernumbertm,Object classratetm){
+  public Campuscustomerweeklystat(Long id,Integer version,Integer yearkey,Integer monthkey,Integer weekkey,java.util.Date startdayofweek,java.util.Date enddayofweek,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Integer availablecustomernumberyear,Integer availablecustomernumbermb,Object accountvaluemb,Object accountmoneymb,Object assetsmoneymb,Integer newassignnumbertm,Integer cfrcnumbertm,Integer ssanumbertm,Integer othernewavailablenumbertm,Integer totalnewavailablenumbertm,Integer csssnumbertm,Integer cfnrcnumbertm,Integer cfrfnumbertm,Integer othernoneavailablenumbertm,Integer totalnoneavailablenumbertm,Integer netavailablechangenumbertm,Integer availablecustomernumbercurrent,Object accountvaluecurrent,Object accountmoneycurrent,Object assetsmoneycurrent,Integer renewchargenumbertm,Object renewratetm,Object renewratety,Integer csanumbertm,Integer ncsnumbertm,Integer netcsnumbertm,Integer totalcsnumber,Integer ssnm1numbercurrent,Integer ssm1numbercurrent,Object csratecurrent,Integer classcustomernumbertm,Object classratetm){
       this.id=id;
       this.version=version;
       this.yearkey=yearkey;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:22
 */
 @Getter
 @Setter
@@ -21,10 +21,10 @@ public class Campussalesweeklystat implements Serializable{
   Integer quarterkey;
   Integer monthkey;
   Integer weekkey;
-  String startdayofweek;
-  String enddayofweek;
-  String startdayoflastweek;
-  String enddayoflastweek;
+  java.util.Date startdayofweek;
+  java.util.Date enddayofweek;
+  java.util.Date startdayoflastweek;
+  java.util.Date enddayoflastweek;
   Long regionid;
   String regionname;
   Long branchid;
@@ -69,7 +69,7 @@ public class Campussalesweeklystat implements Serializable{
   Object signamountplan;
   public Campussalesweeklystat(){
   }
-  public Campussalesweeklystat(Long id,Integer version,Integer yearkey,Integer quarterkey,Integer monthkey,Integer weekkey,String startdayofweek,String enddayofweek,String startdayoflastweek,String enddayoflastweek,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Object nsataskyear,Object nsayear,Object nsayearlastyear,Object nsataskquarter,Object nsaquarter,Object nsaquarterlastyear,Object nsataskmonth,Object nsamonth,Object nsamonthlastyear,Integer nsntaskyear,Integer nsnyear,Integer nsnyearlastyear,Integer nsntaskquarter,Integer nsnquarter,Integer nsnquarterlastyear,Integer nsntaskmonth,Integer nsnmonth,Integer nsnmonthlastyear,Object nsatasklastweek,Object nsalastweek,Object nsaplanlastweek,Object nsayoylastweek,Integer nsntasklastweek,Integer nsnlastweek,Integer nsnplanlastweek,Integer nsnyoylastweek,Object nsataskthisweek,Object nsayoythisweek,Object nsaplanthisweek,Integer nsntaskthisweek,Integer nsnyoythisweek,Integer nsnplanthisweek,Integer potentialcustomernumber,Integer verifynumberplan,Integer signnumberplan,Object signamountplan){
+  public Campussalesweeklystat(Long id,Integer version,Integer yearkey,Integer quarterkey,Integer monthkey,Integer weekkey,java.util.Date startdayofweek,java.util.Date enddayofweek,java.util.Date startdayoflastweek,java.util.Date enddayoflastweek,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Object nsataskyear,Object nsayear,Object nsayearlastyear,Object nsataskquarter,Object nsaquarter,Object nsaquarterlastyear,Object nsataskmonth,Object nsamonth,Object nsamonthlastyear,Integer nsntaskyear,Integer nsnyear,Integer nsnyearlastyear,Integer nsntaskquarter,Integer nsnquarter,Integer nsnquarterlastyear,Integer nsntaskmonth,Integer nsnmonth,Integer nsnmonthlastyear,Object nsatasklastweek,Object nsalastweek,Object nsaplanlastweek,Object nsayoylastweek,Integer nsntasklastweek,Integer nsnlastweek,Integer nsnplanlastweek,Integer nsnyoylastweek,Object nsataskthisweek,Object nsayoythisweek,Object nsaplanthisweek,Integer nsntaskthisweek,Integer nsnyoythisweek,Integer nsnplanthisweek,Integer potentialcustomernumber,Integer verifynumberplan,Integer signnumberplan,Object signamountplan){
       this.id=id;
       this.version=version;
       this.yearkey=yearkey;

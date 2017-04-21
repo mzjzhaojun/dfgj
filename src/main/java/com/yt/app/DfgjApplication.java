@@ -1,5 +1,8 @@
 package com.yt.app;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.yt.app.frame.config.AppConfig;
 import com.yt.app.frame.config.MySqlConfig;
 import com.yt.app.frame.config.RedisConfig;
-import com.yt.app.test.TestCode;
+import com.yt.app.frame.generate.GenerateCode;
 
 /**
  * Spring Boot main application class.
@@ -25,7 +28,7 @@ import com.yt.app.test.TestCode;
  * @author zj
  */
 @SpringBootApplication
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 18000)
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
 @EnableAutoConfiguration
 @EnableTransactionManagement
 @EnableHypermediaSupport(type = { HypermediaType.HAL })
@@ -82,7 +85,38 @@ public class DfgjApplication extends SpringBootServletInitializer {
 		System.out.println("                别人笑我忒疯癫，我笑自己命太贱；");
 		System.out.println("                不见满街漂亮妹，哪个归得程序员？");
 		System.out.println();
-		SpringApplication.run(new Class[] { DfgjApplication.class }, args);
-//		TestCode.getInstance().printFileMySql("account," + "account_role," + "accountchargeallots," + "accountchargeapplies," + "accountchargeinvoices," + "accountchargepayments," + "accountdeductapplies," + "accountrecords," + "accountrefundallots," + "accountrefundapplies," + "accountrefundverifyings," + "accountreturnapplies," + "accounts," + "accounttransferapplies," + "assetconfirms," + "assets," + "assignconditions," + "assignsaccompanies," + "cachets," + "campus_day_task," + "campus_month_task," + "campusassetsdetail," + "campuschargestat," + "campuscustomerweeklystat," + "campuses," + "campusincomestat," + "campusincomeweeklystat," + "campusrefundweeklystat," + "campusrenewweeklystat," + "campussalesweeklystat," + "campustask," + "campustaxrateconfig," + "cashflowreport," + "categories," + "categorycatalogs," + "chargereport," + "classes," + "classlessonitems," + "classlessons," + "consultant_month_task," + "consultbranchcrmdaysum," + "consultbranchcrmmonthsum," + "consultbranchperfdaysum," + "consultbranchperfmonthsum," + "consultcampusperfdaysum," + "consultcampusperfmonthsum," + "consultcountryperfdaysum," + "consultcountryperfmonthsum," + "consultstaffperfdaysum," + "country_code," + "customer," + "customeraccountmonthlystat," + "customerassetsdetail," + "customerassetsdetailsource," + "customerbasestat," + "customercourses," + "customerexpenserelations," + "customerfollowitems," + "customerfollows," + "customermeetingitems," + "customermeetings," + "customerparentrelations," + "customerrefundalerts," + "customerrelations," + "customerreplies," + "customerreturnmoney," + "customerschoolrelations," + "customerscoreitems," + "customerscores," + "customerserviceitems," + "customerservices," + "customerstaffcharges," + "customerstaffrelationships," + "customerstopalerts," + "customerteacherassignapplies," + "customerteachercharges," + "customerteacherrelations," + "customertransferaccounts," + "customertransferapplies," + "customertransferassets," + "customertransferresources," + "customerverifies," + "customervisits," + "debookorderitems," + "debookorders," + "dictionary," + "discountitems," + "discountpermissions," + "discounts," + "educatebranchcrmmonthsum," + "educatebranchperfdaysum," + "educatebranchperfmonthsum," + "educatecampuscrmmonthsum," + "educatecampusperfdaysum," + "educatecampusperfmonthsum," + "educatecountrycrmmonthsum," + "educatecountryperfdaysum," + "educatecountryperfmonthsum," + "educatestaffcrmmonthsum," + "educatestaffperfdaysum," + "educatestaffperfmonthsum," + "educator_day_task," + "educator_week_task," + "educatorreport_org," + "educatorreport_staff," + "email_messages," + "expensepermissions," + "expenses," + "file," + "financialassignmonthlyincome," + "hr_a_charges," + "hr_b_assigns," + "hr_c_refunds," + "hr_d_chargeallots," + "hr_e_refundallots," + "hr_g_educatoreffectivecustomer," + "incomereport," + "jobs," + "link," + "log_sys_info," + "log_user_info," + "menu," + "menu_links," + "operationlog," + "orderdailyinfo," + "orderitems," + "orders," + "organizations," + "orgbranches," + "orgcampuses," + "orgregions," + "orgstaffjobs," + "otherproductincome," + "otherproductincomeweekly," + "parents," + "perfindexreport," + "phones," + "pinyin," + "posrecords," + "potentialcustomers," + "presentitems," + "presents," + "productclassstats," + "productpermissions," + "products," + "productsalaryrules," + "productsexofcourse," + "ps_teacherteachings," + "refundreport," + "region," + "repertories," + "role," + "role_menu," + "rooms," + "schools," + "staffbasestat," + "staffchargestat," + "staffrefundstat," + "staffresources," + "staffs," + "stafftask," + "studentstatusreport," + "sys," + "teachbranchcrmmonthsum," + "teachbranchperfmonthsum," + "teachcampuscrmmonthsum," + "teachcampusperfmonthsum," + "teachcountrycrmmonthsum," + "teachcountryperfmonthsum," + "teacher_day_task," + "teacherjobs," + "teacherreport_org," + "teacherreport_staff," + "teachers," + "teachersearch," + "teacherteachings," + "teachgroupcrmmonthsum," + "teachgroupperfmonthsum," + "teachstaffcrmmonthsum," + "teachstaffperfmonthsum," + "user_operation_log," + "user_task," + "user_task_category" );
+		 SpringApplication.run(new Class[] { DfgjApplication.class }, args);
+//		List<String> tables = Arrays.asList("jobcode", "accountchargeallots", "accountchargeapplies", "accountchargeinvoices",
+//				"accountchargepayments", "accountdeductapplies", "accountrecords", "accountrefundallots", "accountrefundapplies",
+//				"accountrefundverifyings", "accountreturnapplies", "accounts", "accounttransferapplies", "assetconfirms", "assets",
+//				"assignconditions", "assignsaccompanies", "cachets", "campus_day_task", "campus_month_task", "campusassetsdetail",
+//				"campuschargestat", "campuscustomerweeklystat", "campuses", "campusincomestat", "campusincomeweeklystat", "campusrefundweeklystat",
+//				"campusrenewweeklystat", "campussalesweeklystat", "campustask", "campustaxrateconfig", "cashflowreport", "categories",
+//				"categorycatalogs", "chargereport", "classes", "classlessonitems", "classlessons", "consultant_month_task", "consultbranchcrmdaysum",
+//				"consultbranchcrmmonthsum", "consultbranchperfdaysum", "consultbranchperfmonthsum", "consultcampusperfdaysum",
+//				"consultcampusperfmonthsum", "consultcountryperfdaysum", "consultcountryperfmonthsum", "consultstaffperfdaysum", "country_code",
+//				"customer", "customeraccountmonthlystat", "customerassetsdetail", "customerassetsdetailsource", "customerassigns",
+//				"customerbasestat", "customercourses", "customerexpenserelations", "customerfollowitems", "customerfollows", "customermeetingitems",
+//				"customermeetings", "customerparentrelations", "customerrefundalerts", "customerrefunds", "customerrelations", "customerreplies",
+//				"customerreturnmoney", "customerschoolrelations", "customerscoreitems", "customerscores", "customerserviceitems", "customerservices",
+//				"customerstaffcharges", "customerstaffrelationships", "customerstopalerts", "customerteacherassignapplies", "customerteachercharges",
+//				"customerteacherrelations", "customertransferaccounts", "customertransferapplies", "customertransferassets",
+//				"customertransferresources", "customerverifies", "customervisits", "debookorderitems", "debookorders", "discountitems",
+//				"discountpermissions", "discounts", "educatebranchcrmmonthsum", "educatebranchperfdaysum", "educatebranchperfmonthsum",
+//				"educatecampuscrmmonthsum", "educatecampusperfdaysum", "educatecampusperfmonthsum", "educatecountrycrmmonthsum",
+//				"educatecountryperfdaysum", "educatecountryperfmonthsum", "educatestaffcrmmonthsum", "educatestaffperfdaysum",
+//				"educatestaffperfmonthsum", "educator_day_task", "educator_week_task", "educatoreffectivecustomer", "educatorreport_org",
+//				"educatorreport_staff", "email_messages", "expensepermissions", "expenses", "financialassignmonthlyincome", "hr_a_charges",
+//				"incomereport", "jobs", "log_sys_info", "log_user_info", "operationlog", "orderdailyinfo", "orderitems", "orders", "organizations",
+//				"orgbranches", "orgcampuses", "orgregions", "orgstaffjobs", "otherproductincome", "otherproductincomeweekly", "parents",
+//				"perfindexreport", "phones", "pinyin", "posrecords", "potentialcustomers", "presentitems", "presents", "productclassstats",
+//				"productpermissions", "products", "productsalaryrules", "productsexofcourse", "ps_teacherteachings", "refundreport", ""
+//						+ "repertories", "rooms", "schools", "staffbasestat", "staffchargestat", "staffrefundstat", "staffresources", "staffs",
+//				"stafftask", "studentstatusreport", "" + "teachbranchcrmmonthsum", "teachbranchperfmonthsum", "teachcampuscrmmonthsum",
+//				"teachcampusperfmonthsum", "teachcountrycrmmonthsum", "teachcountryperfmonthsum", "teacher_day_task", "teacherchargeallots",
+//				"teacherjobs", "teacherrefundallots", "teacherreport_org", "teacherreport_staff", "teachers", "teachersearch", "teacherteachings",
+//				"teachgroupcrmmonthsum", "teachgroupperfmonthsum", "teachstaffcrmmonthsum", "teachstaffperfmonthsum", "user_operation_log",
+//				"user_task", "user_task_category");
+//		GenerateCode.getInstance().crud(tables, true, true,true,"854616254684729344");
 	}
 }

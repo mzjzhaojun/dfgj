@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.PhonesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,ownerid,itemid,isprimary,phonetype,countrycode,areanumber,phonenumber,extension,creatorid,creatorname,createtime,tenantcode,versionstarttime,versionendtime
+     id,version,ownerid,itemid,isprimary,phonetype,countrycode,areanumber,phonenumber,extension,creatorid,creatorname,createtime,tenantcode
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Phones">
@@ -21,13 +21,11 @@
          <id property="creatorname" column="creatorname" />
          <id property="createtime" column="createtime" />
          <id property="tenantcode" column="tenantcode" />
-         <id property="versionstarttime" column="versionstarttime" />
-         <id property="versionendtime" column="versionendtime" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Phones">
-  insert into phones (id,ownerid,itemid,isprimary,phonetype,countrycode,areanumber,phonenumber,extension,creatorid,creatorname,createtime,tenantcode,versionstarttime,versionendtime)
-         values (#{id},#{ownerid},#{itemid},#{isprimary},#{phonetype},#{countrycode},#{areanumber},#{phonenumber},#{extension},#{creatorid},#{creatorname},#{createtime},#{tenantcode},#{versionstarttime},#{versionendtime})
+  insert into phones (id,ownerid,itemid,isprimary,phonetype,countrycode,areanumber,phonenumber,extension,creatorid,creatorname,createtime,tenantcode)
+         values (#{id},#{ownerid},#{itemid},#{isprimary},#{phonetype},#{countrycode},#{areanumber},#{phonenumber},#{extension},#{creatorid},#{creatorname},#{createtime},#{tenantcode})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -75,13 +73,7 @@
                    createtime = #{createtime},
              </if>
              <if test="tenantcode != null">
-                   tenantcode = #{tenantcode},
-             </if>
-             <if test="versionstarttime != null">
-                   versionstarttime = #{versionstarttime},
-             </if>
-             <if test="versionendtime != null">
-                   versionendtime = #{versionendtime}
+                   tenantcode = #{tenantcode}
              </if>
           </set>
      where id = #{id} and  version = #{version}

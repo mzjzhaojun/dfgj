@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.DiscountsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,discountid,discountcode,discountname,discountstatus,applystartdate,startdate,branchid,branchname,submittime,submitterid,submittername,submitterjobid,submitterjobname,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,discountcode,discountname,discountstatus,applystartdate,startdate,branchid,branchname,submittime,submitterid,submittername,submitterjobid,submitterjobname,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Discounts">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="discountid" column="discountid" />
          <id property="discountcode" column="discountcode" />
          <id property="discountname" column="discountname" />
          <id property="discountstatus" column="discountstatus" />
@@ -36,8 +35,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Discounts">
-  insert into discounts (id,discountid,discountcode,discountname,discountstatus,applystartdate,startdate,branchid,branchname,submittime,submitterid,submittername,submitterjobid,submitterjobname,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{discountid},#{discountcode},#{discountname},#{discountstatus},#{applystartdate},#{startdate},#{branchid},#{branchname},#{submittime},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into discounts (id,discountcode,discountname,discountstatus,applystartdate,startdate,branchid,branchname,submittime,submitterid,submittername,submitterjobid,submitterjobname,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{discountcode},#{discountname},#{discountstatus},#{applystartdate},#{startdate},#{branchid},#{branchname},#{submittime},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -50,9 +49,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="discountid != null">
-                   discountid = #{discountid},
              </if>
              <if test="discountcode != null">
                    discountcode = #{discountcode},

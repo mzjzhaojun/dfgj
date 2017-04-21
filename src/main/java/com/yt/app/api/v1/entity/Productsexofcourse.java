@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:54
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Productsexofcourse implements Serializable{
 
   Long id;
   Integer version;
-  Long productid;
   Integer lessoncount;
   String lessonduration;
   Object lessondurationvalue;
@@ -34,10 +33,9 @@ public class Productsexofcourse implements Serializable{
   Integer iscrosscampus;
   public Productsexofcourse(){
   }
-  public Productsexofcourse(Long id,Integer version,Long productid,Integer lessoncount,String lessonduration,Object lessondurationvalue,String periodduration,Object perioddurationvalue,Object periodsoflesson,String courselevel,String coachtype,String grouptype,String classtype,Integer minpeoples,Integer maxpeoples,String incomebelonging,Integer iscrosscampus){
+  public Productsexofcourse(Long id,Integer version,Integer lessoncount,String lessonduration,Object lessondurationvalue,String periodduration,Object perioddurationvalue,Object periodsoflesson,String courselevel,String coachtype,String grouptype,String classtype,Integer minpeoples,Integer maxpeoples,String incomebelonging,Integer iscrosscampus){
       this.id=id;
       this.version=version;
-      this.productid=productid;
       this.lessoncount=lessoncount;
       this.lessonduration=lessonduration;
       this.lessondurationvalue=lessondurationvalue;

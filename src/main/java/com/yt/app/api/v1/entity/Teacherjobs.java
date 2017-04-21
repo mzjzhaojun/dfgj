@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:03
+* @createdate  2017-04-20 13:49:00
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Teacherjobs implements Serializable{
 
   Long id;
   Integer version;
-  Long jobid;
   String jobname;
   Long joborgid;
   String joborgname;
@@ -29,10 +28,9 @@ public class Teacherjobs implements Serializable{
   Integer isfulltime;
   public Teacherjobs(){
   }
-  public Teacherjobs(Long id,Integer version,Long jobid,String jobname,Long joborgid,String joborgname,String joborgtype,String jobstatus,Long teacherid,Long campusid,String campusname,Integer isfulltime){
+  public Teacherjobs(Long id,Integer version,String jobname,Long joborgid,String joborgname,String joborgtype,String jobstatus,Long teacherid,Long campusid,String campusname,Integer isfulltime){
       this.id=id;
       this.version=version;
-      this.jobid=jobid;
       this.jobname=jobname;
       this.joborgid=joborgid;
       this.joborgname=joborgname;

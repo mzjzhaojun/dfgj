@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:24
 */
 @Getter
 @Setter
@@ -22,7 +22,6 @@ public class Classes implements Serializable{
   Long productid;
   String productcode;
   String productname;
-  Long classid;
   String classcode;
   String classname;
   String classstatus;
@@ -35,8 +34,8 @@ public class Classes implements Serializable{
   String gradename;
   String subject;
   String subjectname;
-  String starttime;
-  String endtime;
+  java.util.Date starttime;
+  java.util.Date endtime;
   Integer lessoncount;
   Integer invalidlessons;
   Integer finishedlessons;
@@ -52,13 +51,13 @@ public class Classes implements Serializable{
   Integer maxpeoples;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Classes(){
   }
-  public Classes(Long id,Integer version,Long campusid,String campusname,Long productid,String productcode,String productname,Long classid,String classcode,String classname,String classstatus,Long roomid,String roomcode,String roomname,String classtype,String classtypename,String grade,String gradename,String subject,String subjectname,String starttime,String endtime,Integer lessoncount,Integer invalidlessons,Integer finishedlessons,Object lessondurationvalue,Object perioddurationvalue,Object periodsoflesson,Integer classpeoples,Integer secondpeoples,Integer latestpeoples,String teachernames,Object confirmedmoney,Integer minpeoples,Integer maxpeoples,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Classes(Long id,Integer version,Long campusid,String campusname,Long productid,String productcode,String productname,String classcode,String classname,String classstatus,Long roomid,String roomcode,String roomname,String classtype,String classtypename,String grade,String gradename,String subject,String subjectname,java.util.Date starttime,java.util.Date endtime,Integer lessoncount,Integer invalidlessons,Integer finishedlessons,Object lessondurationvalue,Object perioddurationvalue,Object periodsoflesson,Integer classpeoples,Integer secondpeoples,Integer latestpeoples,String teachernames,Object confirmedmoney,Integer minpeoples,Integer maxpeoples,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
@@ -66,7 +65,6 @@ public class Classes implements Serializable{
       this.productid=productid;
       this.productcode=productcode;
       this.productname=productname;
-      this.classid=classid;
       this.classcode=classcode;
       this.classname=classname;
       this.classstatus=classstatus;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:25
 */
 @Getter
 @Setter
@@ -37,10 +37,10 @@ public class Consultbranchcrmmonthsum implements Serializable{
   Object convertedratio;
   Object verifiedratio;
   Object signedratio;
-  String createtime;
+  java.util.Date createtime;
   public Consultbranchcrmmonthsum(){
   }
-  public Consultbranchcrmmonthsum(Long id,Integer version,Long regionid,Long branchid,Integer year,Integer month,Integer followingcountofpotential,Integer followingcountofstudent,Integer verifyingcount,Integer signingcount,Integer unfollowcountofpotential,Integer unfollowcountofstudent,Integer unverifycount,Integer unsigncount,Integer followedcountofpotential,Integer followedcountofstudent,Integer verifiedcount,Integer signedcount,Integer newpotentialcount,Object convertedratio,Object verifiedratio,Object signedratio,String createtime){
+  public Consultbranchcrmmonthsum(Long id,Integer version,Long regionid,Long branchid,Integer year,Integer month,Integer followingcountofpotential,Integer followingcountofstudent,Integer verifyingcount,Integer signingcount,Integer unfollowcountofpotential,Integer unfollowcountofstudent,Integer unverifycount,Integer unsigncount,Integer followedcountofpotential,Integer followedcountofstudent,Integer verifiedcount,Integer signedcount,Integer newpotentialcount,Object convertedratio,Object verifiedratio,Object signedratio,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.regionid=regionid;

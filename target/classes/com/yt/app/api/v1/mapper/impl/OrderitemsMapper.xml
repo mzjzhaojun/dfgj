@@ -3,15 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.OrderitemsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,orderid,sortno,itemid,itemno,productid,productcode,productname,productunit,productunitname,productcampusid,productcampusname,grade,gradename,subject,subjectname,catalog,catalogname,category,categoryname,categorytype,categorytypename,courselevel,courselevelname,lessoncount,lessonduration,lessondurationvalue,periodduration,perioddurationvalue,periodsoflesson,orderprice,orderamount,presentid,presentquato,presentamount,tunlandrate,specialrate,discounttype,discountrate,realprice,realamount,promotionquota,expirationdate,joinedclassid,relatedassetid,relatedassetcode,confirmstartdate,confirmenddate,confirmmode,confirmstaging
+     id,version,orderid,itemno,productid,productcode,productname,productunit,productunitname,productcampusid,productcampusname,grade,gradename,subject,subjectname,catalog,catalogname,category,categoryname,categorytype,categorytypename,courselevel,courselevelname,lessoncount,lessonduration,lessondurationvalue,periodduration,perioddurationvalue,periodsoflesson,orderprice,orderamount,presentid,presentquato,presentamount,tunlandrate,specialrate,discounttype,discountrate,realprice,realamount,promotionquota,expirationdate,joinedclassid,relatedassetid,relatedassetcode,confirmstartdate,confirmenddate,confirmmode,confirmstaging
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Orderitems">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="orderid" column="orderid" />
-         <id property="sortno" column="sortno" />
-         <id property="itemid" column="itemid" />
          <id property="itemno" column="itemno" />
          <id property="productid" column="productid" />
          <id property="productcode" column="productcode" />
@@ -61,8 +59,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Orderitems">
-  insert into orderitems (id,orderid,sortno,itemid,itemno,productid,productcode,productname,productunit,productunitname,productcampusid,productcampusname,grade,gradename,subject,subjectname,catalog,catalogname,category,categoryname,categorytype,categorytypename,courselevel,courselevelname,lessoncount,lessonduration,lessondurationvalue,periodduration,perioddurationvalue,periodsoflesson,orderprice,orderamount,presentid,presentquato,presentamount,tunlandrate,specialrate,discounttype,discountrate,realprice,realamount,promotionquota,expirationdate,joinedclassid,relatedassetid,relatedassetcode,confirmstartdate,confirmenddate,confirmmode,confirmstaging)
-         values (#{id},#{orderid},#{sortno},#{itemid},#{itemno},#{productid},#{productcode},#{productname},#{productunit},#{productunitname},#{productcampusid},#{productcampusname},#{grade},#{gradename},#{subject},#{subjectname},#{catalog},#{catalogname},#{category},#{categoryname},#{categorytype},#{categorytypename},#{courselevel},#{courselevelname},#{lessoncount},#{lessonduration},#{lessondurationvalue},#{periodduration},#{perioddurationvalue},#{periodsoflesson},#{orderprice},#{orderamount},#{presentid},#{presentquato},#{presentamount},#{tunlandrate},#{specialrate},#{discounttype},#{discountrate},#{realprice},#{realamount},#{promotionquota},#{expirationdate},#{joinedclassid},#{relatedassetid},#{relatedassetcode},#{confirmstartdate},#{confirmenddate},#{confirmmode},#{confirmstaging})
+  insert into orderitems (id,orderid,itemno,productid,productcode,productname,productunit,productunitname,productcampusid,productcampusname,grade,gradename,subject,subjectname,catalog,catalogname,category,categoryname,categorytype,categorytypename,courselevel,courselevelname,lessoncount,lessonduration,lessondurationvalue,periodduration,perioddurationvalue,periodsoflesson,orderprice,orderamount,presentid,presentquato,presentamount,tunlandrate,specialrate,discounttype,discountrate,realprice,realamount,promotionquota,expirationdate,joinedclassid,relatedassetid,relatedassetcode,confirmstartdate,confirmenddate,confirmmode,confirmstaging)
+         values (#{id},#{orderid},#{itemno},#{productid},#{productcode},#{productname},#{productunit},#{productunitname},#{productcampusid},#{productcampusname},#{grade},#{gradename},#{subject},#{subjectname},#{catalog},#{catalogname},#{category},#{categoryname},#{categorytype},#{categorytypename},#{courselevel},#{courselevelname},#{lessoncount},#{lessonduration},#{lessondurationvalue},#{periodduration},#{perioddurationvalue},#{periodsoflesson},#{orderprice},#{orderamount},#{presentid},#{presentquato},#{presentamount},#{tunlandrate},#{specialrate},#{discounttype},#{discountrate},#{realprice},#{realamount},#{promotionquota},#{expirationdate},#{joinedclassid},#{relatedassetid},#{relatedassetcode},#{confirmstartdate},#{confirmenddate},#{confirmmode},#{confirmstaging})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -78,12 +76,6 @@
              </if>
              <if test="orderid != null">
                    orderid = #{orderid},
-             </if>
-             <if test="sortno != null">
-                   sortno = #{sortno},
-             </if>
-             <if test="itemid != null">
-                   itemid = #{itemid},
              </if>
              <if test="itemno != null">
                    itemno = #{itemno},

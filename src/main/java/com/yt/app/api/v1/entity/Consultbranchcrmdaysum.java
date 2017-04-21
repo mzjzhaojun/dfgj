@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:25
 */
 @Getter
 @Setter
@@ -30,10 +30,10 @@ public class Consultbranchcrmdaysum implements Serializable{
   Integer weekfollowingcountofstudent;
   Integer weekverifyingcount;
   Integer weeksigningcount;
-  String createtime;
+  java.util.Date createtime;
   public Consultbranchcrmdaysum(){
   }
-  public Consultbranchcrmdaysum(Long id,Integer version,Long regionid,Long branchid,Integer year,Integer month,Integer day,Integer followingcountofpotential,Integer followingcountofstudent,Integer verifyingcount,Integer signingcount,Integer weekfollowingcountofpotential,Integer weekfollowingcountofstudent,Integer weekverifyingcount,Integer weeksigningcount,String createtime){
+  public Consultbranchcrmdaysum(Long id,Integer version,Long regionid,Long branchid,Integer year,Integer month,Integer day,Integer followingcountofpotential,Integer followingcountofstudent,Integer verifyingcount,Integer signingcount,Integer weekfollowingcountofpotential,Integer weekfollowingcountofstudent,Integer weekverifyingcount,Integer weeksigningcount,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.regionid=regionid;

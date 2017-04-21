@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:35
 */
 @Getter
 @Setter
@@ -17,9 +17,8 @@ public class Customerstopalerts implements Serializable{
 
   Long id;
   Integer version;
-  Long alertid;
   String alerttype;
-  String alerttime;
+  java.util.Date alerttime;
   String alertreason;
   String alertreasonname;
   Long operatorid;
@@ -29,10 +28,9 @@ public class Customerstopalerts implements Serializable{
   Long customerid;
   public Customerstopalerts(){
   }
-  public Customerstopalerts(Long id,Integer version,Long alertid,String alerttype,String alerttime,String alertreason,String alertreasonname,Long operatorid,String operatorname,Long operatorjobid,String operatorjobname,Long customerid){
+  public Customerstopalerts(Long id,Integer version,String alerttype,java.util.Date alerttime,String alertreason,String alertreasonname,Long operatorid,String operatorname,Long operatorjobid,String operatorjobname,Long customerid){
       this.id=id;
       this.version=version;
-      this.alertid=alertid;
       this.alerttype=alerttype;
       this.alerttime=alerttime;
       this.alertreason=alertreason;

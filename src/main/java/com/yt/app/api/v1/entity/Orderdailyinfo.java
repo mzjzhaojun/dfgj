@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:48
 */
 @Getter
 @Setter
@@ -20,13 +20,11 @@ public class Orderdailyinfo implements Serializable{
   Long customerid;
   Long orderid;
   Long consultantid;
-  String ordertime;
+  java.util.Date ordertime;
   Object realamount;
-  String versionstarttime;
-  String versionendtime;
   public Orderdailyinfo(){
   }
-  public Orderdailyinfo(Long id,Integer version,Long customerid,Long orderid,Long consultantid,String ordertime,Object realamount,String versionstarttime,String versionendtime){
+  public Orderdailyinfo(Long id,Integer version,Long customerid,Long orderid,Long consultantid,java.util.Date ordertime,Object realamount){
       this.id=id;
       this.version=version;
       this.customerid=customerid;
@@ -34,7 +32,5 @@ public class Orderdailyinfo implements Serializable{
       this.consultantid=consultantid;
       this.ordertime=ordertime;
       this.realamount=realamount;
-      this.versionstarttime=versionstarttime;
-      this.versionendtime=versionendtime;
   }
 }

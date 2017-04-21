@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:27
 */
 @Getter
 @Setter
@@ -29,10 +29,10 @@ public class Consultstaffperfdaysum implements Serializable{
   Integer peoplecount;
   Object newmoneycount;
   Integer newpeoplecount;
-  String createtime;
+  java.util.Date createtime;
   public Consultstaffperfdaysum(){
   }
-  public Consultstaffperfdaysum(Long id,Integer version,Long regionid,Long branchid,Long campusid,Long staffid,Long staffjobid,Integer year,Integer month,Integer day,Object moneycount,Integer peoplecount,Object newmoneycount,Integer newpeoplecount,String createtime){
+  public Consultstaffperfdaysum(Long id,Integer version,Long regionid,Long branchid,Long campusid,Long staffid,Long staffjobid,Integer year,Integer month,Integer day,Object moneycount,Integer peoplecount,Object newmoneycount,Integer newpeoplecount,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.regionid=regionid;

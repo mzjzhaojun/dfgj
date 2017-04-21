@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.OrgcampusesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,regionid,branchid,campusid,campusname
+     id,version,regionid,branchid,campusname
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Orgcampuses">
@@ -11,13 +11,12 @@
          <id property="version" column="version" />
          <id property="regionid" column="regionid" />
          <id property="branchid" column="branchid" />
-         <id property="campusid" column="campusid" />
          <id property="campusname" column="campusname" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Orgcampuses">
-  insert into orgcampuses (id,regionid,branchid,campusid,campusname)
-         values (#{id},#{regionid},#{branchid},#{campusid},#{campusname})
+  insert into orgcampuses (id,regionid,branchid,campusname)
+         values (#{id},#{regionid},#{branchid},#{campusname})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -36,9 +35,6 @@
              </if>
              <if test="branchid != null">
                    branchid = #{branchid},
-             </if>
-             <if test="campusid != null">
-                   campusid = #{campusid},
              </if>
              <if test="campusname != null">
                    campusname = #{campusname}

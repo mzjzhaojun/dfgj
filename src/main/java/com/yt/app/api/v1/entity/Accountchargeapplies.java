@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:16
 */
 @Getter
 @Setter
@@ -17,87 +17,86 @@ public class Accountchargeapplies implements Serializable{
 
   Long id;
   Integer version;
-  String campusid;
+  Long campusid;
   String campusname;
-  String parentid;
+  Long parentid;
   String parentname;
-  String customerid;
+  Long customerid;
   String customercode;
   String customername;
   String customergrade;
-  String accountid;
+  Long accountid;
   String accountcode;
-  String applyid;
   String applyno;
   String applystatus;
   String applymemo;
-  String applytime;
-  String applierid;
+  java.util.Date applytime;
+  Long applierid;
   String appliername;
-  String applierjobid;
+  Long applierjobid;
   String applierjobname;
   String applierjobtype;
   String processstatus;
-  String processtime;
+  java.util.Date processtime;
   String processmemo;
   String chargetype;
   String chargeflag;
   Object chargemoney;
   Object paidmoney;
   String paystatus;
-  String paytime;
-  String swipetime;
-  String actualtime;
-  String thatdiscountid;
+  java.util.Date paytime;
+  java.util.Date swipetime;
+  java.util.Date actualtime;
+  Long thatdiscountid;
   String thatdiscountcode;
   Object thatdiscountbase;
   Object thatdiscountrate;
   Object thataccountvalue;
   Object thataccountmoney;
-  String thisdiscountid;
+  Long thisdiscountid;
   String thisdiscountcode;
   Object thisdiscountbase;
   Object thisdiscountrate;
   Object thisaccountvalue;
   Object thisaccountmoney;
-  String consultantid;
+  Long consultantid;
   String consultantname;
-  String consultantjobid;
-  String educatorid;
+  Long consultantjobid;
+  Long educatorid;
   String educatorname;
-  String educatorjobid;
-  String submitterid;
+  Long educatorjobid;
+  Long submitterid;
   String submittername;
-  String submitterjobid;
+  Long submitterjobid;
   String submitterjobname;
   String submitterjobtype;
-  String submittime;
-  String approverid;
+  java.util.Date submittime;
+  Long approverid;
   String approvername;
-  String approverjobid;
+  Long approverjobid;
   String approverjobname;
-  String approvetime;
-  String auditorid;
+  java.util.Date approvetime;
+  Long auditorid;
   String auditorname;
-  String auditorjobid;
+  Long auditorjobid;
   String auditorjobname;
   String auditstatus;
-  String audittime;
+  java.util.Date audittime;
   Integer auditstate1;
   Integer auditstate2;
   Integer auditstate3;
   Integer auditstate4;
   Integer auditstate5;
-  String creatorid;
+  Long creatorid;
   String creatorname;
-  String createtime;
-  String modifierid;
+  java.util.Date createtime;
+  Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   String allotsubjects;
   public Accountchargeapplies(){
   }
-  public Accountchargeapplies(Long id,Integer version,String campusid,String campusname,String parentid,String parentname,String customerid,String customercode,String customername,String customergrade,String accountid,String accountcode,String applyid,String applyno,String applystatus,String applymemo,String applytime,String applierid,String appliername,String applierjobid,String applierjobname,String applierjobtype,String processstatus,String processtime,String processmemo,String chargetype,String chargeflag,Object chargemoney,Object paidmoney,String paystatus,String paytime,String swipetime,String actualtime,String thatdiscountid,String thatdiscountcode,Object thatdiscountbase,Object thatdiscountrate,Object thataccountvalue,Object thataccountmoney,String thisdiscountid,String thisdiscountcode,Object thisdiscountbase,Object thisdiscountrate,Object thisaccountvalue,Object thisaccountmoney,String consultantid,String consultantname,String consultantjobid,String educatorid,String educatorname,String educatorjobid,String submitterid,String submittername,String submitterjobid,String submitterjobname,String submitterjobtype,String submittime,String approverid,String approvername,String approverjobid,String approverjobname,String approvetime,String auditorid,String auditorname,String auditorjobid,String auditorjobname,String auditstatus,String audittime,Integer auditstate1,Integer auditstate2,Integer auditstate3,Integer auditstate4,Integer auditstate5,String creatorid,String creatorname,String createtime,String modifierid,String modifiername,String modifytime,String allotsubjects){
+  public Accountchargeapplies(Long id,Integer version,Long campusid,String campusname,Long parentid,String parentname,Long customerid,String customercode,String customername,String customergrade,Long accountid,String accountcode,String applyno,String applystatus,String applymemo,java.util.Date applytime,Long applierid,String appliername,Long applierjobid,String applierjobname,String applierjobtype,String processstatus,java.util.Date processtime,String processmemo,String chargetype,String chargeflag,Object chargemoney,Object paidmoney,String paystatus,java.util.Date paytime,java.util.Date swipetime,java.util.Date actualtime,Long thatdiscountid,String thatdiscountcode,Object thatdiscountbase,Object thatdiscountrate,Object thataccountvalue,Object thataccountmoney,Long thisdiscountid,String thisdiscountcode,Object thisdiscountbase,Object thisdiscountrate,Object thisaccountvalue,Object thisaccountmoney,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,String submitterjobtype,java.util.Date submittime,Long approverid,String approvername,Long approverjobid,String approverjobname,java.util.Date approvetime,Long auditorid,String auditorname,Long auditorjobid,String auditorjobname,String auditstatus,java.util.Date audittime,Integer auditstate1,Integer auditstate2,Integer auditstate3,Integer auditstate4,Integer auditstate5,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime,String allotsubjects){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
@@ -110,7 +109,6 @@ public class Accountchargeapplies implements Serializable{
       this.customergrade=customergrade;
       this.accountid=accountid;
       this.accountcode=accountcode;
-      this.applyid=applyid;
       this.applyno=applyno;
       this.applystatus=applystatus;
       this.applymemo=applymemo;

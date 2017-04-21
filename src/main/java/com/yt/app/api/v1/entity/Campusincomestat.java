@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:21
 */
 @Getter
 @Setter
@@ -17,7 +17,7 @@ public class Campusincomestat implements Serializable{
 
   Long id;
   Integer version;
-  String statlocaldate;
+  java.util.Date statlocaldate;
   Long customerid;
   Long campusid;
   String campusname;
@@ -31,7 +31,7 @@ public class Campusincomestat implements Serializable{
   Long hqid;
   String hqname;
   String hqshortname;
-  String campusdeliverdate;
+  java.util.Date campusdeliverdate;
   Integer campusage;
   String jobproperty;
   Integer incometype;
@@ -47,7 +47,7 @@ public class Campusincomestat implements Serializable{
   Object income;
   public Campusincomestat(){
   }
-  public Campusincomestat(Long id,Integer version,String statlocaldate,Long customerid,Long campusid,String campusname,String campusshortname,Long branchid,String branchname,String branchshortname,Long regionid,String regionname,String regionshortname,Long hqid,String hqname,String hqshortname,String campusdeliverdate,Integer campusage,String jobproperty,Integer incometype,String incometypename,Integer producttype,String productname,String grade,String gradename,String subjecttype,String subjecttypename,Object amount,Object duration,Object income){
+  public Campusincomestat(Long id,Integer version,java.util.Date statlocaldate,Long customerid,Long campusid,String campusname,String campusshortname,Long branchid,String branchname,String branchshortname,Long regionid,String regionname,String regionshortname,Long hqid,String hqname,String hqshortname,java.util.Date campusdeliverdate,Integer campusage,String jobproperty,Integer incometype,String incometypename,Integer producttype,String productname,String grade,String gradename,String subjecttype,String subjecttypename,Object amount,Object duration,Object income){
       this.id=id;
       this.version=version;
       this.statlocaldate=statlocaldate;

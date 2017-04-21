@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:03
+* @createdate  2017-04-20 13:49:01
 */
 @Getter
 @Setter
@@ -17,20 +17,18 @@ public class Teachers implements Serializable{
 
   Long id;
   Integer version;
-  Long teacherid;
   String teachercode;
   String teachername;
   String teacheroacode;
   String gender;
-  String birthday;
+  java.util.Date birthday;
   String gradememo;
   String subjectmemo;
   public Teachers(){
   }
-  public Teachers(Long id,Integer version,Long teacherid,String teachercode,String teachername,String teacheroacode,String gender,String birthday,String gradememo,String subjectmemo){
+  public Teachers(Long id,Integer version,String teachercode,String teachername,String teacheroacode,String gender,java.util.Date birthday,String gradememo,String subjectmemo){
       this.id=id;
       this.version=version;
-      this.teacherid=teacherid;
       this.teachercode=teachercode;
       this.teachername=teachername;
       this.teacheroacode=teacheroacode;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:49
 */
 @Getter
 @Setter
@@ -17,14 +17,12 @@ public class Orgregions implements Serializable{
 
   Long id;
   Integer version;
-  Long regionid;
   String regionname;
   public Orgregions(){
   }
-  public Orgregions(Long id,Integer version,Long regionid,String regionname){
+  public Orgregions(Long id,Integer version,String regionname){
       this.id=id;
       this.version=version;
-      this.regionid=regionid;
       this.regionname=regionname;
   }
 }

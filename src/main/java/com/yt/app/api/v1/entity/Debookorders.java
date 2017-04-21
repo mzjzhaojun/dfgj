@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:38
 */
 @Getter
 @Setter
@@ -24,13 +24,12 @@ public class Debookorders implements Serializable{
   Long customerid;
   String customercode;
   String customername;
-  Long debookid;
   String debookno;
-  String debooktime;
+  java.util.Date debooktime;
   String debookstatus;
   String debookmemo;
   String processstatus;
-  String processtime;
+  java.util.Date processtime;
   String processmemo;
   String contacttel;
   String contacter;
@@ -39,21 +38,21 @@ public class Debookorders implements Serializable{
   Long submitterjobid;
   String submitterjobname;
   String submitterjobtype;
-  String submittime;
+  java.util.Date submittime;
   Long approverid;
   Long approvername;
   Long approverjobid;
   String approverjobname;
-  String approvetime;
+  java.util.Date approvetime;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Debookorders(){
   }
-  public Debookorders(Long id,Integer version,Long campusid,String campusname,Long parentid,String parentname,Long customerid,String customercode,String customername,Long debookid,String debookno,String debooktime,String debookstatus,String debookmemo,String processstatus,String processtime,String processmemo,String contacttel,String contacter,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,String submitterjobtype,String submittime,Long approverid,Long approvername,Long approverjobid,String approverjobname,String approvetime,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Debookorders(Long id,Integer version,Long campusid,String campusname,Long parentid,String parentname,Long customerid,String customercode,String customername,String debookno,java.util.Date debooktime,String debookstatus,String debookmemo,String processstatus,java.util.Date processtime,String processmemo,String contacttel,String contacter,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,String submitterjobtype,java.util.Date submittime,Long approverid,Long approvername,Long approverjobid,String approverjobname,java.util.Date approvetime,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
@@ -63,7 +62,6 @@ public class Debookorders implements Serializable{
       this.customerid=customerid;
       this.customercode=customercode;
       this.customername=customername;
-      this.debookid=debookid;
       this.debookno=debookno;
       this.debooktime=debooktime;
       this.debookstatus=debookstatus;

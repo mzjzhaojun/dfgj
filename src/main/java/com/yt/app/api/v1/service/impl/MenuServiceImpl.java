@@ -263,10 +263,10 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	public IPage<Menu> list(Map<String, Object> param) {
 		int count = 0;
-		if (PageBean.isPaging(param))
+		if (PageBean.isPaging(param)){
 			count = mapper.countlist(param);
-		if (count == 0) {
-			return PageBean.EMPTY_PAGE;
+			if (count == 0)
+				return PageBean.EMPTY_PAGE;
 		}
 		List<Menu> list = this.mapper.list(param);
 		long[] obj = list.stream().mapToLong(Menu::getSys_id).distinct().toArray();

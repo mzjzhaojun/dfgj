@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:38
 */
 @Getter
 @Setter
@@ -20,29 +20,27 @@ public class Customerverifies implements Serializable{
   Long campusid;
   String campusname;
   Long customerid;
-  Long verifyid;
-  String verifytime;
+  java.util.Date verifytime;
   Long verifierid;
   String verifiername;
   Long verifierjobid;
   String verifierjobname;
   String verifypeoples;
   String verifyrelations;
-  String planverifytime;
+  java.util.Date planverifytime;
   Integer isinvited;
   Integer issigned;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   public Customerverifies(){
   }
-  public Customerverifies(Long id,Integer version,Long campusid,String campusname,Long customerid,Long verifyid,String verifytime,Long verifierid,String verifiername,Long verifierjobid,String verifierjobname,String verifypeoples,String verifyrelations,String planverifytime,Integer isinvited,Integer issigned,Long creatorid,String creatorname,String createtime){
+  public Customerverifies(Long id,Integer version,Long campusid,String campusname,Long customerid,java.util.Date verifytime,Long verifierid,String verifiername,Long verifierjobid,String verifierjobname,String verifypeoples,String verifyrelations,java.util.Date planverifytime,Integer isinvited,Integer issigned,Long creatorid,String creatorname,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
       this.campusname=campusname;
       this.customerid=customerid;
-      this.verifyid=verifyid;
       this.verifytime=verifytime;
       this.verifierid=verifierid;
       this.verifiername=verifiername;

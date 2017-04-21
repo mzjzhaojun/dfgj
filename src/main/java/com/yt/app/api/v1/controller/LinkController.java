@@ -32,7 +32,7 @@ import com.yt.app.api.v1.entity.Link;
 
 
 @RestController
-@RequestMapping("/dfgj/v1/link")
+@RequestMapping("/rest/v1/link")
 public class LinkController extends BaseControllerImpl<Link, Long> {
 
 

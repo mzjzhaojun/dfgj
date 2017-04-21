@@ -11,7 +11,7 @@ import com.yt.app.api.v1.entity.Classes;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:24
 */
 
 public class ClassesResourceAssembler extends ResourceAssemblerSupport<Classes, ClassesResource> {

@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.RoomsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,campusid,campusname,roomid,roomcode,roomname,roomstatus,sortno,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,campusid,campusname,roomcode,roomname,roomstatus,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Rooms">
@@ -11,11 +11,9 @@
          <id property="version" column="version" />
          <id property="campusid" column="campusid" />
          <id property="campusname" column="campusname" />
-         <id property="roomid" column="roomid" />
          <id property="roomcode" column="roomcode" />
          <id property="roomname" column="roomname" />
          <id property="roomstatus" column="roomstatus" />
-         <id property="sortno" column="sortno" />
          <id property="creatorid" column="creatorid" />
          <id property="creatorname" column="creatorname" />
          <id property="createtime" column="createtime" />
@@ -25,8 +23,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Rooms">
-  insert into rooms (id,campusid,campusname,roomid,roomcode,roomname,roomstatus,sortno,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{campusid},#{campusname},#{roomid},#{roomcode},#{roomname},#{roomstatus},#{sortno},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into rooms (id,campusid,campusname,roomcode,roomname,roomstatus,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{campusid},#{campusname},#{roomcode},#{roomname},#{roomstatus},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -46,9 +44,6 @@
              <if test="campusname != null">
                    campusname = #{campusname},
              </if>
-             <if test="roomid != null">
-                   roomid = #{roomid},
-             </if>
              <if test="roomcode != null">
                    roomcode = #{roomcode},
              </if>
@@ -57,9 +52,6 @@
              </if>
              <if test="roomstatus != null">
                    roomstatus = #{roomstatus},
-             </if>
-             <if test="sortno != null">
-                   sortno = #{sortno},
              </if>
              <if test="creatorid != null">
                    creatorid = #{creatorid},

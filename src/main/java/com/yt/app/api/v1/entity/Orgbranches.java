@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:49
 */
 @Getter
 @Setter
@@ -18,15 +18,13 @@ public class Orgbranches implements Serializable{
   Long id;
   Integer version;
   Long regionid;
-  Long branchid;
   String branchname;
   public Orgbranches(){
   }
-  public Orgbranches(Long id,Integer version,Long regionid,Long branchid,String branchname){
+  public Orgbranches(Long id,Integer version,Long regionid,String branchname){
       this.id=id;
       this.version=version;
       this.regionid=regionid;
-      this.branchid=branchid;
       this.branchname=branchname;
   }
 }

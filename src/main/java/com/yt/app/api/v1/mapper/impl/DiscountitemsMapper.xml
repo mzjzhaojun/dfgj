@@ -3,21 +3,20 @@
 <mapper namespace="com.yt.app.api.v1.mapper.DiscountitemsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,itemid,discountid,discountvalue,discountstandard
+     id,version,discountid,discountvalue,discountstandard
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Discountitems">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="itemid" column="itemid" />
          <id property="discountid" column="discountid" />
          <id property="discountvalue" column="discountvalue" />
          <id property="discountstandard" column="discountstandard" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Discountitems">
-  insert into discountitems (id,itemid,discountid,discountvalue,discountstandard)
-         values (#{id},#{itemid},#{discountid},#{discountvalue},#{discountstandard})
+  insert into discountitems (id,discountid,discountvalue,discountstandard)
+         values (#{id},#{discountid},#{discountvalue},#{discountstandard})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -30,9 +29,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="itemid != null">
-                   itemid = #{itemid},
              </if>
              <if test="discountid != null">
                    discountid = #{discountid},

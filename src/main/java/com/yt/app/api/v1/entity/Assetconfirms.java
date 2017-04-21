@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:18
 */
 @Getter
 @Setter
@@ -30,20 +30,19 @@ public class Assetconfirms implements Serializable{
   Long assetrefpid;
   Long assetrefid;
   Object assetmoney;
-  Long confirmid;
   Long assignid;
   Integer confirmflag;
   Object confirmmoney;
   String confirmmemo;
   String confirmstatus;
-  String confirmtime;
+  java.util.Date confirmtime;
   Long confirmerid;
   String confirmername;
   Long confirmerjobid;
   String confirmerjobname;
   String confirmerjobtype;
   String processstatus;
-  String processtime;
+  java.util.Date processtime;
   String processmemo;
   Long consultantid;
   String consultantname;
@@ -54,17 +53,17 @@ public class Assetconfirms implements Serializable{
   Long teacherid;
   String teachername;
   Long teacherjobid;
-  String starttime;
-  String endtime;
+  java.util.Date starttime;
+  java.util.Date endtime;
   Object durationvalue;
   Object amount;
   Object price;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   public Assetconfirms(){
   }
-  public Assetconfirms(Long id,Integer version,Long campusid,String campusname,Long customerid,String customercode,String customername,Long accountid,Long assetid,String assetcode,String assettype,String assetreftype,Long assetrefpid,Long assetrefid,Object assetmoney,Long confirmid,Long assignid,Integer confirmflag,Object confirmmoney,String confirmmemo,String confirmstatus,String confirmtime,Long confirmerid,String confirmername,Long confirmerjobid,String confirmerjobname,String confirmerjobtype,String processstatus,String processtime,String processmemo,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long teacherid,String teachername,Long teacherjobid,String starttime,String endtime,Object durationvalue,Object amount,Object price,Long creatorid,String creatorname,String createtime){
+  public Assetconfirms(Long id,Integer version,Long campusid,String campusname,Long customerid,String customercode,String customername,Long accountid,Long assetid,String assetcode,String assettype,String assetreftype,Long assetrefpid,Long assetrefid,Object assetmoney,Long assignid,Integer confirmflag,Object confirmmoney,String confirmmemo,String confirmstatus,java.util.Date confirmtime,Long confirmerid,String confirmername,Long confirmerjobid,String confirmerjobname,String confirmerjobtype,String processstatus,java.util.Date processtime,String processmemo,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long teacherid,String teachername,Long teacherjobid,java.util.Date starttime,java.util.Date endtime,Object durationvalue,Object amount,Object price,Long creatorid,String creatorname,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
@@ -80,7 +79,6 @@ public class Assetconfirms implements Serializable{
       this.assetrefpid=assetrefpid;
       this.assetrefid=assetrefid;
       this.assetmoney=assetmoney;
-      this.confirmid=confirmid;
       this.assignid=assignid;
       this.confirmflag=confirmflag;
       this.confirmmoney=confirmmoney;

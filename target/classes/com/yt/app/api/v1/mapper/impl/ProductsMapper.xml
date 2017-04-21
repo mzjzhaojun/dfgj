@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.ProductsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,rdorgid,rdorgname,productid,productcode,productname,productmemo,productstatus,productversion,productprice,productcost,productunit,targetprice,targetpricememo,catalog,subject,grade,year,season,startdate,enddate,partnerid,partnerratio,partnername,specialallowed,tunlandallowed,presentallowed,promotionallowed,promotionquota,confirmstartdate,confirmenddate,confirmmode,confirmstaging,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,rdorgid,rdorgname,productcode,productname,productmemo,productstatus,productversion,productprice,productcost,productunit,targetprice,targetpricememo,catalog,subject,grade,year,season,startdate,enddate,partnerid,partnerratio,partnername,specialallowed,tunlandallowed,presentallowed,promotionallowed,promotionquota,confirmstartdate,confirmenddate,confirmmode,confirmstaging,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Products">
@@ -11,7 +11,6 @@
          <id property="version" column="version" />
          <id property="rdorgid" column="rdorgid" />
          <id property="rdorgname" column="rdorgname" />
-         <id property="productid" column="productid" />
          <id property="productcode" column="productcode" />
          <id property="productname" column="productname" />
          <id property="productmemo" column="productmemo" />
@@ -60,8 +59,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Products">
-  insert into products (id,rdorgid,rdorgname,productid,productcode,productname,productmemo,productstatus,productversion,productprice,productcost,productunit,targetprice,targetpricememo,catalog,subject,grade,year,season,startdate,enddate,partnerid,partnerratio,partnername,specialallowed,tunlandallowed,presentallowed,promotionallowed,promotionquota,confirmstartdate,confirmenddate,confirmmode,confirmstaging,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{rdorgid},#{rdorgname},#{productid},#{productcode},#{productname},#{productmemo},#{productstatus},#{productversion},#{productprice},#{productcost},#{productunit},#{targetprice},#{targetpricememo},#{catalog},#{subject},#{grade},#{year},#{season},#{startdate},#{enddate},#{partnerid},#{partnerratio},#{partnername},#{specialallowed},#{tunlandallowed},#{presentallowed},#{promotionallowed},#{promotionquota},#{confirmstartdate},#{confirmenddate},#{confirmmode},#{confirmstaging},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{submittime},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into products (id,rdorgid,rdorgname,productcode,productname,productmemo,productstatus,productversion,productprice,productcost,productunit,targetprice,targetpricememo,catalog,subject,grade,year,season,startdate,enddate,partnerid,partnerratio,partnername,specialallowed,tunlandallowed,presentallowed,promotionallowed,promotionquota,confirmstartdate,confirmenddate,confirmmode,confirmstaging,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{rdorgid},#{rdorgname},#{productcode},#{productname},#{productmemo},#{productstatus},#{productversion},#{productprice},#{productcost},#{productunit},#{targetprice},#{targetpricememo},#{catalog},#{subject},#{grade},#{year},#{season},#{startdate},#{enddate},#{partnerid},#{partnerratio},#{partnername},#{specialallowed},#{tunlandallowed},#{presentallowed},#{promotionallowed},#{promotionquota},#{confirmstartdate},#{confirmenddate},#{confirmmode},#{confirmstaging},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{submittime},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -80,9 +79,6 @@
              </if>
              <if test="rdorgname != null">
                    rdorgname = #{rdorgname},
-             </if>
-             <if test="productid != null">
-                   productid = #{productid},
              </if>
              <if test="productcode != null">
                    productcode = #{productcode},

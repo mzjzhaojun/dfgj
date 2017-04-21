@@ -3,23 +3,21 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CountryCodeMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,code,cnname,enname,abbreviation,validstatus,sortno
+     id,version,cnname,enname,abbreviation,validstatus
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.CountryCode">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="code" column="code" />
          <id property="cnname" column="cnname" />
          <id property="enname" column="enname" />
          <id property="abbreviation" column="abbreviation" />
          <id property="validstatus" column="validstatus" />
-         <id property="sortno" column="sortno" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.CountryCode">
-  insert into country_code (id,code,cnname,enname,abbreviation,validstatus,sortno)
-         values (#{id},#{code},#{cnname},#{enname},#{abbreviation},#{validstatus},#{sortno})
+  insert into country_code (id,cnname,enname,abbreviation,validstatus)
+         values (#{id},#{cnname},#{enname},#{abbreviation},#{validstatus})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -33,9 +31,6 @@
              <if test="version != null">
                    version = #{version}+1,
              </if>
-             <if test="code != null">
-                   code = #{code},
-             </if>
              <if test="cnname != null">
                    cnname = #{cnname},
              </if>
@@ -46,10 +41,7 @@
                    abbreviation = #{abbreviation},
              </if>
              <if test="validstatus != null">
-                   validstatus = #{validstatus},
-             </if>
-             <if test="sortno != null">
-                   sortno = #{sortno}
+                   validstatus = #{validstatus}
              </if>
           </set>
      where id = #{id} and  version = #{version}

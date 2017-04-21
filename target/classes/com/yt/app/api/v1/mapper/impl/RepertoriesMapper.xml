@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.RepertoriesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,productid,productname,totalquantity,usedquantity,createtime
+     id,version,productname,totalquantity,usedquantity,createtime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Repertories">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="productid" column="productid" />
          <id property="productname" column="productname" />
          <id property="totalquantity" column="totalquantity" />
          <id property="usedquantity" column="usedquantity" />
@@ -17,8 +16,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Repertories">
-  insert into repertories (id,productid,productname,totalquantity,usedquantity,createtime)
-         values (#{id},#{productid},#{productname},#{totalquantity},#{usedquantity},#{createtime})
+  insert into repertories (id,productname,totalquantity,usedquantity,createtime)
+         values (#{id},#{productname},#{totalquantity},#{usedquantity},#{createtime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -31,9 +30,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="productid != null">
-                   productid = #{productid},
              </if>
              <if test="productname != null">
                    productname = #{productname},

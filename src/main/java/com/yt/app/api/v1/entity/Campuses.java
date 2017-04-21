@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:21
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Campuses implements Serializable{
 
   Long id;
   Integer version;
-  Long campusid;
   String campusname;
   String campusshortname;
   Long branchid;
@@ -28,10 +27,9 @@ public class Campuses implements Serializable{
   String regionshortname;
   public Campuses(){
   }
-  public Campuses(Long id,Integer version,Long campusid,String campusname,String campusshortname,Long branchid,String branchname,String branchshortname,Long regionid,String regionname,String regionshortname){
+  public Campuses(Long id,Integer version,String campusname,String campusshortname,Long branchid,String branchname,String branchshortname,Long regionid,String regionname,String regionshortname){
       this.id=id;
       this.version=version;
-      this.campusid=campusid;
       this.campusname=campusname;
       this.campusshortname=campusshortname;
       this.branchid=branchid;

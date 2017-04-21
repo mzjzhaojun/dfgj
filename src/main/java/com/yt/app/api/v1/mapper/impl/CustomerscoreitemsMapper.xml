@@ -3,15 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerscoreitemsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,scoreid,itemid,sortno,subject,teacherid,teachername,teacherorgid,teacherorgname,scorechangetype,paperscore,realscore,graderank,classrank,satisficing,isstudyhere,createtime
+     id,version,scoreid,subject,teacherid,teachername,teacherorgid,teacherorgname,scorechangetype,paperscore,realscore,graderank,classrank,satisficing,isstudyhere,createtime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerscoreitems">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="scoreid" column="scoreid" />
-         <id property="itemid" column="itemid" />
-         <id property="sortno" column="sortno" />
          <id property="subject" column="subject" />
          <id property="teacherid" column="teacherid" />
          <id property="teachername" column="teachername" />
@@ -28,8 +26,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerscoreitems">
-  insert into customerscoreitems (id,scoreid,itemid,sortno,subject,teacherid,teachername,teacherorgid,teacherorgname,scorechangetype,paperscore,realscore,graderank,classrank,satisficing,isstudyhere,createtime)
-         values (#{id},#{scoreid},#{itemid},#{sortno},#{subject},#{teacherid},#{teachername},#{teacherorgid},#{teacherorgname},#{scorechangetype},#{paperscore},#{realscore},#{graderank},#{classrank},#{satisficing},#{isstudyhere},#{createtime})
+  insert into customerscoreitems (id,scoreid,subject,teacherid,teachername,teacherorgid,teacherorgname,scorechangetype,paperscore,realscore,graderank,classrank,satisficing,isstudyhere,createtime)
+         values (#{id},#{scoreid},#{subject},#{teacherid},#{teachername},#{teacherorgid},#{teacherorgname},#{scorechangetype},#{paperscore},#{realscore},#{graderank},#{classrank},#{satisficing},#{isstudyhere},#{createtime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -45,12 +43,6 @@
              </if>
              <if test="scoreid != null">
                    scoreid = #{scoreid},
-             </if>
-             <if test="itemid != null">
-                   itemid = #{itemid},
-             </if>
-             <if test="sortno != null">
-                   sortno = #{sortno},
              </if>
              <if test="subject != null">
                    subject = #{subject},

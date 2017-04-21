@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:21
 */
 @Getter
 @Setter
@@ -21,12 +21,12 @@ public class Campusincomeweeklystat implements Serializable{
   Integer quarterkey;
   Integer monthkey;
   Integer weekkey;
-  String startdayofweek;
-  String enddayofweek;
-  String startdayoflastweek;
-  String enddayoflastweek;
-  String startdayofnextweek;
-  String enddayofnextweek;
+  java.util.Date startdayofweek;
+  java.util.Date enddayofweek;
+  java.util.Date startdayoflastweek;
+  java.util.Date enddayoflastweek;
+  java.util.Date startdayofnextweek;
+  java.util.Date enddayofnextweek;
   Long regionid;
   String regionname;
   Long branchid;
@@ -82,7 +82,7 @@ public class Campusincomeweeklystat implements Serializable{
   Object incometaskmonthafternextmonth;
   public Campusincomeweeklystat(){
   }
-  public Campusincomeweeklystat(Long id,Integer version,Integer yearkey,Integer quarterkey,Integer monthkey,Integer weekkey,String startdayofweek,String enddayofweek,String startdayoflastweek,String enddayoflastweek,String startdayofnextweek,String enddayofnextweek,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Integer availablecustomernumber,Object incometaskyear,Object onetooneincomeyear,Object classgroupincomeyear,Object otherincomeyear,Object totalincomeyearlastyear,Object incometaskquarter,Object onetooneincomequarter,Object classgroupincomequarter,Object otherincomequarter,Object totalincomequarterlastyear,Object incometaskmonth,Object onetooneincomemonth,Object classgroupincomemonth,Object otherincomemonth,Object totalincomemonthlastyear,Object incometasklastweek,Object onetooneincomelastweek,Object classgroupincomelastweek,Object otherincomelastweek,Object totalassignmoneylastweek,Object totalincomelastweeklastyear,Object incometaskthisweek,Object incomethisweeklastyear,Integer assignnumberthisweek,Object assignamountthisweek,Object assignmoneythisweek,Integer nonassignnumberthisweek,Object totalavailableordermoneythisweek,Object expectassignamountthisweek,Object expectincomethisweek,Object incometasknextweek,Object incomenextweeklastyear,Integer assignnumbernextweek,Object assignamountnextweek,Object assignmoneynextweek,Integer nonassignnumbernextweek,Object totalavailableordermoneynextweek,Object expectassignamountnextweek,Object expectincomenextweek,Object remainassignmoneythismonth,Object totalassignmoneythismonth,Object incometaskthismonth,Object incomeplannextmonth,Object incometasknextmonth,Object incomeplanmonthafternextmonth,Object incometaskmonthafternextmonth){
+  public Campusincomeweeklystat(Long id,Integer version,Integer yearkey,Integer quarterkey,Integer monthkey,Integer weekkey,java.util.Date startdayofweek,java.util.Date enddayofweek,java.util.Date startdayoflastweek,java.util.Date enddayoflastweek,java.util.Date startdayofnextweek,java.util.Date enddayofnextweek,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Integer availablecustomernumber,Object incometaskyear,Object onetooneincomeyear,Object classgroupincomeyear,Object otherincomeyear,Object totalincomeyearlastyear,Object incometaskquarter,Object onetooneincomequarter,Object classgroupincomequarter,Object otherincomequarter,Object totalincomequarterlastyear,Object incometaskmonth,Object onetooneincomemonth,Object classgroupincomemonth,Object otherincomemonth,Object totalincomemonthlastyear,Object incometasklastweek,Object onetooneincomelastweek,Object classgroupincomelastweek,Object otherincomelastweek,Object totalassignmoneylastweek,Object totalincomelastweeklastyear,Object incometaskthisweek,Object incomethisweeklastyear,Integer assignnumberthisweek,Object assignamountthisweek,Object assignmoneythisweek,Integer nonassignnumberthisweek,Object totalavailableordermoneythisweek,Object expectassignamountthisweek,Object expectincomethisweek,Object incometasknextweek,Object incomenextweeklastyear,Integer assignnumbernextweek,Object assignamountnextweek,Object assignmoneynextweek,Integer nonassignnumbernextweek,Object totalavailableordermoneynextweek,Object expectassignamountnextweek,Object expectincomenextweek,Object remainassignmoneythismonth,Object totalassignmoneythismonth,Object incometaskthismonth,Object incomeplannextmonth,Object incometasknextmonth,Object incomeplanmonthafternextmonth,Object incometaskmonthafternextmonth){
       this.id=id;
       this.version=version;
       this.yearkey=yearkey;

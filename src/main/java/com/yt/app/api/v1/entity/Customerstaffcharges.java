@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:35
 */
 @Getter
 @Setter
@@ -19,7 +19,7 @@ public class Customerstaffcharges implements Serializable{
   Integer version;
   Long customerid;
   Long staffid;
-  String statlocaldate;
+  java.util.Date statlocaldate;
   Long campusid;
   String relationtype;
   Object newchargeamount;
@@ -27,7 +27,7 @@ public class Customerstaffcharges implements Serializable{
   Object refundamount;
   public Customerstaffcharges(){
   }
-  public Customerstaffcharges(Long id,Integer version,Long customerid,Long staffid,String statlocaldate,Long campusid,String relationtype,Object newchargeamount,Object renewamount,Object refundamount){
+  public Customerstaffcharges(Long id,Integer version,Long customerid,Long staffid,java.util.Date statlocaldate,Long campusid,String relationtype,Object newchargeamount,Object renewamount,Object refundamount){
       this.id=id;
       this.version=version;
       this.customerid=customerid;

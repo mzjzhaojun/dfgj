@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:45
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class EmailMessages implements Serializable{
 
   Long id;
   Integer version;
-  Long message_id;
   String body;
   String body_encoding;
   String headers_encoding;
@@ -27,13 +26,12 @@ public class EmailMessages implements Serializable{
   String subject_encoding;
   Integer status;
   String status_text;
-  String sent_time;
+  java.util.Date sent_time;
   public EmailMessages(){
   }
-  public EmailMessages(Long id,Integer version,Long message_id,String body,String body_encoding,String headers_encoding,String is_body_html,Integer priority,String subject,String subject_encoding,Integer status,String status_text,String sent_time){
+  public EmailMessages(Long id,Integer version,String body,String body_encoding,String headers_encoding,String is_body_html,Integer priority,String subject,String subject_encoding,Integer status,String status_text,java.util.Date sent_time){
       this.id=id;
       this.version=version;
-      this.message_id=message_id;
       this.body=body;
       this.body_encoding=body_encoding;
       this.headers_encoding=headers_encoding;

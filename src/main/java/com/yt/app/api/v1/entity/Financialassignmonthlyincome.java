@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:45
 */
 @Getter
 @Setter
@@ -32,13 +32,13 @@ public class Financialassignmonthlyincome implements Serializable{
   Object allamount;
   Object taxrate;
   String issyn;
-  String syntime;
-  String createtime;
-  String modifytime;
+  java.util.Date syntime;
+  java.util.Date createtime;
+  java.util.Date modifytime;
   String financialcode;
   public Financialassignmonthlyincome(){
   }
-  public Financialassignmonthlyincome(Long id,Integer version,Integer checkyear,Integer checkmonth,String branchid,String branchname,String campusid,String campusname,String categorytype,String categoryname,String catalog,String catalogname,Object amount,Object taxamount,Object allamount,Object taxrate,String issyn,String syntime,String createtime,String modifytime,String financialcode){
+  public Financialassignmonthlyincome(Long id,Integer version,Integer checkyear,Integer checkmonth,String branchid,String branchname,String campusid,String campusname,String categorytype,String categoryname,String catalog,String catalogname,Object amount,Object taxamount,Object allamount,Object taxrate,String issyn,java.util.Date syntime,java.util.Date createtime,java.util.Date modifytime,String financialcode){
       this.id=id;
       this.version=version;
       this.checkyear=checkyear;

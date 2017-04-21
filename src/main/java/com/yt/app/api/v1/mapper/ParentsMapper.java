@@ -11,7 +11,7 @@ import com.yt.app.common.base.IBaseMapper;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:51
 */
 
 public interface ParentsMapper extends IBaseMapper<Parents> {

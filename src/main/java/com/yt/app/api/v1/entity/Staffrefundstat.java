@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:57
 */
 @Getter
 @Setter
@@ -17,7 +17,7 @@ public class Staffrefundstat implements Serializable{
 
   Long id;
   Integer version;
-  String statlocaldate;
+  java.util.Date statlocaldate;
   Long customerid;
   Long staffid;
   String staffoacode;
@@ -34,7 +34,7 @@ public class Staffrefundstat implements Serializable{
   Long hqid;
   String hqname;
   String hqshortname;
-  String campusdeliverdate;
+  java.util.Date campusdeliverdate;
   Integer campusage;
   Integer staffjobtype;
   String staffjobname;
@@ -46,7 +46,7 @@ public class Staffrefundstat implements Serializable{
   Object realrefundmoney;
   public Staffrefundstat(){
   }
-  public Staffrefundstat(Long id,Integer version,String statlocaldate,Long customerid,Long staffid,String staffoacode,String staffoaname,Long campusid,String campusname,String campusshortname,Long branchid,String branchname,String branchshortname,Long regionid,String regionname,String regionshortname,Long hqid,String hqname,String hqshortname,String campusdeliverdate,Integer campusage,Integer staffjobtype,String staffjobname,String grade,String gradename,Integer refundtype,String refundtypename,Object applyrefundmoney,Object realrefundmoney){
+  public Staffrefundstat(Long id,Integer version,java.util.Date statlocaldate,Long customerid,Long staffid,String staffoacode,String staffoaname,Long campusid,String campusname,String campusshortname,Long branchid,String branchname,String branchshortname,Long regionid,String regionname,String regionshortname,Long hqid,String hqname,String hqshortname,java.util.Date campusdeliverdate,Integer campusage,Integer staffjobtype,String staffjobname,String grade,String gradename,Integer refundtype,String refundtypename,Object applyrefundmoney,Object realrefundmoney){
       this.id=id;
       this.version=version;
       this.statlocaldate=statlocaldate;

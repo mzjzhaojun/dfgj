@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerteacherrelationsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,customerid,teacherid,teachername,teacherjobid,teacherjobname,teacheroacode,teacherjoborgid,teacherjoborgname,isfulltimeteacher,creatorid,creatorname,createtime,versionstarttime,versionendtime
+     id,version,customerid,teacherid,teachername,teacherjobid,teacherjobname,teacheroacode,teacherjoborgid,teacherjoborgname,isfulltimeteacher,creatorid,creatorname,createtime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerteacherrelations">
@@ -21,13 +21,11 @@
          <id property="creatorid" column="creatorid" />
          <id property="creatorname" column="creatorname" />
          <id property="createtime" column="createtime" />
-         <id property="versionstarttime" column="versionstarttime" />
-         <id property="versionendtime" column="versionendtime" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerteacherrelations">
-  insert into customerteacherrelations (id,customerid,teacherid,teachername,teacherjobid,teacherjobname,teacheroacode,teacherjoborgid,teacherjoborgname,isfulltimeteacher,creatorid,creatorname,createtime,versionstarttime,versionendtime)
-         values (#{id},#{customerid},#{teacherid},#{teachername},#{teacherjobid},#{teacherjobname},#{teacheroacode},#{teacherjoborgid},#{teacherjoborgname},#{isfulltimeteacher},#{creatorid},#{creatorname},#{createtime},#{versionstarttime},#{versionendtime})
+  insert into customerteacherrelations (id,customerid,teacherid,teachername,teacherjobid,teacherjobname,teacheroacode,teacherjoborgid,teacherjoborgname,isfulltimeteacher,creatorid,creatorname,createtime)
+         values (#{id},#{customerid},#{teacherid},#{teachername},#{teacherjobid},#{teacherjobname},#{teacheroacode},#{teacherjoborgid},#{teacherjoborgname},#{isfulltimeteacher},#{creatorid},#{creatorname},#{createtime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -75,13 +73,7 @@
                    creatorname = #{creatorname},
              </if>
              <if test="createtime != null">
-                   createtime = #{createtime},
-             </if>
-             <if test="versionstarttime != null">
-                   versionstarttime = #{versionstarttime},
-             </if>
-             <if test="versionendtime != null">
-                   versionendtime = #{versionendtime}
+                   createtime = #{createtime}
              </if>
           </set>
      where id = #{id} and  version = #{version}

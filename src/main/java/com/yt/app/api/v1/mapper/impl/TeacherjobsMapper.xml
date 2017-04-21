@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.TeacherjobsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,jobid,jobname,joborgid,joborgname,joborgtype,jobstatus,teacherid,campusid,campusname,isfulltime
+     id,version,jobname,joborgid,joborgname,joborgtype,jobstatus,teacherid,campusid,campusname,isfulltime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Teacherjobs">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="jobid" column="jobid" />
          <id property="jobname" column="jobname" />
          <id property="joborgid" column="joborgid" />
          <id property="joborgname" column="joborgname" />
@@ -22,8 +21,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Teacherjobs">
-  insert into teacherjobs (id,jobid,jobname,joborgid,joborgname,joborgtype,jobstatus,teacherid,campusid,campusname,isfulltime)
-         values (#{id},#{jobid},#{jobname},#{joborgid},#{joborgname},#{joborgtype},#{jobstatus},#{teacherid},#{campusid},#{campusname},#{isfulltime})
+  insert into teacherjobs (id,jobname,joborgid,joborgname,joborgtype,jobstatus,teacherid,campusid,campusname,isfulltime)
+         values (#{id},#{jobname},#{joborgid},#{joborgname},#{joborgtype},#{jobstatus},#{teacherid},#{campusid},#{campusname},#{isfulltime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -36,9 +35,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="jobid != null">
-                   jobid = #{jobid},
              </if>
              <if test="jobname != null">
                    jobname = #{jobname},

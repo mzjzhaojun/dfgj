@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:26
 */
 @Getter
 @Setter
@@ -24,10 +24,10 @@ public class Consultcountryperfdaysum implements Serializable{
   Integer peoplecount;
   Object newmoneycount;
   Integer newpeoplecount;
-  String createtime;
+  java.util.Date createtime;
   public Consultcountryperfdaysum(){
   }
-  public Consultcountryperfdaysum(Long id,Integer version,Integer year,Integer month,Integer day,Object moneycount,Integer peoplecount,Object newmoneycount,Integer newpeoplecount,String createtime){
+  public Consultcountryperfdaysum(Long id,Integer version,Integer year,Integer month,Integer day,Object moneycount,Integer peoplecount,Object newmoneycount,Integer newpeoplecount,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.year=year;

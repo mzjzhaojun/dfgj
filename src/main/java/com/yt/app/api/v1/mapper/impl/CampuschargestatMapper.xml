@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CampuschargestatMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,statlocaldate,campusid,campusname,campusshortname,branchid,branchname,branchshortname,regionid,regionname,regionshortname,hqid,hqname,hqshortname,campusdeliverdate,campusage,newchargeamount,renewamount,refundamount
+     id,version,campusid,campusname,campusshortname,branchid,branchname,branchshortname,regionid,regionname,regionshortname,hqid,hqname,hqshortname,campusdeliverdate,campusage,newchargeamount,renewamount,refundamount
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Campuschargestat">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="statlocaldate" column="statlocaldate" />
          <id property="campusid" column="campusid" />
          <id property="campusname" column="campusname" />
          <id property="campusshortname" column="campusshortname" />
@@ -30,8 +29,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Campuschargestat">
-  insert into campuschargestat (id,statlocaldate,campusid,campusname,campusshortname,branchid,branchname,branchshortname,regionid,regionname,regionshortname,hqid,hqname,hqshortname,campusdeliverdate,campusage,newchargeamount,renewamount,refundamount)
-         values (#{id},#{statlocaldate},#{campusid},#{campusname},#{campusshortname},#{branchid},#{branchname},#{branchshortname},#{regionid},#{regionname},#{regionshortname},#{hqid},#{hqname},#{hqshortname},#{campusdeliverdate},#{campusage},#{newchargeamount},#{renewamount},#{refundamount})
+  insert into campuschargestat (id,campusid,campusname,campusshortname,branchid,branchname,branchshortname,regionid,regionname,regionshortname,hqid,hqname,hqshortname,campusdeliverdate,campusage,newchargeamount,renewamount,refundamount)
+         values (#{id},#{campusid},#{campusname},#{campusshortname},#{branchid},#{branchname},#{branchshortname},#{regionid},#{regionname},#{regionshortname},#{hqid},#{hqname},#{hqshortname},#{campusdeliverdate},#{campusage},#{newchargeamount},#{renewamount},#{refundamount})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -44,9 +43,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="statlocaldate != null">
-                   statlocaldate = #{statlocaldate},
              </if>
              <if test="campusid != null">
                    campusid = #{campusid},

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:22
 */
 @Getter
 @Setter
@@ -21,10 +21,10 @@ public class Campusrenewweeklystat implements Serializable{
   Integer quarterkey;
   Integer monthkey;
   Integer weekkey;
-  String startdayofweek;
-  String enddayofweek;
-  String startdayoflastweek;
-  String enddayoflastweek;
+  java.util.Date startdayofweek;
+  java.util.Date enddayofweek;
+  java.util.Date startdayoflastweek;
+  java.util.Date enddayoflastweek;
   Long regionid;
   String regionname;
   Long branchid;
@@ -84,7 +84,7 @@ public class Campusrenewweeklystat implements Serializable{
   Object raplan;
   public Campusrenewweeklystat(){
   }
-  public Campusrenewweeklystat(Long id,Integer version,Integer yearkey,Integer quarterkey,Integer monthkey,Integer weekkey,String startdayofweek,String enddayofweek,String startdayoflastweek,String enddayoflastweek,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Integer availablecustomernumber,Object rataskyear,Object rayear,Object rafinishrateyear,Object rayoyyear,Object rayoyrateyear,Integer rnyear,Integer rnyoyyear,Object rnyoyrateyear,Object rataskquarter,Object raquarter,Object rafinishratequarter,Object rayoyquarter,Object rayoyratequarter,Integer rnquarter,Integer rnyoyquarter,Object rnyoyratequarter,Object rataskmonth,Object ramonth,Object rafinishratemonth,Object rayoymonth,Object rayoyratemonth,Integer rnmonth,Integer rnyoymonth,Object rnyoyratemonth,Object ratasklastweek,Object ralastweek,Object rafinishratelastweek,Object raplanlastweek,Object raplandifflastweek,Object rayoylastweek,Object rayoyratelastweek,Integer rntasklastweek,Integer rnlastweek,Object rnfinishratelastweek,Integer rnplanlastweek,Integer rnplandifflastweek,Integer rnyoylastweek,Object rnyoyratelastweek,Object rataskthisweek,Object rayoythisweek,Object raplanthisweek,Object raplandiffthisweek,Integer rntaskthisweek,Integer rnyoythisweek,Integer rnplanthisweek,Integer rnplandiffthisweek,Integer cfnrcustomernumber,Integer customernumberav2000,Integer rnplan,Object raplan){
+  public Campusrenewweeklystat(Long id,Integer version,Integer yearkey,Integer quarterkey,Integer monthkey,Integer weekkey,java.util.Date startdayofweek,java.util.Date enddayofweek,java.util.Date startdayoflastweek,java.util.Date enddayoflastweek,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Integer availablecustomernumber,Object rataskyear,Object rayear,Object rafinishrateyear,Object rayoyyear,Object rayoyrateyear,Integer rnyear,Integer rnyoyyear,Object rnyoyrateyear,Object rataskquarter,Object raquarter,Object rafinishratequarter,Object rayoyquarter,Object rayoyratequarter,Integer rnquarter,Integer rnyoyquarter,Object rnyoyratequarter,Object rataskmonth,Object ramonth,Object rafinishratemonth,Object rayoymonth,Object rayoyratemonth,Integer rnmonth,Integer rnyoymonth,Object rnyoyratemonth,Object ratasklastweek,Object ralastweek,Object rafinishratelastweek,Object raplanlastweek,Object raplandifflastweek,Object rayoylastweek,Object rayoyratelastweek,Integer rntasklastweek,Integer rnlastweek,Object rnfinishratelastweek,Integer rnplanlastweek,Integer rnplandifflastweek,Integer rnyoylastweek,Object rnyoyratelastweek,Object rataskthisweek,Object rayoythisweek,Object raplanthisweek,Object raplandiffthisweek,Integer rntaskthisweek,Integer rnyoythisweek,Integer rnplanthisweek,Integer rnplandiffthisweek,Integer cfnrcustomernumber,Integer customernumberav2000,Integer rnplan,Object raplan){
       this.id=id;
       this.version=version;
       this.yearkey=yearkey;

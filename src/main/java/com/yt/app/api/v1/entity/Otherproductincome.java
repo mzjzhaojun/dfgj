@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:50
 */
 @Getter
 @Setter
@@ -17,7 +17,7 @@ public class Otherproductincome implements Serializable{
 
   Long id;
   Integer version;
-  String statlocaldate;
+  java.util.Date statlocaldate;
   Long customerid;
   Long campusid;
   Integer producttype;
@@ -26,7 +26,7 @@ public class Otherproductincome implements Serializable{
   Object income;
   public Otherproductincome(){
   }
-  public Otherproductincome(Long id,Integer version,String statlocaldate,Long customerid,Long campusid,Integer producttype,Object amount,Object duration,Object income){
+  public Otherproductincome(Long id,Integer version,java.util.Date statlocaldate,Long customerid,Long campusid,Integer producttype,Object amount,Object duration,Object income){
       this.id=id;
       this.version=version;
       this.statlocaldate=statlocaldate;

@@ -7,7 +7,7 @@
     <meta http-equiv="description" content="this is my page">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-     <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+     <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../../../resource/css/list.css">
     <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
     <script type="text/javascript" src="../../../../resource/js/getUrlParam.js"></script>
     
-    <script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+    
     
     <!-- 分页 -->
 		<script type="text/javascript" src="../../../../resource/js/paging.js"></script>
@@ -63,7 +63,7 @@
 			 	  var data1 = {"name":getn};
 			 	 pageNo = parent.currentPage;
 				$http({
-					url:parent.getMenuLinksHref("roleself"),
+					url:parent.getMenuLinksHref("rolelist"),
 					method:'POST',
 					dataType : "json",
 					withCredentials: true,

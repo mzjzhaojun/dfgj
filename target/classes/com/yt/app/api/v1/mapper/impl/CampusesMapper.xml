@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CampusesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,campusid,campusname,campusshortname,branchid,branchname,branchshortname,regionid,regionname,regionshortname
+     id,version,campusname,campusshortname,branchid,branchname,branchshortname,regionid,regionname,regionshortname
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Campuses">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="campusid" column="campusid" />
          <id property="campusname" column="campusname" />
          <id property="campusshortname" column="campusshortname" />
          <id property="branchid" column="branchid" />
@@ -21,8 +20,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Campuses">
-  insert into campuses (id,campusid,campusname,campusshortname,branchid,branchname,branchshortname,regionid,regionname,regionshortname)
-         values (#{id},#{campusid},#{campusname},#{campusshortname},#{branchid},#{branchname},#{branchshortname},#{regionid},#{regionname},#{regionshortname})
+  insert into campuses (id,campusname,campusshortname,branchid,branchname,branchshortname,regionid,regionname,regionshortname)
+         values (#{id},#{campusname},#{campusshortname},#{branchid},#{branchname},#{branchshortname},#{regionid},#{regionname},#{regionshortname})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -35,9 +34,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="campusid != null">
-                   campusid = #{campusid},
              </if>
              <if test="campusname != null">
                    campusname = #{campusname},

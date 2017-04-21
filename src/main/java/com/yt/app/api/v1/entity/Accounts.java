@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:18
 */
 @Getter
 @Setter
@@ -18,7 +18,6 @@ public class Accounts implements Serializable{
   Long id;
   Integer version;
   Long customerid;
-  Long accountid;
   String accountcode;
   String accounttype;
   String accountmemo;
@@ -29,24 +28,21 @@ public class Accounts implements Serializable{
   Object discountrate;
   Object discountbase;
   Long chargeapplyid;
-  String chargepaytime;
-  String firstchargepaytime;
+  java.util.Date chargepaytime;
+  java.util.Date firstchargepaytime;
   Long firstchargeapplyid;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
-  String versionstarttime;
-  String versionendtime;
+  java.util.Date modifytime;
   public Accounts(){
   }
-  public Accounts(Long id,Integer version,Long customerid,Long accountid,String accountcode,String accounttype,String accountmemo,String accountstatus,Object accountmoney,Long discountid,String discountcode,Object discountrate,Object discountbase,Long chargeapplyid,String chargepaytime,String firstchargepaytime,Long firstchargeapplyid,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime,String versionstarttime,String versionendtime){
+  public Accounts(Long id,Integer version,Long customerid,String accountcode,String accounttype,String accountmemo,String accountstatus,Object accountmoney,Long discountid,String discountcode,Object discountrate,Object discountbase,Long chargeapplyid,java.util.Date chargepaytime,java.util.Date firstchargepaytime,Long firstchargeapplyid,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.customerid=customerid;
-      this.accountid=accountid;
       this.accountcode=accountcode;
       this.accounttype=accounttype;
       this.accountmemo=accountmemo;
@@ -66,7 +62,5 @@ public class Accounts implements Serializable{
       this.modifierid=modifierid;
       this.modifiername=modifiername;
       this.modifytime=modifytime;
-      this.versionstarttime=versionstarttime;
-      this.versionendtime=versionendtime;
   }
 }

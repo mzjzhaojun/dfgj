@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:35
 */
 @Getter
 @Setter
@@ -43,11 +43,11 @@ public class Customerteacherassignapplies implements Serializable{
   String status;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long tenantcode;
   public Customerteacherassignapplies(){
   }
-  public Customerteacherassignapplies(Long id,Integer version,Long customerteacherrelationid,String applytype,Long campusid,String campusname,Long customerid,Long oldteacherid,Long oldteacherjobid,String oldteacherjobname,String oldteacheroacode,String oldteachername,Long oldteacherjoborgid,String oldteacherjoborgname,Integer oldisfulltimeteacher,Long newteacherid,Long newteacherjobid,String newteacherjobname,String newteacheroacode,String newteachername,Long newteacherjoborgid,String newteacherjoborgname,Integer newisfulltimeteacher,String reason,String reasondescription,String status,Long creatorid,String creatorname,String createtime,Long tenantcode){
+  public Customerteacherassignapplies(Long id,Integer version,Long customerteacherrelationid,String applytype,Long campusid,String campusname,Long customerid,Long oldteacherid,Long oldteacherjobid,String oldteacherjobname,String oldteacheroacode,String oldteachername,Long oldteacherjoborgid,String oldteacherjoborgname,Integer oldisfulltimeteacher,Long newteacherid,Long newteacherjobid,String newteacherjobname,String newteacheroacode,String newteachername,Long newteacherjoborgid,String newteacherjoborgname,Integer newisfulltimeteacher,String reason,String reasondescription,String status,Long creatorid,String creatorname,java.util.Date createtime,Long tenantcode){
       this.id=id;
       this.version=version;
       this.customerteacherrelationid=customerteacherrelationid;

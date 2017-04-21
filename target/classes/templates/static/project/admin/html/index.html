@@ -2,7 +2,6 @@
 <html ng-app="main">
   <head>
     <title>控制系统-首页</title>
-	
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="this is my page">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -11,29 +10,22 @@
     <link rel="stylesheet" type="text/css" href="../../../resource/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../../resource/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="../../../resource/css/menu.css">
+    <script type="text/javascript" src="../../../resource/js/config.js"></script>
     <script type="text/javascript" src="../../../resource/js/angular-1.0.1.min.js"></script>
     <script type="text/javascript" src="../../../resource/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="../../../resource/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../../resource/js/getUrlParam.js"></script>
    <script type="text/javascript" src="../../../resource/js/response.js"></script>
-   <script type="text/javascript" src="../../../resource/js/jquery.cookie.js"></script>
     <!-- 弹出框 -->
     <script type="text/javascript" src="../../../resource/js/artDialog/skins/js/artDialog.source.js?skin=default"></script>
     <script type="text/javascript" src="../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
 	<script type="text/javascript" src="../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
-	<!-- 地址配置  -->
-	<script type="text/javascript" src="../../../resource/js/config.js"></script>
 	<script type="text/javascript">
-		var menulinks;
-		var functionLinks;
-		var menuData;
 		var currentPage = 1;
-		var menu = [];
-
 		var main = angular.module("main", []);
+		var childsysname,three,menu,sys,functionLinks,syslinks,menulinks;
 		main.controller("mainController", function($scope, $http) {
 			$scope.initaccount = function(){
-			    // 获取一级数据
 				$http({
 					url:sys.accounturl,
 					method:'GET',
@@ -42,14 +34,11 @@
 					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
 					data: ''				
 					}).success(function(data, status, headers, config){
-						//响应成功
 						$scope.name = data.name;
 					}).error(function(data, status, headers, config){
-						//处理响应失败
 						response(status);
 					});
 			}
-			//退出
 			$scope.onExit = function(){
 				parent.art.dialog({
 					content: '你确定要退出系统吗？',
@@ -59,10 +48,9 @@
 					},
 					time:1000,
 					cancelVal: '关闭',
-					cancel: true //为true等价于function(){}
+					cancel: true
 				});
 			}
-			
 			$scope.initaccount();
 		})
 		function loginout(){
@@ -81,239 +69,134 @@
 			});
 		}
 
-		//删除提示
 		function onPopupDelete() {
 			dialogForButton("删除提示", "您确定要删除此条记录？", true, first, "第一", second,
 					"第二", 300, 100);
 		}
-		//确定
 		function first() {
 			document.getElementById("main").contentWindow.confirmDeletion();
 		}
-		//取消
 		function second() {
 
 		}
-		//获取登录用户的模块
 		function roleModul(url) {
-			sys.onesys = TempCache.getItem('onesys');
-			sys.twosys = TempCache.getItem('twosys');
-			sys.oneorder = TempCache.getItem('oneorder');
 			$.ajax({
 				type : "POST",
 				url : url,
-				data : JSON.stringify({osname:sys.twosys}),
+				data : '',
 				async : false,
 				dataType : 'json',
 				headers : {'Content-Type' : 'application/json;charset=UTF-8;'},
 				success : function(_data) {
-					var currentSys = false;
-					menuData = _data.sysmenu;
-					$.each(menuData,function(index,element){
-						if(element.name == sys.onesys){
-							$.each(element.child,function(index,ele){
-								if(ele.name == sys.twosys){
-									setMenuList(menuData,31,sys.onesys,sys.oneorder,'2',sys.twosys,index);
-									currentSys = true;
-								}
-							})
-						}
-					})
-					/* 不存在控制系统的情况下 */
-					if(!currentSys){
-						/* 进入当前用户拥有的第一个系统 */
-						$.each(menuData[0].child,function(index,ele){
-								initSysConf(menuData[0].name,ele.name,index);
-								location.href=ele.url;
-								return;
-						})
-					}
-					
+					sys = _data.sysmenu;
+					initSysMenu();
 				},
 				error : function(XMLHttpRequest, textStatus,errorThrown) {
 					response(XMLHttpRequest.status);
 				}
 			});
 		}
-		/* 初始化菜单，参数1菜单数据及对应功能,参数2一级系统,参数3一级系统名称,参数4第几个一级系统，参数5二级系统,参数6二级系统名称，参数7第几个二级系统 */
-		function setMenuList(data,lvl,name,order,lvl1,name1,order1,op){
-			var sys = data;
-			var len = sys.length;
-			var sysName,sysName1,level,level1,sysUrl,sysId,sysChild,menus,menus1,sysChild_len,menus_len,menuName,menuId;
-			var className;
-			var html = '';
-			html = '<li> <span class="glyphicon glyphicon-resize-vertical"></span> </li>';
-			/* 一级系统 */
-			for(var i = 0;i<len;i++){
+		function initSysMenu(){
+			var sysName,level,sysUrl,sysId,sysChild,remark,className,remark2,sysName2;
+			var html = '<li> <span class="glyphicon glyphicon-resize-vertical"></span> </li>';
+			for(var i = 0;i<sys.length;i++){
 				sysName = sys[i].name;
 				level = sys[i].level;
 				sysUrl = sys[i].linkUrl;
 				sysId = sys[i].id;
-				if(lvl == 31 && sysName1 != name){//点击一级系统切换数据
+				remark = sys[i].remark;
+				if(level == 31){
 					sysChild = sys[i].child;
-				}else{
-					sysChild = sys[0].child;
 				}
-				html +='<li> <p class="btn-deepblack" order="'+i+'" sysId="'+sysId+'"><i class="icon-caret-right icon-large" data-toggle="tooltip" data-placement="right"></i><span level="'+level+'">'+sysName+'</span><span class="glyphicon glyphicon-cog menu_img" data-toggle="tooltip" data-placement="right" title="'+sysName+'"></span></p>';
+				html +='<li> <p class="btn-deepblack" order="'+remark+'" sysId="'+sysId+'"><i class="icon-caret-right icon-large" data-toggle="tooltip" data-placement="right"></i><span level="'+level+'">'+sysName+'</span></p>';
 				if(sysChild != undefined){
-					sysChild_len = sysChild.length;
-					/* 二级系统 */
-					if(sysChild_len >0 ){
+					if(sysChild.length >0 ){
 						html +='<div class="list-group twolist">';
-						for(var j=0;j<sysChild_len;j++){
-							sysName1 = sysChild[j].name;
-							level1 = sysChild[j].level;
+						for(var j=0;j<sysChild.length;j++){
+							sysName2 = sysChild[j].name;
+							level = sysChild[j].level;
 							sysUrl = sysChild[j].url;
 							sysId = sysChild[j].id;
+							remark2 = sysChild[j].remark;
 							if(j == 0){
-								className = "glyphicon glyphicon-cog";
+								className = 'glyphicon glyphicon-cog  data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
 							}else if(j == 1){
-								className = "glyphicon glyphicon-book";
+								className = 'glyphicon glyphicon-book data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
 							}else if(j == 2){
-								className = "glyphicon glyphicon-shopping-cart";
+								className = 'glyphicon glyphicon-shopping-cart data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
 							}else if(j == 3){
-								className = "glyphicon glyphicon-pencil";
+								className = 'glyphicon glyphicon-pencil data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
 							}else if(j == 4){
-								className = "glyphicon glyphicon-home";
+								className = 'glyphicon glyphicon-home data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
 							}
-							html +='<label order="'+i+'" order1="'+j+'" sysName="'+sysName+'" level="'+level+'" sysId="'+sysId+'" url="'+sysUrl+'"><span class="'+className+'"></span><span level="'+level1+'">'+sysName1+'</span></label>';
-							if(lvl1 == 2 && sysName1 == name1){//点击二级系统切换数据
-								menus = sysChild[j].menus;//系统对应的菜单
-								$("#two_name").html(sysName1);
+							html +='<label order="'+remark+'" order1="'+remark2+'" sysName="'+sysName+'" level="'+level+'" sysId="'+sysId+'" url="'+sysUrl+'"><span class="'+className+'"></span><span level="'+level+'">'+sysName2+'</span></label>';
+							if(level == 32){
+								$("#two_name").html(sysName);
 							}
 						}
 						html +='</div>';
-						if(menus != undefined){
-							/* 一级菜单 */
-							var html1 = '';
-							menus_len = menus.length;
-							menu.length = 0;
-							for(var k = 0;k<menus_len;k++){
-								menuName = menus[k].name;
-								menuId = menus[k].id;
-								var obj = {}
-								obj.modulename = menuName;
-								obj.url = menus[k].url;
-								obj.links = menus[k].links;
-								menu.push(obj);
-								if(menus[0].url != undefined){
-									var url = getMenuLinks(menus[0].name);
-									$("#main").attr("src", url);
-								}
-								menus1 = menus[k].child;
-								if(menus != undefined){
-									/* 二级菜单 */
-									var menus_len2 = menus1.length;
-									if(menus_len2 > 0){//存在二级菜单的情况
-										html1 += '<li> <p class="btn-lightblack" id="'+menuId+'"><i class="icon-caret-right"></i> <span>'+menuName+'</span></p>';
-										html1 +='<div class="list-group fourlist" id="test1">'
-										 for(var x = 0;x<menus_len2;x++){
-											menuName = menus1[x].name;
-											menuId = menus1[x].id;
-											var obj = {}
-											obj.modulename = menuName;
-											obj.url = menus1[x].url;
-											obj.links = menus1[x].links;
-											menu.push(obj);
-											html1 += '<label class="btn-lightblack" id="'+menuId+'"><span class="glyphicon "></span><span>'+menuName+'</span></label>'
-										}  
-									}else{
-										html1 += '<li> <p class="btn-lightblack" id="'+menuId+'"> <span class="span_box">'+menuName+'</span></p>';
-									}
-									 '</div>';
-								}
-								html1 +='</li>';
-								$('.thirdmenu').html(html1);
-							}
-						} 
 					}
 				}
 				html +='</li>';
 			}
 			$(".onemenu").html(html);
-			$('.onemenu > li + li:eq('+order+')> div').show();
-			$('.onemenu > li + li:eq('+order+')> div >label:eq('+order1+')').addClass("btn-primary");
-			$('.onemenu > li + li:eq('+order+')>p').find("i:eq(0)").removeClass("icon-caret-right").addClass("icon-caret-down");
+			$('.onemenu > li + li:eq('+remark+')> div').show();
+			$('.onemenu > li + li:eq('+remark+')> div >label:eq('+remark+')').addClass("btn-primary");
+			$('.onemenu > li + li:eq('+remark+')>p').find("i:eq(0)").removeClass("icon-caret-right").addClass("icon-caret-down");
 			$(".thirdmenu").find("li:eq(0)>p").addClass("btn-whiteblack").removeClass("btn-lightblack");
-			//$(".thirdmenu").find("li:eq(0)>div>li:eq(0)").addClass("btn-whiteblack");
-			/* 有二级菜单显示二级菜单 */
-			var text  = $(".thirdmenu").find("li:eq(0)>div>label:eq(0)>span+span").html();//二级菜单
-			var url = getMenuLinks(text);
-			$(".breadcrumb").css({"color":"#000","background":"#fff"});
-			if(text  != undefined){
-				$('.thirdmenu >li:eq(0)>p').find("i").removeClass("icon-caret-right").addClass("icon-caret-down");
-				text =  $("#two_name").html()+" / "+text;
-				$(".thirdmenu").find("li:eq(0)>div").show();
-				$("#main").attr("src", url);
-			}else{
-				var text  = $(".thirdmenu").find("li:eq(0)>p>span").html();//一级菜单
-				var url = getMenuLinks(text);
-				text =  $("#two_name").html() +" / "+ $(".thirdmenu").find("li:eq(0)>p>span").html();
-				$("#main").attr("src", url);
-			}
-			$("#path").html(text);
 			rightArea();
-			if(lvl = 1 && lvl1 == ""){
-				var parentEle = $(op).parent();
-				$(parentEle).find(".twolist > label:eq(0)").trigger("click");
-			}
+			$(".onemenu").find(".twolist > label:eq(0)").trigger("click");
 		}
-		//未登录跳转到登录页面
+		function initMenuList(menus){
+			menu = [];
+			if(menus != undefined && menus.length>0){
+				var html = '';
+				var first ="";
+				for(var k = 0;k<menus.length;k++){
+					menuName = menus[k].name;
+					menuId = menus[k].id;
+					var obj = {}
+					obj.name = menuName;
+					obj.url = menus[k].url;
+					obj.links = menus[k].links;
+					menu.push(obj);
+					var menus1 = menus[k].child;
+					var menus_len = 0;
+					if(menus1 != undefined)
+						menus_len = menus1.length;
+					if(menus_len > 0){
+						html += '<li> <p class="btn-lightblack" id="'+menuId+'"><i class="icon-caret-right"></i> <span>'+menuName+'</span></p>';
+						html +='<div class="list-group2 fourlist" id="test1">'
+						 for(var x = 0;x<menus_len;x++){
+							menuName = menus1[x].name;
+							menuId = menus1[x].id;
+							var obj = {}
+							obj.name = menuName;
+							obj.url = menus1[x].url;
+							obj.links = menus1[x].links;
+							if(first=="")
+								first = obj.url;
+							menu.push(obj);
+							html += '<label class="btn-lightblack" id="'+menuId+'"><span class="glyphicon "></span><span class="span_box2">'+menuName+'</span></label>'
+						} 
+						$("#main").attr("src", first);
+					}else{
+						html += '<li> <p class="btn-lightblack" id="'+menuId+'"> <span class="span_box">'+menuName+'</span></p>';
+					}
+					 '</div>';
+					html +='</li>';
+					$('.thirdmenu').html(html);
+				}
+				if(menu[0].url != ""){
+					var url = getMenuLinks(menu[0].name);
+					$("#main").attr("src", url);
+				}
+			} 
+		}
 		function onLogin(){
 			location.href = "/dfgj/static/project/login/html/index.html";
 		}
-		
-		//获取点击菜单
-		function getMenuLinks(menuname){
-			var url;
-			$.each( menu, function( index, ele ) {
-					if(ele.modulename==menuname){
-						menulinks =  ele.links;
-						url   =  ele.url;
-					}
-				}
-			)
-			return url;
-		}
-		
-		//获取菜单的动态链接
-		function getMenuLinksHref(key){
-			var href;
-			$.each( menulinks, function( index, ele ) {
-					if(ele.rel==key){
-						href =  ele.href;
-					}
-				}
-			)
-			return href;
-		}
-		
-		//获取菜单的动态链接
-		function setMenuLinksHref(_menulinks){
-			menulinks = _menulinks;
-		}
-		
-		//设置功能的动态链接
-		function setFunctionLinksHref(_functionLinks){
-			functionLinks = _functionLinks;
-		}
-		
-		//获取功能的动态链接
-		function getFunctionLinksHref(key){
-			var href;
-			$.each(functionLinks, function( index, ele ) {
-					var code = ele.rel ==null?index:ele.rel;
-					if(code==key){
-						href =  ele.href;
-					}
-				}
-			)
-			return href;
-		}
 		$(function(){
-			currentPage = 1;
-			roleModul(sys.sysUrl);
-			/* 一级菜单折叠展开 */
 			$(document).on("click",".onemenu li:eq(0)",function(){
 				var switch1 = $('#menu_image').attr("switch");
 				var left = $('#menu_image').css("left");
@@ -371,7 +254,6 @@
 				}
 				rightArea();
 			});
-			/* 一级菜单点击事件二级展开 */
 			$(document).on("click",".onemenu > li + li > p",function(){
 				var className = $('.onemenu li:eq(0)').children().attr('class');
 				if(className == 'glyphicon glyphicon-resize-vertical'){
@@ -385,59 +267,61 @@
 					var level = $(this).find("span:eq(0)").attr("level");
 					var order = $(this).attr("order");
 					var sysName1 = $(this).parent().find(".twolist > label:eq(0)>span:eq(1)").html();
-					initSysConf(sysName,sysName1,order);
-					//setMenuList(menuData,level,sysName,order,'','',0,this);
-					//$(this).parent().find(".twolist > label:eq(0)").trigger("click");
 					$(this).parent().find("div").slideToggle();
 				}
 				rightArea();
 			});
-			/* 二级点击事件 */
 			$(document).on("click",".twolist > label",function(){
-				var className = $('.onemenu li:eq(0)').children().attr('class');
-				//if(className == 'glyphicon glyphicon-resize-vertical'){
-				var level = $(this).attr("level");
-				var sysName = $(this).attr("sysName");
-				var order = $(this).attr("order");
-				var order1 = $(this).attr("order1");
-				var sysName1 = $(this).find("span:eq(1)").html();
-				initSysConf(sysName,sysName1,order);
-				var url = $(this).attr("url");
-				location.href=url;
+				var name = $(this).attr("sysName");
+				var remark= $(this).attr("order");
+				var remark1= $(this).attr("order1");
+				childsysname = $(this).find("span:eq(1)").html();
+				console.info(name,childsysname)
+				for(var i = 0;i<sys.length;i++){
+					var sysName = sys[i].name;
+					if(sysName == name){
+						var childs = sys[i].child;
+						if(childs != undefined && childs.length >0 ){
+							for(var j = 0;j<childs.length;j++){
+								if(childs[j].name == childsysname){
+									initMenuList(childs[j].menus);
+									$("#two_name").html(childsysname);
+									$("#path").html(sysName+" / "+childsysname);
+									break;
+								}
+							}
+						}
+					}
+				}
+				$(".breadcrumb").css({"color":"#000","background":"#fff"});
+				$('.onemenu > li + li:eq('+remark+')> div >label').removeClass("btn-primary");
+				$('.onemenu > li + li:eq('+remark+')> div >label:eq('+remark1+')').addClass("btn-primary");
 			});
-			
-			/* 四级点击事件 */
 			$(document).on("click",".fourlist > label",function(){
 				currentPage = 1;
 				$('.fourlist > label').removeClass("btn-whiteblack").addClass("btn-lightblack");
 				$(this).removeClass("btn-lightblack").addClass("btn-whiteblack");
 				var menuname = $(this).find("span+span").html();
 				var url = getMenuLinks(menuname);
-				menuname =  $("#two_name").html()+" / "+menuname;
-				$("#path").html(menuname);
+				$("#path").html($("#two_name").html()+" / "+childsysname+" / "+three+" / "+menuname);
 				$(".breadcrumb").css({"color":"#000","background":"#fff"});
 				var html = '<li><span class="glyphicon glyphicon-home"  style="margin:0px 3px;color:#99DFF8;" ></span><a href="#">'+menuname+'</a></li>';
 				$("#main").attr("src", url);
 				rightArea()
 			});
-			/* 三级鼠标悬浮事件 */
 			$('.thirdmenu > li').hover(function(){
 				$('.thirdmenu > li').css("background","#EAEDF1");
 			});
-			/* 三级菜单点击/下拉事件 */
 			$(document).on("click",".thirdmenu > li >p",function(){
 				currentPage = 1;
-				var text  = $(this).find("span").html();
-				var url = getMenuLinks(text);
-				text =  $("#two_name").html()+" / "+text;
-				$("#path").html(text);
+				three  = $(this).find("span").html();
+				var url = getMenuLinks(three);
+				$("#path").html($("#two_name").html()+" / "+childsysname+" / "+three);
 				$(".breadcrumb").css({"color":"#000","background":"#fff"});
 				rightArea();
 				var nextElement = $(this).next();
 				if(nextElement.length == 0){
 					$("#main").attr("src", url);
-				}else{
-					$("#main").attr("src", "");
 				}
 				$('.thirdmenu > li >p').removeClass("btn-whiteblack").addClass("btn-lightblack");
 				$(this).removeClass("btn-lightblack").addClass("btn-whiteblack");
@@ -482,6 +366,7 @@
 				}
 				rightArea();
 			});
+			roleModul(sys.sysUrl);
 		})
 		function rightArea(){
 			var width =  document.body.offsetWidth;
@@ -493,41 +378,68 @@
 		$(window).resize(function(){
 			rightArea();
 		});  
+		function getMenuLinks(menuname) {
+			var url;
+			$.each(menu, function(index, ele) {
+				if (ele.name == menuname) {
+					menulinks = ele.links;
+					url = ele.url;
+				}
+			})
+			return url;
+		}
+		function getMenuLinksHref(key) {
+			var href;
+			$.each(menulinks, function(index, ele) {
+				if (ele.rel == key) {
+					href = ele.href;
+				}
+			})
+			return href;
+		}
+		function setMenuLinksHref(_menulinks) {
+			menulinks = _menulinks;
+		}
+		function setFunctionLinksHref(_functionLinks) {
+			functionLinks = _functionLinks;
+		}
+		function getFunctionLinksHref(key) {
+			var href;
+			$.each(functionLinks, function(index, ele) {
+				var code = ele.rel == null ? index : ele.rel;
+				if (code == key) {
+					href = ele.href;
+				}
+			})
+			return href;
+		}
     </script>
   </head>
   
-  <body ng-controller="mainController" style="background: url('../../../resource/img/login_bg1.png');color:#fff;min-width:900px;min-height:500px;">
-  	<!-- 头部 -->
-    <div class="page-header" style="margin:5px 0px 10px 0px;padding:5px 0px 20px 0px;">
-    	<h4 style="width: 30%;"><span class="glyphicon glyphicon-cloud" style="position:relative;top:5px;margin:0px 10px;"></span>控制中心</h4>
-	 	<h5 style="float:right;position: relative;top:-40px;right: 50px;">
-    			<span class="glyphicon glyphicon-user"  style="margin:0px 10px;" ></span>
-    			<label>欢迎您:{{name}}</label>
-    			<span class="glyphicon glyphicon-off" title="退出" style="margin:0px 15px;" ng-click="onExit()"></span>
-    		</h5>
+  <body ng-controller="mainController" style="color:#fff;min-width:900px;min-height:500px;">
+    <div class="page-header" style="height:50px;background-color:#373D41;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;border:none;">
+    	<div style="float:left;text-align:center;width:50px;height:50px;padding:11px 0px 0px 0px;border-right:solid 1px #2A2F32;"><img src="../../../resource/img/logo.ico" style="width: 45px;height: 35px;"/></div>
+    	<div style="float:left;text-align:center;width:130px;height:50px;padding:8px 0px 0px 0px;border-right:solid 1px #2A2F32;"><h4>东方国际教育</h4></div>
+    	<div style="float:right;text-align:center;width:80px;height:50px;padding:15px 0px 0px 0px;border-left:solid 1px #2A2F32;"><span class="glyphicon glyphicon-off" title="退出" style="margin:0px 15px;" ng-click="onExit()"></span></div>
+    	<div style="float:right;text-align:center;width:120px;height:50px;padding:15px 0px 0px 0px;border-left:solid 1px #2A2F32;">{{name}}</span></div>
+    	<div style="float:right;text-align:center;width:80px;height:50px;padding:15px 0px 0px 0px;border-left:solid 1px #2A2F32;"><span class="glyphicon glyphicon-user"  style="margin:0px 10px;" ></span></div>
 	</div>
-	<!-- 中间部分  -->
 	<div class="row rowpanel">
-		 <!-- 左侧菜单  -->
 		  <div class="menupanel">
 			  <ul class="nav nav-pills nav-stacked onemenu">
-			  	
 			  </ul>
 		  </div>
-		  <!-- 三四级菜单 -->
 		  <div class="menupanel1">
 			 <div id="two_name"></div>
 			 <ul class="nav nav-pills nav-stacked thirdmenu">
 			 </ul>
 		  </div>
-		 
 		  <div id="menu_image" class="menu_image" switch="0">
 		  	<i class="icon-indent-left"></i>
 		  </div>
-		  <!-- 右侧部分  -->
 		  <div id="right" style="margin: 0px;padding:0px 10px;background: #fff;height: 100%;position: absolute;left: 360px;top:0px;">
 		   		<ol class="breadcrumb" style="margin: 0px;">
-				  <li><span class="glyphicon glyphicon-home"  style="margin:0px 3px;color:#99DFF8;" ></span><span id="path"></span></li>
+				  <li><span class="glyphicon glyphicon-home"  style="left:-10px;margin:0px 0px;color:#99DFF8;" ></span><span id="path"></span></li>
 				</ol>
 				<div class="col-md-12 embed-responsive" style="height: 93%;width:100%;">
 				  <iframe class="embed-responsive-item" id="main" name="main" src=""></iframe>

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:19
 */
 @Getter
 @Setter
@@ -21,10 +21,10 @@ public class Cachets implements Serializable{
   Long materialid;
   String materialname;
   String materialalias;
-  String createtime;
+  java.util.Date createtime;
   public Cachets(){
   }
-  public Cachets(Long id,Integer version,Long campusid,Long materialid,String materialname,String materialalias,String createtime){
+  public Cachets(Long id,Integer version,Long campusid,Long materialid,String materialname,String materialalias,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;

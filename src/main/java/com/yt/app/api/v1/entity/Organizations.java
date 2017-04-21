@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:48
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Organizations implements Serializable{
 
   Long id;
   Integer version;
-  Long organizationid;
   String codename;
   String name;
   String shortname;
@@ -31,17 +30,14 @@ public class Organizations implements Serializable{
   Long cityid;
   String cityname;
   String fullpath;
-  String deliverdate;
-  String versionstarttime;
-  String versionendtime;
+  java.util.Date deliverdate;
   String bistatus;
   String status;
   public Organizations(){
   }
-  public Organizations(Long id,Integer version,Long organizationid,String codename,String name,String shortname,String departmenttype,String legalentitycode,String legalentity,Long managerid,String orgtype,Object campusarea,Object campususingarea,Long cityid,String cityname,String fullpath,String deliverdate,String versionstarttime,String versionendtime,String bistatus,String status){
+  public Organizations(Long id,Integer version,String codename,String name,String shortname,String departmenttype,String legalentitycode,String legalentity,Long managerid,String orgtype,Object campusarea,Object campususingarea,Long cityid,String cityname,String fullpath,java.util.Date deliverdate,String bistatus,String status){
       this.id=id;
       this.version=version;
-      this.organizationid=organizationid;
       this.codename=codename;
       this.name=name;
       this.shortname=shortname;
@@ -56,8 +52,6 @@ public class Organizations implements Serializable{
       this.cityname=cityname;
       this.fullpath=fullpath;
       this.deliverdate=deliverdate;
-      this.versionstarttime=versionstarttime;
-      this.versionendtime=versionendtime;
       this.bistatus=bistatus;
       this.status=status;
   }

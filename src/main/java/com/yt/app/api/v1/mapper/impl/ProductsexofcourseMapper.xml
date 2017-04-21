@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.ProductsexofcourseMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,productid,lessoncount,lessonduration,lessondurationvalue,periodduration,perioddurationvalue,periodsoflesson,courselevel,coachtype,grouptype,classtype,minpeoples,maxpeoples,incomebelonging,iscrosscampus
+     id,version,lessoncount,lessonduration,lessondurationvalue,periodduration,perioddurationvalue,periodsoflesson,courselevel,coachtype,grouptype,classtype,minpeoples,maxpeoples,incomebelonging,iscrosscampus
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Productsexofcourse">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="productid" column="productid" />
          <id property="lessoncount" column="lessoncount" />
          <id property="lessonduration" column="lessonduration" />
          <id property="lessondurationvalue" column="lessondurationvalue" />
@@ -27,8 +26,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Productsexofcourse">
-  insert into productsexofcourse (id,productid,lessoncount,lessonduration,lessondurationvalue,periodduration,perioddurationvalue,periodsoflesson,courselevel,coachtype,grouptype,classtype,minpeoples,maxpeoples,incomebelonging,iscrosscampus)
-         values (#{id},#{productid},#{lessoncount},#{lessonduration},#{lessondurationvalue},#{periodduration},#{perioddurationvalue},#{periodsoflesson},#{courselevel},#{coachtype},#{grouptype},#{classtype},#{minpeoples},#{maxpeoples},#{incomebelonging},#{iscrosscampus})
+  insert into productsexofcourse (id,lessoncount,lessonduration,lessondurationvalue,periodduration,perioddurationvalue,periodsoflesson,courselevel,coachtype,grouptype,classtype,minpeoples,maxpeoples,incomebelonging,iscrosscampus)
+         values (#{id},#{lessoncount},#{lessonduration},#{lessondurationvalue},#{periodduration},#{perioddurationvalue},#{periodsoflesson},#{courselevel},#{coachtype},#{grouptype},#{classtype},#{minpeoples},#{maxpeoples},#{incomebelonging},#{iscrosscampus})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -41,9 +40,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="productid != null">
-                   productid = #{productid},
              </if>
              <if test="lessoncount != null">
                    lessoncount = #{lessoncount},

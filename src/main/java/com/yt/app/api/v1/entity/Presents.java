@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:53
 */
 @Getter
 @Setter
@@ -17,15 +17,14 @@ public class Presents implements Serializable{
 
   Long id;
   Integer version;
-  Long presentid;
   String presentcode;
   String presentname;
   String presentstatus;
-  String applystartdate;
-  String startdate;
+  java.util.Date applystartdate;
+  java.util.Date startdate;
   Long branchid;
   String branchname;
-  String submittime;
+  java.util.Date submittime;
   Long submitterid;
   String submittername;
   Long submitterjobid;
@@ -34,19 +33,18 @@ public class Presents implements Serializable{
   String approvername;
   Long approverjobid;
   String approverjobname;
-  String approvetime;
+  java.util.Date approvetime;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Presents(){
   }
-  public Presents(Long id,Integer version,Long presentid,String presentcode,String presentname,String presentstatus,String applystartdate,String startdate,Long branchid,String branchname,String submittime,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,Long approverid,String approvername,Long approverjobid,String approverjobname,String approvetime,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Presents(Long id,Integer version,String presentcode,String presentname,String presentstatus,java.util.Date applystartdate,java.util.Date startdate,Long branchid,String branchname,java.util.Date submittime,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,Long approverid,String approvername,Long approverjobid,String approverjobname,java.util.Date approvetime,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
-      this.presentid=presentid;
       this.presentcode=presentcode;
       this.presentname=presentname;
       this.presentstatus=presentstatus;

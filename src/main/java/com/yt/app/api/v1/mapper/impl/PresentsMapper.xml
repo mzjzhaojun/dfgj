@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.PresentsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,presentid,presentcode,presentname,presentstatus,applystartdate,startdate,branchid,branchname,submittime,submitterid,submittername,submitterjobid,submitterjobname,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,presentcode,presentname,presentstatus,applystartdate,startdate,branchid,branchname,submittime,submitterid,submittername,submitterjobid,submitterjobname,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Presents">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="presentid" column="presentid" />
          <id property="presentcode" column="presentcode" />
          <id property="presentname" column="presentname" />
          <id property="presentstatus" column="presentstatus" />
@@ -36,8 +35,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Presents">
-  insert into presents (id,presentid,presentcode,presentname,presentstatus,applystartdate,startdate,branchid,branchname,submittime,submitterid,submittername,submitterjobid,submitterjobname,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{presentid},#{presentcode},#{presentname},#{presentstatus},#{applystartdate},#{startdate},#{branchid},#{branchname},#{submittime},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into presents (id,presentcode,presentname,presentstatus,applystartdate,startdate,branchid,branchname,submittime,submitterid,submittername,submitterjobid,submitterjobname,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{presentcode},#{presentname},#{presentstatus},#{applystartdate},#{startdate},#{branchid},#{branchname},#{submittime},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -50,9 +49,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="presentid != null">
-                   presentid = #{presentid},
              </if>
              <if test="presentcode != null">
                    presentcode = #{presentcode},

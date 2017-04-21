@@ -27,7 +27,7 @@ import com.yt.app.api.v1.entity.AccountRole;
 
 
 @RestController
-@RequestMapping("/dfgj/v1/accountrole")
+@RequestMapping("/rest/v1/accountrole")
 public class AccountRoleController extends BaseControllerImpl<AccountRole, Long> {
 
 

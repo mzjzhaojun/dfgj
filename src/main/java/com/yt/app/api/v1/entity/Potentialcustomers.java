@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:53
 */
 @Getter
 @Setter
@@ -22,7 +22,6 @@ public class Potentialcustomers implements Serializable{
   String orgtype;
   Long campusid;
   String campusname;
-  Long customerid;
   String customercode;
   String customername;
   String customerlevel;
@@ -30,7 +29,7 @@ public class Potentialcustomers implements Serializable{
   String customerstatus;
   Integer isoneparent;
   String describes;
-  String birthday;
+  java.util.Date birthday;
   String gender;
   String email;
   String idtype;
@@ -58,25 +57,23 @@ public class Potentialcustomers implements Serializable{
   Long schoolid;
   String schoolname;
   Integer isstudyagain;
-  String followtime;
+  java.util.Date followtime;
   String followstage;
   Integer followedcount;
-  String nextfollowtime;
+  java.util.Date nextfollowtime;
   Long creatorid;
   String creatorname;
   Long creatorjobid;
   String creatorjobname;
   String creatorjobtype;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   Long tenantcode;
-  String versionstarttime;
-  String versionendtime;
   public Potentialcustomers(){
   }
-  public Potentialcustomers(Long id,Integer version,Long orgid,String orgname,String orgtype,Long campusid,String campusname,Long customerid,String customercode,String customername,String customerlevel,String invalidreason,String customerstatus,Integer isoneparent,String describes,String birthday,String gender,String email,String idtype,String idnumber,String viptype,String viplevel,String entrancegrade,String grade,String schoolyear,String subjecttype,String studenttype,String contacttype,String sourcemaintype,String sourcesubtype,String sourcesystem,Long referralstaffid,String referralstaffname,Long referralstaffjobid,String referralstaffjobname,String referralstaffoacode,Long referralcustomerid,String referralcustomercode,String referralcustomername,String purchaseintention,Long schoolid,String schoolname,Integer isstudyagain,String followtime,String followstage,Integer followedcount,String nextfollowtime,Long creatorid,String creatorname,Long creatorjobid,String creatorjobname,String creatorjobtype,String createtime,Long modifierid,String modifiername,String modifytime,Long tenantcode,String versionstarttime,String versionendtime){
+  public Potentialcustomers(Long id,Integer version,Long orgid,String orgname,String orgtype,Long campusid,String campusname,String customercode,String customername,String customerlevel,String invalidreason,String customerstatus,Integer isoneparent,String describes,java.util.Date birthday,String gender,String email,String idtype,String idnumber,String viptype,String viplevel,String entrancegrade,String grade,String schoolyear,String subjecttype,String studenttype,String contacttype,String sourcemaintype,String sourcesubtype,String sourcesystem,Long referralstaffid,String referralstaffname,Long referralstaffjobid,String referralstaffjobname,String referralstaffoacode,Long referralcustomerid,String referralcustomercode,String referralcustomername,String purchaseintention,Long schoolid,String schoolname,Integer isstudyagain,java.util.Date followtime,String followstage,Integer followedcount,java.util.Date nextfollowtime,Long creatorid,String creatorname,Long creatorjobid,String creatorjobname,String creatorjobtype,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime,Long tenantcode){
       this.id=id;
       this.version=version;
       this.orgid=orgid;
@@ -84,7 +81,6 @@ public class Potentialcustomers implements Serializable{
       this.orgtype=orgtype;
       this.campusid=campusid;
       this.campusname=campusname;
-      this.customerid=customerid;
       this.customercode=customercode;
       this.customername=customername;
       this.customerlevel=customerlevel;
@@ -134,7 +130,5 @@ public class Potentialcustomers implements Serializable{
       this.modifiername=modifiername;
       this.modifytime=modifytime;
       this.tenantcode=tenantcode;
-      this.versionstarttime=versionstarttime;
-      this.versionendtime=versionendtime;
   }
 }

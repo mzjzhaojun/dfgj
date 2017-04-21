@@ -11,7 +11,7 @@ import com.yt.app.api.v1.entity.Accountreturnapplies;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:18
 */
 
 public class AccountreturnappliesResourceAssembler extends ResourceAssemblerSupport<Accountreturnapplies, AccountreturnappliesResource> {

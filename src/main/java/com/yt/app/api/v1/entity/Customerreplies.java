@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:33
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Customerreplies implements Serializable{
 
   Long id;
   Integer version;
-  Long replyid;
   Long branchid;
   String branchname;
   Long campusid;
@@ -28,7 +27,7 @@ public class Customerreplies implements Serializable{
   Long parentpassportid;
   String parentname;
   String phonenumber;
-  String replytime;
+  java.util.Date replytime;
   String replyobject;
   String replycontent;
   String replyfrom;
@@ -38,15 +37,14 @@ public class Customerreplies implements Serializable{
   String poster;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long fromsystemid;
   String status;
   public Customerreplies(){
   }
-  public Customerreplies(Long id,Integer version,Long replyid,Long branchid,String branchname,Long campusid,String campusname,Long customerid,String customername,Long parentid,Long parentpassportid,String parentname,String phonenumber,String replytime,String replyobject,String replycontent,String replyfrom,Long replierid,Long replierjobid,String repliername,String poster,Long creatorid,String creatorname,String createtime,Long fromsystemid,String status){
+  public Customerreplies(Long id,Integer version,Long branchid,String branchname,Long campusid,String campusname,Long customerid,String customername,Long parentid,Long parentpassportid,String parentname,String phonenumber,java.util.Date replytime,String replyobject,String replycontent,String replyfrom,Long replierid,Long replierjobid,String repliername,String poster,Long creatorid,String creatorname,java.util.Date createtime,Long fromsystemid,String status){
       this.id=id;
       this.version=version;
-      this.replyid=replyid;
       this.branchid=branchid;
       this.branchname=branchname;
       this.campusid=campusid;

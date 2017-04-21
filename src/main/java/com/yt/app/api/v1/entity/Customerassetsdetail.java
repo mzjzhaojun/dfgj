@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:29
 */
 @Getter
 @Setter
@@ -18,17 +18,17 @@ public class Customerassetsdetail implements Serializable{
   Long id;
   Integer version;
   Integer monthkey;
-  String statlocaldate;
+  java.util.Date statlocaldate;
   Long campusid;
   String categorytype;
   String grade;
   Long assetid;
-  String ordertime;
+  java.util.Date ordertime;
   Object amount;
   Object money;
   public Customerassetsdetail(){
   }
-  public Customerassetsdetail(Long id,Integer version,Integer monthkey,String statlocaldate,Long campusid,String categorytype,String grade,Long assetid,String ordertime,Object amount,Object money){
+  public Customerassetsdetail(Long id,Integer version,Integer monthkey,java.util.Date statlocaldate,Long campusid,String categorytype,String grade,Long assetid,java.util.Date ordertime,Object amount,Object money){
       this.id=id;
       this.version=version;
       this.monthkey=monthkey;

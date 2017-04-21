@@ -40,7 +40,7 @@ import com.yt.app.api.v1.entity.Sys;
  */
 
 @RestController
-@RequestMapping("/dfgj/v1/menu")
+@RequestMapping("/rest/v1/menu")
 public class MenuController extends BaseControllerImpl<Menu, Long> {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -117,7 +117,7 @@ public class MenuController extends BaseControllerImpl<Menu, Long> {
 	@ApiOperation(value = "删除")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> delete(@PathVariable(value = "id") Long id, HttpServletRequest request, HttpServletResponse response) {
-		
+
 		Integer i = service.delete(id);
 		if (i != null)
 			return new ResponseEntity<Object>(i, HttpStatus.OK);
@@ -170,11 +170,12 @@ public class MenuController extends BaseControllerImpl<Menu, Long> {
 	@RequestMapping(value = "/sysmenu", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> sysmenu(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-		// List<Sys> pagebean = service.sysmenu(param);
 		/**
 		 * 返回形式根据web端需求修改
 		 */
 		AccountSecurityUser acu = RequestAccount.requestGetAccount(request);
+		if (acu == null)
+			return new ResponseEntity<Object>(HttpStatus.UNAUTHORIZED);
 		param.put("userid", acu.getAccount().getId());
 		Map<String, Object> pagebean = service.sysmenu(param);
 		return new ResponseEntity<Object>(pagebean, HttpStatus.OK);

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:59
 */
 @Getter
 @Setter
@@ -46,10 +46,10 @@ public class Teachcountrycrmmonthsum implements Serializable{
   Integer closedactivationcount;
   Integer newoutschoolcount;
   Integer outschoolactivationcount;
-  String createtime;
+  java.util.Date createtime;
   public Teachcountrycrmmonthsum(){
   }
-  public Teachcountrycrmmonthsum(Long id,Integer version,Integer year,Integer month,Integer classpeoplecount,Integer initialeffective,Integer neweffective,Object classhours,Integer outschoolwarningcount,Integer closedwarningcount,Integer refundwarningcount,Integer classnosatisfied,Integer scorenosatisfied,Integer newstudentcount,Integer waitmeetingcount,Integer birthdaytoday,Integer birthdayfuture,Integer managestudentcount,Integer validstudentcount,Integer closedstudentcount,Integer outschoolstudentcount,Integer renewalcount,Integer endclasscount,Integer refundcount,Integer introducecount,Integer switchcount,Integer receivecount,Integer newclosedcount,Integer closedactivationcount,Integer newoutschoolcount,Integer outschoolactivationcount,String createtime){
+  public Teachcountrycrmmonthsum(Long id,Integer version,Integer year,Integer month,Integer classpeoplecount,Integer initialeffective,Integer neweffective,Object classhours,Integer outschoolwarningcount,Integer closedwarningcount,Integer refundwarningcount,Integer classnosatisfied,Integer scorenosatisfied,Integer newstudentcount,Integer waitmeetingcount,Integer birthdaytoday,Integer birthdayfuture,Integer managestudentcount,Integer validstudentcount,Integer closedstudentcount,Integer outschoolstudentcount,Integer renewalcount,Integer endclasscount,Integer refundcount,Integer introducecount,Integer switchcount,Integer receivecount,Integer newclosedcount,Integer closedactivationcount,Integer newoutschoolcount,Integer outschoolactivationcount,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.year=year;

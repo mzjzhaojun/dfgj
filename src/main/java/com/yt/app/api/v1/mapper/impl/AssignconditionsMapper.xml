@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.AssignconditionsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,conditionid,conditionname4customer,conditionname4teacher,customerid,customercode,customername,accountid,assetid,assetcode,productid,productcode,productname,categorytype,categorytypename,grade,gradename,subject,subjectname,roomid,roomcode,roomname,teacherid,teachername,teacheroacode,teacherjobid,teacherjoborgid,teacherjoborgname,isfulltimeteacher,courselevel,courselevelname,lessonduration,lessondurationvalue,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,conditionname4customer,conditionname4teacher,customerid,customercode,customername,accountid,assetid,assetcode,productid,productcode,productname,categorytype,categorytypename,grade,gradename,subject,subjectname,roomid,roomcode,roomname,teacherid,teachername,teacheroacode,teacherjobid,teacherjoborgid,teacherjoborgname,isfulltimeteacher,courselevel,courselevelname,lessonduration,lessondurationvalue,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Assignconditions">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="conditionid" column="conditionid" />
          <id property="conditionname4customer" column="conditionname4customer" />
          <id property="conditionname4teacher" column="conditionname4teacher" />
          <id property="customerid" column="customerid" />
@@ -50,8 +49,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Assignconditions">
-  insert into assignconditions (id,conditionid,conditionname4customer,conditionname4teacher,customerid,customercode,customername,accountid,assetid,assetcode,productid,productcode,productname,categorytype,categorytypename,grade,gradename,subject,subjectname,roomid,roomcode,roomname,teacherid,teachername,teacheroacode,teacherjobid,teacherjoborgid,teacherjoborgname,isfulltimeteacher,courselevel,courselevelname,lessonduration,lessondurationvalue,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{conditionid},#{conditionname4customer},#{conditionname4teacher},#{customerid},#{customercode},#{customername},#{accountid},#{assetid},#{assetcode},#{productid},#{productcode},#{productname},#{categorytype},#{categorytypename},#{grade},#{gradename},#{subject},#{subjectname},#{roomid},#{roomcode},#{roomname},#{teacherid},#{teachername},#{teacheroacode},#{teacherjobid},#{teacherjoborgid},#{teacherjoborgname},#{isfulltimeteacher},#{courselevel},#{courselevelname},#{lessonduration},#{lessondurationvalue},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into assignconditions (id,conditionname4customer,conditionname4teacher,customerid,customercode,customername,accountid,assetid,assetcode,productid,productcode,productname,categorytype,categorytypename,grade,gradename,subject,subjectname,roomid,roomcode,roomname,teacherid,teachername,teacheroacode,teacherjobid,teacherjoborgid,teacherjoborgname,isfulltimeteacher,courselevel,courselevelname,lessonduration,lessondurationvalue,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{conditionname4customer},#{conditionname4teacher},#{customerid},#{customercode},#{customername},#{accountid},#{assetid},#{assetcode},#{productid},#{productcode},#{productname},#{categorytype},#{categorytypename},#{grade},#{gradename},#{subject},#{subjectname},#{roomid},#{roomcode},#{roomname},#{teacherid},#{teachername},#{teacheroacode},#{teacherjobid},#{teacherjoborgid},#{teacherjoborgname},#{isfulltimeteacher},#{courselevel},#{courselevelname},#{lessonduration},#{lessondurationvalue},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -64,9 +63,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="conditionid != null">
-                   conditionid = #{conditionid},
              </if>
              <if test="conditionname4customer != null">
                    conditionname4customer = #{conditionname4customer},

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:43:59
+* @createdate  2017-04-20 13:48:16
 */
 @Getter
 @Setter
@@ -17,13 +17,11 @@ public class Accountchargeallots implements Serializable{
 
   Long id;
   Integer version;
-  String applyid;
-  Integer sortno;
-  String allotid;
-  String teacherid;
+  Long applyid;
+  Long teacherid;
   String teachername;
   String teacheroacode;
-  String teacherjobid;
+  Long teacherjobid;
   String teacherjobname;
   Integer isfulltimeteacher;
   String subject;
@@ -32,12 +30,10 @@ public class Accountchargeallots implements Serializable{
   Object allotmoney;
   public Accountchargeallots(){
   }
-  public Accountchargeallots(Long id,Integer version,String applyid,Integer sortno,String allotid,String teacherid,String teachername,String teacheroacode,String teacherjobid,String teacherjobname,Integer isfulltimeteacher,String subject,String categorytype,Object allotamount,Object allotmoney){
+  public Accountchargeallots(Long id,Integer version,Long applyid,Long teacherid,String teachername,String teacheroacode,Long teacherjobid,String teacherjobname,Integer isfulltimeteacher,String subject,String categorytype,Object allotamount,Object allotmoney){
       this.id=id;
       this.version=version;
       this.applyid=applyid;
-      this.sortno=sortno;
-      this.allotid=allotid;
       this.teacherid=teacherid;
       this.teachername=teachername;
       this.teacheroacode=teacheroacode;

@@ -27,7 +27,7 @@ import com.yt.app.api.v1.entity.MenuLinks;
 
 
 @RestController
-@RequestMapping("/dfgj/v1/menulinks")
+@RequestMapping("/rest/v1/menulinks")
 public class MenuLinksController extends BaseControllerImpl<MenuLinks, Long> {
 
 

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:45
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Expenses implements Serializable{
 
   Long id;
   Integer version;
-  Long expenseid;
   String expensetype;
   Object expensevalue;
   Long branchid;
@@ -26,16 +25,15 @@ public class Expenses implements Serializable{
   String campusnames;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Expenses(){
   }
-  public Expenses(Long id,Integer version,Long expenseid,String expensetype,Object expensevalue,Long branchid,String branchname,String campusids,String campusnames,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Expenses(Long id,Integer version,String expensetype,Object expensevalue,Long branchid,String branchname,String campusids,String campusnames,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
-      this.expenseid=expenseid;
       this.expensetype=expensetype;
       this.expensevalue=expensevalue;
       this.branchid=branchid;

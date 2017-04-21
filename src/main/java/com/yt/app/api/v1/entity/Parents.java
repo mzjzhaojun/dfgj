@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:51
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Parents implements Serializable{
 
   Long id;
   Integer version;
-  Long parentid;
   String parentcode;
   String parentname;
   String gender;
@@ -25,7 +24,7 @@ public class Parents implements Serializable{
   String industry;
   String career;
   String income;
-  String birthday;
+  java.util.Date birthday;
   String idtype;
   String idnumber;
   String country;
@@ -36,19 +35,16 @@ public class Parents implements Serializable{
   String addressdetail;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   Long tenantcode;
-  String versionstarttime;
-  String versionendtime;
   public Parents(){
   }
-  public Parents(Long id,Integer version,Long parentid,String parentcode,String parentname,String gender,String email,String industry,String career,String income,String birthday,String idtype,String idnumber,String country,String province,String city,String county,String streetname,String addressdetail,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime,Long tenantcode,String versionstarttime,String versionendtime){
+  public Parents(Long id,Integer version,String parentcode,String parentname,String gender,String email,String industry,String career,String income,java.util.Date birthday,String idtype,String idnumber,String country,String province,String city,String county,String streetname,String addressdetail,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime,Long tenantcode){
       this.id=id;
       this.version=version;
-      this.parentid=parentid;
       this.parentcode=parentcode;
       this.parentname=parentname;
       this.gender=gender;
@@ -72,7 +68,5 @@ public class Parents implements Serializable{
       this.modifiername=modifiername;
       this.modifytime=modifytime;
       this.tenantcode=tenantcode;
-      this.versionstarttime=versionstarttime;
-      this.versionendtime=versionendtime;
   }
 }

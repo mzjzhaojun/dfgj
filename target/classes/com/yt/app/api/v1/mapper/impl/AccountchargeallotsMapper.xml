@@ -3,15 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.AccountchargeallotsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,applyid,sortno,allotid,teacherid,teachername,teacheroacode,teacherjobid,teacherjobname,isfulltimeteacher,subject,categorytype,allotamount,allotmoney
+     id,version,applyid,teacherid,teachername,teacheroacode,teacherjobid,teacherjobname,isfulltimeteacher,subject,categorytype,allotamount,allotmoney
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accountchargeallots">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="applyid" column="applyid" />
-         <id property="sortno" column="sortno" />
-         <id property="allotid" column="allotid" />
          <id property="teacherid" column="teacherid" />
          <id property="teachername" column="teachername" />
          <id property="teacheroacode" column="teacheroacode" />
@@ -25,8 +23,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Accountchargeallots">
-  insert into accountchargeallots (id,applyid,sortno,allotid,teacherid,teachername,teacheroacode,teacherjobid,teacherjobname,isfulltimeteacher,subject,categorytype,allotamount,allotmoney)
-         values (#{id},#{applyid},#{sortno},#{allotid},#{teacherid},#{teachername},#{teacheroacode},#{teacherjobid},#{teacherjobname},#{isfulltimeteacher},#{subject},#{categorytype},#{allotamount},#{allotmoney})
+  insert into accountchargeallots (id,applyid,teacherid,teachername,teacheroacode,teacherjobid,teacherjobname,isfulltimeteacher,subject,categorytype,allotamount,allotmoney)
+         values (#{id},#{applyid},#{teacherid},#{teachername},#{teacheroacode},#{teacherjobid},#{teacherjobname},#{isfulltimeteacher},#{subject},#{categorytype},#{allotamount},#{allotmoney})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -42,12 +40,6 @@
              </if>
              <if test="applyid != null">
                    applyid = #{applyid},
-             </if>
-             <if test="sortno != null">
-                   sortno = #{sortno},
-             </if>
-             <if test="allotid != null">
-                   allotid = #{allotid},
              </if>
              <if test="teacherid != null">
                    teacherid = #{teacherid},

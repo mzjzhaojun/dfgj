@@ -3,14 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomermeetingitemsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,meetingid,itemid,objecttype,objectname,contenttype,contentdata
+     id,version,meetingid,objecttype,objectname,contenttype,contentdata
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customermeetingitems">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="meetingid" column="meetingid" />
-         <id property="itemid" column="itemid" />
          <id property="objecttype" column="objecttype" />
          <id property="objectname" column="objectname" />
          <id property="contenttype" column="contenttype" />
@@ -18,8 +17,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customermeetingitems">
-  insert into customermeetingitems (id,meetingid,itemid,objecttype,objectname,contenttype,contentdata)
-         values (#{id},#{meetingid},#{itemid},#{objecttype},#{objectname},#{contenttype},#{contentdata})
+  insert into customermeetingitems (id,meetingid,objecttype,objectname,contenttype,contentdata)
+         values (#{id},#{meetingid},#{objecttype},#{objectname},#{contenttype},#{contentdata})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -35,9 +34,6 @@
              </if>
              <if test="meetingid != null">
                    meetingid = #{meetingid},
-             </if>
-             <if test="itemid != null">
-                   itemid = #{itemid},
              </if>
              <if test="objecttype != null">
                    objecttype = #{objecttype},

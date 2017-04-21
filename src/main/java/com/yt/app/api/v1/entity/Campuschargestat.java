@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:20
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Campuschargestat implements Serializable{
 
   Long id;
   Integer version;
-  String statlocaldate;
   Long campusid;
   String campusname;
   String campusshortname;
@@ -30,17 +29,16 @@ public class Campuschargestat implements Serializable{
   Long hqid;
   String hqname;
   String hqshortname;
-  String campusdeliverdate;
+  java.util.Date campusdeliverdate;
   Integer campusage;
   Object newchargeamount;
   Object renewamount;
   Object refundamount;
   public Campuschargestat(){
   }
-  public Campuschargestat(Long id,Integer version,String statlocaldate,Long campusid,String campusname,String campusshortname,Long branchid,String branchname,String branchshortname,Long regionid,String regionname,String regionshortname,Long hqid,String hqname,String hqshortname,String campusdeliverdate,Integer campusage,Object newchargeamount,Object renewamount,Object refundamount){
+  public Campuschargestat(Long id,Integer version,Long campusid,String campusname,String campusshortname,Long branchid,String branchname,String branchshortname,Long regionid,String regionname,String regionshortname,Long hqid,String hqname,String hqshortname,java.util.Date campusdeliverdate,Integer campusage,Object newchargeamount,Object renewamount,Object refundamount){
       this.id=id;
       this.version=version;
-      this.statlocaldate=statlocaldate;
       this.campusid=campusid;
       this.campusname=campusname;
       this.campusshortname=campusshortname;

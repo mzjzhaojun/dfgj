@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.OrgstaffjobsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,regionid,branchid,campusid,staffid,staffname,staffjobid,staffjobtype
+     id,version,regionid,branchid,campusid,staffid,staffname,staffjobtype
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Orgstaffjobs">
@@ -14,13 +14,12 @@
          <id property="campusid" column="campusid" />
          <id property="staffid" column="staffid" />
          <id property="staffname" column="staffname" />
-         <id property="staffjobid" column="staffjobid" />
          <id property="staffjobtype" column="staffjobtype" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Orgstaffjobs">
-  insert into orgstaffjobs (id,regionid,branchid,campusid,staffid,staffname,staffjobid,staffjobtype)
-         values (#{id},#{regionid},#{branchid},#{campusid},#{staffid},#{staffname},#{staffjobid},#{staffjobtype})
+  insert into orgstaffjobs (id,regionid,branchid,campusid,staffid,staffname,staffjobtype)
+         values (#{id},#{regionid},#{branchid},#{campusid},#{staffid},#{staffname},#{staffjobtype})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -48,9 +47,6 @@
              </if>
              <if test="staffname != null">
                    staffname = #{staffname},
-             </if>
-             <if test="staffjobid != null">
-                   staffjobid = #{staffjobid},
              </if>
              <if test="staffjobtype != null">
                    staffjobtype = #{staffjobtype}

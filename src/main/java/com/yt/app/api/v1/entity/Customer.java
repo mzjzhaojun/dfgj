@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:28
 */
 @Getter
 @Setter
@@ -22,7 +22,6 @@ public class Customer implements Serializable{
   Long parentid;
   String parentcode;
   String parentname;
-  Long customerid;
   String customercode;
   String customername;
   String customerlevel;
@@ -30,7 +29,7 @@ public class Customer implements Serializable{
   String studentstatus;
   Integer isoneparent;
   String describes;
-  String birthdays;
+  java.util.Date birthdays;
   String gender;
   String email;
   String idtype;
@@ -48,7 +47,7 @@ public class Customer implements Serializable{
   Long schoolid;
   String schoolname;
   Integer isstudyagain;
-  String firstsigntime;
+  java.util.Date firstsigntime;
   Long firstsignerid;
   String firstsignername;
   String invalidreason;
@@ -73,10 +72,10 @@ public class Customer implements Serializable{
   Long creatorjobid;
   String creatorjobname;
   String creatorjobtype;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   Long consultantid;
   String consultantname;
   String consultantoacode;
@@ -107,33 +106,33 @@ public class Customer implements Serializable{
   String parentsecondaryphonetype;
   String parentsecondaryphonenumber;
   String followstage;
-  String followtime;
+  java.util.Date followtime;
   Integer followedcount;
   Integer followedcountofthismonth;
-  String nextfollowtime;
-  String planverifytime;
-  String plansigntime;
-  String verifytime;
+  java.util.Date nextfollowtime;
+  java.util.Date planverifytime;
+  java.util.Date plansigntime;
+  java.util.Date verifytime;
   Integer verifiedcount;
-  String visittime;
+  java.util.Date visittime;
   Integer visitedcount;
   Integer visitedcountofthismonth;
-  String nextvisittime;
+  java.util.Date nextvisittime;
   Object accountmoney;
   Object accountdiscountrate;
   Object accountdiscountbase;
-  String accountnewsigntime;
+  java.util.Date accountnewsigntime;
   Object accountnewsignmoney;
-  String accountrenewsigntime;
+  java.util.Date accountrenewsigntime;
   Object accountrenewsignmoney;
-  String accountchargetime;
+  java.util.Date accountchargetime;
   Object accountchargemoney;
-  String accountrefundtime;
+  java.util.Date accountrefundtime;
   Object accountrefundmoney;
   Object accounttransferedinmoney;
-  String accounttransferintime;
+  java.util.Date accounttransferintime;
   Object accounttransferedoutmoney;
-  String accounttransferouttime;
+  java.util.Date accounttransferouttime;
   Object signedmoney;
   Integer signedcount;
   Object assetonetooneamount;
@@ -153,30 +152,30 @@ public class Customer implements Serializable{
   Object assetclassconfirmedmoney;
   Object assetotherconfirmedmoney;
   Object assetpresentamount;
-  String ordertime;
-  String debooktime;
-  String assigntime;
-  String starttime;
-  String starttimeofonetoone;
-  String starttimeofclass;
-  String confirmtime;
-  String confirmtimeofonetoone;
-  String confirmtimeofclass;
+  java.util.Date ordertime;
+  java.util.Date debooktime;
+  java.util.Date assigntime;
+  java.util.Date starttime;
+  java.util.Date starttimeofonetoone;
+  java.util.Date starttimeofclass;
+  java.util.Date confirmtime;
+  java.util.Date confirmtimeofonetoone;
+  java.util.Date confirmtimeofclass;
   Integer confirmedsubjectsofrecent;
   Object confirmedhoursofthismonth;
-  String allocateconsultanttime;
+  java.util.Date allocateconsultanttime;
   Integer allocateteachercount;
   Integer hasexpense;
-  String expensetime;
+  java.util.Date expensetime;
   Object expensefee;
-  String completetime;
-  String servicecreatetime;
-  String servicemodifytime;
+  java.util.Date completetime;
+  java.util.Date servicecreatetime;
+  java.util.Date servicemodifytime;
   String customersearchcontent;
   String parentsearchcontent;
   public Customer(){
   }
-  public Customer(Long id,Integer version,Long campusid,String campusname,Long parentid,String parentcode,String parentname,Long customerid,String customercode,String customername,String customerlevel,String customerstatus,String studentstatus,Integer isoneparent,String describes,String birthdays,String gender,String email,String idtype,String idnumber,String viptype,String viplevel,String entrancegrade,String grade,String subjecttype,String studenttype,String contacttype,String sourcemaintype,String sourcesubtype,String sourcesystem,Long schoolid,String schoolname,Integer isstudyagain,String firstsigntime,Long firstsignerid,String firstsignername,String invalidreason,String schoolyear,Integer referralcount,Long referralstaffid,String referralstaffname,Long referralstaffjobid,String referralstaffjobname,String referralstaffoacode,Long referralcustomerid,String referralcustomercode,String referralcustomername,String purchaseintention,Integer locked,String lockmemo,Integer graduated,String graduateyear,Long creatorid,Long creatorname,String creatoroacode,Long creatorjobid,String creatorjobname,String creatorjobtype,String createtime,Long modifierid,String modifiername,String modifytime,Long consultantid,String consultantname,String consultantoacode,Long consultantjobid,Long educatorid,String educatorname,String educatoroacode,Long educatorjobid,Long callcenterid,String callcenteroacode,String callcentername,Long callcenterjobid,Long marketingid,String marketingname,String marketingoacode,Long marketingjobid,Integer assignteachernum,String parentidtype,String parentidnumber,String parentrole,String customerrole,String customerprimaryphonetype,String customerprimaryphonenumber,String customersecondaryphonetype,String customersecondaryphonenumber,String parentprimaryphonetype,String parentprimaryphonenumber,String parentsecondaryphonetype,String parentsecondaryphonenumber,String followstage,String followtime,Integer followedcount,Integer followedcountofthismonth,String nextfollowtime,String planverifytime,String plansigntime,String verifytime,Integer verifiedcount,String visittime,Integer visitedcount,Integer visitedcountofthismonth,String nextvisittime,Object accountmoney,Object accountdiscountrate,Object accountdiscountbase,String accountnewsigntime,Object accountnewsignmoney,String accountrenewsigntime,Object accountrenewsignmoney,String accountchargetime,Object accountchargemoney,String accountrefundtime,Object accountrefundmoney,Object accounttransferedinmoney,String accounttransferintime,Object accounttransferedoutmoney,String accounttransferouttime,Object signedmoney,Integer signedcount,Object assetonetooneamount,Object assetclassamount,Object assetotheramount,Object assetonetoonemoney,Object assetclassmoney,Object assetothermoney,Object assetonetooneassignedamount,Object assetclassassignedamount,Object assetonetooneassignedmoney,Object assetclassassignedmoney,Object assetonetooneconfirmedamount,Object assetclassconfirmedamount,Object assetotherconfirmedamount,Object assetonetooneconfirmedmoney,Object assetclassconfirmedmoney,Object assetotherconfirmedmoney,Object assetpresentamount,String ordertime,String debooktime,String assigntime,String starttime,String starttimeofonetoone,String starttimeofclass,String confirmtime,String confirmtimeofonetoone,String confirmtimeofclass,Integer confirmedsubjectsofrecent,Object confirmedhoursofthismonth,String allocateconsultanttime,Integer allocateteachercount,Integer hasexpense,String expensetime,Object expensefee,String completetime,String servicecreatetime,String servicemodifytime,String customersearchcontent,String parentsearchcontent){
+  public Customer(Long id,Integer version,Long campusid,String campusname,Long parentid,String parentcode,String parentname,String customercode,String customername,String customerlevel,String customerstatus,String studentstatus,Integer isoneparent,String describes,java.util.Date birthdays,String gender,String email,String idtype,String idnumber,String viptype,String viplevel,String entrancegrade,String grade,String subjecttype,String studenttype,String contacttype,String sourcemaintype,String sourcesubtype,String sourcesystem,Long schoolid,String schoolname,Integer isstudyagain,java.util.Date firstsigntime,Long firstsignerid,String firstsignername,String invalidreason,String schoolyear,Integer referralcount,Long referralstaffid,String referralstaffname,Long referralstaffjobid,String referralstaffjobname,String referralstaffoacode,Long referralcustomerid,String referralcustomercode,String referralcustomername,String purchaseintention,Integer locked,String lockmemo,Integer graduated,String graduateyear,Long creatorid,Long creatorname,String creatoroacode,Long creatorjobid,String creatorjobname,String creatorjobtype,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime,Long consultantid,String consultantname,String consultantoacode,Long consultantjobid,Long educatorid,String educatorname,String educatoroacode,Long educatorjobid,Long callcenterid,String callcenteroacode,String callcentername,Long callcenterjobid,Long marketingid,String marketingname,String marketingoacode,Long marketingjobid,Integer assignteachernum,String parentidtype,String parentidnumber,String parentrole,String customerrole,String customerprimaryphonetype,String customerprimaryphonenumber,String customersecondaryphonetype,String customersecondaryphonenumber,String parentprimaryphonetype,String parentprimaryphonenumber,String parentsecondaryphonetype,String parentsecondaryphonenumber,String followstage,java.util.Date followtime,Integer followedcount,Integer followedcountofthismonth,java.util.Date nextfollowtime,java.util.Date planverifytime,java.util.Date plansigntime,java.util.Date verifytime,Integer verifiedcount,java.util.Date visittime,Integer visitedcount,Integer visitedcountofthismonth,java.util.Date nextvisittime,Object accountmoney,Object accountdiscountrate,Object accountdiscountbase,java.util.Date accountnewsigntime,Object accountnewsignmoney,java.util.Date accountrenewsigntime,Object accountrenewsignmoney,java.util.Date accountchargetime,Object accountchargemoney,java.util.Date accountrefundtime,Object accountrefundmoney,Object accounttransferedinmoney,java.util.Date accounttransferintime,Object accounttransferedoutmoney,java.util.Date accounttransferouttime,Object signedmoney,Integer signedcount,Object assetonetooneamount,Object assetclassamount,Object assetotheramount,Object assetonetoonemoney,Object assetclassmoney,Object assetothermoney,Object assetonetooneassignedamount,Object assetclassassignedamount,Object assetonetooneassignedmoney,Object assetclassassignedmoney,Object assetonetooneconfirmedamount,Object assetclassconfirmedamount,Object assetotherconfirmedamount,Object assetonetooneconfirmedmoney,Object assetclassconfirmedmoney,Object assetotherconfirmedmoney,Object assetpresentamount,java.util.Date ordertime,java.util.Date debooktime,java.util.Date assigntime,java.util.Date starttime,java.util.Date starttimeofonetoone,java.util.Date starttimeofclass,java.util.Date confirmtime,java.util.Date confirmtimeofonetoone,java.util.Date confirmtimeofclass,Integer confirmedsubjectsofrecent,Object confirmedhoursofthismonth,java.util.Date allocateconsultanttime,Integer allocateteachercount,Integer hasexpense,java.util.Date expensetime,Object expensefee,java.util.Date completetime,java.util.Date servicecreatetime,java.util.Date servicemodifytime,String customersearchcontent,String parentsearchcontent){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
@@ -184,7 +183,6 @@ public class Customer implements Serializable{
       this.parentid=parentid;
       this.parentcode=parentcode;
       this.parentname=parentname;
-      this.customerid=customerid;
       this.customercode=customercode;
       this.customername=customername;
       this.customerlevel=customerlevel;

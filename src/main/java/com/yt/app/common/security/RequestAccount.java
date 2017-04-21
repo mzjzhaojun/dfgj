@@ -4,13 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.context.SecurityContextImpl;
 
-import com.yt.app.common.resource.CommondResource;
+import com.yt.app.common.resource.CommonResource;
 
 
 public class RequestAccount {
 	
 	public static AccountSecurityUser requestGetAccount(HttpServletRequest request) {
-		SecurityContextImpl sc = (SecurityContextImpl) request.getSession().getAttribute(CommondResource.SPRING_SECURITY_CONTEXT);
+		SecurityContextImpl sc = (SecurityContextImpl) request.getSession().getAttribute(CommonResource.SPRING_SECURITY_CONTEXT);
 		if (sc != null) {
 			AccountSecurityUser acu = (AccountSecurityUser) sc.getAuthentication().getPrincipal();
 			return acu;
@@ -19,6 +19,6 @@ public class RequestAccount {
 	}
 
 	public static void requestRemoveAccount(HttpServletRequest request) {
-		request.getSession().removeAttribute(CommondResource.SPRING_SECURITY_CONTEXT);
+		request.getSession().removeAttribute(CommonResource.SPRING_SECURITY_CONTEXT);
 	}
 }

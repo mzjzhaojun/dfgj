@@ -11,7 +11,7 @@ import com.yt.app.api.v1.entity.Customerteacherassignapplies;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:35
 */
 
 public class CustomerteacherassignappliesResourceAssembler extends ResourceAssemblerSupport<Customerteacherassignapplies, CustomerteacherassignappliesResource> {

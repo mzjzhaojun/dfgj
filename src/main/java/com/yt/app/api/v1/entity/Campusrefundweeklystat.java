@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:21
 */
 @Getter
 @Setter
@@ -21,10 +21,10 @@ public class Campusrefundweeklystat implements Serializable{
   Integer quarterkey;
   Integer monthkey;
   Integer weekkey;
-  String startdayofweek;
-  String enddayofweek;
-  String startdayoflastweek;
-  String enddayoflastweek;
+  java.util.Date startdayofweek;
+  java.util.Date enddayofweek;
+  java.util.Date startdayoflastweek;
+  java.util.Date enddayoflastweek;
   Long regionid;
   String regionname;
   Long branchid;
@@ -75,7 +75,7 @@ public class Campusrefundweeklystat implements Serializable{
   Object rfaplan;
   public Campusrefundweeklystat(){
   }
-  public Campusrefundweeklystat(Long id,Integer version,Integer yearkey,Integer quarterkey,Integer monthkey,Integer weekkey,String startdayofweek,String enddayofweek,String startdayoflastweek,String enddayoflastweek,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Integer availablecustomernumber,Object rfataskyear,Object rfayear,Object rfafinishrateyear,Object rfayoyyear,Object rfayoyrateyear,Integer rfnyear,Integer rfnyoyyear,Object rfnyoyrateyear,Object rfataskquarter,Object rfaquarter,Object rfafinishratequarter,Object rfayoyquarter,Object rfayoyratequarter,Integer rfnquarter,Integer rfnyoyquarter,Object rfnyoyratequarter,Object rfataskmonth,Object rfamonth,Object rfafinishratemonth,Object rfayoymonth,Object rfayoyratemonth,Integer rfnmonth,Integer rfnyoymonth,Object rfnyoyratemonth,Object rfatasklastweek,Object rfalastweek,Object rfahllastweek,Object rfanllastweek,Object rfaorlastweek,Object rfafinishratelastweek,Integer rfntasklastweek,Integer rfnlastweek,Object rfnfinishratelastweek,Object rfataskthisweek,Object rfaplanthisweek,Integer rfntaskthisweek,Integer rfnplanthisweek,Integer suspendedcustomernumber,Integer expectrefundcustomernumber,Integer rfnplan,Object rfaplan){
+  public Campusrefundweeklystat(Long id,Integer version,Integer yearkey,Integer quarterkey,Integer monthkey,Integer weekkey,java.util.Date startdayofweek,java.util.Date enddayofweek,java.util.Date startdayoflastweek,java.util.Date enddayoflastweek,Long regionid,String regionname,Long branchid,String branchname,Long campusid,String campusname,Integer availablecustomernumber,Object rfataskyear,Object rfayear,Object rfafinishrateyear,Object rfayoyyear,Object rfayoyrateyear,Integer rfnyear,Integer rfnyoyyear,Object rfnyoyrateyear,Object rfataskquarter,Object rfaquarter,Object rfafinishratequarter,Object rfayoyquarter,Object rfayoyratequarter,Integer rfnquarter,Integer rfnyoyquarter,Object rfnyoyratequarter,Object rfataskmonth,Object rfamonth,Object rfafinishratemonth,Object rfayoymonth,Object rfayoyratemonth,Integer rfnmonth,Integer rfnyoymonth,Object rfnyoyratemonth,Object rfatasklastweek,Object rfalastweek,Object rfahllastweek,Object rfanllastweek,Object rfaorlastweek,Object rfafinishratelastweek,Integer rfntasklastweek,Integer rfnlastweek,Object rfnfinishratelastweek,Object rfataskthisweek,Object rfaplanthisweek,Integer rfntaskthisweek,Integer rfnplanthisweek,Integer suspendedcustomernumber,Integer expectrefundcustomernumber,Integer rfnplan,Object rfaplan){
       this.id=id;
       this.version=version;
       this.yearkey=yearkey;

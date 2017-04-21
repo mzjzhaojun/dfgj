@@ -17,7 +17,7 @@ import com.yt.app.api.v1.mapper.SysMapper;
 import com.yt.app.api.v1.service.RoleService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
-import com.yt.app.frame.id.IdWorker;
+import com.yt.app.frame.generate.GenerateId;
 import com.yt.app.frame.page.IPage;
 import com.yt.app.frame.page.PageBean;
 import com.yt.app.api.v1.entity.Dictionary;
@@ -46,12 +46,12 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 	@Autowired
 	private SysMapper sysMapper;
 	@Autowired
-	IdWorker idworker;
+	GenerateId idworker;
 
 	@Override
 	@Transactional
 	public Integer deletebyid(long id) {
-		
+
 		Integer i = mapper.delete(id);
 		RoleMenu rolemenu = new RoleMenu();
 		rolemenu.setRole_id(id);
@@ -62,7 +62,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 	@Override
 	@Transactional
 	public Integer addobject(Role role) {
-		
+
 		// role.setId(IdWorker.getInstance().nextId());
 		role.setIs_manage(DictionaryResource.ROLE_TYPE_21);
 		Integer i = mapper.post(role);
@@ -84,20 +84,14 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 
 	@Override
 	public Map<String, Object> getid(long id) {
-		
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		Role role = mapper.get(id);
-		// RoleMenu rmenu = new RoleMenu();
-		// rmenu.setRole_id(role.getId());
 		List<RoleMenu> listRoleMenu = menumapper.getroleid(role.getId());
 		List<Menu> listMenu = mmapper.getlist();
 		if (listRoleMenu.size() > 0) {
-			long[] menuid = listRoleMenu.stream().mapToLong(RoleMenu::getMenu_id).distinct().toArray();
-			List<Menu> list = mmapper.getByIds(menuid);
 			for (Menu ml : listMenu) {
-				for (Menu rm : list) {
-					if (ml.getId().equals(rm.getId())) {
+				for (RoleMenu rm : listRoleMenu) {
+					if (ml.getId().longValue() == rm.getMenu_id().longValue()) {
 						ml.setChecked(true);
 						ml.setOpen(true);
 					}
@@ -114,13 +108,11 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 		List<Sys> getlistsys = sysMapper.getByIds(getsysid);
 		listMenu.stream().forEach(Menu -> {
 			getlistsys.stream().forEach(Sys -> {
-				if (Menu.getSys_id().doubleValue() == (Sys.getId().doubleValue()) && Menu.getLevel().equals(DictionaryResource.MENU_LEVEL)) {
+				if (Menu.getSys_id().longValue() == Sys.getId().longValue() && Menu.getLevel().equals(DictionaryResource.MENU_LEVEL)) {
 					Menu.setParent_id(Sys.getId().toString());
 					Menu.setPId(Sys.getId().toString());
 					return;
-
 				}
-
 			});
 		});
 
@@ -132,18 +124,14 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 			menu.setId(sys.getId());
 			for (Menu m : listMenu) {
 				if (m.getSys_id() != null && m.getChecked() != null) {
-					if (sys.getId().doubleValue() == (m.getSys_id().longValue())) {
+					if (sys.getId().longValue() == m.getSys_id().longValue()) {
 						menu.setChecked(true);
 						menu.setOpen(true);
 					}
 				}
-
-			}
-
+ 			}
 			listMenu.add(menu);
-
 		}
-
 		map.put("listmeun", listMenu);
 		map.put("role", role);
 		return map;
@@ -152,7 +140,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 	@SuppressWarnings("unchecked")
 	@Override
 	public IPage<Role> getlistAll(Map<String, Object> param) {
-		
 
 		int count = 0;
 		if (PageBean.isPaging(param)) {

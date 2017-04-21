@@ -3,14 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerserviceitemsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,serviceid,itemid,handletime,handlestatus,handlememo,handlerid,handlername,handlerjobid,handlerjobname
+     id,version,serviceid,handletime,handlestatus,handlememo,handlerid,handlername,handlerjobid,handlerjobname
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerserviceitems">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="serviceid" column="serviceid" />
-         <id property="itemid" column="itemid" />
          <id property="handletime" column="handletime" />
          <id property="handlestatus" column="handlestatus" />
          <id property="handlememo" column="handlememo" />
@@ -21,8 +20,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerserviceitems">
-  insert into customerserviceitems (id,serviceid,itemid,handletime,handlestatus,handlememo,handlerid,handlername,handlerjobid,handlerjobname)
-         values (#{id},#{serviceid},#{itemid},#{handletime},#{handlestatus},#{handlememo},#{handlerid},#{handlername},#{handlerjobid},#{handlerjobname})
+  insert into customerserviceitems (id,serviceid,handletime,handlestatus,handlememo,handlerid,handlername,handlerjobid,handlerjobname)
+         values (#{id},#{serviceid},#{handletime},#{handlestatus},#{handlememo},#{handlerid},#{handlername},#{handlerjobid},#{handlerjobname})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -38,9 +37,6 @@
              </if>
              <if test="serviceid != null">
                    serviceid = #{serviceid},
-             </if>
-             <if test="itemid != null">
-                   itemid = #{itemid},
              </if>
              <if test="handletime != null">
                    handletime = #{handletime},

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:56
 */
 @Getter
 @Setter
@@ -19,29 +19,25 @@ public class Rooms implements Serializable{
   Integer version;
   Long campusid;
   String campusname;
-  Long roomid;
   String roomcode;
   String roomname;
   String roomstatus;
-  Integer sortno;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Rooms(){
   }
-  public Rooms(Long id,Integer version,Long campusid,String campusname,Long roomid,String roomcode,String roomname,String roomstatus,Integer sortno,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Rooms(Long id,Integer version,Long campusid,String campusname,String roomcode,String roomname,String roomstatus,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
       this.campusname=campusname;
-      this.roomid=roomid;
       this.roomcode=roomcode;
       this.roomname=roomname;
       this.roomstatus=roomstatus;
-      this.sortno=sortno;
       this.creatorid=creatorid;
       this.creatorname=creatorname;
       this.createtime=createtime;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:54
 */
 @Getter
 @Setter
@@ -17,17 +17,15 @@ public class Productsalaryrules implements Serializable{
 
   Long id;
   Integer version;
-  Long ruleid;
   Long productid;
   String ruleobject;
   Object moneyperhour;
   Object moneyperperiod;
   public Productsalaryrules(){
   }
-  public Productsalaryrules(Long id,Integer version,Long ruleid,Long productid,String ruleobject,Object moneyperhour,Object moneyperperiod){
+  public Productsalaryrules(Long id,Integer version,Long productid,String ruleobject,Object moneyperhour,Object moneyperperiod){
       this.id=id;
       this.version=version;
-      this.ruleid=ruleid;
       this.productid=productid;
       this.ruleobject=ruleobject;
       this.moneyperhour=moneyperhour;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:57
 */
 @Getter
 @Setter
@@ -19,22 +19,22 @@ public class Staffresources implements Serializable{
   Integer version;
   Long customerid;
   Long staffid;
-  String statlocaldate;
+  java.util.Date statlocaldate;
   Long campusid;
   String relationtype;
   Integer istodayfollow;
   Integer istodayverify;
   Integer istodaysigned;
   String customerlevel;
-  String verifytime;
-  String followtime;
+  java.util.Date verifytime;
+  java.util.Date followtime;
   String followstage;
   Long referralstaffid;
-  String firstsigntime;
+  java.util.Date firstsigntime;
   Long firstsignerid;
   public Staffresources(){
   }
-  public Staffresources(Long id,Integer version,Long customerid,Long staffid,String statlocaldate,Long campusid,String relationtype,Integer istodayfollow,Integer istodayverify,Integer istodaysigned,String customerlevel,String verifytime,String followtime,String followstage,Long referralstaffid,String firstsigntime,Long firstsignerid){
+  public Staffresources(Long id,Integer version,Long customerid,Long staffid,java.util.Date statlocaldate,Long campusid,String relationtype,Integer istodayfollow,Integer istodayverify,Integer istodaysigned,String customerlevel,java.util.Date verifytime,java.util.Date followtime,String followstage,Long referralstaffid,java.util.Date firstsigntime,Long firstsignerid){
       this.id=id;
       this.version=version;
       this.customerid=customerid;

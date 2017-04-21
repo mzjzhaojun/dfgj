@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:39
 */
 @Getter
 @Setter
@@ -19,14 +19,14 @@ public class Discountpermissions implements Serializable{
   Integer version;
   Long campusid;
   Long discountid;
-  String startdate;
-  String enddate;
+  java.util.Date startdate;
+  java.util.Date enddate;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   public Discountpermissions(){
   }
-  public Discountpermissions(Long id,Integer version,Long campusid,Long discountid,String startdate,String enddate,Long creatorid,String creatorname,String createtime){
+  public Discountpermissions(Long id,Integer version,Long campusid,Long discountid,java.util.Date startdate,java.util.Date enddate,Long creatorid,String creatorname,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;

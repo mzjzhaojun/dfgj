@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:56
 */
 @Getter
 @Setter
@@ -18,7 +18,6 @@ public class Schools implements Serializable{
   Long id;
   Integer version;
   Long orgid;
-  Long schoolid;
   String schoolname;
   String schoolyear;
   String schoolrange;
@@ -26,17 +25,16 @@ public class Schools implements Serializable{
   String schoolnature;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Schools(){
   }
-  public Schools(Long id,Integer version,Long orgid,Long schoolid,String schoolname,String schoolyear,String schoolrange,String schoollevel,String schoolnature,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Schools(Long id,Integer version,Long orgid,String schoolname,String schoolyear,String schoolrange,String schoollevel,String schoolnature,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.orgid=orgid;
-      this.schoolid=schoolid;
       this.schoolname=schoolname;
       this.schoolyear=schoolyear;
       this.schoolrange=schoolrange;

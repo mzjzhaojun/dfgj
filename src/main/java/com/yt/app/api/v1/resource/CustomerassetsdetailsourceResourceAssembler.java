@@ -11,7 +11,7 @@ import com.yt.app.api.v1.entity.Customerassetsdetailsource;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:29
 */
 
 public class CustomerassetsdetailsourceResourceAssembler extends ResourceAssemblerSupport<Customerassetsdetailsource, CustomerassetsdetailsourceResource> {

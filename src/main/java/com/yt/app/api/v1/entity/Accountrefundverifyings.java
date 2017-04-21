@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:17
 */
 @Getter
 @Setter
@@ -18,8 +18,7 @@ public class Accountrefundverifyings implements Serializable{
   Long id;
   Integer version;
   Long applyid;
-  Long verifyid;
-  String verifytime;
+  java.util.Date verifytime;
   String verifyaction;
   String verifymemo;
   Long verifierid;
@@ -30,14 +29,13 @@ public class Accountrefundverifyings implements Serializable{
   String verifierorgname;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   public Accountrefundverifyings(){
   }
-  public Accountrefundverifyings(Long id,Integer version,Long applyid,Long verifyid,String verifytime,String verifyaction,String verifymemo,Long verifierid,String verifiername,Long verifierjobid,String verifierjobname,String verifierorgid,String verifierorgname,Long creatorid,String creatorname,String createtime){
+  public Accountrefundverifyings(Long id,Integer version,Long applyid,java.util.Date verifytime,String verifyaction,String verifymemo,Long verifierid,String verifiername,Long verifierjobid,String verifierjobname,String verifierorgid,String verifierorgname,Long creatorid,String creatorname,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.applyid=applyid;
-      this.verifyid=verifyid;
       this.verifytime=verifytime;
       this.verifyaction=verifyaction;
       this.verifymemo=verifymemo;

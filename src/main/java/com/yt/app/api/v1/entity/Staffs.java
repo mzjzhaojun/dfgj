@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:57
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Staffs implements Serializable{
 
   Long id;
   Integer version;
-  Long staffid;
   String oacode;
   Long staffcode;
   String staffname;
@@ -32,18 +31,15 @@ public class Staffs implements Serializable{
   String gender;
   String isfulltime;
   String privateemail;
-  String employmentdate;
-  String dimissiondate;
-  String versionstarttime;
-  String versionendtime;
+  java.util.Date employmentdate;
+  java.util.Date dimissiondate;
   String status;
   String bistatus;
   public Staffs(){
   }
-  public Staffs(Long id,Integer version,Long staffid,String oacode,Long staffcode,String staffname,String displayname,String mail,Long mp,Long wp,Long extension,String address,String idtype,String idnumber,String gender,String isfulltime,String privateemail,String employmentdate,String dimissiondate,String versionstarttime,String versionendtime,String status,String bistatus){
+  public Staffs(Long id,Integer version,String oacode,Long staffcode,String staffname,String displayname,String mail,Long mp,Long wp,Long extension,String address,String idtype,String idnumber,String gender,String isfulltime,String privateemail,java.util.Date employmentdate,java.util.Date dimissiondate,String status,String bistatus){
       this.id=id;
       this.version=version;
-      this.staffid=staffid;
       this.oacode=oacode;
       this.staffcode=staffcode;
       this.staffname=staffname;
@@ -60,8 +56,6 @@ public class Staffs implements Serializable{
       this.privateemail=privateemail;
       this.employmentdate=employmentdate;
       this.dimissiondate=dimissiondate;
-      this.versionstarttime=versionstarttime;
-      this.versionendtime=versionendtime;
       this.status=status;
       this.bistatus=bistatus;
   }

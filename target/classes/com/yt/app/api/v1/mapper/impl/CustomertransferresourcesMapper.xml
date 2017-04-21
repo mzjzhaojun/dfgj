@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomertransferresourcesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,orgid,orgname,orgtype,customerid,transferid,transfertime,transfermemo,transferorid,transferorname,transferorjobid,transferorjobname,toorgid,toorgname,toorgtype,creatorid,creatorname,createtime
+     id,version,orgid,orgname,orgtype,customerid,transfertime,transfermemo,transferorid,transferorname,transferorjobid,transferorjobname,toorgid,toorgname,toorgtype,creatorid,creatorname,createtime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customertransferresources">
@@ -13,7 +13,6 @@
          <id property="orgname" column="orgname" />
          <id property="orgtype" column="orgtype" />
          <id property="customerid" column="customerid" />
-         <id property="transferid" column="transferid" />
          <id property="transfertime" column="transfertime" />
          <id property="transfermemo" column="transfermemo" />
          <id property="transferorid" column="transferorid" />
@@ -29,8 +28,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customertransferresources">
-  insert into customertransferresources (id,orgid,orgname,orgtype,customerid,transferid,transfertime,transfermemo,transferorid,transferorname,transferorjobid,transferorjobname,toorgid,toorgname,toorgtype,creatorid,creatorname,createtime)
-         values (#{id},#{orgid},#{orgname},#{orgtype},#{customerid},#{transferid},#{transfertime},#{transfermemo},#{transferorid},#{transferorname},#{transferorjobid},#{transferorjobname},#{toorgid},#{toorgname},#{toorgtype},#{creatorid},#{creatorname},#{createtime})
+  insert into customertransferresources (id,orgid,orgname,orgtype,customerid,transfertime,transfermemo,transferorid,transferorname,transferorjobid,transferorjobname,toorgid,toorgname,toorgtype,creatorid,creatorname,createtime)
+         values (#{id},#{orgid},#{orgname},#{orgtype},#{customerid},#{transfertime},#{transfermemo},#{transferorid},#{transferorname},#{transferorjobid},#{transferorjobname},#{toorgid},#{toorgname},#{toorgtype},#{creatorid},#{creatorname},#{createtime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -55,9 +54,6 @@
              </if>
              <if test="customerid != null">
                    customerid = #{customerid},
-             </if>
-             <if test="transferid != null">
-                   transferid = #{transferid},
              </if>
              <if test="transfertime != null">
                    transfertime = #{transfertime},

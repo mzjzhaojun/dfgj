@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:17
 */
 @Getter
 @Setter
@@ -18,9 +18,7 @@ public class Accountrefundallots implements Serializable{
   Long id;
   Integer version;
   Long applyid;
-  Integer sortno;
-  Long allotid;
-  String teacherid;
+  Long teacherid;
   String teachername;
   Long teacheroacode;
   Long teacherjobid;
@@ -32,12 +30,10 @@ public class Accountrefundallots implements Serializable{
   Object allotmoney;
   public Accountrefundallots(){
   }
-  public Accountrefundallots(Long id,Integer version,Long applyid,Integer sortno,Long allotid,String teacherid,String teachername,Long teacheroacode,Long teacherjobid,String teacherjobname,Integer isfulltimeteacher,Long subject,String categorytype,Object allotamount,Object allotmoney){
+  public Accountrefundallots(Long id,Integer version,Long applyid,Long teacherid,String teachername,Long teacheroacode,Long teacherjobid,String teacherjobname,Integer isfulltimeteacher,Long subject,String categorytype,Object allotamount,Object allotmoney){
       this.id=id;
       this.version=version;
       this.applyid=applyid;
-      this.sortno=sortno;
-      this.allotid=allotid;
       this.teacherid=teacherid;
       this.teachername=teachername;
       this.teacheroacode=teacheroacode;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:24
 */
 @Getter
 @Setter
@@ -18,14 +18,12 @@ public class Classlessons implements Serializable{
   Long id;
   Integer version;
   Long classid;
-  Integer sortno;
-  Long lessonid;
   String lessoncode;
   String lessonstatus;
-  String starttime;
-  String endtime;
+  java.util.Date starttime;
+  java.util.Date endtime;
   String confirmstatus;
-  String confirmtime;
+  java.util.Date confirmtime;
   Integer confirmedpeoples;
   Object confirmedmoney;
   Integer lessonpeoples;
@@ -41,18 +39,16 @@ public class Classlessons implements Serializable{
   Integer isfulltimeteacher;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Classlessons(){
   }
-  public Classlessons(Long id,Integer version,Long classid,Integer sortno,Long lessonid,String lessoncode,String lessonstatus,String starttime,String endtime,String confirmstatus,String confirmtime,Integer confirmedpeoples,Object confirmedmoney,Integer lessonpeoples,Long roomid,String roomcode,String roomname,Long teacherid,String teachername,String teacheroacode,Long teacherjobid,Long teacherjoborgid,String teacherjoborgname,Integer isfulltimeteacher,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Classlessons(Long id,Integer version,Long classid,String lessoncode,String lessonstatus,java.util.Date starttime,java.util.Date endtime,String confirmstatus,java.util.Date confirmtime,Integer confirmedpeoples,Object confirmedmoney,Integer lessonpeoples,Long roomid,String roomcode,String roomname,Long teacherid,String teachername,String teacheroacode,Long teacherjobid,Long teacherjoborgid,String teacherjoborgname,Integer isfulltimeteacher,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.classid=classid;
-      this.sortno=sortno;
-      this.lessonid=lessonid;
       this.lessoncode=lessoncode;
       this.lessonstatus=lessonstatus;
       this.starttime=starttime;

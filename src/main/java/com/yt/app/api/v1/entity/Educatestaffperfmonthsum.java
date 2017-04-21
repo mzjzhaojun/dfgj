@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:42
 */
 @Getter
 @Setter
@@ -41,10 +41,10 @@ public class Educatestaffperfmonthsum implements Serializable{
   Object refundmoney;
   Integer hourcounttask;
   Object renewalmoneytask;
-  String createtime;
+  java.util.Date createtime;
   public Educatestaffperfmonthsum(){
   }
-  public Educatestaffperfmonthsum(Long id,Integer version,Long regionid,Long branchid,Long campusid,Long staffid,Long staffjobid,Integer year,Integer month,Integer onetoonehourcount,Object onetoonehourincome,Integer onetoonecampusrank,Integer onetoonebranchrank,Integer onetoonecountryrank,Integer grouphourcount,Object grouphourincome,Integer groupcampusrank,Integer groupbranchrank,Integer groupcountryrank,Object renewalmoney,Integer renewalcampusrank,Integer renewalbranchrank,Integer renewalcountryrank,Object refundmoney,Integer hourcounttask,Object renewalmoneytask,String createtime){
+  public Educatestaffperfmonthsum(Long id,Integer version,Long regionid,Long branchid,Long campusid,Long staffid,Long staffjobid,Integer year,Integer month,Integer onetoonehourcount,Object onetoonehourincome,Integer onetoonecampusrank,Integer onetoonebranchrank,Integer onetoonecountryrank,Integer grouphourcount,Object grouphourincome,Integer groupcampusrank,Integer groupbranchrank,Integer groupcountryrank,Object renewalmoney,Integer renewalcampusrank,Integer renewalbranchrank,Integer renewalcountryrank,Object refundmoney,Integer hourcounttask,Object renewalmoneytask,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.regionid=regionid;

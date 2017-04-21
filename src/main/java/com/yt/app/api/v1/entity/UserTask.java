@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:03
+* @createdate  2017-04-20 13:49:03
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class UserTask implements Serializable{
 
   Long id;
   Integer version;
-  Long task_guid;
   String application_name;
   String program_name;
   Integer task_level;
@@ -30,17 +29,17 @@ public class UserTask implements Serializable{
   Integer emergency;
   String purpose;
   String status;
-  String task_start_time;
-  String expire_time;
+  java.util.Date task_start_time;
+  java.util.Date expire_time;
   Long source_id;
   String source_name;
   Long send_to_user;
   String send_to_user_name;
-  String read_time;
+  java.util.Date read_time;
   Long category_guid;
   Integer top_flag;
   String draft_department_name;
-  String deliver_time;
+  java.util.Date deliver_time;
   Long draft_user_id;
   String draft_user_name;
   Integer operation_type;
@@ -52,10 +51,9 @@ public class UserTask implements Serializable{
   String to_activity_key;
   public UserTask(){
   }
-  public UserTask(Long id,Integer version,Long task_guid,String application_name,String program_name,Integer task_level,String task_title,Long resource_id,Long process_id,Long activity_id,String url,String data,Integer emergency,String purpose,String status,String task_start_time,String expire_time,Long source_id,String source_name,Long send_to_user,String send_to_user_name,String read_time,Long category_guid,Integer top_flag,String draft_department_name,String deliver_time,Long draft_user_id,String draft_user_name,Integer operation_type,String operation_name,String from_transition_key,String from_transition_name,Long from_activity_id,String from_activity_key,String to_activity_key){
+  public UserTask(Long id,Integer version,String application_name,String program_name,Integer task_level,String task_title,Long resource_id,Long process_id,Long activity_id,String url,String data,Integer emergency,String purpose,String status,java.util.Date task_start_time,java.util.Date expire_time,Long source_id,String source_name,Long send_to_user,String send_to_user_name,java.util.Date read_time,Long category_guid,Integer top_flag,String draft_department_name,java.util.Date deliver_time,Long draft_user_id,String draft_user_name,Integer operation_type,String operation_name,String from_transition_key,String from_transition_name,Long from_activity_id,String from_activity_key,String to_activity_key){
       this.id=id;
       this.version=version;
-      this.task_guid=task_guid;
       this.application_name=application_name;
       this.program_name=program_name;
       this.task_level=task_level;

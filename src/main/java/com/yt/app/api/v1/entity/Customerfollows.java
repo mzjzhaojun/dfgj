@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:31
 */
 @Getter
 @Setter
@@ -21,8 +21,7 @@ public class Customerfollows implements Serializable{
   String orgname;
   String orgtype;
   Long customerid;
-  Long followid;
-  String followtime;
+  java.util.Date followtime;
   Long followerid;
   String followername;
   Long followerjobid;
@@ -39,27 +38,26 @@ public class Customerfollows implements Serializable{
   String purchaseintention;
   String intensionsubjects;
   Integer isvalidfiling;
-  String nextfollowtime;
-  String planverifytime;
-  String plansigndate;
+  java.util.Date nextfollowtime;
+  java.util.Date planverifytime;
+  java.util.Date plansigndate;
   Integer isstudythere;
   Integer ispotential;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Customerfollows(){
   }
-  public Customerfollows(Long id,Integer version,Long orgid,String orgname,String orgtype,Long customerid,Long followid,String followtime,Long followerid,String followername,Long followerjobid,String followerjobname,String followtype,String followstage,String followobject,String followphone,String followmemo,String talkmainresult,String talksubresult,String customerlevel,String invalidreason,String purchaseintention,String intensionsubjects,Integer isvalidfiling,String nextfollowtime,String planverifytime,String plansigndate,Integer isstudythere,Integer ispotential,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Customerfollows(Long id,Integer version,Long orgid,String orgname,String orgtype,Long customerid,java.util.Date followtime,Long followerid,String followername,Long followerjobid,String followerjobname,String followtype,String followstage,String followobject,String followphone,String followmemo,String talkmainresult,String talksubresult,String customerlevel,String invalidreason,String purchaseintention,String intensionsubjects,Integer isvalidfiling,java.util.Date nextfollowtime,java.util.Date planverifytime,java.util.Date plansigndate,Integer isstudythere,Integer ispotential,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.orgid=orgid;
       this.orgname=orgname;
       this.orgtype=orgtype;
       this.customerid=customerid;
-      this.followid=followid;
       this.followtime=followtime;
       this.followerid=followerid;
       this.followername=followername;

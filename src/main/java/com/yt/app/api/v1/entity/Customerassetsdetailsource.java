@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:29
 */
 @Getter
 @Setter
@@ -17,7 +17,6 @@ public class Customerassetsdetailsource implements Serializable{
 
   Long id;
   Integer version;
-  String statlocaldate;
   Long assetid;
   String categorytype;
   String grade;
@@ -26,10 +25,9 @@ public class Customerassetsdetailsource implements Serializable{
   Object confirmedmoney;
   public Customerassetsdetailsource(){
   }
-  public Customerassetsdetailsource(Long id,Integer version,String statlocaldate,Long assetid,String categorytype,String grade,String orderid,Object confirmedamount,Object confirmedmoney){
+  public Customerassetsdetailsource(Long id,Integer version,Long assetid,String categorytype,String grade,String orderid,Object confirmedamount,Object confirmedmoney){
       this.id=id;
       this.version=version;
-      this.statlocaldate=statlocaldate;
       this.assetid=assetid;
       this.categorytype=categorytype;
       this.grade=grade;

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:16
 */
 @Getter
 @Setter
@@ -18,30 +18,28 @@ public class Accountchargeinvoices implements Serializable{
   Long id;
   Integer version;
   Long applyid;
-  Long invoiceid;
   String invoiceno;
   Object invoicemoney;
   String invoiceclauses;
   String invoiceheader;
-  String invoicetime;
+  java.util.Date invoicetime;
   String invoicememo;
   String invoicestatus;
   String isdiscarded;
-  String returntime;
+  java.util.Date returntime;
   String returnmemo;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Accountchargeinvoices(){
   }
-  public Accountchargeinvoices(Long id,Integer version,Long applyid,Long invoiceid,String invoiceno,Object invoicemoney,String invoiceclauses,String invoiceheader,String invoicetime,String invoicememo,String invoicestatus,String isdiscarded,String returntime,String returnmemo,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Accountchargeinvoices(Long id,Integer version,Long applyid,String invoiceno,Object invoicemoney,String invoiceclauses,String invoiceheader,java.util.Date invoicetime,String invoicememo,String invoicestatus,String isdiscarded,java.util.Date returntime,String returnmemo,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.applyid=applyid;
-      this.invoiceid=invoiceid;
       this.invoiceno=invoiceno;
       this.invoicemoney=invoicemoney;
       this.invoiceclauses=invoiceclauses;

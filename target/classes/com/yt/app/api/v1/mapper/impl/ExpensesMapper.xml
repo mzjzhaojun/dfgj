@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.ExpensesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,expenseid,expensetype,expensevalue,branchid,branchname,campusids,campusnames,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,expensetype,expensevalue,branchid,branchname,campusids,campusnames,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Expenses">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="expenseid" column="expenseid" />
          <id property="expensetype" column="expensetype" />
          <id property="expensevalue" column="expensevalue" />
          <id property="branchid" column="branchid" />
@@ -25,8 +24,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Expenses">
-  insert into expenses (id,expenseid,expensetype,expensevalue,branchid,branchname,campusids,campusnames,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{expenseid},#{expensetype},#{expensevalue},#{branchid},#{branchname},#{campusids},#{campusnames},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into expenses (id,expensetype,expensevalue,branchid,branchname,campusids,campusnames,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{expensetype},#{expensevalue},#{branchid},#{branchname},#{campusids},#{campusnames},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -39,9 +38,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="expenseid != null">
-                   expenseid = #{expenseid},
              </if>
              <if test="expensetype != null">
                    expensetype = #{expensetype},

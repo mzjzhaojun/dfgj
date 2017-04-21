@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.AssetsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,assetid,assetcode,assetname,assettype,assetreftype,assetrefpid,assetrefid,accountid,customerid,customercode,customername,productid,productcode,productname,productunit,productunitname,grade,gradename,subject,subjectname,catalog,catalogname,categorytype,categorytypename,courselevel,courselevelname,lessonduration,lessondurationvalue,orderprice,orderamount,presentamount,tunlandrate,specialrate,discounttype,discountrate,realprice,realamount,expirationdate,assignedamount,confirmedamount,exchangedamount,debookedamount,confirmedmoney,returnedmoney,amount,price,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,versionstarttime,versionendtime
+     id,version,assetcode,assetname,assettype,assetreftype,assetrefpid,assetrefid,accountid,customerid,customercode,customername,productid,productcode,productname,productunit,productunitname,grade,gradename,subject,subjectname,catalog,catalogname,categorytype,categorytypename,courselevel,courselevelname,lessonduration,lessondurationvalue,orderprice,orderamount,presentamount,tunlandrate,specialrate,discounttype,discountrate,realprice,realamount,expirationdate,assignedamount,confirmedamount,exchangedamount,debookedamount,confirmedmoney,returnedmoney,amount,price,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Assets">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="assetid" column="assetid" />
          <id property="assetcode" column="assetcode" />
          <id property="assetname" column="assetname" />
          <id property="assettype" column="assettype" />
@@ -61,13 +60,11 @@
          <id property="modifierid" column="modifierid" />
          <id property="modifiername" column="modifiername" />
          <id property="modifytime" column="modifytime" />
-         <id property="versionstarttime" column="versionstarttime" />
-         <id property="versionendtime" column="versionendtime" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Assets">
-  insert into assets (id,assetid,assetcode,assetname,assettype,assetreftype,assetrefpid,assetrefid,accountid,customerid,customercode,customername,productid,productcode,productname,productunit,productunitname,grade,gradename,subject,subjectname,catalog,catalogname,categorytype,categorytypename,courselevel,courselevelname,lessonduration,lessondurationvalue,orderprice,orderamount,presentamount,tunlandrate,specialrate,discounttype,discountrate,realprice,realamount,expirationdate,assignedamount,confirmedamount,exchangedamount,debookedamount,confirmedmoney,returnedmoney,amount,price,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,versionstarttime,versionendtime)
-         values (#{id},#{assetid},#{assetcode},#{assetname},#{assettype},#{assetreftype},#{assetrefpid},#{assetrefid},#{accountid},#{customerid},#{customercode},#{customername},#{productid},#{productcode},#{productname},#{productunit},#{productunitname},#{grade},#{gradename},#{subject},#{subjectname},#{catalog},#{catalogname},#{categorytype},#{categorytypename},#{courselevel},#{courselevelname},#{lessonduration},#{lessondurationvalue},#{orderprice},#{orderamount},#{presentamount},#{tunlandrate},#{specialrate},#{discounttype},#{discountrate},#{realprice},#{realamount},#{expirationdate},#{assignedamount},#{confirmedamount},#{exchangedamount},#{debookedamount},#{confirmedmoney},#{returnedmoney},#{amount},#{price},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{versionstarttime},#{versionendtime})
+  insert into assets (id,assetcode,assetname,assettype,assetreftype,assetrefpid,assetrefid,accountid,customerid,customercode,customername,productid,productcode,productname,productunit,productunitname,grade,gradename,subject,subjectname,catalog,catalogname,categorytype,categorytypename,courselevel,courselevelname,lessonduration,lessondurationvalue,orderprice,orderamount,presentamount,tunlandrate,specialrate,discounttype,discountrate,realprice,realamount,expirationdate,assignedamount,confirmedamount,exchangedamount,debookedamount,confirmedmoney,returnedmoney,amount,price,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{assetcode},#{assetname},#{assettype},#{assetreftype},#{assetrefpid},#{assetrefid},#{accountid},#{customerid},#{customercode},#{customername},#{productid},#{productcode},#{productname},#{productunit},#{productunitname},#{grade},#{gradename},#{subject},#{subjectname},#{catalog},#{catalogname},#{categorytype},#{categorytypename},#{courselevel},#{courselevelname},#{lessonduration},#{lessondurationvalue},#{orderprice},#{orderamount},#{presentamount},#{tunlandrate},#{specialrate},#{discounttype},#{discountrate},#{realprice},#{realamount},#{expirationdate},#{assignedamount},#{confirmedamount},#{exchangedamount},#{debookedamount},#{confirmedmoney},#{returnedmoney},#{amount},#{price},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -80,9 +77,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="assetid != null">
-                   assetid = #{assetid},
              </if>
              <if test="assetcode != null">
                    assetcode = #{assetcode},
@@ -235,13 +229,7 @@
                    modifiername = #{modifiername},
              </if>
              <if test="modifytime != null">
-                   modifytime = #{modifytime},
-             </if>
-             <if test="versionstarttime != null">
-                   versionstarttime = #{versionstarttime},
-             </if>
-             <if test="versionendtime != null">
-                   versionendtime = #{versionendtime}
+                   modifytime = #{modifytime}
              </if>
           </set>
      where id = #{id} and  version = #{version}

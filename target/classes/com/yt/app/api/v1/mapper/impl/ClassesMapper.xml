@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.ClassesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,campusid,campusname,productid,productcode,productname,classid,classcode,classname,classstatus,roomid,roomcode,roomname,classtype,classtypename,grade,gradename,subject,subjectname,starttime,endtime,lessoncount,invalidlessons,finishedlessons,lessondurationvalue,perioddurationvalue,periodsoflesson,classpeoples,secondpeoples,latestpeoples,teachernames,confirmedmoney,minpeoples,maxpeoples,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,campusid,campusname,productid,productcode,productname,classcode,classname,classstatus,roomid,roomcode,roomname,classtype,classtypename,grade,gradename,subject,subjectname,starttime,endtime,lessoncount,invalidlessons,finishedlessons,lessondurationvalue,perioddurationvalue,periodsoflesson,classpeoples,secondpeoples,latestpeoples,teachernames,confirmedmoney,minpeoples,maxpeoples,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Classes">
@@ -14,7 +14,6 @@
          <id property="productid" column="productid" />
          <id property="productcode" column="productcode" />
          <id property="productname" column="productname" />
-         <id property="classid" column="classid" />
          <id property="classcode" column="classcode" />
          <id property="classname" column="classname" />
          <id property="classstatus" column="classstatus" />
@@ -51,8 +50,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Classes">
-  insert into classes (id,campusid,campusname,productid,productcode,productname,classid,classcode,classname,classstatus,roomid,roomcode,roomname,classtype,classtypename,grade,gradename,subject,subjectname,starttime,endtime,lessoncount,invalidlessons,finishedlessons,lessondurationvalue,perioddurationvalue,periodsoflesson,classpeoples,secondpeoples,latestpeoples,teachernames,confirmedmoney,minpeoples,maxpeoples,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{campusid},#{campusname},#{productid},#{productcode},#{productname},#{classid},#{classcode},#{classname},#{classstatus},#{roomid},#{roomcode},#{roomname},#{classtype},#{classtypename},#{grade},#{gradename},#{subject},#{subjectname},#{starttime},#{endtime},#{lessoncount},#{invalidlessons},#{finishedlessons},#{lessondurationvalue},#{perioddurationvalue},#{periodsoflesson},#{classpeoples},#{secondpeoples},#{latestpeoples},#{teachernames},#{confirmedmoney},#{minpeoples},#{maxpeoples},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into classes (id,campusid,campusname,productid,productcode,productname,classcode,classname,classstatus,roomid,roomcode,roomname,classtype,classtypename,grade,gradename,subject,subjectname,starttime,endtime,lessoncount,invalidlessons,finishedlessons,lessondurationvalue,perioddurationvalue,periodsoflesson,classpeoples,secondpeoples,latestpeoples,teachernames,confirmedmoney,minpeoples,maxpeoples,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{campusid},#{campusname},#{productid},#{productcode},#{productname},#{classcode},#{classname},#{classstatus},#{roomid},#{roomcode},#{roomname},#{classtype},#{classtypename},#{grade},#{gradename},#{subject},#{subjectname},#{starttime},#{endtime},#{lessoncount},#{invalidlessons},#{finishedlessons},#{lessondurationvalue},#{perioddurationvalue},#{periodsoflesson},#{classpeoples},#{secondpeoples},#{latestpeoples},#{teachernames},#{confirmedmoney},#{minpeoples},#{maxpeoples},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -80,9 +79,6 @@
              </if>
              <if test="productname != null">
                    productname = #{productname},
-             </if>
-             <if test="classid != null">
-                   classid = #{classid},
              </if>
              <if test="classcode != null">
                    classcode = #{classcode},

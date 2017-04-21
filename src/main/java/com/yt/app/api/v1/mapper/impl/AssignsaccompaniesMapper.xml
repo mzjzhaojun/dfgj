@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.AssignsaccompaniesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,assignid,assigntime,assignstatus,campusid,campusname,assignprice,assignsource,assignmemo,copyallowed,confirmid,confirmtime,confirmstatus,confirmprice,assetid,assetcode,customerid,accountid,customercode,customername,productid,productcode,productname,categorytype,categorytypename,roomid,roomcode,roomname,teacherid,teachername,teacherjobid,teacherjoborgid,teacherjoborgname,teacheroacode,isfulltimeteacher,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,grade,gradename,subject,subjectname,durationvalue,amount,starttime,endtime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,assigntime,assignstatus,campusid,campusname,assignprice,assignsource,assignmemo,copyallowed,confirmid,confirmtime,confirmstatus,confirmprice,assetid,assetcode,customerid,accountid,customercode,customername,productid,productcode,productname,categorytype,categorytypename,roomid,roomcode,roomname,teacherid,teachername,teacherjobid,teacherjoborgid,teacherjoborgname,teacheroacode,isfulltimeteacher,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,grade,gradename,subject,subjectname,durationvalue,amount,starttime,endtime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Assignsaccompanies">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="assignid" column="assignid" />
          <id property="assigntime" column="assigntime" />
          <id property="assignstatus" column="assignstatus" />
          <id property="campusid" column="campusid" />
@@ -66,8 +65,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Assignsaccompanies">
-  insert into assignsaccompanies (id,assignid,assigntime,assignstatus,campusid,campusname,assignprice,assignsource,assignmemo,copyallowed,confirmid,confirmtime,confirmstatus,confirmprice,assetid,assetcode,customerid,accountid,customercode,customername,productid,productcode,productname,categorytype,categorytypename,roomid,roomcode,roomname,teacherid,teachername,teacherjobid,teacherjoborgid,teacherjoborgname,teacheroacode,isfulltimeteacher,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,grade,gradename,subject,subjectname,durationvalue,amount,starttime,endtime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{assignid},#{assigntime},#{assignstatus},#{campusid},#{campusname},#{assignprice},#{assignsource},#{assignmemo},#{copyallowed},#{confirmid},#{confirmtime},#{confirmstatus},#{confirmprice},#{assetid},#{assetcode},#{customerid},#{accountid},#{customercode},#{customername},#{productid},#{productcode},#{productname},#{categorytype},#{categorytypename},#{roomid},#{roomcode},#{roomname},#{teacherid},#{teachername},#{teacherjobid},#{teacherjoborgid},#{teacherjoborgname},#{teacheroacode},#{isfulltimeteacher},#{consultantid},#{consultantname},#{consultantjobid},#{educatorid},#{educatorname},#{educatorjobid},#{grade},#{gradename},#{subject},#{subjectname},#{durationvalue},#{amount},#{starttime},#{endtime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into assignsaccompanies (id,assigntime,assignstatus,campusid,campusname,assignprice,assignsource,assignmemo,copyallowed,confirmid,confirmtime,confirmstatus,confirmprice,assetid,assetcode,customerid,accountid,customercode,customername,productid,productcode,productname,categorytype,categorytypename,roomid,roomcode,roomname,teacherid,teachername,teacherjobid,teacherjoborgid,teacherjoborgname,teacheroacode,isfulltimeteacher,consultantid,consultantname,consultantjobid,educatorid,educatorname,educatorjobid,grade,gradename,subject,subjectname,durationvalue,amount,starttime,endtime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{assigntime},#{assignstatus},#{campusid},#{campusname},#{assignprice},#{assignsource},#{assignmemo},#{copyallowed},#{confirmid},#{confirmtime},#{confirmstatus},#{confirmprice},#{assetid},#{assetcode},#{customerid},#{accountid},#{customercode},#{customername},#{productid},#{productcode},#{productname},#{categorytype},#{categorytypename},#{roomid},#{roomcode},#{roomname},#{teacherid},#{teachername},#{teacherjobid},#{teacherjoborgid},#{teacherjoborgname},#{teacheroacode},#{isfulltimeteacher},#{consultantid},#{consultantname},#{consultantjobid},#{educatorid},#{educatorname},#{educatorjobid},#{grade},#{gradename},#{subject},#{subjectname},#{durationvalue},#{amount},#{starttime},#{endtime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -80,9 +79,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="assignid != null">
-                   assignid = #{assignid},
              </if>
              <if test="assigntime != null">
                    assigntime = #{assigntime},

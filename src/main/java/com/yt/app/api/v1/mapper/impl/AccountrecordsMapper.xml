@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.AccountrecordsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,campusid,customerid,accountid,recordid,recordtime,recordtype,recordflag,billid,billno,billparentid,billparentno,billrelateid,billrelateno,billtime,billtype,billtypename,billmoney,billmemo,billerid,billername,billerjobid,billerjobname
+     id,version,campusid,customerid,accountid,recordtime,recordtype,recordflag,billid,billno,billparentid,billparentno,billrelateid,billrelateno,billtime,billtype,billtypename,billmoney,billmemo,billerid,billername,billerjobid,billerjobname
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accountrecords">
@@ -12,7 +12,6 @@
          <id property="campusid" column="campusid" />
          <id property="customerid" column="customerid" />
          <id property="accountid" column="accountid" />
-         <id property="recordid" column="recordid" />
          <id property="recordtime" column="recordtime" />
          <id property="recordtype" column="recordtype" />
          <id property="recordflag" column="recordflag" />
@@ -34,8 +33,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Accountrecords">
-  insert into accountrecords (id,campusid,customerid,accountid,recordid,recordtime,recordtype,recordflag,billid,billno,billparentid,billparentno,billrelateid,billrelateno,billtime,billtype,billtypename,billmoney,billmemo,billerid,billername,billerjobid,billerjobname)
-         values (#{id},#{campusid},#{customerid},#{accountid},#{recordid},#{recordtime},#{recordtype},#{recordflag},#{billid},#{billno},#{billparentid},#{billparentno},#{billrelateid},#{billrelateno},#{billtime},#{billtype},#{billtypename},#{billmoney},#{billmemo},#{billerid},#{billername},#{billerjobid},#{billerjobname})
+  insert into accountrecords (id,campusid,customerid,accountid,recordtime,recordtype,recordflag,billid,billno,billparentid,billparentno,billrelateid,billrelateno,billtime,billtype,billtypename,billmoney,billmemo,billerid,billername,billerjobid,billerjobname)
+         values (#{id},#{campusid},#{customerid},#{accountid},#{recordtime},#{recordtype},#{recordflag},#{billid},#{billno},#{billparentid},#{billparentno},#{billrelateid},#{billrelateno},#{billtime},#{billtype},#{billtypename},#{billmoney},#{billmemo},#{billerid},#{billername},#{billerjobid},#{billerjobname})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -57,9 +56,6 @@
              </if>
              <if test="accountid != null">
                    accountid = #{accountid},
-             </if>
-             <if test="recordid != null">
-                   recordid = #{recordid},
              </if>
              <if test="recordtime != null">
                    recordtime = #{recordtime},

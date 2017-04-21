@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:48
 */
 @Getter
 @Setter
@@ -28,16 +28,15 @@ public class Orders implements Serializable{
   String customergradename;
   Long accountid;
   String accountcode;
-  Long orderid;
   String orderno;
-  String ordertime;
+  java.util.Date ordertime;
   String orderkind;
   String ordertype;
   String orderstatus;
   String specialtype;
   String specialmemo;
   String processstatus;
-  String processtime;
+  java.util.Date processtime;
   String processmemo;
   Long consultantid;
   String consultantname;
@@ -50,23 +49,23 @@ public class Orders implements Serializable{
   Long submitterjobid;
   String submitterjobname;
   String submitterjobtype;
-  String submittime;
+  java.util.Date submittime;
   Long approverid;
   Long approvername;
   Long approverjobid;
   String approverjobname;
-  String approvetime;
+  java.util.Date approvetime;
   Long chargeapplyid;
   String chargeapplymemo;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Orders(){
   }
-  public Orders(Long id,Integer version,Long campusid,String campusname,Long parentid,String parentname,Long customerid,String customercode,String customername,String customergrade,String customergradename,Long accountid,String accountcode,Long orderid,String orderno,String ordertime,String orderkind,String ordertype,String orderstatus,String specialtype,String specialmemo,String processstatus,String processtime,String processmemo,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,String submitterjobtype,String submittime,Long approverid,Long approvername,Long approverjobid,String approverjobname,String approvetime,Long chargeapplyid,String chargeapplymemo,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Orders(Long id,Integer version,Long campusid,String campusname,Long parentid,String parentname,Long customerid,String customercode,String customername,String customergrade,String customergradename,Long accountid,String accountcode,String orderno,java.util.Date ordertime,String orderkind,String ordertype,String orderstatus,String specialtype,String specialmemo,String processstatus,java.util.Date processtime,String processmemo,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,String submitterjobtype,java.util.Date submittime,Long approverid,Long approvername,Long approverjobid,String approverjobname,java.util.Date approvetime,Long chargeapplyid,String chargeapplymemo,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
@@ -80,7 +79,6 @@ public class Orders implements Serializable{
       this.customergradename=customergradename;
       this.accountid=accountid;
       this.accountcode=accountcode;
-      this.orderid=orderid;
       this.orderno=orderno;
       this.ordertime=ordertime;
       this.orderkind=orderkind;

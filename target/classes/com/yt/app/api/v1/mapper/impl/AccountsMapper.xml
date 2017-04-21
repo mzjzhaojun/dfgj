@@ -3,14 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.AccountsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,customerid,accountid,accountcode,accounttype,accountmemo,accountstatus,accountmoney,discountid,discountcode,discountrate,discountbase,chargeapplyid,chargepaytime,firstchargepaytime,firstchargeapplyid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,versionstarttime,versionendtime
+     id,version,customerid,accountcode,accounttype,accountmemo,accountstatus,accountmoney,discountid,discountcode,discountrate,discountbase,chargeapplyid,chargepaytime,firstchargepaytime,firstchargeapplyid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accounts">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="customerid" column="customerid" />
-         <id property="accountid" column="accountid" />
          <id property="accountcode" column="accountcode" />
          <id property="accounttype" column="accounttype" />
          <id property="accountmemo" column="accountmemo" />
@@ -30,13 +29,11 @@
          <id property="modifierid" column="modifierid" />
          <id property="modifiername" column="modifiername" />
          <id property="modifytime" column="modifytime" />
-         <id property="versionstarttime" column="versionstarttime" />
-         <id property="versionendtime" column="versionendtime" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Accounts">
-  insert into accounts (id,customerid,accountid,accountcode,accounttype,accountmemo,accountstatus,accountmoney,discountid,discountcode,discountrate,discountbase,chargeapplyid,chargepaytime,firstchargepaytime,firstchargeapplyid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,versionstarttime,versionendtime)
-         values (#{id},#{customerid},#{accountid},#{accountcode},#{accounttype},#{accountmemo},#{accountstatus},#{accountmoney},#{discountid},#{discountcode},#{discountrate},#{discountbase},#{chargeapplyid},#{chargepaytime},#{firstchargepaytime},#{firstchargeapplyid},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{versionstarttime},#{versionendtime})
+  insert into accounts (id,customerid,accountcode,accounttype,accountmemo,accountstatus,accountmoney,discountid,discountcode,discountrate,discountbase,chargeapplyid,chargepaytime,firstchargepaytime,firstchargeapplyid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{customerid},#{accountcode},#{accounttype},#{accountmemo},#{accountstatus},#{accountmoney},#{discountid},#{discountcode},#{discountrate},#{discountbase},#{chargeapplyid},#{chargepaytime},#{firstchargepaytime},#{firstchargeapplyid},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -52,9 +49,6 @@
              </if>
              <if test="customerid != null">
                    customerid = #{customerid},
-             </if>
-             <if test="accountid != null">
-                   accountid = #{accountid},
              </if>
              <if test="accountcode != null">
                    accountcode = #{accountcode},
@@ -111,13 +105,7 @@
                    modifiername = #{modifiername},
              </if>
              <if test="modifytime != null">
-                   modifytime = #{modifytime},
-             </if>
-             <if test="versionstarttime != null">
-                   versionstarttime = #{versionstarttime},
-             </if>
-             <if test="versionendtime != null">
-                   versionendtime = #{versionendtime}
+                   modifytime = #{modifytime}
              </if>
           </set>
      where id = #{id} and  version = #{version}

@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:55
 */
 @Getter
 @Setter
@@ -17,17 +17,15 @@ public class Repertories implements Serializable{
 
   Long id;
   Integer version;
-  Long productid;
   Long productname;
   Integer totalquantity;
   Integer usedquantity;
-  String createtime;
+  java.util.Date createtime;
   public Repertories(){
   }
-  public Repertories(Long id,Integer version,Long productid,Long productname,Integer totalquantity,Integer usedquantity,String createtime){
+  public Repertories(Long id,Integer version,Long productname,Integer totalquantity,Integer usedquantity,java.util.Date createtime){
       this.id=id;
       this.version=version;
-      this.productid=productid;
       this.productname=productname;
       this.totalquantity=totalquantity;
       this.usedquantity=usedquantity;

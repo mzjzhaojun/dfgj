@@ -3,14 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerfollowitemsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,followid,itemid,subject,institude,startdate,enddate
+     id,version,followid,subject,institude,startdate,enddate
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerfollowitems">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="followid" column="followid" />
-         <id property="itemid" column="itemid" />
          <id property="subject" column="subject" />
          <id property="institude" column="institude" />
          <id property="startdate" column="startdate" />
@@ -18,8 +17,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerfollowitems">
-  insert into customerfollowitems (id,followid,itemid,subject,institude,startdate,enddate)
-         values (#{id},#{followid},#{itemid},#{subject},#{institude},#{startdate},#{enddate})
+  insert into customerfollowitems (id,followid,subject,institude,startdate,enddate)
+         values (#{id},#{followid},#{subject},#{institude},#{startdate},#{enddate})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -35,9 +34,6 @@
              </if>
              <if test="followid != null">
                    followid = #{followid},
-             </if>
-             <if test="itemid != null">
-                   itemid = #{itemid},
              </if>
              <if test="subject != null">
                    subject = #{subject},

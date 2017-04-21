@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.OrganizationsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,organizationid,codename,name,shortname,departmenttype,legalentitycode,legalentity,managerid,orgtype,campusarea,campususingarea,cityid,cityname,fullpath,deliverdate,versionstarttime,versionendtime,bistatus,status
+     id,version,codename,name,shortname,departmenttype,legalentitycode,legalentity,managerid,orgtype,campusarea,campususingarea,cityid,cityname,fullpath,deliverdate,bistatus,status
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Organizations">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="organizationid" column="organizationid" />
          <id property="codename" column="codename" />
          <id property="name" column="name" />
          <id property="shortname" column="shortname" />
@@ -24,15 +23,13 @@
          <id property="cityname" column="cityname" />
          <id property="fullpath" column="fullpath" />
          <id property="deliverdate" column="deliverdate" />
-         <id property="versionstarttime" column="versionstarttime" />
-         <id property="versionendtime" column="versionendtime" />
          <id property="bistatus" column="bistatus" />
          <id property="status" column="status" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Organizations">
-  insert into organizations (id,organizationid,codename,name,shortname,departmenttype,legalentitycode,legalentity,managerid,orgtype,campusarea,campususingarea,cityid,cityname,fullpath,deliverdate,versionstarttime,versionendtime,bistatus,status)
-         values (#{id},#{organizationid},#{codename},#{name},#{shortname},#{departmenttype},#{legalentitycode},#{legalentity},#{managerid},#{orgtype},#{campusarea},#{campususingarea},#{cityid},#{cityname},#{fullpath},#{deliverdate},#{versionstarttime},#{versionendtime},#{bistatus},#{status})
+  insert into organizations (id,codename,name,shortname,departmenttype,legalentitycode,legalentity,managerid,orgtype,campusarea,campususingarea,cityid,cityname,fullpath,deliverdate,bistatus,status)
+         values (#{id},#{codename},#{name},#{shortname},#{departmenttype},#{legalentitycode},#{legalentity},#{managerid},#{orgtype},#{campusarea},#{campususingarea},#{cityid},#{cityname},#{fullpath},#{deliverdate},#{bistatus},#{status})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -45,9 +42,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="organizationid != null">
-                   organizationid = #{organizationid},
              </if>
              <if test="codename != null">
                    codename = #{codename},
@@ -90,12 +84,6 @@
              </if>
              <if test="deliverdate != null">
                    deliverdate = #{deliverdate},
-             </if>
-             <if test="versionstarttime != null">
-                   versionstarttime = #{versionstarttime},
-             </if>
-             <if test="versionendtime != null">
-                   versionendtime = #{versionendtime},
              </if>
              <if test="bistatus != null">
                    bistatus = #{bistatus},

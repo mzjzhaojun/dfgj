@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:18
 */
 @Getter
 @Setter
@@ -24,18 +24,17 @@ public class Accountreturnapplies implements Serializable{
   String customername;
   Long accountid;
   String accountcode;
-  Long applyid;
   String applyno;
   String applystatus;
   String applymemo;
-  String applytime;
+  java.util.Date applytime;
   Long applierid;
   String appliername;
   Long applierjobid;
   String applierjobname;
   String applierjobtype;
   String processstatus;
-  String processtime;
+  java.util.Date processtime;
   String processmemo;
   Long expenseid;
   String expensetype;
@@ -63,21 +62,21 @@ public class Accountreturnapplies implements Serializable{
   Long submitterjobid;
   String submitterjobname;
   String submitterjobtype;
-  String submittime;
+  java.util.Date submittime;
   Long approverid;
   String approvername;
   Long approverjobid;
   String approverjobname;
-  String approvetime;
+  java.util.Date approvetime;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   Long modifierid;
   String modifiername;
-  String modifytime;
+  java.util.Date modifytime;
   public Accountreturnapplies(){
   }
-  public Accountreturnapplies(Long id,Integer version,Long campusid,String campusname,Long customerid,String customercode,String customername,Long accountid,String accountcode,Long applyid,String applyno,String applystatus,String applymemo,String applytime,Long applierid,String appliername,Long applierjobid,String applierjobname,String applierjobtype,String processstatus,String processtime,String processmemo,Long expenseid,String expensetype,Object expensemoney,Long thatdiscountid,String thatdiscountcode,Object thatdiscountbase,Object thatdiscountrate,Object thataccountvalue,Object thataccountmoney,Long thisdiscountid,String thisdiscountcode,Object thisdiscountbase,Object thisdiscountrate,Object thisaccountvalue,Object thisaccountmoney,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,String submitterjobtype,String submittime,Long approverid,String approvername,Long approverjobid,String approverjobname,String approvetime,Long creatorid,String creatorname,String createtime,Long modifierid,String modifiername,String modifytime){
+  public Accountreturnapplies(Long id,Integer version,Long campusid,String campusname,Long customerid,String customercode,String customername,Long accountid,String accountcode,String applyno,String applystatus,String applymemo,java.util.Date applytime,Long applierid,String appliername,Long applierjobid,String applierjobname,String applierjobtype,String processstatus,java.util.Date processtime,String processmemo,Long expenseid,String expensetype,Object expensemoney,Long thatdiscountid,String thatdiscountcode,Object thatdiscountbase,Object thatdiscountrate,Object thataccountvalue,Object thataccountmoney,Long thisdiscountid,String thisdiscountcode,Object thisdiscountbase,Object thisdiscountrate,Object thisaccountvalue,Object thisaccountmoney,Long consultantid,String consultantname,Long consultantjobid,Long educatorid,String educatorname,Long educatorjobid,Long submitterid,String submittername,Long submitterjobid,String submitterjobname,String submitterjobtype,java.util.Date submittime,Long approverid,String approvername,Long approverjobid,String approverjobname,java.util.Date approvetime,Long creatorid,String creatorname,java.util.Date createtime,Long modifierid,String modifiername,java.util.Date modifytime){
       this.id=id;
       this.version=version;
       this.campusid=campusid;
@@ -87,7 +86,6 @@ public class Accountreturnapplies implements Serializable{
       this.customername=customername;
       this.accountid=accountid;
       this.accountcode=accountcode;
-      this.applyid=applyid;
       this.applyno=applyno;
       this.applystatus=applystatus;
       this.applymemo=applymemo;

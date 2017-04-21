@@ -3,13 +3,12 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerrefundalertsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,alertid,alerttime,alertstatus,alertreason,alertreasonname,operatorid,operatorname,operatorjobid,operatorjobname,customerid
+     id,version,alerttime,alertstatus,alertreason,alertreasonname,operatorid,operatorname,operatorjobid,operatorjobname,customerid
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerrefundalerts">
          <id property="id" column="id" />
          <id property="version" column="version" />
-         <id property="alertid" column="alertid" />
          <id property="alerttime" column="alerttime" />
          <id property="alertstatus" column="alertstatus" />
          <id property="alertreason" column="alertreason" />
@@ -22,8 +21,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerrefundalerts">
-  insert into customerrefundalerts (id,alertid,alerttime,alertstatus,alertreason,alertreasonname,operatorid,operatorname,operatorjobid,operatorjobname,customerid)
-         values (#{id},#{alertid},#{alerttime},#{alertstatus},#{alertreason},#{alertreasonname},#{operatorid},#{operatorname},#{operatorjobid},#{operatorjobname},#{customerid})
+  insert into customerrefundalerts (id,alerttime,alertstatus,alertreason,alertreasonname,operatorid,operatorname,operatorjobid,operatorjobname,customerid)
+         values (#{id},#{alerttime},#{alertstatus},#{alertreason},#{alertreasonname},#{operatorid},#{operatorname},#{operatorjobid},#{operatorjobname},#{customerid})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -36,9 +35,6 @@
          <set>
              <if test="version != null">
                    version = #{version}+1,
-             </if>
-             <if test="alertid != null">
-                   alertid = #{alertid},
              </if>
              <if test="alerttime != null">
                    alerttime = #{alerttime},

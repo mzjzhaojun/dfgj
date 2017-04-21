@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerservicesMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,branchid,branchname,campusid,campusname,customerid,customerkind,customercode,customername,serviceid,servicetype,servicestatus,servicememo,accepttime,acceptlimit,acceptlimitvalue,acceptmemo,accepterid,acceptername,accepterjobid,accepterjobname,appealmemo,consultantid,consultantname,consultantjobid,consultantjobname,educatorid,educatorname,educatorjobid,educatorjobname,consulttype,consultmemo,complainttimes,complaintlevel,complaintupgrade,isupgradehandle,handlerid,handlername,handlerjobname,handlerjobtype,handleadvice,issendemail,handleremail,issendmessage,handlerphone,calltime,voiceid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,branchid,branchname,campusid,campusname,customerid,customerkind,customercode,customername,servicetype,servicestatus,servicememo,accepttime,acceptlimit,acceptlimitvalue,acceptmemo,accepterid,acceptername,accepterjobid,accepterjobname,appealmemo,consultantid,consultantname,consultantjobid,consultantjobname,educatorid,educatorname,educatorjobid,educatorjobname,consulttype,consultmemo,complainttimes,complaintlevel,complaintupgrade,isupgradehandle,handlerid,handlername,handlerjobname,handlerjobtype,handleadvice,issendemail,handleremail,issendmessage,handlerphone,calltime,voiceid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerservices">
@@ -17,7 +17,6 @@
          <id property="customerkind" column="customerkind" />
          <id property="customercode" column="customercode" />
          <id property="customername" column="customername" />
-         <id property="serviceid" column="serviceid" />
          <id property="servicetype" column="servicetype" />
          <id property="servicestatus" column="servicestatus" />
          <id property="servicememo" column="servicememo" />
@@ -64,8 +63,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerservices">
-  insert into customerservices (id,branchid,branchname,campusid,campusname,customerid,customerkind,customercode,customername,serviceid,servicetype,servicestatus,servicememo,accepttime,acceptlimit,acceptlimitvalue,acceptmemo,accepterid,acceptername,accepterjobid,accepterjobname,appealmemo,consultantid,consultantname,consultantjobid,consultantjobname,educatorid,educatorname,educatorjobid,educatorjobname,consulttype,consultmemo,complainttimes,complaintlevel,complaintupgrade,isupgradehandle,handlerid,handlername,handlerjobname,handlerjobtype,handleadvice,issendemail,handleremail,issendmessage,handlerphone,calltime,voiceid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{branchid},#{branchname},#{campusid},#{campusname},#{customerid},#{customerkind},#{customercode},#{customername},#{serviceid},#{servicetype},#{servicestatus},#{servicememo},#{accepttime},#{acceptlimit},#{acceptlimitvalue},#{acceptmemo},#{accepterid},#{acceptername},#{accepterjobid},#{accepterjobname},#{appealmemo},#{consultantid},#{consultantname},#{consultantjobid},#{consultantjobname},#{educatorid},#{educatorname},#{educatorjobid},#{educatorjobname},#{consulttype},#{consultmemo},#{complainttimes},#{complaintlevel},#{complaintupgrade},#{isupgradehandle},#{handlerid},#{handlername},#{handlerjobname},#{handlerjobtype},#{handleadvice},#{issendemail},#{handleremail},#{issendmessage},#{handlerphone},#{calltime},#{voiceid},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into customerservices (id,branchid,branchname,campusid,campusname,customerid,customerkind,customercode,customername,servicetype,servicestatus,servicememo,accepttime,acceptlimit,acceptlimitvalue,acceptmemo,accepterid,acceptername,accepterjobid,accepterjobname,appealmemo,consultantid,consultantname,consultantjobid,consultantjobname,educatorid,educatorname,educatorjobid,educatorjobname,consulttype,consultmemo,complainttimes,complaintlevel,complaintupgrade,isupgradehandle,handlerid,handlername,handlerjobname,handlerjobtype,handleadvice,issendemail,handleremail,issendmessage,handlerphone,calltime,voiceid,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{branchid},#{branchname},#{campusid},#{campusname},#{customerid},#{customerkind},#{customercode},#{customername},#{servicetype},#{servicestatus},#{servicememo},#{accepttime},#{acceptlimit},#{acceptlimitvalue},#{acceptmemo},#{accepterid},#{acceptername},#{accepterjobid},#{accepterjobname},#{appealmemo},#{consultantid},#{consultantname},#{consultantjobid},#{consultantjobname},#{educatorid},#{educatorname},#{educatorjobid},#{educatorjobname},#{consulttype},#{consultmemo},#{complainttimes},#{complaintlevel},#{complaintupgrade},#{isupgradehandle},#{handlerid},#{handlername},#{handlerjobname},#{handlerjobtype},#{handleadvice},#{issendemail},#{handleremail},#{issendmessage},#{handlerphone},#{calltime},#{voiceid},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -102,9 +101,6 @@
              </if>
              <if test="customername != null">
                    customername = #{customername},
-             </if>
-             <if test="serviceid != null">
-                   serviceid = #{serviceid},
              </if>
              <if test="servicetype != null">
                    servicetype = #{servicetype},

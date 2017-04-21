@@ -25,7 +25,7 @@ import io.swagger.annotations.ApiOperation;
  */
 
 @RestController
-@RequestMapping("/dfgj/v1/index")
+@RequestMapping("/rest/v1/index")
 public class IndexController {
 
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());

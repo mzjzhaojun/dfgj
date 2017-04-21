@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.DebookordersMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,campusid,campusname,parentid,parentname,customerid,customercode,customername,debookid,debookno,debooktime,debookstatus,debookmemo,processstatus,processtime,processmemo,contacttel,contacter,submitterid,submittername,submitterjobid,submitterjobname,submitterjobtype,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,campusid,campusname,parentid,parentname,customerid,customercode,customername,debookno,debooktime,debookstatus,debookmemo,processstatus,processtime,processmemo,contacttel,contacter,submitterid,submittername,submitterjobid,submitterjobname,submitterjobtype,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Debookorders">
@@ -16,7 +16,6 @@
          <id property="customerid" column="customerid" />
          <id property="customercode" column="customercode" />
          <id property="customername" column="customername" />
-         <id property="debookid" column="debookid" />
          <id property="debookno" column="debookno" />
          <id property="debooktime" column="debooktime" />
          <id property="debookstatus" column="debookstatus" />
@@ -46,8 +45,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Debookorders">
-  insert into debookorders (id,campusid,campusname,parentid,parentname,customerid,customercode,customername,debookid,debookno,debooktime,debookstatus,debookmemo,processstatus,processtime,processmemo,contacttel,contacter,submitterid,submittername,submitterjobid,submitterjobname,submitterjobtype,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{campusid},#{campusname},#{parentid},#{parentname},#{customerid},#{customercode},#{customername},#{debookid},#{debookno},#{debooktime},#{debookstatus},#{debookmemo},#{processstatus},#{processtime},#{processmemo},#{contacttel},#{contacter},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{submitterjobtype},#{submittime},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into debookorders (id,campusid,campusname,parentid,parentname,customerid,customercode,customername,debookno,debooktime,debookstatus,debookmemo,processstatus,processtime,processmemo,contacttel,contacter,submitterid,submittername,submitterjobid,submitterjobname,submitterjobtype,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
+         values (#{id},#{campusid},#{campusname},#{parentid},#{parentname},#{customerid},#{customercode},#{customername},#{debookno},#{debooktime},#{debookstatus},#{debookmemo},#{processstatus},#{processtime},#{processmemo},#{contacttel},#{contacter},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{submitterjobtype},#{submittime},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -81,9 +80,6 @@
              </if>
              <if test="customername != null">
                    customername = #{customername},
-             </if>
-             <if test="debookid != null">
-                   debookid = #{debookid},
              </if>
              <if test="debookno != null">
                    debookno = #{debookno},

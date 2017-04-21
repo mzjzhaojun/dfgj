@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:00
+* @createdate  2017-04-20 13:48:27
 */
 @Getter
 @Setter
@@ -17,22 +17,18 @@ public class CountryCode implements Serializable{
 
   Long id;
   Integer version;
-  Long code;
   String cnname;
   String enname;
   Long abbreviation;
   Integer validstatus;
-  Integer sortno;
   public CountryCode(){
   }
-  public CountryCode(Long id,Integer version,Long code,String cnname,String enname,Long abbreviation,Integer validstatus,Integer sortno){
+  public CountryCode(Long id,Integer version,String cnname,String enname,Long abbreviation,Integer validstatus){
       this.id=id;
       this.version=version;
-      this.code=code;
       this.cnname=cnname;
       this.enname=enname;
       this.abbreviation=abbreviation;
       this.validstatus=validstatus;
-      this.sortno=sortno;
   }
 }

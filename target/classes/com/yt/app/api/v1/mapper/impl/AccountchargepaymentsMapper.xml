@@ -3,15 +3,13 @@
 <mapper namespace="com.yt.app.api.v1.mapper.AccountchargepaymentsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,applyid,sortno,payid,payno,paytime,paytype,payticket,paystatus,paymoney,paymemo,inputtime,swipetime,printstatus,salesman,payer,payeeid,payeename,payeejobid,payeejobname,checkerid,checkername,checkerjobid,checkerjobname,checkstatus,checktime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,issyn,syntime
+     id,version,applyid,payno,paytime,paytype,payticket,paystatus,paymoney,paymemo,inputtime,swipetime,printstatus,salesman,payer,payeeid,payeename,payeejobid,payeejobname,checkerid,checkername,checkerjobid,checkerjobname,checkstatus,checktime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,issyn,syntime
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Accountchargepayments">
          <id property="id" column="id" />
          <id property="version" column="version" />
          <id property="applyid" column="applyid" />
-         <id property="sortno" column="sortno" />
-         <id property="payid" column="payid" />
          <id property="payno" column="payno" />
          <id property="paytime" column="paytime" />
          <id property="paytype" column="paytype" />
@@ -45,8 +43,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Accountchargepayments">
-  insert into accountchargepayments (id,applyid,sortno,payid,payno,paytime,paytype,payticket,paystatus,paymoney,paymemo,inputtime,swipetime,printstatus,salesman,payer,payeeid,payeename,payeejobid,payeejobname,checkerid,checkername,checkerjobid,checkerjobname,checkstatus,checktime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,issyn,syntime)
-         values (#{id},#{applyid},#{sortno},#{payid},#{payno},#{paytime},#{paytype},#{payticket},#{paystatus},#{paymoney},#{paymemo},#{inputtime},#{swipetime},#{printstatus},#{salesman},#{payer},#{payeeid},#{payeename},#{payeejobid},#{payeejobname},#{checkerid},#{checkername},#{checkerjobid},#{checkerjobname},#{checkstatus},#{checktime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{issyn},#{syntime})
+  insert into accountchargepayments (id,applyid,payno,paytime,paytype,payticket,paystatus,paymoney,paymemo,inputtime,swipetime,printstatus,salesman,payer,payeeid,payeename,payeejobid,payeejobname,checkerid,checkername,checkerjobid,checkerjobname,checkstatus,checktime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,issyn,syntime)
+         values (#{id},#{applyid},#{payno},#{paytime},#{paytype},#{payticket},#{paystatus},#{paymoney},#{paymemo},#{inputtime},#{swipetime},#{printstatus},#{salesman},#{payer},#{payeeid},#{payeename},#{payeejobid},#{payeejobname},#{checkerid},#{checkername},#{checkerjobid},#{checkerjobname},#{checkstatus},#{checktime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{issyn},#{syntime})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -62,12 +60,6 @@
              </if>
              <if test="applyid != null">
                    applyid = #{applyid},
-             </if>
-             <if test="sortno != null">
-                   sortno = #{sortno},
-             </if>
-             <if test="payid != null">
-                   payid = #{payid},
              </if>
              <if test="payno != null">
                    payno = #{payno},

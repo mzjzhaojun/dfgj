@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:01
+* @createdate  2017-04-20 13:48:32
 */
 @Getter
 @Setter
@@ -27,10 +27,10 @@ public class Customerrelations implements Serializable{
   String relationtype;
   Long creatorid;
   String creatorname;
-  String createtime;
+  java.util.Date createtime;
   public Customerrelations(){
   }
-  public Customerrelations(Long id,Integer version,Long customerid,Long staffid,String staffname,Long staffjobid,String staffjobname,Long staffjoborgid,String staffjoborgname,String relationtype,Long creatorid,String creatorname,String createtime){
+  public Customerrelations(Long id,Integer version,Long customerid,Long staffid,String staffname,Long staffjobid,String staffjobname,Long staffjoborgid,String staffjoborgname,String relationtype,Long creatorid,String creatorname,java.util.Date createtime){
       this.id=id;
       this.version=version;
       this.customerid=customerid;

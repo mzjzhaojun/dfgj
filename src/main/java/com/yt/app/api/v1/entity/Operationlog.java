@@ -7,7 +7,7 @@ import java.io.Serializable;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-17 17:44:02
+* @createdate  2017-04-20 13:48:47
 */
 @Getter
 @Setter
@@ -29,11 +29,11 @@ public class Operationlog implements Serializable{
   String schematype;
   String operationtype;
   String searchcontent;
-  String createtime;
+  java.util.Date createtime;
   Long rowuniqueid;
   public Operationlog(){
   }
-  public Operationlog(Long id,Integer version,Long resourceid,Long correlationid,String category,Long operatorid,String operatorname,Long realoperatorid,String realoperatorname,String requestcontext,String subject,String schematype,String operationtype,String searchcontent,String createtime,Long rowuniqueid){
+  public Operationlog(Long id,Integer version,Long resourceid,Long correlationid,String category,Long operatorid,String operatorname,Long realoperatorid,String realoperatorname,String requestcontext,String subject,String schematype,String operationtype,String searchcontent,java.util.Date createtime,Long rowuniqueid){
       this.id=id;
       this.version=version;
       this.resourceid=resourceid;
