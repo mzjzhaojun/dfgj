@@ -1,9 +1,9 @@
-var sys = {};
-sys.loginUrl = "http://localhost:17000/dfgj/login";
-sys.loginOutUrl = "http://localhost:17000/dfgj/logout";
-sys.accounturl = "http://localhost:17000/dfgj/rest/v1/account/user";
-sys.sysUrl = "http://localhost:17000/dfgj/rest/v1/menu/sysmenu";
-sys.fileUrl = "http://localhost:17000/dfgj/rest/v1/file";
-sys.moreFileUrl = "http://localhost:17000/dfgj/rest/v1/file/upload";
-sys.KindEditorFileUrl = "http://localhost:17000/dfgj/rest/v1/file/kindeditor/uploadFile";
+var configsys = {};
+configsys.loginUrl = "http://localhost:17000/dfgj/login";
+configsys.loginOutUrl = "http://localhost:17000/dfgj/logout";
+configsys.accounturl = "http://localhost:17000/dfgj/rest/v1/account/user";
+configsys.sysUrl = "http://localhost:17000/dfgj/rest/v1/menu/sysmenu";
+configsys.fileUrl = "http://localhost:17000/dfgj/rest/v1/file";
+configsys.moreFileUrl = "http://localhost:17000/dfgj/rest/v1/file/upload";
+configsys.KindEditorFileUrl = "http://localhost:17000/dfgj/rest/v1/file/kindeditor/uploadFile";
 

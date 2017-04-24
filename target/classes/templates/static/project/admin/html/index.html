@@ -27,7 +27,7 @@
 		main.controller("mainController", function($scope, $http) {
 			$scope.initaccount = function(){
 				$http({
-					url:sys.accounturl,
+					url:configsys.accounturl,
 					method:'GET',
 					dataType : "json",
 					withCredentials: true,
@@ -56,7 +56,7 @@
 		function loginout(){
 			$.ajax({
 				type : "POST",
-				url : sys.loginOutUrl,
+				url : configsys.loginOutUrl,
 				async : false,
 				dataType : 'json',
 				headers : {'Content-Type' : 'application/json;charset=UTF-8;'},
@@ -98,7 +98,7 @@
 		}
 		function initSysMenu(){
 			var sysName,level,sysUrl,sysId,sysChild,remark,className,remark2,sysName2;
-			var html = '<li> <span class="glyphicon glyphicon-resize-vertical"></span> </li>';
+			var html = '<li> <span class="glyphicon glyphicon-arrow-left"></span> </li>';
 			for(var i = 0;i<sys.length;i++){
 				sysName = sys[i].name;
 				level = sys[i].level;
@@ -108,7 +108,7 @@
 				if(level == 31){
 					sysChild = sys[i].child;
 				}
-				html +='<li> <p class="btn-deepblack" order="'+remark+'" sysId="'+sysId+'"><i class="icon-caret-right icon-large" data-toggle="tooltip" data-placement="right"></i><span level="'+level+'">'+sysName+'</span></p>';
+				html +='<li> <p class="btn-deepblack" order="'+remark+'" sysId="'+sysId+'"><i class="glyphicon glyphicon-chevron-down" data-toggle="tooltip" data-placement="right"></i><span level="'+level+'">'+sysName+'</span></p>';
 				if(sysChild != undefined){
 					if(sysChild.length >0 ){
 						html +='<div class="list-group twolist">';
@@ -142,7 +142,7 @@
 			$(".onemenu").html(html);
 			$('.onemenu > li + li:eq('+remark+')> div').show();
 			$('.onemenu > li + li:eq('+remark+')> div >label:eq('+remark+')').addClass("btn-primary");
-			$('.onemenu > li + li:eq('+remark+')>p').find("i:eq(0)").removeClass("icon-caret-right").addClass("icon-caret-down");
+			$('.onemenu > li + li:eq('+remark+')>p').find("i:eq(0)").removeClass("glyphicon glyphicon-chevron-right").addClass("glyphicon glyphicon-chevron-down");
 			$(".thirdmenu").find("li:eq(0)>p").addClass("btn-whiteblack").removeClass("btn-lightblack");
 			rightArea();
 			$(".onemenu").find(".twolist > label:eq(0)").trigger("click");
@@ -165,7 +165,7 @@
 					if(menus1 != undefined)
 						menus_len = menus1.length;
 					if(menus_len > 0){
-						html += '<li> <p class="btn-lightblack" id="'+menuId+'"><i class="icon-caret-right"></i> <span>'+menuName+'</span></p>';
+						html += '<li> <p class="btn-lightblack" id="'+menuId+'"><i class="glyphicon glyphicon-chevron-right"></i> <span>'+menuName+'</span></p>';
 						html +='<div class="list-group2 fourlist" id="test1">'
 						 for(var x = 0;x<menus_len;x++){
 							menuName = menus1[x].name;
@@ -202,9 +202,9 @@
 				var left = $('#menu_image').css("left");
 				left = parseInt(left.substr(0,left.length-2));
 				var className = $('.onemenu li:eq(0)').children().attr('class');
-				if(className == 'glyphicon glyphicon-resize-vertical'){
-					$('.onemenu li:eq(0)').children().removeClass('glyphicon-resize-vertical');
-					$('.onemenu li:eq(0)').children().addClass('glyphicon-resize-horizontal');
+				if(className == 'glyphicon glyphicon-arrow-left'){
+					$('.onemenu li:eq(0)').children().removeClass('glyphicon-arrow-left');
+					$('.onemenu li:eq(0)').children().addClass('glyphicon-th-list');
 					$(".menupanel").css("width","50px");
 					$(".menupanel1").css("left","50px");
 					$('.onemenu > li+li >p> span').hide();
@@ -228,8 +228,8 @@
 						}
 					}
 				}else{
-					$('.onemenu li:eq(0)').children().addClass('glyphicon-resize-vertical');
-					$('.onemenu li:eq(0)').children().removeClass('glyphicon-resize-horizontal');
+					$('.onemenu li:eq(0)').children().addClass('glyphicon-arrow-left');
+					$('.onemenu li:eq(0)').children().removeClass('glyphicon-th-list');
 					$(".menupanel").css("width","180px");
 					$(".menupanel1").css("left","180px");
 					$('.onemenu > li+li  >p> span').show();
@@ -256,12 +256,12 @@
 			});
 			$(document).on("click",".onemenu > li + li > p",function(){
 				var className = $('.onemenu li:eq(0)').children().attr('class');
-				if(className == 'glyphicon glyphicon-resize-vertical'){
+				if(className == 'glyphicon glyphicon-arrow-left'){
 					var display = $(this).parent().find("div").css("display");
 					if(display == "none"){
-						$(this).find("i:eq(0)").removeClass("icon-caret-right").addClass("icon-caret-down");
+						$(this).find("i:eq(0)").removeClass("glyphicon glyphicon-chevron-right").addClass("glyphicon glyphicon-chevron-down");
 					}else{
-						$(this).find("i:eq(0)").removeClass("icon-caret-down").addClass("icon-caret-right");
+						$(this).find("i:eq(0)").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-right");
 					}
 					var sysName = $(this).find("span:eq(0)").html();
 					var level = $(this).find("span:eq(0)").attr("level");
@@ -328,10 +328,10 @@
 				var display = $(this).parent().find("div").css("display");
 				$(this).parent().find("div").slideToggle();
 				var className = $(this).find("i").attr("class");
-				if(className == "icon-caret-right"){
-					$(this).find("i").removeClass("icon-caret-right").addClass("icon-caret-down");
+				if(className == "glyphicon glyphicon-chevron-right"){
+					$(this).find("i").removeClass("glyphicon glyphicon-chevron-right").addClass("glyphicon glyphicon-chevron-down");
 				}else{
-					$(this).find("i").removeClass("icon-caret-down").addClass("icon-caret-right");
+					$(this).find("i").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-right");
 				}
 			});
 			$("[data-toggle='tooltip']").tooltip({html : true });
@@ -366,7 +366,7 @@
 				}
 				rightArea();
 			});
-			roleModul(sys.sysUrl);
+			roleModul(configsys.sysUrl);
 		})
 		function rightArea(){
 			var width =  document.body.offsetWidth;

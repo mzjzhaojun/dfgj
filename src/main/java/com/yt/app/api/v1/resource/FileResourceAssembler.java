@@ -3,7 +3,7 @@ package com.yt.app.api.v1.resource;
 
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import com.yt.app.api.v1.controller.FileController;
-import com.yt.app.api.v1.entity.File;
+import com.yt.app.modul.File;
 
 
 

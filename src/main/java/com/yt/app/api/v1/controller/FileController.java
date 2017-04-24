@@ -2,10 +2,9 @@ package com.yt.app.api.v1.controller;
 
 import io.swagger.annotations.ApiOperation;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,11 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.yt.app.api.v1.entity.File;
+
+
+
 import com.yt.app.api.v1.resource.FileResourceAssembler;
 import com.yt.app.api.v1.service.FileService;
 import com.yt.app.common.base.impl.BaseControllerImpl;
 import com.yt.app.frame.page.IPage;
+import com.yt.app.modul.File;
 import com.yt.app.util.FileUtil;
 
 /**
@@ -77,42 +79,19 @@ public class FileController extends BaseControllerImpl<File, Long> {
 	 * @param response
 	 */
 	@ApiOperation(value = "下载", response = File.class)
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public void dowload(@PathVariable Long id, HttpServletResponse response) {
-		File fl = service.get(id);
-		if (fl == null) {
-			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			return;
-		}
-		StringBuffer sb = new StringBuffer();
-		String filepath = sb.append(fl.getRoot_path()).append(fl.getRelative_path()).append(java.io.File.separator).append(fl.getFile_name())
-				.toString();
-		java.io.File file = new java.io.File(filepath);
-		if (FileUtil.isImage(file)) {
-			if (file.exists()) {
-				response.setContentType("image/" + fl.getSuffix());
-			} else {
-				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-				return;
+	@RequestMapping(value = "/{ids}", method = RequestMethod.GET)
+	public void dowloadall(@PathVariable String ids, HttpServletResponse response) {
+		if (ids.indexOf(",") != -1) {
+			String[] arrayid = ids.split(",");
+			List<File> listfiles = new ArrayList<File>();
+			for (String string : arrayid) {
+				File fl = service.get(Long.valueOf(string));
+				listfiles.add(fl);
 			}
+			FileUtil.dowloadfiles(listfiles, response);
 		} else {
-			response.setContentType("application/octet-stream");
-			response.setHeader("Accept-Ranges", "bytes");
-			response.setHeader("Content-Disposition", "attachment;fileName=" + new String(fl.getFile_name()));
-		}
-		try {
-			FileInputStream inputStream = new FileInputStream(file);
-			byte[] data = new byte[(int) file.length()];
-			inputStream.read(data);
-			inputStream.close();
-			OutputStream stream = response.getOutputStream();
-			stream.write(data);
-			stream.flush();
-			stream.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+			File fl = service.get(Long.valueOf(ids));
+			FileUtil.dowloadfile(fl, response);
 		}
 	}
 

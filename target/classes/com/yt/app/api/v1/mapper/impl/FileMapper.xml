@@ -4,7 +4,7 @@
 	<sql id="Base_Column_List">
 		id,root_path,relative_path,file_type,suffix,file_size,createtime,modifytime,file_name,version
 	</sql>
-	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.File">
+	<resultMap id="ResultMap" type="com.yt.app.modul.File">
 		<id property="id" column="id" />
 		<id property="root_path" column="root_path" />
 		<id property="relative_path" column="relative_path" />
@@ -16,7 +16,7 @@
 		<id property="file_name" column="file_name" />
 		<id property="version" column="version" />
 	</resultMap>
-	<insert id="post" parameterType="com.yt.app.api.v1.entity.File">
+	<insert id="post" parameterType="com.yt.app.modul.File">
 		insert into file
 		(id,root_path,relative_path,file_type,suffix,file_size,createtime,modifytime,file_name)
 		values
@@ -27,7 +27,7 @@
 		where id =
 		#{id}
 	</delete>
-	<update id="put" parameterType="com.yt.app.api.v1.entity.File">
+	<update id="put" parameterType="com.yt.app.modul.File">
 		update file
 		<set>
 			<if test="id != null">

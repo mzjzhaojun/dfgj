@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html ng-app="login">
-<head>
-<title>后台管理-登录</title>
-
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="this is my page">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
-<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-<link rel="stylesheet" type="text/css"
-	href="../../../resource/css/bootstrap.min.css">
-<script type="text/javascript"
-	src="../../../resource/js/angular-1.0.1.min.js"></script>
-<script type="text/javascript"
-	src="../../../resource/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript"
-	src="../../../resource/js/jquery.cookie.js"></script>
-<!-- 地址配置  -->
-<script type="text/javascript" src="../../../resource/js/config.js"></script>
-<script type="text/javascript">
-	var login = angular.module("login", []);
-	login
-			.controller(
-					"logon",
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>登陆</title>
+        <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="../../../resource/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../../resource/css/font-awesome.min.css">
+		<link rel="stylesheet" href="../../../resource/css/form-elements.css">
+        <link rel="stylesheet" href="../../../resource/css/style.css">
+        <script type="text/javascript" src="../../../resource/js/angular-1.0.1.min.js"></script>
+		<!-- 地址配置  -->
+		<script type="text/javascript" src="../../../resource/js/config.js"></script>
+        <script type="text/javascript" src="../../../resource/js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="../../../resource/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../../../resource/js/jquery.backstretch.min.js"></script>
+        <!-- <script src="../../../resource/js/placeholder.js"></script> -->
+        <script type="text/javascript">
+			var login = angular.module("login", []);
+			login.controller("logon",
 					function($scope, $http) {
 						$scope.promptName = false;
 						$scope.promptPassword = false;
@@ -31,32 +29,25 @@
 							var name = $scope.name;
 							var password = $scope.password;
 							$scope.info = true;
-							if (name != "" && name != undefined
-									&& password != "" && password != undefined) {
+							if (name != "" && name != undefined && password != "" && password != undefined) {
 								$http(
 										{
-											url : sys.loginUrl + "?username="
-													+ name + "&password="
-													+ password,
+											url : configsys.loginUrl + "?username="+ name + "&password="+ password,
 											method : 'POST',
 											headers : {
 												'Content-Type' : 'application/x-www-form-urlencoded;'
 											}
 										})
 										.success(
-												function(data, status, headers,
-														config) {
+												function(data, status, headers,config) {
 													location.href = "../../../project/admin/html/index.html";
 												})
 										.error(
 												function(response) {
 													var message = response.message;
-													if (message != undefined
-															&& message != "") {
-														message = message
-																.split("Authentication Failed: ")[1];
-														$(".prompt_div").html(
-																message);
+													if (message != undefined && message != "") {
+														message = message.split("Authentication Failed: ")[1];
+														$("#msg").html(message);
 													}
 												});
 							}
@@ -64,49 +55,69 @@
 					});
 
 	$(function() {
-		$(document)
-				.keypress(
-						function(event) {
-							var keycode = (event.keyCode ? event.keyCode
-									: event.which);
-							if (keycode == '13') {
-								var appElement = document
-										.querySelector('[ng-controller=logon]');
-								var $scope = angular.element(appElement)
-										.scope();
-								$scope.onLogon();
-							}
-						});
+		$(document).keypress(
+			function(event) {
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if (keycode == '13') {
+					var appElement = document.querySelector('[ng-controller=logon]');
+					var $scope = angular.element(appElement).scope();
+					$scope.onLogon();
+				}
+			}
+		);
+
+	    $.backstretch("../../../resource/img/background.jpg");
+	    $('.login-form input[type="text"], .login-form input[type="password"], .login-form textarea').on('focus', function() {
+	    	$("#msg").html("");
+	    	$(this).removeClass('input-error');
+	    });
+	    $('.login-form').on('submit', function(e) {
+	    	$(this).find('input[type="text"], input[type="password"], textarea').each(function(){
+	    		if( $(this).val() == "" ) {
+	    			e.preventDefault();
+	    			$(this).addClass('input-error');
+	    		}
+	    		else {
+	    			$(this).removeClass('input-error');
+	    			$("#msg").html("");
+	    		}
+	    	});
+	    });
 	});
-</script>
-
-</head>
-
-<body ng-controller="logon">
-	<div class="login" style="margin: 220px auto;">
-		<div class="logon">
-			<h1 class="text-center" style="color: #fff;">管理系统</h1>
-			<div style="padding: 10px 100px 10px;">
-				<form class="bs-example bs-example-form" role="form">
-					<div class="input-group input-group-lg">
-						<span class="input-group-addon">账号</span> <input type="text"
-							class="form-control" placeholder="请输入账号" ng-model="name">
-					</div>
-					<br>
-					<div class="input-group input-group-lg">
-						<span class="input-group-addon">密码</span> <input type="password"
-							class="form-control" placeholder="请输入密码" ng-model="password">
-					</div>
-					<br> <a class="btn btn-primary btn-lg"
-						style="display: block; margin: 0px auto;" href="#" role="button"
-						ng-click="onLogon()">登&nbsp;&nbsp;录</a>
-				</form>
-			</div>
-			<h5 class="text-center" style="color: #000;">Copyright
-				&nbsp;2016 &nbsp;&copy; &nbsp;综合管理系统&nbsp; 版权所有</h5>
-
-		</div>
-	</div>
-
-</body>
+	</script>
+    </head>
+    <body ng-controller="logon">
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 form-box">
+                        	<div class="form-top">
+                        		<div class="form-top-left" style="height: 100px;">
+                        			<h2 style="color: #FFFFFF;;padding-top: 1px;">登陆管理系统</h2>
+                        			<p id="msg" style="color: red;padding-top: 1px;padding-left: 1px;"></p>
+                        		</div>
+                        		<div class="form-top-right">
+                        			<i class="fa fa-lock"></i>
+                        		</div>
+                            </div>
+                             <div class="form-bottom">
+			                    <form class="login-form">
+			                    	<div class="form-group">
+			                    		<label class="sr-only" for="form-username">用户名</label>
+			                        	<input type="text" name="username" ng-model="name" placeholder="用户名" class="form-username form-control" id="username">
+			                        </div>
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="form-password">密码</label>
+			                        	<input type="password" name="password" ng-model="password" placeholder="密码" class="form-password form-control" id="password">
+			                        </div>
+			                        <button type="submit" class="btn" ng-click="onLogon()">登陆</button>
+			                    </form>
+		                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.yt.app.api.v1.entity.File;
+import com.yt.app.modul.File;
 import com.yt.app.common.base.IBaseService;
 
 /**

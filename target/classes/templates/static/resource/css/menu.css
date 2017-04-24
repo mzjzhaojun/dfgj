@@ -57,6 +57,7 @@
 	background-color:#293038;
 	border-color:#293038;
 }
+
 .btn-deepblack:hover{
 	background-color:#465562;
 	border-color:#293038;
@@ -126,7 +127,6 @@
 	position: relative;
 	top:0px;
 	color: #ccc;
-	width: 20px;
 	height: 22px;
 	line-height: 25px;
 	text-align:center;

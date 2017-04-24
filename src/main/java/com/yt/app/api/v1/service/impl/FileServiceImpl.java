@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yt.app.annotation.DataSourceAnnotation;
-import com.yt.app.api.v1.entity.File;
+import com.yt.app.modul.File;
 import com.yt.app.api.v1.mapper.FileMapper;
 import com.yt.app.api.v1.service.FileService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
