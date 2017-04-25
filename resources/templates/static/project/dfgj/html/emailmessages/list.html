@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>邮件体</th>
 	      <th>邮件体的编码</th>
 	      <th>邮件头的编码</th>
@@ -119,7 +118,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.emailMessages.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.emailMessages.body}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.emailMessages.body_encoding}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.emailMessages.headers_encoding}}</td>

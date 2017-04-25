@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>产品ID</th>
 	      <th>规则对象枚举（咨询师，学管师，教师）</th>
 	      <th>课酬金额每小时</th>
@@ -113,7 +112,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.productsalaryrules.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.productsalaryrules.productid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.productsalaryrules.ruleobject}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.productsalaryrules.moneyperhour}}</td>

@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>订单ID</th>
 	      <th>明细编号=（OrderNo+SortNo)=资产编码</th>
 	      <th>产品ID</th>
@@ -156,7 +155,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.orderitems.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.orderitems.orderid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.orderitems.itemno}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.orderitems.productid}}</td>

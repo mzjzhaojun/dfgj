@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>校区ID</th>
 	      <th>校区任务信息的本地日期</th>
 	      <th>校区新签金额月度任务</th>
@@ -141,7 +140,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.campustask.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.campustask.campusid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.campustask.statlocaldate}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.campustask.campusmonthlynewchargeamount}}</td>

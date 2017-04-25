@@ -48,8 +48,8 @@
         from orgregions 
         <where>
         			1=1
-             <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
+             <if test="regionname != null and regionname != ''">
+           		and regionname like "%"#{regionname}"%"
              </if>
              <if test="orderby != null and dir != null">
            		order by ${orderby} ${dir}
@@ -66,8 +66,8 @@
         from orgregions 
         <where>
         			1=1
-             <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
+             <if test="regionname != null and regionname != ''">
+           		and regionname like "%"#{regionname}"%"
              </if>
              <if test="orderby != null and dir != null">
            		order by ${orderby} ${dir}
@@ -82,8 +82,8 @@
        select count(*) from orgregions 
         <where>
         			1=1
-             <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
+             <if test="regionname != null and regionname != ''">
+           		and regionname like "%"#{regionname}"%"
              </if>
         </where>
  </select>
@@ -92,8 +92,8 @@
        select count(*) from orgregions 
         <where>
         			1=1
-             <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
+             <if test="regionname != null and regionname != ''">
+           		and regionname like "%"#{regionname}"%"
              </if>
         </where>
  </select>

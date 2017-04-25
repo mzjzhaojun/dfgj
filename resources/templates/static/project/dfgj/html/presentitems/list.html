@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>买赠ID</th>
 	      <th>买赠率</th>
 	      <th>买赠标准</th>
@@ -112,7 +111,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.presentitems.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.presentitems.presentid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.presentitems.presentvalue}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.presentitems.presentstandard}}</td>

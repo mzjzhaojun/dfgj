@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>学员ID</th>
 	      <th>账户编码</th>
 	      <th>账户类型（0- 合同账户，1-非合同账户【拓路账户】）</th>
@@ -129,7 +128,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.accounts.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.accounts.customerid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.accounts.accountcode}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.accounts.accounttype}}</td>

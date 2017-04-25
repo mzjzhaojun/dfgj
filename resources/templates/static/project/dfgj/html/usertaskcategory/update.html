@@ -56,6 +56,23 @@
 					})
     			}
 			}
+			$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("orgregionslist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+				}).success(function(data, status, headers, config) {
+					$scope.selects = data;
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		//$scope.initselect();
 		})
 	</script>
 </head>
@@ -72,25 +89,24 @@
     	</div>
    		<div class="col-lg-6">
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入ID" name="id" ng-model="formData.id" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">类别名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入类别名称" name="category_name" ng-model="formData.category_name" maxlength="64">
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">用户ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入用户ID" name="user_id" ng-model="formData.user_id" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">用户ID</span>
+	   		 		<select class="form-control required" name="user_id" ng-model="formData.user_id" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择用户ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">类别排序</span>
-	           		<input type="text" class="form-control required" placeholder="请输入类别排序" name="inner_sort_id" ng-model="formData.inner_sort_id" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">类别排序</span>
+	   		 		<select class="form-control required" name="inner_sort_id" ng-model="formData.inner_sort_id" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择类别排序</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
    		</div>
     </form>
   </body>

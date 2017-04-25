@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th></th>
 	      <th></th>
 	      <th></th>
@@ -182,7 +181,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.studentstatusreport.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.studentstatusreport.snapshotid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.studentstatusreport.regionid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.studentstatusreport.regionshortname}}</td>

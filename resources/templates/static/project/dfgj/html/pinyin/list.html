@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>拼音</th>
 	      <th>汉字</th>
 	      <th>权重</th>
@@ -112,7 +111,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.pinyin.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.pinyin.pinyin}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.pinyin.hz}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.pinyin.weight}}</td>

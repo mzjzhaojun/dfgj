@@ -56,6 +56,23 @@
 					})
     			}
 			}
+			$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("orgregionslist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+				}).success(function(data, status, headers, config) {
+					$scope.selects = data;
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		//$scope.initselect();
 		})
 	</script>
 </head>
@@ -71,11 +88,6 @@
 	    	</div>
     	</div>
    		<div class="col-lg-6">
-	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入ID" name="id" ng-model="formData.id" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">交易日期</span>
 	           		<input type="text" class="form-control required" placeholder="请输入交易日期" name="transactiondate" ng-model="formData.transactiondate" maxlength="">
@@ -102,25 +114,31 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">交易参考号</span>
-	           		<input type="text" class="form-control required" placeholder="请输入交易参考号" name="transactionid" ng-model="formData.transactionid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">交易参考号</span>
+	   		 		<select class="form-control required" name="transactionid" ng-model="formData.transactionid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择交易参考号</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">银行卡号</span>
 	           		<input type="text" class="form-control required" placeholder="请输入银行卡号" name="cardnum" ng-model="formData.cardnum" maxlength="32">
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">商户号</span>
-	           		<input type="text" class="form-control required" placeholder="请输入商户号" name="merchantid" ng-model="formData.merchantid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">商户号</span>
+	   		 		<select class="form-control required" name="merchantid" ng-model="formData.merchantid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择商户号</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">终端号</span>
-	           		<input type="text" class="form-control required" placeholder="请输入终端号" name="posid" ng-model="formData.posid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">终端号</span>
+	   		 		<select class="form-control required" name="posid" ng-model="formData.posid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择终端号</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">刷卡金额</span>
 	           		<input type="text" class="form-control required" placeholder="请输入刷卡金额" name="money" ng-model="formData.money" maxlength="">

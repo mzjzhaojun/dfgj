@@ -49,6 +49,23 @@
 					})
     			}
 			}
+			$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("orgregionslist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+				}).success(function(data, status, headers, config) {
+					$scope.selects = data;
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		//$scope.initselect();
 		})
 	</script>
 </head>
@@ -65,11 +82,6 @@
 	    	</div>
     		</div>
    		<div class="col-lg-6">
-	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入ID" name="id" ng-model="formData.id" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">客户ID命名规则：家长P+年份后两位+月+日+999999，学生S+年份后两位+月份+日期+999999</span>
 	           		<input type="text" class="form-control required" placeholder="请输入客户ID命名规则：家长P+年份后两位+月+日+999999，学生S+年份后两位+月份+日期+999999" name="parentcode" ng-model="formData.parentcode" maxlength="64">
@@ -111,15 +123,19 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">证件类型(C_CODE_ABBR_BO_Customer_CertificateType)</span>
-	           		<input type="text" class="form-control required" placeholder="请输入证件类型(C_CODE_ABBR_BO_Customer_CertificateType)" name="idtype" ng-model="formData.idtype" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">证件类型(C_CODE_ABBR_BO_Customer_CertificateType)</span>
+	   		 		<select class="form-control required" name="idtype" ng-model="formData.idtype" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择证件类型(C_CODE_ABBR_BO_Customer_CertificateType)</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">证件号码</span>
-	           		<input type="text" class="form-control required" placeholder="请输入证件号码" name="idnumber" ng-model="formData.idnumber" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">证件号码</span>
+	   		 		<select class="form-control required" name="idnumber" ng-model="formData.idnumber" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择证件号码</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">国家(C_CODE_ABBR_COUNTRY)。默认是中国1004115</span>
 	           		<input type="text" class="form-control required" placeholder="请输入国家(C_CODE_ABBR_COUNTRY)。默认是中国1004115" name="country" ng-model="formData.country" maxlength="32">
@@ -151,10 +167,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">创建者ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入创建者ID" name="creatorid" ng-model="formData.creatorid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">创建者ID</span>
+	   		 		<select class="form-control required" name="creatorid" ng-model="formData.creatorid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择创建者ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">创建者名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入创建者名称" name="creatorname" ng-model="formData.creatorname" maxlength="64">
@@ -166,10 +184,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">最后修改人</span>
-	           		<input type="text" class="form-control required" placeholder="请输入最后修改人" name="modifierid" ng-model="formData.modifierid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">最后修改人</span>
+	   		 		<select class="form-control required" name="modifierid" ng-model="formData.modifierid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择最后修改人</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">最后修改人名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入最后修改人名称" name="modifiername" ng-model="formData.modifiername" maxlength="64">

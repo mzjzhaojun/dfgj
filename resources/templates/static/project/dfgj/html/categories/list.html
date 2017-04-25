@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>产品类型编码</th>
 	      <th>产品类型名称</th>
 	      <th>产品类别枚举（1对1，班组，游学，无课收合作，其它）</th>
@@ -121,7 +120,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.categories.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.categories.category}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.categories.categoryname}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.categories.categorytype}}</td>

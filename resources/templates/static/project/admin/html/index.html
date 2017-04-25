@@ -108,7 +108,7 @@
 				if(level == 31){
 					sysChild = sys[i].child;
 				}
-				html +='<li> <p class="btn-deepblack" order="'+remark+'" sysId="'+sysId+'"><i class="glyphicon glyphicon-chevron-down" data-toggle="tooltip" data-placement="right"></i><span level="'+level+'">'+sysName+'</span></p>';
+				html +='<li> <p class="btn-deepblack" order="'+remark+'" sysId="'+sysId+'"><i class="glyphicon glyphicon-chevron-right" data-toggle="tooltip" data-placement="right"></i><span level="'+level+'">'+sysName+'</span></p>';
 				if(sysChild != undefined){
 					if(sysChild.length >0 ){
 						html +='<div class="list-group twolist">';
@@ -140,12 +140,12 @@
 				html +='</li>';
 			}
 			$(".onemenu").html(html);
-			$('.onemenu > li + li:eq('+remark+')> div').show();
-			$('.onemenu > li + li:eq('+remark+')> div >label:eq('+remark+')').addClass("btn-primary");
-			$('.onemenu > li + li:eq('+remark+')>p').find("i:eq(0)").removeClass("glyphicon glyphicon-chevron-right").addClass("glyphicon glyphicon-chevron-down");
-			$(".thirdmenu").find("li:eq(0)>p").addClass("btn-whiteblack").removeClass("btn-lightblack");
+			$('.onemenu > li + li:eq(0)> div').show();
+			$('.onemenu > li + li:eq(0)> div >label:eq('+remark+')').addClass("btn-primary");
+			$('.onemenu > li + li:eq(0)> p').find("i:eq(0)").removeClass("glyphicon glyphicon-chevron-right").addClass("glyphicon glyphicon-chevron-down");
+			$(".thirdmenu").find("li:eq(0) > p").addClass("btn-whiteblack").removeClass("btn-lightblack");
 			rightArea();
-			$(".onemenu").find(".twolist > label:eq(0)").trigger("click");
+			$(".onemenu").find(".twolist:eq(0) > label:eq(0)").trigger("click");
 		}
 		function initMenuList(menus){
 			menu = [];
@@ -276,7 +276,7 @@
 				var remark= $(this).attr("order");
 				var remark1= $(this).attr("order1");
 				childsysname = $(this).find("span:eq(1)").html();
-				console.info(name,childsysname)
+				console.info(remark,remark1,name,childsysname)
 				for(var i = 0;i<sys.length;i++){
 					var sysName = sys[i].name;
 					if(sysName == name){
@@ -294,7 +294,7 @@
 					}
 				}
 				$(".breadcrumb").css({"color":"#000","background":"#fff"});
-				$('.onemenu > li + li:eq('+remark+')> div >label').removeClass("btn-primary");
+				$('.onemenu > li > div >label').removeClass("btn-primary");
 				$('.onemenu > li + li:eq('+remark+')> div >label:eq('+remark1+')').addClass("btn-primary");
 			});
 			$(document).on("click",".fourlist > label",function(){

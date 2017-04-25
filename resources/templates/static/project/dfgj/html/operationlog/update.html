@@ -56,6 +56,23 @@
 					})
     			}
 			}
+			$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("orgregionslist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+				}).success(function(data, status, headers, config) {
+					$scope.selects = data;
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		//$scope.initselect();
 		})
 	</script>
 </head>
@@ -72,40 +89,43 @@
     	</div>
    		<div class="col-lg-6">
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入ID" name="id" ng-model="formData.id" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">相关对象的ID</span>
+	   		 		<select class="form-control required" name="resourceid" ng-model="formData.resourceid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择相关对象的ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">相关对象的ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入相关对象的ID" name="resourceid" ng-model="formData.resourceid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">环境上下文ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入环境上下文ID" name="correlationid" ng-model="formData.correlationid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">环境上下文ID</span>
+	   		 		<select class="form-control required" name="correlationid" ng-model="formData.correlationid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择环境上下文ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">类别</span>
 	           		<input type="text" class="form-control required" placeholder="请输入类别" name="category" ng-model="formData.category" maxlength="64">
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">操作人ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入操作人ID" name="operatorid" ng-model="formData.operatorid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">操作人ID</span>
+	   		 		<select class="form-control required" name="operatorid" ng-model="formData.operatorid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择操作人ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">操作人名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入操作人名称" name="operatorname" ng-model="formData.operatorname" maxlength="128">
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">实际操作人ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入实际操作人ID" name="realoperatorid" ng-model="formData.realoperatorid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">实际操作人ID</span>
+	   		 		<select class="form-control required" name="realoperatorid" ng-model="formData.realoperatorid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择实际操作人ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">实际操作人名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入实际操作人名称" name="realoperatorname" ng-model="formData.realoperatorname" maxlength="128">
@@ -142,10 +162,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth"></span>
-	           		<input type="text" class="form-control required" placeholder="请输入" name="rowuniqueid" ng-model="formData.rowuniqueid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth"></span>
+	   		 		<select class="form-control required" name="rowuniqueid" ng-model="formData.rowuniqueid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
    		</div>
     </form>
   </body>

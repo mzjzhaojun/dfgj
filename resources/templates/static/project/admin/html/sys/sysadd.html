@@ -154,7 +154,7 @@
 					height           :   "120px",                 // 宽度
 					itemWidth        :   "120px",                 // 文件项的宽度
 					itemHeight       :   "100px",                 // 文件项的高度
-					url              :   parent.sys.moreFileUrl,  // 上传文件的路径
+					url              :   parent.configsys.moreFileUrl,  // 上传文件的路径
 					multiple         :   false,                    // 是否可以多个文件上传
 					dragDrop         :   false,                    // 是否可以拖动上传文件
 					del              :   true,                    // 是否可以删除文件
@@ -213,7 +213,7 @@
 	        
 				 <div id="demo" class="demo"></div>   
 	    		<input type="hidden" id="icon" class="form-control inputchange"  ng-model="formData.icon"/> 
-	            
+	            <span class="input-group-addon verifyprompt">*</span>
 	        </div>
 	        
 	        <div class="input-group input-group-sm"  style="display: none;">

@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>快照ID</th>
 	      <th>统计的日期Key</th>
 	      <th>统计的日期名称（显示用）</th>
@@ -138,7 +137,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.incomereport.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.incomereport.snapshotid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.incomereport.statdatekey}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.incomereport.statdatename}}</td>

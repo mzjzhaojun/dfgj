@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>应用名称</th>
 	      <th>模块名称</th>
 	      <th>任务级别，即消息类型 则0为None;1为VeryLow;2为提醒消息;3为阅知消息;4为办理消息;5为VeryHigh</th>
@@ -141,7 +140,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.userTask.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.userTask.application_name}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.userTask.program_name}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.userTask.task_level}}</td>

@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>预警时间</th>
 	      <th>预警状态（0-预警中，1-解除预警）</th>
 	      <th>预警原因代码</th>
@@ -118,7 +117,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerrefundalerts.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.customerrefundalerts.alerttime}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.customerrefundalerts.alertstatus}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.customerrefundalerts.alertreason}}</td>

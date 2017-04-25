@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>客户ID命名规则：家长P+年份后两位+月+日+999999，学生S+年份后两位+月份+日期+999999</th>
 	      <th>家长名称</th>
 	      <th>性别(C_CODE_ABBR_GENDER)。1--男，2--女</th>
@@ -132,7 +131,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.parents.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.parents.parentcode}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.parents.parentname}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.parents.gender}}</td>

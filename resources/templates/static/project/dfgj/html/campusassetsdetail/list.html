@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>分区表分区列</th>
 	      <th>校区资产明细信息的本地日期</th>
 	      <th>校区ID</th>
@@ -122,7 +121,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.campusassetsdetail.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.campusassetsdetail.monthkey}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.campusassetsdetail.statlocaldate}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.campusassetsdetail.campusid}}</td>

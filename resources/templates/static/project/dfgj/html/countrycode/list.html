@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>中文名</th>
 	      <th>英文名</th>
 	      <th>缩写，例如CN，US</th>
@@ -113,7 +112,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.countryCode.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.countryCode.cnname}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.countryCode.enname}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.countryCode.abbreviation}}</td>

@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>大区ID</th>
 	      <th>分公司ID</th>
 	      <th>年份</th>
@@ -130,7 +129,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.consultbranchcrmmonthsum.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.consultbranchcrmmonthsum.regionid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.consultbranchcrmmonthsum.branchid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.consultbranchcrmmonthsum.year}}</td>

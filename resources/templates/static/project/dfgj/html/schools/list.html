@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>组织机构ID</th>
 	      <th>在读学校名称</th>
 	      <th>学年制（三年制-八年制）</th>
@@ -121,7 +120,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.schools.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.schools.orgid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.schools.schoolname}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.schools.schoolyear}}</td>

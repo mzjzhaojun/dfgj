@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>折扣编码</th>
 	      <th>折扣名称</th>
 	      <th>状态（审批中，已完成，已拒绝）</th>
@@ -132,7 +131,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.discounts.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.discounts.discountcode}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.discounts.discountname}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.discounts.discountstatus}}</td>

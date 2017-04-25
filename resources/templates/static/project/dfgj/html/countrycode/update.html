@@ -56,6 +56,23 @@
 					})
     			}
 			}
+			$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("orgregionslist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+				}).success(function(data, status, headers, config) {
+					$scope.selects = data;
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		//$scope.initselect();
 		})
 	</script>
 </head>
@@ -72,11 +89,6 @@
     	</div>
    		<div class="col-lg-6">
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入ID" name="id" ng-model="formData.id" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">中文名</span>
 	           		<input type="text" class="form-control required" placeholder="请输入中文名" name="cnname" ng-model="formData.cnname" maxlength="50">
 	        		<span class="input-group-addon verifyprompt">*</span>
@@ -92,10 +104,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">是否启用</span>
-	           		<input type="text" class="form-control required" placeholder="请输入是否启用" name="validstatus" ng-model="formData.validstatus" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">是否启用</span>
+	   		 		<select class="form-control required" name="validstatus" ng-model="formData.validstatus" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择是否启用</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
    		</div>
     </form>
   </body>

@@ -49,6 +49,23 @@
 					})
     			}
 			}
+			$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("orgregionslist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+				}).success(function(data, status, headers, config) {
+					$scope.selects = data;
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		//$scope.initselect();
 		})
 	</script>
 </head>
@@ -65,11 +82,6 @@
 	    	</div>
     		</div>
    		<div class="col-lg-6">
-	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入ID" name="id" ng-model="formData.id" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">用户的代码（登录名）</span>
 	           		<input type="text" class="form-control required" placeholder="请输入用户的代码（登录名）" name="oacode" ng-model="formData.oacode" maxlength="64">
@@ -116,15 +128,19 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">证件类型</span>
-	           		<input type="text" class="form-control required" placeholder="请输入证件类型" name="idtype" ng-model="formData.idtype" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">证件类型</span>
+	   		 		<select class="form-control required" name="idtype" ng-model="formData.idtype" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择证件类型</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">证件号</span>
-	           		<input type="text" class="form-control required" placeholder="请输入证件号" name="idnumber" ng-model="formData.idnumber" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">证件号</span>
+	   		 		<select class="form-control required" name="idnumber" ng-model="formData.idnumber" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择证件号</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">性别(1--男,2--女)</span>
 	           		<input type="text" class="form-control required" placeholder="请输入性别(1--男,2--女)" name="gender" ng-model="formData.gender" maxlength="32">

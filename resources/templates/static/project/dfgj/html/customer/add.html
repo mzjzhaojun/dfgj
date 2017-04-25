@@ -49,6 +49,23 @@
 					})
     			}
 			}
+			$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("orgregionslist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+				}).success(function(data, status, headers, config) {
+					$scope.selects = data;
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		//$scope.initselect();
 		})
 	</script>
 </head>
@@ -66,25 +83,24 @@
     		</div>
    		<div class="col-lg-6">
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入ID" name="id" ng-model="formData.id" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">校区ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区ID" name="campusid" ng-model="formData.campusid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">校区ID</span>
+	   		 		<select class="form-control required" name="campusid" ng-model="formData.campusid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择校区ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入校区名称" name="campusname" ng-model="formData.campusname" maxlength="128">
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">家长ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入家长ID" name="parentid" ng-model="formData.parentid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">家长ID</span>
+	   		 		<select class="form-control required" name="parentid" ng-model="formData.parentid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择家长ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">家长编号</span>
 	           		<input type="text" class="form-control required" placeholder="请输入家长编号" name="parentcode" ng-model="formData.parentcode" maxlength="64">
@@ -146,15 +162,19 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">证件类型</span>
-	           		<input type="text" class="form-control required" placeholder="请输入证件类型" name="idtype" ng-model="formData.idtype" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">证件类型</span>
+	   		 		<select class="form-control required" name="idtype" ng-model="formData.idtype" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择证件类型</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">证件号码</span>
-	           		<input type="text" class="form-control required" placeholder="请输入证件号码" name="idnumber" ng-model="formData.idnumber" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">证件号码</span>
+	   		 		<select class="form-control required" name="idnumber" ng-model="formData.idnumber" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择证件号码</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">VIP类型</span>
 	           		<input type="text" class="form-control required" placeholder="请输入VIP类型" name="viptype" ng-model="formData.viptype" maxlength="32">
@@ -206,10 +226,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">当前在读学校ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入当前在读学校ID" name="schoolid" ng-model="formData.schoolid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">当前在读学校ID</span>
+	   		 		<select class="form-control required" name="schoolid" ng-model="formData.schoolid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择当前在读学校ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">当前在读学校名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入当前在读学校名称" name="schoolname" ng-model="formData.schoolname" maxlength="128">
@@ -226,20 +248,24 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">首次签约人ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入首次签约人ID" name="firstsignerid" ng-model="formData.firstsignerid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">首次签约人ID</span>
+	   		 		<select class="form-control required" name="firstsignerid" ng-model="formData.firstsignerid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择首次签约人ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">首次签约人</span>
 	           		<input type="text" class="form-control required" placeholder="请输入首次签约人" name="firstsignername" ng-model="formData.firstsignername" maxlength="64">
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">无效客户理由代码（参考跟进）</span>
-	           		<input type="text" class="form-control required" placeholder="请输入无效客户理由代码（参考跟进）" name="invalidreason" ng-model="formData.invalidreason" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">无效客户理由代码（参考跟进）</span>
+	   		 		<select class="form-control required" name="invalidreason" ng-model="formData.invalidreason" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择无效客户理由代码（参考跟进）</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">学年制(C_CODE_ABBR_ACDEMICYEAR)</span>
 	           		<input type="text" class="form-control required" placeholder="请输入学年制(C_CODE_ABBR_ACDEMICYEAR)" name="schoolyear" ng-model="formData.schoolyear" maxlength="32">
@@ -251,20 +277,24 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">转介绍员工ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入转介绍员工ID" name="referralstaffid" ng-model="formData.referralstaffid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">转介绍员工ID</span>
+	   		 		<select class="form-control required" name="referralstaffid" ng-model="formData.referralstaffid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择转介绍员工ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">转介绍员工姓名</span>
 	           		<input type="text" class="form-control required" placeholder="请输入转介绍员工姓名" name="referralstaffname" ng-model="formData.referralstaffname" maxlength="64">
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">转介绍员工岗位ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入转介绍员工岗位ID" name="referralstaffjobid" ng-model="formData.referralstaffjobid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">转介绍员工岗位ID</span>
+	   		 		<select class="form-control required" name="referralstaffjobid" ng-model="formData.referralstaffjobid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择转介绍员工岗位ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">转介绍员工岗位名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入转介绍员工岗位名称" name="referralstaffjobname" ng-model="formData.referralstaffjobname" maxlength="64">
@@ -276,10 +306,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">转介绍学员ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入转介绍学员ID" name="referralcustomerid" ng-model="formData.referralcustomerid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">转介绍学员ID</span>
+	   		 		<select class="form-control required" name="referralcustomerid" ng-model="formData.referralcustomerid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择转介绍学员ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">转介绍学员编码</span>
 	           		<input type="text" class="form-control required" placeholder="请输入转介绍学员编码" name="referralcustomercode" ng-model="formData.referralcustomercode" maxlength="32">
@@ -316,10 +348,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">建档人ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入建档人ID" name="creatorid" ng-model="formData.creatorid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">建档人ID</span>
+	   		 		<select class="form-control required" name="creatorid" ng-model="formData.creatorid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择建档人ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">建档人姓名</span>
 	           		<input type="text" class="form-control required" placeholder="请输入建档人姓名" name="creatorname" ng-model="formData.creatorname" maxlength="">
@@ -331,10 +365,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">建档人岗位ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入建档人岗位ID" name="creatorjobid" ng-model="formData.creatorjobid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">建档人岗位ID</span>
+	   		 		<select class="form-control required" name="creatorjobid" ng-model="formData.creatorjobid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择建档人岗位ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">建档人岗位名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入建档人岗位名称" name="creatorjobname" ng-model="formData.creatorjobname" maxlength="64">
@@ -351,10 +387,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">最后修改人ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入最后修改人ID" name="modifierid" ng-model="formData.modifierid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">最后修改人ID</span>
+	   		 		<select class="form-control required" name="modifierid" ng-model="formData.modifierid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择最后修改人ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">最后修改人姓名</span>
 	           		<input type="text" class="form-control required" placeholder="请输入最后修改人姓名" name="modifiername" ng-model="formData.modifiername" maxlength="64">
@@ -366,10 +404,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">咨询师ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入咨询师ID" name="consultantid" ng-model="formData.consultantid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">咨询师ID</span>
+	   		 		<select class="form-control required" name="consultantid" ng-model="formData.consultantid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择咨询师ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">咨询师姓名</span>
 	           		<input type="text" class="form-control required" placeholder="请输入咨询师姓名" name="consultantname" ng-model="formData.consultantname" maxlength="64">
@@ -381,15 +421,19 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">咨询师岗位ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入咨询师岗位ID" name="consultantjobid" ng-model="formData.consultantjobid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">咨询师岗位ID</span>
+	   		 		<select class="form-control required" name="consultantjobid" ng-model="formData.consultantjobid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择咨询师岗位ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">学管师ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入学管师ID" name="educatorid" ng-model="formData.educatorid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">学管师ID</span>
+	   		 		<select class="form-control required" name="educatorid" ng-model="formData.educatorid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择学管师ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">学管师姓名</span>
 	           		<input type="text" class="form-control required" placeholder="请输入学管师姓名" name="educatorname" ng-model="formData.educatorname" maxlength="64">
@@ -401,15 +445,19 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">学管师岗位ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入学管师岗位ID" name="educatorjobid" ng-model="formData.educatorjobid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">学管师岗位ID</span>
+	   		 		<select class="form-control required" name="educatorjobid" ng-model="formData.educatorjobid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择学管师岗位ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">电销人员员工ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入电销人员员工ID" name="callcenterid" ng-model="formData.callcenterid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">电销人员员工ID</span>
+	   		 		<select class="form-control required" name="callcenterid" ng-model="formData.callcenterid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择电销人员员工ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">电销人OA编码</span>
 	           		<input type="text" class="form-control required" placeholder="请输入电销人OA编码" name="callcenteroacode" ng-model="formData.callcenteroacode" maxlength="64">
@@ -421,15 +469,19 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">电销人员岗位ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入电销人员岗位ID" name="callcenterjobid" ng-model="formData.callcenterjobid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">电销人员岗位ID</span>
+	   		 		<select class="form-control required" name="callcenterjobid" ng-model="formData.callcenterjobid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择电销人员岗位ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">市场人员员工ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入市场人员员工ID" name="marketingid" ng-model="formData.marketingid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">市场人员员工ID</span>
+	   		 		<select class="form-control required" name="marketingid" ng-model="formData.marketingid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择市场人员员工ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">市场人员姓名</span>
 	           		<input type="text" class="form-control required" placeholder="请输入市场人员姓名" name="marketingname" ng-model="formData.marketingname" maxlength="64">
@@ -441,25 +493,31 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">市场人员岗位ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入市场人员岗位ID" name="marketingjobid" ng-model="formData.marketingjobid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">市场人员岗位ID</span>
+	   		 		<select class="form-control required" name="marketingjobid" ng-model="formData.marketingjobid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择市场人员岗位ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">分配教师数量</span>
 	           		<input type="text" class="form-control required" placeholder="请输入分配教师数量" name="assignteachernum" ng-model="formData.assignteachernum" maxlength="">
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">主要监护人证件类型</span>
-	           		<input type="text" class="form-control required" placeholder="请输入主要监护人证件类型" name="parentidtype" ng-model="formData.parentidtype" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">主要监护人证件类型</span>
+	   		 		<select class="form-control required" name="parentidtype" ng-model="formData.parentidtype" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择主要监护人证件类型</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">主要监护人证件号码</span>
-	           		<input type="text" class="form-control required" placeholder="请输入主要监护人证件号码" name="parentidnumber" ng-model="formData.parentidnumber" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">主要监护人证件号码</span>
+	   		 		<select class="form-control required" name="parentidnumber" ng-model="formData.parentidnumber" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择主要监护人证件号码</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">主要监护人称谓代码</span>
 	           		<input type="text" class="form-control required" placeholder="请输入主要监护人称谓代码" name="parentrole" ng-model="formData.parentrole" maxlength="32">

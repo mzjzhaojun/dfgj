@@ -102,7 +102,6 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>ID</th>
 	      <th>学员视图排课条件名称（资产编码+科目+老师+年级）</th>
 	      <th>教师视图排课条件名称（资产编码+科目+学员+年级）</th>
 	      <th>学员ID</th>
@@ -146,7 +145,6 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.assignconditions.id}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.assignconditions.conditionname4customer}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.assignconditions.conditionname4teacher}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.assignconditions.customerid}}</td>

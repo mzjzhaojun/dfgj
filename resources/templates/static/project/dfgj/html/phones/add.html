@@ -49,6 +49,23 @@
 					})
     			}
 			}
+			$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("orgregionslist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+				}).success(function(data, status, headers, config) {
+					$scope.selects = data;
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		//$scope.initselect();
 		})
 	</script>
 </head>
@@ -66,20 +83,19 @@
     		</div>
    		<div class="col-lg-6">
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入ID" name="id" ng-model="formData.id" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">电话拥有者的ID（家长ID或学员ID）</span>
+	   		 		<select class="form-control required" name="ownerid" ng-model="formData.ownerid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择电话拥有者的ID（家长ID或学员ID）</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">电话拥有者的ID（家长ID或学员ID）</span>
-	           		<input type="text" class="form-control required" placeholder="请输入电话拥有者的ID（家长ID或学员ID）" name="ownerid" ng-model="formData.ownerid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth"></span>
-	           		<input type="text" class="form-control required" placeholder="请输入" name="itemid" ng-model="formData.itemid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth"></span>
+	   		 		<select class="form-control required" name="itemid" ng-model="formData.itemid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">是否是主要联系电话</span>
 	           		<input type="text" class="form-control required" placeholder="请输入是否是主要联系电话" name="isprimary" ng-model="formData.isprimary" maxlength="">
@@ -111,10 +127,12 @@
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">创建者ID</span>
-	           		<input type="text" class="form-control required" placeholder="请输入创建者ID" name="creatorid" ng-model="formData.creatorid" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	   		 		<span class="input-group-addon text-right spanwidth">创建者ID</span>
+	   		 		<select class="form-control required" name="creatorid" ng-model="formData.creatorid" ng-options="data.id as data.name for data in selects">
+	   		 			<option value=''>请选择创建者ID</option>
+	   		 			</select>
+	   		 	<span class="input-group-addon verifyprompt">*</span>
+	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">创建者名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入创建者名称" name="creatorname" ng-model="formData.creatorname" maxlength="64">
