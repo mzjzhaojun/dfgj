@@ -65,7 +65,7 @@
 					response(status);
 				})
 			}
-		//$scope.initselect();
+		$scope.initselect();
 		})
 	</script>
 </head>
@@ -83,7 +83,7 @@
     		</div>
    		<div class="col-lg-6">
 	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">大区ID</span>
+	   		 		<span class="input-group-addon text-right spanwidth">大区</span>
 	   		 		<select class="form-control required" name="regionid" ng-model="formData.regionid" ng-options="data.id as data.name for data in selects">
 	   		 			<option value=''>请选择大区ID</option>
 	   		 			</select>

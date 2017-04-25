@@ -179,7 +179,6 @@
 							menu.push(obj);
 							html += '<label class="btn-lightblack" id="'+menuId+'"><span class="glyphicon "></span><span class="span_box2">'+menuName+'</span></label>'
 						} 
-						$("#main").attr("src", first);
 					}else{
 						html += '<li> <p class="btn-lightblack" id="'+menuId+'"> <span class="span_box">'+menuName+'</span></p>';
 					}
@@ -187,11 +186,10 @@
 					html +='</li>';
 					$('.thirdmenu').html(html);
 				}
-				if(menu[0].url != ""){
-					var url = getMenuLinks(menu[0].name);
-					$("#main").attr("src", url);
-				}
 			} 
+			$(".thirdmenu").find("li:eq(0) > p:eq(0)").trigger("click");
+			//$("#main").attr("src", first);
+			$(".fourlist").find("label:eq(0)").trigger("click");
 		}
 		function onLogin(){
 			location.href = "/dfgj/static/project/login/html/index.html";
