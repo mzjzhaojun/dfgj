@@ -46,7 +46,7 @@
 			}
 			$scope.pageList = function(){
 				pageNo = parent.currentPage;
-			    var data = {"name":$("#name").val()};
+			    var data = {"regionname":$("#name").val()};
 				$http({
 					url:parent.getMenuLinksHref("orgregionslist"),
 					method:'POST',

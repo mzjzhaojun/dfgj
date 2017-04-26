@@ -106,27 +106,27 @@
 			//查询后台
 			$scope.select1 = function(data){
 			//alert("获取的值:"+$scope.name1 );
-		if($scope.name1 != null){
-			$("#orhidden2").show();	
-	
-				$http({
-					url:parent.getMenuLinksHref("getbyparentid")+$scope.name1,
-					method:'POST',
-					dataType : "json",
-					withCredentials: true,
-					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-					data: ""
-					}).success(function(data, status, headers, config){
-						$scope.syss2  = data;
-			  							
-					}).error(function(data, status, headers, config){
-						//处理响应失败
-						response(status);
-					});
-		}else{
-			$("#orhidden2").hide();
-			$("#orhidden3").hide();
-		}
+				if($scope.name1 != null){
+					$("#orhidden2").show();	
+			
+						$http({
+							url:parent.getMenuLinksHref("getbyparentid")+$scope.name1,
+							method:'POST',
+							dataType : "json",
+							withCredentials: true,
+							headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+							data: ""
+							}).success(function(data, status, headers, config){
+								$scope.syss2  = data;
+					  							
+							}).error(function(data, status, headers, config){
+								//处理响应失败
+								response(status);
+							});
+				}else{
+					$("#orhidden2").hide();
+					$("#orhidden3").hide();
+				}
 			}
 			//判断是否可选类型
 			$scope.select2 = function(data){

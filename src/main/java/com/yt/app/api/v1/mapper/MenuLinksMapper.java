@@ -102,7 +102,7 @@ public List<Map<String, Object>> map(Map<String, Object> param);
 * @return 数据
 */
 @RedisCacheAnnotation(classs = MenuLinks.class)
-public List<MenuLinks> getByIds(long[] id);
+public List<MenuLinks> listByArrayId(long[] id);
 /**
  * 根据菜单编码删除指定的唯一标识符数组对应的持久化对象
 * @author zgp

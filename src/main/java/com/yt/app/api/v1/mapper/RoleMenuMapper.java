@@ -113,7 +113,7 @@ public interface RoleMenuMapper extends IBaseMapper<RoleMenu> {
 	 * @return 数据
 	 */
 	@RedisCacheAnnotation(classs = RoleMenu.class)
-	public List<RoleMenu> getByIds(long[] id);
+	public List<RoleMenu> listByArrayId(long[] id);
 
 	/**
 	 * 删除指定的唯一标识符数组对应的持久化对象

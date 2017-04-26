@@ -102,43 +102,35 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>组织机构代码</th>
-	      <th>组织机构机构简称</th>
-	      <th>组织机构机构名称</th>
-	      <th>组织机构机构类型</th>
-	      <th>法人编码</th>
-	      <th>法人</th>
-	      <th>机构负责人ID</th>
+	      <th>机构代码</th>
+	      <th>机构简称</th>
+	      <th>机构名称</th>
+	      <th>法人身份证</th>
+	      <th>机构法人</th>
 	      <th>机构类型</th>
-	      <th>校区面积(平方米)</th>
-	      <th>校区使用面积(平方米)</th>
-	      <th>城市ID</th>
+	      <th>校区面积</th>
+	      <th>使用面积</th>
 	      <th>城市名称</th>
-	      <th>组织机构机构路径</th>
-	      <th>交付日期,校区开业日期</th>
-	      <th>BI数据状态(1--有效，3--无效),失效有两种情况，IT_Secrity数据获取不到时失效，业务数据本身失效</th>
-	      <th>状态描述(1--有效，3--失效)</th>
+	      <th>机构地址</th>
+	      <th>开业日期</th>
+	      <th>状态描述</th>
 	      <th>相关操作</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.organizations.codename}}</td>
+		    <td ng-dblclick="toInfo(data)">{{data.organizations.codename}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.name}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.shortname}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.organizations.departmenttype}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.legalentitycode}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.legalentity}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.organizations.managerid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.orgtype}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.campusarea}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.campususingarea}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.organizations.cityid}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.cityname}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.fullpath}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.deliverdate}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.organizations.bistatus}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.organizations.status}}</td>
 			<td>
 	    		<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" title="查看"></h4>

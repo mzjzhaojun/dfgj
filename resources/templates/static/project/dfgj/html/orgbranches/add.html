@@ -83,14 +83,14 @@
     		</div>
    		<div class="col-lg-6">
 	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">大区</span>
-	   		 		<select class="form-control required" name="regionid" ng-model="formData.regionid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择大区ID</option>
+	   		 		<span class="input-group-addon text-right spanwidth">所属大区</span>
+	   		 		<select class="form-control required" name="regionid" ng-model="formData.regionid" ng-options="data.orgregions.id as data.orgregions.regionname for data in selects">
+	   		 			<option value=''>请选择大区</option>
 	   		 			</select>
 	   		 	<span class="input-group-addon verifyprompt">*</span>
 	   		 	</div>
 	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">分公司名称</span>
+	            	<span class="input-group-addon text-right spanwidth">公司名称</span>
 	           		<input type="text" class="form-control required" placeholder="请输入分公司名称" name="branchname" ng-model="formData.branchname" maxlength="128">
 	        		<span class="input-group-addon verifyprompt">*</span>
 	       		 </div>

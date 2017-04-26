@@ -30,9 +30,7 @@ public class RegionServiceImpl extends BaseServiceImpl<Region, Long> implements 
 
 	@Override
 	public List<Region> getlist() {
-
 		List<Region> listmeun = mapper.getlist();
-
 		return listmeun;
 	}
 

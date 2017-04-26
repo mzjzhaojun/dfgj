@@ -151,7 +151,6 @@
 			menu = [];
 			if(menus != undefined && menus.length>0){
 				var html = '';
-				var first ="";
 				for(var k = 0;k<menus.length;k++){
 					menuName = menus[k].name;
 					menuId = menus[k].id;
@@ -174,8 +173,6 @@
 							obj.name = menuName;
 							obj.url = menus1[x].url;
 							obj.links = menus1[x].links;
-							if(first=="")
-								first = obj.url;
 							menu.push(obj);
 							html += '<label class="btn-lightblack" id="'+menuId+'"><span class="glyphicon "></span><span class="span_box2">'+menuName+'</span></label>'
 						} 
@@ -188,8 +185,8 @@
 				}
 			} 
 			$(".thirdmenu").find("li:eq(0) > p:eq(0)").trigger("click");
-			//$("#main").attr("src", first);
-			$(".fourlist").find("label:eq(0)").trigger("click");
+			$(".thirdmenu").find("li:eq(0) > div:eq(0) > label:eq(0)").trigger("click");
+			/* $("#main").attr("src", first); */
 		}
 		function onLogin(){
 			location.href = "/dfgj/static/project/login/html/index.html";

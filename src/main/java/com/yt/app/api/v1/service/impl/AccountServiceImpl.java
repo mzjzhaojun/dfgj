@@ -96,7 +96,7 @@ public class AccountServiceImpl extends BaseServiceImpl<Account, Long> implement
 
 	@Override
 	public List<Dictionary> getlistaccount() {
-		List<Dictionary> list = dmapper.getBycode(DictionaryResource.ACCOUNT_TYPE_10);
+		List<Dictionary> list = dmapper.getByTypeCode(DictionaryResource.ACCOUNT_TYPE_10);
 		return list;
 	}
 
@@ -113,7 +113,7 @@ public class AccountServiceImpl extends BaseServiceImpl<Account, Long> implement
 		List<Account> listaccount = mapper.list(param);
 		if (listaccount.size() > 0) {
 			long[] type = listaccount.stream().mapToLong(Account::getType).distinct().toArray();
-			List<Dictionary> listdict = dmapper.getByIds(type);
+			List<Dictionary> listdict = dmapper.listByArrayId(type);
 			listaccount.stream().forEach(Account -> {
 				listdict.stream().forEach(Dictionary -> {
 					if (Account.getType().longValue() == Dictionary.getCode().longValue()) {

@@ -14,13 +14,13 @@ import java.io.Serializable;
 public class DictionaryResource implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 
-	 * 默认状态  21 是 ‘是’ 22 是 ‘否’
+	 * 默认状态 21 是 ‘是’ 22 是 ‘否’
 	 */
 	public static final Long STATUS_21 = 21L;
-	
+
 	public static final Long STATUS_22 = 22L;
 
 	/**
@@ -99,45 +99,50 @@ public class DictionaryResource implements Serializable {
 	/**
 	 * 学习情况
 	 */
-	public static final Long PAYHOUR_STATUS_751 = 751L;//学习中
-	public static final Long PAYHOUR_STATUS_752 = 752L;//已学完
-	
-	
+	public static final Long PAYHOUR_STATUS_751 = 751L;// 学习中
+	public static final Long PAYHOUR_STATUS_752 = 752L;// 已学完
+
 	/**
 	 * 课时状态
 	 */
-	public static final Long HOUR_STATUS_771 = 771L;//已上
-	public static final Long HOUR_STATUS_772 = 772L;//未上
-	
-	
+	public static final Long HOUR_STATUS_771 = 771L;// 已上
+	public static final Long HOUR_STATUS_772 = 772L;// 未上
+
 	/**
 	 * 操作课时数量
 	 */
-	public static final Integer HOURHISTORY_COUNT_1 = 1;//数量1
-	public static final Integer HOURHISTORY_COUNT_2 = 2;//数量2
-	
+	public static final Integer HOURHISTORY_COUNT_1 = 1;// 数量1
+	public static final Integer HOURHISTORY_COUNT_2 = 2;// 数量2
+
 	/**
 	 * 操作课时记录类型
 	 */
-	public static final Long HOURHISTORY_TYPE_811 = 811L;//加课时
-	public static final Long HOURHISTORY_TYPE_812 = 812L;//减课时
-	
-	
+	public static final Long HOURHISTORY_TYPE_811 = 811L;// 加课时
+	public static final Long HOURHISTORY_TYPE_812 = 812L;// 减课时
+
 	/**
 	 * 学员状态
 	 */
-	//新户
+	// 新户
 	public static final Long PATRIARCH_STATUS_571 = 571L;
-	//沟通
+	// 沟通
 	public static final Long PATRIARCH_STATUS_572 = 572L;
-	//未接通
+	// 未接通
 	public static final Long PATRIARCH_STATUS_573 = 573L;
-	//诺访
+	// 诺访
 	public static final Long PATRIARCH_STATUS_574 = 574L;
-	//到访
+	// 到访
 	public static final Long PATRIARCH_STATUS_575 = 575L;
-	//未转化
+	// 未转化
 	public static final Long PATRIARCH_STATUS_576 = 576L;
-	//已转化
+	// 已转化
 	public static final Long PATRIARCH_STATUS_577 = 577L;
+
+	/**
+	 * 组织机构状态
+	 */
+	// 正常
+	public static final Long ORGANIZATIONS_STATUS_571 = 1841L;
+	// 停用
+	public static final Long ORGANIZATIONS_STATUS_572 = 1842L;
 }

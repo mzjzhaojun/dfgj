@@ -102,24 +102,22 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>用户的代码（登录名）</th>
-	      <th>员工工号</th>
-	      <th>用户的名称</th>
+	      <th>登录名</th>
+	      <th>名称</th>
 	      <th>显示名称</th>
-	      <th>用户的邮件地址</th>
-	      <th>用户的手机号</th>
-	      <th>用户的工作电话</th>
+	      <th>邮件地址</th>
+	      <th>手机号</th>
+	      <th>工作电话</th>
 	      <th>分机</th>
-	      <th>用户的地址</th>
+	      <th>地址</th>
 	      <th>证件类型</th>
 	      <th>证件号</th>
-	      <th>性别(1--男,2--女)</th>
-	      <th>全职/兼职(0--兼职,1--全职)</th>
-	      <th>个人邮箱</th>
+	      <th>性别</th>
+	      <th>全职/兼职</th>
+	      <th>邮箱</th>
 	      <th>入职日期</th>
 	      <th>离职日期</th>
-	      <th>状态描述(1--有效，3--失效)</th>
-	      <th>BI数据状态(1--有效，3--无效),BI数据状态(1--有效，3--无效),失效有两种情况，IT_Secrity数据获取不到时失效，业务数据本身失效</th>
+	      <th>状态</th>
 	      <th>相关操作</th>
 	    </tr>
 	  </thead>
@@ -143,7 +141,6 @@
 			<td ng-dblclick="toInfo(data)">{{data.staffs.employmentdate}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.staffs.dimissiondate}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.staffs.status}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.staffs.bistatus}}</td>
 			<td>
 	    		<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" title="查看"></h4>
 	    		<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil"  style="margin:0px 5px;color:#99DFF8;" title="修改"></h4>

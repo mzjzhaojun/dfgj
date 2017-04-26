@@ -103,7 +103,7 @@ public interface AccountRoleMapper extends IBaseMapper<AccountRole> {
 	 * @return 数据
 	 */
 	@RedisCacheAnnotation(classs = AccountRole.class)
-	public List<AccountRole> getByIds(long[] id);
+	public List<AccountRole> listByArrayId(long[] id);
 
 	/**
 	 * 删除（根据accountid）

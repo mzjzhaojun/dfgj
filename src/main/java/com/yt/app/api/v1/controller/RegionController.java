@@ -63,7 +63,6 @@ protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@ApiOperation(value = "列表分页", response = Region.class)
 	@RequestMapping(value = "/grade", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> ptree(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-		
 		List<Region> pagebean = service.getlist();
 		return new ResponseEntity<Object>(pagebean, HttpStatus.OK);
 	}

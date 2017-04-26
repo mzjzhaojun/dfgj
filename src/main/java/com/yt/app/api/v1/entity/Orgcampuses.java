@@ -20,6 +20,9 @@ public class Orgcampuses implements Serializable{
   Long regionid;
   Long branchid;
   String campusname;
+  
+  String regionidname;
+  String branchidname;
   public Orgcampuses(){
   }
   public Orgcampuses(Long id,Integer version,Long regionid,Long branchid,String campusname){

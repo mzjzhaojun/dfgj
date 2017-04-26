@@ -93,7 +93,7 @@ public class SysServiceImpl extends BaseServiceImpl<Sys, Long> implements SysSer
 	@Override
 	public List<Dictionary> syslevel() {
 		long[] code = { DictionaryResource.SYS_LEVEL_31.longValue(), DictionaryResource.SYS_LEVEL_32.longValue() };
-		List<Dictionary> listdic = dmapper.getByIds(code);
+		List<Dictionary> listdic = dmapper.listByArrayId(code);
 		return listdic;
 	}
 }

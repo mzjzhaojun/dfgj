@@ -103,7 +103,7 @@ public interface SysMapper extends IBaseMapper<Sys> {
 	 * @return 数据
 	 */
 	@RedisCacheAnnotation(classs = Sys.class)
-	public List<Sys> getByIds(long[] id);
+	public List<Sys> listByArrayId(long[] id);
 
 	public List<Sys> getlist();
 

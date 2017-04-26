@@ -103,5 +103,5 @@ public interface RoleMapper extends IBaseMapper<Role> {
 	 * @return 数据
 	 */
 	@RedisCacheAnnotation(classs = Role.class)
-	public List<Role> getByIds(long[] id);
+	public List<Role> listByArrayId(long[] id);
 }

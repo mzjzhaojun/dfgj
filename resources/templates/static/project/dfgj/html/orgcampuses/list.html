@@ -46,7 +46,7 @@
 			}
 			$scope.pageList = function(){
 				pageNo = parent.currentPage;
-			    var data = {"name":$("#name").val()};
+			    var data = {"campusname":$("#name").val()};
 				$http({
 					url:parent.getMenuLinksHref("orgcampuseslist"),
 					method:'POST',
@@ -102,8 +102,8 @@
 	  <thead>
 	    <tr class="info">
 	      <th>序号</th>
-	      <th>大区ID</th>
-	      <th>分公司ID</th>
+	      <th>所属大区</th>
+	      <th>所属公司</th>
 	      <th>校区名称</th>
 	      <th>相关操作</th>
 	    </tr>
@@ -111,8 +111,8 @@
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
 		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.orgcampuses.regionid}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.orgcampuses.branchid}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.orgcampuses.regionidname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.orgcampuses.branchidname}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.orgcampuses.campusname}}</td>
 			<td>
 	    		<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" title="查看"></h4>

@@ -104,7 +104,7 @@ public interface MenuMapper extends IBaseMapper<Menu> {
 	 * @return 数据
 	 */
 	@RedisCacheAnnotation(classs = Menu.class)
-	public List<Menu> getByIds(long[] id);
+	public List<Menu> listByArrayId(long[] id);
 
 	/**
 	 * 获取满足查询参数条件的数据

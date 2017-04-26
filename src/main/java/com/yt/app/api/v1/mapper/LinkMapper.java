@@ -102,7 +102,7 @@ public List<Map<String, Object>> map(Map<String, Object> param);
 * @return 数据
 */
 @RedisCacheAnnotation(classs = Link.class)
-public List<Link> getByIds(long[] id);
+public List<Link> listByArrayId(long[] id);
 
 /**
 * 获取与现在输入的别名一样的别名个数

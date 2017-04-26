@@ -106,7 +106,7 @@
         </where>
  </select>
   <!-- 默认获取Ids的对象 -->
- <select id="getByIds" parameterType="java.util.HashMap" resultMap="ResultMap">
+ <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
        select
         <include refid="Base_Column_List" />
         from link 

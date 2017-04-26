@@ -85,7 +85,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 		 * 
 		 */
 		long[] getsysid = listlevelmeun.stream().mapToLong(Menu::getSys_id).distinct().toArray();
-		List<Sys> getlistsys = sysMapper.getByIds(getsysid);
+		List<Sys> getlistsys = sysMapper.listByArrayId(getsysid);
 		listmeun.stream().forEach(Menu -> {
 			getlistsys.stream().forEach(Sys -> {
 				if (Menu.getSys_id().doubleValue() == (Sys.getId().doubleValue()) && Menu.getLevel().equals(DictionaryResource.MENU_LEVEL)) {
@@ -138,7 +138,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 		List<MenuLinks> mLinks = this.MenuLinksMapper.list(param);
 		long[] obj = mLinks.stream().mapToLong(MenuLinks::getLinks_id).distinct().toArray();
 		if (obj != null && obj.length > 0) {
-			List<Link> links = this.linkMapper.getByIds(obj);
+			List<Link> links = this.linkMapper.listByArrayId(obj);
 
 			return links;
 		} else {
@@ -218,7 +218,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 		List<MenuLinks> mls = this.MenuLinksMapper.list(map);
 		long[] obj = mls.stream().mapToLong(MenuLinks::getLinks_id).distinct().toArray();
 		if (obj != null && obj.length > 0) {
-			List<Link> links = this.linkMapper.getByIds(obj);
+			List<Link> links = this.linkMapper.listByArrayId(obj);
 			return links;
 		} else {
 			return null;
@@ -270,7 +270,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 		}
 		List<Menu> list = this.mapper.list(param);
 		long[] obj = list.stream().mapToLong(Menu::getSys_id).distinct().toArray();
-		List<Sys> syss = this.sysMapper.getByIds(obj);
+		List<Sys> syss = this.sysMapper.listByArrayId(obj);
 		// 清除所有条件用于查询所有的字典，防止以后typecode改变
 		List<Dictionary> diclist = this.dictionaryMapper.list(new HashMap<String, Object>());
 		list.stream().forEach(menu -> {

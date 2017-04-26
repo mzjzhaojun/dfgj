@@ -105,7 +105,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 		 * 
 		 */
 		long[] getsysid = listMenu.stream().mapToLong(Menu::getSys_id).distinct().toArray();
-		List<Sys> getlistsys = sysMapper.getByIds(getsysid);
+		List<Sys> getlistsys = sysMapper.listByArrayId(getsysid);
 		listMenu.stream().forEach(Menu -> {
 			getlistsys.stream().forEach(Sys -> {
 				if (Menu.getSys_id().longValue() == Sys.getId().longValue() && Menu.getLevel().equals(DictionaryResource.MENU_LEVEL)) {
@@ -151,8 +151,8 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 		List<Role> loglist = mapper.list(param);
 		long[] obj = loglist.stream().mapToLong(Role::getType).distinct().toArray();
 		long[] objmanage = loglist.stream().mapToLong(Role::getIs_manage).distinct().toArray();
-		List<Dictionary> listd = dictionarymapper.getByIds(obj);
-		List<Dictionary> listd2 = dictionarymapper.getByIds(objmanage);
+		List<Dictionary> listd = dictionarymapper.listByArrayId(obj);
+		List<Dictionary> listd2 = dictionarymapper.listByArrayId(objmanage);
 
 		loglist.stream().forEach(Role -> {
 			listd.stream().forEach(Dictionary -> {
@@ -199,7 +199,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 
 	@Override
 	public List<Dictionary> getdicttype() {
-		List<Dictionary> listdict = dictionarymapper.getBycode(DictionaryResource.ACCOUNT_TYPE_10);
+		List<Dictionary> listdict = dictionarymapper.getByTypeCode(DictionaryResource.ACCOUNT_TYPE_10);
 		return listdict;
 	}
 

@@ -103,7 +103,7 @@ public List<Map<String, Object>> map(Map<String, Object> param);
 * @return 数据
 */
 @RedisCacheAnnotation(classs = Region.class)
-public List<Region> getByIds(long[] id);
+public List<Region> listByArrayId(long[] id);
 
 /**
  * 查询一级菜单的父级树
