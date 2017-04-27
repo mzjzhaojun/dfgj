@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
 
 import com.yt.app.api.v1.mapper.DictionaryMapper;
@@ -13,6 +14,7 @@ import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
 import com.yt.app.frame.page.IPage;
 import com.yt.app.frame.page.PageBean;
+import com.yt.app.util.RequestUtil;
 import com.yt.app.util.StreamUtil;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Organizations;
@@ -32,7 +34,7 @@ public class OrganizationsServiceImpl extends BaseServiceImpl<Organizations, Lon
 	private DictionaryMapper dictionarymapper;
 
 	@Override
-	public Integer sava(Organizations t) {
+	public Integer post(Organizations t) {
 		t.setStatus(DictionaryResource.ORGANIZATIONS_STATUS_571);
 		Integer i = mapper.post(t);
 		return i;
@@ -40,7 +42,8 @@ public class OrganizationsServiceImpl extends BaseServiceImpl<Organizations, Lon
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public IPage<Organizations> listpage(Map<String, Object> param) {
+	public IPage<Organizations> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
 		int count = 0;
 		if (PageBean.isPaging(param)) {
 			count = mapper.countlist(param);
@@ -64,7 +67,7 @@ public class OrganizationsServiceImpl extends BaseServiceImpl<Organizations, Lon
 	}
 
 	@Override
-	public Organizations getById(Long id) {
+	public Organizations get(Long id) {
 		Organizations o = mapper.get(id);
 		o.setStatusname(dictionarymapper.getByCode(o.getStatus()).getName());
 		o.setOrgtypename(dictionarymapper.getByCode(o.getOrgtype()).getName());

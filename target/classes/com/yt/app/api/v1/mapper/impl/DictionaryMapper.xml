@@ -149,4 +149,19 @@
              </if>
         </where>
  </select>
+  <!-- 默认获取Ids的对象 -->
+ <select id="listByArrayTypeCode" parameterType="java.util.HashMap" resultMap="ResultMap">
+       select
+        <include refid="Base_Column_List" />
+        from dictionary 
+        <where>
+        1=1
+             <if test="array != null and array != ''">
+      		 	and typecode in
+        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           			#{item}
+        			</foreach>
+             </if>
+        </where>
+ </select>
 </mapper>

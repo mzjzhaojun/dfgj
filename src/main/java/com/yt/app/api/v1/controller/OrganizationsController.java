@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yt.app.frame.page.IPage;
-import com.yt.app.util.RequestUtil;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -44,7 +43,7 @@ public class OrganizationsController extends BaseControllerImpl<Organizations, L
 	@ApiOperation(value = "查询")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> get(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
-		Organizations t = service.getById(id);
+		Organizations t = service.get(id);
 		if (t != null)
 			return new ResponseEntity<Object>(t, HttpStatus.OK);
 		else
@@ -55,7 +54,7 @@ public class OrganizationsController extends BaseControllerImpl<Organizations, L
 	@ApiOperation(value = "添加")
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> post(RequestEntity<Organizations> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-		Integer i = service.sava(requestEntity.getBody());
+		Integer i = service.post(requestEntity.getBody());
 		return new ResponseEntity<Object>(i, HttpStatus.OK);
 	}
 
@@ -63,7 +62,7 @@ public class OrganizationsController extends BaseControllerImpl<Organizations, L
 	@ApiOperation(value = "列表分页", response = Organizations.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-		IPage<Organizations> pagebean = service.listpage(RequestUtil.requestEntityToParamMap(requestEntity));
+		IPage<Organizations> pagebean = service.list(requestEntity);
 		return new ResponseEntity<Object>(new OrganizationsResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
 				HttpStatus.OK);
 	}
