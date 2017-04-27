@@ -16,10 +16,12 @@ import com.yt.app.frame.page.IPage;
 public interface OrgbranchesService extends IBaseService<Orgbranches, Long> {
 	/**
 	 * 重写get
+	 * 
 	 * @param id
 	 * @return
 	 */
 	Orgbranches getById(Long id);
+
 	/**
 	 * 重写list
 	 * 

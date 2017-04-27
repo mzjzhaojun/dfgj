@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,26 @@ import com.yt.app.api.v1.service.AssignsaccompaniesService;
 import com.yt.app.api.v1.entity.Assignsaccompanies;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:46
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:46
+ */
 
 @RestController
 @RequestMapping("/rest/v1/assignsaccompanies")
 public class AssignsaccompaniesController extends BaseControllerImpl<Assignsaccompanies, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private AssignsaccompaniesService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private AssignsaccompaniesService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Assignsaccompanies.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<Assignsaccompanies> pagebean = service.list(requestEntity);
-return new ResponseEntity<Object>(new AssignsaccompaniesResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
+		IPage<Assignsaccompanies> pagebean = service.list(requestEntity);
+		return new ResponseEntity<Object>(new AssignsaccompaniesResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
+				HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

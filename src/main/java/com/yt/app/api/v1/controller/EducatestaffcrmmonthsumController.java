@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,26 @@ import com.yt.app.api.v1.service.EducatestaffcrmmonthsumService;
 import com.yt.app.api.v1.entity.Educatestaffcrmmonthsum;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:48
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:48
+ */
 
 @RestController
 @RequestMapping("/rest/v1/educatestaffcrmmonthsum")
 public class EducatestaffcrmmonthsumController extends BaseControllerImpl<Educatestaffcrmmonthsum, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private EducatestaffcrmmonthsumService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private EducatestaffcrmmonthsumService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Educatestaffcrmmonthsum.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<Educatestaffcrmmonthsum> pagebean = service.list(requestEntity);
-return new ResponseEntity<Object>(new EducatestaffcrmmonthsumResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
+		IPage<Educatestaffcrmmonthsum> pagebean = service.list(requestEntity);
+		return new ResponseEntity<Object>(new EducatestaffcrmmonthsumResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
+				HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

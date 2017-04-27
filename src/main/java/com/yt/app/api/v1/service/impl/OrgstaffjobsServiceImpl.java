@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:49
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:49
+ */
 
 @Service
-public class OrgstaffjobsServiceImpl extends BaseServiceImpl<Orgstaffjobs, Long> implements OrgstaffjobsService{
-  @Autowired
-  private OrgstaffjobsMapper mapper;
+public class OrgstaffjobsServiceImpl extends BaseServiceImpl<Orgstaffjobs, Long> implements OrgstaffjobsService {
+	@Autowired
+	private OrgstaffjobsMapper mapper;
 
-@Override
-public Integer post(Orgstaffjobs t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Orgstaffjobs> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Orgstaffjobs t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Orgstaffjobs> list = mapper.list(param);
-	return new PageBean<Orgstaffjobs>(param, list, count);
-}
 
-@Override
-public Orgstaffjobs get(Long id) {
-	Orgstaffjobs t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Orgstaffjobs> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Orgstaffjobs> list = mapper.list(param);
+		return new PageBean<Orgstaffjobs>(param, list, count);
+	}
+
+	@Override
+	public Orgstaffjobs get(Long id) {
+		Orgstaffjobs t = mapper.get(id);
+		return t;
+	}
 }

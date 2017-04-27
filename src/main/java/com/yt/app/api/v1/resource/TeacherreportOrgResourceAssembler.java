@@ -1,29 +1,29 @@
 package com.yt.app.api.v1.resource;
 
-
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import com.yt.app.api.v1.controller.TeacherreportOrgController;
 import com.yt.app.api.v1.entity.TeacherreportOrg;
 
-
-
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:50
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:50
+ */
 
 public class TeacherreportOrgResourceAssembler extends ResourceAssemblerSupport<TeacherreportOrg, TeacherreportOrgResource> {
 	public TeacherreportOrgResourceAssembler() {
-super(TeacherreportOrgController.class, TeacherreportOrgResource.class);
+		super(TeacherreportOrgController.class, TeacherreportOrgResource.class);
 	}
-	@Override	public TeacherreportOrgResource toResource(TeacherreportOrg t) {
-return createResourceWithId(t.getId(), t);
+
+	@Override
+	public TeacherreportOrgResource toResource(TeacherreportOrg t) {
+		return createResourceWithId(t.getId(), t);
 	}
+
 	@Override
 	protected TeacherreportOrgResource instantiateResource(TeacherreportOrg t) {
-return new TeacherreportOrgResource(t);
+		return new TeacherreportOrgResource(t);
 	}
 
 }

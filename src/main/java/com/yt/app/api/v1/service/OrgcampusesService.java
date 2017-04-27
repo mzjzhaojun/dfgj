@@ -16,10 +16,12 @@ import com.yt.app.frame.page.IPage;
 public interface OrgcampusesService extends IBaseService<Orgcampuses, Long> {
 	/**
 	 * 重写get
+	 * 
 	 * @param id
 	 * @return
 	 */
 	Orgcampuses getById(Long id);
+
 	/**
 	 * 重写list
 	 * 

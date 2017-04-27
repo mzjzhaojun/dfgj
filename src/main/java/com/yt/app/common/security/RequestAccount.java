@@ -6,9 +6,8 @@ import org.springframework.security.core.context.SecurityContextImpl;
 
 import com.yt.app.common.resource.CommonResource;
 
-
 public class RequestAccount {
-	
+
 	public static AccountSecurityUser requestGetAccount(HttpServletRequest request) {
 		SecurityContextImpl sc = (SecurityContextImpl) request.getSession().getAttribute(CommonResource.SPRING_SECURITY_CONTEXT);
 		if (sc != null) {

@@ -84,8 +84,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// 禁用自动修改headers
 		http.headers().frameOptions().disable();
 		// api
-//		http.authorizeRequests().antMatchers("/**").permitAll();
-		
+		// http.authorizeRequests().antMatchers("/**").permitAll();
+
 		http.authorizeRequests().antMatchers("/webjars/**").permitAll();
 		http.authorizeRequests().antMatchers("/swagger-resources/**").permitAll();
 		http.authorizeRequests().antMatchers("/v2/**").permitAll();
@@ -94,14 +94,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/app/v1/**").permitAll();
 		http.authorizeRequests().antMatchers("/rest/v1/file/**").permitAll();
 		http.authorizeRequests().antMatchers("/rest/v1/filevoice/**").permitAll();
-		http.authorizeRequests().anyRequest().authenticated().
-		and().
-		exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).
-		and().
-		formLogin().
-		successHandler(authenticationSuccessHandler).
-		and().
-		formLogin().failureHandler(authenticationFailureHandler).and().logout().logoutSuccessUrl("/rest/v1/logout/logout");
+		http.authorizeRequests().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
+				.formLogin().successHandler(authenticationSuccessHandler).and().formLogin().failureHandler(authenticationFailureHandler).and()
+				.logout().logoutSuccessUrl("/rest/v1/logout/logout");
 	}
 
 	@Override

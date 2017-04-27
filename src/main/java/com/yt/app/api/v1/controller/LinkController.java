@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,34 +25,28 @@ import com.yt.app.api.v1.service.LinkService;
 import com.yt.app.api.v1.entity.Link;
 
 /**
-* @author ssh
-* 
-* @version v1
-* @createdate  2016-10-14 10:17:35
-*/
-
+ * @author ssh
+ * 
+ * @version v1
+ * @createdate 2016-10-14 10:17:35
+ */
 
 @RestController
 @RequestMapping("/rest/v1/link")
 public class LinkController extends BaseControllerImpl<Link, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private LinkService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private LinkService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Link.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request,
-			HttpServletResponse response) {
-	    IPage<Link> pagebean = service.list(requestEntity);
-		return new ResponseEntity<Object>(new LinkResourceAssembler().toResources(pagebean.getPageList()),
-				pagebean.getHeaders(), HttpStatus.OK);
+	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
+		IPage<Link> pagebean = service.list(requestEntity);
+		return new ResponseEntity<Object>(new LinkResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
 	}
-	
+
 	/**
 	 * 链接新增
 	 * 
@@ -67,7 +62,7 @@ protected Logger logger = LoggerFactory.getLogger(this.getClass());
 		Integer i = service.add(requestEntity);
 		return new ResponseEntity<Object>(i, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * 链接修改
 	 * 
@@ -79,10 +74,12 @@ protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Override
 	@ApiOperation(value = "更新")
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Object> put(@PathVariable Long id, RequestEntity<Link> requestEntity, HttpServletRequest request, HttpServletResponse response) {
+	public ResponseEntity<Object> put(@PathVariable Long id, RequestEntity<Link> requestEntity, HttpServletRequest request,
+			HttpServletResponse response) {
 		Integer i = service.update(requestEntity);
 		return new ResponseEntity<Object>(i, HttpStatus.OK);
 	}
+
 	/**
 	 * 链接删除
 	 */
@@ -93,6 +90,7 @@ protected Logger logger = LoggerFactory.getLogger(this.getClass());
 		Integer i = service.delete(id);
 		return new ResponseEntity<Object>(i, HttpStatus.OK);
 	}
+
 	/**
 	 * 
 	 * 链接查询
@@ -108,13 +106,3 @@ protected Logger logger = LoggerFactory.getLogger(this.getClass());
 			return new ResponseEntity<Object>(link, HttpStatus.NOT_FOUND);
 	}
 }
-
-
-
-
-
-
-
-
-
-

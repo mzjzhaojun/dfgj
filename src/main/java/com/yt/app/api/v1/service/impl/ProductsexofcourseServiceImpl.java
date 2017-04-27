@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:49
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:49
+ */
 
 @Service
-public class ProductsexofcourseServiceImpl extends BaseServiceImpl<Productsexofcourse, Long> implements ProductsexofcourseService{
-  @Autowired
-  private ProductsexofcourseMapper mapper;
+public class ProductsexofcourseServiceImpl extends BaseServiceImpl<Productsexofcourse, Long> implements ProductsexofcourseService {
+	@Autowired
+	private ProductsexofcourseMapper mapper;
 
-@Override
-public Integer post(Productsexofcourse t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Productsexofcourse> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Productsexofcourse t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Productsexofcourse> list = mapper.list(param);
-	return new PageBean<Productsexofcourse>(param, list, count);
-}
 
-@Override
-public Productsexofcourse get(Long id) {
-	Productsexofcourse t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Productsexofcourse> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Productsexofcourse> list = mapper.list(param);
+		return new PageBean<Productsexofcourse>(param, list, count);
+	}
+
+	@Override
+	public Productsexofcourse get(Long id) {
+		Productsexofcourse t = mapper.get(id);
+		return t;
+	}
 }

@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:49
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:49
+ */
 
 @Service
-public class TeachcampusperfmonthsumServiceImpl extends BaseServiceImpl<Teachcampusperfmonthsum, Long> implements TeachcampusperfmonthsumService{
-  @Autowired
-  private TeachcampusperfmonthsumMapper mapper;
+public class TeachcampusperfmonthsumServiceImpl extends BaseServiceImpl<Teachcampusperfmonthsum, Long> implements TeachcampusperfmonthsumService {
+	@Autowired
+	private TeachcampusperfmonthsumMapper mapper;
 
-@Override
-public Integer post(Teachcampusperfmonthsum t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Teachcampusperfmonthsum> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Teachcampusperfmonthsum t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Teachcampusperfmonthsum> list = mapper.list(param);
-	return new PageBean<Teachcampusperfmonthsum>(param, list, count);
-}
 
-@Override
-public Teachcampusperfmonthsum get(Long id) {
-	Teachcampusperfmonthsum t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Teachcampusperfmonthsum> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Teachcampusperfmonthsum> list = mapper.list(param);
+		return new PageBean<Teachcampusperfmonthsum>(param, list, count);
+	}
+
+	@Override
+	public Teachcampusperfmonthsum get(Long id) {
+		Teachcampusperfmonthsum t = mapper.get(id);
+		return t;
+	}
 }

@@ -19,5 +19,5 @@ public interface DictionaryService extends IBaseService<Dictionary, Long> {
 	 * @param ids
 	 * @return
 	 */
-	List<Dictionary> listtypecodes(long [] ids);
+	List<Dictionary> listtypecodes(long[] ids);
 }

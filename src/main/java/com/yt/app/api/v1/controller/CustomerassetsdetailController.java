@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,26 @@ import com.yt.app.api.v1.service.CustomerassetsdetailService;
 import com.yt.app.api.v1.entity.Customerassetsdetail;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:47
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:47
+ */
 
 @RestController
 @RequestMapping("/rest/v1/customerassetsdetail")
 public class CustomerassetsdetailController extends BaseControllerImpl<Customerassetsdetail, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private CustomerassetsdetailService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private CustomerassetsdetailService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Customerassetsdetail.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<Customerassetsdetail> pagebean = service.list(requestEntity);
-return new ResponseEntity<Object>(new CustomerassetsdetailResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
+		IPage<Customerassetsdetail> pagebean = service.list(requestEntity);
+		return new ResponseEntity<Object>(new CustomerassetsdetailResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
+				HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

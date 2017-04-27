@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,26 @@ import com.yt.app.api.v1.service.DebookordersService;
 import com.yt.app.api.v1.entity.Debookorders;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:48
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:48
+ */
 
 @RestController
 @RequestMapping("/rest/v1/debookorders")
 public class DebookordersController extends BaseControllerImpl<Debookorders, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private DebookordersService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private DebookordersService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Debookorders.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<Debookorders> pagebean = service.list(requestEntity);
-return new ResponseEntity<Object>(new DebookordersResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
+		IPage<Debookorders> pagebean = service.list(requestEntity);
+		return new ResponseEntity<Object>(new DebookordersResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
+				HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

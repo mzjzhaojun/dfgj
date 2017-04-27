@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:47
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:47
+ */
 
 @Service
-public class CustomerteacherrelationsServiceImpl extends BaseServiceImpl<Customerteacherrelations, Long> implements CustomerteacherrelationsService{
-  @Autowired
-  private CustomerteacherrelationsMapper mapper;
+public class CustomerteacherrelationsServiceImpl extends BaseServiceImpl<Customerteacherrelations, Long> implements CustomerteacherrelationsService {
+	@Autowired
+	private CustomerteacherrelationsMapper mapper;
 
-@Override
-public Integer post(Customerteacherrelations t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Customerteacherrelations> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Customerteacherrelations t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Customerteacherrelations> list = mapper.list(param);
-	return new PageBean<Customerteacherrelations>(param, list, count);
-}
 
-@Override
-public Customerteacherrelations get(Long id) {
-	Customerteacherrelations t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Customerteacherrelations> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Customerteacherrelations> list = mapper.list(param);
+		return new PageBean<Customerteacherrelations>(param, list, count);
+	}
+
+	@Override
+	public Customerteacherrelations get(Long id) {
+		Customerteacherrelations t = mapper.get(id);
+		return t;
+	}
 }

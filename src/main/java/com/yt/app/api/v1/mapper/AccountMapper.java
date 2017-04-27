@@ -105,7 +105,7 @@ public interface AccountMapper extends IBaseMapper<Account> {
 	 */
 	@RedisCacheAnnotation(classs = Account.class)
 	public List<Account> listByArrayId(long[] id);
-	
+
 	/**
 	 * 根据账户户名称查
 	 * 

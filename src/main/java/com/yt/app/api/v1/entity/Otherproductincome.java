@@ -3,38 +3,42 @@ package com.yt.app.api.v1.entity;
 import lombok.Getter;
 import lombok.Setter;
 import java.io.Serializable;
+
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:49
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:49
+ */
 @Getter
 @Setter
-public class Otherproductincome implements Serializable{
+public class Otherproductincome implements Serializable {
 
-  private static final long serialVersionUID=1L;
+	private static final long serialVersionUID = 1L;
 
-  Long id;
-  Integer version;
-  java.util.Date statlocaldate;
-  Long customerid;
-  Long campusid;
-  Integer producttype;
-  Object amount;
-  Object duration;
-  Object income;
-  public Otherproductincome(){
-  }
-  public Otherproductincome(Long id,Integer version,java.util.Date statlocaldate,Long customerid,Long campusid,Integer producttype,Object amount,Object duration,Object income){
-      this.id=id;
-      this.version=version;
-      this.statlocaldate=statlocaldate;
-      this.customerid=customerid;
-      this.campusid=campusid;
-      this.producttype=producttype;
-      this.amount=amount;
-      this.duration=duration;
-      this.income=income;
-  }
+	Long id;
+	Integer version;
+	java.util.Date statlocaldate;
+	Long customerid;
+	Long campusid;
+	Integer producttype;
+	Object amount;
+	Object duration;
+	Object income;
+
+	public Otherproductincome() {
+	}
+
+	public Otherproductincome(Long id, Integer version, java.util.Date statlocaldate, Long customerid, Long campusid, Integer producttype,
+			Object amount, Object duration, Object income) {
+		this.id = id;
+		this.version = version;
+		this.statlocaldate = statlocaldate;
+		this.customerid = customerid;
+		this.campusid = campusid;
+		this.producttype = producttype;
+		this.amount = amount;
+		this.duration = duration;
+		this.income = income;
+	}
 }

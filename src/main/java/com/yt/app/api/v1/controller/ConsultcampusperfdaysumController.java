@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,26 @@ import com.yt.app.api.v1.service.ConsultcampusperfdaysumService;
 import com.yt.app.api.v1.entity.Consultcampusperfdaysum;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:47
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:47
+ */
 
 @RestController
 @RequestMapping("/rest/v1/consultcampusperfdaysum")
 public class ConsultcampusperfdaysumController extends BaseControllerImpl<Consultcampusperfdaysum, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private ConsultcampusperfdaysumService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private ConsultcampusperfdaysumService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Consultcampusperfdaysum.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<Consultcampusperfdaysum> pagebean = service.list(requestEntity);
-return new ResponseEntity<Object>(new ConsultcampusperfdaysumResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
+		IPage<Consultcampusperfdaysum> pagebean = service.list(requestEntity);
+		return new ResponseEntity<Object>(new ConsultcampusperfdaysumResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
+				HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

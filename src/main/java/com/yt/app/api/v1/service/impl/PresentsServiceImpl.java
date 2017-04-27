@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:49
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:49
+ */
 
 @Service
-public class PresentsServiceImpl extends BaseServiceImpl<Presents, Long> implements PresentsService{
-  @Autowired
-  private PresentsMapper mapper;
+public class PresentsServiceImpl extends BaseServiceImpl<Presents, Long> implements PresentsService {
+	@Autowired
+	private PresentsMapper mapper;
 
-@Override
-public Integer post(Presents t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Presents> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Presents t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Presents> list = mapper.list(param);
-	return new PageBean<Presents>(param, list, count);
-}
 
-@Override
-public Presents get(Long id) {
-	Presents t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Presents> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Presents> list = mapper.list(param);
+		return new PageBean<Presents>(param, list, count);
+	}
+
+	@Override
+	public Presents get(Long id) {
+		Presents t = mapper.get(id);
+		return t;
+	}
 }

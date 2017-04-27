@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,25 @@ import com.yt.app.api.v1.service.RoleMenuService;
 import com.yt.app.api.v1.entity.RoleMenu;
 
 /**
-* @author huanghao
-* 
-* @version v1
-* @createdate  2016-10-14 10:16:02
-*/
-
+ * @author huanghao
+ * 
+ * @version v1
+ * @createdate 2016-10-14 10:16:02
+ */
 
 @RestController
 @RequestMapping("/rest/v1/rolemenu")
 public class RoleMenuController extends BaseControllerImpl<RoleMenu, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private RoleMenuService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private RoleMenuService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = RoleMenu.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<RoleMenu> pagebean = service.list(requestEntity);
+		IPage<RoleMenu> pagebean = service.list(requestEntity);
 		return new ResponseEntity<Object>(new RoleMenuResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

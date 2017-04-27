@@ -104,7 +104,7 @@ public interface DictionaryMapper extends IBaseMapper<Dictionary> {
 	 */
 	@RedisCacheAnnotation(classs = Dictionary.class)
 	public List<Dictionary> listByArrayId(long[] id);
-	
+
 	/**
 	 * 获取满足查询参数条件的数据
 	 * 
@@ -124,8 +124,7 @@ public interface DictionaryMapper extends IBaseMapper<Dictionary> {
 	 */
 	@RedisCacheAnnotation(classs = Dictionary.class)
 	public List<Dictionary> getByTypeCode(long id);
-	
-	
+
 	/**
 	 * 获取满足查询参数条件的数据
 	 * 

@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:46
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:46
+ */
 
 @Service
-public class CampussalesweeklystatServiceImpl extends BaseServiceImpl<Campussalesweeklystat, Long> implements CampussalesweeklystatService{
-  @Autowired
-  private CampussalesweeklystatMapper mapper;
+public class CampussalesweeklystatServiceImpl extends BaseServiceImpl<Campussalesweeklystat, Long> implements CampussalesweeklystatService {
+	@Autowired
+	private CampussalesweeklystatMapper mapper;
 
-@Override
-public Integer post(Campussalesweeklystat t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Campussalesweeklystat> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Campussalesweeklystat t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Campussalesweeklystat> list = mapper.list(param);
-	return new PageBean<Campussalesweeklystat>(param, list, count);
-}
 
-@Override
-public Campussalesweeklystat get(Long id) {
-	Campussalesweeklystat t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Campussalesweeklystat> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Campussalesweeklystat> list = mapper.list(param);
+		return new PageBean<Campussalesweeklystat>(param, list, count);
+	}
+
+	@Override
+	public Campussalesweeklystat get(Long id) {
+		Campussalesweeklystat t = mapper.get(id);
+		return t;
+	}
 }

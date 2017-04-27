@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,26 @@ import com.yt.app.api.v1.service.TeachgroupperfmonthsumService;
 import com.yt.app.api.v1.entity.Teachgroupperfmonthsum;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:50
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:50
+ */
 
 @RestController
 @RequestMapping("/rest/v1/teachgroupperfmonthsum")
 public class TeachgroupperfmonthsumController extends BaseControllerImpl<Teachgroupperfmonthsum, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private TeachgroupperfmonthsumService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private TeachgroupperfmonthsumService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Teachgroupperfmonthsum.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<Teachgroupperfmonthsum> pagebean = service.list(requestEntity);
-return new ResponseEntity<Object>(new TeachgroupperfmonthsumResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
+		IPage<Teachgroupperfmonthsum> pagebean = service.list(requestEntity);
+		return new ResponseEntity<Object>(new TeachgroupperfmonthsumResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
+				HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

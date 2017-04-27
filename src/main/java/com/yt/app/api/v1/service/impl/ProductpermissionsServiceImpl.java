@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:49
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:49
+ */
 
 @Service
-public class ProductpermissionsServiceImpl extends BaseServiceImpl<Productpermissions, Long> implements ProductpermissionsService{
-  @Autowired
-  private ProductpermissionsMapper mapper;
+public class ProductpermissionsServiceImpl extends BaseServiceImpl<Productpermissions, Long> implements ProductpermissionsService {
+	@Autowired
+	private ProductpermissionsMapper mapper;
 
-@Override
-public Integer post(Productpermissions t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Productpermissions> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Productpermissions t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Productpermissions> list = mapper.list(param);
-	return new PageBean<Productpermissions>(param, list, count);
-}
 
-@Override
-public Productpermissions get(Long id) {
-	Productpermissions t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Productpermissions> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Productpermissions> list = mapper.list(param);
+		return new PageBean<Productpermissions>(param, list, count);
+	}
+
+	@Override
+	public Productpermissions get(Long id) {
+		Productpermissions t = mapper.get(id);
+		return t;
+	}
 }

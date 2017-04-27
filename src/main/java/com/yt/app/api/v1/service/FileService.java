@@ -30,16 +30,18 @@ public interface FileService extends IBaseService<File, Long> {
 	 * @return
 	 */
 	File addFile(MultipartFile file, String url) throws IOException;
-	
+
 	/**
 	 * 删除
+	 * 
 	 * @param id
 	 * @return
 	 */
 	Integer remove(long id);
-	
+
 	/**
 	 * 根据数组id删除
+	 * 
 	 * @param list
 	 * @return
 	 */

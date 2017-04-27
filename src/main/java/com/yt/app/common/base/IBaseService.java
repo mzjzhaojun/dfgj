@@ -111,7 +111,7 @@ public interface IBaseService<T, ID extends Serializable> {
 	 */
 	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	public List<Map<String, Object>> map();
-	
+
 	/**
 	 * 获取满足查询参数条件的数据
 	 * 

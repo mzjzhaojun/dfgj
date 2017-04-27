@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,32 +27,28 @@ import com.yt.app.api.v1.service.RegionService;
 import com.yt.app.api.v1.entity.Region;
 
 /**
-* @author huanghao
-* 
-* @version v1
-* @createdate  2016-11-04 15:40:04
-*/
-
+ * @author huanghao
+ * 
+ * @version v1
+ * @createdate 2016-11-04 15:40:04
+ */
 
 @RestController
 @RequestMapping("/rest/v1/region")
 public class RegionController extends BaseControllerImpl<Region, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private RegionService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private RegionService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Region.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<Region> pagebean = service.list(requestEntity);
+		IPage<Region> pagebean = service.list(requestEntity);
 		return new ResponseEntity<Object>(new RegionResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
 	}
-	
+
 	/**
 	 * 查询等级
 	 * 
@@ -78,7 +75,7 @@ protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@ApiOperation(value = "省市县查询", response = Region.class)
 	@RequestMapping(value = "/listAll", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> listAll(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-		
+
 		List<Region> pagebean = service.getlistAll();
 		return new ResponseEntity<Object>(pagebean, HttpStatus.OK);
 	}
@@ -94,14 +91,14 @@ protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@ApiOperation(value = "根据parentid查询", response = Region.class)
 	@RequestMapping(value = "/getbyparentid/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> getbyparentid(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) {
-			
+
 		List<Region> t = service.getbyparentid(id);
 		if (t != null)
 			return new ResponseEntity<Object>(t, HttpStatus.OK);
 		else
 			return new ResponseEntity<Object>(t, HttpStatus.NOT_FOUND);
 	}
-	
+
 	/**
 	 * 省市县查询
 	 * 
@@ -113,7 +110,7 @@ protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@ApiOperation(value = "省市县查询分类", response = Region.class)
 	@RequestMapping(value = "/listallstyle", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> listAllstyle(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-		
+
 		List<Region> pagebean = service.getlistAllStyle();
 		return new ResponseEntity<Object>(pagebean, HttpStatus.OK);
 	}
@@ -126,15 +123,4 @@ protected Logger logger = LoggerFactory.getLogger(this.getClass());
 		return new ResponseEntity<Object>(i, HttpStatus.OK);
 	}
 
-	
 }
-
-
-
-
-
-
-
-
-
-

@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,26 @@ import com.yt.app.api.v1.service.UserOperationlogService;
 import com.yt.app.api.v1.entity.UserOperationlog;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:50
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:50
+ */
 
 @RestController
 @RequestMapping("/rest/v1/useroperationlog")
 public class UserOperationlogController extends BaseControllerImpl<UserOperationlog, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private UserOperationlogService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private UserOperationlogService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = UserOperationlog.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<UserOperationlog> pagebean = service.list(requestEntity);
-return new ResponseEntity<Object>(new UserOperationlogResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
+		IPage<UserOperationlog> pagebean = service.list(requestEntity);
+		return new ResponseEntity<Object>(new UserOperationlogResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
+				HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

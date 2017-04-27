@@ -8,15 +8,15 @@ import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.api.v1.entity.MenuLinks;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2016-10-14 10:16:02
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2016-10-14 10:16:02
+ */
 
 @Service
-public class MenuLinksServiceImpl extends BaseServiceImpl<MenuLinks, Long> implements MenuLinksService{
-  @Autowired
-  private MenuLinksMapper mapper;
+public class MenuLinksServiceImpl extends BaseServiceImpl<MenuLinks, Long> implements MenuLinksService {
+	@Autowired
+	private MenuLinksMapper mapper;
 
 }

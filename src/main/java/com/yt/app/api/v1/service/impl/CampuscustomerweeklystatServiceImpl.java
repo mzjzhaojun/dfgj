@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:46
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:46
+ */
 
 @Service
-public class CampuscustomerweeklystatServiceImpl extends BaseServiceImpl<Campuscustomerweeklystat, Long> implements CampuscustomerweeklystatService{
-  @Autowired
-  private CampuscustomerweeklystatMapper mapper;
+public class CampuscustomerweeklystatServiceImpl extends BaseServiceImpl<Campuscustomerweeklystat, Long> implements CampuscustomerweeklystatService {
+	@Autowired
+	private CampuscustomerweeklystatMapper mapper;
 
-@Override
-public Integer post(Campuscustomerweeklystat t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Campuscustomerweeklystat> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Campuscustomerweeklystat t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Campuscustomerweeklystat> list = mapper.list(param);
-	return new PageBean<Campuscustomerweeklystat>(param, list, count);
-}
 
-@Override
-public Campuscustomerweeklystat get(Long id) {
-	Campuscustomerweeklystat t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Campuscustomerweeklystat> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Campuscustomerweeklystat> list = mapper.list(param);
+		return new PageBean<Campuscustomerweeklystat>(param, list, count);
+	}
+
+	@Override
+	public Campuscustomerweeklystat get(Long id) {
+		Campuscustomerweeklystat t = mapper.get(id);
+		return t;
+	}
 }

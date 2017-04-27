@@ -10,7 +10,6 @@ import com.yt.app.api.v1.entity.Account;
 import lombok.Getter;
 import lombok.Setter;
 
-
 /**
  * 封装登陆用户
  * 

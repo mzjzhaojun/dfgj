@@ -22,7 +22,7 @@ public interface FileMapper extends IBaseMapper<File> {
 	 *            要持久化的对象
 	 * @return 执行成功的记录个数
 	 */
-	@RedisCacheEvictAnnotation(classs = { File.class})
+	@RedisCacheEvictAnnotation(classs = { File.class })
 	public Integer post(Object t);
 
 	/**
@@ -32,7 +32,7 @@ public interface FileMapper extends IBaseMapper<File> {
 	 *            要持久化的对象
 	 * @return 执行成功的记录个数
 	 */
-	@RedisCacheEvictAnnotation(classs = { File.class})
+	@RedisCacheEvictAnnotation(classs = { File.class })
 	public Integer put(Object t);
 
 	/**
@@ -52,7 +52,7 @@ public interface FileMapper extends IBaseMapper<File> {
 	 *            指定的唯一标识符数组
 	 * @return 删除的对象数量
 	 */
-	@RedisCacheEvictAnnotation(classs = { File.class})
+	@RedisCacheEvictAnnotation(classs = { File.class })
 	public Integer delete(Long id);
 
 	/**

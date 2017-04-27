@@ -132,11 +132,13 @@ public interface MenuMapper extends IBaseMapper<Menu> {
 	 */
 	@RedisCacheAnnotation(classs = Menu.class)
 	public List<Menu> sysmenu(Map<String, Object> param);
+
 	/**
 	 * 便捷修改菜单顺序
+	 * 
 	 * @param param
 	 * @return
 	 */
-	@RedisCacheEvictAnnotation(classs = { Menu.class})
+	@RedisCacheEvictAnnotation(classs = { Menu.class })
 	Integer updatestorn(Map<String, Object> param);
 }

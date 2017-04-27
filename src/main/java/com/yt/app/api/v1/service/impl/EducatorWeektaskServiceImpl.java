@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:48
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:48
+ */
 
 @Service
-public class EducatorWeektaskServiceImpl extends BaseServiceImpl<EducatorWeektask, Long> implements EducatorWeektaskService{
-  @Autowired
-  private EducatorWeektaskMapper mapper;
+public class EducatorWeektaskServiceImpl extends BaseServiceImpl<EducatorWeektask, Long> implements EducatorWeektaskService {
+	@Autowired
+	private EducatorWeektaskMapper mapper;
 
-@Override
-public Integer post(EducatorWeektask t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<EducatorWeektask> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(EducatorWeektask t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<EducatorWeektask> list = mapper.list(param);
-	return new PageBean<EducatorWeektask>(param, list, count);
-}
 
-@Override
-public EducatorWeektask get(Long id) {
-	EducatorWeektask t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<EducatorWeektask> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<EducatorWeektask> list = mapper.list(param);
+		return new PageBean<EducatorWeektask>(param, list, count);
+	}
+
+	@Override
+	public EducatorWeektask get(Long id) {
+		EducatorWeektask t = mapper.get(id);
+		return t;
+	}
 }

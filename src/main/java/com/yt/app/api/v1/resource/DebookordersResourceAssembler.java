@@ -1,29 +1,29 @@
 package com.yt.app.api.v1.resource;
 
-
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import com.yt.app.api.v1.controller.DebookordersController;
 import com.yt.app.api.v1.entity.Debookorders;
 
-
-
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:48
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:48
+ */
 
 public class DebookordersResourceAssembler extends ResourceAssemblerSupport<Debookorders, DebookordersResource> {
 	public DebookordersResourceAssembler() {
-super(DebookordersController.class, DebookordersResource.class);
+		super(DebookordersController.class, DebookordersResource.class);
 	}
-	@Override	public DebookordersResource toResource(Debookorders t) {
-return createResourceWithId(t.getId(), t);
+
+	@Override
+	public DebookordersResource toResource(Debookorders t) {
+		return createResourceWithId(t.getId(), t);
 	}
+
 	@Override
 	protected DebookordersResource instantiateResource(Debookorders t) {
-return new DebookordersResource(t);
+		return new DebookordersResource(t);
 	}
 
 }

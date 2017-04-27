@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:49
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:49
+ */
 
 @Service
-public class PerfindexreportServiceImpl extends BaseServiceImpl<Perfindexreport, Long> implements PerfindexreportService{
-  @Autowired
-  private PerfindexreportMapper mapper;
+public class PerfindexreportServiceImpl extends BaseServiceImpl<Perfindexreport, Long> implements PerfindexreportService {
+	@Autowired
+	private PerfindexreportMapper mapper;
 
-@Override
-public Integer post(Perfindexreport t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Perfindexreport> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Perfindexreport t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Perfindexreport> list = mapper.list(param);
-	return new PageBean<Perfindexreport>(param, list, count);
-}
 
-@Override
-public Perfindexreport get(Long id) {
-	Perfindexreport t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Perfindexreport> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Perfindexreport> list = mapper.list(param);
+		return new PageBean<Perfindexreport>(param, list, count);
+	}
+
+	@Override
+	public Perfindexreport get(Long id) {
+		Perfindexreport t = mapper.get(id);
+		return t;
+	}
 }

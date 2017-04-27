@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:49
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:49
+ */
 
 @Service
-public class StaffrefundstatServiceImpl extends BaseServiceImpl<Staffrefundstat, Long> implements StaffrefundstatService{
-  @Autowired
-  private StaffrefundstatMapper mapper;
+public class StaffrefundstatServiceImpl extends BaseServiceImpl<Staffrefundstat, Long> implements StaffrefundstatService {
+	@Autowired
+	private StaffrefundstatMapper mapper;
 
-@Override
-public Integer post(Staffrefundstat t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Staffrefundstat> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Staffrefundstat t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Staffrefundstat> list = mapper.list(param);
-	return new PageBean<Staffrefundstat>(param, list, count);
-}
 
-@Override
-public Staffrefundstat get(Long id) {
-	Staffrefundstat t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Staffrefundstat> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Staffrefundstat> list = mapper.list(param);
+		return new PageBean<Staffrefundstat>(param, list, count);
+	}
+
+	@Override
+	public Staffrefundstat get(Long id) {
+		Staffrefundstat t = mapper.get(id);
+		return t;
+	}
 }

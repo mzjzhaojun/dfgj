@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:50
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:50
+ */
 
 @Service
-public class TeachgroupperfmonthsumServiceImpl extends BaseServiceImpl<Teachgroupperfmonthsum, Long> implements TeachgroupperfmonthsumService{
-  @Autowired
-  private TeachgroupperfmonthsumMapper mapper;
+public class TeachgroupperfmonthsumServiceImpl extends BaseServiceImpl<Teachgroupperfmonthsum, Long> implements TeachgroupperfmonthsumService {
+	@Autowired
+	private TeachgroupperfmonthsumMapper mapper;
 
-@Override
-public Integer post(Teachgroupperfmonthsum t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Teachgroupperfmonthsum> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Teachgroupperfmonthsum t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Teachgroupperfmonthsum> list = mapper.list(param);
-	return new PageBean<Teachgroupperfmonthsum>(param, list, count);
-}
 
-@Override
-public Teachgroupperfmonthsum get(Long id) {
-	Teachgroupperfmonthsum t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Teachgroupperfmonthsum> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Teachgroupperfmonthsum> list = mapper.list(param);
+		return new PageBean<Teachgroupperfmonthsum>(param, list, count);
+	}
+
+	@Override
+	public Teachgroupperfmonthsum get(Long id) {
+		Teachgroupperfmonthsum t = mapper.get(id);
+		return t;
+	}
 }

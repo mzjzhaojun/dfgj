@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:46
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:46
+ */
 
 @Service
-public class AccountsServiceImpl extends BaseServiceImpl<Accounts, Long> implements AccountsService{
-  @Autowired
-  private AccountsMapper mapper;
+public class AccountsServiceImpl extends BaseServiceImpl<Accounts, Long> implements AccountsService {
+	@Autowired
+	private AccountsMapper mapper;
 
-@Override
-public Integer post(Accounts t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Accounts> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Accounts t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Accounts> list = mapper.list(param);
-	return new PageBean<Accounts>(param, list, count);
-}
 
-@Override
-public Accounts get(Long id) {
-	Accounts t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Accounts> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Accounts> list = mapper.list(param);
+		return new PageBean<Accounts>(param, list, count);
+	}
+
+	@Override
+	public Accounts get(Long id) {
+		Accounts t = mapper.get(id);
+		return t;
+	}
 }

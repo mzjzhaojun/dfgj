@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:50
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:50
+ */
 
 @Service
-public class TeacherDaytaskServiceImpl extends BaseServiceImpl<TeacherDaytask, Long> implements TeacherDaytaskService{
-  @Autowired
-  private TeacherDaytaskMapper mapper;
+public class TeacherDaytaskServiceImpl extends BaseServiceImpl<TeacherDaytask, Long> implements TeacherDaytaskService {
+	@Autowired
+	private TeacherDaytaskMapper mapper;
 
-@Override
-public Integer post(TeacherDaytask t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<TeacherDaytask> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(TeacherDaytask t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<TeacherDaytask> list = mapper.list(param);
-	return new PageBean<TeacherDaytask>(param, list, count);
-}
 
-@Override
-public TeacherDaytask get(Long id) {
-	TeacherDaytask t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<TeacherDaytask> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<TeacherDaytask> list = mapper.list(param);
+		return new PageBean<TeacherDaytask>(param, list, count);
+	}
+
+	@Override
+	public TeacherDaytask get(Long id) {
+		TeacherDaytask t = mapper.get(id);
+		return t;
+	}
 }

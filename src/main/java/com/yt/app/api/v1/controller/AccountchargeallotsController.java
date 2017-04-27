@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,26 @@ import com.yt.app.api.v1.service.AccountchargeallotsService;
 import com.yt.app.api.v1.entity.Accountchargeallots;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:45
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:45
+ */
 
 @RestController
 @RequestMapping("/rest/v1/accountchargeallots")
 public class AccountchargeallotsController extends BaseControllerImpl<Accountchargeallots, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private AccountchargeallotsService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private AccountchargeallotsService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Accountchargeallots.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<Accountchargeallots> pagebean = service.list(requestEntity);
-return new ResponseEntity<Object>(new AccountchargeallotsResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
+		IPage<Accountchargeallots> pagebean = service.list(requestEntity);
+		return new ResponseEntity<Object>(new AccountchargeallotsResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
+				HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:46
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:46
+ */
 
 @Service
-public class CampusincomestatServiceImpl extends BaseServiceImpl<Campusincomestat, Long> implements CampusincomestatService{
-  @Autowired
-  private CampusincomestatMapper mapper;
+public class CampusincomestatServiceImpl extends BaseServiceImpl<Campusincomestat, Long> implements CampusincomestatService {
+	@Autowired
+	private CampusincomestatMapper mapper;
 
-@Override
-public Integer post(Campusincomestat t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Campusincomestat> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Campusincomestat t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Campusincomestat> list = mapper.list(param);
-	return new PageBean<Campusincomestat>(param, list, count);
-}
 
-@Override
-public Campusincomestat get(Long id) {
-	Campusincomestat t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Campusincomestat> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Campusincomestat> list = mapper.list(param);
+		return new PageBean<Campusincomestat>(param, list, count);
+	}
+
+	@Override
+	public Campusincomestat get(Long id) {
+		Campusincomestat t = mapper.get(id);
+		return t;
+	}
 }

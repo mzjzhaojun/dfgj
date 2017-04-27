@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:47
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:47
+ */
 
 @Service
-public class CustomerexpenserelationsServiceImpl extends BaseServiceImpl<Customerexpenserelations, Long> implements CustomerexpenserelationsService{
-  @Autowired
-  private CustomerexpenserelationsMapper mapper;
+public class CustomerexpenserelationsServiceImpl extends BaseServiceImpl<Customerexpenserelations, Long> implements CustomerexpenserelationsService {
+	@Autowired
+	private CustomerexpenserelationsMapper mapper;
 
-@Override
-public Integer post(Customerexpenserelations t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Customerexpenserelations> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Customerexpenserelations t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Customerexpenserelations> list = mapper.list(param);
-	return new PageBean<Customerexpenserelations>(param, list, count);
-}
 
-@Override
-public Customerexpenserelations get(Long id) {
-	Customerexpenserelations t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Customerexpenserelations> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Customerexpenserelations> list = mapper.list(param);
+		return new PageBean<Customerexpenserelations>(param, list, count);
+	}
+
+	@Override
+	public Customerexpenserelations get(Long id) {
+		Customerexpenserelations t = mapper.get(id);
+		return t;
+	}
 }

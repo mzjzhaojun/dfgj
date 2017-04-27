@@ -1,29 +1,29 @@
 package com.yt.app.api.v1.resource;
 
-
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import com.yt.app.api.v1.controller.PsTeacherteachingsController;
 import com.yt.app.api.v1.entity.PsTeacherteachings;
 
-
-
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:49
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:49
+ */
 
 public class PsTeacherteachingsResourceAssembler extends ResourceAssemblerSupport<PsTeacherteachings, PsTeacherteachingsResource> {
 	public PsTeacherteachingsResourceAssembler() {
-super(PsTeacherteachingsController.class, PsTeacherteachingsResource.class);
+		super(PsTeacherteachingsController.class, PsTeacherteachingsResource.class);
 	}
-	@Override	public PsTeacherteachingsResource toResource(PsTeacherteachings t) {
-return createResourceWithId(t.getId(), t);
+
+	@Override
+	public PsTeacherteachingsResource toResource(PsTeacherteachings t) {
+		return createResourceWithId(t.getId(), t);
 	}
+
 	@Override
 	protected PsTeacherteachingsResource instantiateResource(PsTeacherteachings t) {
-return new PsTeacherteachingsResource(t);
+		return new PsTeacherteachingsResource(t);
 	}
 
 }

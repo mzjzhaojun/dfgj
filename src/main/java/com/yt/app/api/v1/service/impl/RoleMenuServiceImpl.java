@@ -8,15 +8,15 @@ import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.api.v1.entity.RoleMenu;
 
 /**
-* @author huanghao 
-* 
-* @version v1
-* @createdate  2016-10-14 10:16:02
-*/
+ * @author huanghao
+ * 
+ * @version v1
+ * @createdate 2016-10-14 10:16:02
+ */
 
 @Service
-public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu, Long> implements RoleMenuService{
-  @Autowired
-  private RoleMenuMapper mapper;
+public class RoleMenuServiceImpl extends BaseServiceImpl<RoleMenu, Long> implements RoleMenuService {
+	@Autowired
+	private RoleMenuMapper mapper;
 
 }

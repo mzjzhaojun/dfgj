@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:48
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:48
+ */
 
 @Service
-public class DebookorderitemsServiceImpl extends BaseServiceImpl<Debookorderitems, Long> implements DebookorderitemsService{
-  @Autowired
-  private DebookorderitemsMapper mapper;
+public class DebookorderitemsServiceImpl extends BaseServiceImpl<Debookorderitems, Long> implements DebookorderitemsService {
+	@Autowired
+	private DebookorderitemsMapper mapper;
 
-@Override
-public Integer post(Debookorderitems t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Debookorderitems> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Debookorderitems t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Debookorderitems> list = mapper.list(param);
-	return new PageBean<Debookorderitems>(param, list, count);
-}
 
-@Override
-public Debookorderitems get(Long id) {
-	Debookorderitems t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Debookorderitems> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Debookorderitems> list = mapper.list(param);
+		return new PageBean<Debookorderitems>(param, list, count);
+	}
+
+	@Override
+	public Debookorderitems get(Long id) {
+		Debookorderitems t = mapper.get(id);
+		return t;
+	}
 }

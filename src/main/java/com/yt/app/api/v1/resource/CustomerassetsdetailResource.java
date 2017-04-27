@@ -1,32 +1,30 @@
 package com.yt.app.api.v1.resource;
 
-
 import org.springframework.hateoas.ResourceSupport;
 import com.yt.app.api.v1.controller.CustomerassetsdetailController;
 import com.yt.app.api.v1.entity.Customerassetsdetail;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-
-
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:47
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:47
+ */
 
 public class CustomerassetsdetailResource extends ResourceSupport {
 	private final Customerassetsdetail t;
-	public CustomerassetsdetailResource(Customerassetsdetail entity) {
-this.t = entity;
-this.add(linkTo(CustomerassetsdetailController.class).withRel("post"));
-this.add(linkTo(methodOn(CustomerassetsdetailController.class).list(null, null, null)).withRel("list"));
 
-}
-	public Customerassetsdetail getCustomerassetsdetail() {
-return t;
+	public CustomerassetsdetailResource(Customerassetsdetail entity) {
+		this.t = entity;
+		this.add(linkTo(CustomerassetsdetailController.class).withRel("post"));
+		this.add(linkTo(methodOn(CustomerassetsdetailController.class).list(null, null, null)).withRel("list"));
+
 	}
 
+	public Customerassetsdetail getCustomerassetsdetail() {
+		return t;
+	}
 
 }

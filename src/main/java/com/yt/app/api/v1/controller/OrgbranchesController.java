@@ -39,7 +39,7 @@ public class OrgbranchesController extends BaseControllerImpl<Orgbranches, Long>
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private OrgbranchesService service;
-	
+
 	@Override
 	@ApiOperation(value = "查询")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -56,6 +56,7 @@ public class OrgbranchesController extends BaseControllerImpl<Orgbranches, Long>
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
 		IPage<Orgbranches> pagebean = service.listpage(RequestUtil.requestEntityToParamMap(requestEntity));
-		return new ResponseEntity<Object>(new OrgbranchesResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),HttpStatus.OK);
+		return new ResponseEntity<Object>(new OrgbranchesResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
+				HttpStatus.OK);
 	}
 }

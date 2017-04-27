@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,25 @@ import com.yt.app.api.v1.service.MenuLinksService;
 import com.yt.app.api.v1.entity.MenuLinks;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2016-10-14 10:16:02
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2016-10-14 10:16:02
+ */
 
 @RestController
 @RequestMapping("/rest/v1/menulinks")
 public class MenuLinksController extends BaseControllerImpl<MenuLinks, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private MenuLinksService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private MenuLinksService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = MenuLinks.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<MenuLinks> pagebean = service.list(requestEntity);
+		IPage<MenuLinks> pagebean = service.list(requestEntity);
 		return new ResponseEntity<Object>(new MenuLinksResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

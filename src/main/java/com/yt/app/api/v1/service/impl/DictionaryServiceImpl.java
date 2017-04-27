@@ -23,7 +23,7 @@ public class DictionaryServiceImpl extends BaseServiceImpl<Dictionary, Long> imp
 	private DictionaryMapper mapper;
 
 	@Override
-	public List<Dictionary> listtypecodes(long [] ids) {
+	public List<Dictionary> listtypecodes(long[] ids) {
 		return mapper.listByArrayTypeCode(ids);
 	}
 

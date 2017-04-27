@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:48
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:48
+ */
 
 @Service
-public class EducatestaffperfmonthsumServiceImpl extends BaseServiceImpl<Educatestaffperfmonthsum, Long> implements EducatestaffperfmonthsumService{
-  @Autowired
-  private EducatestaffperfmonthsumMapper mapper;
+public class EducatestaffperfmonthsumServiceImpl extends BaseServiceImpl<Educatestaffperfmonthsum, Long> implements EducatestaffperfmonthsumService {
+	@Autowired
+	private EducatestaffperfmonthsumMapper mapper;
 
-@Override
-public Integer post(Educatestaffperfmonthsum t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Educatestaffperfmonthsum> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Educatestaffperfmonthsum t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Educatestaffperfmonthsum> list = mapper.list(param);
-	return new PageBean<Educatestaffperfmonthsum>(param, list, count);
-}
 
-@Override
-public Educatestaffperfmonthsum get(Long id) {
-	Educatestaffperfmonthsum t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Educatestaffperfmonthsum> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Educatestaffperfmonthsum> list = mapper.list(param);
+		return new PageBean<Educatestaffperfmonthsum>(param, list, count);
+	}
+
+	@Override
+	public Educatestaffperfmonthsum get(Long id) {
+		Educatestaffperfmonthsum t = mapper.get(id);
+		return t;
+	}
 }

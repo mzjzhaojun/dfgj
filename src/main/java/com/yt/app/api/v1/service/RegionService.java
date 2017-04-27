@@ -20,6 +20,7 @@ public interface RegionService extends IBaseService<Region, Long> {
 	 * @return
 	 */
 	List<Region> getlist();
+
 	/**
 	 * 省市县查询
 	 * 
@@ -27,6 +28,7 @@ public interface RegionService extends IBaseService<Region, Long> {
 	 * @return
 	 */
 	List<Region> getlistAll();
+
 	/**
 	 * 省市县查询级别分类
 	 * 
@@ -34,17 +36,19 @@ public interface RegionService extends IBaseService<Region, Long> {
 	 * @return
 	 */
 	List<Region> getlistAllStyle();
-	
+
 	/**
 	 * 根据parendid查询
+	 * 
 	 * @author huanghao
 	 * @param parendid
 	 * @return
 	 */
 	List<Region> getbyparentid(long parendid);
-	
+
 	/**
 	 * 添加
+	 * 
 	 * @author huanghao
 	 * @param param
 	 * @return

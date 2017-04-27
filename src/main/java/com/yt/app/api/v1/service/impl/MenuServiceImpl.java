@@ -75,7 +75,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 
 	@Override
 	public List<Menu> getlist() {
-		
+
 		List<Menu> listmeun = mapper.getlist();
 		List<Menu> listlevelmeun = mapper.getlistlevel();
 		/**
@@ -263,7 +263,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	public IPage<Menu> list(Map<String, Object> param) {
 		int count = 0;
-		if (PageBean.isPaging(param)){
+		if (PageBean.isPaging(param)) {
 			count = mapper.countlist(param);
 			if (count == 0)
 				return PageBean.EMPTY_PAGE;

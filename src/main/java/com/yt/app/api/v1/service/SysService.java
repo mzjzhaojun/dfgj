@@ -19,16 +19,19 @@ public interface SysService extends IBaseService<Sys, Long> {
 
 	/**
 	 * 获取等级
+	 * 
 	 * @return
 	 */
 	List<Sys> listSys();
+
 	/**
 	 * 查询父类数据
+	 * 
 	 * @author huanghao
 	 * @return
 	 */
 	List<Sys> listSyslevel();
-	
+
 	/**
 	 * 保存（持久化）对象
 	 * 
@@ -37,24 +40,27 @@ public interface SysService extends IBaseService<Sys, Long> {
 	 * @return 执行成功的记录个数
 	 */
 	public Integer addSys(Sys t);
-	
+
 	/**
 	 * 根据id查询
+	 * 
 	 * @param id
 	 * @return
 	 */
-	Map<String,Object> getid(long id);
-	
-	
+	Map<String, Object> getid(long id);
+
 	/**
 	 * 列表分页
+	 * 
 	 * @author huanghao
 	 * @param param
 	 * @return
 	 */
 	IPage<Sys> getlist(Map<String, Object> param);
+
 	/**
 	 * 查询字典等级
+	 * 
 	 * @author huanghao
 	 * @return
 	 */

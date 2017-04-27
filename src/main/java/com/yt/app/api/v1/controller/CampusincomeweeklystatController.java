@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,26 @@ import com.yt.app.api.v1.service.CampusincomeweeklystatService;
 import com.yt.app.api.v1.entity.Campusincomeweeklystat;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:46
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:46
+ */
 
 @RestController
 @RequestMapping("/rest/v1/campusincomeweeklystat")
 public class CampusincomeweeklystatController extends BaseControllerImpl<Campusincomeweeklystat, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private CampusincomeweeklystatService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private CampusincomeweeklystatService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Campusincomeweeklystat.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<Campusincomeweeklystat> pagebean = service.list(requestEntity);
-return new ResponseEntity<Object>(new CampusincomeweeklystatResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
+		IPage<Campusincomeweeklystat> pagebean = service.list(requestEntity);
+		return new ResponseEntity<Object>(new CampusincomeweeklystatResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
+				HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:47
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:47
+ */
 
 @Service
-public class CountryCodeServiceImpl extends BaseServiceImpl<CountryCode, Long> implements CountryCodeService{
-  @Autowired
-  private CountryCodeMapper mapper;
+public class CountryCodeServiceImpl extends BaseServiceImpl<CountryCode, Long> implements CountryCodeService {
+	@Autowired
+	private CountryCodeMapper mapper;
 
-@Override
-public Integer post(CountryCode t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<CountryCode> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(CountryCode t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<CountryCode> list = mapper.list(param);
-	return new PageBean<CountryCode>(param, list, count);
-}
 
-@Override
-public CountryCode get(Long id) {
-	CountryCode t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<CountryCode> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<CountryCode> list = mapper.list(param);
+		return new PageBean<CountryCode>(param, list, count);
+	}
+
+	@Override
+	public CountryCode get(Long id) {
+		CountryCode t = mapper.get(id);
+		return t;
+	}
 }

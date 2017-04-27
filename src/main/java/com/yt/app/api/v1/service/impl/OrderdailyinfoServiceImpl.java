@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:49
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:49
+ */
 
 @Service
-public class OrderdailyinfoServiceImpl extends BaseServiceImpl<Orderdailyinfo, Long> implements OrderdailyinfoService{
-  @Autowired
-  private OrderdailyinfoMapper mapper;
+public class OrderdailyinfoServiceImpl extends BaseServiceImpl<Orderdailyinfo, Long> implements OrderdailyinfoService {
+	@Autowired
+	private OrderdailyinfoMapper mapper;
 
-@Override
-public Integer post(Orderdailyinfo t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<Orderdailyinfo> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(Orderdailyinfo t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<Orderdailyinfo> list = mapper.list(param);
-	return new PageBean<Orderdailyinfo>(param, list, count);
-}
 
-@Override
-public Orderdailyinfo get(Long id) {
-	Orderdailyinfo t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<Orderdailyinfo> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<Orderdailyinfo> list = mapper.list(param);
+		return new PageBean<Orderdailyinfo>(param, list, count);
+	}
+
+	@Override
+	public Orderdailyinfo get(Long id) {
+		Orderdailyinfo t = mapper.get(id);
+		return t;
+	}
 }

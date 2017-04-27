@@ -129,7 +129,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 						menu.setOpen(true);
 					}
 				}
- 			}
+			}
 			listMenu.add(menu);
 		}
 		map.put("listmeun", listMenu);

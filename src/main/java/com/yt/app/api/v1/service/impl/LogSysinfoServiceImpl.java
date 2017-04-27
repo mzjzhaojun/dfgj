@@ -14,41 +14,41 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* @author zj    default  
-* 
-* @version v1
-* @createdate  2017-04-27 15:10:48
-*/
+ * @author zj default
+ * 
+ * @version v1
+ * @createdate 2017-04-27 15:10:48
+ */
 
 @Service
-public class LogSysinfoServiceImpl extends BaseServiceImpl<LogSysinfo, Long> implements LogSysinfoService{
-  @Autowired
-  private LogSysinfoMapper mapper;
+public class LogSysinfoServiceImpl extends BaseServiceImpl<LogSysinfo, Long> implements LogSysinfoService {
+	@Autowired
+	private LogSysinfoMapper mapper;
 
-@Override
-public Integer post(LogSysinfo t) {
-	Integer i = mapper.post(t);
-	return i;
-}
-
-@SuppressWarnings("unchecked")
-@Override
-public IPage<LogSysinfo> list(RequestEntity<Object> requestEntity) {
-	Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
-	int count = 0;
-	if (PageBean.isPaging(param)) {
-  	count = mapper.countlist(param);
- 	    if (count == 0) {
-			return PageBean.EMPTY_PAGE;
-		}
+	@Override
+	public Integer post(LogSysinfo t) {
+		Integer i = mapper.post(t);
+		return i;
 	}
-	List<LogSysinfo> list = mapper.list(param);
-	return new PageBean<LogSysinfo>(param, list, count);
-}
 
-@Override
-public LogSysinfo get(Long id) {
-	LogSysinfo t = mapper.get(id);
-	return t;
-}
+	@SuppressWarnings("unchecked")
+	@Override
+	public IPage<LogSysinfo> list(RequestEntity<Object> requestEntity) {
+		Map<String, Object> param = RequestUtil.requestEntityToParamMap(requestEntity);
+		int count = 0;
+		if (PageBean.isPaging(param)) {
+			count = mapper.countlist(param);
+			if (count == 0) {
+				return PageBean.EMPTY_PAGE;
+			}
+		}
+		List<LogSysinfo> list = mapper.list(param);
+		return new PageBean<LogSysinfo>(param, list, count);
+	}
+
+	@Override
+	public LogSysinfo get(Long id) {
+		LogSysinfo t = mapper.get(id);
+		return t;
+	}
 }
