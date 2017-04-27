@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.StaffsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,oacode,staffcode,staffname,displayname,mail,mp,wp,extension,address,idtype,idnumber,gender,isfulltime,privateemail,employmentdate,dimissiondate,status,bistatus
+     id,version,oacode,staffcode,staffname,displayname,mail,mp,wp,extension,address,idtype,idnumber,gender,isfulltime,privateemail,employmentdate,dimissiondate,status
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Staffs">
@@ -26,12 +26,11 @@
          <id property="employmentdate" column="employmentdate" />
          <id property="dimissiondate" column="dimissiondate" />
          <id property="status" column="status" />
-         <id property="bistatus" column="bistatus" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Staffs">
-  insert into staffs (id,oacode,staffcode,staffname,displayname,mail,mp,wp,extension,address,idtype,idnumber,gender,isfulltime,privateemail,employmentdate,dimissiondate,status,bistatus)
-         values (#{id},#{oacode},#{staffcode},#{staffname},#{displayname},#{mail},#{mp},#{wp},#{extension},#{address},#{idtype},#{idnumber},#{gender},#{isfulltime},#{privateemail},#{employmentdate},#{dimissiondate},#{status},#{bistatus})
+  insert into staffs (id,oacode,staffcode,staffname,displayname,mail,mp,wp,extension,address,idtype,idnumber,gender,isfulltime,privateemail,employmentdate,dimissiondate,status)
+         values (#{id},#{oacode},#{staffcode},#{staffname},#{displayname},#{mail},#{mp},#{wp},#{extension},#{address},#{idtype},#{idnumber},#{gender},#{isfulltime},#{privateemail},#{employmentdate},#{dimissiondate},#{status})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -94,10 +93,7 @@
                    dimissiondate = #{dimissiondate},
              </if>
              <if test="status != null">
-                   status = #{status},
-             </if>
-             <if test="bistatus != null">
-                   bistatus = #{bistatus}
+                   status = #{status}
              </if>
           </set>
      where id = #{id} and  version = #{version}

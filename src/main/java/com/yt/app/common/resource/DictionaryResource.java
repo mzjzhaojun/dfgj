@@ -139,10 +139,10 @@ public class DictionaryResource implements Serializable {
 	public static final Long PATRIARCH_STATUS_577 = 577L;
 
 	/**
-	 * 组织机构状态
+	 * 状态
 	 */
 	// 正常
-	public static final Long ORGANIZATIONS_STATUS_571 = 1841L;
+	public static final Long STATUS_571 = 1841L;
 	// 停用
-	public static final Long ORGANIZATIONS_STATUS_572 = 1842L;
+	public static final Long STATUS_572 = 1842L;
 }

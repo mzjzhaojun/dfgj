@@ -1,4 +1,5 @@
 package com.yt.app.api.v1.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
@@ -19,39 +20,25 @@ import com.yt.app.api.v1.service.StaffsService;
 import com.yt.app.api.v1.entity.Staffs;
 
 /**
-* @author zj    default  test
-* 
-* @version v1
-* @createdate  2017-04-20 13:48:57
-*/
-
+ * @author zj default test
+ * 
+ * @version v1
+ * @createdate 2017-04-20 13:48:57
+ */
 
 @RestController
 @RequestMapping("/rest/v1/staffs")
 public class StaffsController extends BaseControllerImpl<Staffs, Long> {
 
-
-protected Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Autowired
-  private StaffsService service;
-
-
+	protected Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private StaffsService service;
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Staffs.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
-	    IPage<Staffs> pagebean = service.list(requestEntity);
+		IPage<Staffs> pagebean = service.list(requestEntity);
 		return new ResponseEntity<Object>(new StaffsResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
-
-
-
-

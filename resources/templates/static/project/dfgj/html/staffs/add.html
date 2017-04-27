@@ -36,8 +36,8 @@
 			//保存
 			$scope.onPreserved=function(){
 				var isValid = $("#saveForm").valid();
-					if(isValid){、
-						$scope.formData.employmentdate = $("employmentdate").val();
+				if(isValid){
+					$scope.formData.employmentdate = $("#employmentdate").val();
     				$http({
     					url:parent.getMenuLinksHref("staffspost"),
     					method:'POST',
