@@ -97,7 +97,7 @@
 			});
 		}
 		function initSysMenu(){
-			var sysName,level,sysUrl,sysId,sysChild,remark,className,remark2,sysName2;
+			var sysName,level,sysUrl,sysId,sysChild,remark,className,remark2,sysName2,icon;
 			var html = '<li> <span class="glyphicon glyphicon-arrow-left"></span> </li>';
 			for(var i = 0;i<sys.length;i++){
 				sysName = sys[i].name;
@@ -117,6 +117,7 @@
 							level = sysChild[j].level;
 							sysUrl = sysChild[j].url;
 							sysId = sysChild[j].id;
+							icon = sysChild[j].icon;
 							remark2 = sysChild[j].remark;
 							if(j == 0){
 								className = 'glyphicon glyphicon-cog  data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
@@ -129,7 +130,7 @@
 							}else if(j == 4){
 								className = 'glyphicon glyphicon-home data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
 							}
-							html +='<label order="'+remark+'" order1="'+remark2+'" sysName="'+sysName+'" level="'+level+'" sysId="'+sysId+'" url="'+sysUrl+'"><span class="'+className+'"></span><span level="'+level+'">'+sysName2+'</span></label>';
+							html +='<label order="'+remark+'" order1="'+remark2+'" sysName="'+sysName+'" level="'+level+'" sysId="'+sysId+'" url="'+sysUrl+'"><span class="'+icon+'"></span><span level="'+level+'">'+sysName2+'</span></label>';
 							if(level == 32){
 								$("#two_name").html(sysName);
 							}

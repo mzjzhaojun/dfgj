@@ -27,7 +27,7 @@ public class Sys implements Serializable {
 	String remark;
 	String createtime;
 	String modifytime;
-	Integer level;
+	Long level;
 	Integer version;
 	List<Sys> child;// 用于存放对应的二级系统或菜单
 	List<Menu> menus;// 存放对应的菜单（正常情况下只有二级系统才会拥有值）
@@ -36,7 +36,7 @@ public class Sys implements Serializable {
 	public Sys() {
 	}
 
-	public Sys(Long id, Long parent_id, String name, String url, String linkUrl, String icon, String remark, String createtime, Integer level,
+	public Sys(Long id, Long parent_id, String name, String url, String linkUrl, String icon, String remark, String createtime, Long level,
 			String modifytime, Integer version) {
 		this.id = id;
 		this.parent_id = parent_id;

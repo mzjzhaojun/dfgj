@@ -18,7 +18,7 @@ public class Role implements Serializable {
 
 	Long id;
 	String name;
-	Integer type;
+	Long type;
 	Integer is_manage;
 	Integer version;
 	String menucode;
@@ -28,7 +28,7 @@ public class Role implements Serializable {
 	public Role() {
 	}
 
-	public Role(Long id, String name, Integer type, Integer is_manage, Integer version) {
+	public Role(Long id, String name, Long type, Integer is_manage, Integer version) {
 		this.id = id;
 		this.name = name;
 		this.type = type;

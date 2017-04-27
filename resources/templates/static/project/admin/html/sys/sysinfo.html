@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html ng-app="info">
-  <head>
-    <title>系统管理-详情</title>
-	
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="this is my page">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-     <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/sysmenu.css">
-    
-    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
-    
-    <script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.all-3.5.js"></script>
-    
-    <script src="../../../../resource/js/date/js/eap.core.js"></script>
-	<!-- 表单验证 -->
-	
-	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
-	<!-- 引用控制层插件样式 -->
-	<link rel="stylesheet" href="../../../../resource/css/zyfile/control/css/zyUpload.css" type="text/css">
-	<!-- 引用核心层插件 -->
-	<script type="text/javascript" src="../../../../resource/js/zyfile/core/zyFile.js"></script>
-	<!-- 引用控制层插件 -->
-	<script type="text/javascript" src="../../../../resource/js/zyfile/control/js/zyUpload.js"></script>
-   
-	<script type="text/javascript">
+<head>
+<title>系统管理-详情</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/sysmenu.css">
+
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.all-3.5.js"></script>
+
+<script src="../../../../resource/js/date/js/eap.core.js"></script>
+<!-- 表单验证 -->
+
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<!-- 引用控制层插件样式 -->
+<link rel="stylesheet" href="../../../../resource/css/zyfile/control/css/zyUpload.css" type="text/css">
+<!-- 引用核心层插件 -->
+<script type="text/javascript" src="../../../../resource/js/zyfile/core/zyFile.js"></script>
+<!-- 引用控制层插件 -->
+<script type="text/javascript" src="../../../../resource/js/zyfile/control/js/zyUpload.js"></script>
+
+<script type="text/javascript">
 		
 		var info = angular.module("info", []);
 		info.controller("addController",function($scope, $http) {
@@ -56,7 +56,7 @@
 								}
 							}
 						}
-						var icon = $scope.formData.icon != null ? $scope.formData.icon : '';
+						/* var icon = $scope.formData.icon != null ? $scope.formData.icon : '';
 						$("#demo").zyUpload({
 							width            :   "500px",                 // 宽度
 							height           :   "120px",                 // 宽度
@@ -73,7 +73,7 @@
 								//submitForm(); // 上传完成的回调方法
 								$scope.onPreserved();
 							}
-						},{imgUrl:icon});
+						},{imgUrl:icon}); */
 					}).error(function(data, status, headers, config){
 						//处理响应失败
 						response(status);
@@ -147,67 +147,67 @@
 		});
 		
 	</script>
-		
+
 </head>
-  
-  <body ng-controller="addController">
-  	<form method="post" id="saveForm" action="">
-  		 <!-- 操作按钮操作区 -->
-  		 <div class="col-lg-12 topActionPanel">	      
-	    	<div>
-		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-	    	</div>
-    	</div>
-   		<div class="col-lg-6">
-   		<div class="input-group input-group-sm">
-	            <span class="input-group-addon text-right spanwidth">系&nbsp;&nbsp;统&nbsp;&nbsp;名&nbsp;&nbsp;</span>
-	           	<input type="text" class="form-control required"  value="{{formData.name}}" name="name" ng-model="formData.name" maxlength="50" disabled="disabled">
-	        	
-	        </div>
-	      
+
+<body ng-controller="addController">
+	<form method="post" id="saveForm" action="">
+		<!-- 操作按钮操作区 -->
+		<div class="col-lg-12 topActionPanel">
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+			</div>
+		</div>
+		<div class="col-lg-6">
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">系统连接&nbsp;&nbsp;</span>
-				<input type="text" class="form-control required" value="{{formData.url}}" name="url"  maxlength="50" disabled="disabled">
-	        </div>
-	      <div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">连&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接&nbsp;&nbsp;&nbsp;</span>
-				<input type="text" class="form-control required" value="{{formData.linkUrl}}" name="linkUrl"  maxlength="128" disabled="disabled">
-	        </div>
-	          <div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">系&nbsp;&nbsp;统&nbsp;&nbsp;名&nbsp;&nbsp;</span> <input type="text" class="form-control required"
+					value="{{formData.name}}" name="name" ng-model="formData.name" maxlength="50" disabled="disabled">
+
+			</div>
+
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">系统连接&nbsp;&nbsp;</span> <input type="text" class="form-control required" value="{{formData.url}}"
+					name="url" maxlength="50" disabled="disabled">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">连&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接&nbsp;&nbsp;&nbsp;</span> <input type="text"
+					class="form-control required" value="{{formData.linkUrl}}" name="linkUrl" maxlength="128" disabled="disabled">
+			</div>
+			<!-- <div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片&nbsp;&nbsp;&nbsp;</span>
-				
-					  <div id="demo" class="demo"></div>   
-	    		<input type="hidden" id="icon" class="form-control inputchange"  ng-model="formData.icon"/>
-	        </div>
-	         <!--  创建日期 --> 
-	       <div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">创建日期&nbsp;</span>
-				<input style="width: 100%;height: 30px;" type="text" value="{{formData.createtime}}" class="form-control dates" disabled="disabled">
-			
-	        </div>
-	      <!--  修改日期   
+
+				<div id="demo" class="demo"></div>
+				<input type="hidden" id="icon" class="form-control inputchange" ng-model="formData.icon" />
+			</div> -->
+			<!--  创建日期 -->
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">创建日期&nbsp;</span> <input style="width: 100%; height: 30px;" type="text"
+					value="{{formData.createtime}}" class="form-control dates" disabled="disabled">
+
+			</div>
+			<!--  修改日期   
 	       <div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">修改日期&nbsp;&nbsp;</span>
 			    <input style="width: 100%;height: 30px;" type="text" value="{{formData.modifytime}}" class="form-control dates" disabled="disabled">			
 	        </div> -->
-	     		       
-	        	
-	        <div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">系统等级&nbsp;</span>
-				<select class="form-control" ng-model="formData.level" ng-change="setIsShow(this)" ng-options="sys.code as sys.name for sys in syss" disabled="disabled">
-					
+
+
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">系统等级&nbsp;</span> <select class="form-control" ng-model="formData.level" ng-change="setIsShow(this)"
+					ng-options="sys.code as sys.name for sys in syss" disabled="disabled">
+
 				</select>
-	        </div>
-	        <div class="input-group input-group-sm" id="orhidden">
-				<span class="input-group-addon text-right spanwidth">父&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类&nbsp;&nbsp;&nbsp;</span>
-					<input type="text" class="form-control required" value="{{leveldata.name}}" maxlength="50" disabled="disabled">
-	        </div>
-	       <div class="input-group input-group-sm" >
+			</div>
+			<div class="input-group input-group-sm" id="orhidden">
+				<span class="input-group-addon text-right spanwidth">父&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类&nbsp;&nbsp;&nbsp;</span> <input type="text"
+					class="form-control required" value="{{leveldata.name}}" maxlength="50" disabled="disabled">
+			</div>
+			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth" style="height: 150px;">备&nbsp;&nbsp;&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			
-                <textarea class="txtVal form-control" style="height:150px;" disabled="disabled">{{formData.remark}}</textarea>
-   		  </div>
-   		</div>
-    </form>
-  </body>
+
+				<textarea class="txtVal form-control" style="height: 150px;" disabled="disabled">{{formData.remark}}</textarea>
+			</div>
+		</div>
+	</form>
+</body>
 </html>

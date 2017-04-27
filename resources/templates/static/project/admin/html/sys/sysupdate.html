@@ -59,7 +59,7 @@
 						//响应成功
 					
 						$scope.formData = data.sys;
-						// 初始化插件
+						/* // 初始化插件
 						$("#demo").zyUpload({
 							width            :   "500px",                 // 宽度
 							height           :   "120px",                 // 宽度
@@ -79,7 +79,7 @@
 								var $scope = angular.element(appElement).scope();
 								$scope.onPreserved();
 							}
-						},{imgUrl:$scope.formData.icon,inputId:"icon"});
+						},{imgUrl:$scope.formData.icon,inputId:"icon"}); */
 						
 						$scope.leveldata = data.listsys;
 						if(data.listsys.length == 0){
@@ -189,12 +189,12 @@
 				<span class="input-group-addon text-right spanwidth">连&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接&nbsp;&nbsp;&nbsp;</span>
 				<input type="text" class="form-control required" value="{{formData.linkUrl}}" name="linkUrl" ng-model="formData.linkUrl" maxlength="128">
 	        </div>
-	         <div class="input-group input-group-sm">
+	        <!--  <div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片&nbsp;&nbsp;&nbsp;</span>
 					<div id="demo" class="demo"></div>   
 	    		<input type="hidden" id="icon" class="form-control inputchange"  ng-model="formData.icon"/>
 	    		<span class="input-group-addon verifyprompt">*</span>
-	        </div>
+	        </div> -->
 	         <!--  创建日期 --> 
 	      <!--   <div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">创建日期&nbsp;</span>
