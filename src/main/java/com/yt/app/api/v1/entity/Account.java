@@ -32,7 +32,7 @@ public class Account implements Serializable {
 	String birthday;
 	String name;
 	String card_id;
-	Integer type;
+	Long type;
 	String endtime;
 	String lastlogin_time;
 	String lastlogin_ip;
@@ -50,7 +50,7 @@ public class Account implements Serializable {
 	}
 
 	public Account(Long id, String account, String psw, String position, String phone, String mobile, String mail, Integer state, Integer flag,
-			Integer lockstatus, Integer deletestatus, Integer validstatus, String picurl, String birthday, String name, String card_id, Integer type,
+			Integer lockstatus, Integer deletestatus, Integer validstatus, String picurl, String birthday, String name, String card_id, Long type,
 			String endtime, String lastlogin_time, String lastlogin_ip, String create_time, String create_user, String modify_time, Long staffid,
 			Integer version) {
 		this.id = id;

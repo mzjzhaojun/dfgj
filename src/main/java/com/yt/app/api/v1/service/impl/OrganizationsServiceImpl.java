@@ -35,7 +35,7 @@ public class OrganizationsServiceImpl extends BaseServiceImpl<Organizations, Lon
 
 	@Override
 	public Integer post(Organizations t) {
-		t.setStatus(DictionaryResource.STATUS_571);
+		t.setStatus(DictionaryResource.STATUS_1841);
 		Integer i = mapper.post(t);
 		return i;
 	}

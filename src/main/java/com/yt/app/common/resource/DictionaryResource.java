@@ -76,12 +76,12 @@ public class DictionaryResource implements Serializable {
 	public static final Integer REGION_GRADE_4 = 4; // 县
 	public static final Integer REGION_GRADE_5 = 5; // 街道
 	/**
-	 * 账户类型
+	 * 员工类型
 	 */
-	public static final Long ACCOUNT_TYPE_10 = 10L; // 类型系统
-	public static final Long ACCOUNT_TYPE_1 = 11L; // 商城系统
-	public static final Long ACCOUNT_TYPE_2 = 12L; // 论坛系统
-	public static final Long ACCOUNT_TYPE_3 = 13L; // 物业系统
+	public static final Long ACCOUNT_TYPE_10 = 10L; // 默认账号
+	public static final Long ACCOUNT_TYPE_11 = 11L; // 管理
+	public static final Long ACCOUNT_TYPE_12 = 12L; // 经理
+	public static final Long ACCOUNT_TYPE_13 = 13L; // 董事
 
 	/**
 	 * 系统等级
@@ -142,7 +142,7 @@ public class DictionaryResource implements Serializable {
 	 * 状态
 	 */
 	// 正常
-	public static final Long STATUS_571 = 1841L;
+	public static final Long STATUS_1841 = 1841L;
 	// 停用
-	public static final Long STATUS_572 = 1842L;
+	public static final Long STATUS_1842 = 1842L;
 }

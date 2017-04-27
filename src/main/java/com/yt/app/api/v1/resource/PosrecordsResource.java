@@ -10,7 +10,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * @author zj default
  * 
  * @version v1
- * @createdate 2017-04-27 15:10:49
+ * @createdate 2017-04-27 19:22:21
  */
 
 public class PosrecordsResource extends ResourceSupport {

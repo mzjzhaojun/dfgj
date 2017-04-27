@@ -8,7 +8,7 @@ import com.yt.app.api.v1.entity.Customerfollows;
  * @author zj default
  * 
  * @version v1
- * @createdate 2017-04-27 15:10:47
+ * @createdate 2017-04-27 19:22:19
  */
 
 public class CustomerfollowsResourceAssembler extends ResourceAssemblerSupport<Customerfollows, CustomerfollowsResource> {

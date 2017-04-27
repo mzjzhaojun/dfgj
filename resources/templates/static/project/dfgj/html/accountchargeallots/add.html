@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html ng-app="add">
-<head>
-<title>新增</title>
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="this is my page">
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<!-- 基础样式 -->
-<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
-<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css" />
-<!-- 基础js -->
-<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
-<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../../../../resource/js/response.js"></script>
-<!-- 表单验证 -->
-<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
-<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
-<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
-<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
-<!-- datetime -->
-<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
-<!-- 初始化 -->
-<script type="text/javascript">
+  <head>
+    <title>新增</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <!-- 基础样式 -->
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css"/>
+    <!-- 基础js -->
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+	<!-- 表单验证 -->
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
+	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	<!-- datetime -->
+	<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>	
+	<!-- 初始化 -->
+	<script type="text/javascript">
 var add = angular.module("add", []);
 add.controller("addController",function($scope, $http) {
 	$scope.formData = {};
@@ -73,75 +73,84 @@ response(status);
 })
 	</script>
 </head>
-
-<body ng-controller="addController">
-	<form method="post" id="saveForm" action="">
-		<!-- 操作按钮操作区 -->
-		<div class="col-lg-12 topActionPanel">
-			<div>
-				<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
-			</div>
-			<div>
-				<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">申请ID</span> <select class="form-control required" name="applyid" ng-model="formData.applyid"
-					ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-					<option value=''>请选择申请ID</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">教师ID</span> <select class="form-control required" name="teacherid" ng-model="formData.teacherid"
-					ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-					<option value=''>请选择教师ID</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">教师姓名</span> <input type="text" class="form-control required" placeholder="请输入教师姓名" name="teachername"
-					ng-model="formData.teachername" maxlength="10"> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">教师OA编码</span> <input type="text" class="form-control required" placeholder="请输入教师OA编码"
-					name="teacheroacode" ng-model="formData.teacheroacode" maxlength="36"> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">教师岗位ID</span> <select class="form-control required" name="teacherjobid"
-					ng-model="formData.teacherjobid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-					<option value=''>请选择教师岗位ID</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">教师岗位名称</span> <input type="text" class="form-control required" placeholder="请输入教师岗位名称"
-					name="teacherjobname" ng-model="formData.teacherjobname" maxlength="64"> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">是否全职（1-全职，0-兼职）</span> <input type="text" class="form-control required"
-					placeholder="请输入是否全职（1-全职，0-兼职）" name="isfulltimeteacher" ng-model="formData.isfulltimeteacher" maxlength=""> <span
-					class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">科目</span> <input type="text" class="form-control required" placeholder="请输入科目" name="subject"
-					ng-model="formData.subject" maxlength="36"> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">产品类型（一对一，班组...）</span> <input type="text" class="form-control required"
-					placeholder="请输入产品类型（一对一，班组...）" name="categorytype" ng-model="formData.categorytype" maxlength="32"> <span
-					class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">课时</span> <input type="text" class="form-control required" placeholder="请输入课时" name="allotamount"
-					ng-model="formData.allotamount" maxlength=""> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">金额</span> <input type="text" class="form-control required" placeholder="请输入金额" name="allotmoney"
-					ng-model="formData.allotmoney" maxlength=""> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-		</div>
-	</form>
-</body>
-<script type="text/javascript">
+  
+  <body ng-controller="addController">
+  	<form method="post" id="saveForm" action="">
+   <!-- 操作按钮操作区 -->
+   <div class="col-lg-12 topActionPanel">
+	        <div>
+    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+	    	</div>
+	    	<div>
+    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+	    	</div>
+    </div>
+   <div class="col-lg-6">
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">申请ID</span>
+	    <select class="form-control required" name="applyid" ng-model="formData.applyid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择申请ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">教师ID</span>
+	    <select class="form-control required" name="teacherid" ng-model="formData.teacherid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择教师ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教师姓名</span>
+	           <input type="text" class="form-control required" placeholder="请输入教师姓名" name="teachername" ng-model="formData.teachername" maxlength="10">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教师OA编码</span>
+	           <input type="text" class="form-control required" placeholder="请输入教师OA编码" name="teacheroacode" ng-model="formData.teacheroacode" maxlength="36">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">教师岗位ID</span>
+	    <select class="form-control required" name="teacherjobid" ng-model="formData.teacherjobid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择教师岗位ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">教师岗位名称</span>
+	           <input type="text" class="form-control required" placeholder="请输入教师岗位名称" name="teacherjobname" ng-model="formData.teacherjobname" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">是否全职（1-全职，0-兼职）</span>
+	           <input type="text" class="form-control required" placeholder="请输入是否全职（1-全职，0-兼职）" name="isfulltimeteacher" ng-model="formData.isfulltimeteacher" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">科目</span>
+	           <input type="text" class="form-control required" placeholder="请输入科目" name="subject" ng-model="formData.subject" maxlength="36">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">产品类型（一对一，班组...）</span>
+	           <input type="text" class="form-control required" placeholder="请输入产品类型（一对一，班组...）" name="categorytype" ng-model="formData.categorytype" maxlength="32">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">课时</span>
+	           <input type="text" class="form-control required" placeholder="请输入课时" name="allotamount" ng-model="formData.allotamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	            	<span class="input-group-addon text-right spanwidth">金额</span>
+	           <input type="text" class="form-control required" placeholder="请输入金额" name="allotmoney" ng-model="formData.allotmoney" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	        </div>
+    </form>
+  </body>
+  <script type="text/javascript">
   $('#date').datetimepicker({
   	format : 'yyyy-mm-dd',
   	language : 'cn',

@@ -8,7 +8,7 @@ import com.yt.app.api.v1.entity.Consultbranchcrmmonthsum;
  * @author zj default
  * 
  * @version v1
- * @createdate 2017-04-27 15:10:46
+ * @createdate 2017-04-27 19:22:18
  */
 
 public class ConsultbranchcrmmonthsumResourceAssembler extends ResourceAssemblerSupport<Consultbranchcrmmonthsum, ConsultbranchcrmmonthsumResource> {

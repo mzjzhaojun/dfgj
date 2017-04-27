@@ -7,16 +7,23 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.yt.app.api.v1.mapper.AccountMapper;
+import com.yt.app.api.v1.mapper.AccountRoleMapper;
 import com.yt.app.api.v1.mapper.DictionaryMapper;
 import com.yt.app.api.v1.mapper.StaffsMapper;
 import com.yt.app.api.v1.service.StaffsService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
+import com.yt.app.frame.config.PasswordEncoders;
 import com.yt.app.frame.page.IPage;
 import com.yt.app.frame.page.PageBean;
+import com.yt.app.util.DateTimeUtil;
 import com.yt.app.util.RequestUtil;
 import com.yt.app.util.StreamUtil;
+import com.yt.app.api.v1.entity.Account;
+import com.yt.app.api.v1.entity.AccountRole;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Staffs;
 
@@ -33,11 +40,38 @@ public class StaffsServiceImpl extends BaseServiceImpl<Staffs, Long> implements 
 	private StaffsMapper mapper;
 	@Autowired
 	private DictionaryMapper dictionarymapper;
+	@Autowired
+	private AccountMapper accountmapper;
+	@Autowired
+	private PasswordEncoders passwordencoders;
+	@Autowired
+	private AccountRoleMapper accountrolemapper;
 
 	@Override
+	@Transactional
 	public Integer post(Staffs t) {
-		t.setStatus(DictionaryResource.STATUS_571);
+		t.setStatus(DictionaryResource.STATUS_1841);
 		Integer i = mapper.post(t);
+		if (i > 0) {
+			Account a = new Account();
+			a.setDeletestatus(DictionaryResource.USER_STATUS_1);
+			a.setPsw(passwordencoders.encode("888888"));
+			a.setAccount(t.getOacode());
+			a.setStaffid(t.getId());
+			a.setMobile(t.getMp().toString());
+			a.setMail(t.getMail());
+			a.setCreate_time(DateTimeUtil.getDateTime());
+			a.setName(t.getDisplayname());
+			a.setCard_id(t.getIdnumber());
+			a.setType(DictionaryResource.ACCOUNT_TYPE_10);
+			i = accountmapper.post(a);
+			if (i > 0) {
+				AccountRole accountr = new AccountRole();
+				accountr.setRole_id(857549673261568000L);
+				accountr.setAccount_id(a.getId());
+				i = accountrolemapper.post(accountr);
+			}
+		}
 		return i;
 	}
 

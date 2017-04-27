@@ -8,7 +8,7 @@ import com.yt.app.api.v1.entity.Teachgroupperfmonthsum;
  * @author zj default
  * 
  * @version v1
- * @createdate 2017-04-27 15:10:50
+ * @createdate 2017-04-27 19:22:22
  */
 
 public class TeachgroupperfmonthsumResourceAssembler extends ResourceAssemblerSupport<Teachgroupperfmonthsum, TeachgroupperfmonthsumResource> {

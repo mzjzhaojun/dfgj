@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yt.app.api.v1.mapper.AccountMapper;
 import com.yt.app.api.v1.mapper.AccountRoleMapper;
 import com.yt.app.api.v1.mapper.DictionaryMapper;
 import com.yt.app.api.v1.mapper.RoleMapper;
+import com.yt.app.api.v1.mapper.StaffsMapper;
 import com.yt.app.api.v1.service.AccountService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
@@ -20,6 +22,7 @@ import com.yt.app.api.v1.entity.Account;
 import com.yt.app.api.v1.entity.AccountRole;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Role;
+import com.yt.app.api.v1.entity.Staffs;
 
 /**
  * @author huanghao
@@ -40,13 +43,15 @@ public class AccountServiceImpl extends BaseServiceImpl<Account, Long> implement
 	private PasswordEncoders passwordencoders;
 	@Autowired
 	private DictionaryMapper dmapper;
-
+	@Autowired
+	private StaffsMapper staffsmapper;
 	@Override
 	public Account getAccountByName(String account) {
 		return mapper.getAccountByName(account);
 	}
 
 	@Override
+	@Transactional
 	public Integer addobject(Account param) {
 		param.setDeletestatus(DictionaryResource.USER_STATUS_1);
 		param.setPsw(passwordencoders.encode(param.getPsw()));
@@ -59,9 +64,15 @@ public class AccountServiceImpl extends BaseServiceImpl<Account, Long> implement
 	}
 
 	@Override
+	@Transactional
 	public Integer deletebyid(long id) {
-		Integer i = mapper.delete(id);
+		Account account = mapper.get(id);
+		account.setDeletestatus(DictionaryResource.USER_STATUS_0);
+		Integer i = mapper.put(account);
 		armapper.deletebyaccountid(id);
+		Staffs s = staffsmapper.get(account.getStaffid());
+		s.setStatus(DictionaryResource.STATUS_1842);
+		i = staffsmapper.put(s);
 		return i;
 	}
 
@@ -77,6 +88,7 @@ public class AccountServiceImpl extends BaseServiceImpl<Account, Long> implement
 	}
 
 	@Override
+	@Transactional
 	public Integer updatebyid(Account param) {
 		if (param.getPsw() != null) {
 			param.setPsw(passwordencoders.encode(param.getPsw()));

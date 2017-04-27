@@ -1,6 +1,7 @@
 package com.yt.app.api.v1.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
 import com.yt.app.api.v1.mapper.OperationlogMapper;
@@ -17,7 +18,7 @@ import java.util.Map;
  * @author zj default
  * 
  * @version v1
- * @createdate 2017-04-27 15:10:48
+ * @createdate 2017-04-27 19:22:20
  */
 
 @Service
@@ -26,6 +27,7 @@ public class OperationlogServiceImpl extends BaseServiceImpl<Operationlog, Long>
 	private OperationlogMapper mapper;
 
 	@Override
+	@Transactional
 	public Integer post(Operationlog t) {
 		Integer i = mapper.post(t);
 		return i;

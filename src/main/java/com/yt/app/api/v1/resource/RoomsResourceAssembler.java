@@ -8,7 +8,7 @@ import com.yt.app.api.v1.entity.Rooms;
  * @author zj default
  * 
  * @version v1
- * @createdate 2017-04-27 15:10:49
+ * @createdate 2017-04-27 19:22:21
  */
 
 public class RoomsResourceAssembler extends ResourceAssemblerSupport<Rooms, RoomsResource> {

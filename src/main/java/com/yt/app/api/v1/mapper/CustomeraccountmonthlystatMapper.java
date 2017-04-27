@@ -11,7 +11,7 @@ import com.yt.app.common.base.IBaseMapper;
  * @author zj default
  * 
  * @version v1
- * @createdate 2017-04-27 15:10:47
+ * @createdate 2017-04-27 19:22:19
  */
 
 public interface CustomeraccountmonthlystatMapper extends IBaseMapper<Customeraccountmonthlystat> {
