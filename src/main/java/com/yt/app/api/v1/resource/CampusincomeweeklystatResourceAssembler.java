@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Campusincomeweeklystat;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:21
+* @createdate  2017-04-27 15:10:46
 */
 
 public class CampusincomeweeklystatResourceAssembler extends ResourceAssemblerSupport<Campusincomeweeklystat, CampusincomeweeklystatResource> {
 	public CampusincomeweeklystatResourceAssembler() {
-		super(CampusincomeweeklystatController.class, CampusincomeweeklystatResource.class);
+super(CampusincomeweeklystatController.class, CampusincomeweeklystatResource.class);
 	}
 	@Override	public CampusincomeweeklystatResource toResource(Campusincomeweeklystat t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CampusincomeweeklystatResource instantiateResource(Campusincomeweeklystat t) {
-		return new CampusincomeweeklystatResource(t);
+return new CampusincomeweeklystatResource(t);
 	}
 
 }

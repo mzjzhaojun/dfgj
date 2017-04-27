@@ -11,14 +11,14 @@ import com.yt.app.common.base.IBaseMapper;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:36
+* @createdate  2017-04-27 15:10:47
 */
 
 public interface CustomerteacherchargesMapper extends IBaseMapper<Customerteachercharges> {
-		/**
-		 * 保存（持久化）对象
-		 * 
-		 * @param o
+/**
+ * 保存（持久化）对象
+ * 
+ * @param o
 *            要持久化的对象
  * @return 执行成功的记录个数
  */

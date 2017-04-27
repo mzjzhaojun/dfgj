@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Campusassetsdetail;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:20
+* @createdate  2017-04-27 15:10:46
 */
 
 public class CampusassetsdetailResourceAssembler extends ResourceAssemblerSupport<Campusassetsdetail, CampusassetsdetailResource> {
 	public CampusassetsdetailResourceAssembler() {
-		super(CampusassetsdetailController.class, CampusassetsdetailResource.class);
+super(CampusassetsdetailController.class, CampusassetsdetailResource.class);
 	}
 	@Override	public CampusassetsdetailResource toResource(Campusassetsdetail t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CampusassetsdetailResource instantiateResource(Campusassetsdetail t) {
-		return new CampusassetsdetailResource(t);
+return new CampusassetsdetailResource(t);
 	}
 
 }

@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:22
+* @createdate  2017-04-27 15:10:46
 */
 
 public class CampustaskResource extends ResourceSupport {
 	private final Campustask t;
 	public CampustaskResource(Campustask entity) {
-		this.t = entity;
-		this.add(linkTo(CampustaskController.class).withRel("post"));
-		this.add(linkTo(methodOn(CampustaskController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(CampustaskController.class).withRel("post"));
+this.add(linkTo(methodOn(CampustaskController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Campustask getCampustask() {
-		return t;
+return t;
 	}
 
 

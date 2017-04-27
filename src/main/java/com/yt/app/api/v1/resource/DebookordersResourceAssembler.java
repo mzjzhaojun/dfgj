@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Debookorders;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:38
+* @createdate  2017-04-27 15:10:48
 */
 
 public class DebookordersResourceAssembler extends ResourceAssemblerSupport<Debookorders, DebookordersResource> {
 	public DebookordersResourceAssembler() {
-		super(DebookordersController.class, DebookordersResource.class);
+super(DebookordersController.class, DebookordersResource.class);
 	}
 	@Override	public DebookordersResource toResource(Debookorders t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected DebookordersResource instantiateResource(Debookorders t) {
-		return new DebookordersResource(t);
+return new DebookordersResource(t);
 	}
 
 }

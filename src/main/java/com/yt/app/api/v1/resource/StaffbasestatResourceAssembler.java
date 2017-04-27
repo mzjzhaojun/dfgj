@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Staffbasestat;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:56
+* @createdate  2017-04-27 15:10:49
 */
 
 public class StaffbasestatResourceAssembler extends ResourceAssemblerSupport<Staffbasestat, StaffbasestatResource> {
 	public StaffbasestatResourceAssembler() {
-		super(StaffbasestatController.class, StaffbasestatResource.class);
+super(StaffbasestatController.class, StaffbasestatResource.class);
 	}
 	@Override	public StaffbasestatResource toResource(Staffbasestat t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected StaffbasestatResource instantiateResource(Staffbasestat t) {
-		return new StaffbasestatResource(t);
+return new StaffbasestatResource(t);
 	}
 
 }

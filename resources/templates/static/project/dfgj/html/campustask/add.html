@@ -20,231 +20,252 @@
 	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
 	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
 	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	<!-- datetime -->
+	<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>	
 	<!-- 初始化 -->
 	<script type="text/javascript">
-		var add = angular.module("add", []);
-		add.controller("addController",function($scope, $http) {
-			$scope.formData = {};
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			//保存
-			$scope.onPreserved=function(){
-				var isValid = $("#saveForm").valid();
-					if(isValid){
-    				$http({
-    					url:parent.getMenuLinksHref("campustaskpost"),
-    					method:'POST',
-    					dataType : "json",
-    					withCredentials: true,
-    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-    					data: JSON.stringify($scope.formData)
-    		  		}).success(function(data, status, headers, config){
-    		  			if(data == 1){
-    		  				location.href="list.html";
-    		  			}
-    		  		}).error(function(data, status, headers, config){
-    		  			response(status);
-					})
-    			}
-			}
-			$scope.initselect = function() {
-			$http({
-				url : parent.getMenuLinksHref("orgregionslist"),
-				method : 'POST',
-				dataType : "json",
-				withCredentials : true,
-				headers : {
-					'Content-Type' : 'application/json;charset=UTF-8;'
-				},
-				data : ''
-				}).success(function(data, status, headers, config) {
-					$scope.selects = data;
-				}).error(function(data, status, headers, config) {
-					response(status);
-				})
-			}
-		//$scope.initselect();
-		})
+var add = angular.module("add", []);
+add.controller("addController",function($scope, $http) {
+	$scope.formData = {};
+	//返回
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	//保存
+	$scope.onPreserved=function(){
+var isValid = $("#saveForm").valid();
+	if(isValid){
+    $http({
+    	url:parent.getMenuLinksHref("campustaskpost"),
+    	method:'POST',
+    	dataType : "json",
+    	withCredentials: true,
+    	headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    	data: JSON.stringify($scope.formData)
+      }).success(function(data, status, headers, config){
+      	if(data == 1){
+      location.href="list.html";
+      	}
+      }).error(function(data, status, headers, config){
+      	response(status);
+	})
+    	}
+	}
+	$scope.initselect = function() {
+$http({
+	url : parent.getMenuLinksHref("dictionarylist"),
+	method : 'POST',
+	dataType : "json",
+	withCredentials : true,
+	headers : {
+'Content-Type' : 'application/json;charset=UTF-8;'
+	},
+	data : JSON.stringify([20])
+	}).success(function(data, status, headers, config) {
+$scope.selects = data;
+	}).error(function(data, status, headers, config) {
+response(status);
+	})
+}
+	$scope.initselect();
+})
 	</script>
 </head>
   
   <body ng-controller="addController">
   	<form method="post" id="saveForm" action="">
-  		 <!-- 操作按钮操作区 -->
-  		 <div class="col-lg-12 topActionPanel">
+   <!-- 操作按钮操作区 -->
+   <div class="col-lg-12 topActionPanel">
 	        <div>
-		    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
 	    	</div>
 	    	<div>
-		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
 	    	</div>
-    		</div>
-   		<div class="col-lg-6">
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">校区ID</span>
-	   		 		<select class="form-control required" name="campusid" ng-model="formData.campusid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择校区ID</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">校区任务信息的本地日期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区任务信息的本地日期" name="statlocaldate" ng-model="formData.statlocaldate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+    </div>
+   <div class="col-lg-6">
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">校区ID</span>
+	    <select class="form-control required" name="campusid" ng-model="formData.campusid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择校区ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+<div class="input-group input-group-sm" id="statlocaldatehidden">
+	<span class="input-group-addon text-right spanwidth">校区任务信息的本地日期</span>
+	  <div class="input-group date form_datetime" id="statlocaldatedate" style="width:400px;" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input">
+        <input class="form-control required" id="statlocaldate" ng-model="formData.statlocaldate" size="14" type="text" value="" readonly>
+  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+    </div>
+	<input type="hidden" id="dtp_input" value="" />
+</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区新签金额月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区新签金额月度任务" name="campusmonthlynewchargeamount" ng-model="formData.campusmonthlynewchargeamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区新签金额月度任务" name="campusmonthlynewchargeamount" ng-model="formData.campusmonthlynewchargeamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区新签金额每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区新签金额每日任务" name="campusdailynewchargeamount" ng-model="formData.campusdailynewchargeamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区新签金额每日任务" name="campusdailynewchargeamount" ng-model="formData.campusdailynewchargeamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区新签人数月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区新签人数月度任务" name="campusmonthlynewchargenumber" ng-model="formData.campusmonthlynewchargenumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区新签人数月度任务" name="campusmonthlynewchargenumber" ng-model="formData.campusmonthlynewchargenumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区新签人数每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区新签人数每日任务" name="campusdailynewchargenumber" ng-model="formData.campusdailynewchargenumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区新签人数每日任务" name="campusdailynewchargenumber" ng-model="formData.campusdailynewchargenumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区续费金额月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区续费金额月度任务" name="campusmonthlyrenewamount" ng-model="formData.campusmonthlyrenewamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区续费金额月度任务" name="campusmonthlyrenewamount" ng-model="formData.campusmonthlyrenewamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区续费金额每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区续费金额每日任务" name="campusdailyrenewamount" ng-model="formData.campusdailyrenewamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区续费金额每日任务" name="campusdailyrenewamount" ng-model="formData.campusdailyrenewamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区续费人数月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区续费人数月度任务" name="campusmonthlyrenewnumber" ng-model="formData.campusmonthlyrenewnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区续费人数月度任务" name="campusmonthlyrenewnumber" ng-model="formData.campusmonthlyrenewnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区续费人数每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区续费人数每日任务" name="campusdailyrenewnumber" ng-model="formData.campusdailyrenewnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区续费人数每日任务" name="campusdailyrenewnumber" ng-model="formData.campusdailyrenewnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区退费金额月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区退费金额月度任务" name="campusmonthlyrefundamount" ng-model="formData.campusmonthlyrefundamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区退费金额月度任务" name="campusmonthlyrefundamount" ng-model="formData.campusmonthlyrefundamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区退费金额每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区退费金额每日任务" name="campusdailyrefundamount" ng-model="formData.campusdailyrefundamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区退费金额每日任务" name="campusdailyrefundamount" ng-model="formData.campusdailyrefundamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区退费人数月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区退费人数月度任务" name="campusmonthlyrefundnumber" ng-model="formData.campusmonthlyrefundnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区退费人数月度任务" name="campusmonthlyrefundnumber" ng-model="formData.campusmonthlyrefundnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区退费人数每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区退费人数每日任务" name="campusdailyrefundnumber" ng-model="formData.campusdailyrefundnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区退费人数每日任务" name="campusdailyrefundnumber" ng-model="formData.campusdailyrefundnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区总收入月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区总收入月度任务" name="campusmonthlytotalincome" ng-model="formData.campusmonthlytotalincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区总收入月度任务" name="campusmonthlytotalincome" ng-model="formData.campusmonthlytotalincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区总收入每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区总收入每日任务" name="campusdailytotalincome" ng-model="formData.campusdailytotalincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区总收入每日任务" name="campusdailytotalincome" ng-model="formData.campusdailytotalincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区总课收月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区总课收月度任务" name="campusmonthlytotalassignedincome" ng-model="formData.campusmonthlytotalassignedincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区总课收月度任务" name="campusmonthlytotalassignedincome" ng-model="formData.campusmonthlytotalassignedincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区总课收每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区总课收每日任务" name="campusdailytotalassignedincome" ng-model="formData.campusdailytotalassignedincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区总课收每日任务" name="campusdailytotalassignedincome" ng-model="formData.campusdailytotalassignedincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区一对一课收月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区一对一课收月度任务" name="campusmonthlyonetooneincome" ng-model="formData.campusmonthlyonetooneincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区一对一课收月度任务" name="campusmonthlyonetooneincome" ng-model="formData.campusmonthlyonetooneincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区一对一课收每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区一对一课收每日任务" name="campusdailyonetooneincome" ng-model="formData.campusdailyonetooneincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区一对一课收每日任务" name="campusdailyonetooneincome" ng-model="formData.campusdailyonetooneincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区班组课收月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区班组课收月度任务" name="campusmonthlyclassgroupincome" ng-model="formData.campusmonthlyclassgroupincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区班组课收月度任务" name="campusmonthlyclassgroupincome" ng-model="formData.campusmonthlyclassgroupincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区班组课收每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区班组课收每日任务" name="campusdailyclassgroupincome" ng-model="formData.campusdailyclassgroupincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区班组课收每日任务" name="campusdailyclassgroupincome" ng-model="formData.campusdailyclassgroupincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区其它课收月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区其它课收月度任务" name="campusmonthlyotherincome" ng-model="formData.campusmonthlyotherincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区其它课收月度任务" name="campusmonthlyotherincome" ng-model="formData.campusmonthlyotherincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区其它课收每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区其它课收每日任务" name="campusdailyotherincome" ng-model="formData.campusdailyotherincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区其它课收每日任务" name="campusdailyotherincome" ng-model="formData.campusdailyotherincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区总课时月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区总课时月度任务" name="campusmonthlytotalassignedamount" ng-model="formData.campusmonthlytotalassignedamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区总课时月度任务" name="campusmonthlytotalassignedamount" ng-model="formData.campusmonthlytotalassignedamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区总课时每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区总课时每日任务" name="campusdailytotalassignedamount" ng-model="formData.campusdailytotalassignedamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区总课时每日任务" name="campusdailytotalassignedamount" ng-model="formData.campusdailytotalassignedamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区一对一课时月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区一对一课时月度任务" name="campusmonthlyonetooneassignedamount" ng-model="formData.campusmonthlyonetooneassignedamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区一对一课时月度任务" name="campusmonthlyonetooneassignedamount" ng-model="formData.campusmonthlyonetooneassignedamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区一对一课时每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区一对一课时每日任务" name="campusdailyonetooneassignedamount" ng-model="formData.campusdailyonetooneassignedamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区一对一课时每日任务" name="campusdailyonetooneassignedamount" ng-model="formData.campusdailyonetooneassignedamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区班组课时月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区班组课时月度任务" name="campusmonthlyclassgroupassignedamount" ng-model="formData.campusmonthlyclassgroupassignedamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区班组课时月度任务" name="campusmonthlyclassgroupassignedamount" ng-model="formData.campusmonthlyclassgroupassignedamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区班组课时每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区班组课时每日任务" name="campusdailyclassgroupassignedamount" ng-model="formData.campusdailyclassgroupassignedamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区班组课时每日任务" name="campusdailyclassgroupassignedamount" ng-model="formData.campusdailyclassgroupassignedamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区停课激活人数月度任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区停课激活人数月度任务" name="campusmonthlyreactivenumber" ng-model="formData.campusmonthlyreactivenumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区停课激活人数月度任务" name="campusmonthlyreactivenumber" ng-model="formData.campusmonthlyreactivenumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区停课激活人数每日任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区停课激活人数每日任务" name="campusdailyreactivenumber" ng-model="formData.campusdailyreactivenumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	           <input type="text" class="form-control required" placeholder="请输入校区停课激活人数每日任务" name="campusdailyreactivenumber" ng-model="formData.campusdailyreactivenumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
 	        </div>
     </form>
   </body>
+  <script type="text/javascript">
+  $('#statlocaldatedate').datetimepicker({
+  	format : 'yyyy-mm-dd',
+  	language : 'cn',
+  	weekStart : 1,
+  	minView : "month",
+  	todayBtn : 1,
+  	initialDate:new Date(),
+  	autoclose : 1,
+  	todayHighlight : 1,
+  	startView : 2,
+  	forceParse : 0,
+  	showMeridian : 0
+  });
 </html>

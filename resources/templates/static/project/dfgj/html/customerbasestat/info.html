@@ -15,419 +15,419 @@
     <script type="text/javascript" src="../../../../resource/js/response.js"></script>
     <!-- 初始化 -->
     <script type="text/javascript">
-		var info = angular.module("info", []);
-		info.controller("infoController",function($scope, $http) {
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			$http({
-				url:parent.getFunctionLinksHref("self"),
-				method:'GET',
-				dataType : "json",
-				withCredentials: true,
-				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-				data: ''
-				}).success(function(data, status, headers, config){
-					$scope.formData= data;
-				}).error(function(data, status, headers, config){
-					response(status);
-				});
-		})
+var info = angular.module("info", []);
+info.controller("infoController",function($scope, $http) {
+	//返回
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	$http({
+url:parent.getFunctionLinksHref("self"),
+method:'GET',
+dataType : "json",
+withCredentials: true,
+headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+data: ''
+}).success(function(data, status, headers, config){
+	$scope.formData= data;
+}).error(function(data, status, headers, config){
+	response(status);
+});
+})
 	</script>
   </head>
   <body ng-controller="infoController">
-  		 <div class="col-lg-12 topActionPanel">
+   <div class="col-lg-12 topActionPanel">
 	        <div>
 	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-    		</div>
+    </div>
     	</div>
-   		<div class="col-lg-6 viewFixedWidth">
-   		 <div class="input-group input-group-sm">
+   <div class="col-lg-6 viewFixedWidth">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth"></span>
            	<input type="text" class="form-control" value="{{formData.datekey}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">学员ID</span>
            	<input type="text" class="form-control" value="{{formData.customerid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">学员状态的本地日期</span>
            	<input type="text" class="form-control" value="{{formData.statlocaldate}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">校区ID</span>
            	<input type="text" class="form-control" value="{{formData.campusid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">咨询师ID(Customers数据库的CustomerStaffRelations)</span>
            	<input type="text" class="form-control" value="{{formData.consultantid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">咨询师名称</span>
            	<input type="text" class="form-control" value="{{formData.consultantname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">咨询师OACode</span>
            	<input type="text" class="form-control" value="{{formData.consultantoacode}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">学管师ID(Customers数据库的CustomerStaffRelations)</span>
            	<input type="text" class="form-control" value="{{formData.educatorid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">学管师名称</span>
            	<input type="text" class="form-control" value="{{formData.educatorname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">学管师OACode</span>
            	<input type="text" class="form-control" value="{{formData.educatoroacode}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">新签的金额(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.newchargeamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">前期结课续费金额(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.earlyendrenewamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">新签回款金额(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.earlystudyrenew}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">后期结课续费金额(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.laterendrenew}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">后期非结课续费金额(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.laterstudyrenew}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">前期结课续费再续费(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.earlyendrenewamountagain}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">总续费金额</span>
            	<input type="text" class="form-control" value="{{formData.totalrenewamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">总新签金额</span>
            	<input type="text" class="form-control" value="{{formData.totalnewchargeamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">总充值金额（现金流）</span>
            	<input type="text" class="form-control" value="{{formData.totalchargeamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">每天新签的金额(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.dailynewchargeamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">每天前期结课续费金额(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.dailyearlyendrenewamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">每天新签回款金额(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.dailyearlystudyrenew}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">每天后期结课续费金额(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.dailylaterendrenew}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">每天后期非结课续费金额(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.dailylaterstudyrenew}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">每天前期结课续费再续费(Customers数据库的AccountChargeApplies)</span>
            	<input type="text" class="form-control" value="{{formData.dailyearlyendrenewamountagain}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">每天总新签金额</span>
            	<input type="text" class="form-control" value="{{formData.dailytotalnewchargeamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">每天总充值金额（现金流）</span>
            	<input type="text" class="form-control" value="{{formData.dailytotalchargeamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度内在上课的正常退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=1，IsExtraRefund=0，IsPeriodRefund=1)</span>
            	<input type="text" class="form-control" value="{{formData.regularinperiodrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度内不在上课的正常退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=1，IsExtraRefund=0，IsPeriodRefund=0)</span>
            	<input type="text" class="form-control" value="{{formData.regularnotinperiodrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度内正常退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=1，IsExtraRefund=0)</span>
            	<input type="text" class="form-control" value="{{formData.regularrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度内在上课的坏账退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=2，IsExtraRefund=0，IsPeriodRefund=1)</span>
            	<input type="text" class="form-control" value="{{formData.irregularinperiodrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度内不在上课的坏账退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=2，IsExtraRefund=0，IsPeriodRefund=0)</span>
            	<input type="text" class="form-control" value="{{formData.irregularnotinperiodrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度内坏账退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=2，IsExtraRefund=0)</span>
            	<input type="text" class="form-control" value="{{formData.irregularrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度内退费的总金额，包括正常的和坏账的</span>
            	<input type="text" class="form-control" value="{{formData.totalnormalrefundamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度外在上课的正常退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=1，IsExtraRefund=1，IsPeriodRefund=1)</span>
            	<input type="text" class="form-control" value="{{formData.extraregularinperiodrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度外不在上课的正常退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=1，IsExtraRefund=1，IsPeriodRefund=0)</span>
            	<input type="text" class="form-control" value="{{formData.extraregularnotinperiodrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度外正常退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=1，IsExtraRefund=1)</span>
            	<input type="text" class="form-control" value="{{formData.extraregularrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度外在上课的坏账退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=1，IsExtraRefund=1，IsPeriodRefund=1)</span>
            	<input type="text" class="form-control" value="{{formData.extrairregularinperiodrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度外不在上课的坏账退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=1，IsExtraRefund=1，IsPeriodRefund=0)</span>
            	<input type="text" class="form-control" value="{{formData.extrairregularnotinperiodrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度外坏账退费金额(Customers数据库的AccountRefundApplies的RealRefundMoney汇总，RefundType=1，IsExtraRefund=1)</span>
            	<input type="text" class="form-control" value="{{formData.extrairregularrefundmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">制度外退费的总金额，包括正常的和坏账的</span>
            	<input type="text" class="form-control" value="{{formData.totalextrarefundamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">所有退费金额</span>
            	<input type="text" class="form-control" value="{{formData.totalrefundamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">折扣返还收入(Customers数据库的AccountRefundApplies的ReallowanceMoney汇总)</span>
            	<input type="text" class="form-control" value="{{formData.reallowancemoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">差价返还收入(Customers数据库的AccountRefundApplies的CompensateMoney汇总)</span>
            	<input type="text" class="form-control" value="{{formData.compensatemoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">分区财务经理确认退费时间</span>
            	<input type="text" class="form-control" value="{{formData.lastestrefundverifytime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">转介绍的员工(Customers数据库的Customers表)</span>
            	<input type="text" class="form-control" value="{{formData.referralstaffid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">转介绍的客户(Customers数据库的Customers表)</span>
            	<input type="text" class="form-control" value="{{formData.referralcustomerid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">当前年级</span>
            	<input type="text" class="form-control" value="{{formData.currentgrade}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">入学年级</span>
            	<input type="text" class="form-control" value="{{formData.entrancegrade}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">总转出金额。AccountTransferApplies的TransferMoney，ApproveTime在区间内，TransferType=1</span>
            	<input type="text" class="form-control" value="{{formData.totalmoneytransferedout}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">总转入金额。AccountTransferApplies的TransferMoney，ApproveTime在区间内，TransferType=2</span>
            	<input type="text" class="form-control" value="{{formData.totalmoneytransferedin}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">最后转入到本校区时间。CustomerTransferApplies的ToCampusID为本记录校区，ApproveTime在区间内</span>
            	<input type="text" class="form-control" value="{{formData.lastesttransferedintime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">最后从本校区转出时间。CustomerTransferApplies的CampusID为本记录校区，ApproveTime在区间内</span>
            	<input type="text" class="form-control" value="{{formData.lastesttransferedouttime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">最后上课时间，计算字段。根据一对一、班组以及其它课程中的最后时间计算出来</span>
            	<input type="text" class="form-control" value="{{formData.lastestclasstime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">最后充值时间</span>
            	<input type="text" class="form-control" value="{{formData.lastestpaytime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">最早充值时间</span>
            	<input type="text" class="form-control" value="{{formData.earliestpaytime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">上门时间(Customers数据库的CustomerVerifies表)</span>
            	<input type="text" class="form-control" value="{{formData.verifytime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">周反馈时间(Customers数据库的CustomerReplies表)</span>
            	<input type="text" class="form-control" value="{{formData.replytime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">回访时间(Customers数据库的CustomerVisits表)</span>
            	<input type="text" class="form-control" value="{{formData.visittime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">教学服务会时间(Customers数据库的CustomerMeetings表)</span>
            	<input type="text" class="form-control" value="{{formData.meetingtime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">学员状态（枚举-  正常-11，冻结-14（高三毕业9月后），解冻中-141）</span>
            	<input type="text" class="form-control" value="{{formData.studentstatus}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否高三毕业</span>
            	<input type="text" class="form-control" value="{{formData.graduated}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">账户价值Customer库Account的账户余额(AccountMoney，VS，VE)+ Order库的Assets的Price*Amount（VS，VE）</span>
            	<input type="text" class="form-control" value="{{formData.accountvalue}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">账户可用金额</span>
            	<input type="text" class="form-control" value="{{formData.accountmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">账户订购余额</span>
            	<input type="text" class="form-control" value="{{formData.accountpriceandamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">1对1课程课时数(Order库Assets表的Amount，CategoryType=1，VS，VE)</span>
            	<input type="text" class="form-control" value="{{formData.onetooneamountinasset}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">班组课程课时数(Order库Assets表的Amount，CategoryType=2，VS，VE)</span>
            	<input type="text" class="form-control" value="{{formData.classgroupamountinasset}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">游学课程课时数(Order库Assets表的Amount，CategoryType=3，VS，VE)</span>
            	<input type="text" class="form-control" value="{{formData.youxueamountinasset}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">其它课时数(Order库Assets表的Amount，CategoryType<>1、2、3，VS，VE)</span>
            	<input type="text" class="form-control" value="{{formData.otheramountinasset}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">资产中的总课时数</span>
            	<input type="text" class="form-control" value="{{formData.totalamountinasset}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">课次时长(分钟)(Order库Assets表同名字段*Amount，VS，VE)</span>
            	<input type="text" class="form-control" value="{{formData.lessondurationvalue}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">一对一课时收入(Order库Assigns视图ConfirmPrice*Amount，ConfirmTime，CategoryType=1)</span>
            	<input type="text" class="form-control" value="{{formData.onetooneassignedincome}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">班组课时收入(Order库Assigns视图ConfirmPrice*Amount，ConfirmTime，CategoryType=2)</span>
            	<input type="text" class="form-control" value="{{formData.classgroupassignedincome}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">课时收入</span>
            	<input type="text" class="form-control" value="{{formData.assignedincome}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">游学收入(Assets表ConfirmMoney，ConfirmTime，CategoryType=3)</span>
            	<input type="text" class="form-control" value="{{formData.youxueincome}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">其它产品收入(Assets表ConfirmMoney，ConfirmTime，CategoryType not in 1,2,3)</span>
            	<input type="text" class="form-control" value="{{formData.otherproductincome}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">非课时收入</span>
            	<input type="text" class="form-control" value="{{formData.otherincome}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">上课量(Order库Assigns视图Amount，ConfirmTime)</span>
            	<input type="text" class="form-control" value="{{formData.assignedamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">上课课收平均单价(Order库Assign的ConfirmPrice*Amount/SUM(Amount))，ConfirmTime</span>
            	<input type="text" class="form-control" value="{{formData.assignedavgunitprice}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">课收（含买赠返还）/本期已上课小时，[OM].[Assigns]视图中的[DurationValue] * [Amount] / 60</span>
            	<input type="text" class="form-control" value="{{formData.assigneddurationhours}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">一对一上课时间(Order库Assign的MAX(StartTime)，CategoryType=1，ConfirmTime</span>
            	<input type="text" class="form-control" value="{{formData.onetoonecoursetime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">班组上课时间(Order库Assign的MAX(StartTime)，CategoryType=2，ConfirmTime</span>
            	<input type="text" class="form-control" value="{{formData.classgroupcoursetime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">游学上课时间(Order库Assign的MAX(StartTime)，CategoryType=3，ConfirmTime</span>
            	<input type="text" class="form-control" value="{{formData.youxuecoursetime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">其它课程上课时间(Order库Assign的MAX(StartTime)，CategoryType<>1、2、3，ConfirmTime</span>
            	<input type="text" class="form-control" value="{{formData.othercoursetime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">平均单价Order里面的OrderItems，RealPrice * RealAmount / SUM(RealAmount)，Join到Order，ProcessStatus=2 AND OrderStatus=2和ApproveTime</span>
            	<input type="text" class="form-control" value="{{formData.orderavgunitprice}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">Order里面的OrderItems，RealAmount Join到Order，ProcessStatus=2 AND OrderStatus=2和ApproveTime</span>
            	<input type="text" class="form-control" value="{{formData.orderrealamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">Order里面的OrderItems，LessonDurationValue * RealAmount / 60 Join到Order，ProcessStatus=2 AND OrderStatus=2和ApproveTime</span>
            	<input type="text" class="form-control" value="{{formData.orderlessonhours}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">Order里面的OrderItems，RealAmount * RealPrice Join到Order，ProcessStatus=2 AND OrderStatus=2和ApproveTime</span>
            	<input type="text" class="form-control" value="{{formData.ordertotalprice}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">退订课时(Order里面的DebookOrderItems的DebookAmount)，Join到DebookOrder，ProcessStatus=2 AND DebookStatus=2和ApproveTime</span>
            	<input type="text" class="form-control" value="{{formData.debookamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">退订课时(Order里面的DebookOrderItems的DebookMoney)，Join到DebookOrder，ProcessStatus=2 AND DebookStatus=2和ApproveTime</span>
            	<input type="text" class="form-control" value="{{formData.debookmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">退订课时(Order里面的DebookOrderItems的[DebookAmount]*[LessonDurationValue]/60)，Join到DebookOrder，ProcessStatus=2 AND DebookStatus=2和ApproveTime</span>
            	<input type="text" class="form-control" value="{{formData.debooklessonhours}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">买赠返还收入(Assets表ReturnedMoney， VS，VE)</span>
            	<input type="text" class="form-control" value="{{formData.returnedmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否有效学员</span>
            	<input type="text" class="form-control" value="{{formData.isavailable}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否是停课学员</span>
            	<input type="text" class="form-control" value="{{formData.isclasssuspended}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否活跃</span>
            	<input type="text" class="form-control" value="{{formData.isactive}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否休学</span>
            	<input type="text" class="form-control" value="{{formData.isschoolsuspended}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否结课</span>
            	<input type="text" class="form-control" value="{{formData.isclassfinished}}" disabled>
            </div>

@@ -15,143 +15,143 @@
     <script type="text/javascript" src="../../../../resource/js/response.js"></script>
     <!-- 初始化 -->
     <script type="text/javascript">
-		var info = angular.module("info", []);
-		info.controller("infoController",function($scope, $http) {
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			$http({
-				url:parent.getFunctionLinksHref("self"),
-				method:'GET',
-				dataType : "json",
-				withCredentials: true,
-				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-				data: ''
-				}).success(function(data, status, headers, config){
-					$scope.formData= data;
-				}).error(function(data, status, headers, config){
-					response(status);
-				});
-		})
+var info = angular.module("info", []);
+info.controller("infoController",function($scope, $http) {
+	//返回
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	$http({
+url:parent.getFunctionLinksHref("self"),
+method:'GET',
+dataType : "json",
+withCredentials: true,
+headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+data: ''
+}).success(function(data, status, headers, config){
+	$scope.formData= data;
+}).error(function(data, status, headers, config){
+	response(status);
+});
+})
 	</script>
   </head>
   <body ng-controller="infoController">
-  		 <div class="col-lg-12 topActionPanel">
+   <div class="col-lg-12 topActionPanel">
 	        <div>
 	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-    		</div>
+    </div>
     	</div>
-   		<div class="col-lg-6 viewFixedWidth">
-   		 <div class="input-group input-group-sm">
+   <div class="col-lg-6 viewFixedWidth">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">教师学员关系主键ID</span>
            	<input type="text" class="form-control" value="{{formData.customerteacherrelationid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">操作类型(分配-0，调换-1，调出-2)</span>
            	<input type="text" class="form-control" value="{{formData.applytype}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">校区ID</span>
            	<input type="text" class="form-control" value="{{formData.campusid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">校区名称</span>
            	<input type="text" class="form-control" value="{{formData.campusname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">学员ID</span>
            	<input type="text" class="form-control" value="{{formData.customerid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">原有教师ID</span>
            	<input type="text" class="form-control" value="{{formData.oldteacherid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">原有教师岗位ID</span>
            	<input type="text" class="form-control" value="{{formData.oldteacherjobid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">原有教师岗位名称</span>
            	<input type="text" class="form-control" value="{{formData.oldteacherjobname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">原有教师OA账号</span>
            	<input type="text" class="form-control" value="{{formData.oldteacheroacode}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">原有教师姓名</span>
            	<input type="text" class="form-control" value="{{formData.oldteachername}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">原有教师所属机构ID</span>
            	<input type="text" class="form-control" value="{{formData.oldteacherjoborgid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">原有教师所属机构名称</span>
            	<input type="text" class="form-control" value="{{formData.oldteacherjoborgname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">原有教师是全职教师</span>
            	<input type="text" class="form-control" value="{{formData.oldisfulltimeteacher}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">新教师ID</span>
            	<input type="text" class="form-control" value="{{formData.newteacherid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">新教师岗位ID</span>
            	<input type="text" class="form-control" value="{{formData.newteacherjobid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">新教师岗位名称</span>
            	<input type="text" class="form-control" value="{{formData.newteacherjobname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">新教师OA账号</span>
            	<input type="text" class="form-control" value="{{formData.newteacheroacode}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">新教师姓名</span>
            	<input type="text" class="form-control" value="{{formData.newteachername}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">新教师所属机构ID</span>
            	<input type="text" class="form-control" value="{{formData.newteacherjoborgid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">新教师所属机构名称</span>
            	<input type="text" class="form-control" value="{{formData.newteacherjoborgname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">新教师是全职教师</span>
            	<input type="text" class="form-control" value="{{formData.newisfulltimeteacher}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">调换、调出原因</span>
            	<input type="text" class="form-control" value="{{formData.reason}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">其他原因描述</span>
            	<input type="text" class="form-control" value="{{formData.reasondescription}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">状态(待提交，已提交，已完成)</span>
            	<input type="text" class="form-control" value="{{formData.status}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">创建人ID</span>
            	<input type="text" class="form-control" value="{{formData.creatorid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">创建人姓名</span>
            	<input type="text" class="form-control" value="{{formData.creatorname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">创建时间</span>
            	<input type="text" class="form-control" value="{{formData.createtime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">租户的ID</span>
            	<input type="text" class="form-control" value="{{formData.tenantcode}}" disabled>
            </div>

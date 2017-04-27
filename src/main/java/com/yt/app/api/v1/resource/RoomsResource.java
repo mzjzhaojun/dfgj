@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:56
+* @createdate  2017-04-27 15:10:49
 */
 
 public class RoomsResource extends ResourceSupport {
 	private final Rooms t;
 	public RoomsResource(Rooms entity) {
-		this.t = entity;
-		this.add(linkTo(RoomsController.class).withRel("post"));
-		this.add(linkTo(methodOn(RoomsController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(RoomsController.class).withRel("post"));
+this.add(linkTo(methodOn(RoomsController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Rooms getRooms() {
-		return t;
+return t;
 	}
 
 

@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Productsexofcourse;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:54
+* @createdate  2017-04-27 15:10:49
 */
 
 public class ProductsexofcourseResourceAssembler extends ResourceAssemblerSupport<Productsexofcourse, ProductsexofcourseResource> {
 	public ProductsexofcourseResourceAssembler() {
-		super(ProductsexofcourseController.class, ProductsexofcourseResource.class);
+super(ProductsexofcourseController.class, ProductsexofcourseResource.class);
 	}
 	@Override	public ProductsexofcourseResource toResource(Productsexofcourse t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected ProductsexofcourseResource instantiateResource(Productsexofcourse t) {
-		return new ProductsexofcourseResource(t);
+return new ProductsexofcourseResource(t);
 	}
 
 }

@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:53
+* @createdate  2017-04-27 15:10:49
 */
 
 public class ProductclassstatsResource extends ResourceSupport {
 	private final Productclassstats t;
 	public ProductclassstatsResource(Productclassstats entity) {
-		this.t = entity;
-		this.add(linkTo(ProductclassstatsController.class).withRel("post"));
-		this.add(linkTo(methodOn(ProductclassstatsController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(ProductclassstatsController.class).withRel("post"));
+this.add(linkTo(methodOn(ProductclassstatsController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Productclassstats getProductclassstats() {
-		return t;
+return t;
 	}
 
 

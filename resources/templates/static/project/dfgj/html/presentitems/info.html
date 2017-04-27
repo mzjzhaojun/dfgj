@@ -15,43 +15,43 @@
     <script type="text/javascript" src="../../../../resource/js/response.js"></script>
     <!-- 初始化 -->
     <script type="text/javascript">
-		var info = angular.module("info", []);
-		info.controller("infoController",function($scope, $http) {
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			$http({
-				url:parent.getFunctionLinksHref("self"),
-				method:'GET',
-				dataType : "json",
-				withCredentials: true,
-				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-				data: ''
-				}).success(function(data, status, headers, config){
-					$scope.formData= data;
-				}).error(function(data, status, headers, config){
-					response(status);
-				});
-		})
+var info = angular.module("info", []);
+info.controller("infoController",function($scope, $http) {
+	//返回
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	$http({
+url:parent.getFunctionLinksHref("self"),
+method:'GET',
+dataType : "json",
+withCredentials: true,
+headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+data: ''
+}).success(function(data, status, headers, config){
+	$scope.formData= data;
+}).error(function(data, status, headers, config){
+	response(status);
+});
+})
 	</script>
   </head>
   <body ng-controller="infoController">
-  		 <div class="col-lg-12 topActionPanel">
+   <div class="col-lg-12 topActionPanel">
 	        <div>
 	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-    		</div>
+    </div>
     	</div>
-   		<div class="col-lg-6 viewFixedWidth">
-   		 <div class="input-group input-group-sm">
+   <div class="col-lg-6 viewFixedWidth">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">买赠ID</span>
            	<input type="text" class="form-control" value="{{formData.presentid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">买赠率</span>
            	<input type="text" class="form-control" value="{{formData.presentvalue}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">买赠标准</span>
            	<input type="text" class="form-control" value="{{formData.presentstandard}}" disabled>
            </div>

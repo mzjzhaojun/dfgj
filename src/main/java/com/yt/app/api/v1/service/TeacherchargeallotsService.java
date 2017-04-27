@@ -7,7 +7,7 @@ import com.yt.app.common.base.IBaseService;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:49:00
+* @createdate  2017-04-27 15:10:50
 */
 
 public interface TeacherchargeallotsService  extends IBaseService<Teacherchargeallots, Long>{

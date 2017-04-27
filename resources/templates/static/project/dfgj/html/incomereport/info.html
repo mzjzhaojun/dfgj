@@ -15,147 +15,147 @@
     <script type="text/javascript" src="../../../../resource/js/response.js"></script>
     <!-- 初始化 -->
     <script type="text/javascript">
-		var info = angular.module("info", []);
-		info.controller("infoController",function($scope, $http) {
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			$http({
-				url:parent.getFunctionLinksHref("self"),
-				method:'GET',
-				dataType : "json",
-				withCredentials: true,
-				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-				data: ''
-				}).success(function(data, status, headers, config){
-					$scope.formData= data;
-				}).error(function(data, status, headers, config){
-					response(status);
-				});
-		})
+var info = angular.module("info", []);
+info.controller("infoController",function($scope, $http) {
+	//返回
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	$http({
+url:parent.getFunctionLinksHref("self"),
+method:'GET',
+dataType : "json",
+withCredentials: true,
+headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+data: ''
+}).success(function(data, status, headers, config){
+	$scope.formData= data;
+}).error(function(data, status, headers, config){
+	response(status);
+});
+})
 	</script>
   </head>
   <body ng-controller="infoController">
-  		 <div class="col-lg-12 topActionPanel">
+   <div class="col-lg-12 topActionPanel">
 	        <div>
 	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-    		</div>
+    </div>
     	</div>
-   		<div class="col-lg-6 viewFixedWidth">
-   		 <div class="input-group input-group-sm">
+   <div class="col-lg-6 viewFixedWidth">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">快照ID</span>
            	<input type="text" class="form-control" value="{{formData.snapshotid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">统计的日期Key</span>
            	<input type="text" class="form-control" value="{{formData.statdatekey}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">统计的日期名称（显示用）</span>
            	<input type="text" class="form-control" value="{{formData.statdatename}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">大区ID</span>
            	<input type="text" class="form-control" value="{{formData.regionid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">大区名称</span>
            	<input type="text" class="form-control" value="{{formData.regionname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">分公司ID</span>
            	<input type="text" class="form-control" value="{{formData.branchid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">分工司名称</span>
            	<input type="text" class="form-control" value="{{formData.branchname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">校区ID</span>
            	<input type="text" class="form-control" value="{{formData.campusid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">校区名称</span>
            	<input type="text" class="form-control" value="{{formData.campusname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">校龄</span>
            	<input type="text" class="form-control" value="{{formData.campusage}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">岗位性质</span>
            	<input type="text" class="form-control" value="{{formData.jobnature}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">岗位性质名称</span>
            	<input type="text" class="form-control" value="{{formData.jobnaturename}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">收入类型</span>
            	<input type="text" class="form-control" value="{{formData.incometype}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">收入类型名称</span>
            	<input type="text" class="form-control" value="{{formData.incometypename}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">产品类型</span>
            	<input type="text" class="form-control" value="{{formData.producttype}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">产品类型名称</span>
            	<input type="text" class="form-control" value="{{formData.producttypename}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">年级代码</span>
            	<input type="text" class="form-control" value="{{formData.grade}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">年级名称</span>
            	<input type="text" class="form-control" value="{{formData.gradename}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">科目</span>
            	<input type="text" class="form-control" value="{{formData.subject}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">科目名称</span>
            	<input type="text" class="form-control" value="{{formData.subjectname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">上课人数</span>
            	<input type="text" class="form-control" value="{{formData.persons}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">课时数</span>
            	<input type="text" class="form-control" value="{{formData.periods}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">小时数</span>
            	<input type="text" class="form-control" value="{{formData.hours}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">收入金额</span>
            	<input type="text" class="form-control" value="{{formData.income}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">课时单价</span>
            	<input type="text" class="form-control" value="{{formData.priceperperiod}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">小时单价</span>
            	<input type="text" class="form-control" value="{{formData.priceperhour}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">生均课时</span>
            	<input type="text" class="form-control" value="{{formData.periodperperson}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">生均小时</span>
            	<input type="text" class="form-control" value="{{formData.hourperperson}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">买赠返还</span>
            	<input type="text" class="form-control" value="{{formData.returnmoney}}" disabled>
            </div>

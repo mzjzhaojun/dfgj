@@ -15,115 +15,115 @@
     <script type="text/javascript" src="../../../../resource/js/response.js"></script>
     <!-- 初始化 -->
     <script type="text/javascript">
-		var info = angular.module("info", []);
-		info.controller("infoController",function($scope, $http) {
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			$http({
-				url:parent.getFunctionLinksHref("self"),
-				method:'GET',
-				dataType : "json",
-				withCredentials: true,
-				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-				data: ''
-				}).success(function(data, status, headers, config){
-					$scope.formData= data;
-				}).error(function(data, status, headers, config){
-					response(status);
-				});
-		})
+var info = angular.module("info", []);
+info.controller("infoController",function($scope, $http) {
+	//返回
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	$http({
+url:parent.getFunctionLinksHref("self"),
+method:'GET',
+dataType : "json",
+withCredentials: true,
+headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+data: ''
+}).success(function(data, status, headers, config){
+	$scope.formData= data;
+}).error(function(data, status, headers, config){
+	response(status);
+});
+})
 	</script>
   </head>
   <body ng-controller="infoController">
-  		 <div class="col-lg-12 topActionPanel">
+   <div class="col-lg-12 topActionPanel">
 	        <div>
 	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-    		</div>
+    </div>
     	</div>
-   		<div class="col-lg-6 viewFixedWidth">
-   		 <div class="input-group input-group-sm">
+   <div class="col-lg-6 viewFixedWidth">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">申请ID</span>
            	<input type="text" class="form-control" value="{{formData.applyid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">资产ID</span>
            	<input type="text" class="form-control" value="{{formData.assetid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">资产类型</span>
            	<input type="text" class="form-control" value="{{formData.assettype}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">资产编码</span>
            	<input type="text" class="form-control" value="{{formData.assetcode}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">资产名称</span>
            	<input type="text" class="form-control" value="{{formData.assetname}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">账户ID</span>
            	<input type="text" class="form-control" value="{{formData.accountid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">产品ID</span>
            	<input type="text" class="form-control" value="{{formData.productid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">原产品单价</span>
            	<input type="text" class="form-control" value="{{formData.orderprice}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">原订购数量</span>
            	<input type="text" class="form-control" value="{{formData.orderamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">赠送数量</span>
            	<input type="text" class="form-control" value="{{formData.presentamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">实际单价</span>
            	<input type="text" class="form-control" value="{{formData.realprice}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">实际数量</span>
            	<input type="text" class="form-control" value="{{formData.realamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">实际金额</span>
            	<input type="text" class="form-control" value="{{formData.realmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">剩余数量</span>
            	<input type="text" class="form-control" value="{{formData.amount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">单价=RealPrice</span>
            	<input type="text" class="form-control" value="{{formData.price}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">剩余金额</span>
            	<input type="text" class="form-control" value="{{formData.remainmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">已上(确认)数量</span>
            	<input type="text" class="form-control" value="{{formData.confirmedamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">已兑换数量</span>
            	<input type="text" class="form-control" value="{{formData.exchangeamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">已退订数量</span>
            	<input type="text" class="form-control" value="{{formData.debookedamount}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">已上(确认)金额</span>
            	<input type="text" class="form-control" value="{{formData.confirmedmoney}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">已折扣返还金额</span>
            	<input type="text" class="form-control" value="{{formData.returnedmoney}}" disabled>
            </div>

@@ -20,82 +20,82 @@
 	<script type="text/javascript" src="../../../../resource/js/paging.js"></script>
 	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
     <script type="text/javascript">
-		var flag = true;
-		var list = angular.module("list", []);
-		list.controller("listController",function($scope, $http) {	
-			$scope.toInfo=function(data){
-				parent.setFunctionLinksHref(data.links==null?data._links:data.links);
-				location.href="info.html";
-			}
-			$scope.toUpdate=function(data){
-				parent.setFunctionLinksHref(data.links==null?data._links:data.links);
-				location.href="update.html";
-			}
-			$scope.toDelete=function(data){	
-				parent.setFunctionLinksHref(data.links==null?data._links:data.links);
-				parent.onPopupDelete();
-			}
-			$scope.onSearch=function(){
-				$scope.pageList();
-			}
-			$scope.changePage=function(){
-				$scope.pageList();
-			}
-			$scope.onAdd=function(){
-				location.href="add.html";
-			}
-			$scope.pageList = function(){
-				pageNo = parent.currentPage;
-			    var data = {"name":$("#name").val()};
-				$http({
-					url:parent.getMenuLinksHref("customerbasestatlist"),
-					method:'POST',
-					dataType : "json",
-					withCredentials: true,
-					headers: {'Content-Type': 'application/json;charset=UTF-8;',"pageNo":pageNo,"pageSize":pageSize,"orderby":"id","dir":"desc"},
-					data: JSON.stringify(data)
-					}).success(function(data, status, headers, config){
-						totalCount = headers('totalCount');
-						pageCount = headers('pageCount');
-						$scope.datalist= data;
-						paging();
-						initPage();
-					}).error(function(data, status, headers, config){
-						response(status);
-					});
-			}
-			$scope.pageList();
-			$scope.onDelete = function(){
+var flag = true;
+var list = angular.module("list", []);
+list.controller("listController",function($scope, $http) {	
+	$scope.toInfo=function(data){
+parent.setFunctionLinksHref(data.links==null?data._links:data.links);
+location.href="info.html";
+	}
+	$scope.toUpdate=function(data){
+parent.setFunctionLinksHref(data.links==null?data._links:data.links);
+location.href="update.html";
+	}
+	$scope.toDelete=function(data){	
+parent.setFunctionLinksHref(data.links==null?data._links:data.links);
+parent.onPopupDelete();
+	}
+	$scope.onSearch=function(){
+$scope.pageList();
+	}
+	$scope.changePage=function(){
+$scope.pageList();
+	}
+	$scope.onAdd=function(){
+location.href="add.html";
+	}
+	$scope.pageList = function(){
+pageNo = parent.currentPage;
+	    var data = {"name":$("#name").val()};
+$http({
+	url:parent.getMenuLinksHref("customerbasestatlist"),
+	method:'POST',
+	dataType : "json",
+	withCredentials: true,
+	headers: {'Content-Type': 'application/json;charset=UTF-8;',"pageNo":pageNo,"pageSize":pageSize,"orderby":"id","dir":"desc"},
+	data: JSON.stringify(data)
+	}).success(function(data, status, headers, config){
+totalCount = headers('totalCount');
+pageCount = headers('pageCount');
+$scope.datalist= data;
+paging();
+initPage();
+	}).error(function(data, status, headers, config){
+response(status);
+	});
+	}
+	$scope.pageList();
+	$scope.onDelete = function(){
                 $http({
-					url:parent.getFunctionLinksHref("self"),
-					method:'DELETE',
-					dataType : "json",
-					withCredentials: true,
-					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-					data: ""
-					}).success(function(data, status, headers, config){
-						$scope.pageList();
-					}).error(function(data, status, headers, config){
-						response(status);
-					});
-				}
-		})
-		
-		function confirmDeletion(){
-			var appElement = document.querySelector('[ng-controller=listController]');
-			var $scope = angular.element(appElement).scope();
-			$scope.onDelete();
-		}
+	url:parent.getFunctionLinksHref("self"),
+	method:'DELETE',
+	dataType : "json",
+	withCredentials: true,
+	headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+	data: ""
+	}).success(function(data, status, headers, config){
+$scope.pageList();
+	}).error(function(data, status, headers, config){
+response(status);
+	});
+}
+})
+
+function confirmDeletion(){
+	var appElement = document.querySelector('[ng-controller=listController]');
+	var $scope = angular.element(appElement).scope();
+	$scope.onDelete();
+}
 	</script>
   </head> 
   <body ng-controller="listController" style="color: #000;">
   	<!-- 基本操作区 -->
   	<h5>
-  		<span class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ></span>
-  		<input type="text" id="name" class="form-control" value="" placeholder="请输入需要查找的名称" style="width: 20%;display: inline;">
-  		<i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i>
-  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onSearch()">搜索</a>
-  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onAdd()">添加</a>
+  <span class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ></span>
+  <input type="text" id="name" class="form-control" value="" placeholder="请输入需要查找的名称" style="width: 20%;display: inline;">
+  <i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i>
+  <a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onSearch()">搜索</a>
+  <a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onAdd()">添加</a>
   	</h5>
   	<!-- 列表区 -->
   	<table class="table">
@@ -204,121 +204,121 @@
 	  </thead>
 	  <tbody>
 	    <tr ng-repeat="data in datalist"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
-		    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.datekey}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.customerid}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.statlocaldate}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.campusid}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.consultantid}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.consultantname}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.consultantoacode}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.educatorid}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.educatorname}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.educatoroacode}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.newchargeamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.earlyendrenewamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.earlystudyrenew}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.laterendrenew}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.laterstudyrenew}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.earlyendrenewamountagain}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalrenewamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalnewchargeamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalchargeamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailynewchargeamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailyearlyendrenewamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailyearlystudyrenew}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailylaterendrenew}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailylaterstudyrenew}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailyearlyendrenewamountagain}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailytotalnewchargeamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailytotalchargeamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.regularinperiodrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.regularnotinperiodrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.regularrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.irregularinperiodrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.irregularnotinperiodrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.irregularrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalnormalrefundamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extraregularinperiodrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extraregularnotinperiodrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extraregularrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extrairregularinperiodrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extrairregularnotinperiodrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extrairregularrefundmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalextrarefundamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalrefundamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.reallowancemoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.compensatemoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lastestrefundverifytime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.referralstaffid}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.referralcustomerid}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.currentgrade}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.entrancegrade}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalmoneytransferedout}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalmoneytransferedin}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lastesttransferedintime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lastesttransferedouttime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lastestclasstime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lastestpaytime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.earliestpaytime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.verifytime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.replytime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.visittime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.meetingtime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.studentstatus}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.graduated}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.accountvalue}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.accountmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.accountpriceandamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.onetooneamountinasset}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.classgroupamountinasset}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.youxueamountinasset}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.otheramountinasset}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalamountinasset}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lessondurationvalue}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.onetooneassignedincome}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.classgroupassignedincome}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.assignedincome}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.youxueincome}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.otherproductincome}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.otherincome}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.assignedamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.assignedavgunitprice}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.assigneddurationhours}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.onetoonecoursetime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.classgroupcoursetime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.youxuecoursetime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.othercoursetime}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.orderavgunitprice}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.orderrealamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.orderlessonhours}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.ordertotalprice}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.debookamount}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.debookmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.debooklessonhours}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.returnedmoney}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.isavailable}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.isclasssuspended}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.isactive}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.isschoolsuspended}}</td>
-			<td ng-dblclick="toInfo(data)">{{data.customerbasestat.isclassfinished}}</td>
-			<td>
-	    		<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" title="查看"></h4>
-	    		<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil"  style="margin:0px 5px;color:#99DFF8;" title="修改"></h4>
-	    		<h4 ng-click="toDelete(data)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;" title="删除"></h4>
-			</td>
+    <td ng-dblclick="toInfo(data)">{{$index+1}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.datekey}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.customerid}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.statlocaldate}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.campusid}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.consultantid}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.consultantname}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.consultantoacode}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.educatorid}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.educatorname}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.educatoroacode}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.newchargeamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.earlyendrenewamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.earlystudyrenew}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.laterendrenew}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.laterstudyrenew}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.earlyendrenewamountagain}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalrenewamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalnewchargeamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalchargeamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailynewchargeamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailyearlyendrenewamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailyearlystudyrenew}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailylaterendrenew}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailylaterstudyrenew}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailyearlyendrenewamountagain}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailytotalnewchargeamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.dailytotalchargeamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.regularinperiodrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.regularnotinperiodrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.regularrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.irregularinperiodrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.irregularnotinperiodrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.irregularrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalnormalrefundamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extraregularinperiodrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extraregularnotinperiodrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extraregularrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extrairregularinperiodrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extrairregularnotinperiodrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.extrairregularrefundmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalextrarefundamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalrefundamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.reallowancemoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.compensatemoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lastestrefundverifytime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.referralstaffid}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.referralcustomerid}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.currentgrade}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.entrancegrade}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalmoneytransferedout}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalmoneytransferedin}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lastesttransferedintime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lastesttransferedouttime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lastestclasstime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lastestpaytime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.earliestpaytime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.verifytime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.replytime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.visittime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.meetingtime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.studentstatus}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.graduated}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.accountvalue}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.accountmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.accountpriceandamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.onetooneamountinasset}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.classgroupamountinasset}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.youxueamountinasset}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.otheramountinasset}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.totalamountinasset}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.lessondurationvalue}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.onetooneassignedincome}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.classgroupassignedincome}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.assignedincome}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.youxueincome}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.otherproductincome}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.otherincome}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.assignedamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.assignedavgunitprice}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.assigneddurationhours}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.onetoonecoursetime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.classgroupcoursetime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.youxuecoursetime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.othercoursetime}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.orderavgunitprice}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.orderrealamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.orderlessonhours}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.ordertotalprice}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.debookamount}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.debookmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.debooklessonhours}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.returnedmoney}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.isavailable}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.isclasssuspended}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.isactive}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.isschoolsuspended}}</td>
+	<td ng-dblclick="toInfo(data)">{{data.customerbasestat.isclassfinished}}</td>
+	<td>
+	    <h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" title="查看"></h4>
+	    <h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil"  style="margin:0px 5px;color:#99DFF8;" title="修改"></h4>
+	    <h4 ng-click="toDelete(data)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;" title="删除"></h4>
+	</td>
 	    </tr>
 	  </tbody>
 	</table>
  	<!-- 分页区 -->
 	<div class="pagepanel">
-		<span class="text-info" style="position:relative;top:-10px;">共<label id="totalCount"></label>条</span>
-		<ul class="pagination" style="margin: 0px 10px;padding:0px;">
-		</ul>
-		<span class="text-info" style="position:relative;top:-10px;">第<label id="pageNo"></label>页/共<label id="pageCount"></label>页</span>
-		<select id="pageSize" class="form-control" style="width: 70px;float: right;">
-		</select>
-		<span class="text-info" style="position:relative;top:6px;float: right;margin: 0px 5px;">每页显示</span>
+<span class="text-info" style="position:relative;top:-10px;">共<label id="totalCount"></label>条</span>
+<ul class="pagination" style="margin: 0px 10px;padding:0px;">
+</ul>
+<span class="text-info" style="position:relative;top:-10px;">第<label id="pageNo"></label>页/共<label id="pageCount"></label>页</span>
+<select id="pageSize" class="form-control" style="width: 70px;float: right;">
+</select>
+<span class="text-info" style="position:relative;top:6px;float: right;margin: 0px 5px;">每页显示</span>
 	</div>
   </body>
 </html>

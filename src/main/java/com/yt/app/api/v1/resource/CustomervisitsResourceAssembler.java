@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Customervisits;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:38
+* @createdate  2017-04-27 15:10:48
 */
 
 public class CustomervisitsResourceAssembler extends ResourceAssemblerSupport<Customervisits, CustomervisitsResource> {
 	public CustomervisitsResourceAssembler() {
-		super(CustomervisitsController.class, CustomervisitsResource.class);
+super(CustomervisitsController.class, CustomervisitsResource.class);
 	}
 	@Override	public CustomervisitsResource toResource(Customervisits t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CustomervisitsResource instantiateResource(Customervisits t) {
-		return new CustomervisitsResource(t);
+return new CustomervisitsResource(t);
 	}
 
 }

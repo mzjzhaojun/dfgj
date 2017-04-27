@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:16
+* @createdate  2017-04-27 15:10:45
 */
 
 public class AccountchargeinvoicesResource extends ResourceSupport {
 	private final Accountchargeinvoices t;
 	public AccountchargeinvoicesResource(Accountchargeinvoices entity) {
-		this.t = entity;
-		this.add(linkTo(AccountchargeinvoicesController.class).withRel("post"));
-		this.add(linkTo(methodOn(AccountchargeinvoicesController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(AccountchargeinvoicesController.class).withRel("post"));
+this.add(linkTo(methodOn(AccountchargeinvoicesController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Accountchargeinvoices getAccountchargeinvoices() {
-		return t;
+return t;
 	}
 
 

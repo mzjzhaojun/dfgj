@@ -15,119 +15,119 @@
     <script type="text/javascript" src="../../../../resource/js/response.js"></script>
     <!-- 初始化 -->
     <script type="text/javascript">
-		var info = angular.module("info", []);
-		info.controller("infoController",function($scope, $http) {
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			$http({
-				url:parent.getFunctionLinksHref("self"),
-				method:'GET',
-				dataType : "json",
-				withCredentials: true,
-				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-				data: ''
-				}).success(function(data, status, headers, config){
-					$scope.formData= data;
-				}).error(function(data, status, headers, config){
-					response(status);
-				});
-		})
+var info = angular.module("info", []);
+info.controller("infoController",function($scope, $http) {
+	//返回
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	$http({
+url:parent.getFunctionLinksHref("self"),
+method:'GET',
+dataType : "json",
+withCredentials: true,
+headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+data: ''
+}).success(function(data, status, headers, config){
+	$scope.formData= data;
+}).error(function(data, status, headers, config){
+	response(status);
+});
+})
 	</script>
   </head>
   <body ng-controller="infoController">
-  		 <div class="col-lg-12 topActionPanel">
+   <div class="col-lg-12 topActionPanel">
 	        <div>
 	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-    		</div>
+    </div>
     	</div>
-   		<div class="col-lg-6 viewFixedWidth">
-   		 <div class="input-group input-group-sm">
+   <div class="col-lg-6 viewFixedWidth">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">学员ID</span>
            	<input type="text" class="form-control" value="{{formData.customerid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">员工ID(Customers数据库的CustomerStaffRelations)</span>
            	<input type="text" class="form-control" value="{{formData.staffid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">学员与员工关系的本地日期</span>
            	<input type="text" class="form-control" value="{{formData.statlocaldate}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">1 咨询关系: 学生，咨询师;2 教管关系：学生，学管师;3 教学关系: 学生，老师; 4 电销关系：学生，坐席；5 市场关系：学生，市场专员(Customers数据库的CustomerStaffRelations)</span>
            	<input type="text" class="form-control" value="{{formData.relationtype}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">校区ID(CustomerBaseStat)</span>
            	<input type="text" class="form-control" value="{{formData.campusid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">转介绍的员工(CustomerBaseStat)</span>
            	<input type="text" class="form-control" value="{{formData.referralstaffid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">转介绍的客户(CustomerBaseStat)</span>
            	<input type="text" class="form-control" value="{{formData.referralcustomerid}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">账户价值</span>
            	<input type="text" class="form-control" value="{{formData.accountvalue}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">最后一次上课时间</span>
            	<input type="text" class="form-control" value="{{formData.lastestclasstime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">最后一次付款时间</span>
            	<input type="text" class="form-control" value="{{formData.lastestpaytime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">最后一次退费时间</span>
            	<input type="text" class="form-control" value="{{formData.lastestrefundverifytime}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">1对1课程课时数</span>
            	<input type="text" class="form-control" value="{{formData.onetooneamountinasset}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">班组课程课时数</span>
            	<input type="text" class="form-control" value="{{formData.classgroupamountinasset}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">游学课程课时数</span>
            	<input type="text" class="form-control" value="{{formData.youxueamountinasset}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">其它课时数</span>
            	<input type="text" class="form-control" value="{{formData.otheramountinasset}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">剩余课时数</span>
            	<input type="text" class="form-control" value="{{formData.totalamountinasset}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否有效学员</span>
            	<input type="text" class="form-control" value="{{formData.isavailable}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否是停课学员</span>
            	<input type="text" class="form-control" value="{{formData.isclasssuspended}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否活跃</span>
            	<input type="text" class="form-control" value="{{formData.isactive}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否休学</span>
            	<input type="text" class="form-control" value="{{formData.isschoolsuspended}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否结课</span>
            	<input type="text" class="form-control" value="{{formData.isclassfinished}}" disabled>
            </div>
-   		 <div class="input-group input-group-sm">
+    <div class="input-group input-group-sm">
              <span class="input-group-addon text-right spanwidth">是否高三毕业</span>
            	<input type="text" class="form-control" value="{{formData.graduated}}" disabled>
            </div>

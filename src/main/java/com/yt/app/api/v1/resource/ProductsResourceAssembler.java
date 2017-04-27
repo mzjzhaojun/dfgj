@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Products;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:54
+* @createdate  2017-04-27 15:10:49
 */
 
 public class ProductsResourceAssembler extends ResourceAssemblerSupport<Products, ProductsResource> {
 	public ProductsResourceAssembler() {
-		super(ProductsController.class, ProductsResource.class);
+super(ProductsController.class, ProductsResource.class);
 	}
 	@Override	public ProductsResource toResource(Products t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected ProductsResource instantiateResource(Products t) {
-		return new ProductsResource(t);
+return new ProductsResource(t);
 	}
 
 }

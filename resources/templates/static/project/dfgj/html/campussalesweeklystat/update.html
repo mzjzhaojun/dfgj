@@ -19,332 +19,350 @@
 	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
 	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
 	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	<!-- datetime -->
+	<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>	
 	<!-- 初始化 -->
 	<script type="text/javascript">
-		var add = angular.module("add", []);
-		add.controller("addController",function($scope, $http) {
-			$scope.formData = {};
-			$http({
-				url:parent.getFunctionLinksHref("self"),
-				method:'GET',
-				dataType : "json",
-				withCredentials: true,
-				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-				data: ''
-				}).success(function(data, status, headers, config){
-					$scope.formData= data
-				}).error(function(data, status, headers, config){
-					response(status);
-				});
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			$scope.onPreserved=function(){
-				var isValid = $("#saveForm").valid();
-					if(isValid){
-    				$http({
-    					url:parent.getFunctionLinksHref("self"),
-    					method:'PUT',
-    					dataType : "json",
-    					withCredentials: true,
-    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-    					data: JSON.stringify($scope.formData)
-    		  		}).success(function(data, status, headers, config){
-    		  			location.href="list.html";
-    		  		}).error(function(data, status, headers, config){
-    		  			response(status);
-					})
-    			}
-			}
-			$scope.initselect = function() {
-			$http({
-				url : parent.getMenuLinksHref("orgregionslist"),
-				method : 'POST',
-				dataType : "json",
-				withCredentials : true,
-				headers : {
-					'Content-Type' : 'application/json;charset=UTF-8;'
-				},
-				data : ''
-				}).success(function(data, status, headers, config) {
-					$scope.selects = data;
-				}).error(function(data, status, headers, config) {
-					response(status);
-				})
-			}
-		//$scope.initselect();
-		})
+var add = angular.module("add", []);
+add.controller("addController",function($scope, $http) {
+	$scope.formData = {};
+	$http({
+url:parent.getFunctionLinksHref("self"),
+method:'GET',
+dataType : "json",
+withCredentials: true,
+headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+data: ''
+}).success(function(data, status, headers, config){
+	$scope.formData= data
+}).error(function(data, status, headers, config){
+	response(status);
+});
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	$scope.onPreserved=function(){
+var isValid = $("#saveForm").valid();
+	if(isValid){
+    $http({
+    	url:parent.getFunctionLinksHref("self"),
+    	method:'PUT',
+    	dataType : "json",
+    	withCredentials: true,
+    	headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    	data: JSON.stringify($scope.formData)
+      }).success(function(data, status, headers, config){
+      	location.href="list.html";
+      }).error(function(data, status, headers, config){
+      	response(status);
+	})
+    	}
+	}
+	$scope.initselect = function() {
+$http({
+	url : parent.getMenuLinksHref("dictionarylist"),
+	method : 'POST',
+	dataType : "json",
+	withCredentials : true,
+	headers : {
+'Content-Type' : 'application/json;charset=UTF-8;'
+	},
+	data : JSON.stringify([20])
+	}).success(function(data, status, headers, config) {
+$scope.selects = data;
+	}).error(function(data, status, headers, config) {
+response(status);
+	})
+}
+	$scope.initselect();
+})
 	</script>
 </head>
   <body ng-controller="addController">
   	<form method="post" id="saveForm" action="">
-  		 <!-- 操作按钮操作区 -->
-  		 <div class="col-lg-12 topActionPanel">
+   <!-- 操作按钮操作区 -->
+   <div class="col-lg-12 topActionPanel">
 	        <div>
-		    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
 	    	</div>
 	    	<div>
-		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
 	    	</div>
     	</div>
-   		<div class="col-lg-6">
-	   		 	<div class="input-group input-group-sm">
+   <div class="col-lg-6">
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">年度</span>
-	           		<input type="text" class="form-control required" placeholder="请输入年度" name="yearkey" ng-model="formData.yearkey" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入年度" name="yearkey" ng-model="formData.yearkey" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">季度</span>
-	           		<input type="text" class="form-control required" placeholder="请输入季度" name="quarterkey" ng-model="formData.quarterkey" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入季度" name="quarterkey" ng-model="formData.quarterkey" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">月份</span>
-	           		<input type="text" class="form-control required" placeholder="请输入月份" name="monthkey" ng-model="formData.monthkey" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入月份" name="monthkey" ng-model="formData.monthkey" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">周</span>
-	           		<input type="text" class="form-control required" placeholder="请输入周" name="weekkey" ng-model="formData.weekkey" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入周" name="weekkey" ng-model="formData.weekkey" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">本周开始日期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入本周开始日期" name="startdayofweek" ng-model="formData.startdayofweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入本周开始日期" name="startdayofweek" ng-model="formData.startdayofweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">本周结束日期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入本周结束日期" name="enddayofweek" ng-model="formData.enddayofweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入本周结束日期" name="enddayofweek" ng-model="formData.enddayofweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上周开始日期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上周开始日期" name="startdayoflastweek" ng-model="formData.startdayoflastweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上周开始日期" name="startdayoflastweek" ng-model="formData.startdayoflastweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上周结束日期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上周结束日期" name="enddayoflastweek" ng-model="formData.enddayoflastweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">大区ID</span>
-	   		 		<select class="form-control required" name="regionid" ng-model="formData.regionid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择大区ID</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上周结束日期" name="enddayoflastweek" ng-model="formData.enddayoflastweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">大区ID</span>
+	    <select class="form-control required" name="regionid" ng-model="formData.regionid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择大区ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">大区</span>
-	           		<input type="text" class="form-control required" placeholder="请输入大区" name="regionname" ng-model="formData.regionname" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">分公司ID</span>
-	   		 		<select class="form-control required" name="branchid" ng-model="formData.branchid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择分公司ID</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入大区" name="regionname" ng-model="formData.regionname" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">分公司ID</span>
+	    <select class="form-control required" name="branchid" ng-model="formData.branchid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择分公司ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">分公司</span>
-	           		<input type="text" class="form-control required" placeholder="请输入分公司" name="branchname" ng-model="formData.branchname" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">校区ID</span>
-	   		 		<select class="form-control required" name="campusid" ng-model="formData.campusid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择校区ID</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入分公司" name="branchname" ng-model="formData.branchname" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">校区ID</span>
+	    <select class="form-control required" name="campusid" ng-model="formData.campusid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择校区ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">校区</span>
-	           		<input type="text" class="form-control required" placeholder="请输入校区" name="campusname" ng-model="formData.campusname" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入校区" name="campusname" ng-model="formData.campusname" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签金额年度预算任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签金额年度预算任务" name="nsataskyear" ng-model="formData.nsataskyear" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签金额年度预算任务" name="nsataskyear" ng-model="formData.nsataskyear" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签金额年度累计完成额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签金额年度累计完成额" name="nsayear" ng-model="formData.nsayear" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签金额年度累计完成额" name="nsayear" ng-model="formData.nsayear" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签金额年度去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签金额年度去年同期" name="nsayearlastyear" ng-model="formData.nsayearlastyear" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签金额年度去年同期" name="nsayearlastyear" ng-model="formData.nsayearlastyear" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签金额季度预算任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签金额季度预算任务" name="nsataskquarter" ng-model="formData.nsataskquarter" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签金额季度预算任务" name="nsataskquarter" ng-model="formData.nsataskquarter" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签金额季度累计完成额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签金额季度累计完成额" name="nsaquarter" ng-model="formData.nsaquarter" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签金额季度累计完成额" name="nsaquarter" ng-model="formData.nsaquarter" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签金额季度去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签金额季度去年同期" name="nsaquarterlastyear" ng-model="formData.nsaquarterlastyear" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签金额季度去年同期" name="nsaquarterlastyear" ng-model="formData.nsaquarterlastyear" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签金额月度预算任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签金额月度预算任务" name="nsataskmonth" ng-model="formData.nsataskmonth" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签金额月度预算任务" name="nsataskmonth" ng-model="formData.nsataskmonth" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签金额月度累计完成额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签金额月度累计完成额" name="nsamonth" ng-model="formData.nsamonth" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签金额月度累计完成额" name="nsamonth" ng-model="formData.nsamonth" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签金额月度去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签金额月度去年同期" name="nsamonthlastyear" ng-model="formData.nsamonthlastyear" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签金额月度去年同期" name="nsamonthlastyear" ng-model="formData.nsamonthlastyear" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签人数年度预算任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签人数年度预算任务" name="nsntaskyear" ng-model="formData.nsntaskyear" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签人数年度预算任务" name="nsntaskyear" ng-model="formData.nsntaskyear" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签人数年度累计完成</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签人数年度累计完成" name="nsnyear" ng-model="formData.nsnyear" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签人数年度累计完成" name="nsnyear" ng-model="formData.nsnyear" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签人数年度去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签人数年度去年同期" name="nsnyearlastyear" ng-model="formData.nsnyearlastyear" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签人数年度去年同期" name="nsnyearlastyear" ng-model="formData.nsnyearlastyear" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签人数季度预算任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签人数季度预算任务" name="nsntaskquarter" ng-model="formData.nsntaskquarter" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签人数季度预算任务" name="nsntaskquarter" ng-model="formData.nsntaskquarter" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签人数季度累计完成额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签人数季度累计完成额" name="nsnquarter" ng-model="formData.nsnquarter" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签人数季度累计完成额" name="nsnquarter" ng-model="formData.nsnquarter" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签人数季度去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签人数季度去年同期" name="nsnquarterlastyear" ng-model="formData.nsnquarterlastyear" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签人数季度去年同期" name="nsnquarterlastyear" ng-model="formData.nsnquarterlastyear" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签人数月度预算任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签人数月度预算任务" name="nsntaskmonth" ng-model="formData.nsntaskmonth" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签人数月度预算任务" name="nsntaskmonth" ng-model="formData.nsntaskmonth" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签人数月度累计完成额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签人数月度累计完成额" name="nsnmonth" ng-model="formData.nsnmonth" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签人数月度累计完成额" name="nsnmonth" ng-model="formData.nsnmonth" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">累计新签人数月度去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入累计新签人数月度去年同期" name="nsnmonthlastyear" ng-model="formData.nsnmonthlastyear" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入累计新签人数月度去年同期" name="nsnmonthlastyear" ng-model="formData.nsnmonthlastyear" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上周签约金额任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上周签约金额任务" name="nsatasklastweek" ng-model="formData.nsatasklastweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上周签约金额任务" name="nsatasklastweek" ng-model="formData.nsatasklastweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上周签约金额实际</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上周签约金额实际" name="nsalastweek" ng-model="formData.nsalastweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上周签约金额实际" name="nsalastweek" ng-model="formData.nsalastweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上周签约金额原预计完成</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上周签约金额原预计完成" name="nsaplanlastweek" ng-model="formData.nsaplanlastweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上周签约金额原预计完成" name="nsaplanlastweek" ng-model="formData.nsaplanlastweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上周签约金额去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上周签约金额去年同期" name="nsayoylastweek" ng-model="formData.nsayoylastweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上周签约金额去年同期" name="nsayoylastweek" ng-model="formData.nsayoylastweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上周签约人数任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上周签约人数任务" name="nsntasklastweek" ng-model="formData.nsntasklastweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上周签约人数任务" name="nsntasklastweek" ng-model="formData.nsntasklastweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上周签约人数实际</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上周签约人数实际" name="nsnlastweek" ng-model="formData.nsnlastweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上周签约人数实际" name="nsnlastweek" ng-model="formData.nsnlastweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上周签约人数原预计完成</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上周签约人数原预计完成" name="nsnplanlastweek" ng-model="formData.nsnplanlastweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上周签约人数原预计完成" name="nsnplanlastweek" ng-model="formData.nsnplanlastweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上周签约人数去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上周签约人数去年同期" name="nsnyoylastweek" ng-model="formData.nsnyoylastweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上周签约人数去年同期" name="nsnyoylastweek" ng-model="formData.nsnyoylastweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">本周签约金额任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入本周签约金额任务" name="nsataskthisweek" ng-model="formData.nsataskthisweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入本周签约金额任务" name="nsataskthisweek" ng-model="formData.nsataskthisweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">本周签约金额去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入本周签约金额去年同期" name="nsayoythisweek" ng-model="formData.nsayoythisweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入本周签约金额去年同期" name="nsayoythisweek" ng-model="formData.nsayoythisweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">本周签约金额预计完成</span>
-	           		<input type="text" class="form-control required" placeholder="请输入本周签约金额预计完成" name="nsaplanthisweek" ng-model="formData.nsaplanthisweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入本周签约金额预计完成" name="nsaplanthisweek" ng-model="formData.nsaplanthisweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">本周签约人数任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入本周签约人数任务" name="nsntaskthisweek" ng-model="formData.nsntaskthisweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入本周签约人数任务" name="nsntaskthisweek" ng-model="formData.nsntaskthisweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">本周签约人数去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入本周签约人数去年同期" name="nsnyoythisweek" ng-model="formData.nsnyoythisweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入本周签约人数去年同期" name="nsnyoythisweek" ng-model="formData.nsnyoythisweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">本周签约人数预计完成</span>
-	           		<input type="text" class="form-control required" placeholder="请输入本周签约人数预计完成" name="nsnplanthisweek" ng-model="formData.nsnplanthisweek" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入本周签约人数预计完成" name="nsnplanthisweek" ng-model="formData.nsnplanthisweek" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">潜在客户人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入潜在客户人数" name="potentialcustomernumber" ng-model="formData.potentialcustomernumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入潜在客户人数" name="potentialcustomernumber" ng-model="formData.potentialcustomernumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">预计可上门人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入预计可上门人数" name="verifynumberplan" ng-model="formData.verifynumberplan" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入预计可上门人数" name="verifynumberplan" ng-model="formData.verifynumberplan" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">预估签约人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入预估签约人数" name="signnumberplan" ng-model="formData.signnumberplan" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入预估签约人数" name="signnumberplan" ng-model="formData.signnumberplan" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">预估签约金额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入预估签约金额" name="signamountplan" ng-model="formData.signamountplan" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-   		</div>
+	           <input type="text" class="form-control required" placeholder="请输入预估签约金额" name="signamountplan" ng-model="formData.signamountplan" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+   </div>
     </form>
   </body>
+  <script type="text/javascript">
+  $('#date').datetimepicker({
+  	format : 'yyyy-mm-dd',
+  	language : 'cn',
+  	weekStart : 1,
+  	minView : "month",
+  	todayBtn : 1,
+  	initialDate:new Date(),
+  	autoclose : 1,
+  	todayHighlight : 1,
+  	startView : 2,
+  	forceParse : 0,
+  	showMeridian : 0
+  });
 </html>

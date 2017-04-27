@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Otherproductincomeweekly;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:50
+* @createdate  2017-04-27 15:10:49
 */
 
 public class OtherproductincomeweeklyResourceAssembler extends ResourceAssemblerSupport<Otherproductincomeweekly, OtherproductincomeweeklyResource> {
 	public OtherproductincomeweeklyResourceAssembler() {
-		super(OtherproductincomeweeklyController.class, OtherproductincomeweeklyResource.class);
+super(OtherproductincomeweeklyController.class, OtherproductincomeweeklyResource.class);
 	}
 	@Override	public OtherproductincomeweeklyResource toResource(Otherproductincomeweekly t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected OtherproductincomeweeklyResource instantiateResource(Otherproductincomeweekly t) {
-		return new OtherproductincomeweeklyResource(t);
+return new OtherproductincomeweeklyResource(t);
 	}
 
 }

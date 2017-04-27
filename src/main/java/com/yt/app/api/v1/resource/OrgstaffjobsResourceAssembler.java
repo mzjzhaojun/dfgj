@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Orgstaffjobs;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:49
+* @createdate  2017-04-27 15:10:49
 */
 
 public class OrgstaffjobsResourceAssembler extends ResourceAssemblerSupport<Orgstaffjobs, OrgstaffjobsResource> {
 	public OrgstaffjobsResourceAssembler() {
-		super(OrgstaffjobsController.class, OrgstaffjobsResource.class);
+super(OrgstaffjobsController.class, OrgstaffjobsResource.class);
 	}
 	@Override	public OrgstaffjobsResource toResource(Orgstaffjobs t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected OrgstaffjobsResource instantiateResource(Orgstaffjobs t) {
-		return new OrgstaffjobsResource(t);
+return new OrgstaffjobsResource(t);
 	}
 
 }

@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Customerassetsdetail;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:29
+* @createdate  2017-04-27 15:10:47
 */
 
 public class CustomerassetsdetailResourceAssembler extends ResourceAssemblerSupport<Customerassetsdetail, CustomerassetsdetailResource> {
 	public CustomerassetsdetailResourceAssembler() {
-		super(CustomerassetsdetailController.class, CustomerassetsdetailResource.class);
+super(CustomerassetsdetailController.class, CustomerassetsdetailResource.class);
 	}
 	@Override	public CustomerassetsdetailResource toResource(Customerassetsdetail t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CustomerassetsdetailResource instantiateResource(Customerassetsdetail t) {
-		return new CustomerassetsdetailResource(t);
+return new CustomerassetsdetailResource(t);
 	}
 
 }

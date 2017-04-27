@@ -20,190 +20,208 @@
 	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
 	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
 	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	<!-- datetime -->
+	<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>	
 	<!-- 初始化 -->
 	<script type="text/javascript">
-		var add = angular.module("add", []);
-		add.controller("addController",function($scope, $http) {
-			$scope.formData = {};
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			//保存
-			$scope.onPreserved=function(){
-				var isValid = $("#saveForm").valid();
-					if(isValid){
-    				$http({
-    					url:parent.getMenuLinksHref("accountrecordspost"),
-    					method:'POST',
-    					dataType : "json",
-    					withCredentials: true,
-    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-    					data: JSON.stringify($scope.formData)
-    		  		}).success(function(data, status, headers, config){
-    		  			if(data == 1){
-    		  				location.href="list.html";
-    		  			}
-    		  		}).error(function(data, status, headers, config){
-    		  			response(status);
-					})
-    			}
-			}
-			$scope.initselect = function() {
-			$http({
-				url : parent.getMenuLinksHref("orgregionslist"),
-				method : 'POST',
-				dataType : "json",
-				withCredentials : true,
-				headers : {
-					'Content-Type' : 'application/json;charset=UTF-8;'
-				},
-				data : ''
-				}).success(function(data, status, headers, config) {
-					$scope.selects = data;
-				}).error(function(data, status, headers, config) {
-					response(status);
-				})
-			}
-		//$scope.initselect();
-		})
+var add = angular.module("add", []);
+add.controller("addController",function($scope, $http) {
+	$scope.formData = {};
+	//返回
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	//保存
+	$scope.onPreserved=function(){
+var isValid = $("#saveForm").valid();
+	if(isValid){
+    $http({
+    	url:parent.getMenuLinksHref("accountrecordspost"),
+    	method:'POST',
+    	dataType : "json",
+    	withCredentials: true,
+    	headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    	data: JSON.stringify($scope.formData)
+      }).success(function(data, status, headers, config){
+      	if(data == 1){
+      location.href="list.html";
+      	}
+      }).error(function(data, status, headers, config){
+      	response(status);
+	})
+    	}
+	}
+	$scope.initselect = function() {
+$http({
+	url : parent.getMenuLinksHref("dictionarylist"),
+	method : 'POST',
+	dataType : "json",
+	withCredentials : true,
+	headers : {
+'Content-Type' : 'application/json;charset=UTF-8;'
+	},
+	data : JSON.stringify([20])
+	}).success(function(data, status, headers, config) {
+$scope.selects = data;
+	}).error(function(data, status, headers, config) {
+response(status);
+	})
+}
+	$scope.initselect();
+})
 	</script>
 </head>
   
   <body ng-controller="addController">
   	<form method="post" id="saveForm" action="">
-  		 <!-- 操作按钮操作区 -->
-  		 <div class="col-lg-12 topActionPanel">
+   <!-- 操作按钮操作区 -->
+   <div class="col-lg-12 topActionPanel">
 	        <div>
-		    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
 	    	</div>
 	    	<div>
-		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
 	    	</div>
-    		</div>
-   		<div class="col-lg-6">
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">校区ID</span>
-	   		 		<select class="form-control required" name="campusid" ng-model="formData.campusid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择校区ID</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">学员ID</span>
-	   		 		<select class="form-control required" name="customerid" ng-model="formData.customerid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择学员ID</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">账户ID</span>
-	   		 		<select class="form-control required" name="accountid" ng-model="formData.accountid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择账户ID</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+    </div>
+   <div class="col-lg-6">
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">校区ID</span>
+	    <select class="form-control required" name="campusid" ng-model="formData.campusid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择校区ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">学员ID</span>
+	    <select class="form-control required" name="customerid" ng-model="formData.customerid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择学员ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">账户ID</span>
+	    <select class="form-control required" name="accountid" ng-model="formData.accountid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择账户ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">流水时间</span>
-	           		<input type="text" class="form-control required" placeholder="请输入流水时间" name="recordtime" ng-model="formData.recordtime" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入流水时间" name="recordtime" ng-model="formData.recordtime" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">流水类型（1充值，2退费,3 转入, 4转出，5订购，6退订, 7服务费扣除，8服务费返还）</span>
-	           		<input type="text" class="form-control required" placeholder="请输入流水类型（1充值，2退费,3 转入, 4转出，5订购，6退订, 7服务费扣除，8服务费返还）" name="recordtype" ng-model="formData.recordtype" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入流水类型（1充值，2退费,3 转入, 4转出，5订购，6退订, 7服务费扣除，8服务费返还）" name="recordtype" ng-model="formData.recordtype" maxlength="32">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">流水方向（1是入，-1是出）</span>
-	           		<input type="text" class="form-control required" placeholder="请输入流水方向（1是入，-1是出）" name="recordflag" ng-model="formData.recordflag" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">业务单ID（例如订购明细ID）</span>
-	   		 		<select class="form-control required" name="billid" ng-model="formData.billid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择业务单ID（例如订购明细ID）</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入流水方向（1是入，-1是出）" name="recordflag" ng-model="formData.recordflag" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">业务单ID（例如订购明细ID）</span>
+	    <select class="form-control required" name="billid" ng-model="formData.billid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择业务单ID（例如订购明细ID）</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">业务单号（例如订购明细号）</span>
-	           		<input type="text" class="form-control required" placeholder="请输入业务单号（例如订购明细号）" name="billno" ng-model="formData.billno" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">总业务单ID（例如订购单ID）</span>
-	   		 		<select class="form-control required" name="billparentid" ng-model="formData.billparentid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择总业务单ID（例如订购单ID）</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入业务单号（例如订购明细号）" name="billno" ng-model="formData.billno" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">总业务单ID（例如订购单ID）</span>
+	    <select class="form-control required" name="billparentid" ng-model="formData.billparentid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择总业务单ID（例如订购单ID）</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">总业务单号（例如订购单号）</span>
-	           		<input type="text" class="form-control required" placeholder="请输入总业务单号（例如订购单号）" name="billparentno" ng-model="formData.billparentno" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">业务关联ID（例如退订单关联订购明细ID）</span>
-	   		 		<select class="form-control required" name="billrelateid" ng-model="formData.billrelateid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择业务关联ID（例如退订单关联订购明细ID）</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入总业务单号（例如订购单号）" name="billparentno" ng-model="formData.billparentno" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">业务关联ID（例如退订单关联订购明细ID）</span>
+	    <select class="form-control required" name="billrelateid" ng-model="formData.billrelateid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择业务关联ID（例如退订单关联订购明细ID）</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">业务关联单号（例如退订单关联订购明细号）</span>
-	           		<input type="text" class="form-control required" placeholder="请输入业务关联单号（例如退订单关联订购明细号）" name="billrelateno" ng-model="formData.billrelateno" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入业务关联单号（例如退订单关联订购明细号）" name="billrelateno" ng-model="formData.billrelateno" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">业务操作时间</span>
-	           		<input type="text" class="form-control required" placeholder="请输入业务操作时间" name="billtime" ng-model="formData.billtime" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入业务操作时间" name="billtime" ng-model="formData.billtime" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">业务类型</span>
-	           		<input type="text" class="form-control required" placeholder="请输入业务类型" name="billtype" ng-model="formData.billtype" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入业务类型" name="billtype" ng-model="formData.billtype" maxlength="32">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">业务类型描述</span>
-	           		<input type="text" class="form-control required" placeholder="请输入业务类型描述" name="billtypename" ng-model="formData.billtypename" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入业务类型描述" name="billtypename" ng-model="formData.billtypename" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">业务金额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入业务金额" name="billmoney" ng-model="formData.billmoney" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入业务金额" name="billmoney" ng-model="formData.billmoney" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">业务说明</span>
-	           		<input type="text" class="form-control required" placeholder="请输入业务说明" name="billmemo" ng-model="formData.billmemo" maxlength="500">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">业务操作人ID</span>
-	   		 		<select class="form-control required" name="billerid" ng-model="formData.billerid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择业务操作人ID</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入业务说明" name="billmemo" ng-model="formData.billmemo" maxlength="500">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">业务操作人ID</span>
+	    <select class="form-control required" name="billerid" ng-model="formData.billerid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择业务操作人ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">业务操作人姓名</span>
-	           		<input type="text" class="form-control required" placeholder="请输入业务操作人姓名" name="billername" ng-model="formData.billername" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">业务操作人岗位ID</span>
-	   		 		<select class="form-control required" name="billerjobid" ng-model="formData.billerjobid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择业务操作人岗位ID</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入业务操作人姓名" name="billername" ng-model="formData.billername" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">业务操作人岗位ID</span>
+	    <select class="form-control required" name="billerjobid" ng-model="formData.billerjobid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择业务操作人岗位ID</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">业务操作人岗位名称</span>
-	           		<input type="text" class="form-control required" placeholder="请输入业务操作人岗位名称" name="billerjobname" ng-model="formData.billerjobname" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	           <input type="text" class="form-control required" placeholder="请输入业务操作人岗位名称" name="billerjobname" ng-model="formData.billerjobname" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
 	        </div>
     </form>
   </body>
+  <script type="text/javascript">
+  $('#date').datetimepicker({
+  	format : 'yyyy-mm-dd',
+  	language : 'cn',
+  	weekStart : 1,
+  	minView : "month",
+  	todayBtn : 1,
+  	initialDate:new Date(),
+  	autoclose : 1,
+  	todayHighlight : 1,
+  	startView : 2,
+  	forceParse : 0,
+  	showMeridian : 0
+  });
 </html>

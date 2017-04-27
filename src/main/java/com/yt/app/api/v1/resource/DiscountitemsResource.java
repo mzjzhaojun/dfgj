@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:38
+* @createdate  2017-04-27 15:10:48
 */
 
 public class DiscountitemsResource extends ResourceSupport {
 	private final Discountitems t;
 	public DiscountitemsResource(Discountitems entity) {
-		this.t = entity;
-		this.add(linkTo(DiscountitemsController.class).withRel("post"));
-		this.add(linkTo(methodOn(DiscountitemsController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(DiscountitemsController.class).withRel("post"));
+this.add(linkTo(methodOn(DiscountitemsController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Discountitems getDiscountitems() {
-		return t;
+return t;
 	}
 
 

@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:38
+* @createdate  2017-04-27 15:10:48
 */
 
 public class DebookorderitemsResource extends ResourceSupport {
 	private final Debookorderitems t;
 	public DebookorderitemsResource(Debookorderitems entity) {
-		this.t = entity;
-		this.add(linkTo(DebookorderitemsController.class).withRel("post"));
-		this.add(linkTo(methodOn(DebookorderitemsController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(DebookorderitemsController.class).withRel("post"));
+this.add(linkTo(methodOn(DebookorderitemsController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Debookorderitems getDebookorderitems() {
-		return t;
+return t;
 	}
 
 

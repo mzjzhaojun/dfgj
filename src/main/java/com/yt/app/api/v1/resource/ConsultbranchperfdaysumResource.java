@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:25
+* @createdate  2017-04-27 15:10:46
 */
 
 public class ConsultbranchperfdaysumResource extends ResourceSupport {
 	private final Consultbranchperfdaysum t;
 	public ConsultbranchperfdaysumResource(Consultbranchperfdaysum entity) {
-		this.t = entity;
-		this.add(linkTo(ConsultbranchperfdaysumController.class).withRel("post"));
-		this.add(linkTo(methodOn(ConsultbranchperfdaysumController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(ConsultbranchperfdaysumController.class).withRel("post"));
+this.add(linkTo(methodOn(ConsultbranchperfdaysumController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Consultbranchperfdaysum getConsultbranchperfdaysum() {
-		return t;
+return t;
 	}
 
 

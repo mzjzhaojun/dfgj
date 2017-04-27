@@ -7,7 +7,7 @@ import com.yt.app.common.base.IBaseService;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:43
+* @createdate  2017-04-27 15:10:48
 */
 
 public interface EducatorDaytaskService  extends IBaseService<EducatorDaytask, Long>{

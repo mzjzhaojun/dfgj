@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:30
+* @createdate  2017-04-27 15:10:47
 */
 
 public class CustomercoursesResource extends ResourceSupport {
 	private final Customercourses t;
 	public CustomercoursesResource(Customercourses entity) {
-		this.t = entity;
-		this.add(linkTo(CustomercoursesController.class).withRel("post"));
-		this.add(linkTo(methodOn(CustomercoursesController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(CustomercoursesController.class).withRel("post"));
+this.add(linkTo(methodOn(CustomercoursesController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Customercourses getCustomercourses() {
-		return t;
+return t;
 	}
 
 

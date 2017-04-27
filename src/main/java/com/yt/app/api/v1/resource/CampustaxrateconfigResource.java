@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:23
+* @createdate  2017-04-27 15:10:46
 */
 
 public class CampustaxrateconfigResource extends ResourceSupport {
 	private final Campustaxrateconfig t;
 	public CampustaxrateconfigResource(Campustaxrateconfig entity) {
-		this.t = entity;
-		this.add(linkTo(CampustaxrateconfigController.class).withRel("post"));
-		this.add(linkTo(methodOn(CampustaxrateconfigController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(CampustaxrateconfigController.class).withRel("post"));
+this.add(linkTo(methodOn(CampustaxrateconfigController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Campustaxrateconfig getCampustaxrateconfig() {
-		return t;
+return t;
 	}
 
 

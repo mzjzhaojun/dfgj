@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Campusincomestat;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:21
+* @createdate  2017-04-27 15:10:46
 */
 
 public class CampusincomestatResourceAssembler extends ResourceAssemblerSupport<Campusincomestat, CampusincomestatResource> {
 	public CampusincomestatResourceAssembler() {
-		super(CampusincomestatController.class, CampusincomestatResource.class);
+super(CampusincomestatController.class, CampusincomestatResource.class);
 	}
 	@Override	public CampusincomestatResource toResource(Campusincomestat t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CampusincomestatResource instantiateResource(Campusincomestat t) {
-		return new CampusincomestatResource(t);
+return new CampusincomestatResource(t);
 	}
 
 }

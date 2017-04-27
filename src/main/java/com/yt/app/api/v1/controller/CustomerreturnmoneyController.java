@@ -22,7 +22,7 @@ import com.yt.app.api.v1.entity.Customerreturnmoney;
 * @author zj    default  test
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:33
+* @createdate  2017-04-27 15:10:47
 */
 
 
@@ -42,7 +42,7 @@ protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
 	    IPage<Customerreturnmoney> pagebean = service.list(requestEntity);
-		return new ResponseEntity<Object>(new CustomerreturnmoneyResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
+return new ResponseEntity<Object>(new CustomerreturnmoneyResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(), HttpStatus.OK);
 	}
 }
 

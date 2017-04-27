@@ -215,15 +215,15 @@
         <include refid="Base_Column_List" />
         from campuscustomerweeklystat 
         <where>
-        			1=1
+        	1=1
              <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
+           and name like "%"#{name}"%"
              </if>
              <if test="orderby != null and dir != null">
-           		order by ${orderby} ${dir}
+           order by ${orderby} ${dir}
              </if>
              <if test="pageStart != null and pageEnd != null">
-           		LIMIT #{pageStart},#{pageEnd}
+           LIMIT #{pageStart},#{pageEnd}
              </if>
         </where>
  </select>
@@ -233,15 +233,15 @@
         <include refid="Base_Column_List" />
         from campuscustomerweeklystat 
         <where>
-        			1=1
+        	1=1
              <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
+           and name like "%"#{name}"%"
              </if>
              <if test="orderby != null and dir != null">
-           		order by ${orderby} ${dir}
+           order by ${orderby} ${dir}
              </if>
              <if test="pageStart != null and pageEnd != null">
-           		LIMIT #{pageStart},#{pageEnd}
+           LIMIT #{pageStart},#{pageEnd}
              </if>
         </where>
  </select>
@@ -249,9 +249,9 @@
  <select id="countlist" parameterType="java.util.HashMap" resultType="int">
        select count(*) from campuscustomerweeklystat 
         <where>
-        			1=1
+        	1=1
              <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
+           and name like "%"#{name}"%"
              </if>
         </where>
  </select>
@@ -259,9 +259,9 @@
  <select id="countmap" parameterType="java.util.HashMap" resultType="int">
        select count(*) from campuscustomerweeklystat 
         <where>
-        			1=1
+        	1=1
              <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
+           and name like "%"#{name}"%"
              </if>
         </where>
  </select>
@@ -273,10 +273,10 @@
         <where>
         1=1
              <if test="array != null and array != ''">
-      		 	and id in
-        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-           			#{item}
-        			</foreach>
+       	and id in
+        	<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
+           	#{item}
+        	</foreach>
              </if>
         </where>
  </select>

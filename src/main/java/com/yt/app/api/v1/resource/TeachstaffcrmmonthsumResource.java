@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:49:02
+* @createdate  2017-04-27 15:10:50
 */
 
 public class TeachstaffcrmmonthsumResource extends ResourceSupport {
 	private final Teachstaffcrmmonthsum t;
 	public TeachstaffcrmmonthsumResource(Teachstaffcrmmonthsum entity) {
-		this.t = entity;
-		this.add(linkTo(TeachstaffcrmmonthsumController.class).withRel("post"));
-		this.add(linkTo(methodOn(TeachstaffcrmmonthsumController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(TeachstaffcrmmonthsumController.class).withRel("post"));
+this.add(linkTo(methodOn(TeachstaffcrmmonthsumController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Teachstaffcrmmonthsum getTeachstaffcrmmonthsum() {
-		return t;
+return t;
 	}
 
 

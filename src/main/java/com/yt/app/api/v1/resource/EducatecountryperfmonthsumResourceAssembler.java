@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Educatecountryperfmonthsum;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:42
+* @createdate  2017-04-27 15:10:48
 */
 
 public class EducatecountryperfmonthsumResourceAssembler extends ResourceAssemblerSupport<Educatecountryperfmonthsum, EducatecountryperfmonthsumResource> {
 	public EducatecountryperfmonthsumResourceAssembler() {
-		super(EducatecountryperfmonthsumController.class, EducatecountryperfmonthsumResource.class);
+super(EducatecountryperfmonthsumController.class, EducatecountryperfmonthsumResource.class);
 	}
 	@Override	public EducatecountryperfmonthsumResource toResource(Educatecountryperfmonthsum t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected EducatecountryperfmonthsumResource instantiateResource(Educatecountryperfmonthsum t) {
-		return new EducatecountryperfmonthsumResource(t);
+return new EducatecountryperfmonthsumResource(t);
 	}
 
 }

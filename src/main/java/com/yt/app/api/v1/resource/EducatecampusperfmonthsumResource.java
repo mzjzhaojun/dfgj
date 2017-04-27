@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:41
+* @createdate  2017-04-27 15:10:48
 */
 
 public class EducatecampusperfmonthsumResource extends ResourceSupport {
 	private final Educatecampusperfmonthsum t;
 	public EducatecampusperfmonthsumResource(Educatecampusperfmonthsum entity) {
-		this.t = entity;
-		this.add(linkTo(EducatecampusperfmonthsumController.class).withRel("post"));
-		this.add(linkTo(methodOn(EducatecampusperfmonthsumController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(EducatecampusperfmonthsumController.class).withRel("post"));
+this.add(linkTo(methodOn(EducatecampusperfmonthsumController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Educatecampusperfmonthsum getEducatecampusperfmonthsum() {
-		return t;
+return t;
 	}
 
 

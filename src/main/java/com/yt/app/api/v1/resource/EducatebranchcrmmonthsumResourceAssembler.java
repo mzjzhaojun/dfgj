@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Educatebranchcrmmonthsum;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:39
+* @createdate  2017-04-27 15:10:48
 */
 
 public class EducatebranchcrmmonthsumResourceAssembler extends ResourceAssemblerSupport<Educatebranchcrmmonthsum, EducatebranchcrmmonthsumResource> {
 	public EducatebranchcrmmonthsumResourceAssembler() {
-		super(EducatebranchcrmmonthsumController.class, EducatebranchcrmmonthsumResource.class);
+super(EducatebranchcrmmonthsumController.class, EducatebranchcrmmonthsumResource.class);
 	}
 	@Override	public EducatebranchcrmmonthsumResource toResource(Educatebranchcrmmonthsum t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected EducatebranchcrmmonthsumResource instantiateResource(Educatebranchcrmmonthsum t) {
-		return new EducatebranchcrmmonthsumResource(t);
+return new EducatebranchcrmmonthsumResource(t);
 	}
 
 }

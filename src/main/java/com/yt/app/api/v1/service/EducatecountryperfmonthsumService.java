@@ -7,7 +7,7 @@ import com.yt.app.common.base.IBaseService;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:42
+* @createdate  2017-04-27 15:10:48
 */
 
 public interface EducatecountryperfmonthsumService  extends IBaseService<Educatecountryperfmonthsum, Long>{

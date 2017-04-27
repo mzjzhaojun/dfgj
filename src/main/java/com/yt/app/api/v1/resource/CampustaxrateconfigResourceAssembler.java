@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Campustaxrateconfig;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:23
+* @createdate  2017-04-27 15:10:46
 */
 
 public class CampustaxrateconfigResourceAssembler extends ResourceAssemblerSupport<Campustaxrateconfig, CampustaxrateconfigResource> {
 	public CampustaxrateconfigResourceAssembler() {
-		super(CampustaxrateconfigController.class, CampustaxrateconfigResource.class);
+super(CampustaxrateconfigController.class, CampustaxrateconfigResource.class);
 	}
 	@Override	public CampustaxrateconfigResource toResource(Campustaxrateconfig t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CampustaxrateconfigResource instantiateResource(Campustaxrateconfig t) {
-		return new CampustaxrateconfigResource(t);
+return new CampustaxrateconfigResource(t);
 	}
 
 }

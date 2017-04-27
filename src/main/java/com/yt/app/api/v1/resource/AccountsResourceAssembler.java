@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Accounts;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:18
+* @createdate  2017-04-27 15:10:46
 */
 
 public class AccountsResourceAssembler extends ResourceAssemblerSupport<Accounts, AccountsResource> {
 	public AccountsResourceAssembler() {
-		super(AccountsController.class, AccountsResource.class);
+super(AccountsController.class, AccountsResource.class);
 	}
 	@Override	public AccountsResource toResource(Accounts t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected AccountsResource instantiateResource(Accounts t) {
-		return new AccountsResource(t);
+return new AccountsResource(t);
 	}
 
 }

@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:35
+* @createdate  2017-04-27 15:10:47
 */
 
 public class CustomerstopalertsResource extends ResourceSupport {
 	private final Customerstopalerts t;
 	public CustomerstopalertsResource(Customerstopalerts entity) {
-		this.t = entity;
-		this.add(linkTo(CustomerstopalertsController.class).withRel("post"));
-		this.add(linkTo(methodOn(CustomerstopalertsController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(CustomerstopalertsController.class).withRel("post"));
+this.add(linkTo(methodOn(CustomerstopalertsController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Customerstopalerts getCustomerstopalerts() {
-		return t;
+return t;
 	}
 
 

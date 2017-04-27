@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Customerrefunds;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:32
+* @createdate  2017-04-27 15:10:47
 */
 
 public class CustomerrefundsResourceAssembler extends ResourceAssemblerSupport<Customerrefunds, CustomerrefundsResource> {
 	public CustomerrefundsResourceAssembler() {
-		super(CustomerrefundsController.class, CustomerrefundsResource.class);
+super(CustomerrefundsController.class, CustomerrefundsResource.class);
 	}
 	@Override	public CustomerrefundsResource toResource(Customerrefunds t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CustomerrefundsResource instantiateResource(Customerrefunds t) {
-		return new CustomerrefundsResource(t);
+return new CustomerrefundsResource(t);
 	}
 
 }

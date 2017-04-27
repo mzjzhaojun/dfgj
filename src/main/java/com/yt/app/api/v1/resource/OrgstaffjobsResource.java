@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:49
+* @createdate  2017-04-27 15:10:49
 */
 
 public class OrgstaffjobsResource extends ResourceSupport {
 	private final Orgstaffjobs t;
 	public OrgstaffjobsResource(Orgstaffjobs entity) {
-		this.t = entity;
-		this.add(linkTo(OrgstaffjobsController.class).withRel("post"));
-		this.add(linkTo(methodOn(OrgstaffjobsController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(OrgstaffjobsController.class).withRel("post"));
+this.add(linkTo(methodOn(OrgstaffjobsController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Orgstaffjobs getOrgstaffjobs() {
-		return t;
+return t;
 	}
 
 

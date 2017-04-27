@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Customerfollows;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:31
+* @createdate  2017-04-27 15:10:47
 */
 
 public class CustomerfollowsResourceAssembler extends ResourceAssemblerSupport<Customerfollows, CustomerfollowsResource> {
 	public CustomerfollowsResourceAssembler() {
-		super(CustomerfollowsController.class, CustomerfollowsResource.class);
+super(CustomerfollowsController.class, CustomerfollowsResource.class);
 	}
 	@Override	public CustomerfollowsResource toResource(Customerfollows t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CustomerfollowsResource instantiateResource(Customerfollows t) {
-		return new CustomerfollowsResource(t);
+return new CustomerfollowsResource(t);
 	}
 
 }

@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Customertransferresources;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:37
+* @createdate  2017-04-27 15:10:48
 */
 
 public class CustomertransferresourcesResourceAssembler extends ResourceAssemblerSupport<Customertransferresources, CustomertransferresourcesResource> {
 	public CustomertransferresourcesResourceAssembler() {
-		super(CustomertransferresourcesController.class, CustomertransferresourcesResource.class);
+super(CustomertransferresourcesController.class, CustomertransferresourcesResource.class);
 	}
 	@Override	public CustomertransferresourcesResource toResource(Customertransferresources t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CustomertransferresourcesResource instantiateResource(Customertransferresources t) {
-		return new CustomertransferresourcesResource(t);
+return new CustomertransferresourcesResource(t);
 	}
 
 }

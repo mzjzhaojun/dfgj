@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Customerparentrelations;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:31
+* @createdate  2017-04-27 15:10:47
 */
 
 public class CustomerparentrelationsResourceAssembler extends ResourceAssemblerSupport<Customerparentrelations, CustomerparentrelationsResource> {
 	public CustomerparentrelationsResourceAssembler() {
-		super(CustomerparentrelationsController.class, CustomerparentrelationsResource.class);
+super(CustomerparentrelationsController.class, CustomerparentrelationsResource.class);
 	}
 	@Override	public CustomerparentrelationsResource toResource(Customerparentrelations t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CustomerparentrelationsResource instantiateResource(Customerparentrelations t) {
-		return new CustomerparentrelationsResource(t);
+return new CustomerparentrelationsResource(t);
 	}
 
 }

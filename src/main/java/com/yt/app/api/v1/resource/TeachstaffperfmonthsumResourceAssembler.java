@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Teachstaffperfmonthsum;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:49:03
+* @createdate  2017-04-27 15:10:50
 */
 
 public class TeachstaffperfmonthsumResourceAssembler extends ResourceAssemblerSupport<Teachstaffperfmonthsum, TeachstaffperfmonthsumResource> {
 	public TeachstaffperfmonthsumResourceAssembler() {
-		super(TeachstaffperfmonthsumController.class, TeachstaffperfmonthsumResource.class);
+super(TeachstaffperfmonthsumController.class, TeachstaffperfmonthsumResource.class);
 	}
 	@Override	public TeachstaffperfmonthsumResource toResource(Teachstaffperfmonthsum t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected TeachstaffperfmonthsumResource instantiateResource(Teachstaffperfmonthsum t) {
-		return new TeachstaffperfmonthsumResource(t);
+return new TeachstaffperfmonthsumResource(t);
 	}
 
 }

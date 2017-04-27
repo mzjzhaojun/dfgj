@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Expensepermissions;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:45
+* @createdate  2017-04-27 15:10:48
 */
 
 public class ExpensepermissionsResourceAssembler extends ResourceAssemblerSupport<Expensepermissions, ExpensepermissionsResource> {
 	public ExpensepermissionsResourceAssembler() {
-		super(ExpensepermissionsController.class, ExpensepermissionsResource.class);
+super(ExpensepermissionsController.class, ExpensepermissionsResource.class);
 	}
 	@Override	public ExpensepermissionsResource toResource(Expensepermissions t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected ExpensepermissionsResource instantiateResource(Expensepermissions t) {
-		return new ExpensepermissionsResource(t);
+return new ExpensepermissionsResource(t);
 	}
 
 }

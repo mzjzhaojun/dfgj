@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:58
+* @createdate  2017-04-27 15:10:49
 */
 
 public class StudentstatusreportResource extends ResourceSupport {
 	private final Studentstatusreport t;
 	public StudentstatusreportResource(Studentstatusreport entity) {
-		this.t = entity;
-		this.add(linkTo(StudentstatusreportController.class).withRel("post"));
-		this.add(linkTo(methodOn(StudentstatusreportController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(StudentstatusreportController.class).withRel("post"));
+this.add(linkTo(methodOn(StudentstatusreportController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Studentstatusreport getStudentstatusreport() {
-		return t;
+return t;
 	}
 
 

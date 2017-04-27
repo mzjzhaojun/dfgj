@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:21
+* @createdate  2017-04-27 15:10:46
 */
 
 public class CampusincomeweeklystatResource extends ResourceSupport {
 	private final Campusincomeweeklystat t;
 	public CampusincomeweeklystatResource(Campusincomeweeklystat entity) {
-		this.t = entity;
-		this.add(linkTo(CampusincomeweeklystatController.class).withRel("post"));
-		this.add(linkTo(methodOn(CampusincomeweeklystatController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(CampusincomeweeklystatController.class).withRel("post"));
+this.add(linkTo(methodOn(CampusincomeweeklystatController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Campusincomeweeklystat getCampusincomeweeklystat() {
-		return t;
+return t;
 	}
 
 

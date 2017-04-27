@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.PsTeacherteachings;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:55
+* @createdate  2017-04-27 15:10:49
 */
 
 public class PsTeacherteachingsResourceAssembler extends ResourceAssemblerSupport<PsTeacherteachings, PsTeacherteachingsResource> {
 	public PsTeacherteachingsResourceAssembler() {
-		super(PsTeacherteachingsController.class, PsTeacherteachingsResource.class);
+super(PsTeacherteachingsController.class, PsTeacherteachingsResource.class);
 	}
 	@Override	public PsTeacherteachingsResource toResource(PsTeacherteachings t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected PsTeacherteachingsResource instantiateResource(PsTeacherteachings t) {
-		return new PsTeacherteachingsResource(t);
+return new PsTeacherteachingsResource(t);
 	}
 
 }

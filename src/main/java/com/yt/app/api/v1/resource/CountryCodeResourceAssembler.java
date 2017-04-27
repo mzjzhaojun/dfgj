@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.CountryCode;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:27
+* @createdate  2017-04-27 15:10:47
 */
 
 public class CountryCodeResourceAssembler extends ResourceAssemblerSupport<CountryCode, CountryCodeResource> {
 	public CountryCodeResourceAssembler() {
-		super(CountryCodeController.class, CountryCodeResource.class);
+super(CountryCodeController.class, CountryCodeResource.class);
 	}
 	@Override	public CountryCodeResource toResource(CountryCode t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CountryCodeResource instantiateResource(CountryCode t) {
-		return new CountryCodeResource(t);
+return new CountryCodeResource(t);
 	}
 
 }

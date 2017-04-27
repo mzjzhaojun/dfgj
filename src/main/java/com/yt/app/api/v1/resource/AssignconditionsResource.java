@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:19
+* @createdate  2017-04-27 15:10:46
 */
 
 public class AssignconditionsResource extends ResourceSupport {
 	private final Assignconditions t;
 	public AssignconditionsResource(Assignconditions entity) {
-		this.t = entity;
-		this.add(linkTo(AssignconditionsController.class).withRel("post"));
-		this.add(linkTo(methodOn(AssignconditionsController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(AssignconditionsController.class).withRel("post"));
+this.add(linkTo(methodOn(AssignconditionsController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Assignconditions getAssignconditions() {
-		return t;
+return t;
 	}
 
 

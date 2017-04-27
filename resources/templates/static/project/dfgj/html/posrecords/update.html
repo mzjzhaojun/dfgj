@@ -19,152 +19,176 @@
 	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
 	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
 	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	<!-- datetime -->
+	<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>	
 	<!-- 初始化 -->
 	<script type="text/javascript">
-		var add = angular.module("add", []);
-		add.controller("addController",function($scope, $http) {
-			$scope.formData = {};
-			$http({
-				url:parent.getFunctionLinksHref("self"),
-				method:'GET',
-				dataType : "json",
-				withCredentials: true,
-				headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-				data: ''
-				}).success(function(data, status, headers, config){
-					$scope.formData= data
-				}).error(function(data, status, headers, config){
-					response(status);
-				});
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			$scope.onPreserved=function(){
-				var isValid = $("#saveForm").valid();
-					if(isValid){
-    				$http({
-    					url:parent.getFunctionLinksHref("self"),
-    					method:'PUT',
-    					dataType : "json",
-    					withCredentials: true,
-    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-    					data: JSON.stringify($scope.formData)
-    		  		}).success(function(data, status, headers, config){
-    		  			location.href="list.html";
-    		  		}).error(function(data, status, headers, config){
-    		  			response(status);
-					})
-    			}
-			}
-			$scope.initselect = function() {
-			$http({
-				url : parent.getMenuLinksHref("orgregionslist"),
-				method : 'POST',
-				dataType : "json",
-				withCredentials : true,
-				headers : {
-					'Content-Type' : 'application/json;charset=UTF-8;'
-				},
-				data : ''
-				}).success(function(data, status, headers, config) {
-					$scope.selects = data;
-				}).error(function(data, status, headers, config) {
-					response(status);
-				})
-			}
-		//$scope.initselect();
-		})
+var add = angular.module("add", []);
+add.controller("addController",function($scope, $http) {
+	$scope.formData = {};
+	$http({
+url:parent.getFunctionLinksHref("self"),
+method:'GET',
+dataType : "json",
+withCredentials: true,
+headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+data: ''
+}).success(function(data, status, headers, config){
+	$scope.formData= data
+}).error(function(data, status, headers, config){
+	response(status);
+});
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	$scope.onPreserved=function(){
+var isValid = $("#saveForm").valid();
+	if(isValid){
+    $http({
+    	url:parent.getFunctionLinksHref("self"),
+    	method:'PUT',
+    	dataType : "json",
+    	withCredentials: true,
+    	headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    	data: JSON.stringify($scope.formData)
+      }).success(function(data, status, headers, config){
+      	location.href="list.html";
+      }).error(function(data, status, headers, config){
+      	response(status);
+	})
+    	}
+	}
+	$scope.initselect = function() {
+$http({
+	url : parent.getMenuLinksHref("dictionarylist"),
+	method : 'POST',
+	dataType : "json",
+	withCredentials : true,
+	headers : {
+'Content-Type' : 'application/json;charset=UTF-8;'
+	},
+	data : JSON.stringify([20])
+	}).success(function(data, status, headers, config) {
+$scope.selects = data;
+	}).error(function(data, status, headers, config) {
+response(status);
+	})
+}
+	$scope.initselect();
+})
 	</script>
 </head>
   <body ng-controller="addController">
   	<form method="post" id="saveForm" action="">
-  		 <!-- 操作按钮操作区 -->
-  		 <div class="col-lg-12 topActionPanel">
+   <!-- 操作按钮操作区 -->
+   <div class="col-lg-12 topActionPanel">
 	        <div>
-		    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
 	    	</div>
 	    	<div>
-		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
 	    	</div>
     	</div>
-   		<div class="col-lg-6">
-	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">交易日期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入交易日期" name="transactiondate" ng-model="formData.transactiondate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">清算日期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入清算日期" name="settlementdate" ng-model="formData.settlementdate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+   <div class="col-lg-6">
+<div class="input-group input-group-sm" id="transactiondatehidden">
+	<span class="input-group-addon text-right spanwidth">交易日期</span>
+	  <div class="input-group date form_datetime" id="transactiondatedate" style="width:400px;" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input">
+        <input class="form-control required" id="transactiondate" ng-model="formData.transactiondate" size="14" type="text" value="" readonly>
+  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+    </div>
+	<input type="hidden" id="dtp_input" value="" />
+</div>
+<div class="input-group input-group-sm" id="settlementdatehidden">
+	<span class="input-group-addon text-right spanwidth">清算日期</span>
+	  <div class="input-group date form_datetime" id="settlementdatedate" style="width:400px;" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input">
+        <input class="form-control required" id="settlementdate" ng-model="formData.settlementdate" size="14" type="text" value="" readonly>
+  <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+    </div>
+	<input type="hidden" id="dtp_input" value="" />
+</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">刷卡交易时间(来源原始值)</span>
-	           		<input type="text" class="form-control required" placeholder="请输入刷卡交易时间(来源原始值)" name="transactiontimevalue" ng-model="formData.transactiontimevalue" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入刷卡交易时间(来源原始值)" name="transactiontimevalue" ng-model="formData.transactiontimevalue" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">刷卡交易时间-(交易日期+交易时间)</span>
-	           		<input type="text" class="form-control required" placeholder="请输入刷卡交易时间-(交易日期+交易时间)" name="transactiontime" ng-model="formData.transactiontime" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入刷卡交易时间-(交易日期+交易时间)" name="transactiontime" ng-model="formData.transactiontime" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">刷卡交易类型（1-银联，4-通联）</span>
-	           		<input type="text" class="form-control required" placeholder="请输入刷卡交易类型（1-银联，4-通联）" name="transactiontype" ng-model="formData.transactiontype" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">交易参考号</span>
-	   		 		<select class="form-control required" name="transactionid" ng-model="formData.transactionid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择交易参考号</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入刷卡交易类型（1-银联，4-通联）" name="transactiontype" ng-model="formData.transactiontype" maxlength="32">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">交易参考号</span>
+	    <select class="form-control required" name="transactionid" ng-model="formData.transactionid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择交易参考号</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">银行卡号</span>
-	           		<input type="text" class="form-control required" placeholder="请输入银行卡号" name="cardnum" ng-model="formData.cardnum" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">商户号</span>
-	   		 		<select class="form-control required" name="merchantid" ng-model="formData.merchantid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择商户号</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth">终端号</span>
-	   		 		<select class="form-control required" name="posid" ng-model="formData.posid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择终端号</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入银行卡号" name="cardnum" ng-model="formData.cardnum" maxlength="32">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">商户号</span>
+	    <select class="form-control required" name="merchantid" ng-model="formData.merchantid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择商户号</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth">终端号</span>
+	    <select class="form-control required" name="posid" ng-model="formData.posid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择终端号</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">刷卡金额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入刷卡金额" name="money" ng-model="formData.money" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入刷卡金额" name="money" ng-model="formData.money" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">来源类型(1--接口(实时接口)来源、2--对账(异步接口)来源)</span>
-	           		<input type="text" class="form-control required" placeholder="请输入来源类型(1--接口(实时接口)来源、2--对账(异步接口)来源)" name="fromtype" ng-model="formData.fromtype" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入来源类型(1--接口(实时接口)来源、2--对账(异步接口)来源)" name="fromtype" ng-model="formData.fromtype" maxlength="32">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">是否核销</span>
-	           		<input type="text" class="form-control required" placeholder="请输入是否核销" name="isusered" ng-model="formData.isusered" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入是否核销" name="isusered" ng-model="formData.isusered" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">创建时间</span>
-	           		<input type="text" class="form-control required" placeholder="请输入创建时间" name="createtime" ng-model="formData.createtime" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入创建时间" name="createtime" ng-model="formData.createtime" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">收款方式(1-普通刷卡，2-支付宝，3-微信)</span>
-	           		<input type="text" class="form-control required" placeholder="请输入收款方式(1-普通刷卡，2-支付宝，3-微信)" name="receipttype" ng-model="formData.receipttype" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-   		</div>
+	           <input type="text" class="form-control required" placeholder="请输入收款方式(1-普通刷卡，2-支付宝，3-微信)" name="receipttype" ng-model="formData.receipttype" maxlength="32">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+   </div>
     </form>
   </body>
+  <script type="text/javascript">
+  $('#settlementdatedate').datetimepicker({
+  	format : 'yyyy-mm-dd',
+  	language : 'cn',
+  	weekStart : 1,
+  	minView : "month",
+  	todayBtn : 1,
+  	initialDate:new Date(),
+  	autoclose : 1,
+  	todayHighlight : 1,
+  	startView : 2,
+  	forceParse : 0,
+  	showMeridian : 0
+  });
 </html>

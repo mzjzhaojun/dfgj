@@ -106,18 +106,18 @@ public class DfgjApplication extends SpringBootServletInitializer {
 				"educatecountryperfdaysum", "educatecountryperfmonthsum", "educatestaffcrmmonthsum", "educatestaffperfdaysum",
 				"educatestaffperfmonthsum", "educator_day_task", "educator_week_task", "educatoreffectivecustomer", "educatorreport_org",
 				"educatorreport_staff", "email_messages", "expensepermissions", "expenses", "financialassignmonthlyincome", "hr_a_charges",
-				"incomereport", "jobs", "log_sys_info", "log_user_info", "operationlog", "orderdailyinfo", "orderitems", "orders", "organizations",
-				"orgbranches", "orgcampuses", "orgregions", "orgstaffjobs", "otherproductincome", "otherproductincomeweekly", "parents",
+				"incomereport", "jobs", "log_sys_info", "log_user_info", "operationlog", "orderdailyinfo", "orderitems", "orders", "orgstaffjobs", "otherproductincome", "otherproductincomeweekly", "parents",
 				"perfindexreport", "phones", "pinyin", "posrecords", "potentialcustomers", "presentitems", "presents", "productclassstats",
 				"productpermissions", "products", "productsalaryrules", "productsexofcourse", "ps_teacherteachings", "refundreport", ""
-						+ "repertories", "rooms", "schools", "staffbasestat", "staffchargestat", "staffrefundstat", "staffresources", "staffs",
+						+ "repertories", "rooms", "schools", "staffbasestat", "staffchargestat", "staffrefundstat", "staffresources", 
 				"stafftask", "studentstatusreport", "" + "teachbranchcrmmonthsum", "teachbranchperfmonthsum", "teachcampuscrmmonthsum",
 				"teachcampusperfmonthsum", "teachcountrycrmmonthsum", "teachcountryperfmonthsum", "teacher_day_task", "teacherchargeallots",
 				"teacherjobs", "teacherrefundallots", "teacherreport_org", "teacherreport_staff", "teachers", "teachersearch", "teacherteachings",
 				"teachgroupcrmmonthsum", "teachgroupperfmonthsum", "teachstaffcrmmonthsum", "teachstaffperfmonthsum", "user_operation_log",
 				"user_task", "user_task_category");
+//		List<String> tables1 = Arrays.asList("jobcode");
 		SpringApplication.run(new Class[] { DfgjApplication.class }, args);
 //		GenerateCode.getInstance().crud(tables, false, true, true, "854616254684729344");
-		// GenerateCode.getInstance().crud(tables, false, true);
+//		GenerateCode.getInstance().crud(tables, true, true);
 	}
 }

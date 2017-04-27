@@ -7,7 +7,7 @@ import com.yt.app.common.base.IBaseService;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:35
+* @createdate  2017-04-27 15:10:47
 */
 
 public interface CustomerstaffrelationshipsService  extends IBaseService<Customerstaffrelationships, Long>{

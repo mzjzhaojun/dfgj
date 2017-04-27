@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Accountchargeallots;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:16
+* @createdate  2017-04-27 15:10:45
 */
 
 public class AccountchargeallotsResourceAssembler extends ResourceAssemblerSupport<Accountchargeallots, AccountchargeallotsResource> {
 	public AccountchargeallotsResourceAssembler() {
-		super(AccountchargeallotsController.class, AccountchargeallotsResource.class);
+super(AccountchargeallotsController.class, AccountchargeallotsResource.class);
 	}
 	@Override	public AccountchargeallotsResource toResource(Accountchargeallots t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected AccountchargeallotsResource instantiateResource(Accountchargeallots t) {
-		return new AccountchargeallotsResource(t);
+return new AccountchargeallotsResource(t);
 	}
 
 }

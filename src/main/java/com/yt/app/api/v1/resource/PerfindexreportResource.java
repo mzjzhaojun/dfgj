@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:51
+* @createdate  2017-04-27 15:10:49
 */
 
 public class PerfindexreportResource extends ResourceSupport {
 	private final Perfindexreport t;
 	public PerfindexreportResource(Perfindexreport entity) {
-		this.t = entity;
-		this.add(linkTo(PerfindexreportController.class).withRel("post"));
-		this.add(linkTo(methodOn(PerfindexreportController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(PerfindexreportController.class).withRel("post"));
+this.add(linkTo(methodOn(PerfindexreportController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Perfindexreport getPerfindexreport() {
-		return t;
+return t;
 	}
 
 

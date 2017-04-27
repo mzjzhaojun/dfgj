@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:17
+* @createdate  2017-04-27 15:10:46
 */
 
 public class AccountrefundappliesResource extends ResourceSupport {
 	private final Accountrefundapplies t;
 	public AccountrefundappliesResource(Accountrefundapplies entity) {
-		this.t = entity;
-		this.add(linkTo(AccountrefundappliesController.class).withRel("post"));
-		this.add(linkTo(methodOn(AccountrefundappliesController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(AccountrefundappliesController.class).withRel("post"));
+this.add(linkTo(methodOn(AccountrefundappliesController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Accountrefundapplies getAccountrefundapplies() {
-		return t;
+return t;
 	}
 
 

@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:20
+* @createdate  2017-04-27 15:10:46
 */
 
 public class CampusassetsdetailResource extends ResourceSupport {
 	private final Campusassetsdetail t;
 	public CampusassetsdetailResource(Campusassetsdetail entity) {
-		this.t = entity;
-		this.add(linkTo(CampusassetsdetailController.class).withRel("post"));
-		this.add(linkTo(methodOn(CampusassetsdetailController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(CampusassetsdetailController.class).withRel("post"));
+this.add(linkTo(methodOn(CampusassetsdetailController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Campusassetsdetail getCampusassetsdetail() {
-		return t;
+return t;
 	}
 
 

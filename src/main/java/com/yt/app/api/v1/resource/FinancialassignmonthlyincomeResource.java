@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:45
+* @createdate  2017-04-27 15:10:48
 */
 
 public class FinancialassignmonthlyincomeResource extends ResourceSupport {
 	private final Financialassignmonthlyincome t;
 	public FinancialassignmonthlyincomeResource(Financialassignmonthlyincome entity) {
-		this.t = entity;
-		this.add(linkTo(FinancialassignmonthlyincomeController.class).withRel("post"));
-		this.add(linkTo(methodOn(FinancialassignmonthlyincomeController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(FinancialassignmonthlyincomeController.class).withRel("post"));
+this.add(linkTo(methodOn(FinancialassignmonthlyincomeController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Financialassignmonthlyincome getFinancialassignmonthlyincome() {
-		return t;
+return t;
 	}
 
 

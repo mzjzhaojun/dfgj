@@ -13,19 +13,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:18
+* @createdate  2017-04-27 15:10:46
 */
 
 public class AssetconfirmsResource extends ResourceSupport {
 	private final Assetconfirms t;
 	public AssetconfirmsResource(Assetconfirms entity) {
-		this.t = entity;
-		this.add(linkTo(AssetconfirmsController.class).withRel("post"));
-		this.add(linkTo(methodOn(AssetconfirmsController.class).list(null, null, null)).withRel("list"));
-		
+this.t = entity;
+this.add(linkTo(AssetconfirmsController.class).withRel("post"));
+this.add(linkTo(methodOn(AssetconfirmsController.class).list(null, null, null)).withRel("list"));
+
 }
 	public Assetconfirms getAssetconfirms() {
-		return t;
+return t;
 	}
 
 

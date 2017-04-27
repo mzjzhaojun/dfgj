@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Teacherjobs;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:49:00
+* @createdate  2017-04-27 15:10:50
 */
 
 public class TeacherjobsResourceAssembler extends ResourceAssemblerSupport<Teacherjobs, TeacherjobsResource> {
 	public TeacherjobsResourceAssembler() {
-		super(TeacherjobsController.class, TeacherjobsResource.class);
+super(TeacherjobsController.class, TeacherjobsResource.class);
 	}
 	@Override	public TeacherjobsResource toResource(Teacherjobs t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected TeacherjobsResource instantiateResource(Teacherjobs t) {
-		return new TeacherjobsResource(t);
+return new TeacherjobsResource(t);
 	}
 
 }

@@ -20,599 +20,617 @@
 	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
 	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
 	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+	<!-- datetime -->
+	<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>	
 	<!-- 初始化 -->
 	<script type="text/javascript">
-		var add = angular.module("add", []);
-		add.controller("addController",function($scope, $http) {
-			$scope.formData = {};
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			//保存
-			$scope.onPreserved=function(){
-				var isValid = $("#saveForm").valid();
-					if(isValid){
-    				$http({
-    					url:parent.getMenuLinksHref("educatorreport_staffpost"),
-    					method:'POST',
-    					dataType : "json",
-    					withCredentials: true,
-    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-    					data: JSON.stringify($scope.formData)
-    		  		}).success(function(data, status, headers, config){
-    		  			if(data == 1){
-    		  				location.href="list.html";
-    		  			}
-    		  		}).error(function(data, status, headers, config){
-    		  			response(status);
-					})
-    			}
-			}
-			$scope.initselect = function() {
-			$http({
-				url : parent.getMenuLinksHref("orgregionslist"),
-				method : 'POST',
-				dataType : "json",
-				withCredentials : true,
-				headers : {
-					'Content-Type' : 'application/json;charset=UTF-8;'
-				},
-				data : ''
-				}).success(function(data, status, headers, config) {
-					$scope.selects = data;
-				}).error(function(data, status, headers, config) {
-					response(status);
-				})
-			}
-		//$scope.initselect();
-		})
+var add = angular.module("add", []);
+add.controller("addController",function($scope, $http) {
+	$scope.formData = {};
+	//返回
+	$scope.onReturn=function(){
+history.go(-1);
+	}
+	//保存
+	$scope.onPreserved=function(){
+var isValid = $("#saveForm").valid();
+	if(isValid){
+    $http({
+    	url:parent.getMenuLinksHref("educatorreport_staffpost"),
+    	method:'POST',
+    	dataType : "json",
+    	withCredentials: true,
+    	headers: {'Content-Type': 'application/json;charset=UTF-8;'},
+    	data: JSON.stringify($scope.formData)
+      }).success(function(data, status, headers, config){
+      	if(data == 1){
+      location.href="list.html";
+      	}
+      }).error(function(data, status, headers, config){
+      	response(status);
+	})
+    	}
+	}
+	$scope.initselect = function() {
+$http({
+	url : parent.getMenuLinksHref("dictionarylist"),
+	method : 'POST',
+	dataType : "json",
+	withCredentials : true,
+	headers : {
+'Content-Type' : 'application/json;charset=UTF-8;'
+	},
+	data : JSON.stringify([20])
+	}).success(function(data, status, headers, config) {
+$scope.selects = data;
+	}).error(function(data, status, headers, config) {
+response(status);
+	})
+}
+	$scope.initselect();
+})
 	</script>
 </head>
   
   <body ng-controller="addController">
   	<form method="post" id="saveForm" action="">
-  		 <!-- 操作按钮操作区 -->
-  		 <div class="col-lg-12 topActionPanel">
+   <!-- 操作按钮操作区 -->
+   <div class="col-lg-12 topActionPanel">
 	        <div>
-		    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
 	    	</div>
 	    	<div>
-		    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
 	    	</div>
-    		</div>
-   		<div class="col-lg-6">
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth"></span>
-	   		 		<select class="form-control required" name="snapshotid" ng-model="formData.snapshotid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth"></span>
-	   		 		<select class="form-control required" name="regionid" ng-model="formData.regionid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+    </div>
+   <div class="col-lg-6">
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth"></span>
+	    <select class="form-control required" name="snapshotid" ng-model="formData.snapshotid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth"></span>
+	    <select class="form-control required" name="regionid" ng-model="formData.regionid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth"></span>
-	           		<input type="text" class="form-control required" placeholder="请输入" name="regionshortname" ng-model="formData.regionshortname" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth"></span>
-	   		 		<select class="form-control required" name="branchid" ng-model="formData.branchid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入" name="regionshortname" ng-model="formData.regionshortname" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth"></span>
+	    <select class="form-control required" name="branchid" ng-model="formData.branchid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth"></span>
-	           		<input type="text" class="form-control required" placeholder="请输入" name="branchshortname" ng-model="formData.branchshortname" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth"></span>
-	   		 		<select class="form-control required" name="campusid" ng-model="formData.campusid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入" name="branchshortname" ng-model="formData.branchshortname" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth"></span>
+	    <select class="form-control required" name="campusid" ng-model="formData.campusid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth"></span>
-	           		<input type="text" class="form-control required" placeholder="请输入" name="campusshortname" ng-model="formData.campusshortname" maxlength="64">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入" name="campusshortname" ng-model="formData.campusshortname" maxlength="64">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth"></span>
-	           		<input type="text" class="form-control required" placeholder="请输入" name="campusage" ng-model="formData.campusage" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
-	   		 		<span class="input-group-addon text-right spanwidth"></span>
-	   		 		<select class="form-control required" name="staffid" ng-model="formData.staffid" ng-options="data.id as data.name for data in selects">
-	   		 			<option value=''>请选择</option>
-	   		 			</select>
-	   		 	<span class="input-group-addon verifyprompt">*</span>
-	   		 	</div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入" name="campusage" ng-model="formData.campusage" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
+	    <span class="input-group-addon text-right spanwidth"></span>
+	    <select class="form-control required" name="staffid" ng-model="formData.staffid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+	    	<option value=''>请选择</option>
+	    	</select>
+	    	<span class="input-group-addon verifyprompt">*</span>
+	    	</div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth"></span>
-	           		<input type="text" class="form-control required" placeholder="请输入" name="staffname" ng-model="formData.staffname" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入" name="staffname" ng-model="formData.staffname" maxlength="32">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth"></span>
-	           		<input type="text" class="form-control required" placeholder="请输入" name="staffoacode" ng-model="formData.staffoacode" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入" name="staffoacode" ng-model="formData.staffoacode" maxlength="32">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth"></span>
-	           		<input type="text" class="form-control required" placeholder="请输入" name="staffoaname" ng-model="formData.staffoaname" maxlength="32">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入" name="staffoaname" ng-model="formData.staffoaname" maxlength="32">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">入职时长</span>
-	           		<input type="text" class="form-control required" placeholder="请输入入职时长" name="employmentperiod" ng-model="formData.employmentperiod" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入入职时长" name="employmentperiod" ng-model="formData.employmentperiod" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">归属人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入归属人数" name="belongnumber" ng-model="formData.belongnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入归属人数" name="belongnumber" ng-model="formData.belongnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">管理人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入管理人数" name="managenumber" ng-model="formData.managenumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入管理人数" name="managenumber" ng-model="formData.managenumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">有效人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入有效人数" name="availablenumber" ng-model="formData.availablenumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入有效人数" name="availablenumber" ng-model="formData.availablenumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上课人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上课人数" name="assignednumber" ng-model="formData.assignednumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上课人数" name="assignednumber" ng-model="formData.assignednumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">停课人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入停课人数" name="classsuspendednumber" ng-model="formData.classsuspendednumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入停课人数" name="classsuspendednumber" ng-model="formData.classsuspendednumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">休学人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入休学人数" name="schoolsuspendednumber" ng-model="formData.schoolsuspendednumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入休学人数" name="schoolsuspendednumber" ng-model="formData.schoolsuspendednumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费人数" name="refundmoneynumber" ng-model="formData.refundmoneynumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费人数" name="refundmoneynumber" ng-model="formData.refundmoneynumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">结课人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入结课人数" name="classfinishednumber" ng-model="formData.classfinishednumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入结课人数" name="classfinishednumber" ng-model="formData.classfinishednumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费金额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费金额" name="renewsignmoney" ng-model="formData.renewsignmoney" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费金额" name="renewsignmoney" ng-model="formData.renewsignmoney" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费金额-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费金额-去年同期" name="renewsignmoneyvol" ng-model="formData.renewsignmoneyvol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费金额-去年同期" name="renewsignmoneyvol" ng-model="formData.renewsignmoneyvol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费金额-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费金额-同比差额" name="renewsignmoneydiffyoy" ng-model="formData.renewsignmoneydiffyoy" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费金额-同比差额" name="renewsignmoneydiffyoy" ng-model="formData.renewsignmoneydiffyoy" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费金额-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费金额-同比率" name="renewsignmoneyyoyrate" ng-model="formData.renewsignmoneyyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费金额-同比率" name="renewsignmoneyyoyrate" ng-model="formData.renewsignmoneyyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费金额-任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费金额-任务" name="renewsignmoneytask" ng-model="formData.renewsignmoneytask" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费金额-任务" name="renewsignmoneytask" ng-model="formData.renewsignmoneytask" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">完成率-续费金额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入完成率-续费金额" name="renewsignmoneytcr" ng-model="formData.renewsignmoneytcr" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入完成率-续费金额" name="renewsignmoneytcr" ng-model="formData.renewsignmoneytcr" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费人数" name="renewsignnumber" ng-model="formData.renewsignnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费人数" name="renewsignnumber" ng-model="formData.renewsignnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费人数-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费人数-去年同期" name="renewsignnumbervol" ng-model="formData.renewsignnumbervol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费人数-去年同期" name="renewsignnumbervol" ng-model="formData.renewsignnumbervol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费人数-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费人数-同比差额" name="renewsignnumberyoydiff" ng-model="formData.renewsignnumberyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费人数-同比差额" name="renewsignnumberyoydiff" ng-model="formData.renewsignnumberyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费人数-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费人数-同比率" name="renewsignnumberyoyrate" ng-model="formData.renewsignnumberyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费人数-同比率" name="renewsignnumberyoyrate" ng-model="formData.renewsignnumberyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费人数-任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费人数-任务" name="renewsignnumberrask" ng-model="formData.renewsignnumberrask" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费人数-任务" name="renewsignnumberrask" ng-model="formData.renewsignnumberrask" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费人数-完成率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费人数-完成率" name="renewsignnumbertcr" ng-model="formData.renewsignnumbertcr" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费人数-完成率" name="renewsignnumbertcr" ng-model="formData.renewsignnumbertcr" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费单笔</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费单笔" name="renewsignsingle" ng-model="formData.renewsignsingle" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费单笔" name="renewsignsingle" ng-model="formData.renewsignsingle" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费单笔-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费单笔-去年同期" name="renewsignsinglevol" ng-model="formData.renewsignsinglevol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费单笔-去年同期" name="renewsignsinglevol" ng-model="formData.renewsignsinglevol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费单笔-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费单笔-同比差额" name="renewsignsingleyoydiff" ng-model="formData.renewsignsingleyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费单笔-同比差额" name="renewsignsingleyoydiff" ng-model="formData.renewsignsingleyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续费单笔-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续费单笔-同比率" name="renewsignsingleyoyrate" ng-model="formData.renewsignsingleyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续费单笔-同比率" name="renewsignsingleyoyrate" ng-model="formData.renewsignsingleyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费金额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费金额" name="refundmoney" ng-model="formData.refundmoney" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费金额" name="refundmoney" ng-model="formData.refundmoney" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费金额-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费金额-去年同期" name="refundmoneyvol" ng-model="formData.refundmoneyvol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费金额-去年同期" name="refundmoneyvol" ng-model="formData.refundmoneyvol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费金额-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费金额-同比差额" name="refundmoneyyoydiff" ng-model="formData.refundmoneyyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费金额-同比差额" name="refundmoneyyoydiff" ng-model="formData.refundmoneyyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费金额-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费金额-同比率" name="refundmoneyyoyrate" ng-model="formData.refundmoneyyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费金额-同比率" name="refundmoneyyoyrate" ng-model="formData.refundmoneyyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费金额-任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费金额-任务" name="refundmoneytask" ng-model="formData.refundmoneytask" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费金额-任务" name="refundmoneytask" ng-model="formData.refundmoneytask" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费金额-完成率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费金额-完成率" name="refundmoneytcr" ng-model="formData.refundmoneytcr" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费金额-完成率" name="refundmoneytcr" ng-model="formData.refundmoneytcr" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费人数" name="refundnumber" ng-model="formData.refundnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费人数" name="refundnumber" ng-model="formData.refundnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费人数-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费人数-去年同期" name="refundnumbervol" ng-model="formData.refundnumbervol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费人数-去年同期" name="refundnumbervol" ng-model="formData.refundnumbervol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费人数-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费人数-同比差额" name="refundnumberyoydiff" ng-model="formData.refundnumberyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费人数-同比差额" name="refundnumberyoydiff" ng-model="formData.refundnumberyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费人数-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费人数-同比率" name="refundnumberyoyrate" ng-model="formData.refundnumberyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费人数-同比率" name="refundnumberyoyrate" ng-model="formData.refundnumberyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费人数-任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费人数-任务" name="refundnumbertask" ng-model="formData.refundnumbertask" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费人数-任务" name="refundnumbertask" ng-model="formData.refundnumbertask" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退费人数-完成率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退费人数-完成率" name="refundnumbertcr" ng-model="formData.refundnumbertcr" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退费人数-完成率" name="refundnumbertcr" ng-model="formData.refundnumbertcr" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">课时量</span>
-	           		<input type="text" class="form-control required" placeholder="请输入课时量" name="assignnumber" ng-model="formData.assignnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入课时量" name="assignnumber" ng-model="formData.assignnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">课时量-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入课时量-去年同期" name="assignnumbervol" ng-model="formData.assignnumbervol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入课时量-去年同期" name="assignnumbervol" ng-model="formData.assignnumbervol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">课时量-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入课时量-同比差额" name="assignnumberyoydiff" ng-model="formData.assignnumberyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入课时量-同比差额" name="assignnumberyoydiff" ng-model="formData.assignnumberyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">课时量-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入课时量-同比率" name="assignnumberyoyrate" ng-model="formData.assignnumberyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入课时量-同比率" name="assignnumberyoyrate" ng-model="formData.assignnumberyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">课时量任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入课时量任务" name="assignnumbertask" ng-model="formData.assignnumbertask" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入课时量任务" name="assignnumbertask" ng-model="formData.assignnumbertask" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">课时量-完成率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入课时量-完成率" name="assignnumbertcr" ng-model="formData.assignnumbertcr" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入课时量-完成率" name="assignnumbertcr" ng-model="formData.assignnumbertcr" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">课时收入</span>
-	           		<input type="text" class="form-control required" placeholder="请输入课时收入" name="courseincome" ng-model="formData.courseincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入课时收入" name="courseincome" ng-model="formData.courseincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">课时收入-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入课时收入-去年同期" name="courseincomevol" ng-model="formData.courseincomevol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入课时收入-去年同期" name="courseincomevol" ng-model="formData.courseincomevol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">课时收入-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入课时收入-同比差额" name="courseincomeyoydiff" ng-model="formData.courseincomeyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入课时收入-同比差额" name="courseincomeyoydiff" ng-model="formData.courseincomeyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">课时收入-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入课时收入-同比率" name="courseincomeyoyrate" ng-model="formData.courseincomeyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入课时收入-同比率" name="courseincomeyoyrate" ng-model="formData.courseincomeyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上课人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上课人数" name="attendnumber" ng-model="formData.attendnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上课人数" name="attendnumber" ng-model="formData.attendnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上课人数-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上课人数-去年同期" name="attendnumbervol" ng-model="formData.attendnumbervol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上课人数-去年同期" name="attendnumbervol" ng-model="formData.attendnumbervol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上课人数-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上课人数-同比差额" name="attendnumberyoydiff" ng-model="formData.attendnumberyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上课人数-同比差额" name="attendnumberyoydiff" ng-model="formData.attendnumberyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上课人数-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上课人数-同比率" name="attendnumberyoyrate" ng-model="formData.attendnumberyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上课人数-同比率" name="attendnumberyoyrate" ng-model="formData.attendnumberyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">上课率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入上课率" name="attendnumberrate" ng-model="formData.attendnumberrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入上课率" name="attendnumberrate" ng-model="formData.attendnumberrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">停课率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入停课率" name="classsuspendedrate" ng-model="formData.classsuspendedrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入停课率" name="classsuspendedrate" ng-model="formData.classsuspendedrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1生均小时</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1生均小时" name="onetooneaveragehours" ng-model="formData.onetooneaveragehours" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1生均小时" name="onetooneaveragehours" ng-model="formData.onetooneaveragehours" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1生均课时</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1生均课时" name="onetooneaverageassignedamount" ng-model="formData.onetooneaverageassignedamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1生均课时" name="onetooneaverageassignedamount" ng-model="formData.onetooneaverageassignedamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">有效生均小时</span>
-	           		<input type="text" class="form-control required" placeholder="请输入有效生均小时" name="availableaveragehours" ng-model="formData.availableaveragehours" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入有效生均小时" name="availableaveragehours" ng-model="formData.availableaveragehours" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">有效生均课时</span>
-	           		<input type="text" class="form-control required" placeholder="请输入有效生均课时" name="availableaverageassignedamount" ng-model="formData.availableaverageassignedamount" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入有效生均课时" name="availableaverageassignedamount" ng-model="formData.availableaverageassignedamount" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1课时量</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1课时量" name="onetooneassignnumber" ng-model="formData.onetooneassignnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1课时量" name="onetooneassignnumber" ng-model="formData.onetooneassignnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1课时量-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1课时量-去年同期" name="onetooneassignnumbervol" ng-model="formData.onetooneassignnumbervol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1课时量-去年同期" name="onetooneassignnumbervol" ng-model="formData.onetooneassignnumbervol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1课时量-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1课时量-同比差额" name="onetooneassignnumberyoydiff" ng-model="formData.onetooneassignnumberyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1课时量-同比差额" name="onetooneassignnumberyoydiff" ng-model="formData.onetooneassignnumberyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1课时量-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1课时量-同比率" name="onetooneassignnumberyoyrate" ng-model="formData.onetooneassignnumberyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1课时量-同比率" name="onetooneassignnumberyoyrate" ng-model="formData.onetooneassignnumberyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1课时收入</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1课时收入" name="onetoonecourseincome" ng-model="formData.onetoonecourseincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1课时收入" name="onetoonecourseincome" ng-model="formData.onetoonecourseincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1课时收入-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1课时收入-去年同期" name="onetoonecourseincomevol" ng-model="formData.onetoonecourseincomevol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1课时收入-去年同期" name="onetoonecourseincomevol" ng-model="formData.onetoonecourseincomevol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1课时收入-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1课时收入-同比差额" name="onetoonecourseincomeyoydiff" ng-model="formData.onetoonecourseincomeyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1课时收入-同比差额" name="onetoonecourseincomeyoydiff" ng-model="formData.onetoonecourseincomeyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1课时收入-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1课时收入-同比率" name="onetoonecourseincomeyoyrate" ng-model="formData.onetoonecourseincomeyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1课时收入-同比率" name="onetoonecourseincomeyoyrate" ng-model="formData.onetoonecourseincomeyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1上课人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1上课人数" name="onetooneattendnumber" ng-model="formData.onetooneattendnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1上课人数" name="onetooneattendnumber" ng-model="formData.onetooneattendnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1上课人数-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1上课人数-去年同期" name="onetooneattendnumbervol" ng-model="formData.onetooneattendnumbervol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1上课人数-去年同期" name="onetooneattendnumbervol" ng-model="formData.onetooneattendnumbervol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1上课人数-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1上课人数-同比差额" name="onetooneattendnumberyoydiff" ng-model="formData.onetooneattendnumberyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1上课人数-同比差额" name="onetooneattendnumberyoydiff" ng-model="formData.onetooneattendnumberyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">1对1上课人数-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入1对1上课人数-同比率" name="onetooneattendnumberyoyrate" ng-model="formData.onetooneattendnumberyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入1对1上课人数-同比率" name="onetooneattendnumberyoyrate" ng-model="formData.onetooneattendnumberyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组课时量</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组课时量" name="classassignnumber" ng-model="formData.classassignnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组课时量" name="classassignnumber" ng-model="formData.classassignnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组课时量-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组课时量-去年同期" name="classassignnumbervol" ng-model="formData.classassignnumbervol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组课时量-去年同期" name="classassignnumbervol" ng-model="formData.classassignnumbervol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组课时量-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组课时量-同比差额" name="classassignnumberyoydiff" ng-model="formData.classassignnumberyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组课时量-同比差额" name="classassignnumberyoydiff" ng-model="formData.classassignnumberyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组课时量-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组课时量-同比率" name="classassignnumberyoyrate" ng-model="formData.classassignnumberyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组课时量-同比率" name="classassignnumberyoyrate" ng-model="formData.classassignnumberyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组课时量-课时量任务</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组课时量-课时量任务" name="classassignnumbertask" ng-model="formData.classassignnumbertask" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组课时量-课时量任务" name="classassignnumbertask" ng-model="formData.classassignnumbertask" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组课时量-完成率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组课时量-完成率" name="classassignnumbertcr" ng-model="formData.classassignnumbertcr" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组课时量-完成率" name="classassignnumbertcr" ng-model="formData.classassignnumbertcr" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组课时收入</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组课时收入" name="classcourseincome" ng-model="formData.classcourseincome" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组课时收入" name="classcourseincome" ng-model="formData.classcourseincome" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组课时收入-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组课时收入-去年同期" name="classcourseincomevol" ng-model="formData.classcourseincomevol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组课时收入-去年同期" name="classcourseincomevol" ng-model="formData.classcourseincomevol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组课时收入-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组课时收入-同比差额" name="classcourseincomeyoydiff" ng-model="formData.classcourseincomeyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组课时收入-同比差额" name="classcourseincomeyoydiff" ng-model="formData.classcourseincomeyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组课时收入-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组课时收入-同比率" name="classcourseincomeyoyrate" ng-model="formData.classcourseincomeyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组课时收入-同比率" name="classcourseincomeyoyrate" ng-model="formData.classcourseincomeyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组上课人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组上课人数" name="classattendnumber" ng-model="formData.classattendnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组上课人数" name="classattendnumber" ng-model="formData.classattendnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组上课人数-去年同期</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组上课人数-去年同期" name="classattendnumbervol" ng-model="formData.classattendnumbervol" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组上课人数-去年同期" name="classattendnumbervol" ng-model="formData.classattendnumbervol" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组上课人数-同比差额</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组上课人数-同比差额" name="classattendnumberyoydiff" ng-model="formData.classattendnumberyoydiff" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组上课人数-同比差额" name="classattendnumberyoydiff" ng-model="formData.classattendnumberyoydiff" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">班组上课人数-同比率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入班组上课人数-同比率" name="classattendnumberyoyrate" ng-model="formData.classattendnumberyoyrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入班组上课人数-同比率" name="classattendnumberyoyrate" ng-model="formData.classattendnumberyoyrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">续生率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入续生率" name="renewrate" ng-model="formData.renewrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入续生率" name="renewrate" ng-model="formData.renewrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">退生率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入退生率" name="refundrate" ng-model="formData.refundrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入退生率" name="refundrate" ng-model="formData.refundrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">流失率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入流失率" name="lossrate" ng-model="formData.lossrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入流失率" name="lossrate" ng-model="formData.lossrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">留存率</span>
-	           		<input type="text" class="form-control required" placeholder="请输入留存率" name="retainedrate" ng-model="formData.retainedrate" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入留存率" name="retainedrate" ng-model="formData.retainedrate" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">转介绍人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入转介绍人数" name="referralnumber" ng-model="formData.referralnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入转介绍人数" name="referralnumber" ng-model="formData.referralnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">回访人数</span>
-	           		<input type="text" class="form-control required" placeholder="请输入回访人数" name="visitnumber" ng-model="formData.visitnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入回访人数" name="visitnumber" ng-model="formData.visitnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">教学服务会</span>
-	           		<input type="text" class="form-control required" placeholder="请输入教学服务会" name="meetingnumber" ng-model="formData.meetingnumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入教学服务会" name="meetingnumber" ng-model="formData.meetingnumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">周反馈</span>
-	           		<input type="text" class="form-control required" placeholder="请输入周反馈" name="replynumber" ng-model="formData.replynumber" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
-	   		 	<div class="input-group input-group-sm">
+	           <input type="text" class="form-control required" placeholder="请输入周反馈" name="replynumber" ng-model="formData.replynumber" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
+	    	<div class="input-group input-group-sm">
 	            	<span class="input-group-addon text-right spanwidth">成绩统计</span>
-	           		<input type="text" class="form-control required" placeholder="请输入成绩统计" name="scorestatistics" ng-model="formData.scorestatistics" maxlength="">
-	        		<span class="input-group-addon verifyprompt">*</span>
-	       		 </div>
+	           <input type="text" class="form-control required" placeholder="请输入成绩统计" name="scorestatistics" ng-model="formData.scorestatistics" maxlength="">
+	        <span class="input-group-addon verifyprompt">*</span>
+	        </div>
 	        </div>
     </form>
   </body>
+  <script type="text/javascript">
+  $('#date').datetimepicker({
+  	format : 'yyyy-mm-dd',
+  	language : 'cn',
+  	weekStart : 1,
+  	minView : "month",
+  	todayBtn : 1,
+  	initialDate:new Date(),
+  	autoclose : 1,
+  	todayHighlight : 1,
+  	startView : 2,
+  	forceParse : 0,
+  	showMeridian : 0
+  });
 </html>

@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.CampusMonthtask;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:20
+* @createdate  2017-04-27 15:10:46
 */
 
 public class CampusMonthtaskResourceAssembler extends ResourceAssemblerSupport<CampusMonthtask, CampusMonthtaskResource> {
 	public CampusMonthtaskResourceAssembler() {
-		super(CampusMonthtaskController.class, CampusMonthtaskResource.class);
+super(CampusMonthtaskController.class, CampusMonthtaskResource.class);
 	}
 	@Override	public CampusMonthtaskResource toResource(CampusMonthtask t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CampusMonthtaskResource instantiateResource(CampusMonthtask t) {
-		return new CampusMonthtaskResource(t);
+return new CampusMonthtaskResource(t);
 	}
 
 }

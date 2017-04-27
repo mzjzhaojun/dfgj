@@ -11,19 +11,19 @@ import com.yt.app.api.v1.entity.Categorycatalogs;
 * @author zj    default  
 * 
 * @version v1
-* @createdate  2017-04-20 13:48:23
+* @createdate  2017-04-27 15:10:46
 */
 
 public class CategorycatalogsResourceAssembler extends ResourceAssemblerSupport<Categorycatalogs, CategorycatalogsResource> {
 	public CategorycatalogsResourceAssembler() {
-		super(CategorycatalogsController.class, CategorycatalogsResource.class);
+super(CategorycatalogsController.class, CategorycatalogsResource.class);
 	}
 	@Override	public CategorycatalogsResource toResource(Categorycatalogs t) {
-		return createResourceWithId(t.getId(), t);
+return createResourceWithId(t.getId(), t);
 	}
 	@Override
 	protected CategorycatalogsResource instantiateResource(Categorycatalogs t) {
-		return new CategorycatalogsResource(t);
+return new CategorycatalogsResource(t);
 	}
 
 }
