@@ -50,7 +50,7 @@
 					$scope.formData.deliverdate = $("#deliverdate").val();
 					$scope.formData.cityname = $("#cityid").find("option:selected").text();
     				$http({
-    					url:parent.getMenuLinksHref("organizationspost"),
+    					url:parent.getFunctionLinksHref("self"),
     					method:'PUT',
     					dataType : "json",
     					withCredentials: true,

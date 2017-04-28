@@ -45,6 +45,10 @@ public class Staffs implements Serializable {
 	String gendername;
 	String isfulltimename;
 	String statusname;
+	Long branchid;
+	Long campusid;
+	Long staffjobid;
+	Long staffjobtype;
 
 	public Staffs() {
 	}

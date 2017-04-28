@@ -20,7 +20,6 @@ public class Orgbranches implements Serializable {
 	Integer version;
 	Long regionid;
 	String branchname;
-
 	String regionidname;
 
 	public Orgbranches() {

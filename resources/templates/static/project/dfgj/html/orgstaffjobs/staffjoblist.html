@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html ng-app="list">
+<head>
+<title>角色类型-list</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/list.css">
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<!-- 弹出框 -->
+
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+<script type="text/javascript" src="../../../../resource/js/getUrlParam.js"></script>
+<!-- 分页 -->
+<script type="text/javascript" src="../../../../resource/js/paging.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<script type="text/javascript">
+	var list = angular.module("list", []);
+	list.controller("listController", function($scope, $http) {
+		var ids = "";
+		var flag = true;
+		$scope.toselect = function(id, name) {
+			var parm = {};
+			parm.id = id;
+			parm.name = name;
+			setDateChild(parm);
+			artClose();
+		}
+		//搜索
+		$scope.onSearch = function() {
+			$scope.pageList();
+		}
+		//翻页	
+		$scope.changePage = function() {
+			$scope.pageList();
+		}
+		$scope.onReturn = function() {
+			artClose();
+		}
+		$scope.pageList = function() {
+			var getn = $("#name").val();
+			var data1 = {
+				"jobname" : getn
+			};
+			pageNo = parent.currentPage;
+			$http({
+				url : parent.getMenuLinksHref("jobslist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;',
+					"pageNo" : pageNo,
+					"pageSize" : pageSize,
+					"orderBy" : "id",
+					"dir" : "desc"
+				},
+				data : JSON.stringify(data1)
+			}).success(function(data, status, headers, config) {
+				totalCount = headers('totalCount');
+				pageCount = headers('pageCount');
+				$scope.datalist = data;
+				paging();
+				initPage();
+			}).error(function(data, status, headers, config) {
+				response(status);
+			});
+
+		}
+		$scope.pageList();
+	})
+	function confirmDeletion() {
+		var appElement = document
+				.querySelector('[ng-controller=listController]');
+		var $scope = angular.element(appElement).scope();
+	}
+</script>
+</head>
+
+<body ng-controller="listController">
+	<h5>
+		<span class="glyphicon glyphicon-search" style="margin: 0px 5px; color: #99DFF8;"></span> <input type="text" id="name" class="form-control" value=""
+			placeholder="请输入查找的校区名" style="width: 25%; display: inline;"> <i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i> <a
+			class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onSearch()">快速搜索</a> <a class="btn btn-primary"
+			style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onReturn()">返回</a>
+	</h5>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
+		<tr class="info">
+				<th>序号</th>
+				<th>岗位名称</th>
+				<th>岗位负责人</th>
+				<th>是否是主岗</th>
+				<th>是否全职</th>
+				<th>职务</th>
+				<th>状态</th>
+				<th>相关操作</th>
+			</tr>
+		<tr ng-repeat="data in datalist" class='tr{{$index%2+2}}' ng-class="{selected: $index==selectedRow}">
+			<td ng-bind="$index+1">1</td>
+			<td ng-dblclick="toInfo(data)">{{data.jobs.jobname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.jobs.staffidname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.jobs.isprimaryname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.jobs.isfulltimename}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.jobs.jobcodeidname}}</td>
+			<td ng-dblclick="toInfo(data)">{{data.jobs.statusname}}</td>
+			<td><img ng-click="toselect(data.jobs.id,data.jobs.jobname)" class="operationImg" src="../../../../resource/img/cms/search.png" title="选择"></td>
+		</tr>
+	</table>
+
+
+
+	<!-- 分页区 -->
+	<div class="pagepanel">
+		<span class="text-info" style="position: relative; top: -10px;">共<label id="totalCount"></label>条
+		</span>
+		<ul class="pagination" style="margin: 0px 10px; padding: 0px;">
+		</ul>
+		<span class="text-info" style="position: relative; top: -10px;">第<label id="pageNo"></label>页/共<label id="pageCount"></label>页
+		</span> <select id="pageSize" class="form-control" style="width: 70px; float: right;">
+		</select> <span class="text-info" style="position: relative; top: 6px; float: right; margin: 0px 5px;">每页显示</span>
+	</div>
+
+	</div>
+
+</body>
+</html>

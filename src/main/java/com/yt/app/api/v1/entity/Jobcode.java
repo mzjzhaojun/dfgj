@@ -2,7 +2,11 @@ package com.yt.app.api.v1.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yt.app.util.DateTimeUtil;
 
 /**
  * @author zj default
@@ -20,8 +24,12 @@ public class Jobcode implements Serializable {
 	String name;
 	Long type;
 	Long status;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date createtime;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date modifytime;
+	String typename;
+	String statusname;
 
 	public Jobcode() {
 	}

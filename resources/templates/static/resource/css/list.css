@@ -7,7 +7,7 @@ body{
 a{color:#616161;text-decoration: none;}
 /* 分页按钮的显示高度 */
 .pagination>li>a{padding:3px 12px !important;}
-.pagepanel{text-align: center; font-size: 16px;background: #F5F6FA;padding:10px 0px 5px 0px;border:solid 1px #ddd;border-top:solid 0px #ddd;}
+.pagepanel{text-align: center; font-size: 16px;background: #F5F6FA;padding:10px 0px 5px 0px;border:solid 1px #ddd;border-top:solid 0px #ddd;padding-right: 5px;}
 .table{margin-bottom:0px;}
 .table>thead>tr{border:solid 1px #ddd;border-bottom: solid 0px #ddd;}
 .table>tbody>tr{border:solid 1px #ddd;border-top: solid 0px #ccc;}

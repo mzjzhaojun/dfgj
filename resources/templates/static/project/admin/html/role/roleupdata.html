@@ -7,46 +7,36 @@
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-<link rel="stylesheet" type="text/css"
-	href="../../../../resource/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css"
-	type="text/css">
-<link rel="stylesheet" type="text/css"
-	href="../../../../resource/css/common.css">
-<script type="text/javascript"
-	src="../../../../resource/js/angular-1.0.1.min.js"></script>
-<script type="text/javascript"
-	src="../../../../resource/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript"
-	src="../../../../resource/js/getUrlParam.js"></script>
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/getUrlParam.js"></script>
 <script type="text/javascript" src="../../../../resource/js/response.js"></script>
-<script type="text/javascript"
-	src="../../../../resource/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
 <!-- 树形控件 -->
-<script type="text/javascript"
-	src="../../../../resource/js/validate/js/jqueryTree/jquery.ztree.core-3.5.js"></script>
-<script type="text/javascript"
-	src="../../../../resource/js/validate/js/jqueryTree/jquery.ztree.excheck-3.5.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/jqueryTree/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/jqueryTree/jquery.ztree.excheck-3.5.js"></script>
 
 <script type="text/javascript">
 	var update = angular.module("update", []);
 	update.controller("updateController", function($scope, $http) {
-		//		var ids = UrlParm.parm("id");	
-		$scope.inittype = function() {
+		$scope.initcode = function() {
 			$http({
-				url : parent.getMenuLinksHref("roledicttype"),
-				method : 'GET',
+				url : parent.getMenuLinksHref("admindictionarylist"),
+				method : 'POST',
 				dataType : "json",
 				withCredentials : true,
 				headers : {
 					'Content-Type' : 'application/json;charset=UTF-8;'
 				},
-				data : ""
+				data : JSON.stringify({
+					"typecode" : 1
+				})
 			}).success(function(data, status, headers, config) {
-				$scope.syss = data;
+				$scope.selects = data;
 			}).error(function(data, status, headers, config) {
-				//处理响应失败
 				response(status);
 			})
 		}
@@ -109,13 +99,12 @@
 			}).success(function(data, status, headers, config) {
 				location.href = "rolelist.html";
 			}).error(function(data, status, headers, config) {
-				//处理响应失败
 				response(status);
 			})
 
 		}
 
-		$scope.inittype();
+		$scope.initcode();
 		$scope.inittree();
 	})
 
@@ -190,44 +179,30 @@ ul.ztree {
 		<!-- 操作按钮操作区 -->
 		<div class="col-lg-12 topActionPanel">
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onSave()">确
-					定</button>
+				<button type="button" class="btn btn-primary" ng-click="onSave()">确 定</button>
 			</div>
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onReturn()">返
-					回</button>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
 			</div>
 		</div>
 		<div class="col-lg-6">
-			<input type="hidden" class="form-control required" name="id"
-				ng-model="formData.id" value="{{formData.id}}" maxlength="50">
+			<input type="hidden" class="form-control required" name="id" ng-model="formData.id" value="{{formData.id}}" maxlength="50">
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">角&nbsp;&nbsp;色&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;</span>
-				<input type="text" class="form-control required" name="name"
-					ng-model="formData.name" value="{{formData.roleName}}"
-					maxlength="50"> <span
-					class="input-group-addon verifyprompt">*</span>
+				<span class="input-group-addon text-right spanwidth">角&nbsp;&nbsp;色&nbsp;&nbsp;名&nbsp;&nbsp;&nbsp;</span> <input type="text" class="form-control required"
+					name="name" ng-model="formData.name" value="{{formData.roleName}}" maxlength="50"> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">角色类型&nbsp;&nbsp;</span>
-				<select class="form-control required" name="type"
-					ng-model="formData.type"
-					ng-options="sys.code as sys.name for sys in syss">
+				<span class="input-group-addon text-right spanwidth">角色类型&nbsp;&nbsp;</span> <select class="form-control required" name="type" ng-model="formData.type"
+					ng-options="data.dictionary.code as data.dictionary.name for data in selects">
 					<option value="">请选择类型</option>
 				</select> <span class="input-group-addon verifyprompt">*</span>
 			</div>
-
 			<div class="input-group input-group-sm">
-
-				<span class="input-group-addon text-right spanwidth">菜单权限&nbsp;&nbsp;&nbsp;</span>
-				<input type="hidden" name="add_menucode" id="add_menucode">
-				<div class=" form-control"
-					style="position: relative; z-index: 1; height: 100%">
+				<span class="input-group-addon text-right spanwidth">菜单权限&nbsp;&nbsp;&nbsp;</span> <input type="hidden" name="add_menucode" id="add_menucode">
+				<div class=" form-control" style="position: relative; z-index: 1; height: 100%">
 					<ul id="treeDemo" class="ztree"></ul>
 				</div>
 			</div>
-
-
 		</div>
 	</form>
 </body>

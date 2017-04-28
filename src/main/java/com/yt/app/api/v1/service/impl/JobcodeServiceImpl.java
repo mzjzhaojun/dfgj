@@ -4,13 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
+
+import com.yt.app.api.v1.mapper.DictionaryMapper;
 import com.yt.app.api.v1.mapper.JobcodeMapper;
 import com.yt.app.api.v1.service.JobcodeService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
+import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Jobcode;
 import com.yt.app.frame.page.IPage;
 import com.yt.app.frame.page.PageBean;
 import com.yt.app.util.RequestUtil;
+import com.yt.app.util.StreamUtil;
+
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,10 +32,13 @@ import java.util.Map;
 public class JobcodeServiceImpl extends BaseServiceImpl<Jobcode, Long> implements JobcodeService {
 	@Autowired
 	private JobcodeMapper mapper;
+	@Autowired
+	private DictionaryMapper dictionarymapper;
 
 	@Override
 	@Transactional
 	public Integer post(Jobcode t) {
+		t.setCreatetime(new Date());
 		Integer i = mapper.post(t);
 		return i;
 	}
@@ -45,12 +55,30 @@ public class JobcodeServiceImpl extends BaseServiceImpl<Jobcode, Long> implement
 			}
 		}
 		List<Jobcode> list = mapper.list(param);
+		long[] dids = StreamUtil.concat(list.stream().mapToLong(Jobcode::getStatus), list.stream().mapToLong(Jobcode::getType)).distinct().toArray();
+		List<Dictionary> listdictionary = dictionarymapper.listByArrayId(dids);
+		list.stream().forEach(s -> {
+			listdictionary.stream().forEach(d -> {
+				if (s.getType().longValue() == d.getCode().longValue())
+					s.setTypename(d.getName());
+				if (s.getStatus().longValue() == d.getCode().longValue())
+					s.setStatusname(d.getName());
+			});
+		});
 		return new PageBean<Jobcode>(param, list, count);
 	}
 
 	@Override
 	public Jobcode get(Long id) {
 		Jobcode t = mapper.get(id);
+		long[] dids = Arrays.asList(t.getType(), t.getStatus()).stream().mapToLong(Long::longValue).toArray();
+		List<Dictionary> listdictionary = dictionarymapper.listByArrayId(dids);
+		listdictionary.stream().forEach(d -> {
+			if (t.getType().longValue() == d.getCode().longValue())
+				t.setTypename(d.getName());
+			if (t.getStatus().longValue() == d.getCode().longValue())
+				t.setStatusname(d.getName());
+		});
 		return t;
 	}
 }

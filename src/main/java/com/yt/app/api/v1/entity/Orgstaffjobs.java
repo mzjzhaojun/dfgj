@@ -23,12 +23,17 @@ public class Orgstaffjobs implements Serializable {
 	Long campusid;
 	Long staffid;
 	String staffname;
-	String staffjobtype;
+	Long staffjobtype;
+	Long staffjobid;
+	String branchidname;
+	String campusidname;
+	String staffjobtypename;
+	String staffjobidname;
 
 	public Orgstaffjobs() {
 	}
 
-	public Orgstaffjobs(Long id, Integer version, Long regionid, Long branchid, Long campusid, Long staffid, String staffname, String staffjobtype) {
+	public Orgstaffjobs(Long id, Integer version, Long regionid, Long branchid, Long campusid, Long staffid, String staffname, Long staffjobtype) {
 		this.id = id;
 		this.version = version;
 		this.regionid = regionid;

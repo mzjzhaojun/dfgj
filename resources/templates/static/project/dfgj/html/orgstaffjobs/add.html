@@ -1,144 +1,188 @@
 <!DOCTYPE html>
 <html ng-app="add">
-  <head>
-    <title>新增</title>
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="this is my page">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <!-- 基础样式 -->
-    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css"/>
-    <!-- 基础js -->
-    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
-	<!-- 表单验证 -->
-	<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
-	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
-	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
-	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
-	<!-- datetime -->
-	<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>	
-	<!-- 初始化 -->
-	<script type="text/javascript">
-var add = angular.module("add", []);
-add.controller("addController",function($scope, $http) {
-	$scope.formData = {};
-	//返回
-	$scope.onReturn=function(){
-history.go(-1);
-	}
-	//保存
-	$scope.onPreserved=function(){
-var isValid = $("#saveForm").valid();
-	if(isValid){
-    $http({
-    	url:parent.getMenuLinksHref("orgstaffjobspost"),
-    	method:'POST',
-    	dataType : "json",
-    	withCredentials: true,
-    	headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-    	data: JSON.stringify($scope.formData)
-      }).success(function(data, status, headers, config){
-      	if(data == 1){
-      location.href="list.html";
-      	}
-      }).error(function(data, status, headers, config){
-      	response(status);
+<head>
+<title>新增</title>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- 基础样式 -->
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css" />
+<!-- 基础js -->
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<!-- 表单验证 -->
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+<!-- datetime -->
+<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
+<!-- dialog -->
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+<!-- cookie-->
+<script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+<!-- 初始化 -->
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add.controller("addController", function($scope, $http) {
+		$scope.formData = {};
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		//保存
+		$scope.onPreserved = function() {
+			var isValid = $("#saveForm").valid();
+			if (isValid) {
+				$scope.formData.branchid = $("#branchid").val();
+				$scope.formData.staffid = $("#staffid").val();
+				$scope.formData.campusid = $("#campusid").val();
+				$scope.formData.staffname = $("#staffidname").val();
+				$scope.formData.regionid = $.cookie('regionid');
+				$scope.formData.staffjobid = $("#staffjobid").val();
+				$http({
+					url : parent.getMenuLinksHref("orgstaffjobspost"),
+					method : 'POST',
+					dataType : "json",
+					withCredentials : true,
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					data : JSON.stringify($scope.formData)
+				}).success(function(data, status, headers, config) {
+					if (data == 1) {
+						location.href = "list.html";
+					}
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		}
+		$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("dictionarylist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify([ 1870 ])
+			}).success(function(data, status, headers, config) {
+				$scope.selects = data;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+		$scope.selectbBranch = function() {
+			artdialogIframe("../../dfgj/html/orgstaffjobs/branchlist.html",
+					null, backfunctionorg, 1024, 600, true);
+		}
+		$scope.selectCampus = function() {
+			artdialogIframe("../../dfgj/html/orgstaffjobs/campuslist.html",
+					null, backfunctioncampus, 1024, 600, true);
+		}
+		$scope.selectStaff = function() {
+			artdialogIframe("../../dfgj/html/jobs/stafflist.html", null,
+					backfunctionstaff, 1024, 600, true);
+		}
+		$scope.selectStaffjob = function() {
+			artdialogIframe("../../dfgj/html/orgstaffjobs/staffjoblist.html?bid="+$("#branchid").val(),
+					null, backfunctionstaffjob, 1024, 600, true);
+		}
+		$scope.initselect();
 	})
-    	}
+
+	function backfunctionorg() {
+		if (parent.getDateChild().id != undefined) {
+			$("#branchid").val(parent.getDateChild().id);
+		}
+		if (parent.getDateChild().name != undefined) {
+			$("#branchidname").val(parent.getDateChild().name);
+		}
+		setDateChild({});
 	}
-	$scope.initselect = function() {
-$http({
-	url : parent.getMenuLinksHref("dictionarylist"),
-	method : 'POST',
-	dataType : "json",
-	withCredentials : true,
-	headers : {
-'Content-Type' : 'application/json;charset=UTF-8;'
-	},
-	data : JSON.stringify([20])
-	}).success(function(data, status, headers, config) {
-$scope.selects = data;
-	}).error(function(data, status, headers, config) {
-response(status);
-	})
-}
-	$scope.initselect();
-})
-	</script>
+
+	function backfunctioncampus() {
+		if (parent.getDateChild().id != undefined) {
+			$("#campusid").val(parent.getDateChild().id);
+		}
+		if (parent.getDateChild().name != undefined) {
+			$("#campusidname").val(parent.getDateChild().name);
+		}
+		setDateChild({});
+	}
+
+	function backfunctionstaff() {
+		if (parent.getDateChild().id != undefined) {
+			$("#staffid").val(parent.getDateChild().id);
+		}
+		if (parent.getDateChild().name != undefined) {
+			$("#staffidname").val(parent.getDateChild().name);
+		}
+		setDateChild({});
+	}
+
+	function backfunctionstaffjob() {
+		if (parent.getDateChild().id != undefined) {
+			$("#staffjobid").val(parent.getDateChild().id);
+		}
+		if (parent.getDateChild().name != undefined) {
+			$("#staffjobidname").val(parent.getDateChild().name);
+		}
+		setDateChild({});
+	}
+</script>
 </head>
-  
-  <body ng-controller="addController">
-  	<form method="post" id="saveForm" action="">
-   <!-- 操作按钮操作区 -->
-   <div class="col-lg-12 topActionPanel">
-	        <div>
-    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
-	    	</div>
-	    	<div>
-    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-	    	</div>
-    </div>
-   <div class="col-lg-6">
-	    	<div class="input-group input-group-sm">
-	    <span class="input-group-addon text-right spanwidth">大区ID</span>
-	    <select class="form-control required" name="regionid" ng-model="formData.regionid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-	    	<option value=''>请选择大区ID</option>
-	    	</select>
-	    	<span class="input-group-addon verifyprompt">*</span>
-	    	</div>
-	    	<div class="input-group input-group-sm">
-	    <span class="input-group-addon text-right spanwidth">分公司ID</span>
-	    <select class="form-control required" name="branchid" ng-model="formData.branchid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-	    	<option value=''>请选择分公司ID</option>
-	    	</select>
-	    	<span class="input-group-addon verifyprompt">*</span>
-	    	</div>
-	    	<div class="input-group input-group-sm">
-	    <span class="input-group-addon text-right spanwidth">校区ID</span>
-	    <select class="form-control required" name="campusid" ng-model="formData.campusid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-	    	<option value=''>请选择校区ID</option>
-	    	</select>
-	    	<span class="input-group-addon verifyprompt">*</span>
-	    	</div>
-	    	<div class="input-group input-group-sm">
-	    <span class="input-group-addon text-right spanwidth">员工ID</span>
-	    <select class="form-control required" name="staffid" ng-model="formData.staffid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-	    	<option value=''>请选择员工ID</option>
-	    	</select>
-	    	<span class="input-group-addon verifyprompt">*</span>
-	    	</div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">员工姓名</span>
-	           <input type="text" class="form-control required" placeholder="请输入员工姓名" name="staffname" ng-model="formData.staffname" maxlength="64">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">岗位类型</span>
-	           <input type="text" class="form-control required" placeholder="请输入岗位类型" name="staffjobtype" ng-model="formData.staffjobtype" maxlength="32">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	        </div>
-    </form>
-  </body>
-  <script type="text/javascript">
-  $('#date').datetimepicker({
-  	format : 'yyyy-mm-dd',
-  	language : 'cn',
-  	weekStart : 1,
-  	minView : "month",
-  	todayBtn : 1,
-  	initialDate:new Date(),
-  	autoclose : 1,
-  	todayHighlight : 1,
-  	startView : 2,
-  	forceParse : 0,
-  	showMeridian : 0
-  });
+
+<body ng-controller="addController">
+	<form method="post" id="saveForm" action="">
+		<!-- 操作按钮操作区 -->
+		<div class="col-lg-12 topActionPanel">
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<input type="hidden" id="branchid" ng-model="formData.branchid" /> <span class="input-group-addon text-right spanwidth">公司</span> <input type="text"
+					id="branchidname" name="branchidname" ng-model="formData.branchidname" readonly="readonly" class="form-control required"> <i
+					ng-click="selectbBranch()" class="glyphicon glyphicon-search" title="选择"></i>
+			</div>
+			<div class="input-group input-group-sm">
+				<input type="hidden" id="campusid" ng-model="formData.campusid" /> <span class="input-group-addon text-right spanwidth">校区</span> <input type="text"
+					id="campusidname" name="campusidname" ng-model="formData.campusidname" readonly="readonly" class="form-control required"> <i
+					ng-click="selectCampus()" class="glyphicon glyphicon-search" title="选择"></i>
+			</div>
+			<div class="input-group input-group-sm">
+				<input type="hidden" id="staffid" ng-model="formData.staffid" /> <span class="input-group-addon text-right spanwidth">员工</span> <input type="text"
+					id="staffidname" name="staffidname" ng-model="formData.staffidname" readonly="readonly" class="form-control required"> <i
+					ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i>
+			</div>
+			<div class="input-group input-group-sm">
+				<input type="hidden" id="staffjobid" ng-model="formData.staffjobid" /> <span class="input-group-addon text-right spanwidth">岗位</span> <input type="text"
+					id="staffjobidname" name="staffjobidname" ng-model="formData.staffjobidname" readonly="readonly" class="form-control required"> <i
+					ng-click="selectStaffjob()" class="glyphicon glyphicon-search" title="选择"></i>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">岗位类型</span> <select class="form-control required" name="staffjobtype"
+					ng-model="formData.staffjobtype" ng-options="data.code as data.name for data in selects  | filter: {typecode: '1870'}">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+		</div>
+	</form>
+</body>
 </html>

@@ -21,7 +21,6 @@ public class Orgcampuses implements Serializable {
 	Long regionid;
 	Long branchid;
 	String campusname;
-
 	String regionidname;
 	String branchidname;
 

@@ -1,446 +1,551 @@
 <!DOCTYPE html>
 <html ng-app="main">
-  <head>
-    <title>控制系统-首页</title>
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="this is my page">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" ></meta>
-    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-    <link rel="stylesheet" type="text/css" href="../../../resource/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../resource/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="../../../resource/css/menu.css">
-    <script type="text/javascript" src="../../../resource/js/config.js"></script>
-    <script type="text/javascript" src="../../../resource/js/angular-1.0.1.min.js"></script>
-    <script type="text/javascript" src="../../../resource/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="../../../resource/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../../resource/js/getUrlParam.js"></script>
-   <script type="text/javascript" src="../../../resource/js/response.js"></script>
-    <!-- 弹出框 -->
-    <script type="text/javascript" src="../../../resource/js/artDialog/skins/js/artDialog.source.js?skin=default"></script>
-    <script type="text/javascript" src="../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
-	<script type="text/javascript" src="../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
-	<script type="text/javascript">
-		var currentPage = 1;
-		var main = angular.module("main", []);
-		var childsysname,three,menu,sys,functionLinks,syslinks,menulinks;
-		main.controller("mainController", function($scope, $http) {
-			$scope.initaccount = function(){
-				$http({
-					url:configsys.accounturl,
-					method:'GET',
-					dataType : "json",
-					withCredentials: true,
-					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-					data: ''				
-					}).success(function(data, status, headers, config){
-						$scope.name = data.name;
-					}).error(function(data, status, headers, config){
-						response(status);
-					});
+<head>
+<title>控制系统-首页</title>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../resource/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="../../../resource/css/menu.css">
+<script type="text/javascript" src="../../../resource/js/config.js"></script>
+<script type="text/javascript" src="../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../resource/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../resource/js/getUrlParam.js"></script>
+<script type="text/javascript" src="../../../resource/js/response.js"></script>
+<script type="text/javascript" src="../../../resource/js/jquery.cookie.js"></script>
+<!-- 弹出框 -->
+<script type="text/javascript" src="../../../resource/js/artDialog/skins/js/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+<script type="text/javascript" src="../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+<script type="text/javascript">
+	var currentPage = 1;
+	var main = angular.module("main", []);
+	var childsysname, three, menu, sys, functionLinks, syslinks, menulinks;
+	main.controller("mainController", function($scope, $http) {
+		$scope.initaccount = function() {
+			$http({
+				url : configsys.accounturl,
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				$scope.name = data.name;
+				$.cookie('regionid', data.regionid,{ expires: 7, path: '/' });
+			}).error(function(data, status, headers, config) {
+				response(status);
+			});
+		}
+		$scope.onExit = function() {
+			parent.art.dialog({
+				content : '你确定要退出系统吗？',
+				lock : true,
+				ok : function() {
+					loginout();
+				},
+				time : 1000,
+				cancelVal : '关闭',
+				cancel : true
+			});
+		}
+		$scope.initaccount();
+	})
+	function loginout() {
+		$.ajax({
+			type : "POST",
+			url : configsys.loginOutUrl,
+			async : false,
+			dataType : 'json',
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			success : function(data) {
+				location.href = "/dfgj/static/project/login/html/index.html";
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				response(XMLHttpRequest.status);
 			}
-			$scope.onExit = function(){
-				parent.art.dialog({
-					content: '你确定要退出系统吗？',
-					lock:true,
-					ok: function () {
-						loginout();
-					},
-					time:1000,
-					cancelVal: '关闭',
-					cancel: true
+		});
+	}
+
+	function onPopupDelete() {
+		dialogForButton("删除提示", "您确定要删除此条记录？", true, first, "第一", second, "第二",
+				300, 100);
+	}
+	function first() {
+		document.getElementById("main").contentWindow.confirmDeletion();
+	}
+	function second() {
+
+	}
+	function roleModul(url) {
+		$.ajax({
+			type : "POST",
+			url : url,
+			data : '',
+			async : false,
+			dataType : 'json',
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			success : function(_data) {
+				sys = _data.sysmenu;
+				initSysMenu();
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				response(XMLHttpRequest.status);
+			}
+		});
+	}
+	function initSysMenu() {
+		var sysName, level, sysUrl, sysId, sysChild, remark, className, remark2, sysName2, icon;
+		var html = '<li> <span class="glyphicon glyphicon-arrow-left"></span> </li>';
+		for (var i = 0; i < sys.length; i++) {
+			sysName = sys[i].name;
+			level = sys[i].level;
+			sysUrl = sys[i].linkUrl;
+			sysId = sys[i].id;
+			remark = sys[i].remark;
+			if (level == 31) {
+				sysChild = sys[i].child;
+			}
+			html += '<li> <p class="btn-deepblack" order="'+remark+'" sysId="'+sysId+'"><i class="glyphicon glyphicon-chevron-right" data-toggle="tooltip" data-placement="right"></i><span level="'+level+'">'
+					+ sysName + '</span></p>';
+			if (sysChild != undefined) {
+				if (sysChild.length > 0) {
+					html += '<div class="list-group twolist">';
+					for (var j = 0; j < sysChild.length; j++) {
+						sysName2 = sysChild[j].name;
+						level = sysChild[j].level;
+						sysUrl = sysChild[j].url;
+						sysId = sysChild[j].id;
+						icon = sysChild[j].icon;
+						remark2 = sysChild[j].remark;
+						html += '<label order="'+remark+'" order1="'+remark2+'" sysName="'+sysName+'" level="'+level+'" sysId="'+sysId+'" url="'+sysUrl+'"><span class="'+icon+'"></span><span level="'+level+'">'
+								+ sysName2 + '</span></label>';
+						if (level == 32) {
+							$("#two_name").html(sysName);
+						}
+					}
+					html += '</div>';
+				}
+			}
+			html += '</li>';
+		}
+		$(".onemenu").html(html);
+		$('.onemenu > li + li:eq(0)> div').show();
+		$('.onemenu > li + li:eq(0)> div >label:eq(' + remark + ')').addClass(
+				"btn-primary");
+		$('.onemenu > li + li:eq(0)> p').find("i:eq(0)").removeClass(
+				"glyphicon glyphicon-chevron-right").addClass(
+				"glyphicon glyphicon-chevron-down");
+		$(".thirdmenu").find("li:eq(0) > p").addClass("btn-whiteblack")
+				.removeClass("btn-lightblack");
+		rightArea();
+		$(".onemenu").find(".twolist:eq(0) > label:eq(0)").trigger("click");
+	}
+	function initMenuList(menus) {
+		menu = [];
+		if (menus != undefined && menus.length > 0) {
+			var html = '';
+			for (var k = 0; k < menus.length; k++) {
+				menuName = menus[k].name;
+				menuId = menus[k].id;
+				var obj = {}
+				obj.name = menuName;
+				obj.url = menus[k].url;
+				obj.links = menus[k].links;
+				menu.push(obj);
+				var menus1 = menus[k].child;
+				var menus_len = 0;
+				if (menus1 != undefined)
+					menus_len = menus1.length;
+				if (menus_len > 0) {
+					html += '<li> <p class="btn-lightblack" id="'+menuId+'"><i class="glyphicon glyphicon-chevron-right"></i> <span>'
+							+ menuName + '</span></p>';
+					html += '<div class="list-group2 fourlist" id="test1">'
+					for (var x = 0; x < menus_len; x++) {
+						menuName = menus1[x].name;
+						menuId = menus1[x].id;
+						var obj = {}
+						obj.name = menuName;
+						obj.url = menus1[x].url;
+						obj.links = menus1[x].links;
+						menu.push(obj);
+						html += '<label class="btn-lightblack" id="'+menuId+'"><span class="glyphicon "></span><span class="span_box2">'
+								+ menuName + '</span></label>'
+					}
+				} else {
+					html += '<li> <p class="btn-lightblack" id="'+menuId+'"> <span class="span_box">'
+							+ menuName + '</span></p>';
+				}
+				'</div>';
+				html += '</li>';
+				$('.thirdmenu').html(html);
+			}
+		}
+		$(".thirdmenu").find("li:eq(0) > p:eq(0)").trigger("click");
+		$(".thirdmenu").find("li:eq(0) > div:eq(0) > label:eq(0)").trigger(
+				"click");
+		/* $("#main").attr("src", first); */
+	}
+	function onLogin() {
+		location.href = "/dfgj/static/project/login/html/index.html";
+	}
+	$(function() {
+		$(document).on(
+				"click",
+				".onemenu li:eq(0)",
+				function() {
+					var switch1 = $('#menu_image').attr("switch");
+					var left = $('#menu_image').css("left");
+					left = parseInt(left.substr(0, left.length - 2));
+					var className = $('.onemenu li:eq(0)').children().attr(
+							'class');
+					if (className == 'glyphicon glyphicon-arrow-left') {
+						$('.onemenu li:eq(0)').children().removeClass(
+								'glyphicon-arrow-left');
+						$('.onemenu li:eq(0)').children().addClass(
+								'glyphicon-th-list');
+						$(".menupanel").css("width", "50px");
+						$(".menupanel1").css("left", "50px");
+						$('.onemenu > li+li >p> span').hide();
+						$('.twolist > label > span + span').hide();
+						$("[data-toggle='tooltip']").tooltip({
+							"html" : "true",
+							"animation" : "56"
+						});
+						if (switch1 == 0) {
+							if (left > 100) {
+								$('#menu_image').removeClass("menu_image")
+										.addClass("menu_image1");
+								$("#right").css("left", "230px");
+							} else {
+								$('#menu_image').removeClass("menu_image1")
+										.addClass("menu_image");
+								$("#right").css("left", "50px");
+							}
+						} else {
+							if (left > 50) {
+								$('#menu_image').removeClass("menu_image2")
+										.addClass("menu_image3");
+								$("#right").css("left", "50px");
+							} else {
+								$('#menu_image').removeClass("menu_image3")
+										.addClass("menu_image");
+								$("#right").css("left", "360px");
+							}
+						}
+					} else {
+						$('.onemenu li:eq(0)').children().addClass(
+								'glyphicon-arrow-left');
+						$('.onemenu li:eq(0)').children().removeClass(
+								'glyphicon-th-list');
+						$(".menupanel").css("width", "180px");
+						$(".menupanel1").css("left", "180px");
+						$('.onemenu > li+li  >p> span').show();
+						$('.twolist > label > span + span').show();
+						if (switch1 == 0) {
+							if (left > 100) {
+								$('#menu_image').removeClass("menu_image1")
+										.addClass("menu_image");
+								$("#right").css("left", "360px");
+							} else {
+								$('#menu_image').removeClass("menu_image1")
+										.addClass("menu_image");
+							}
+						} else {
+							if (left > 50) {
+								$('#menu_image').removeClass("menu_image2")
+										.addClass("menu_image3");
+								$("#right").css("left", "360px");
+							} else {
+								$('#menu_image').removeClass("menu_image3")
+										.addClass("menu_image2");
+								$("#right").css("left", "180px");
+							}
+						}
+
+					}
+					rightArea();
 				});
-			}
-			$scope.initaccount();
-		})
-		function loginout(){
-			$.ajax({
-				type : "POST",
-				url : configsys.loginOutUrl,
-				async : false,
-				dataType : 'json',
-				headers : {'Content-Type' : 'application/json;charset=UTF-8;'},
-				success : function(data) {
-					location.href="/dfgj/static/project/login/html/index.html";
-				},
-				error : function(XMLHttpRequest, textStatus,errorThrown) {
-					response(XMLHttpRequest.status);
-				}
-			});
-		}
-
-		function onPopupDelete() {
-			dialogForButton("删除提示", "您确定要删除此条记录？", true, first, "第一", second,
-					"第二", 300, 100);
-		}
-		function first() {
-			document.getElementById("main").contentWindow.confirmDeletion();
-		}
-		function second() {
-
-		}
-		function roleModul(url) {
-			$.ajax({
-				type : "POST",
-				url : url,
-				data : '',
-				async : false,
-				dataType : 'json',
-				headers : {'Content-Type' : 'application/json;charset=UTF-8;'},
-				success : function(_data) {
-					sys = _data.sysmenu;
-					initSysMenu();
-				},
-				error : function(XMLHttpRequest, textStatus,errorThrown) {
-					response(XMLHttpRequest.status);
-				}
-			});
-		}
-		function initSysMenu(){
-			var sysName,level,sysUrl,sysId,sysChild,remark,className,remark2,sysName2,icon;
-			var html = '<li> <span class="glyphicon glyphicon-arrow-left"></span> </li>';
-			for(var i = 0;i<sys.length;i++){
-				sysName = sys[i].name;
-				level = sys[i].level;
-				sysUrl = sys[i].linkUrl;
-				sysId = sys[i].id;
-				remark = sys[i].remark;
-				if(level == 31){
-					sysChild = sys[i].child;
-				}
-				html +='<li> <p class="btn-deepblack" order="'+remark+'" sysId="'+sysId+'"><i class="glyphicon glyphicon-chevron-right" data-toggle="tooltip" data-placement="right"></i><span level="'+level+'">'+sysName+'</span></p>';
-				if(sysChild != undefined){
-					if(sysChild.length >0 ){
-						html +='<div class="list-group twolist">';
-						for(var j=0;j<sysChild.length;j++){
-							sysName2 = sysChild[j].name;
-							level = sysChild[j].level;
-							sysUrl = sysChild[j].url;
-							sysId = sysChild[j].id;
-							icon = sysChild[j].icon;
-							remark2 = sysChild[j].remark;
-							if(j == 0){
-								className = 'glyphicon glyphicon-cog  data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
-							}else if(j == 1){
-								className = 'glyphicon glyphicon-book data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
-							}else if(j == 2){
-								className = 'glyphicon glyphicon-shopping-cart data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
-							}else if(j == 3){
-								className = 'glyphicon glyphicon-pencil data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
-							}else if(j == 4){
-								className = 'glyphicon glyphicon-home data-toggle="tooltip" data-placement="right" title="'+sysName2+'"';
+		$(document)
+				.on(
+						"click",
+						".onemenu > li + li > p",
+						function() {
+							var className = $('.onemenu li:eq(0)').children()
+									.attr('class');
+							if (className == 'glyphicon glyphicon-arrow-left') {
+								var display = $(this).parent().find("div").css(
+										"display");
+								if (display == "none") {
+									$(this)
+											.find("i:eq(0)")
+											.removeClass(
+													"glyphicon glyphicon-chevron-right")
+											.addClass(
+													"glyphicon glyphicon-chevron-down");
+								} else {
+									$(this)
+											.find("i:eq(0)")
+											.removeClass(
+													"glyphicon glyphicon-chevron-down")
+											.addClass(
+													"glyphicon glyphicon-chevron-right");
+								}
+								var sysName = $(this).find("span:eq(0)").html();
+								var level = $(this).find("span:eq(0)").attr(
+										"level");
+								var order = $(this).attr("order");
+								var sysName1 = $(this).parent().find(
+										".twolist > label:eq(0)>span:eq(1)")
+										.html();
+								$(this).parent().find("div").slideToggle();
 							}
-							html +='<label order="'+remark+'" order1="'+remark2+'" sysName="'+sysName+'" level="'+level+'" sysId="'+sysId+'" url="'+sysUrl+'"><span class="'+icon+'"></span><span level="'+level+'">'+sysName2+'</span></label>';
-							if(level == 32){
-								$("#two_name").html(sysName);
-							}
-						}
-						html +='</div>';
-					}
-				}
-				html +='</li>';
-			}
-			$(".onemenu").html(html);
-			$('.onemenu > li + li:eq(0)> div').show();
-			$('.onemenu > li + li:eq(0)> div >label:eq('+remark+')').addClass("btn-primary");
-			$('.onemenu > li + li:eq(0)> p').find("i:eq(0)").removeClass("glyphicon glyphicon-chevron-right").addClass("glyphicon glyphicon-chevron-down");
-			$(".thirdmenu").find("li:eq(0) > p").addClass("btn-whiteblack").removeClass("btn-lightblack");
-			rightArea();
-			$(".onemenu").find(".twolist:eq(0) > label:eq(0)").trigger("click");
-		}
-		function initMenuList(menus){
-			menu = [];
-			if(menus != undefined && menus.length>0){
-				var html = '';
-				for(var k = 0;k<menus.length;k++){
-					menuName = menus[k].name;
-					menuId = menus[k].id;
-					var obj = {}
-					obj.name = menuName;
-					obj.url = menus[k].url;
-					obj.links = menus[k].links;
-					menu.push(obj);
-					var menus1 = menus[k].child;
-					var menus_len = 0;
-					if(menus1 != undefined)
-						menus_len = menus1.length;
-					if(menus_len > 0){
-						html += '<li> <p class="btn-lightblack" id="'+menuId+'"><i class="glyphicon glyphicon-chevron-right"></i> <span>'+menuName+'</span></p>';
-						html +='<div class="list-group2 fourlist" id="test1">'
-						 for(var x = 0;x<menus_len;x++){
-							menuName = menus1[x].name;
-							menuId = menus1[x].id;
-							var obj = {}
-							obj.name = menuName;
-							obj.url = menus1[x].url;
-							obj.links = menus1[x].links;
-							menu.push(obj);
-							html += '<label class="btn-lightblack" id="'+menuId+'"><span class="glyphicon "></span><span class="span_box2">'+menuName+'</span></label>'
-						} 
-					}else{
-						html += '<li> <p class="btn-lightblack" id="'+menuId+'"> <span class="span_box">'+menuName+'</span></p>';
-					}
-					 '</div>';
-					html +='</li>';
-					$('.thirdmenu').html(html);
-				}
-			} 
-			$(".thirdmenu").find("li:eq(0) > p:eq(0)").trigger("click");
-			$(".thirdmenu").find("li:eq(0) > div:eq(0) > label:eq(0)").trigger("click");
-			/* $("#main").attr("src", first); */
-		}
-		function onLogin(){
-			location.href = "/dfgj/static/project/login/html/index.html";
-		}
-		$(function(){
-			$(document).on("click",".onemenu li:eq(0)",function(){
-				var switch1 = $('#menu_image').attr("switch");
-				var left = $('#menu_image').css("left");
-				left = parseInt(left.substr(0,left.length-2));
-				var className = $('.onemenu li:eq(0)').children().attr('class');
-				if(className == 'glyphicon glyphicon-arrow-left'){
-					$('.onemenu li:eq(0)').children().removeClass('glyphicon-arrow-left');
-					$('.onemenu li:eq(0)').children().addClass('glyphicon-th-list');
-					$(".menupanel").css("width","50px");
-					$(".menupanel1").css("left","50px");
-					$('.onemenu > li+li >p> span').hide();
-					$('.twolist > label > span + span').hide();
-					$("[data-toggle='tooltip']").tooltip({"html" : "true","animation":"56"});
-					if(switch1 == 0){
-						if(left > 100){
-							$('#menu_image').removeClass("menu_image").addClass("menu_image1");
-							$("#right").css("left","230px");
-						}else{
-							$('#menu_image').removeClass("menu_image1").addClass("menu_image");
-							$("#right").css("left","50px");
-						}
-					}else{
-						if(left > 50){
-							$('#menu_image').removeClass("menu_image2").addClass("menu_image3");
-							$("#right").css("left","50px");
-						}else{
-							$('#menu_image').removeClass("menu_image3").addClass("menu_image");
-							$("#right").css("left","360px");
-						}
-					}
-				}else{
-					$('.onemenu li:eq(0)').children().addClass('glyphicon-arrow-left');
-					$('.onemenu li:eq(0)').children().removeClass('glyphicon-th-list');
-					$(".menupanel").css("width","180px");
-					$(".menupanel1").css("left","180px");
-					$('.onemenu > li+li  >p> span').show();
-					$('.twolist > label > span + span').show();
-					if(switch1 == 0){
-						if(left > 100){
-							$('#menu_image').removeClass("menu_image1").addClass("menu_image");
-							$("#right").css("left","360px");
-						}else{
-							$('#menu_image').removeClass("menu_image1").addClass("menu_image");
-						}
-					}else{
-						if(left > 50){
-							$('#menu_image').removeClass("menu_image2").addClass("menu_image3");
-							$("#right").css("left","360px");
-						}else{
-							$('#menu_image').removeClass("menu_image3").addClass("menu_image2");
-							$("#right").css("left","180px");
-						}
-					}
-
-				}
-				rightArea();
-			});
-			$(document).on("click",".onemenu > li + li > p",function(){
-				var className = $('.onemenu li:eq(0)').children().attr('class');
-				if(className == 'glyphicon glyphicon-arrow-left'){
-					var display = $(this).parent().find("div").css("display");
-					if(display == "none"){
-						$(this).find("i:eq(0)").removeClass("glyphicon glyphicon-chevron-right").addClass("glyphicon glyphicon-chevron-down");
-					}else{
-						$(this).find("i:eq(0)").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-right");
-					}
-					var sysName = $(this).find("span:eq(0)").html();
-					var level = $(this).find("span:eq(0)").attr("level");
-					var order = $(this).attr("order");
-					var sysName1 = $(this).parent().find(".twolist > label:eq(0)>span:eq(1)").html();
-					$(this).parent().find("div").slideToggle();
-				}
-				rightArea();
-			});
-			$(document).on("click",".twolist > label",function(){
-				var name = $(this).attr("sysName");
-				var remark= $(this).attr("order");
-				var remark1= $(this).attr("order1");
-				childsysname = $(this).find("span:eq(1)").html();
-				console.info(remark,remark1,name,childsysname)
-				for(var i = 0;i<sys.length;i++){
-					var sysName = sys[i].name;
-					if(sysName == name){
-						var childs = sys[i].child;
-						if(childs != undefined && childs.length >0 ){
-							for(var j = 0;j<childs.length;j++){
-								if(childs[j].name == childsysname){
-									initMenuList(childs[j].menus);
-									$("#two_name").html(childsysname);
-									$("#path").html(sysName+" / "+childsysname);
-									break;
+							rightArea();
+						});
+		$(document)
+				.on(
+						"click",
+						".twolist > label",
+						function() {
+							var name = $(this).attr("sysName");
+							var remark = $(this).attr("order");
+							var remark1 = $(this).attr("order1");
+							childsysname = $(this).find("span:eq(1)").html();
+							console.info(remark, remark1, name, childsysname)
+							for (var i = 0; i < sys.length; i++) {
+								var sysName = sys[i].name;
+								if (sysName == name) {
+									var childs = sys[i].child;
+									if (childs != undefined
+											&& childs.length > 0) {
+										for (var j = 0; j < childs.length; j++) {
+											if (childs[j].name == childsysname) {
+												initMenuList(childs[j].menus);
+												$("#two_name").html(
+														childsysname);
+												$("#path").html(
+														sysName + " / "
+																+ childsysname);
+												break;
+											}
+										}
+									}
 								}
 							}
+							$(".breadcrumb").css({
+								"color" : "#000",
+								"background" : "#fff"
+							});
+							$('.onemenu > li > div >label').removeClass(
+									"btn-primary");
+							$(
+									'.onemenu > li + li:eq(' + remark
+											+ ')> div >label:eq(' + remark1
+											+ ')').addClass("btn-primary");
+						});
+		$(document)
+				.on(
+						"click",
+						".fourlist > label",
+						function() {
+							currentPage = 1;
+							$('.fourlist > label')
+									.removeClass("btn-whiteblack").addClass(
+											"btn-lightblack");
+							$(this).removeClass("btn-lightblack").addClass(
+									"btn-whiteblack");
+							var menuname = $(this).find("span+span").html();
+							var url = getMenuLinks(menuname);
+							$("#path").html(
+									$("#two_name").html() + " / "
+											+ childsysname + " / " + three
+											+ " / " + menuname);
+							$(".breadcrumb").css({
+								"color" : "#000",
+								"background" : "#fff"
+							});
+							var html = '<li><span class="glyphicon glyphicon-home"  style="margin:0px 3px;color:#99DFF8;" ></span><a href="#">'
+									+ menuname + '</a></li>';
+							$("#main").attr("src", url);
+							rightArea()
+						});
+		$('.thirdmenu > li').hover(function() {
+			$('.thirdmenu > li').css("background", "#EAEDF1");
+		});
+		$(document).on(
+				"click",
+				".thirdmenu > li >p",
+				function() {
+					currentPage = 1;
+					three = $(this).find("span").html();
+					var url = getMenuLinks(three);
+					$("#path").html(
+							$("#two_name").html() + " / " + childsysname
+									+ " / " + three);
+					$(".breadcrumb").css({
+						"color" : "#000",
+						"background" : "#fff"
+					});
+					rightArea();
+					var nextElement = $(this).next();
+					if (nextElement.length == 0) {
+						$("#main").attr("src", url);
+					}
+					$('.thirdmenu > li >p').removeClass("btn-whiteblack")
+							.addClass("btn-lightblack");
+					$(this).removeClass("btn-lightblack").addClass(
+							"btn-whiteblack");
+					var display = $(this).parent().find("div").css("display");
+					$(this).parent().find("div").slideToggle();
+					var className = $(this).find("i").attr("class");
+					if (className == "glyphicon glyphicon-chevron-right") {
+						$(this).find("i").removeClass(
+								"glyphicon glyphicon-chevron-right").addClass(
+								"glyphicon glyphicon-chevron-down");
+					} else {
+						$(this).find("i").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-right");
+					}
+				});
+		$("[data-toggle='tooltip']").tooltip({
+			html : true
+		});
+		$("#menu_image").click(
+				function() {
+					var switch1 = $('#menu_image').attr("switch");
+					var left = $('#menu_image').css("left");
+					left = parseInt(left.substr(0, left.length - 2));
+					if (switch1 == 0) {
+						$('#menu_image').attr("switch", "1");
+						$("#menu_image > i").removeClass(" glyphicon glyphicon-chevron-left")
+								.addClass(" glyphicon glyphicon-chevron-right");
+						if (left > 300) {
+							$(".menupanel1").hide();
+							$('#menu_image').removeClass("menu_image")
+									.addClass("menu_image2");
+							$("#right").css("left", "180px");
+						} else {
+							$(".menupanel1").hide();
+							$('#menu_image').removeClass("menu_image1")
+									.addClass("menu_image3");
+							$("#right").css("left", "50px");
+						}
+					} else {
+						$('#menu_image').attr("switch", "0");
+						$("#menu_image > i").removeClass(" glyphicon glyphicon-chevron-right")
+								.addClass(" glyphicon glyphicon-chevron-left");
+						if (left > 150) {
+							$(".menupanel1").show();
+							$('#menu_image').removeClass("menu_image2")
+									.addClass("menu_image");
+							$("#right").css("left", "360px");
+						} else {
+							$(".menupanel1").show();
+							$('#menu_image').removeClass("menu_image3")
+									.addClass("menu_image1");
+							$("#right").css("left", "230px");
 						}
 					}
-				}
-				$(".breadcrumb").css({"color":"#000","background":"#fff"});
-				$('.onemenu > li > div >label').removeClass("btn-primary");
-				$('.onemenu > li + li:eq('+remark+')> div >label:eq('+remark1+')').addClass("btn-primary");
-			});
-			$(document).on("click",".fourlist > label",function(){
-				currentPage = 1;
-				$('.fourlist > label').removeClass("btn-whiteblack").addClass("btn-lightblack");
-				$(this).removeClass("btn-lightblack").addClass("btn-whiteblack");
-				var menuname = $(this).find("span+span").html();
-				var url = getMenuLinks(menuname);
-				$("#path").html($("#two_name").html()+" / "+childsysname+" / "+three+" / "+menuname);
-				$(".breadcrumb").css({"color":"#000","background":"#fff"});
-				var html = '<li><span class="glyphicon glyphicon-home"  style="margin:0px 3px;color:#99DFF8;" ></span><a href="#">'+menuname+'</a></li>';
-				$("#main").attr("src", url);
-				rightArea()
-			});
-			$('.thirdmenu > li').hover(function(){
-				$('.thirdmenu > li').css("background","#EAEDF1");
-			});
-			$(document).on("click",".thirdmenu > li >p",function(){
-				currentPage = 1;
-				three  = $(this).find("span").html();
-				var url = getMenuLinks(three);
-				$("#path").html($("#two_name").html()+" / "+childsysname+" / "+three);
-				$(".breadcrumb").css({"color":"#000","background":"#fff"});
-				rightArea();
-				var nextElement = $(this).next();
-				if(nextElement.length == 0){
-					$("#main").attr("src", url);
-				}
-				$('.thirdmenu > li >p').removeClass("btn-whiteblack").addClass("btn-lightblack");
-				$(this).removeClass("btn-lightblack").addClass("btn-whiteblack");
-				var display = $(this).parent().find("div").css("display");
-				$(this).parent().find("div").slideToggle();
-				var className = $(this).find("i").attr("class");
-				if(className == "glyphicon glyphicon-chevron-right"){
-					$(this).find("i").removeClass("glyphicon glyphicon-chevron-right").addClass("glyphicon glyphicon-chevron-down");
-				}else{
-					$(this).find("i").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-right");
-				}
-			});
-			$("[data-toggle='tooltip']").tooltip({html : true });
-			$("#menu_image").click(function(){
-				var switch1 = $('#menu_image').attr("switch");
-				var left = $('#menu_image').css("left");
-				left = parseInt(left.substr(0,left.length-2));
-				if(switch1 == 0){
-					$('#menu_image').attr("switch","1");
-					$("#menu_image > i").removeClass(" icon-indent-left").addClass(" icon-indent-right");
-					if(left > 300){
-						$(".menupanel1").hide();
-						$('#menu_image').removeClass("menu_image").addClass("menu_image2");
-						$("#right").css("left","180px");
-					}else{
-						$(".menupanel1").hide();
-						$('#menu_image').removeClass("menu_image1").addClass("menu_image3");
-						$("#right").css("left","50px");
-					}
-				}else{
-					$('#menu_image').attr("switch","0");
-					$("#menu_image > i").removeClass(" icon-indent-right").addClass(" icon-indent-left");
-					if(left > 150){
-						$(".menupanel1").show();
-						$('#menu_image').removeClass("menu_image2").addClass("menu_image");
-						$("#right").css("left","360px");
-					}else{
-						$(".menupanel1").show();
-						$('#menu_image').removeClass("menu_image3").addClass("menu_image1");
-						$("#right").css("left","230px");
-					}
-				}
-				rightArea();
-			});
-			roleModul(configsys.sysUrl);
+					rightArea();
+				});
+		roleModul(configsys.sysUrl);
+	})
+	function rightArea() {
+		var width = document.body.offsetWidth;
+		var len = $("#right").css("left");
+		length = len.substring(0, len.length - 2)
+		width = width - length;
+		$("#right").css("width", width + "px");
+	}
+	$(window).resize(function() {
+		rightArea();
+	});
+	function getMenuLinks(menuname) {
+		var url;
+		$.each(menu, function(index, ele) {
+			if (ele.name == menuname) {
+				menulinks = ele.links;
+				url = ele.url;
+			}
 		})
-		function rightArea(){
-			var width =  document.body.offsetWidth;
-			var len = $("#right").css("left");
-			length = len.substring(0,len.length-2)
-			width = width - length;
-			$("#right").css("width",width+"px");
-		}
-		$(window).resize(function(){
-			rightArea();
-		});  
-		function getMenuLinks(menuname) {
-			var url;
-			$.each(menu, function(index, ele) {
-				if (ele.name == menuname) {
-					menulinks = ele.links;
-					url = ele.url;
-				}
-			})
-			return url;
-		}
-		function getMenuLinksHref(key) {
-			var href;
-			$.each(menulinks, function(index, ele) {
-				if (ele.rel == key) {
-					href = ele.href;
-				}
-			})
-			return href;
-		}
-		function setMenuLinksHref(_menulinks) {
-			menulinks = _menulinks;
-		}
-		function setFunctionLinksHref(_functionLinks) {
-			functionLinks = _functionLinks;
-		}
-		function getFunctionLinksHref(key) {
-			var href;
-			$.each(functionLinks, function(index, ele) {
-				var code = ele.rel == null ? index : ele.rel;
-				if (code == key) {
-					href = ele.href;
-				}
-			})
-			return href;
-		}
-    </script>
-  </head>
-  
-  <body ng-controller="mainController" style="color:#fff;min-width:900px;min-height:500px;">
-    <div class="page-header" style="height:50px;background-color:#373D41;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;border:none;">
-    	<div style="float:left;text-align:center;width:50px;height:50px;padding:11px 0px 0px 0px;border-right:solid 1px #2A2F32;"><img src="../../../resource/img/logo.ico" style="width: 45px;height: 35px;"/></div>
-    	<div style="float:left;text-align:center;width:130px;height:50px;padding:8px 0px 0px 0px;border-right:solid 1px #2A2F32;"><h4>东方国际教育</h4></div>
-    	<div style="float:right;text-align:center;width:80px;height:50px;padding:15px 0px 0px 0px;border-left:solid 1px #2A2F32;"><span class="glyphicon glyphicon-off" title="退出" style="margin:0px 15px;" ng-click="onExit()"></span></div>
-    	<div style="float:right;text-align:center;width:120px;height:50px;padding:15px 0px 0px 0px;border-left:solid 1px #2A2F32;">{{name}}</span></div>
-    	<div style="float:right;text-align:center;width:80px;height:50px;padding:15px 0px 0px 0px;border-left:solid 1px #2A2F32;"><span class="glyphicon glyphicon-user"  style="margin:0px 10px;" ></span></div>
+		return url;
+	}
+	function getMenuLinksHref(key) {
+		var href;
+		$.each(menulinks, function(index, ele) {
+			if (ele.rel == key) {
+				href = ele.href;
+			}
+		})
+		return href;
+	}
+	function setMenuLinksHref(_menulinks) {
+		menulinks = _menulinks;
+	}
+	function setFunctionLinksHref(_functionLinks) {
+		functionLinks = _functionLinks;
+	}
+	function getFunctionLinksHref(key) {
+		var href;
+		$.each(functionLinks, function(index, ele) {
+			var code = ele.rel == null ? index : ele.rel;
+			if (code == key) {
+				href = ele.href;
+			}
+		})
+		return href;
+	}
+</script>
+</head>
+
+<body ng-controller="mainController" style="color: #fff; min-width: 900px; min-height: 500px;">
+	<div class="page-header" style="height: 50px; background-color: #373D41; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; border: none;">
+		<div style="float: left; text-align: center; width: 50px; height: 50px; padding: 11px 0px 0px 0px; border-right: solid 1px #2A2F32;">
+			<img src="../../../resource/img/logo.ico" style="width: 45px; height: 35px;" />
+		</div>
+		<div style="float: left; text-align: center; width: 130px; height: 50px; padding: 8px 0px 0px 0px; border-right: solid 1px #2A2F32;">
+			<h4>云深智能化</h4>
+		</div>
+		<div style="float: right; text-align: center; width: 80px; height: 50px; padding: 15px 0px 0px 0px; border-left: solid 1px #2A2F32;">
+			<span class="glyphicon glyphicon-off" title="退出" style="margin: 0px 15px;" ng-click="onExit()"></span>
+		</div>
+		<div style="float: right; text-align: center; width: 120px; height: 50px; padding: 15px 0px 0px 0px; border-left: solid 1px #2A2F32;">
+			{{name}}</span>
+		</div>
+		<div style="float: right; text-align: center; width: 80px; height: 50px; padding: 15px 0px 0px 0px; border-left: solid 1px #2A2F32;">
+			<span class="glyphicon glyphicon-user" style="margin: 0px 10px;"></span>
+		</div>
 	</div>
 	<div class="row rowpanel">
-		  <div class="menupanel">
-			  <ul class="nav nav-pills nav-stacked onemenu">
-			  </ul>
-		  </div>
-		  <div class="menupanel1">
-			 <div id="two_name"></div>
-			 <ul class="nav nav-pills nav-stacked thirdmenu">
-			 </ul>
-		  </div>
-		  <div id="menu_image" class="menu_image" switch="0">
-		  	<i class="icon-indent-left"></i>
-		  </div>
-		  <div id="right" style="margin: 0px;padding:0px 10px;background: #fff;height: 100%;position: absolute;left: 360px;top:0px;">
-		   		<ol class="breadcrumb" style="margin: 0px;">
-				  <li><span class="glyphicon glyphicon-home"  style="left:-10px;margin:0px 0px;color:#99DFF8;" ></span><span id="path"></span></li>
-				</ol>
-				<div class="col-md-12 embed-responsive" style="height: 93%;width:100%;">
-				  <iframe class="embed-responsive-item" id="main" name="main" src=""></iframe>
-				</div>
-		  </div>
+		<div class="menupanel">
+			<ul class="nav nav-pills nav-stacked onemenu">
+			</ul>
+		</div>
+		<div class="menupanel1">
+			<div id="two_name"></div>
+			<ul class="nav nav-pills nav-stacked thirdmenu">
+			</ul>
+		</div>
+		<div id="menu_image" class="menu_image" switch="0">
+			<i class="glyphicon glyphicon-chevron-left"></i>
+		</div>
+		<div id="right" style="margin: 0px; padding: 0px 10px; background: #fff; height: 100%; position: absolute; left: 360px; top: 0px;">
+			<ol class="breadcrumb" style="margin: 0px;">
+				<li><span class="glyphicon glyphicon-home" style="left: -10px; margin: 0px 0px; color: #99DFF8;"></span><span id="path"></span></li>
+			</ol>
+			<div class="col-md-12 embed-responsive" style="height: 93%; width: 100%;">
+				<iframe class="embed-responsive-item" id="main" name="main" src=""></iframe>
+			</div>
+		</div>
 	</div>
-  </body>
+</body>
 </html>

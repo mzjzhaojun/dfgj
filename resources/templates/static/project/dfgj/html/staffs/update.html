@@ -49,7 +49,7 @@
 				if(isValid){
 					$scope.formData.employmentdate = $("#employmentdate").val();
     				$http({
-    					url:parent.getMenuLinksHref("staffspost"),
+    					url:parent.getFunctionLinksHref("self"),
     					method:'POST',
     					dataType : "json",
     					withCredentials: true,

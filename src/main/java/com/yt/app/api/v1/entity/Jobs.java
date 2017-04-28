@@ -22,18 +22,24 @@ public class Jobs implements Serializable {
 	Long orgid;
 	Long staffid;
 	Long parentid;
-	Integer isprimary;
-	String isfulltime;
+	Long isprimary;
+	Long isfulltime;
 	Long jobcodeid;
 	String fullpath;
-	String status;
+	Long status;
 	String bistatus;
+	String orgidname;
+	String staffidname;
+	String statusname;
+	String isprimaryname;
+	String isfulltimename;
+	String jobcodeidname;
 
 	public Jobs() {
 	}
 
-	public Jobs(Long id, Integer version, String jobname, Long orgid, Long staffid, Long parentid, Integer isprimary, String isfulltime,
-			Long jobcodeid, String fullpath, String status, String bistatus) {
+	public Jobs(Long id, Integer version, String jobname, Long orgid, Long staffid, Long parentid, Long isprimary, Long isfulltime, Long jobcodeid,
+			String fullpath, Long status, String bistatus) {
 		this.id = id;
 		this.version = version;
 		this.jobname = jobname;
