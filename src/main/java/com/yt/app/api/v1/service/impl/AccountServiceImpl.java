@@ -12,6 +12,7 @@ import com.yt.app.api.v1.mapper.AccountRoleMapper;
 import com.yt.app.api.v1.mapper.DictionaryMapper;
 import com.yt.app.api.v1.mapper.RoleMapper;
 import com.yt.app.api.v1.mapper.StaffsMapper;
+import com.yt.app.api.v1.mapper.TeachersMapper;
 import com.yt.app.api.v1.service.AccountService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
@@ -23,6 +24,7 @@ import com.yt.app.api.v1.entity.AccountRole;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Role;
 import com.yt.app.api.v1.entity.Staffs;
+import com.yt.app.api.v1.entity.Teachers;
 
 /**
  * @author huanghao
@@ -45,6 +47,9 @@ public class AccountServiceImpl extends BaseServiceImpl<Account, Long> implement
 	private DictionaryMapper dmapper;
 	@Autowired
 	private StaffsMapper staffsmapper;
+	@Autowired
+	private TeachersMapper teachersmapper;
+
 	@Override
 	public Account getAccountByName(String account) {
 		return mapper.getAccountByName(account);
@@ -70,9 +75,15 @@ public class AccountServiceImpl extends BaseServiceImpl<Account, Long> implement
 		account.setDeletestatus(DictionaryResource.USER_STATUS_0);
 		Integer i = mapper.put(account);
 		armapper.deletebyaccountid(id);
-		Staffs s = staffsmapper.get(account.getStaffid());
-		s.setStatus(DictionaryResource.STATUS_1842);
-		i = staffsmapper.put(s);
+		if (account.getType().longValue() == DictionaryResource.ACCOUNT_TYPE_10) {
+			Staffs s = staffsmapper.get(account.getStaffid());
+			s.setStatus(DictionaryResource.STATUS_1842);
+			i = staffsmapper.put(s);
+		} else {
+			Teachers t = teachersmapper.get(account.getStaffid());
+			t.setStatus(DictionaryResource.STATUS_1842);
+			i = teachersmapper.put(t);
+		}
 		return i;
 	}
 

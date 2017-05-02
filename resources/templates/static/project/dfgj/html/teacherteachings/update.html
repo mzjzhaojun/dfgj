@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html ng-app="add">
 <head>
-<title>新增</title>
+<title>修改</title>
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<!-- 基础样式 -->
 <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
 <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
@@ -16,7 +15,7 @@
 <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/response.js"></script>
 <!-- 表单验证 -->
-<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
+<script src="../../../../resource/js/date/js/eap.core.js"></script>
 <script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
 <script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
 <script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
@@ -33,19 +32,31 @@
 	var add = angular.module("add", []);
 	add.controller("addController", function($scope, $http) {
 		$scope.formData = {};
-		//返回
+		$http({
+			url : parent.getFunctionLinksHref("self"),
+			method : 'GET',
+			dataType : "json",
+			withCredentials : true,
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			data : ''
+		}).success(function(data, status, headers, config) {
+			$scope.formData = data
+		}).error(function(data, status, headers, config) {
+			response(status);
+		});
 		$scope.onReturn = function() {
 			history.go(-1);
 		}
-		//保存
 		$scope.onPreserved = function() {
 			var isValid = $("#saveForm").valid();
 			if (isValid) {
-				$scope.formData.orgid = $("#orgid").val();
-				$scope.formData.staffid = $("#staffid").val();
+				$scope.formData.teacherid = $("#teacherid").val();
+				$scope.formData.teachername = $("#teacheridname").val();
 				$http({
-					url : parent.getMenuLinksHref("jobspost"),
-					method : 'POST',
+					url : parent.getFunctionLinksHref("self"),
+					method : 'PUT',
 					dataType : "json",
 					withCredentials : true,
 					headers : {
@@ -53,9 +64,7 @@
 					},
 					data : JSON.stringify($scope.formData)
 				}).success(function(data, status, headers, config) {
-					if (data == 1) {
-						location.href = "list.html";
-					}
+					location.href = "list.html";
 				}).error(function(data, status, headers, config) {
 					response(status);
 				})
@@ -70,60 +79,31 @@
 				headers : {
 					'Content-Type' : 'application/json;charset=UTF-8;'
 				},
-				data : JSON.stringify([ 20 ])
+				data : JSON.stringify([ 300, 400 ])
 			}).success(function(data, status, headers, config) {
 				$scope.selects = data;
 			}).error(function(data, status, headers, config) {
 				response(status);
 			})
 		}
-		$scope.initselectjobcode = function() {
-			$http({
-				url : parent.getMenuLinksHref("jobcodelist"),
-				method : 'POST',
-				dataType : "json",
-				withCredentials : true,
-				headers : {
-					'Content-Type' : 'application/json;charset=UTF-8;'
-				},
-				data : ''
-			}).success(function(data, status, headers, config) {
-				$scope.selectjobcode = data;
-			}).error(function(data, status, headers, config) {
-				response(status);
-			})
-		}
-		$scope.selectOrg = function() {
-			artdialogIframe("../../dfgj/html/jobs/orglist.html", null,
-					backfunctionorg, 900, 600, true);
-		}
-		$scope.selectStaff = function() {
-			artdialogIframe("../../dfgj/html/jobs/stafflist.html", null,
-					backfunctionstaff, 900, 600, true);
-		}
-		$scope.initselect();
-		$scope.initselectjobcode();
-	})
 
-	function backfunctionorg() {
-		if (parent.getDateChild().id != undefined) {
-			$("#orgid").val(parent.getDateChild().id);
+		$scope.selectbTeacher = function() {
+			artdialogIframe("../../dfgj/html/teacherjobs/teacherlist.html",
+					null, backfunctionteacher, 1024, 600, true);
 		}
-		if (parent.getDateChild().name != undefined) {
-			$("#orgname").val(parent.getDateChild().name);
+
+		function backfunctionteacher() {
+			if (parent.getDateChild().id != undefined) {
+				$("#teacherid").val(parent.getDateChild().id);
+			}
+			if (parent.getDateChild().name != undefined) {
+				$("#teacheridname").val(parent.getDateChild().name);
+			}
+			setDateChild({});
 		}
-		setDateChild({});
-	}
-	
-	function backfunctionstaff() {
-		if (parent.getDateChild().id != undefined) {
-			$("#staffid").val(parent.getDateChild().id);
-		}
-		if (parent.getDateChild().name != undefined) {
-			$("#staffname").val(parent.getDateChild().name);
-		}
-		setDateChild({});
-	}
+
+		$scope.initselect();
+	})
 </script>
 </head>
 
@@ -140,35 +120,20 @@
 		</div>
 		<div class="col-lg-6">
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">学科组名称</span> <input type="text" class="form-control required" placeholder="请输入学科组名称" name="jobname"
-					ng-model="formData.jobname" maxlength="255"> <span class="input-group-addon verifyprompt">*</span>
+				<input type="hidden" id="teacherid" ng-model="formData.teacherid" /> <span class="input-group-addon text-right spanwidth">教师</span> <input type="text"
+					id="teacheridname" name="teacheridname" ng-model="formData.teachername" readonly="readonly" class="form-control required"> <i
+					ng-click="selectbTeacher()" class="glyphicon glyphicon-search" title="选择"></i>
 			</div>
 			<div class="input-group input-group-sm">
-				<input type="hidden" id="orgid" ng-model="formData.orgid" /> <span class="input-group-addon text-right spanwidth">公司</span> <input type="text"
-					id="orgname" name="orgname" ng-model="formData.orgname" readonly="readonly" class="form-control required"> <i id="type_name"
-					ng-click="selectOrg()" class="glyphicon glyphicon-search" title="选择"></i>
-			</div>
-			<div class="input-group input-group-sm">
-				<input type="hidden" id="staffid" ng-model="formData.orgid" /> <span class="input-group-addon text-right spanwidth">选择小组负责人</span> <input type="text"
-					id="staffname" name="staffname" ng-model="formData.staffname" readonly="readonly" class="form-control required"> <i id="type_name"
-					ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">是否是主要小组</span> <select class="form-control required" name="IsPrimary" ng-model="formData.isprimary"
-					ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-					<option value=''>请选择</option>
+				<span class="input-group-addon text-right spanwidth">年级代码</span> <select class="form-control required" name="grade" ng-model="formData.grade"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '300'}">
+					<option value=''>请选择年级</option>
 				</select> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">是否全职</span> <select class="form-control required" name="IsFullTime" ng-model="formData.isfulltime"
-					ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-					<option value=''>请选择</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">职务</span> <select class="form-control required" name="jobcodeid" ng-model="formData.jobcodeid"
-					ng-options="data.jobcode.id as data.jobcode.name for data in selectjobcode">
-					<option value=''>请选择职务</option>
+				<span class="input-group-addon text-right spanwidth">科目代码</span> <select class="form-control required" name="subject" ng-model="formData.subject"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '400'}">
+					<option value=''>请选择科目</option>
 				</select> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 		</div>

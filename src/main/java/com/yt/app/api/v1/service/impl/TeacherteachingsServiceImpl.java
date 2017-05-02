@@ -4,13 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
+
+import com.yt.app.api.v1.mapper.DictionaryMapper;
 import com.yt.app.api.v1.mapper.TeacherteachingsMapper;
 import com.yt.app.api.v1.service.TeacherteachingsService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
+import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Teacherteachings;
 import com.yt.app.frame.page.IPage;
 import com.yt.app.frame.page.PageBean;
 import com.yt.app.util.RequestUtil;
+import com.yt.app.util.StreamUtil;
+
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +30,8 @@ import java.util.Map;
 public class TeacherteachingsServiceImpl extends BaseServiceImpl<Teacherteachings, Long> implements TeacherteachingsService {
 	@Autowired
 	private TeacherteachingsMapper mapper;
+	@Autowired
+	private DictionaryMapper dictionarymapper;
 
 	@Override
 	@Transactional
@@ -45,12 +52,25 @@ public class TeacherteachingsServiceImpl extends BaseServiceImpl<Teacherteaching
 			}
 		}
 		List<Teacherteachings> list = mapper.list(param);
+		long[] dids = StreamUtil.concat(list.stream().mapToLong(Teacherteachings::getGrade), list.stream().mapToLong(Teacherteachings::getSubject))
+				.distinct().toArray();
+		List<Dictionary> listd = dictionarymapper.listByArrayId(dids);
+		list.stream().forEach(t -> {
+			listd.stream().forEach(d -> {
+				if (t.getGrade().longValue() == d.getCode().longValue())
+					t.setGradename(d.getName());
+				if (t.getSubject().longValue() == d.getCode().longValue())
+					t.setSubjectname(d.getName());
+			});
+		});
 		return new PageBean<Teacherteachings>(param, list, count);
 	}
 
 	@Override
 	public Teacherteachings get(Long id) {
 		Teacherteachings t = mapper.get(id);
+		t.setGradename(dictionarymapper.getByCode(t.getGrade()).getName());
+		t.setSubjectname(dictionarymapper.getByCode(t.getSubject()).getName());
 		return t;
 	}
 }

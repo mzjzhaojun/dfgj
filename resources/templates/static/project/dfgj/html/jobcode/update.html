@@ -50,8 +50,8 @@
 			var isValid = $("#saveForm").valid();
 			if (isValid) {
 				$http({
-					url : parent.getMenuLinksHref("jobcodepost"),
-					method : 'POST',
+					url : parent.getFunctionLinksHref("self"),
+					method : 'PUT',
 					dataType : "json",
 					withCredentials : true,
 					headers : {

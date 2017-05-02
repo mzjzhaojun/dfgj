@@ -21,18 +21,20 @@ public class Teacherjobs implements Serializable {
 	String jobname;
 	Long joborgid;
 	String joborgname;
-	String joborgtype;
-	String jobstatus;
+	Long joborgtype;
+	Long jobstatus;
 	Long teacherid;
 	Long campusid;
 	String campusname;
-	Integer isfulltime;
+	Long isfulltime;
+	String teacheridname;
+	String jobstatusname;
 
 	public Teacherjobs() {
 	}
 
-	public Teacherjobs(Long id, Integer version, String jobname, Long joborgid, String joborgname, String joborgtype, String jobstatus,
-			Long teacherid, Long campusid, String campusname, Integer isfulltime) {
+	public Teacherjobs(Long id, Integer version, String jobname, Long joborgid, String joborgname, Long joborgtype, Long jobstatus,
+			Long teacherid, Long campusid, String campusname, Long isfulltime) {
 		this.id = id;
 		this.version = version;
 		this.jobname = jobname;

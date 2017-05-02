@@ -64,8 +64,8 @@
 				$scope.formData.regionid = $.cookie('regionid');
 				$scope.formData.staffjobid = $("#staffjobid").val();
 				$http({
-					url : parent.getMenuLinksHref("orgstaffjobspost"),
-					method : 'POST',
+					url : parent.getFunctionLinksHref("self"),
+					method : 'PUT',
 					dataType : "json",
 					withCredentials : true,
 					headers : {

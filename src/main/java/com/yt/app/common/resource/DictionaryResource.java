@@ -78,8 +78,8 @@ public class DictionaryResource implements Serializable {
 	/**
 	 * 员工类型
 	 */
-	public static final Long ACCOUNT_TYPE_10 = 10L; // 默认账号
-	public static final Long ACCOUNT_TYPE_11 = 11L; // 管理
+	public static final Long ACCOUNT_TYPE_10 = 10L; // 员工
+	public static final Long ACCOUNT_TYPE_11 = 11L; // 教师
 	public static final Long ACCOUNT_TYPE_12 = 12L; // 经理
 	public static final Long ACCOUNT_TYPE_13 = 13L; // 董事
 

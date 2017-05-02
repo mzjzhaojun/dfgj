@@ -2,7 +2,11 @@ package com.yt.app.api.v1.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yt.app.util.DateTimeUtil;
 
 /**
  * @author zj default
@@ -21,15 +25,23 @@ public class Teachers implements Serializable {
 	String teachercode;
 	String teachername;
 	String teacheroacode;
-	String gender;
+	String mp;
+	String idnumber;
+	String mail;
+	String address;
+	Long gender;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date birthday;
 	String gradememo;
 	String subjectmemo;
+	String gendername;
+	Long status;
+	String statusname;
 
 	public Teachers() {
 	}
 
-	public Teachers(Long id, Integer version, String teachercode, String teachername, String teacheroacode, String gender, java.util.Date birthday,
+	public Teachers(Long id, Integer version, String teachercode, String teachername, String teacheroacode, Long gender, java.util.Date birthday,
 			String gradememo, String subjectmemo) {
 		this.id = id;
 		this.version = version;

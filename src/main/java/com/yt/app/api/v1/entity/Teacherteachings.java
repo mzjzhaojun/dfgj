@@ -19,13 +19,16 @@ public class Teacherteachings implements Serializable {
 	Long id;
 	Integer version;
 	Long teacherid;
-	String subject;
-	String grade;
+	Long subject;
+	Long grade;
+	String teachername;
+	String subjectname;
+	String gradename;
 
 	public Teacherteachings() {
 	}
 
-	public Teacherteachings(Long id, Integer version, Long teacherid, String subject, String grade) {
+	public Teacherteachings(Long id, Integer version, Long teacherid, Long subject, Long grade) {
 		this.id = id;
 		this.version = version;
 		this.teacherid = teacherid;

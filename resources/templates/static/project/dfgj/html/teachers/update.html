@@ -24,10 +24,6 @@
 <script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
-<!-- dialog -->
-<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js?skin=default"></script>
-<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
-<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
 <!-- 初始化 -->
 <script type="text/javascript">
 	var add = angular.module("add", []);
@@ -47,7 +43,6 @@
 		}).error(function(data, status, headers, config) {
 			response(status);
 		});
-		
 		//返回
 		$scope.onReturn = function() {
 			history.go(-1);
@@ -56,8 +51,7 @@
 		$scope.onPreserved = function() {
 			var isValid = $("#saveForm").valid();
 			if (isValid) {
-				$scope.formData.orgid = $("#orgid").val();
-				$scope.formData.staffid = $("#staffid").val();
+				$scope.formData.birthday = $("#birthday").val();
 				$http({
 					url : parent.getFunctionLinksHref("self"),
 					method : 'PUT',
@@ -85,60 +79,15 @@
 				headers : {
 					'Content-Type' : 'application/json;charset=UTF-8;'
 				},
-				data : JSON.stringify([20,1840])
+				data : JSON.stringify([ 900 ])
 			}).success(function(data, status, headers, config) {
 				$scope.selects = data;
 			}).error(function(data, status, headers, config) {
 				response(status);
 			})
 		}
-		$scope.initselectjobcode = function() {
-			$http({
-				url : parent.getMenuLinksHref("jobcodelist"),
-				method : 'POST',
-				dataType : "json",
-				withCredentials : true,
-				headers : {
-					'Content-Type' : 'application/json;charset=UTF-8;'
-				},
-				data : ''
-			}).success(function(data, status, headers, config) {
-				$scope.selectjobcode = data;
-			}).error(function(data, status, headers, config) {
-				response(status);
-			})
-		}
-		$scope.selectOrg = function() {
-			artdialogIframe("../../dfgj/html/jobs/orglist.html", null,
-					backfunctionorg, 900, 600, true);
-		}
-		$scope.selectStaff = function() {
-			artdialogIframe("../../dfgj/html/jobs/stafflist.html", null,
-					backfunctionstaff, 900, 600, true);
-		}
 		$scope.initselect();
-		$scope.initselectjobcode();
 	})
-
-	function backfunctionorg() {
-		if (parent.getDateChild().id != undefined) {
-			$("#orgid").val(parent.getDateChild().id);
-		}
-		if (parent.getDateChild().name != undefined) {
-			$("#orgname").val(parent.getDateChild().name);
-		}
-		setDateChild({});
-	}
-	
-	function backfunctionstaff() {
-		if (parent.getDateChild().id != undefined) {
-			$("#staffid").val(parent.getDateChild().id);
-		}
-		if (parent.getDateChild().name != undefined) {
-			$("#staffname").val(parent.getDateChild().name);
-		}
-		setDateChild({});
-	}
 </script>
 </head>
 
@@ -155,44 +104,67 @@
 		</div>
 		<div class="col-lg-6">
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">学科组名称</span> <input type="text" class="form-control required" placeholder="请输入学科组名称" name="jobname"
-					ng-model="formData.jobname" maxlength="255"> <span class="input-group-addon verifyprompt">*</span>
+				<span class="input-group-addon text-right spanwidth">登陆名</span> <input type="text" class="form-control required" placeholder="请输入登陆名" name="teacheroacode"
+					ng-model="formData.teacheroacode" maxlength="64"> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<input type="hidden" id="orgid" ng-model="formData.orgid" /> <span class="input-group-addon text-right spanwidth">公司</span> <input type="text"
-					id="orgname" name="orgname" ng-model="formData.orgidname" readonly="readonly" class="form-control required"> <i id="type_name"
-					ng-click="selectOrg()" class="glyphicon glyphicon-search" title="选择"></i>
+				<span class="input-group-addon text-right spanwidth">姓名</span> <input type="text" class="form-control required" placeholder="请输入教师姓名" name="teachername"
+					ng-model="formData.teachername" maxlength="64"> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<input type="hidden" id="staffid" ng-model="formData.orgid" /> <span class="input-group-addon text-right spanwidth">小组负责人</span> <input type="text"
-					id="staffname" name="staffname" ng-model="formData.staffidname" readonly="readonly" class="form-control required"> <i id="type_name"
-					ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i>
+				<span class="input-group-addon text-right spanwidth">手机号</span> <input type="text" class="form-control required mobile" placeholder="请输入手机号" name="mp"
+					ng-model="formData.mp" maxlength="64"> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">是否是主要学科组</span> <select class="form-control required" name="IsPrimary" ng-model="formData.isprimary"
-					ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-					<option value=''>请选择</option>
+				<span class="input-group-addon text-right spanwidth">邮箱</span> <input type="text" class="form-control required" placeholder="请输入邮箱" name="address"
+					ng-model="formData.address" maxlength="64"> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">地址</span> <input type="text" class="form-control required" placeholder="请输入地址" name="mail"
+					ng-model="formData.mail" maxlength="64"> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">身份证号</span> <input type="text" class="form-control required" placeholder="请输入身份证" name="idnumber"
+					ng-model="formData.idnumber" maxlength="64"> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">性别</span> <select class="form-control required" name="gender" ng-model="formData.gender"
+					ng-options="data.code as data.name for data in selects | filter: {typecode: '900'}">
+					<option value=''>请选择性别</option>
 				</select> <span class="input-group-addon verifyprompt">*</span>
 			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">是否全职</span> <select class="form-control required" name="IsFullTime" ng-model="formData.isfulltime"
-					ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-					<option value=''>请选择</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
+			<div class="input-group input-group-sm" id="birthdayhidden">
+				<span class="input-group-addon text-right spanwidth">出生日期</span>
+				<div class="input-group date form_datetime" id="birthdaydate" style="width: 400px;" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input">
+					<input class="form-control required" id="birthday" ng-model="formData.birthday" size="14" type="text" value="" readonly> <span
+						class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+				</div>
+				<input type="hidden" id="dtp_input" value="" />
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">职务</span> <select class="form-control required" name="jobcodeid" ng-model="formData.jobcodeid"
-					ng-options="data.jobcode.id as data.jobcode.name for data in selectjobcode">
-					<option value=''>请选择职务</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
+				<span class="input-group-addon text-right spanwidth">教授年级</span> <input type="text" class="form-control required" placeholder="请输入教授年级（用逗号分割名称）"
+					name="gradememo" ng-model="formData.gradememo" maxlength="500"> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">状态</span> <select class="form-control required" name="status" ng-model="formData.status"
-					ng-options="data.code as data.name for data in selects  | filter: {typecode: '1840'}">
-					<option value=''>请选择</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
+				<span class="input-group-addon text-right spanwidth">教授科目</span> <input type="text" class="form-control required" placeholder="请输入教授科目（用逗号分割名称）"
+					name="subjectmemo" ng-model="formData.subjectmemo" maxlength="500"> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 		</div>
 	</form>
 </body>
+<script type="text/javascript">
+	$('#birthdaydate').datetimepicker({
+		format : 'yyyy-mm-dd',
+		language : 'cn',
+		weekStart : 1,
+		minView : "month",
+		todayBtn : 1,
+		initialDate : new Date(),
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 0
+	});
+</script>
 </html>
