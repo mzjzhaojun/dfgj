@@ -5,8 +5,6 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import com.yt.app.api.v1.entity.Account;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,9 +23,13 @@ public class AccountSecurityUser extends User {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	Account account;
-
-	// Role role;
+	Long accountid;
+	Long staffid;
+	String staffname;
+	Long regionid;
+	Long campusid;
+	Long branchid;
+	Long staffjobid;
 
 	public AccountSecurityUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired,
 			boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {

@@ -176,7 +176,7 @@ public class MenuController extends BaseControllerImpl<Menu, Long> {
 		AccountSecurityUser acu = RequestAccount.requestGetAccount(request);
 		if (acu == null)
 			return new ResponseEntity<Object>(HttpStatus.UNAUTHORIZED);
-		param.put("userid", acu.getAccount().getId());
+		param.put("userid", acu.getAccountid());
 		Map<String, Object> pagebean = service.sysmenu(param);
 		return new ResponseEntity<Object>(pagebean, HttpStatus.OK);
 	}

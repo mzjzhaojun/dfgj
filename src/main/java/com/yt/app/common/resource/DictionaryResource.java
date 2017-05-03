@@ -8,7 +8,7 @@ import java.io.Serializable;
  * 
  * @author zj
  * 
- *         默认规定：0代表‘是’，1代表‘否’
+ *         默认规定：21代表‘是’，22代表‘否’
  *
  */
 public class DictionaryResource implements Serializable {
@@ -19,6 +19,8 @@ public class DictionaryResource implements Serializable {
 	 * 
 	 * 默认状态 21 是 ‘是’ 22 是 ‘否’
 	 */
+	public static final Long STATUS_20 = 20L;
+	
 	public static final Long STATUS_21 = 21L;
 
 	public static final Long STATUS_22 = 22L;
@@ -82,7 +84,7 @@ public class DictionaryResource implements Serializable {
 	public static final Long ACCOUNT_TYPE_11 = 11L; // 教师
 	public static final Long ACCOUNT_TYPE_12 = 12L; // 经理
 	public static final Long ACCOUNT_TYPE_13 = 13L; // 董事
-
+	public static final Long ACCOUNT_TYPE_18 = 18L; // 内置超级管理员
 	/**
 	 * 系统等级
 	 */

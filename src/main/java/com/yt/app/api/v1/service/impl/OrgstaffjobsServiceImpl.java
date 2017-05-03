@@ -104,10 +104,17 @@ public class OrgstaffjobsServiceImpl extends BaseServiceImpl<Orgstaffjobs, Long>
 	@Override
 	public Orgstaffjobs get(Long id) {
 		Orgstaffjobs t = mapper.get(id);
-		t.setBranchidname(orgbranchesmapper.get(t.getBranchid()).getBranchname());
-		t.setCampusidname(orgcampusesmapper.get(t.getCampusid()).getCampusname());
-		t.setStaffjobtypename(dictionarymapper.getByCode(t.getStaffjobtype()).getName());
-		t.setStaffjobidname(jobsmapper.get(t.getStaffjobid()).getJobname());
+		if (t != null) {
+			t.setBranchidname(orgbranchesmapper.get(t.getBranchid()).getBranchname());
+			t.setCampusidname(orgcampusesmapper.get(t.getCampusid()).getCampusname());
+			t.setStaffjobtypename(dictionarymapper.getByCode(t.getStaffjobtype()).getName());
+			t.setStaffjobidname(jobsmapper.get(t.getStaffjobid()).getJobname());
+		}
 		return t;
+	}
+
+	@Override
+	public Orgstaffjobs getByStaffId(Long id) {
+		return mapper.getByStaffId(id);
 	}
 }

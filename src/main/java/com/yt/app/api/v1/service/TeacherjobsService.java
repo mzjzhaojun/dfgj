@@ -11,4 +11,11 @@ import com.yt.app.common.base.IBaseService;
  */
 
 public interface TeacherjobsService extends IBaseService<Teacherjobs, Long> {
+
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 */
+	Teacherjobs getByTeacherId(Long id);
 }

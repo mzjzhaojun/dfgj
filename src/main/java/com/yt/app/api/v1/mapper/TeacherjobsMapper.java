@@ -104,4 +104,14 @@ public interface TeacherjobsMapper extends IBaseMapper<Teacherjobs> {
 	 */
 	@RedisCacheAnnotation(classs = Teacherjobs.class)
 	public List<Teacherjobs> listByArrayId(long[] id);
+
+	/**
+	 * 获取指定的唯一标识符对应的持久化对象
+	 *
+	 * @param id
+	 *            指定的唯一标识符
+	 * @return 指定的唯一标识符对应的持久化对象，如果没有对应的持久化对象，则返回null。
+	 */
+	@RedisCacheAnnotation(classs = Teacherjobs.class)
+	public Teacherjobs getByTeacherId(Long id);
 }

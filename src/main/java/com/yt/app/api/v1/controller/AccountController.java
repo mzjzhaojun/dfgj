@@ -51,7 +51,7 @@ public class AccountController extends BaseControllerImpl<Account, Long> {
 		AccountSecurityUser acu = RequestAccount.requestGetAccount(request);
 		if (acu == null)
 			return new ResponseEntity<Object>(HttpStatus.UNAUTHORIZED);
-		return new ResponseEntity<Object>(acu.getAccount(), HttpStatus.OK);
+		return new ResponseEntity<Object>(acu, HttpStatus.OK);
 	}
 
 	@Override

@@ -37,8 +37,12 @@
 				},
 				data : ''
 			}).success(function(data, status, headers, config) {
-				$scope.name = data.name;
-				$.cookie('regionid', data.regionid,{ expires: 7, path: '/' });
+				$scope.name = data.staffname;
+				$.cookie('regionid', data.regionid, { path : '/'});
+				$.cookie('branchid', data.branchid, { path : '/'});
+				$.cookie('campusid', data.campusid, { path : '/'});
+				$.cookie('staffid', data.staffid, { path : '/'});
+				$.cookie('staffname', data.staffname, { path : '/'});
 			}).error(function(data, status, headers, config) {
 				response(status);
 			});
@@ -67,6 +71,11 @@
 				'Content-Type' : 'application/json;charset=UTF-8;'
 			},
 			success : function(data) {
+				$.cookie('regionid', null, { path : '/'});
+				$.cookie('branchid', null, { path : '/'});
+				$.cookie('campusid', null, { path : '/'});
+				$.cookie('staffid', null, { path : '/'});
+				$.cookie('staffname', null, { path : '/'});
 				location.href = "/dfgj/static/project/login/html/index.html";
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -413,7 +422,9 @@
 								"glyphicon glyphicon-chevron-right").addClass(
 								"glyphicon glyphicon-chevron-down");
 					} else {
-						$(this).find("i").removeClass("glyphicon glyphicon-chevron-down").addClass("glyphicon glyphicon-chevron-right");
+						$(this).find("i").removeClass(
+								"glyphicon glyphicon-chevron-down").addClass(
+								"glyphicon glyphicon-chevron-right");
 					}
 				});
 		$("[data-toggle='tooltip']").tooltip({
@@ -426,8 +437,9 @@
 					left = parseInt(left.substr(0, left.length - 2));
 					if (switch1 == 0) {
 						$('#menu_image').attr("switch", "1");
-						$("#menu_image > i").removeClass(" glyphicon glyphicon-chevron-left")
-								.addClass(" glyphicon glyphicon-chevron-right");
+						$("#menu_image > i").removeClass(
+								" glyphicon glyphicon-chevron-left").addClass(
+								" glyphicon glyphicon-chevron-right");
 						if (left > 300) {
 							$(".menupanel1").hide();
 							$('#menu_image').removeClass("menu_image")
@@ -441,8 +453,9 @@
 						}
 					} else {
 						$('#menu_image').attr("switch", "0");
-						$("#menu_image > i").removeClass(" glyphicon glyphicon-chevron-right")
-								.addClass(" glyphicon glyphicon-chevron-left");
+						$("#menu_image > i").removeClass(
+								" glyphicon glyphicon-chevron-right").addClass(
+								" glyphicon glyphicon-chevron-left");
 						if (left > 150) {
 							$(".menupanel1").show();
 							$('#menu_image').removeClass("menu_image2")

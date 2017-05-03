@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html ng-app="add">
+<head>
+<title>新增</title>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- 基础样式 -->
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css" />
+<!-- 基础js -->
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+<!-- 表单验证 -->
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+<!-- datetime -->
+<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
+<!-- dialog -->
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+<!-- 初始化 -->
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add.controller("addController", function($scope, $http) {
+		$scope.formData = {};
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		//保存
+		$scope.onPreserved = function() {
+			var isValid = $("#saveForm").valid();
+			if (isValid) {
+				$scope.formData.rdorgid = $("#rdorgid").val();
+				$scope.formData.rdorgname = $("#rdorgname").val();
+				$scope.formData.startdate = $("#startdate").val();
+				$scope.formData.enddate = $("#enddate").val();
+				$scope.formData.creatorid = $.cookie('staffid');
+				$scope.formData.creatorname = $.cookie('staffname');
+				$http({
+					url : parent.getMenuLinksHref("productspost"),
+					method : 'POST',
+					dataType : "json",
+					withCredentials : true,
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					data : JSON.stringify($scope.formData)
+				}).success(function(data, status, headers, config) {
+					if (data == 1) {
+						location.href = "list.html";
+					}
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		}
+		$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("dictionarylist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify([ 20, 300, 400, 1210, 1900 ])
+			}).success(function(data, status, headers, config) {
+				$scope.selects = data;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+
+		$scope.initcatalog = function() {
+			$http({
+				url : parent.getMenuLinksHref("categorieslist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				$scope.catalogs = data;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+		$scope.selectOrg = function() {
+			artdialogIframe("../../dfgj/html/jobs/orglist.html", null,
+					backfunctionorg, 900, 600, true);
+		}
+
+		$scope.initselect();
+		$scope.initcatalog();
+	})
+
+	function backfunctionorg() {
+		if (parent.getDateChild().id != undefined) {
+			$("#rdorgid").val(parent.getDateChild().id);
+		}
+		if (parent.getDateChild().name != undefined) {
+			$("#rdorgname").val(parent.getDateChild().name);
+		}
+		setDateChild({});
+	}
+</script>
+</head>
+
+<body ng-controller="addController">
+	<form method="post" id="saveForm" action="">
+		<!-- 操作按钮操作区 -->
+		<div class="col-lg-12 topActionPanel">
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<input type="hidden" id="rdorgid" ng-model="formData.rdorgid" /> <span class="input-group-addon text-right spanwidth">公司</span> <input type="text"
+					id="rdorgname" name="rdorgname" ng-model="formData.rdorgname" readonly="readonly" class="form-control required"> <i id="type_name"
+					ng-click="selectOrg()" class="glyphicon glyphicon-search" title="选择"></i>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">产品名称</span> <input type="text" class="form-control required" placeholder="请输入产品名称" name="productname"
+					ng-model="formData.productname" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">产品描述</span> <input type="text" class="form-control required" placeholder="请输入产品描述" name="productmemo"
+					ng-model="formData.productmemo" maxlength="500"> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">是否上架</span> <select class="form-control required" name="productstatus"
+					ng-model="formData.productstatus" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">单价</span> <input type="text" class="form-control required number" placeholder="请输入单价"
+					name="productprice" ng-model="formData.productprice" maxlength=""> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">成本</span> <input type="text" class="form-control required number" placeholder="请输入成本"
+					name="productcost" ng-model="formData.productcost" maxlength=""> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">目标价格</span> <input type="text" class="form-control required number" placeholder="请输入目标价格"
+					name="targetprice" ng-model="formData.targetprice" maxlength=""> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">目标单价描述</span> <input type="text" class="form-control required" placeholder="请输入目标单价描述"
+					name="targetpricememo" ng-model="formData.targetpricememo" maxlength="255"> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">类别</span> <select class="form-control required" name="catalog" ng-model="formData.catalog"
+					ng-options="data.categories.id as data.categories.categoryname for data in catalogs">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学科</span> <select class="form-control required" name="subject" ng-model="formData.subject"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '400'}">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">年级</span> <select class="form-control required" name="grade" ng-model="formData.grade"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '300'}">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">年度</span> <select class="form-control required" name="year" ng-model="formData.year"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '1210'}">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">季度</span> <select class="form-control required" name="season" ng-model="formData.season"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '1900'}">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm" id="startdatehidden">
+				<span class="input-group-addon text-right spanwidth">启售日期</span>
+				<div class="input-group date form_datetime" id="startdatedate" style="width: 400px;" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input">
+					<input class="form-control required" id="startdate" ng-model="formData.startdate" size="14" type="text" value="" readonly> <span
+						class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+				</div>
+				<input type="hidden" id="dtp_input" value="" />
+			</div>
+			<div class="input-group input-group-sm" id="enddatehidden">
+				<span class="input-group-addon text-right spanwidth">停售日期</span>
+				<div class="input-group date form_datetime" id="enddatedate" style="width: 400px;" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input">
+					<input class="form-control required" id="enddate" ng-model="formData.enddate" size="14" type="text" value="" readonly> <span
+						class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+				</div>
+				<input type="hidden" id="dtp_input" value="" />
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">允许特殊折扣</span> <select class="form-control required" name="specialallowed"
+					ng-model="formData.specialallowed" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">允许拓路折扣</span> <select class="form-control required" name="tunlandallowed"
+					ng-model="formData.tunlandallowed" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">允许买赠折扣</span> <select class="form-control required" name="presentallowed"
+					ng-model="formData.presentallowed" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">允许买赠折扣</span> <select class="form-control required" name="promotionallowed"
+					ng-model="formData.promotionallowed" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">促销优惠限额</span> <input type="text" class="form-control required number" placeholder="请输入促销优惠限额"
+					name="promotionquota" ng-model="formData.promotionquota" maxlength=""> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+		</div>
+	</form>
+</body>
+<script type="text/javascript">
+	$('#startdatedate').datetimepicker({
+		format : 'yyyy-mm-dd',
+		language : 'cn',
+		weekStart : 1,
+		minView : "month",
+		todayBtn : 1,
+		initialDate : new Date(),
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 0
+	});
+
+	$('#enddatedate').datetimepicker({
+		format : 'yyyy-mm-dd',
+		language : 'cn',
+		weekStart : 1,
+		minView : "month",
+		todayBtn : 1,
+		initialDate : new Date(),
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 0
+	});
+</script>
+</html>

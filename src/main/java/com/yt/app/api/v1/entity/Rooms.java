@@ -2,7 +2,11 @@ package com.yt.app.api.v1.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yt.app.util.DateTimeUtil;
 
 /**
  * @author zj default
@@ -22,18 +26,21 @@ public class Rooms implements Serializable {
 	String campusname;
 	String roomcode;
 	String roomname;
-	String roomstatus;
+	Long roomstatus;
+	String roomstatusname;
 	Long creatorid;
 	String creatorname;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date createtime;
 	Long modifierid;
 	String modifiername;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date modifytime;
 
 	public Rooms() {
 	}
 
-	public Rooms(Long id, Integer version, Long campusid, String campusname, String roomcode, String roomname, String roomstatus, Long creatorid,
+	public Rooms(Long id, Integer version, Long campusid, String campusname, String roomcode, String roomname, Long roomstatus, Long creatorid,
 			String creatorname, java.util.Date createtime, Long modifierid, String modifiername, java.util.Date modifytime) {
 		this.id = id;
 		this.version = version;

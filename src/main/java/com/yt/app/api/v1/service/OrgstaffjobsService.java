@@ -11,4 +11,10 @@ import com.yt.app.common.base.IBaseService;
  */
 
 public interface OrgstaffjobsService extends IBaseService<Orgstaffjobs, Long> {
+	/**
+	 * 重写get
+	 * @param id
+	 * @return
+	 */
+	Orgstaffjobs getByStaffId(Long id);
 }

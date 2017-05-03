@@ -19,14 +19,16 @@ public class Productsalaryrules implements Serializable {
 	Long id;
 	Integer version;
 	Long productid;
-	String ruleobject;
+	String productidname;
+	Long ruleobject;
+	String ruleobjectname;
 	Object moneyperhour;
 	Object moneyperperiod;
 
 	public Productsalaryrules() {
 	}
 
-	public Productsalaryrules(Long id, Integer version, Long productid, String ruleobject, Object moneyperhour, Object moneyperperiod) {
+	public Productsalaryrules(Long id, Integer version, Long productid, Long ruleobject, Object moneyperhour, Object moneyperperiod) {
 		this.id = id;
 		this.version = version;
 		this.productid = productid;

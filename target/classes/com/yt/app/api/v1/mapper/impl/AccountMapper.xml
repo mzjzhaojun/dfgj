@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.AccountMapper">
 	<!-- 数据库列 -->
 	<sql id="Base_Column_List">
-		id,account,psw,position,mobile,mail,phone,state,flag,lockstatus,deletestatus,validstatus,picurl,birthday,name,card_id,type,endtime,lastlogin_time,lastlogin_ip,create_time,create_user,modify_time,staffid,regionid,version
+		id,account,psw,position,mobile,mail,phone,state,flag,lockstatus,deletestatus,validstatus,picurl,birthday,name,card_id,type,endtime,lastlogin_time,lastlogin_ip,create_time,create_user,modify_time,staffid,version
 	</sql>
 	<!-- 基础返回对象封装 -->
 	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Account">
@@ -31,15 +31,14 @@
 		<id property="create_user" column="create_user" />
 		<id property="modify_time" column="modify_time" />
 		<id property="staffid" column="staffid" />
-		<id property="regionid" column="regionid" />
 		<id property="version" column="version" />
 	</resultMap>
 	<!-- 默认新增 -->
 	<insert id="post" parameterType="com.yt.app.api.v1.entity.Account">
 		insert into account
-		(id,account,psw,position,mobile,mail,phone,state,flag,lockstatus,deletestatus,validstatus,picurl,birthday,name,card_id,type,endtime,lastlogin_time,lastlogin_ip,create_time,create_user,modify_time,staffid,regionid)
+		(id,account,psw,position,mobile,mail,phone,state,flag,lockstatus,deletestatus,validstatus,picurl,birthday,name,card_id,type,endtime,lastlogin_time,lastlogin_ip,create_time,create_user,modify_time,staffid)
 		values
-		(#{id},#{account},#{psw},#{position},#{mobile},#{mail},#{phone},#{state},#{flag},#{lockstatus},#{deletestatus},#{validstatus},#{picurl},#{birthday},#{name},#{card_id},#{type},#{endtime},#{lastlogin_time},#{lastlogin_ip},#{create_time},#{create_user},#{modify_time},#{staffid},#{regionid})
+		(#{id},#{account},#{psw},#{position},#{mobile},#{mail},#{phone},#{state},#{flag},#{lockstatus},#{deletestatus},#{validstatus},#{picurl},#{birthday},#{name},#{card_id},#{type},#{endtime},#{lastlogin_time},#{lastlogin_ip},#{create_time},#{create_user},#{modify_time},#{staffid})
 	</insert>
 	<!-- 默认删除id对象 -->
 	<delete id="delete" parameterType="java.lang.String">
@@ -119,9 +118,6 @@
 			</if>
 			<if test="staffid != null">
 				staffid = #{staffid},
-			</if>
-			<if test="regionid != null">
-				regionid = #{regionid},
 			</if>
 			<if test="version != null">
 				version = #{version}+1

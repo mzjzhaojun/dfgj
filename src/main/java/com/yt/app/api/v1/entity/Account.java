@@ -45,7 +45,6 @@ public class Account implements Serializable {
 	Long roleid;
 	String rolename;
 	String typename;
-	Long regionid;
 
 	public Account() {
 	}
