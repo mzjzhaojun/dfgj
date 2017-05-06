@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.PotentialcustomersMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,orgid,orgname,orgtype,campusid,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,tenantcode
+     id,version,orgid,orgname,orgtype,mp,campusid,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,tenantcode
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Potentialcustomers">
@@ -12,6 +12,7 @@
          <id property="orgid" column="orgid" />
          <id property="orgname" column="orgname" />
          <id property="orgtype" column="orgtype" />
+          <id property="mp" column="mp" />
          <id property="campusid" column="campusid" />
          <id property="campusname" column="campusname" />
          <id property="customercode" column="customercode" />
@@ -66,8 +67,8 @@
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Potentialcustomers">
-  insert into potentialcustomers (id,orgid,orgname,orgtype,campusid,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,tenantcode)
-         values (#{id},#{orgid},#{orgname},#{orgtype},#{campusid},#{campusname},#{customercode},#{customername},#{customerlevel},#{invalidreason},#{customerstatus},#{isoneparent},#{describes},#{birthday},#{gender},#{email},#{idtype},#{idnumber},#{viptype},#{viplevel},#{entrancegrade},#{grade},#{schoolyear},#{subjecttype},#{studenttype},#{contacttype},#{sourcemaintype},#{sourcesubtype},#{sourcesystem},#{referralstaffid},#{referralstaffname},#{referralstaffjobid},#{referralstaffjobname},#{referralstaffoacode},#{referralcustomerid},#{referralcustomercode},#{referralcustomername},#{purchaseintention},#{schoolid},#{schoolname},#{isstudyagain},#{followtime},#{followstage},#{followedcount},#{nextfollowtime},#{creatorid},#{creatorname},#{creatorjobid},#{creatorjobname},#{creatorjobtype},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{tenantcode})
+  insert into potentialcustomers (id,orgid,orgname,orgtype,campusid,mp,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,tenantcode)
+         values (#{id},#{orgid},#{orgname},#{orgtype},#{campusid},#{mp},#{campusname},#{customercode},#{customername},#{customerlevel},#{invalidreason},#{customerstatus},#{isoneparent},#{describes},#{birthday},#{gender},#{email},#{idtype},#{idnumber},#{viptype},#{viplevel},#{entrancegrade},#{grade},#{schoolyear},#{subjecttype},#{studenttype},#{contacttype},#{sourcemaintype},#{sourcesubtype},#{sourcesystem},#{referralstaffid},#{referralstaffname},#{referralstaffjobid},#{referralstaffjobname},#{referralstaffoacode},#{referralcustomerid},#{referralcustomercode},#{referralcustomername},#{purchaseintention},#{schoolid},#{schoolname},#{isstudyagain},#{followtime},#{followstage},#{followedcount},#{nextfollowtime},#{creatorid},#{creatorname},#{creatorjobid},#{creatorjobname},#{creatorjobtype},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{tenantcode})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -92,6 +93,9 @@
              </if>
              <if test="campusid != null">
                    campusid = #{campusid},
+             </if>
+              <if test="mp != null">
+                   mp = #{mp},
              </if>
              <if test="campusname != null">
                    campusname = #{campusname},

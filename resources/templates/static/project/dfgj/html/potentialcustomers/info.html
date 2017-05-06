@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html ng-app="info">
+<head>
+<title>查看</title>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- 基础样式 -->
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<!-- 基础js -->
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<!-- 初始化 -->
+<script type="text/javascript">
+	var info = angular.module("info", []);
+	info.controller("infoController", function($scope, $http) {
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		$http({
+			url : parent.getFunctionLinksHref("self"),
+			method : 'GET',
+			dataType : "json",
+			withCredentials : true,
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			data : ''
+		}).success(function(data, status, headers, config) {
+			$scope.formData = data;
+		}).error(function(data, status, headers, config) {
+			response(status);
+		});
+	})
+</script>
+</head>
+<body ng-controller="infoController">
+	<div class="col-lg-12 topActionPanel">
+		<div>
+			<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+		</div>
+	</div>
+	<div class="col-lg-6 viewFixedWidth">
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">组织机构名称</span> <input type="text" class="form-control" value="{{formData.orgname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">校区名称</span> <input type="text" class="form-control" value="{{formData.campusname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">客户名称</span> <input type="text" class="form-control" value="{{formData.customername}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">客户来源</span> <input type="text" class="form-control" value="{{formData.sourcemaintypename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">客户级别</span> <input type="text" class="form-control" value="{{formData.customerlevelname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">无效客户理由</span> <input type="text" class="form-control" value="{{formData.invalidreasonname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">客户状态</span> <input type="text" class="form-control" value="{{formData.customerstatusname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">仅登记一家长</span> <input type="text" class="form-control" value="{{formData.isoneparentname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">学生生日</span> <input type="text" class="form-control" value="{{formData.birthday}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">性别</span> <input type="text" class="form-control" value="{{formData.gendername}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">电子邮箱</span> <input type="text" class="form-control" value="{{formData.email}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">证件类型</span> <input type="text" class="form-control" value="{{formData.idtypename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">证件号</span> <input type="text" class="form-control" value="{{formData.idnumber}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">入学年级</span> <input type="text" class="form-control" value="{{formData.entrancegradename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前年级</span> <input type="text" class="form-control" value="{{formData.gradename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">学年制</span> <input type="text" class="form-control" value="{{formData.schoolyearname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">文理科</span> <input type="text" class="form-control" value="{{formData.subjecttypename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">学生类型</span> <input type="text" class="form-control" value="{{formData.studenttypename}}" disabled>
+		</div>
+	</div>
+	<div class="col-lg-6 viewFixedWidth">
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">vip客户</span> <input type="text" class="form-control" value="{{formData.viptypename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">vip客户等级</span> <input type="text" class="form-control" value="{{formData.viplevelname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">转介绍员工</span> <input type="text" class="form-control" value="{{formData.referralstaffname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">转介绍员工岗位</span> <input type="text" class="form-control" value="{{formData.referralstaffjobname}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">转介绍学员</span> <input type="text" class="form-control" value="{{formData.referralcustomername}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">购买意愿</span> <input type="text" class="form-control" value="{{formData.purchaseintentionname}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前在读学校</span> <input type="text" class="form-control" value="{{formData.schoolname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">是否复读</span> <input type="text" class="form-control" value="{{formData.isstudyagainname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前跟进时间</span> <input type="text" class="form-control" value="{{formData.followtime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">跟进方式</span> <input type="text" class="form-control" value="{{formData.contacttypename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">跟进阶段</span> <input type="text" class="form-control" value="{{formData.followstagename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">跟进次数</span> <input type="text" class="form-control" value="{{formData.followedcount}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">下次跟进时间</span> <input type="text" class="form-control" value="{{formData.nextfollowtime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">创建者</span> <input type="text" class="form-control" value="{{formData.creatorname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">创建时间</span> <input type="text" class="form-control" value="{{formData.createtime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">跟进人姓名</span> <input type="text" class="form-control" value="{{formData.modifiername}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">最后修改时间</span> <input type="text" class="form-control" value="{{formData.modifytime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">学生描述</span> <input type="text" class="form-control" value="{{formData.describesname}}" disabled>
+		</div>
+	</div>
+</body>
+</html>

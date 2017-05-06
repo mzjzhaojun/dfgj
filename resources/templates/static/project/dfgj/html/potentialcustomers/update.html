@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html ng-app="add">
+<head>
+<title>新增</title>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- 基础样式 -->
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css" />
+<!-- 基础js -->
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+
+<!-- 表单验证 -->
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+<!-- datetime -->
+<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
+
+<style type="text/css">
+.searchHistory {
+	width: 100%;
+	height: auto;
+	border: solid 1px #CCCCCC;
+	background: #eee;
+	font-family: 微软雅黑;
+	font-size: 12px;
+}
+
+.searchHistory .searchHistory_title {
+	width: 100%;
+	height: 30px;
+	border-bottom: solid 1px #CCCCCC;
+	font-size: 14px;
+	line-height: 22px;
+	font-weight: bold;
+}
+
+.searchHistory .history {
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+	border: solid 0px;
+	margin-top: 10px;
+}
+
+.searchHistory .history .history_div {
+	float: left;
+	width: 10%;
+	margin-left: 8px;
+}
+
+.searchHistory .history .history_div2 {
+	float: left;
+	width: 30%;
+	margin-left: 1px;
+	border: solid 0px;
+}
+
+.searchHistory .history .history_line {
+	width: 35px;
+	height: 35px;
+	float: left;
+}
+
+.searchHistory .history .history_line>img {
+	width: 35px;
+	height: 40px;
+}
+</style>
+<!-- 初始化 -->
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add
+			.controller(
+					"addController",
+					function($scope, $http) {
+						$scope.formData = {};
+						$scope.formData2 = {};
+						//返回
+						$scope.onReturn = function() {
+							history.go(-1);
+						}
+						$scope.initdata = function() {
+							$http(
+									{
+										url : parent
+												.getFunctionLinksHref("self"),
+										method : 'GET',
+										dataType : "json",
+										withCredentials : true,
+										headers : {
+											'Content-Type' : 'application/json;charset=UTF-8;'
+										},
+										data : ''
+									})
+									.success(
+											function(data, status, headers,config) {
+												$scope.formData = data;
+												$scope.formData2.orgid = data.orgid;
+												$scope.formData2.orgname = data.orgname;
+												$scope.formData2.customerid = data.id;
+												$scope.formData2.followphone = data.mp;
+												$scope.formData2.followstage = data.followstage;
+												$scope.formData2.customerlevel = data.customerlevel;
+												$scope.pageList(data.id);
+											}).error(
+											function(data, status, headers,
+													config) {
+												response(status);
+											});
+						}
+						//保存
+						$scope.onPreserved = function() {
+							var isValid = $("#saveForm").valid();
+							if (isValid) {
+								$scope.formData.birthday = $("#birthday").val();
+								$http(
+										{
+											url : parent
+													.getFunctionLinksHref("self"),
+											method : 'PUT',
+											dataType : "json",
+											withCredentials : true,
+											headers : {
+												'Content-Type' : 'application/json;charset=UTF-8;'
+											},
+											data : JSON
+													.stringify($scope.formData)
+										})
+										.success(
+												function(data, status, headers,
+														config) {
+													if (data == 1) {
+														//location.href = "list.html";
+													}
+												}).error(
+												function(data, status, headers,
+														config) {
+													response(status);
+												})
+							}
+						}
+						$scope.initselect = function() {
+							$http(
+									{
+										url : parent
+												.getMenuLinksHref("dictionarylist"),
+										method : 'POST',
+										dataType : "json",
+										withCredentials : true,
+										headers : {
+											'Content-Type' : 'application/json;charset=UTF-8;'
+										},
+										data : JSON.stringify([ 20, 570, 1950,
+												900, 1850, 2111, 300, 1990,
+												1950, 1300, 560, 2101, 2121,
+												2131, 790, 1960, 830, 400 ])
+									}).success(
+									function(data, status, headers, config) {
+										$scope.selects = data;
+									}).error(
+									function(data, status, headers, config) {
+										response(status);
+									})
+						}
+						$scope.initselectschools = function() {
+							$http(
+									{
+										url : parent
+												.getMenuLinksHref("schoolslist"),
+										method : 'POST',
+										dataType : "json",
+										withCredentials : true,
+										headers : {
+											'Content-Type' : 'application/json;charset=UTF-8;'
+										},
+										data : ""
+									}).success(
+									function(data, status, headers, config) {
+										$scope.selectsschools = data;
+									}).error(
+									function(data, status, headers, config) {
+										response(status);
+									})
+						}
+						$scope.initdata();
+						$scope.initselect();
+						$scope.initselectschools();
+						////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+						$scope.pageList = function(customerid) {
+							pageNo = parent.currentPage;
+							var data = {
+								"customerid" : customerid
+							};
+							$http(
+									{
+										url : parent
+												.getMenuLinksHref("customerfollowslist"),
+										method : 'POST',
+										dataType : "json",
+										withCredentials : true,
+										headers : {
+											'Content-Type' : 'application/json;charset=UTF-8;',
+											"orderby" : "id",
+											"dir" : "desc"
+										},
+										data : JSON.stringify(data)
+									})
+									.success(
+											function(data, status, headers,
+													config) {
+												$scope.datalist = data;
+												if ($scope.datalist.length > 0) {
+													$scope.formData2 = data[0].customerfollows;
+												}
+											}).error(
+											function(data, status, headers,
+													config) {
+												response(status);
+											});
+						}
+
+						//保存
+						$scope.onPreserved2 = function() {
+							var isValid = $("#saveForm2").valid();
+							if (isValid) {
+								$scope.formData2.id = null;
+								$scope.formData2.creatorid = parent
+										.getCookie('staffid');
+								$scope.formData2.creatorname = parent
+										.getCookie('staffname');
+								$scope.formData2.modifierid = parent
+										.getCookie('staffid');
+								$scope.formData2.modifiername = parent
+										.getCookie('staffname');
+								$scope.formData2.followerid = parent
+										.getCookie('staffid');
+								$scope.formData2.followername = parent
+										.getCookie('staffname');
+								$scope.formData2.followerjobid = parent
+										.getCookie('staffjobid');
+								$scope.formData2.followerjobname = parent
+										.getCookie('staffjobname');
+								$scope.formData2.nextfollowtime = $(
+										"#nextfollowtime").val();
+								$scope.formData2.planverifytime = $(
+										"#planverifytime").val();
+								$scope.formData2.plansigndate = $(
+										"#plansigndate").val();
+								$scope.formData2.followmemo = $("#followmemo").val();
+								$scope.formData.modifierid = parent.getCookie('staffid');
+								$scope.formData.modifiername = parent.getCookie('staffname');
+								$http(
+										{
+											url : parent
+													.getMenuLinksHref("customerfollowspost"),
+											method : 'POST',
+											dataType : "json",
+											withCredentials : true,
+											headers : {
+												'Content-Type' : 'application/json;charset=UTF-8;'
+											},
+											data : JSON
+													.stringify($scope.formData2)
+										})
+										.success(
+												function(data, status, headers,
+														config) {
+													if (data == 1) {
+														$scope.initdata();
+														$scope.pageList();
+													}
+												}).error(
+												function(data, status, headers,
+														config) {
+													response(status);
+												})
+							}
+						}
+					})
+</script>
+</head>
+
+<body ng-controller="addController">
+	<!-- 操作按钮操作区 -->
+	<div class="col-lg-12 topActionPanel">
+		<div>
+			<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+		</div>
+	</div>
+	<div class="col-lg-12 topActionPanel1">
+		<ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#home" data-toggle="tab">基础信息 </a></li>
+			<li><a href="#fllow" data-toggle="tab">跟进信息</a></li>
+		</ul>
+	</div>
+	<div id="myTabContent" class="tab-content">
+		<div class="tab-pane fade in active" id="home">
+			<form method="post" id="saveForm" action="">
+				<div class="col-lg-12 topActionPane2">
+					<div>
+						<button type="button" class="btn btn-primary" style="margin-left: 10px; width: 80px;" ng-click="onPreserved()">确 定</button>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">客户名称</span> <input type="text" class="form-control required" placeholder="请输入客户名称"
+							name="customername" ng-model="formData.customername" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">手机号</span> <input type="text" class="form-control required mobile" placeholder="请输入手机号" name="mp"
+							ng-model="formData.mp" maxlength="11"> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">客户来源</span> <select class="form-control required" name="sourcemaintype"
+							ng-model="formData.sourcemaintype" ng-options="data.code as data.name for data in selects  | filter: {typecode: '560'}">
+							<option value=''>请选择</option>
+						</select> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">性别</span> <select class="form-control" name="gender" ng-model="formData.gender"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '900'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">证件类型</span> <select class="form-control" name="idtype" ng-model="formData.idtype"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1850'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">证件号</span> <input type="text" class="form-control" placeholder="请输入手机号" name="idnumber"
+							ng-model="formData.idnumber" maxlength="11">
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">学生类型</span> <select class="form-control" name="studenttype" ng-model="formData.studenttype"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '2111'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<div class="input-group input-group-sm" id="birthdayhidden">
+							<span class="input-group-addon text-right spanwidth">出生日期</span>
+							<div class="input-group date form_datetime" id="birthdaydate" style="width: 400px;" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input">
+								<input class="form-control" id="birthday" ng-model="formData.birthday" size="14" type="text" value="" readonly> <span
+									class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+							</div>
+							<input type="hidden" id="dtp_input" value="" />
+						</div>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">电子邮箱</span> <input type="text" class="form-control" placeholder="请输入电子邮箱" name="email"
+							ng-model="formData.email" maxlength="255">
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">入学年级</span> <select class="form-control" name="entrancegrade" ng-model="formData.entrancegrade"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '300'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">入学年级</span> <select class="form-control" name="grade" ng-model="formData.grade"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '300'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">vip客户</span> <select class="form-control" name="viptype" ng-model="formData.viptype"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1990'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">vip客户</span> <select class="form-control" name="viplevel" ng-model="formData.viplevel"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1950'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">学年制</span> <select class="form-control" name="schoolyear" ng-model="formData.schoolyear"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1300'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">文理科</span> <select class="form-control" name="subjecttype" ng-model="formData.subjecttype"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '2101'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">介绍员工姓名</span> <input type="text" class="form-control" placeholder="请输入转介绍员工姓名"
+							name="referralstaffname" ng-model="formData.referralstaffname" maxlength="64">
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">介绍员工岗位</span> <input type="text" class="form-control" placeholder="请输入转介绍员工岗位名称"
+							name="referralstaffjobname" ng-model="formData.referralstaffjobname" maxlength="64">
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">介绍学员姓名</span> <input type="text" class="form-control" placeholder="请输入转介绍学员姓名"
+							name="referralcustomername" ng-model="formData.referralcustomername" maxlength="64">
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">当前在读学校</span> <select class="form-control" name="schoolname" ng-model="formData.schoolname"
+							ng-options="data.schools.id as data.schools.schoolname for data in selectsschools">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">是否复读</span> <select class="form-control" name="isstudyagain" ng-model="formData.isstudyagain"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">学生描述</span> <input type="text" class="form-control" placeholder="请输入学生描述" name="describes"
+							ng-model="formData.describes" maxlength="500">
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">登记一位家长</span> <select class="form-control" name="isoneparent" ng-model="formData.isoneparent"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="tab-pane fade" id="fllow">
+			<form method="post" id="saveForm2" action="">
+				<div class="col-lg-12 topActionPane2">
+					<div>
+						<button type="button" class="btn btn-primary" style="margin-left: 10px; width: 80px;" ng-click="onPreserved2()">确 定</button>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">跟进方式</span> <select class="form-control required" name="followtype" ng-model="formData2.followtype"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '2121'}">
+							<option value=''>请选择</option>
+						</select> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">跟进阶段</span> <select class="form-control required" name="followstage"
+							ng-model="formData2.followstage" ng-options="data.code as data.name for data in selects  | filter: {typecode: '570'}">
+							<option value=''>请选择</option>
+						</select> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">跟进对象</span> <select class="form-control required" name="followobject"
+							ng-model="formData2.followobject" ng-options="data.code as data.name for data in selects  | filter: {typecode: '2131'}">
+							<option value=''>请选择</option>
+						</select> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">跟进结果</span> <select class="form-control required" name="talkmainresult"
+							ng-model="formData2.talkmainresult" ng-options="data.code as data.name for data in selects  | filter: {typecode: '790'}">
+							<option value=''>请选择</option>
+						</select> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">是否潜在客户</span> <select class="form-control required" name="ispotential"
+							ng-model="formData2.ispotential" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+							<option value=''>请选择</option>
+						</select> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">此次通话号码</span> <input type="text" class="form-control" placeholder="请输入此次通电号码" name="followphone"
+							ng-model="formData2.followphone" maxlength="64">
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">客户级别</span> <select class="form-control" name="customerlevel" ng-model="formData2.customerlevel"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1950'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">无效客户理由</span> <select class="form-control" name="invalidreason" ng-model="formData2.invalidreason"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1960'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">购买意愿</span> <select class="form-control" name="purchaseintention"
+							ng-model="formData2.purchaseintention" ng-options="data.code as data.name for data in selects  | filter: {typecode: '830'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">想补习的科目</span> <select class="form-control" name="intensionsubjects"
+							ng-model="formData2.intensionsubjects" ng-options="data.code as data.name for data in selects  | filter: {typecode: '400'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">其它机构辅导</span> <select class="form-control" name="isstudythere" ng-model="formData2.isstudythere"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">上次跟进时间</span> <input type="text" class="form-control" value="{{formData.followtime}}" disabled>
+					</div>
+					<div class="input-group input-group-sm">
+						<div class="input-group input-group-sm" id="nextfollowtimehidden">
+							<span class="input-group-addon text-right spanwidth">下次跟进日期</span>
+							<div class="input-group date form_datetime" id="nextfollowtimedate" style="width: 400px;" data-date-format="dd MM yyyy - HH:ii p"
+								data-link-field="dtp_input">
+								<input class="form-control required" id="nextfollowtime" ng-model="formData2.nextfollowtime" size="14" type="text" value="" readonly> <span
+									class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+							</div>
+							<input type="hidden" id="dtp_input" value="" />
+						</div>
+					</div>
+					<div class="input-group input-group-sm">
+						<div class="input-group input-group-sm" id="planverifytimehidden">
+							<span class="input-group-addon text-right spanwidth">预计上门日期</span>
+							<div class="input-group date form_datetime" id="planverifytimedate" style="width: 400px;" data-date-format="dd MM yyyy - HH:ii p"
+								data-link-field="dtp_input">
+								<input class="form-control" id="planverifytime" ng-model="formData2.planverifytime" size="14" type="text" value="" readonly> <span
+									class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+							</div>
+							<input type="hidden" id="dtp_input" value="" />
+						</div>
+					</div>
+					<div class="input-group input-group-sm" id="plansigndatehidden">
+						<span class="input-group-addon text-right spanwidth">预计签约日期</span>
+						<div class="input-group date form_datetime" id="plansigndatedate" style="width: 400px;" data-date-format="dd MM yyyy - HH:ii p"
+							data-link-field="dtp_input">
+							<input class="form-control" id="plansigndate" ng-model="formData2.plansigndate" size="14" type="text" value="" readonly> <span
+								class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+						</div>
+						<input type="hidden" id="dtp_input" value="" />
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth" style="height: 100px;">跟进备注</span>
+						<textarea class="txtVal form-control" style="height: 100px;" id="followmemo" name="followmemo"></textarea>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="searchHistory">
+						<div class="searchHistory_title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跟进记录</div>
+						<div class="history" ng-repeat="data in datalist">
+							<div class="history_line">
+								<img src="../../../../resource/img/line2.png">
+							</div>
+							<div class="history_div" style="font-weight: bold;">{{data.customerfollows.createtime}}</div>
+							<div class="history_div">{{data.customerfollows.followtypename}}</div>
+							<div class="history_div">{{data.customerfollows.followstagename}}</div>
+							<div class="history_div">{{data.customerfollows.talkmainresultname}}</div>
+							<div class="history_div">{{data.customerfollows.followobjectname}}</div>
+							<div class="history_div2">{{data.customerfollows.followmemo}}</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$('#birthdaydate').datetimepicker({
+		format : 'yyyy-mm-dd',
+		language : 'cn',
+		weekStart : 1,
+		minView : "month",
+		todayBtn : 1,
+		initialDate : new Date(),
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 0
+	});
+
+	$('#plansigndatedate').datetimepicker({
+		format : 'yyyy-mm-dd',
+		language : 'cn',
+		weekStart : 1,
+		minView : "month",
+		todayBtn : 1,
+		initialDate : new Date(),
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 0
+	});
+
+	$('#planverifytimedate').datetimepicker({
+		format : 'yyyy-mm-dd',
+		language : 'cn',
+		weekStart : 1,
+		minView : "month",
+		todayBtn : 1,
+		initialDate : new Date(),
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 0
+	});
+
+	$('#nextfollowtimedate').datetimepicker({
+		format : 'yyyy-mm-dd',
+		language : 'cn',
+		weekStart : 1,
+		minView : "month",
+		todayBtn : 1,
+		initialDate : new Date(),
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 0
+	});
+</script>
+</html>

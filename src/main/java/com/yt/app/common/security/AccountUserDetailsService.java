@@ -12,9 +12,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.yt.app.api.v1.entity.Account;
+import com.yt.app.api.v1.entity.Orgcampuses;
 import com.yt.app.api.v1.entity.Orgstaffjobs;
 import com.yt.app.api.v1.entity.Teacherjobs;
 import com.yt.app.api.v1.service.AccountService;
+import com.yt.app.api.v1.service.OrgcampusesService;
 import com.yt.app.api.v1.service.OrgstaffjobsService;
 import com.yt.app.api.v1.service.StaffsService;
 import com.yt.app.api.v1.service.TeacherjobsService;
@@ -42,6 +44,9 @@ public class AccountUserDetailsService implements UserDetailsService {
 	private StaffsService staffsservice;
 
 	@Autowired
+	private OrgcampusesService orgcampusesservice;
+
+	@Autowired
 	private TeacherjobsService teacherjobsservice;
 
 	@Override
@@ -61,23 +66,32 @@ public class AccountUserDetailsService implements UserDetailsService {
 				booleancredentialsNonExpired, booleanaccountNonLocked, grantedAuthorities);
 		userDetails.setAccountid(account.getId());
 		if (account.getType().longValue() == DictionaryResource.ACCOUNT_TYPE_18) {
+			userDetails.setStaffid(account.getId());
 			userDetails.setStaffname("内置超级管理员");
 		} else if (account.getType().longValue() == DictionaryResource.ACCOUNT_TYPE_10 && account.getStaffid() != null) {
 			userDetails.setStaffid(account.getStaffid());
 			userDetails.setStaffname(staffsservice.get(account.getStaffid()).getDisplayname());
 			Orgstaffjobs osj = orgstaffjobsservice.getByStaffId(account.getStaffid());
 			if (osj != null) {
+				Orgcampuses oc = orgcampusesservice.getById(osj.getCampusid());
+				userDetails.setCampusname(oc.getCampusname());
+				userDetails.setBranchname(oc.getBranchidname());
 				userDetails.setRegionid(osj.getRegionid());
 				userDetails.setBranchid(osj.getBranchid());
 				userDetails.setCampusid(osj.getCampusid());
 				userDetails.setStaffjobid(osj.getStaffjobid());
+				userDetails.setStaffjobname(osj.getStaffjobidname());
 			}
 		} else if (account.getType().longValue() == DictionaryResource.ACCOUNT_TYPE_11 && account.getStaffid() != null) {
 			Teacherjobs tj = teacherjobsservice.getByTeacherId(account.getStaffid());
 			if (tj != null) {
+				Orgcampuses oc = orgcampusesservice.getById(tj.getCampusid());
 				userDetails.setCampusid(tj.getCampusid());
+				userDetails.setCampusname(oc.getCampusname());
+				userDetails.setBranchname(oc.getBranchidname());
 				userDetails.setStaffjobid(tj.getJoborgid());
 				userDetails.setStaffname(tj.getTeacheridname());
+				userDetails.setStaffjobname(tj.getJobname());
 			}
 		}
 		return userDetails;

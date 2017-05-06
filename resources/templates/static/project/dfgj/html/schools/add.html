@@ -1,172 +1,126 @@
 <!DOCTYPE html>
 <html ng-app="add">
-  <head>
-    <title>新增</title>
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="this is my page">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <!-- 基础样式 -->
-    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css"/>
-    <!-- 基础js -->
-    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
-	<!-- 表单验证 -->
-	<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
-	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js" ></script>
-	<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
-	<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
-	<!-- datetime -->
-	<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
-	<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>	
-	<!-- 初始化 -->
-	<script type="text/javascript">
-var add = angular.module("add", []);
-add.controller("addController",function($scope, $http) {
-	$scope.formData = {};
-	//返回
-	$scope.onReturn=function(){
-history.go(-1);
-	}
-	//保存
-	$scope.onPreserved=function(){
-var isValid = $("#saveForm").valid();
-	if(isValid){
-    $http({
-    	url:parent.getMenuLinksHref("schoolspost"),
-    	method:'POST',
-    	dataType : "json",
-    	withCredentials: true,
-    	headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-    	data: JSON.stringify($scope.formData)
-      }).success(function(data, status, headers, config){
-      	if(data == 1){
-      location.href="list.html";
-      	}
-      }).error(function(data, status, headers, config){
-      	response(status);
+<head>
+<title>新增</title>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- 基础样式 -->
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css" />
+<!-- 基础js -->
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+
+<!-- 表单验证 -->
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+<!-- datetime -->
+<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
+<!-- 初始化 -->
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add.controller("addController", function($scope, $http) {
+		$scope.formData = {};
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		//保存
+		$scope.onPreserved = function() {
+			var isValid = $("#saveForm").valid();
+			if (isValid) {
+				$scope.formData.orgid = parent.getCookie('branchid');
+				$scope.formData.creatorid = parent.getCookie('staffid');
+				$scope.formData.creatorname = parent.getCookie('staffname');
+				$http({
+					url : parent.getMenuLinksHref("schoolspost"),
+					method : 'POST',
+					dataType : "json",
+					withCredentials : true,
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					data : JSON.stringify($scope.formData)
+				}).success(function(data, status, headers, config) {
+					if (data == 1) {
+						location.href = "list.html";
+					}
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		}
+		$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("dictionarylist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify([ 1300, 1930, 1920, 1940 ])
+			}).success(function(data, status, headers, config) {
+				$scope.selects = data;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+		$scope.initselect();
 	})
-    	}
-	}
-	$scope.initselect = function() {
-$http({
-	url : parent.getMenuLinksHref("dictionarylist"),
-	method : 'POST',
-	dataType : "json",
-	withCredentials : true,
-	headers : {
-'Content-Type' : 'application/json;charset=UTF-8;'
-	},
-	data : JSON.stringify([20])
-	}).success(function(data, status, headers, config) {
-$scope.selects = data;
-	}).error(function(data, status, headers, config) {
-response(status);
-	})
-}
-	$scope.initselect();
-})
-	</script>
+</script>
 </head>
-  
-  <body ng-controller="addController">
-  	<form method="post" id="saveForm" action="">
-   <!-- 操作按钮操作区 -->
-   <div class="col-lg-12 topActionPanel">
-	        <div>
-    	<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
-	    	</div>
-	    	<div>
-    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-	    	</div>
-    </div>
-   <div class="col-lg-6">
-	    	<div class="input-group input-group-sm">
-	    <span class="input-group-addon text-right spanwidth">组织机构ID</span>
-	    <select class="form-control required" name="orgid" ng-model="formData.orgid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-	    	<option value=''>请选择组织机构ID</option>
-	    	</select>
-	    	<span class="input-group-addon verifyprompt">*</span>
-	    	</div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">在读学校名称</span>
-	           <input type="text" class="form-control required" placeholder="请输入在读学校名称" name="schoolname" ng-model="formData.schoolname" maxlength="128">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">学年制（三年制-八年制）</span>
-	           <input type="text" class="form-control required" placeholder="请输入学年制（三年制-八年制）" name="schoolyear" ng-model="formData.schoolyear" maxlength="32">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">学段（小学，中学，高中，完中，九年一贯，十二年一贯）</span>
-	           <input type="text" class="form-control required" placeholder="请输入学段（小学，中学，高中，完中，九年一贯，十二年一贯）" name="schoolrange" ng-model="formData.schoolrange" maxlength="32">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">学校等级（普通学校，区重点，市重点等）</span>
-	           <input type="text" class="form-control required" placeholder="请输入学校等级（普通学校，区重点，市重点等）" name="schoollevel" ng-model="formData.schoollevel" maxlength="32">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">学校性质（不确定，公立，私立）</span>
-	           <input type="text" class="form-control required" placeholder="请输入学校性质（不确定，公立，私立）" name="schoolnature" ng-model="formData.schoolnature" maxlength="32">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	    	<div class="input-group input-group-sm">
-	    <span class="input-group-addon text-right spanwidth">创建人ID</span>
-	    <select class="form-control required" name="creatorid" ng-model="formData.creatorid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-	    	<option value=''>请选择创建人ID</option>
-	    	</select>
-	    	<span class="input-group-addon verifyprompt">*</span>
-	    	</div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">创建人姓名</span>
-	           <input type="text" class="form-control required" placeholder="请输入创建人姓名" name="creatorname" ng-model="formData.creatorname" maxlength="64">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">创建时间</span>
-	           <input type="text" class="form-control required" placeholder="请输入创建时间" name="createtime" ng-model="formData.createtime" maxlength="">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	    	<div class="input-group input-group-sm">
-	    <span class="input-group-addon text-right spanwidth">最后修改人ID</span>
-	    <select class="form-control required" name="modifierid" ng-model="formData.modifierid" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-	    	<option value=''>请选择最后修改人ID</option>
-	    	</select>
-	    	<span class="input-group-addon verifyprompt">*</span>
-	    	</div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">最后修改人姓名</span>
-	           <input type="text" class="form-control required" placeholder="请输入最后修改人姓名" name="modifiername" ng-model="formData.modifiername" maxlength="64">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	    	<div class="input-group input-group-sm">
-	            	<span class="input-group-addon text-right spanwidth">最后修改时间</span>
-	           <input type="text" class="form-control required" placeholder="请输入最后修改时间" name="modifytime" ng-model="formData.modifytime" maxlength="">
-	        <span class="input-group-addon verifyprompt">*</span>
-	        </div>
-	        </div>
-    </form>
-  </body>
-  <script type="text/javascript">
-  $('#date').datetimepicker({
-  	format : 'yyyy-mm-dd',
-  	language : 'cn',
-  	weekStart : 1,
-  	minView : "month",
-  	todayBtn : 1,
-  	initialDate:new Date(),
-  	autoclose : 1,
-  	todayHighlight : 1,
-  	startView : 2,
-  	forceParse : 0,
-  	showMeridian : 0
-  });
+
+<body ng-controller="addController">
+	<form method="post" id="saveForm" action="">
+		<!-- 操作按钮操作区 -->
+		<div class="col-lg-12 topActionPanel">
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学校名称</span> <input type="text" class="form-control required" placeholder="请输入在读学校名称"
+					name="schoolname" ng-model="formData.schoolname" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学年制</span> <select class="form-control required" name="schoolyear" ng-model="formData.schoolyear"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '1300'}">
+					<option value=''>请选择学年制</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学段</span> <select class="form-control required" name="schoolrange" ng-model="formData.schoolrange"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '1920'}">
+					<option value=''>请选择学段</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学校等级</span> <select class="form-control required" name="schoollevel" ng-model="formData.schoollevel"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '1930'}">
+					<option value=''>请选择学校等级</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学校性质</span> <select class="form-control required" name="schoolnature"
+					ng-model="formData.schoolnature" ng-options="data.code as data.name for data in selects  | filter: {typecode: '1940'}">
+					<option value=''>请选择学校性质</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+		</div>
+	</form>
+</body>
 </html>

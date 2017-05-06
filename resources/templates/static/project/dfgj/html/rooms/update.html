@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/response.js"></script>
-<script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+
 <!-- 表单验证 -->
 <script src="../../../../resource/js/date/js/eap.core.js"></script>
 <script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
@@ -54,10 +54,8 @@
 		$scope.onPreserved = function() {
 			var isValid = $("#saveForm").valid();
 			if (isValid) {
-				$scope.formData.campusid = $("#campusid").val();
-				$scope.formData.campusname = $("#campusname").val();
-				$scope.formData.modifierid = $.cookie('staffid');
-				$scope.formData.modifiername = $.cookie('staffname');
+				$scope.formData.modifierid = parent.getCookie('staffid');
+				$scope.formData.modifiername = parent.getCookie('staffname');
 				$http({
 					url : parent.getFunctionLinksHref("self"),
 					method : 'PUT',
@@ -123,11 +121,6 @@
 			</div>
 		</div>
 		<div class="col-lg-6">
-			<div class="input-group input-group-sm">
-				<input type="hidden" id="campusid" ng-model="formData.campusid" /> <span class="input-group-addon text-right spanwidth">校区</span> <input type="text"
-					id="campusname" name="campusname" ng-model="formData.campusname" readonly="readonly" class="form-control required"> <i ng-click="selectCampus()"
-					class="glyphicon glyphicon-search" title="选择"></i>
-			</div>
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">名称</span> <input type="text" class="form-control required" placeholder="请输入教室名称" name="roomname"
 					ng-model="formData.roomname" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>

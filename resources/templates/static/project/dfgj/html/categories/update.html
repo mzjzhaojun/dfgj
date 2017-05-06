@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/response.js"></script>
-<script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+
 <!-- 表单验证 -->
 <script src="../../../../resource/js/date/js/eap.core.js"></script>
 <script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
@@ -49,8 +49,8 @@
 		$scope.onPreserved = function() {
 			var isValid = $("#saveForm").valid();
 			if (isValid) {
-				$scope.formData.modifierid = $.cookie('staffid');
-				$scope.formData.modifiername = $.cookie('staffname');
+				$scope.formData.modifierid = parent.getCookie('staffid');
+				$scope.formData.modifiername = parent.getCookie('staffname');
 				$http({
 					url : parent.getFunctionLinksHref("self"),
 					method : 'PUT',

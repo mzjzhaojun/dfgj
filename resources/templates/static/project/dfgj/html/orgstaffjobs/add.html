@@ -29,7 +29,7 @@
 <script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
 <script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
 <!-- cookie-->
-<script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
+
 <!-- 初始化 -->
 <script type="text/javascript">
 	var add = angular.module("add", []);
@@ -47,7 +47,7 @@
 				$scope.formData.staffid = $("#staffid").val();
 				$scope.formData.campusid = $("#campusid").val();
 				$scope.formData.staffname = $("#staffidname").val();
-				$scope.formData.regionid = $.cookie('regionid');
+				$scope.formData.regionid = parent.getCookie('regionid');
 				$scope.formData.staffjobid = $("#staffjobid").val();
 				$http({
 					url : parent.getMenuLinksHref("orgstaffjobspost"),

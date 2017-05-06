@@ -2,7 +2,11 @@ package com.yt.app.api.v1.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yt.app.util.DateTimeUtil;
 
 /**
  * @author zj default
@@ -22,77 +26,49 @@ public class Customerfollows implements Serializable {
 	String orgname;
 	String orgtype;
 	Long customerid;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date followtime;
 	Long followerid;
 	String followername;
 	Long followerjobid;
 	String followerjobname;
-	String followtype;
-	String followstage;
-	String followobject;
+	Long followtype;
+	String followtypename;
+	Long followstage;
+	String followstagename;
+	Long followobject;
+	String followobjectname;
 	String followphone;
 	String followmemo;
-	String talkmainresult;
+	Long talkmainresult;
+	String talkmainresultname;
 	String talksubresult;
-	String customerlevel;
-	String invalidreason;
-	String purchaseintention;
-	String intensionsubjects;
-	Integer isvalidfiling;
+	Long customerlevel;
+	String customerlevelname;
+	Long invalidreason;
+	String invalidreasonname;
+	Long purchaseintention;
+	Long intensionsubjects;
+	Long isvalidfiling;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date nextfollowtime;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date planverifytime;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date plansigndate;
-	Integer isstudythere;
-	Integer ispotential;
+	Long isstudythere;
+	Long ispotential;
+	String ispotentialname;
 	Long creatorid;
 	String creatorname;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date createtime;
 	Long modifierid;
 	String modifiername;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date modifytime;
 
 	public Customerfollows() {
 	}
 
-	public Customerfollows(Long id, Integer version, Long orgid, String orgname, String orgtype, Long customerid, java.util.Date followtime,
-			Long followerid, String followername, Long followerjobid, String followerjobname, String followtype, String followstage,
-			String followobject, String followphone, String followmemo, String talkmainresult, String talksubresult, String customerlevel,
-			String invalidreason, String purchaseintention, String intensionsubjects, Integer isvalidfiling, java.util.Date nextfollowtime,
-			java.util.Date planverifytime, java.util.Date plansigndate, Integer isstudythere, Integer ispotential, Long creatorid,
-			String creatorname, java.util.Date createtime, Long modifierid, String modifiername, java.util.Date modifytime) {
-		this.id = id;
-		this.version = version;
-		this.orgid = orgid;
-		this.orgname = orgname;
-		this.orgtype = orgtype;
-		this.customerid = customerid;
-		this.followtime = followtime;
-		this.followerid = followerid;
-		this.followername = followername;
-		this.followerjobid = followerjobid;
-		this.followerjobname = followerjobname;
-		this.followtype = followtype;
-		this.followstage = followstage;
-		this.followobject = followobject;
-		this.followphone = followphone;
-		this.followmemo = followmemo;
-		this.talkmainresult = talkmainresult;
-		this.talksubresult = talksubresult;
-		this.customerlevel = customerlevel;
-		this.invalidreason = invalidreason;
-		this.purchaseintention = purchaseintention;
-		this.intensionsubjects = intensionsubjects;
-		this.isvalidfiling = isvalidfiling;
-		this.nextfollowtime = nextfollowtime;
-		this.planverifytime = planverifytime;
-		this.plansigndate = plansigndate;
-		this.isstudythere = isstudythere;
-		this.ispotential = ispotential;
-		this.creatorid = creatorid;
-		this.creatorname = creatorname;
-		this.createtime = createtime;
-		this.modifierid = modifierid;
-		this.modifiername = modifiername;
-		this.modifytime = modifytime;
-	}
 }

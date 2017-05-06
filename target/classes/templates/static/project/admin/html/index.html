@@ -38,11 +38,9 @@
 				data : ''
 			}).success(function(data, status, headers, config) {
 				$scope.name = data.staffname;
-				$.cookie('regionid', data.regionid, { path : '/'});
-				$.cookie('branchid', data.branchid, { path : '/'});
-				$.cookie('campusid', data.campusid, { path : '/'});
-				$.cookie('staffid', data.staffid, { path : '/'});
-				$.cookie('staffname', data.staffname, { path : '/'});
+				$.cookie('assetstoken', JSON.stringify(data), {
+					path : '/'
+				});
 			}).error(function(data, status, headers, config) {
 				response(status);
 			});
@@ -71,11 +69,9 @@
 				'Content-Type' : 'application/json;charset=UTF-8;'
 			},
 			success : function(data) {
-				$.cookie('regionid', null, { path : '/'});
-				$.cookie('branchid', null, { path : '/'});
-				$.cookie('campusid', null, { path : '/'});
-				$.cookie('staffid', null, { path : '/'});
-				$.cookie('staffname', null, { path : '/'});
+				$.cookie('assetstoken', null, {
+					path : '/'
+				});
 				location.href = "/dfgj/static/project/login/html/index.html";
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -516,6 +512,10 @@
 			}
 		})
 		return href;
+	}
+	function getCookie(key) {
+		var data = JSON.parse($.cookie('assetstoken'));
+		return data[key];
 	}
 </script>
 </head>

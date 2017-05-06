@@ -53,7 +53,7 @@
 				"name" : $("#name").val()
 			};
 			$http({
-				url : parent.getMenuLinksHref("schoolslist"),
+				url : parent.getMenuLinksHref("potentialcustomerslist"),
 				method : 'POST',
 				dataType : "json",
 				withCredentials : true,
@@ -115,30 +115,52 @@
 		<thead>
 			<tr class="info">
 				<th>序号</th>
-				<th>学校名称</th>
+				<th>名称</th>
+				<th>组织机构</th>
+				<th>手机号</th>
+				<th>来源</th>
+				<th>级别</th>
+				<th>状态</th>
+				<th>性别</th>
+				<th>vip客户</th>
+				<th>当前年级</th>
 				<th>学年制</th>
-				<th>学段</th>
-				<th>学校等级</th>
-				<th>学校性质</th>
-				<th>创建人姓名</th>
-				<th>创建时间</th>
-				<th>最后修改人姓名</th>
-				<th>最后修改时间</th>
+				<th>文理科</th>
+				<th>类型</th>
+				<th>跟进方式</th>
+				<th>购买意愿</th>
+				<th>当前跟进时间</th>
+				<th>跟进阶段</th>
+				<th>跟进次数</th>
+				<th>预计下次跟进时间</th>
+				<th>创建者</th>
+				<th>跟进人</th>
 				<th>相关操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="data in datalist" class='tr{{$index%2+2}}' ng-class="{selected: $index==selectedRow}">
 				<td ng-dblclick="toInfo(data)">{{$index+1}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.schools.schoolname}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.schools.schoolyearname}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.schools.schoolrangename}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.schools.schoollevelname}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.schools.schoolnaturename}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.schools.creatorname}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.schools.createtime}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.schools.modifiername}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.schools.modifytime}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.customername}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.orgname}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.mp}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.sourcemaintypename}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.customerlevelname}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.customerstatusname}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.gendername}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.viptypename}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.gradename}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.schoolyearname}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.subjecttypename}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.studenttypename}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.contacttypename}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.purchaseintentionname}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.followtime}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.followstagename}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.followedcount}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.nextfollowtime}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.creatorname}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.modifiername}}</td>
 				<td>
 					<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search" style="margin: 0px 5px; color: #99DFF8;" title="查看"></h4>
 					<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil" style="margin: 0px 5px; color: #99DFF8;" title="修改"></h4>
