@@ -25,6 +25,10 @@
 <script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
+<!-- dialog -->
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
 <!-- 初始化 -->
 <script type="text/javascript">
 	var add = angular.module("add", []);
@@ -45,6 +49,9 @@
 				$scope.formData.creatorname = parent.getCookie('staffname');
 				$scope.formData.campusid = parent.getCookie('campusid');
 				$scope.formData.campusname = parent.getCookie('campusname');
+				$scope.formData.referralstaffid = $("#referralstaffid").val();
+				$scope.formData.referralstaffname = $("#referralstaffname")
+						.val();
 				$http({
 					url : parent.getMenuLinksHref("potentialcustomerspost"),
 					method : 'POST',
@@ -97,9 +104,24 @@
 				response(status);
 			})
 		}
+		$scope.selectStaff = function() {
+			artdialogIframe("../../dfgj/html/jobs/stafflist.html", null,
+					backfunctionstaff, 1024, 600, true);
+		}
+
 		$scope.initselect();
 		$scope.initselectschools();
 	})
+
+	function backfunctionstaff() {
+		if (parent.getDateChild().id != undefined) {
+			$("#referralstaffid").val(parent.getDateChild().id);
+		}
+		if (parent.getDateChild().name != undefined) {
+			$("#referralstaffname").val(parent.getDateChild().name);
+		}
+		setDateChild({});
+	}
 </script>
 </head>
 
@@ -119,12 +141,6 @@
 				<span class="input-group-addon text-right spanwidth">客户名称</span> <input type="text" class="form-control required" placeholder="请输入客户名称"
 					name="customername" ng-model="formData.customername" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
 			</div>
-			<!-- <div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">客户级别</span> <select class="form-control required" name="customerlevel" ng-model="formData.idtype"
-					ng-options="data.code as data.name for data in selects  | filter: {typecode: '1950'}">
-					<option value=''>请选择</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
-			</div> -->
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">手机号</span> <input type="text" class="form-control required mobile" placeholder="请输入手机号" name="mp"
 					ng-model="formData.mp" maxlength="11"> <span class="input-group-addon verifyprompt">*</span>
@@ -209,13 +225,14 @@
 					<option value=''>请选择</option>
 				</select>
 			</div>
-			<div class="input-group input-group-sm">
+			<!-- <div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">介绍员工姓名</span> <input type="text" class="form-control" placeholder="请输入转介绍员工姓名"
 					name="referralstaffname" ng-model="formData.referralstaffname" maxlength="64">
-			</div>
+			</div> -->
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">介绍员工岗位</span> <input type="text" class="form-control" placeholder="请输入转介绍员工岗位名称"
-					name="referralstaffjobname" ng-model="formData.referralstaffjobname" maxlength="64">
+				<input type="hidden" id="referralstaffid" ng-model="formData.referralstaffid" /> <span class="input-group-addon text-right spanwidth">员工</span> <input
+					type="text" id="referralstaffname" name="referralstaffname" ng-model="formData.referralstaffname" readonly="readonly" class="form-control">
+				<i ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i>
 			</div>
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">介绍学员姓名</span> <input type="text" class="form-control" placeholder="请输入转介绍学员姓名"
@@ -234,14 +251,14 @@
 				</select>
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">学生描述</span> <input type="text" class="form-control" placeholder="请输入学生描述" name="describes"
-					ng-model="formData.describes" maxlength="500">
-			</div>
-			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">登记一位家长</span> <select class="form-control" name="isoneparent" ng-model="formData.isoneparent"
 					ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
 					<option value=''>请选择</option>
 				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">学生描述</span>
+				<textarea class="txtVal form-control" style="height: 90px;" name="describes" ng-model="formData.describes" maxlength="500" /></textarea>
 			</div>
 		</div>
 	</form>

@@ -3,9 +3,11 @@ package com.yt.app.api.v1.service;
 import java.util.List;
 import java.util.Map;
 
+import com.yt.app.annotation.DataSourceAnnotation;
 import com.yt.app.api.v1.entity.Account;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.common.base.IBaseService;
+import com.yt.app.enums.DataSourceEnum;
 import com.yt.app.frame.page.IPage;
 
 /**
@@ -24,6 +26,7 @@ public interface AccountService extends IBaseService<Account, Long> {
 	 * @param param
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer addobject(Account param);
 
 	/**
@@ -33,6 +36,7 @@ public interface AccountService extends IBaseService<Account, Long> {
 	 * @param id
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer deletebyid(long id);
 
 	/**
@@ -42,6 +46,7 @@ public interface AccountService extends IBaseService<Account, Long> {
 	 * @param id
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	Account getById(long id);
 
 	/**
@@ -51,6 +56,7 @@ public interface AccountService extends IBaseService<Account, Long> {
 	 * @param id
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer updatebyid(Account id);
 
 	/**
@@ -60,6 +66,7 @@ public interface AccountService extends IBaseService<Account, Long> {
 	 * @param param
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	List<Dictionary> getlistaccount();
 
 	/**
@@ -69,6 +76,7 @@ public interface AccountService extends IBaseService<Account, Long> {
 	 * @param param
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	IPage<Account> getlist(Map<String, Object> param);
 
 	/**
@@ -77,5 +85,6 @@ public interface AccountService extends IBaseService<Account, Long> {
 	 * @param account
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	public Account getAccountByName(String account);
 }

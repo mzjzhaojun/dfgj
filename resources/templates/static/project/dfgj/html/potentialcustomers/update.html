@@ -25,7 +25,10 @@
 <script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
-
+<!-- dialog -->
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
 <style type="text/css">
 .searchHistory {
 	width: 100%;
@@ -55,13 +58,19 @@
 
 .searchHistory .history .history_div {
 	float: left;
-	width: 10%;
-	margin-left: 8px;
+	width: 15%;
+	margin-left: 2px;
+}
+
+.searchHistory .history .history_div1 {
+	float: left;
+	width: 5%;
+	margin-left: 5px;
 }
 
 .searchHistory .history .history_div2 {
 	float: left;
-	width: 30%;
+	width: 50%;
 	margin-left: 1px;
 	border: solid 0px;
 }
@@ -104,7 +113,8 @@
 										data : ''
 									})
 									.success(
-											function(data, status, headers,config) {
+											function(data, status, headers,
+													config) {
 												$scope.formData = data;
 												$scope.formData2.orgid = data.orgid;
 												$scope.formData2.orgname = data.orgname;
@@ -124,6 +134,9 @@
 							var isValid = $("#saveForm").valid();
 							if (isValid) {
 								$scope.formData.birthday = $("#birthday").val();
+								$scope.formData.referralstaffid = $("#referralstaffid").val();
+								$scope.formData.referralstaffname = $("#referralstaffname")
+										.val();
 								$http(
 										{
 											url : parent
@@ -141,7 +154,7 @@
 												function(data, status, headers,
 														config) {
 													if (data == 1) {
-														//location.href = "list.html";
+														location.href = "list.html";
 													}
 												}).error(
 												function(data, status, headers,
@@ -192,6 +205,12 @@
 									function(data, status, headers, config) {
 										response(status);
 									})
+						}
+
+						$scope.selectStaff = function() {
+							artdialogIframe(
+									"../../dfgj/html/jobs/stafflist.html",
+									null, backfunctionstaff, 1024, 600, true);
 						}
 						$scope.initdata();
 						$scope.initselect();
@@ -258,9 +277,12 @@
 										"#planverifytime").val();
 								$scope.formData2.plansigndate = $(
 										"#plansigndate").val();
-								$scope.formData2.followmemo = $("#followmemo").val();
-								$scope.formData.modifierid = parent.getCookie('staffid');
-								$scope.formData.modifiername = parent.getCookie('staffname');
+								$scope.formData2.followmemo = $("#followmemo")
+										.val();
+								$scope.formData.modifierid = parent
+										.getCookie('staffid');
+								$scope.formData.modifiername = parent
+										.getCookie('staffname');
 								$http(
 										{
 											url : parent
@@ -289,6 +311,15 @@
 							}
 						}
 					})
+	function backfunctionstaff() {
+		if (parent.getDateChild().id != undefined) {
+			$("#referralstaffid").val(parent.getDateChild().id);
+		}
+		if (parent.getDateChild().name != undefined) {
+			$("#referralstaffname").val(parent.getDateChild().name);
+		}
+		setDateChild({});
+	}
 </script>
 </head>
 
@@ -403,12 +434,9 @@
 						</select>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">介绍员工姓名</span> <input type="text" class="form-control" placeholder="请输入转介绍员工姓名"
-							name="referralstaffname" ng-model="formData.referralstaffname" maxlength="64">
-					</div>
-					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">介绍员工岗位</span> <input type="text" class="form-control" placeholder="请输入转介绍员工岗位名称"
-							name="referralstaffjobname" ng-model="formData.referralstaffjobname" maxlength="64">
+						<input type="hidden" id="referralstaffid" ng-model="formData.referralstaffid" /> <span class="input-group-addon text-right spanwidth">员工</span> <input
+							type="text" id="referralstaffname" name="referralstaffname" ng-model="formData.referralstaffname" readonly="readonly" class="form-control"> <i
+							ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i>
 					</div>
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">介绍学员姓名</span> <input type="text" class="form-control" placeholder="请输入转介绍学员姓名"
@@ -427,14 +455,15 @@
 						</select>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">学生描述</span> <input type="text" class="form-control" placeholder="请输入学生描述" name="describes"
-							ng-model="formData.describes" maxlength="500">
-					</div>
-					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">登记一位家长</span> <select class="form-control" name="isoneparent" ng-model="formData.isoneparent"
 							ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
 							<option value=''>请选择</option>
 						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">学生描述</span>
+						<textarea class="txtVal form-control" style="height: 90px;" name="describes" ng-model="formData.describes" maxlength="500">
+					</textarea>
 					</div>
 				</div>
 			</form>
@@ -547,7 +576,8 @@
 					</div>
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth" style="height: 100px;">跟进备注</span>
-						<textarea class="txtVal form-control" style="height: 100px;" id="followmemo" name="followmemo"></textarea>
+						<textarea class="txtVal form-control required" style="height: 100px;" id="followmemo" name="followmemo" maxlength="30"></textarea>
+						<span class="input-group-addon verifyprompt">*</span>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -559,9 +589,8 @@
 							</div>
 							<div class="history_div" style="font-weight: bold;">{{data.customerfollows.createtime}}</div>
 							<div class="history_div">{{data.customerfollows.followtypename}}</div>
-							<div class="history_div">{{data.customerfollows.followstagename}}</div>
-							<div class="history_div">{{data.customerfollows.talkmainresultname}}</div>
-							<div class="history_div">{{data.customerfollows.followobjectname}}</div>
+							<div class="history_div1">{{data.customerfollows.followstagename}}</div>
+							<div class="history_div1">{{data.customerfollows.talkmainresultname}}</div>
 							<div class="history_div2">{{data.customerfollows.followmemo}}</div>
 						</div>
 					</div>

@@ -2,8 +2,10 @@ package com.yt.app.api.v1.service;
 
 import java.util.List;
 
+import com.yt.app.annotation.DataSourceAnnotation;
 import com.yt.app.api.v1.entity.Region;
 import com.yt.app.common.base.IBaseService;
+import com.yt.app.enums.DataSourceEnum;
 
 /**
  * @author huanghao
@@ -19,6 +21,7 @@ public interface RegionService extends IBaseService<Region, Long> {
 	 * @author huanghao
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	List<Region> getlist();
 
 	/**
@@ -27,6 +30,7 @@ public interface RegionService extends IBaseService<Region, Long> {
 	 * @author huanghao
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	List<Region> getlistAll();
 
 	/**
@@ -35,6 +39,7 @@ public interface RegionService extends IBaseService<Region, Long> {
 	 * @author huanghao
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	List<Region> getlistAllStyle();
 
 	/**
@@ -44,6 +49,7 @@ public interface RegionService extends IBaseService<Region, Long> {
 	 * @param parendid
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	List<Region> getbyparentid(long parendid);
 
 	/**
@@ -53,6 +59,7 @@ public interface RegionService extends IBaseService<Region, Long> {
 	 * @param param
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer addobject(Region param);
 
 }

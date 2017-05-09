@@ -70,6 +70,27 @@ public class FileController extends BaseControllerImpl<File, Long> {
 	}
 
 	/**
+	 * 导入数据
+	 * 
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 */
+	@ApiOperation(value = "导入数据", response = File.class)
+	@RequestMapping(value = "/import", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> importexcel(MultipartHttpServletRequest request) throws IOException {
+		MultipartFile file = request.getFile("file");
+		String orgid = request.getParameter("orgid");
+		String orgname = request.getParameter("orgname");
+		String creatorid = request.getParameter("creatorid");
+		String creatorname = request.getParameter("creatorname");
+		String campusid = request.getParameter("campusid");
+		String campusname = request.getParameter("campusname");
+		String msg = service.importexcel(file, orgid, orgname, creatorid, creatorname, campusid, campusname);
+		return new ResponseEntity<Object>(msg, HttpStatus.OK);
+	}
+
+	/**
 	 * 下载
 	 * 
 	 * @param id

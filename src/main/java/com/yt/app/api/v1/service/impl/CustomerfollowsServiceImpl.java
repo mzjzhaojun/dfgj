@@ -49,6 +49,8 @@ public class CustomerfollowsServiceImpl extends BaseServiceImpl<Customerfollows,
 			// 不是潜在客户
 			if (t.getIspotential() != null && t.getIspotential().longValue() == DictionaryResource.STATUS_21) {
 				pc.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1972);
+			}else{
+				pc.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1973);
 			}
 			pc.setCustomerlevel(t.getCustomerlevel());
 			pc.setContacttype(t.getFollowtype());
@@ -56,7 +58,7 @@ public class CustomerfollowsServiceImpl extends BaseServiceImpl<Customerfollows,
 			pc.setFollowedcount(pc.getFollowedcount() + 1);
 			pc.setInvalidreason(t.getInvalidreason());
 			pc.setPurchaseintention(t.getPurchaseintention());
-			pc.setFollowtime(t.getNextfollowtime());
+			pc.setFollowtime(t.getPlanverifytime());
 			pc.setNextfollowtime(t.getNextfollowtime());
 			pc.setModifierid(t.getModifierid());
 			pc.setModifiername(t.getModifiername());

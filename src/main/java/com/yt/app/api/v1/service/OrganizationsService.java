@@ -12,29 +12,4 @@ import com.yt.app.common.base.IBaseService;
 
 public interface OrganizationsService extends IBaseService<Organizations, Long> {
 
-	/**
-	 * 重写根据id查询
-	 * 
-	 * @param id
-	 * @return
-	 */
-	/*
-	 * Organizations get(Long id);
-	 *//**
-	 * 重写保存
-	 * 
-	 * @param t
-	 * @return
-	 */
-	/*
-	 * Integer post(Organizations t);
-	 *//**
-	 * 重写集合
-	 * 
-	 * @param param
-	 * @return
-	 */
-	/*
-	 * IPage<Organizations> list(RequestEntity<Object> requestEntity);
-	 */
 }

@@ -104,4 +104,13 @@ public interface PotentialcustomersMapper extends IBaseMapper<Potentialcustomers
 	 */
 	@RedisCacheAnnotation(classs = Potentialcustomers.class)
 	public List<Potentialcustomers> listByArrayId(long[] id);
+
+	/**
+	 * 批量保存
+	 * 
+	 * @param list
+	 * @return 数据
+	 */
+	@RedisCacheEvictAnnotation(classs = Potentialcustomers.class)
+	public Integer savebatch(List<Potentialcustomers> array);
 }

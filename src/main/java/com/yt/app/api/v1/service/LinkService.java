@@ -2,8 +2,10 @@ package com.yt.app.api.v1.service;
 
 import org.springframework.http.RequestEntity;
 
+import com.yt.app.annotation.DataSourceAnnotation;
 import com.yt.app.api.v1.entity.Link;
 import com.yt.app.common.base.IBaseService;
+import com.yt.app.enums.DataSourceEnum;
 import com.yt.app.frame.page.IPage;
 
 /**
@@ -21,6 +23,7 @@ public interface LinkService extends IBaseService<Link, Long> {
 	 * @param requestEntity
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer add(RequestEntity<Link> requestEntity);
 
 	/**
@@ -29,11 +32,13 @@ public interface LinkService extends IBaseService<Link, Long> {
 	 * @param requestEntity
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer update(RequestEntity<Link> requestEntity);
 
 	/**
 	 * 链接删除
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer delete(Long id);
 
 	/**
@@ -42,6 +47,7 @@ public interface LinkService extends IBaseService<Link, Long> {
 	 * @param id
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	Link get(Long id);
 
 	/**
@@ -50,5 +56,6 @@ public interface LinkService extends IBaseService<Link, Long> {
 	 * @param requestEntity
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	IPage<Link> getlist(RequestEntity<Object> requestEntity);
 }

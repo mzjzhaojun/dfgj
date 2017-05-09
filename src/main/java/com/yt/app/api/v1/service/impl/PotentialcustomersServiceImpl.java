@@ -48,7 +48,6 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 	@Transactional
 	public Integer post(Potentialcustomers t) {
 		t.setCreatetime(new Date());
-		t.setFollowtime(new Date());
 		t.setNextfollowtime(new Date());
 		t.setCustomerlevel(DictionaryResource.PATRIARCH_LEVEL_1951);
 		t.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1971);
@@ -71,6 +70,8 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 			}
 		}
 		List<Potentialcustomers> list = mapper.list(param);
+		if (list.size() == 0)
+			return PageBean.EMPTY_PAGE;
 		long[] dids = StreamUtil
 				.concat(list.stream().mapToLong(Potentialcustomers::getSourcemaintype),
 						list.stream().mapToLong(Potentialcustomers::getCustomerlevel),
@@ -122,8 +123,9 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 		Potentialcustomers t = mapper.get(id);
 		long[] dids = Arrays
 				.asList(t.getSourcemaintype(), t.getCustomerlevel(), t.getCustomerstatus(), t.getFollowstage(), t.getViptype(), t.getGender(),
-						t.getGrade(), t.getSchoolyear(), t.getSubjecttype(), t.getStudenttype(), t.getContacttype(), t.getPurchaseintention())
-				.stream().filter(Long -> Long != null).mapToLong(Long::longValue).toArray();
+						t.getGrade(), t.getSchoolyear(), t.getSubjecttype(), t.getStudenttype(), t.getContacttype(), t.getPurchaseintention(),
+						t.getViplevel(), t.getIsoneparent(), t.getIdtype(), t.getIsstudyagain(), t.getEntrancegrade()).stream()
+				.filter(Long -> Long != null).mapToLong(Long::longValue).toArray();
 		List<Dictionary> listd = dictionarymapper.listByArrayId(dids);
 		listd.forEach(d -> {
 			if (t.getSourcemaintype().longValue() == d.getCode().longValue())
@@ -151,6 +153,17 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 				t.setContacttypename(d.getName());
 			if (t.getPurchaseintention() != null && t.getPurchaseintention().longValue() == d.getCode().longValue())
 				t.setPurchaseintentionname(d.getName());
+
+			if (t.getViplevel() != null && t.getViplevel().longValue() == d.getCode().longValue())
+				t.setViplevelname(d.getName());
+			if (t.getIsoneparent() != null && t.getIsoneparent().longValue() == d.getCode().longValue())
+				t.setIsoneparentname(d.getName());
+			if (t.getIdtype() != null && t.getIdtype().longValue() == d.getCode().longValue())
+				t.setIdtypename(d.getName());
+			if (t.getIsstudyagain() != null && t.getIsstudyagain().longValue() == d.getCode().longValue())
+				t.setIsstudyagainname(d.getName());
+			if (t.getEntrancegrade() != null && t.getEntrancegrade().longValue() == d.getCode().longValue())
+				t.setEntrancegradename(d.getName());
 		});
 		return t;
 	}

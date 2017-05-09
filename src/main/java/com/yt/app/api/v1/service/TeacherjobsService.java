@@ -1,7 +1,9 @@
 package com.yt.app.api.v1.service;
 
+import com.yt.app.annotation.DataSourceAnnotation;
 import com.yt.app.api.v1.entity.Teacherjobs;
 import com.yt.app.common.base.IBaseService;
+import com.yt.app.enums.DataSourceEnum;
 
 /**
  * @author zj default
@@ -17,5 +19,6 @@ public interface TeacherjobsService extends IBaseService<Teacherjobs, Long> {
 	 * @param id
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	Teacherjobs getByTeacherId(Long id);
 }

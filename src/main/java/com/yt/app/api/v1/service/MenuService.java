@@ -3,9 +3,11 @@ package com.yt.app.api.v1.service;
 import java.util.List;
 import java.util.Map;
 
+import com.yt.app.annotation.DataSourceAnnotation;
 import com.yt.app.api.v1.entity.Link;
 import com.yt.app.api.v1.entity.Menu;
 import com.yt.app.common.base.IBaseService;
+import com.yt.app.enums.DataSourceEnum;
 import com.yt.app.frame.page.IPage;
 
 /**
@@ -23,6 +25,7 @@ public interface MenuService extends IBaseService<Menu, Long> {
 	 * @author huanghao
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	List<Menu> getlist();
 
 	/**
@@ -31,6 +34,7 @@ public interface MenuService extends IBaseService<Menu, Long> {
 	 * @param menu
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer add(Menu menu);
 
 	/**
@@ -39,11 +43,13 @@ public interface MenuService extends IBaseService<Menu, Long> {
 	 * @param menu
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer update(Menu menu);
 
 	/**
 	 * 根据id删除菜单和菜单关联链接
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer delete(Long id);
 
 	/**
@@ -52,6 +58,7 @@ public interface MenuService extends IBaseService<Menu, Long> {
 	 * @param param
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	List<Link> listLinks(Map<String, Object> param);
 
 	/**
@@ -59,6 +66,7 @@ public interface MenuService extends IBaseService<Menu, Long> {
 	 * 
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	Map<String, Object> sysmenu(Map<String, Object> param);
 
 	/**
@@ -67,6 +75,7 @@ public interface MenuService extends IBaseService<Menu, Long> {
 	 * @param requestEntity
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.SLAVE)
 	public IPage<Menu> list(Map<String, Object> param);
 
 	/**
@@ -75,5 +84,6 @@ public interface MenuService extends IBaseService<Menu, Long> {
 	 * @param menu
 	 * @return
 	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	Integer updatesortno(Map<String, Object> param);
 }

@@ -227,4 +227,20 @@ public class DictionaryResource implements Serializable {
 	 * 大单客户
 	 */
 	public static final Long PATRIARCH_VIP_1991 = 1991L;
+
+	// 客户来源
+	/**
+	 * 市场活动
+	 */
+	public static final Long PATRIARCH_SOURCE_561 = 561L;
+
+	/**
+	 * 电话咨询
+	 */
+	public static final Long PATRIARCH_SOURCE_562 = 562L;
+
+	/**
+	 * 转介绍
+	 */
+	public static final Long PATRIARCH_SOURCE_563 = 563L;
 }

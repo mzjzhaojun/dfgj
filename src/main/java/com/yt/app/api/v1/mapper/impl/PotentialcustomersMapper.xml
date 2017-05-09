@@ -1,331 +1,350 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yt.app.api.v1.mapper.PotentialcustomersMapper">
-  <!-- 数据库列 -->
-  <sql id="Base_Column_List">
-     id,version,orgid,orgname,orgtype,mp,campusid,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,tenantcode
-  </sql>
-  <!-- 基础返回对象封装 -->
-  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Potentialcustomers">
-         <id property="id" column="id" />
-         <id property="version" column="version" />
-         <id property="orgid" column="orgid" />
-         <id property="orgname" column="orgname" />
-         <id property="orgtype" column="orgtype" />
-          <id property="mp" column="mp" />
-         <id property="campusid" column="campusid" />
-         <id property="campusname" column="campusname" />
-         <id property="customercode" column="customercode" />
-         <id property="customername" column="customername" />
-         <id property="customerlevel" column="customerlevel" />
-         <id property="invalidreason" column="invalidreason" />
-         <id property="customerstatus" column="customerstatus" />
-         <id property="isoneparent" column="isoneparent" />
-         <id property="describes" column="describes" />
-         <id property="birthday" column="birthday" />
-         <id property="gender" column="gender" />
-         <id property="email" column="email" />
-         <id property="idtype" column="idtype" />
-         <id property="idnumber" column="idnumber" />
-         <id property="viptype" column="viptype" />
-         <id property="viplevel" column="viplevel" />
-         <id property="entrancegrade" column="entrancegrade" />
-         <id property="grade" column="grade" />
-         <id property="schoolyear" column="schoolyear" />
-         <id property="subjecttype" column="subjecttype" />
-         <id property="studenttype" column="studenttype" />
-         <id property="contacttype" column="contacttype" />
-         <id property="sourcemaintype" column="sourcemaintype" />
-         <id property="sourcesubtype" column="sourcesubtype" />
-         <id property="sourcesystem" column="sourcesystem" />
-         <id property="referralstaffid" column="referralstaffid" />
-         <id property="referralstaffname" column="referralstaffname" />
-         <id property="referralstaffjobid" column="referralstaffjobid" />
-         <id property="referralstaffjobname" column="referralstaffjobname" />
-         <id property="referralstaffoacode" column="referralstaffoacode" />
-         <id property="referralcustomerid" column="referralcustomerid" />
-         <id property="referralcustomercode" column="referralcustomercode" />
-         <id property="referralcustomername" column="referralcustomername" />
-         <id property="purchaseintention" column="purchaseintention" />
-         <id property="schoolid" column="schoolid" />
-         <id property="schoolname" column="schoolname" />
-         <id property="isstudyagain" column="isstudyagain" />
-         <id property="followtime" column="followtime" />
-         <id property="followstage" column="followstage" />
-         <id property="followedcount" column="followedcount" />
-         <id property="nextfollowtime" column="nextfollowtime" />
-         <id property="creatorid" column="creatorid" />
-         <id property="creatorname" column="creatorname" />
-         <id property="creatorjobid" column="creatorjobid" />
-         <id property="creatorjobname" column="creatorjobname" />
-         <id property="creatorjobtype" column="creatorjobtype" />
-         <id property="createtime" column="createtime" />
-         <id property="modifierid" column="modifierid" />
-         <id property="modifiername" column="modifiername" />
-         <id property="modifytime" column="modifytime" />
-         <id property="tenantcode" column="tenantcode" />
-  </resultMap>
-  <!-- 默认新增 -->
-  <insert id="post" parameterType="com.yt.app.api.v1.entity.Potentialcustomers">
-  insert into potentialcustomers (id,orgid,orgname,orgtype,campusid,mp,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,tenantcode)
-         values (#{id},#{orgid},#{orgname},#{orgtype},#{campusid},#{mp},#{campusname},#{customercode},#{customername},#{customerlevel},#{invalidreason},#{customerstatus},#{isoneparent},#{describes},#{birthday},#{gender},#{email},#{idtype},#{idnumber},#{viptype},#{viplevel},#{entrancegrade},#{grade},#{schoolyear},#{subjecttype},#{studenttype},#{contacttype},#{sourcemaintype},#{sourcesubtype},#{sourcesystem},#{referralstaffid},#{referralstaffname},#{referralstaffjobid},#{referralstaffjobname},#{referralstaffoacode},#{referralcustomerid},#{referralcustomercode},#{referralcustomername},#{purchaseintention},#{schoolid},#{schoolname},#{isstudyagain},#{followtime},#{followstage},#{followedcount},#{nextfollowtime},#{creatorid},#{creatorname},#{creatorjobid},#{creatorjobname},#{creatorjobtype},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{tenantcode})
-  </insert>
-  <!-- 默认删除id对象 -->
- <delete id="delete" parameterType="java.lang.String">
-     delete from potentialcustomers 
-     where id = #{id}
- </delete>
-  <!-- 默认更新id对象 -->
- <update id="put" parameterType="com.yt.app.api.v1.entity.Potentialcustomers">
-    update potentialcustomers
-         <set>
-             <if test="version != null">
-                   version = #{version}+1,
-             </if>
-             <if test="orgid != null">
-                   orgid = #{orgid},
-             </if>
-             <if test="orgname != null">
-                   orgname = #{orgname},
-             </if>
-             <if test="orgtype != null">
-                   orgtype = #{orgtype},
-             </if>
-             <if test="campusid != null">
-                   campusid = #{campusid},
-             </if>
-              <if test="mp != null">
-                   mp = #{mp},
-             </if>
-             <if test="campusname != null">
-                   campusname = #{campusname},
-             </if>
-             <if test="customercode != null">
-                   customercode = #{customercode},
-             </if>
-             <if test="customername != null">
-                   customername = #{customername},
-             </if>
-             <if test="customerlevel != null">
-                   customerlevel = #{customerlevel},
-             </if>
-             <if test="invalidreason != null">
-                   invalidreason = #{invalidreason},
-             </if>
-             <if test="customerstatus != null">
-                   customerstatus = #{customerstatus},
-             </if>
-             <if test="isoneparent != null">
-                   isoneparent = #{isoneparent},
-             </if>
-             <if test="describes != null">
-                   describes = #{describes},
-             </if>
-             <if test="birthday != null">
-                   birthday = #{birthday},
-             </if>
-             <if test="gender != null">
-                   gender = #{gender},
-             </if>
-             <if test="email != null">
-                   email = #{email},
-             </if>
-             <if test="idtype != null">
-                   idtype = #{idtype},
-             </if>
-             <if test="idnumber != null">
-                   idnumber = #{idnumber},
-             </if>
-             <if test="viptype != null">
-                   viptype = #{viptype},
-             </if>
-             <if test="viplevel != null">
-                   viplevel = #{viplevel},
-             </if>
-             <if test="entrancegrade != null">
-                   entrancegrade = #{entrancegrade},
-             </if>
-             <if test="grade != null">
-                   grade = #{grade},
-             </if>
-             <if test="schoolyear != null">
-                   schoolyear = #{schoolyear},
-             </if>
-             <if test="subjecttype != null">
-                   subjecttype = #{subjecttype},
-             </if>
-             <if test="studenttype != null">
-                   studenttype = #{studenttype},
-             </if>
-             <if test="contacttype != null">
-                   contacttype = #{contacttype},
-             </if>
-             <if test="sourcemaintype != null">
-                   sourcemaintype = #{sourcemaintype},
-             </if>
-             <if test="sourcesubtype != null">
-                   sourcesubtype = #{sourcesubtype},
-             </if>
-             <if test="sourcesystem != null">
-                   sourcesystem = #{sourcesystem},
-             </if>
-             <if test="referralstaffid != null">
-                   referralstaffid = #{referralstaffid},
-             </if>
-             <if test="referralstaffname != null">
-                   referralstaffname = #{referralstaffname},
-             </if>
-             <if test="referralstaffjobid != null">
-                   referralstaffjobid = #{referralstaffjobid},
-             </if>
-             <if test="referralstaffjobname != null">
-                   referralstaffjobname = #{referralstaffjobname},
-             </if>
-             <if test="referralstaffoacode != null">
-                   referralstaffoacode = #{referralstaffoacode},
-             </if>
-             <if test="referralcustomerid != null">
-                   referralcustomerid = #{referralcustomerid},
-             </if>
-             <if test="referralcustomercode != null">
-                   referralcustomercode = #{referralcustomercode},
-             </if>
-             <if test="referralcustomername != null">
-                   referralcustomername = #{referralcustomername},
-             </if>
-             <if test="purchaseintention != null">
-                   purchaseintention = #{purchaseintention},
-             </if>
-             <if test="schoolid != null">
-                   schoolid = #{schoolid},
-             </if>
-             <if test="schoolname != null">
-                   schoolname = #{schoolname},
-             </if>
-             <if test="isstudyagain != null">
-                   isstudyagain = #{isstudyagain},
-             </if>
-             <if test="followtime != null">
-                   followtime = #{followtime},
-             </if>
-             <if test="followstage != null">
-                   followstage = #{followstage},
-             </if>
-             <if test="followedcount != null">
-                   followedcount = #{followedcount},
-             </if>
-             <if test="nextfollowtime != null">
-                   nextfollowtime = #{nextfollowtime},
-             </if>
-             <if test="creatorid != null">
-                   creatorid = #{creatorid},
-             </if>
-             <if test="creatorname != null">
-                   creatorname = #{creatorname},
-             </if>
-             <if test="creatorjobid != null">
-                   creatorjobid = #{creatorjobid},
-             </if>
-             <if test="creatorjobname != null">
-                   creatorjobname = #{creatorjobname},
-             </if>
-             <if test="creatorjobtype != null">
-                   creatorjobtype = #{creatorjobtype},
-             </if>
-             <if test="createtime != null">
-                   createtime = #{createtime},
-             </if>
-             <if test="modifierid != null">
-                   modifierid = #{modifierid},
-             </if>
-             <if test="modifiername != null">
-                   modifiername = #{modifiername},
-             </if>
-             <if test="modifytime != null">
-                   modifytime = #{modifytime},
-             </if>
-             <if test="tenantcode != null">
-                   tenantcode = #{tenantcode}
-             </if>
-          </set>
-     where id = #{id} and  version = #{version}
- </update>
-  <!-- 默认获得id对象 -->
- <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
-     select
-        <include refid="Base_Column_List" />
-        from potentialcustomers 
-        where id = #{id}
- </select>
-  <!-- 默认集合 -->
- <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
-       select
-        <include refid="Base_Column_List" />
-        from potentialcustomers 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-             <if test="orderby != null and dir != null">
-           order by ${orderby} ${dir}
-             </if>
-             <if test="pageStart != null and pageEnd != null">
-           LIMIT #{pageStart},#{pageEnd}
-             </if>
-        </where>
- </select>
-  <!-- 默认返回MAP集合 -->
- <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-       select
-        <include refid="Base_Column_List" />
-        from potentialcustomers 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-             <if test="orderby != null and dir != null">
-           order by ${orderby} ${dir}
-             </if>
-             <if test="pageStart != null and pageEnd != null">
-           LIMIT #{pageStart},#{pageEnd}
-             </if>
-        </where>
- </select>
-  <!-- 默认集合统计 -->
- <select id="countlist" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from potentialcustomers 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-        </where>
- </select>
-  <!-- 默认返回MAP集合统计 -->
- <select id="countmap" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from potentialcustomers 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-        </where>
- </select>
-  <!-- 默认获取Ids的对象 -->
- <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
-       select
-        <include refid="Base_Column_List" />
-        from potentialcustomers 
-        <where>
-        1=1
-             <if test="array != null and array != ''">
-       	and id in
-        	<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-           	#{item}
-        	</foreach>
-             </if>
-        </where>
- </select>
+	<!-- 数据库列 -->
+	<sql id="Base_Column_List">
+		id,version,orgid,orgname,orgtype,mp,campusid,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,tenantcode
+	</sql>
+	<!-- 基础返回对象封装 -->
+	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Potentialcustomers">
+		<id property="id" column="id" />
+		<id property="version" column="version" />
+		<id property="orgid" column="orgid" />
+		<id property="orgname" column="orgname" />
+		<id property="orgtype" column="orgtype" />
+		<id property="mp" column="mp" />
+		<id property="campusid" column="campusid" />
+		<id property="campusname" column="campusname" />
+		<id property="customercode" column="customercode" />
+		<id property="customername" column="customername" />
+		<id property="customerlevel" column="customerlevel" />
+		<id property="invalidreason" column="invalidreason" />
+		<id property="customerstatus" column="customerstatus" />
+		<id property="isoneparent" column="isoneparent" />
+		<id property="describes" column="describes" />
+		<id property="birthday" column="birthday" />
+		<id property="gender" column="gender" />
+		<id property="email" column="email" />
+		<id property="idtype" column="idtype" />
+		<id property="idnumber" column="idnumber" />
+		<id property="viptype" column="viptype" />
+		<id property="viplevel" column="viplevel" />
+		<id property="entrancegrade" column="entrancegrade" />
+		<id property="grade" column="grade" />
+		<id property="schoolyear" column="schoolyear" />
+		<id property="subjecttype" column="subjecttype" />
+		<id property="studenttype" column="studenttype" />
+		<id property="contacttype" column="contacttype" />
+		<id property="sourcemaintype" column="sourcemaintype" />
+		<id property="sourcesubtype" column="sourcesubtype" />
+		<id property="sourcesystem" column="sourcesystem" />
+		<id property="referralstaffid" column="referralstaffid" />
+		<id property="referralstaffname" column="referralstaffname" />
+		<id property="referralstaffjobid" column="referralstaffjobid" />
+		<id property="referralstaffjobname" column="referralstaffjobname" />
+		<id property="referralstaffoacode" column="referralstaffoacode" />
+		<id property="referralcustomerid" column="referralcustomerid" />
+		<id property="referralcustomercode" column="referralcustomercode" />
+		<id property="referralcustomername" column="referralcustomername" />
+		<id property="purchaseintention" column="purchaseintention" />
+		<id property="schoolid" column="schoolid" />
+		<id property="schoolname" column="schoolname" />
+		<id property="isstudyagain" column="isstudyagain" />
+		<id property="followtime" column="followtime" />
+		<id property="followstage" column="followstage" />
+		<id property="followedcount" column="followedcount" />
+		<id property="nextfollowtime" column="nextfollowtime" />
+		<id property="creatorid" column="creatorid" />
+		<id property="creatorname" column="creatorname" />
+		<id property="creatorjobid" column="creatorjobid" />
+		<id property="creatorjobname" column="creatorjobname" />
+		<id property="creatorjobtype" column="creatorjobtype" />
+		<id property="createtime" column="createtime" />
+		<id property="modifierid" column="modifierid" />
+		<id property="modifiername" column="modifiername" />
+		<id property="modifytime" column="modifytime" />
+		<id property="tenantcode" column="tenantcode" />
+	</resultMap>
+	<!-- 默认新增 -->
+	<insert id="post" parameterType="com.yt.app.api.v1.entity.Potentialcustomers">
+		insert into potentialcustomers
+		(id,orgid,orgname,orgtype,campusid,mp,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,tenantcode)
+		values
+		(#{id},#{orgid},#{orgname},#{orgtype},#{campusid},#{mp},#{campusname},#{customercode},#{customername},#{customerlevel},#{invalidreason},#{customerstatus},#{isoneparent},#{describes},#{birthday},#{gender},#{email},#{idtype},#{idnumber},#{viptype},#{viplevel},#{entrancegrade},#{grade},#{schoolyear},#{subjecttype},#{studenttype},#{contacttype},#{sourcemaintype},#{sourcesubtype},#{sourcesystem},#{referralstaffid},#{referralstaffname},#{referralstaffjobid},#{referralstaffjobname},#{referralstaffoacode},#{referralcustomerid},#{referralcustomercode},#{referralcustomername},#{purchaseintention},#{schoolid},#{schoolname},#{isstudyagain},#{followtime},#{followstage},#{followedcount},#{nextfollowtime},#{creatorid},#{creatorname},#{creatorjobid},#{creatorjobname},#{creatorjobtype},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{tenantcode})
+	</insert>
+	<!-- 默认删除id对象 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from potentialcustomers
+		where id = #{id}
+	</delete>
+	<!-- 默认更新id对象 -->
+	<update id="put" parameterType="com.yt.app.api.v1.entity.Potentialcustomers">
+		update potentialcustomers
+		<set>
+			<if test="version != null">
+				version = #{version}+1,
+			</if>
+			<if test="orgid != null">
+				orgid = #{orgid},
+			</if>
+			<if test="orgname != null">
+				orgname = #{orgname},
+			</if>
+			<if test="orgtype != null">
+				orgtype = #{orgtype},
+			</if>
+			<if test="campusid != null">
+				campusid = #{campusid},
+			</if>
+			<if test="mp != null">
+				mp = #{mp},
+			</if>
+			<if test="campusname != null">
+				campusname = #{campusname},
+			</if>
+			<if test="customercode != null">
+				customercode = #{customercode},
+			</if>
+			<if test="customername != null">
+				customername = #{customername},
+			</if>
+			<if test="customerlevel != null">
+				customerlevel = #{customerlevel},
+			</if>
+			<if test="invalidreason != null">
+				invalidreason = #{invalidreason},
+			</if>
+			<if test="customerstatus != null">
+				customerstatus = #{customerstatus},
+			</if>
+			<if test="isoneparent != null">
+				isoneparent = #{isoneparent},
+			</if>
+			<if test="describes != null">
+				describes = #{describes},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday},
+			</if>
+			<if test="gender != null">
+				gender = #{gender},
+			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
+			<if test="idtype != null">
+				idtype = #{idtype},
+			</if>
+			<if test="idnumber != null">
+				idnumber = #{idnumber},
+			</if>
+			<if test="viptype != null">
+				viptype = #{viptype},
+			</if>
+			<if test="viplevel != null">
+				viplevel = #{viplevel},
+			</if>
+			<if test="entrancegrade != null">
+				entrancegrade = #{entrancegrade},
+			</if>
+			<if test="grade != null">
+				grade = #{grade},
+			</if>
+			<if test="schoolyear != null">
+				schoolyear = #{schoolyear},
+			</if>
+			<if test="subjecttype != null">
+				subjecttype = #{subjecttype},
+			</if>
+			<if test="studenttype != null">
+				studenttype = #{studenttype},
+			</if>
+			<if test="contacttype != null">
+				contacttype = #{contacttype},
+			</if>
+			<if test="sourcemaintype != null">
+				sourcemaintype = #{sourcemaintype},
+			</if>
+			<if test="sourcesubtype != null">
+				sourcesubtype = #{sourcesubtype},
+			</if>
+			<if test="sourcesystem != null">
+				sourcesystem = #{sourcesystem},
+			</if>
+			<if test="referralstaffid != null">
+				referralstaffid = #{referralstaffid},
+			</if>
+			<if test="referralstaffname != null">
+				referralstaffname = #{referralstaffname},
+			</if>
+			<if test="referralstaffjobid != null">
+				referralstaffjobid = #{referralstaffjobid},
+			</if>
+			<if test="referralstaffjobname != null">
+				referralstaffjobname = #{referralstaffjobname},
+			</if>
+			<if test="referralstaffoacode != null">
+				referralstaffoacode = #{referralstaffoacode},
+			</if>
+			<if test="referralcustomerid != null">
+				referralcustomerid = #{referralcustomerid},
+			</if>
+			<if test="referralcustomercode != null">
+				referralcustomercode = #{referralcustomercode},
+			</if>
+			<if test="referralcustomername != null">
+				referralcustomername = #{referralcustomername},
+			</if>
+			<if test="purchaseintention != null">
+				purchaseintention = #{purchaseintention},
+			</if>
+			<if test="schoolid != null">
+				schoolid = #{schoolid},
+			</if>
+			<if test="schoolname != null">
+				schoolname = #{schoolname},
+			</if>
+			<if test="isstudyagain != null">
+				isstudyagain = #{isstudyagain},
+			</if>
+			<if test="followtime != null">
+				followtime = #{followtime},
+			</if>
+			<if test="followstage != null">
+				followstage = #{followstage},
+			</if>
+			<if test="followedcount != null">
+				followedcount = #{followedcount},
+			</if>
+			<if test="nextfollowtime != null">
+				nextfollowtime = #{nextfollowtime},
+			</if>
+			<if test="creatorid != null">
+				creatorid = #{creatorid},
+			</if>
+			<if test="creatorname != null">
+				creatorname = #{creatorname},
+			</if>
+			<if test="creatorjobid != null">
+				creatorjobid = #{creatorjobid},
+			</if>
+			<if test="creatorjobname != null">
+				creatorjobname = #{creatorjobname},
+			</if>
+			<if test="creatorjobtype != null">
+				creatorjobtype = #{creatorjobtype},
+			</if>
+			<if test="createtime != null">
+				createtime = #{createtime},
+			</if>
+			<if test="modifierid != null">
+				modifierid = #{modifierid},
+			</if>
+			<if test="modifiername != null">
+				modifiername = #{modifiername},
+			</if>
+			<if test="modifytime != null">
+				modifytime = #{modifytime},
+			</if>
+			<if test="tenantcode != null">
+				tenantcode = #{tenantcode}
+			</if>
+		</set>
+		where id = #{id} and version = #{version}
+	</update>
+	<!-- 默认获得id对象 -->
+	<select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from potentialcustomers
+		where id = #{id}
+	</select>
+	<!-- 默认集合 -->
+	<select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from potentialcustomers
+		<where>
+			1=1
+			<if test="customername != null and customername != ''">
+				and customername like "%"#{customername}"%"
+			</if>
+			<if test="followtime != null and followtime != ''">
+				and followtime like #{followtime}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合 -->
+	<select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from potentialcustomers
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认集合统计 -->
+	<select id="countlist" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from potentialcustomers
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合统计 -->
+	<select id="countmap" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from potentialcustomers
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认获取Ids的对象 -->
+	<select id="listByArrayId" parameterType="java.util.HashMap"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from potentialcustomers
+		<where>
+			1=1
+			<if test="array != null and array != ''">
+				and id in
+				<foreach item="item" index="index" collection="array" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+	<!-- 批量导入 -->
+	<insert id="savebatch" parameterType="java.util.List">
+		insert into potentialcustomers
+		(id,orgid,orgname,campusid,mp,campusname,customername,customerlevel,customerstatus,viptype,followstage,sourcemaintype,followedcount,nextfollowtime,creatorid,creatorname,createtime)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.orgid},#{item.orgname},#{item.campusid},#{item.mp},#{item.campusname},#{item.customername},#{item.customerlevel},#{item.customerstatus},#{item.viptype},#{item.followstage},#{item.sourcemaintype},#{item.followedcount},#{item.nextfollowtime},#{item.creatorid},#{item.creatorname},#{item.createtime})
+		</foreach>
+	</insert>
 </mapper>
