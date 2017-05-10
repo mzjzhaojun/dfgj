@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.PotentialcustomersMapper">
 	<!-- 数据库列 -->
 	<sql id="Base_Column_List">
-		id,version,orgid,orgname,orgtype,mp,campusid,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,tenantcode
+		id,version,orgid,orgname,orgtype,campusid,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,principalid,principalname
 	</sql>
 	<!-- 基础返回对象封装 -->
 	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Potentialcustomers">
@@ -63,14 +63,15 @@
 		<id property="modifierid" column="modifierid" />
 		<id property="modifiername" column="modifiername" />
 		<id property="modifytime" column="modifytime" />
-		<id property="tenantcode" column="tenantcode" />
+		<id property="principalid" column="principalid" />
+		<id property="principalname" column="principalname" />
 	</resultMap>
 	<!-- 默认新增 -->
 	<insert id="post" parameterType="com.yt.app.api.v1.entity.Potentialcustomers">
 		insert into potentialcustomers
-		(id,orgid,orgname,orgtype,campusid,mp,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,tenantcode)
+		(id,orgid,orgname,orgtype,campusid,mp,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,principalid)
 		values
-		(#{id},#{orgid},#{orgname},#{orgtype},#{campusid},#{mp},#{campusname},#{customercode},#{customername},#{customerlevel},#{invalidreason},#{customerstatus},#{isoneparent},#{describes},#{birthday},#{gender},#{email},#{idtype},#{idnumber},#{viptype},#{viplevel},#{entrancegrade},#{grade},#{schoolyear},#{subjecttype},#{studenttype},#{contacttype},#{sourcemaintype},#{sourcesubtype},#{sourcesystem},#{referralstaffid},#{referralstaffname},#{referralstaffjobid},#{referralstaffjobname},#{referralstaffoacode},#{referralcustomerid},#{referralcustomercode},#{referralcustomername},#{purchaseintention},#{schoolid},#{schoolname},#{isstudyagain},#{followtime},#{followstage},#{followedcount},#{nextfollowtime},#{creatorid},#{creatorname},#{creatorjobid},#{creatorjobname},#{creatorjobtype},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{tenantcode})
+		(#{id},#{orgid},#{orgname},#{orgtype},#{campusid},#{mp},#{campusname},#{customercode},#{customername},#{customerlevel},#{invalidreason},#{customerstatus},#{isoneparent},#{describes},#{birthday},#{gender},#{email},#{idtype},#{idnumber},#{viptype},#{viplevel},#{entrancegrade},#{grade},#{schoolyear},#{subjecttype},#{studenttype},#{contacttype},#{sourcemaintype},#{sourcesubtype},#{sourcesystem},#{referralstaffid},#{referralstaffname},#{referralstaffjobid},#{referralstaffjobname},#{referralstaffoacode},#{referralcustomerid},#{referralcustomercode},#{referralcustomername},#{purchaseintention},#{schoolid},#{schoolname},#{isstudyagain},#{followtime},#{followstage},#{followedcount},#{nextfollowtime},#{creatorid},#{creatorname},#{creatorjobid},#{creatorjobname},#{creatorjobtype},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{principalid})
 	</insert>
 	<!-- 默认删除id对象 -->
 	<delete id="delete" parameterType="java.lang.String">
@@ -246,8 +247,11 @@
 			<if test="modifytime != null">
 				modifytime = #{modifytime},
 			</if>
-			<if test="tenantcode != null">
-				tenantcode = #{tenantcode}
+			<if test="principalid != null">
+				principalid = #{principalid},
+			</if>
+			<if test="principalname != null">
+				principalname = #{principalname}
 			</if>
 		</set>
 		where id = #{id} and version = #{version}
@@ -255,7 +259,7 @@
 	<!-- 默认获得id对象 -->
 	<select id="get" parameterType="java.lang.String" resultMap="ResultMap">
 		select
-		<include refid="Base_Column_List" />
+		id,version,orgid,orgname,orgtype,mp,campusid,campusname,customercode,customername,customerlevel,invalidreason,customerstatus,isoneparent,describes,birthday,gender,email,idtype,idnumber,viptype,viplevel,entrancegrade,grade,schoolyear,subjecttype,studenttype,contacttype,sourcemaintype,sourcesubtype,sourcesystem,referralstaffid,referralstaffname,referralstaffjobid,referralstaffjobname,referralstaffoacode,referralcustomerid,referralcustomercode,referralcustomername,purchaseintention,schoolid,schoolname,isstudyagain,followtime,followstage,followedcount,nextfollowtime,creatorid,creatorname,creatorjobid,creatorjobname,creatorjobtype,createtime,modifierid,modifiername,modifytime,principalid,principalname
 		from potentialcustomers
 		where id = #{id}
 	</select>
@@ -271,6 +275,9 @@
 			</if>
 			<if test="followtime != null and followtime != ''">
 				and followtime like #{followtime}"%"
+			</if>
+			<if test="principalid != null and principalid != ''">
+				and principalid like #{principalid}"%"
 			</if>
 			<if test="orderby != null and dir != null">
 				order by ${orderby} ${dir}
@@ -304,8 +311,14 @@
 		select count(*) from potentialcustomers
 		<where>
 			1=1
-			<if test="name != null and name != ''">
-				and name like "%"#{name}"%"
+			<if test="customername != null and customername != ''">
+				and customername like "%"#{customername}"%"
+			</if>
+			<if test="followtime != null and followtime != ''">
+				and followtime like #{followtime}"%"
+			</if>
+			<if test="principalid != null and principalid != ''">
+				and principalid like #{principalid}"%"
 			</if>
 		</where>
 	</select>

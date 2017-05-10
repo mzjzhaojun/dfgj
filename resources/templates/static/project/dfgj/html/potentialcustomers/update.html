@@ -360,6 +360,12 @@
 						</select> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">无效客户理由</span> <select class="form-control" name="invalidreason" ng-model="formData.invalidreason"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1960'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">性别</span> <select class="form-control" name="gender" ng-model="formData.gender"
 							ng-options="data.code as data.name for data in selects  | filter: {typecode: '900'}">
 							<option value=''>请选择</option>
@@ -507,18 +513,18 @@
 						</select> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">无效客户理由</span> <select class="form-control" name="invalidreason" ng-model="formData2.invalidreason"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1960'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">此次通话号码</span> <input type="text" class="form-control" placeholder="请输入此次通电号码" name="followphone"
 							ng-model="formData2.followphone" maxlength="64">
 					</div>
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">客户级别</span> <select class="form-control" name="customerlevel" ng-model="formData2.customerlevel"
 							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1950'}">
-							<option value=''>请选择</option>
-						</select>
-					</div>
-					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">无效客户理由</span> <select class="form-control" name="invalidreason" ng-model="formData2.invalidreason"
-							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1960'}">
 							<option value=''>请选择</option>
 						</select>
 					</div>

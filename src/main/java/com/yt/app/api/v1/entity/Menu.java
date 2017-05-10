@@ -42,6 +42,8 @@ public class Menu implements Serializable {
 	List<Link> links;// 存放对应关联链接
 	String sys_name;// 系统名称
 	String level_name;// 用于列表便捷显示等级
+	String buttonIds;
+	List<Button> buttons;
 
 	public Menu() {
 	}

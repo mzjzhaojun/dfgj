@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yt.app.api.v1.mapper.RoleModulbuttonMapper">
+	<sql id="Base_Column_List">
+		id,role_id,modul_id,button_id,version
+	</sql>
+	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.RoleModulbutton">
+		<id property="id" column="id" />
+		<id property="role_id" column="role_id" />
+		<id property="modul_id" column="modul_id" />
+		<id property="button_id" column="button_id" />
+		<id property="version" column="version" />
+	</resultMap>
+	<resultMap id="ResultMapButton" type="com.yt.app.api.v1.entity.Button">
+		<id property="id" column="id" />
+		<id property="name" column="name" />
+		<id property="status" column="status" />
+		<id property="remark" column="remark" />
+		<id property="version" column="version" />
+		<id property="code" column="code" />
+	</resultMap>
+	<insert id="post" parameterType="com.yt.app.api.v1.entity.RoleModulbutton">
+		insert into role_modul_button
+		(id,role_id,modul_id,button_id)
+		values
+		(#{id},#{role_id},#{modul_id},#{button_id})
+	</insert>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from role_modul_button
+		where id = #{id}
+	</delete>
+	<update id="put" parameterType="com.yt.app.api.v1.entity.RoleModulbutton">
+		update role_modul_button
+		<set>
+			<if test="id != null">
+				id = #{id},
+			</if>
+			<if test="role_id != null">
+				role_id = #{role_id},
+			</if>
+			<if test="modul_id != null">
+				modul_id = #{modul_id},
+			</if>
+			<if test="button_id != null">
+				button_id = #{button_id},
+			</if>
+			<if test="version != null">
+				version = #{version}+1
+			</if>
+		</set>
+		where id = #{id} and version = #{version}
+	</update>
+	<select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role_modul_button
+		where id = #{id}
+	</select>
+	<select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+		select * from role_modul_button rmb
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from role_modul_button
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<select id="countlist" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from role_modul_button
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<select id="countmap" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from role_modul_button
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认获取Ids的对象 -->
+	<select id="listByArrayId" parameterType="java.util.HashMap"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role_modul_button
+		<where>
+			1=1
+			<if test="array != null and array != ''">
+				and id in
+				<foreach item="item" index="index" collection="array" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+	<select id="selectRoleModulbutton" parameterType="java.util.HashMap"
+		resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from role_modul_button
+		<where>
+			<if test="name != null and name != ''">
+				name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<select id="getModulGroupBy" parameterType="java.util.HashMap"
+		resultMap="ResultMap">
+		select * from role_modul_button rmb
+		<where>
+			<if test="role_id != null and role_id != ''">
+				role_id = #{role_id}
+			</if>
+		</where>
+		group by modul_id
+	</select>
+
+	<select id="getButtonByModul" parameterType="java.util.HashMap"
+		resultMap="ResultMap">
+		select * from role_modul_button rmb
+		<where>
+			1=1
+			<if test="role_id != null and role_id != ''">
+				and role_id = #{role_id}
+			</if>
+			<if test="modul_id != null and modul_id != ''">
+				and modul_id = #{modul_id}
+			</if>
+		</where>
+	</select>
+
+	<select id="getButtons" parameterType="java.util.HashMap"
+		resultMap="ResultMapButton">
+		select bt.* from role_modul_button rmb
+		left join button bt on
+		rmb.button_id = bt.id
+		<where>
+			1=1
+			<if test="role_id != null and role_id != ''">
+				and rmb.role_id = #{role_id}
+			</if>
+			<if test="modul_id != null and modul_id != ''">
+				and rmb.modul_id = #{modul_id}
+			</if>
+			<if test="array !=null and array !=''">
+				and rmb.button_id in
+				<foreach item="item" index="index" collection="array" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+	<select id="getByRidMidBid" parameterType="com.yt.app.api.v1.entity.RoleModulbutton"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role_modul_button
+		where role_id = #{role_id} and button_id =
+		#{button_id} and modul_id = #{modul_id}
+	</select>
+	<delete id="deleteByRoleId" parameterType="java.lang.String">
+		delete from
+		role_modul_button
+		where role_id = #{id}
+	</delete>
+</mapper>

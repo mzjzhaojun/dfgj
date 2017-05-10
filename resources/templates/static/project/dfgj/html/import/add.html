@@ -15,6 +15,7 @@
 <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<script type="text/javascript" src="../../../../resource/js/config.js"></script>
 
 <!-- 表单验证 -->
 <script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
@@ -34,7 +35,6 @@
 			if (isValid) {
 				var fileObj = $("#file").get(0).files[0];
 				$("#_fileName").html(fileObj.name);
-				var FileController = "http://localhost:17000/dfgj/rest/v1/file/import";
 				var form = new FormData();
 				form.append("file", fileObj);
 				form.append("orgid", parent.getCookie('branchid'));
@@ -44,7 +44,7 @@
 				form.append("campusid", parent.getCookie('campusid'));
 				form.append("campusname", parent.getCookie('campusname'));
 				var xhr = new XMLHttpRequest();
-				xhr.open("post", FileController, true);
+				xhr.open("post", configsys.fileImportUrl, true);
 				xhr.onload = function(data) {
 					$(".progressBar").css({
 						"width" : "100%"
@@ -57,7 +57,15 @@
 				xhr.onreadystatechange = function () {
 				    if (xhr.readyState == 4) {
 				      if (xhr.status == 200) {
-				        alert(xhr.responseText);
+				        parent.art.dialog({
+							content: xhr.responseText,
+							lock:true,
+							time:1,
+							ok: function () {
+							},
+							cancelVal: '关闭',
+							cancel: true
+						});
 				      }
 				    }
 				  }

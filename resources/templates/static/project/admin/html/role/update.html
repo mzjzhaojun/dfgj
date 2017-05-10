@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html ng-app="add">
+<head>
+<title>list</title>
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/list.css">
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<!-- 弹出框 -->
+
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+<script type="text/javascript" src="../../../../resource/js/getUrlParam.js"></script>
+<script type="text/javascript" src="../../../../resource/js/config.js"></script>
+<!-- 分页 -->
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add.controller("addController", function($scope, $http) {
+		$scope.formData = {};
+		var id = UrlParm.parm("id");
+		$scope.onRoleModul = function() {
+			$http({
+				url : configsys.rolebuttonUrl + id,
+				method : 'GET',
+				dataType : "json",
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ""
+			}).success(function(data, status, headers, config) {
+				$scope.formData = data;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+		//保存
+		$scope.onPreserved = function() {
+			var checkbox = $("input[type='checkbox']:checked");
+			var len = checkbox.length;
+			var checkboxData = [];
+			var count = 0;
+			for (var i = 0; i < len; i++) {
+				var buttId = $(checkbox[i]).attr("id");
+				var name = $(checkbox[i]).attr("name");
+				if (name != "all") {
+					var datas = {
+						"button_id" : buttId,
+						"modul_id" : name,
+						"role_id" : id
+					};
+					checkboxData[count] = datas;
+					count++;
+				}
+			}
+			$http({
+				url : configsys.rolebuttonsavaUrl + id,
+				method : 'POST',
+				dataType : "json",
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify(checkboxData)
+			}).success(function(data, status, headers, config) {
+				$scope.onReturn();
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+		$scope.onRoleModul();
+		$scope.onReturn = function() {
+			artClose();
+		}
+	});
+
+	$(function() {
+		$(document).delegate(".checkbox_all input", "click", function() {
+			var id = $(this).attr("id");
+			var isChecked = $(this).prop("checked");
+			$("input[name=" + id + "]").prop("checked", isChecked);
+		});
+		
+		$(document).delegate("#allcheckbox", "click", function() {
+			var isChecked = $(this).prop("checked");
+			$("input[type='checkbox']").prop("checked", isChecked);
+		});
+
+	});
+</script>
+<style type="text/css">
+.menu_div {
+	width: 96%;
+	height: 38px;
+	background: #EFEFEF;
+	margin-left: 2%;
+	margin-top: 15px;
+	line-height: 38px;
+	font-size: 14px;
+}
+
+.menu_div>label {
+	margin-left: 10px;
+}
+
+.button_div {
+	width: 90%;
+	min-height: 38px;
+	border: solid 0px;
+	margin-left: 5%;
+	margin-top: 15px;
+	height: auto;
+}
+
+.button_div .button {
+	height: 38px;
+	width: 200px;
+	float: left;
+	line-height: 38px;
+	color: #919191;
+	border: solid 0px;
+}
+
+.input {
+	vertical-align: middle;
+}
+
+.checkbox_all {
+	border: solid 0px;
+	float: right;
+	margin-right: 10px;
+	height: 38px;
+	line-height: 38px;
+	color: #999;
+	font-size: 12px;
+}
+
+.checkbox_all1 {
+	border: solid 0px;
+	float: right;
+	margin-right: 10px;
+	height: 38px;
+	line-height: 38px;
+	color: #337ab7;
+	font-size: 12px;
+}
+</style>
+</head>
+
+<body ng-controller="addController">
+	<h5>
+		<span style="margin: 0px 10px;"></span> <a class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onPreserved()">确认</a>
+		<a class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onReturn()">返回</a>
+		<div class="checkbox_all1">
+			<input type="checkbox" value="checkbox" id="allcheckbox" class="input" name="all" /> 选中全部
+		</div>
+	</h5>
+	<div class="form_data" style="overflow: auto;">
+		<div ng-repeat="task in formData">
+			<div class="menu_div">
+				<label>{{task.menu.name}}</label>
+				<div class="checkbox_all">
+					<input type="checkbox" value="checkbox" class="input" id="{{task.menu.id}}" name="all" /> 全选
+				</div>
+			</div>
+			<div class="button_div">
+				<div class="button" ng-repeat="button in task.menu.buttons">
+					<div ng-switch="button.flag">
+						<div ng-switch-when="true">
+							<input type="checkbox" value="checkbox" checked="checked" class="input" id="{{button.id}}" name="{{task.menu.id}}" /> {{button.name}}
+						</div>
+						<div ng-switch-when="false">
+							<input type="checkbox" value="checkbox" class="input" id="{{button.id}}" name="{{task.menu.id}}" /> {{button.name}}
+						</div>
+					</div>
+				</div>
+				<br style="clear: both;">
+			</div>
+		</div>
+	</div>
+	</div>
+</body>
+</html>
+</html>

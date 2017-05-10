@@ -99,8 +99,8 @@ public class Potentialcustomers implements Serializable {
 	String modifiername;
 	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date modifytime;
-	Long tenantcode;
-
+	Long principalid;
+	String principalname;
 	public Potentialcustomers() {
 	}
 }

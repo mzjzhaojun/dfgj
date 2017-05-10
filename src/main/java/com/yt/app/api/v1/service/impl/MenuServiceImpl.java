@@ -11,11 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.yt.app.annotation.DataSourceAnnotation;
 import com.yt.app.api.v1.mapper.AccountRoleMapper;
+import com.yt.app.api.v1.mapper.ButtonMapper;
 import com.yt.app.api.v1.mapper.DictionaryMapper;
 import com.yt.app.api.v1.mapper.LinkMapper;
 import com.yt.app.api.v1.mapper.MenuLinksMapper;
 import com.yt.app.api.v1.mapper.MenuMapper;
 import com.yt.app.api.v1.mapper.RoleMenuMapper;
+import com.yt.app.api.v1.mapper.RoleModulbuttonMapper;
 import com.yt.app.api.v1.mapper.SysMapper;
 import com.yt.app.api.v1.service.MenuService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
@@ -24,11 +26,13 @@ import com.yt.app.enums.DataSourceEnum;
 import com.yt.app.frame.page.IPage;
 import com.yt.app.frame.page.PageBean;
 import com.yt.app.api.v1.entity.AccountRole;
+import com.yt.app.api.v1.entity.Button;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Link;
 import com.yt.app.api.v1.entity.Menu;
 import com.yt.app.api.v1.entity.MenuLinks;
 import com.yt.app.api.v1.entity.RoleMenu;
+import com.yt.app.api.v1.entity.RoleModulbutton;
 import com.yt.app.api.v1.entity.Sys;
 
 /**
@@ -54,6 +58,10 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 	private RoleMenuMapper roleMenuMapper;
 	@Autowired
 	private DictionaryMapper dictionaryMapper;
+	@Autowired
+	private RoleModulbuttonMapper rolemodulbuttonmapper;
+	@Autowired
+	private ButtonMapper buttonmapper;
 
 	@Override
 	@Transactional
@@ -179,9 +187,7 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 			List<Sys> childSys = Sys.getChild();// 获取子集
 				if (!childSys.isEmpty()) {// 无子集规避 或者不是需要加载的系统
 					childSys.stream().forEach(Sysc -> {
-
-						Sysc.setMenus(menus(Sysc, obj));
-
+						Sysc.setMenus(menus(Sysc, obj, ar.getRole_id()));
 					});
 				}
 
@@ -226,13 +232,24 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 
 	}
 
+	public List<Button> menuButtons(Long menuId, Long roleId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("modul_id", menuId);
+		map.put("role_id", roleId);
+		List<RoleModulbutton> mls = rolemodulbuttonmapper.getButtonByModul(map);
+		if (mls.size() == 0)
+			return null;
+		long[] ids = mls.stream().mapToLong(RoleModulbutton::getButton_id).distinct().toArray();
+		return buttonmapper.listByArrayId(ids);
+	}
+
 	/**
 	 * 加载系统下菜单
 	 * 
 	 * @param sys
 	 * @return
 	 */
-	public List<Menu> menus(Sys sys, long[] ids) {
+	public List<Menu> menus(Sys sys, long[] ids, Long roleid) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("level", DictionaryResource.MENU_LEVLE_1);
@@ -243,18 +260,18 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 			map.put("level", DictionaryResource.MENU_LEVLE_2);
 			menus.stream().forEach(Menu -> {
 				Menu.setLinks(menuLinks(Menu.getId()));// 加载一级菜单下link
+					Menu.setButtons(menuButtons(Menu.getId(), roleid));
 					map.put("parent_id", Menu.getId());
 					List<Menu> child = this.mapper.sysmenu(map);// 获取对应子系统下对应一级菜单的子集菜单
 					if (!child.isEmpty()) {// 加载二级菜单下link
 						child.stream().forEach(c -> {
 							c.setLinks(menuLinks(c.getId()));
+							c.setButtons(menuButtons(c.getId(), roleid));
 						});
 					}
 					Menu.setChild(child);
-
 				});
 		}
-
 		return menus;
 	}
 

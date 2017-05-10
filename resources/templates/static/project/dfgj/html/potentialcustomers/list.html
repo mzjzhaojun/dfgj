@@ -21,6 +21,7 @@
 <script type="text/javascript" src="../../../../resource/js/response.js"></script>
 <script type="text/javascript">
 	var flag = true;
+	var idArr = new Array();
 	var list = angular.module("list", []);
 	list.controller("listController", function($scope, $http) {
 		$scope.toInfo = function(data) {
@@ -61,7 +62,7 @@
 					'Content-Type' : 'application/json;charset=UTF-8;',
 					"pageNo" : pageNo,
 					"pageSize" : pageSize,
-					"orderby" : "id",
+					"orderby" : "modifytime",
 					"dir" : "desc"
 				},
 				data : JSON.stringify(data)
@@ -92,32 +93,125 @@
 				response(status);
 			});
 		}
+		$scope.onUpdatePrincipal = function(){
+			idArr = new Array();
+			var tbody = $(".table").find("tbody");
+			var tbody_tr = $(tbody).find("tr");
+			var checkboxs = tbody_tr.find("td>div[class='checkbox1 checked1']");
+			for(var i = 0;i<checkboxs.length;i++){
+				 var ele = $(checkboxs[i]);
+				 var id = ele.attr("data");
+				 idArr.push(id);
+			}
+			if(idArr.length==0){
+				parent.art.dialog({
+					content: '请选择潜在学员!',
+					lock:true,
+					time:10,
+					ok: function () {
+					},
+					cancelVal: '关闭',
+					cancel: true
+				});
+				return;
+			}
+			$scope.selectStaff();
+		}
+
+		$scope.onTranslate = function(){
+			idArr = new Array();
+			var tbody = $(".table").find("tbody");
+			var tbody_tr = $(tbody).find("tr");
+			var checkboxs = tbody_tr.find("td>div[class='checkbox1 checked1']");
+			for(var i = 0;i<checkboxs.length;i++){
+				 var ele = $(checkboxs[i]);
+				 var id = ele.attr("data");
+				 idArr.push(id);
+			}
+			if(idArr.length==0){
+				parent.art.dialog({
+					content: '请选择潜在学员!',
+					lock:true,
+					time:1000,
+					ok: function () {
+					},
+					cancelVal: '关闭',
+					cancel: true
+				});
+				return;
+			}
+		}
+		
+		$scope.selectStaff = function() {
+			artdialogIframe("../../dfgj/html/jobs/stafflist.html", null,
+					backfunctionstaff, 1024, 600, true);
+		}
 	})
 
 	function confirmDeletion() {
-		var appElement = document
-				.querySelector('[ng-controller=listController]');
+		var appElement = document.querySelector('[ng-controller=listController]');
 		var $scope = angular.element(appElement).scope();
 		$scope.onDelete();
+	}
+	function backfunctionstaff() {
+		if (parent.getDateChild().id != undefined) {
+			$("#staffid").val(parent.getDateChild().id);
+		}
+		if (parent.getDateChild().name != undefined) {
+			$("#staffname").val(parent.getDateChild().name);
+		}
+		setDateChild({});
+		parent.art.dialog({
+			content: '确定要把选择潜在客户修转给[ '+$("#staffname").val()+" ]负责",
+			lock:true,
+			time:1000,
+			ok: function () {
+				var data = idArr;
+				$.ajax({
+					type : "PUT",
+					url : parent.getMenuLinksHref("potentialcustomerslist")+"batch/"+$("#staffid").val(),
+					async : false,
+					dataType : 'json',
+					data : JSON.stringify(data),
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					success : function(data) {
+						var appElement = document.querySelector('[ng-controller=listController]');
+						var $scope = angular.element(appElement).scope();
+						$scope.pageList();
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						response(XMLHttpRequest.status);
+					}
+				});
+			},
+			cancelVal: '关闭',
+			cancel: true
+		});
 	}
 </script>
 </head>
 <body ng-controller="listController" style="color: #000;">
 	<!-- 基本操作区 -->
+	<input type="hidden" id="staffid" />
+	<input type="hidden" id="staffname" />
 	<h5>
 		<span class="glyphicon glyphicon-search" style="margin: 0px 5px; color: #99DFF8;"></span> <input type="text" id="name" class="form-control" value=""
-			placeholder="请输入需要查找的名称" style="width: 20%; display: inline;"> <i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i> <a
-			class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onSearch()">搜索</a> <a class="btn btn-primary"
-			style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onAdd()">添加</a>
+			placeholder="请输入需要查找的名称" style="width: 20%; display: inline;"> <i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i> 
+			<a class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onSearch()">搜索</a> 
+			<a class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onAdd()">添加</a> 
+			<a class="btn btn-primary" style="margin: 0px auto; width: 120px;" href="#" role="button" ng-click="onUpdatePrincipal()">批量修改责任人</a>
+			<a class="btn btn-primary" style="margin: 0px auto; width: 90px;" href="#" role="button" ng-click="onTranslate()">转正式学员</a>
 	</h5>
 	<!-- 列表区 -->
 	<table class="table">
 		<thead>
 			<tr class="info">
+				<th class="text-center"><div id="all" class="checkbox"></div></th>
 				<th>序号</th>
 				<th>名称</th>
 				<th>公司</th>
-				<th>手机号</th>
 				<th>来源</th>
 				<th>级别</th>
 				<th>状态</th>
@@ -133,18 +227,18 @@
 				<th>跟进次数</th>
 				<th>上次跟进</th>
 				<th>下次跟进</th>
-				<th>诺访时间</th>
+				<th>上门时间</th>
 				<th>创建者</th>
-				<th>跟进人</th>
+				<th>负责人</th>
 				<th>相关操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="data in datalist" class='tr{{$index%2+2}}' ng-class="{selected: $index==selectedRow}">
+				<td class="text-center"><div class="checkbox1 check_box" data="{{data.potentialcustomers.id}}"></div></td>
 				<td ng-dblclick="toInfo(data)">{{$index+1}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.customername}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.orgname}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.mp}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.sourcemaintypename}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.customerlevelname}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.customerstatusname}}</td>
@@ -162,7 +256,7 @@
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.nextfollowtime}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.followtime}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.creatorname}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.modifiername}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.principalname}}</td>
 				<td>
 					<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search" style="margin: 0px 5px; color: #99DFF8;" title="查看"></h4>
 					<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil" style="margin: 0px 5px; color: #99DFF8;" title="修改"></h4>
@@ -182,4 +276,26 @@
 		</select> <span class="text-info" style="position: relative; top: 6px; float: right; margin: 0px 5px;">每页显示</span>
 	</div>
 </body>
+<script type="text/javascript">
+  		$(function(){
+			$("#all").click(function(){
+				var className = $(this).attr("class");
+				if(className == "checkbox"){//全选
+					$(this).removeClass("checkbox").addClass("checked");
+					$(".checkbox1").addClass("checked1").removeClass("check_box");
+				}else{//全部取消
+					$(this).removeClass("checked").addClass("checkbox");
+					$(".checkbox1").addClass("check_box").removeClass("checked1");
+				}
+			})
+			$(document).on("click",".checkbox1",function(){
+				var className = $(this).attr("class");
+				if(className == "checkbox1 check_box"){//选中
+					$(this).removeClass("check_box").addClass("checked1");
+				}else{//取消
+					$(this).addClass("check_box").removeClass("checked1");
+				}
+			})
+		})
+	</script>
 </html>

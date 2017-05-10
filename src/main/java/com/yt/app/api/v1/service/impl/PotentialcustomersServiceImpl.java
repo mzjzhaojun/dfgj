@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.yt.app.api.v1.mapper.DictionaryMapper;
 import com.yt.app.api.v1.mapper.PotentialcustomersMapper;
+import com.yt.app.api.v1.mapper.StaffsMapper;
 import com.yt.app.api.v1.service.PotentialcustomersService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Potentialcustomers;
+import com.yt.app.api.v1.entity.Staffs;
 import com.yt.app.frame.page.IPage;
 import com.yt.app.frame.page.PageBean;
 import com.yt.app.util.RequestUtil;
@@ -35,6 +37,8 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 	private PotentialcustomersMapper mapper;
 	@Autowired
 	private DictionaryMapper dictionarymapper;
+	@Autowired
+	private StaffsMapper staffsmapper;
 
 	@Override
 	@Transactional
@@ -124,7 +128,7 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 		long[] dids = Arrays
 				.asList(t.getSourcemaintype(), t.getCustomerlevel(), t.getCustomerstatus(), t.getFollowstage(), t.getViptype(), t.getGender(),
 						t.getGrade(), t.getSchoolyear(), t.getSubjecttype(), t.getStudenttype(), t.getContacttype(), t.getPurchaseintention(),
-						t.getViplevel(), t.getIsoneparent(), t.getIdtype(), t.getIsstudyagain(), t.getEntrancegrade()).stream()
+						t.getViplevel(), t.getIsoneparent(), t.getIdtype(), t.getIsstudyagain(), t.getEntrancegrade(), t.getInvalidreason()).stream()
 				.filter(Long -> Long != null).mapToLong(Long::longValue).toArray();
 		List<Dictionary> listd = dictionarymapper.listByArrayId(dids);
 		listd.forEach(d -> {
@@ -164,7 +168,22 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 				t.setIsstudyagainname(d.getName());
 			if (t.getEntrancegrade() != null && t.getEntrancegrade().longValue() == d.getCode().longValue())
 				t.setEntrancegradename(d.getName());
+			if (t.getInvalidreason() != null && t.getInvalidreason().longValue() == d.getCode().longValue())
+				t.setInvalidreasonname(d.getName());
 		});
 		return t;
+	}
+
+	@Override
+	public Integer updatebatch(List<Long> list, Long id) {
+		Integer i = 0;
+		Staffs s = staffsmapper.get(id);
+		for (Long t : list) {
+			Potentialcustomers p = mapper.get(t);
+			p.setPrincipalid(id);
+			p.setPrincipalname(s.getDisplayname());
+			i = mapper.put(p);
+		}
+		return i;
 	}
 }

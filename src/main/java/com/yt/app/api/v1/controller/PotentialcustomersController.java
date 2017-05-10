@@ -1,7 +1,10 @@
 package com.yt.app.api.v1.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +12,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.yt.app.frame.page.IPage;
+
 import io.swagger.annotations.ApiOperation;
+
 import com.yt.app.common.base.impl.BaseControllerImpl;
 import com.yt.app.api.v1.resource.PotentialcustomersResourceAssembler;
 import com.yt.app.api.v1.service.PotentialcustomersService;
@@ -41,5 +48,13 @@ public class PotentialcustomersController extends BaseControllerImpl<Potentialcu
 		IPage<Potentialcustomers> pagebean = service.list(requestEntity);
 		return new ResponseEntity<Object>(new PotentialcustomersResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
 				HttpStatus.OK);
+	}
+
+	@ApiOperation(value = "批量更新责任人", response = Potentialcustomers.class)
+	@RequestMapping(value = "/batch/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> updatebatch(@PathVariable Long id, RequestEntity<List<Long>> requestEntity, HttpServletRequest request,
+			HttpServletResponse response) {
+		Integer i = service.updatebatch(requestEntity.getBody(), id);
+		return new ResponseEntity<Object>(i, HttpStatus.OK);
 	}
 }
