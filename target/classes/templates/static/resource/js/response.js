@@ -1,62 +1,116 @@
-/*请求失败响应处理*/
+$(function() {
+	var appElement = document.querySelector('[ng-controller=controller]');
+	var $scope = angular.element(appElement).scope();
+	if ($scope != undefined) {
+		if (parent.menubuttons != undefined) {
+			for (var i = 0; i < parent.menubuttons.length; i++) {
+				if (parent.menubuttons[i].code == "info") {
+					$scope.isShowInfo = true;
+				}
+				if (parent.menubuttons[i].code == "update") {
+					$scope.isShowUpdate = true;
+				}
+				if (parent.menubuttons[i].code == "delete") {
+					$scope.isShowDelete = true;
+				}
+				if (parent.menubuttons[i].code == "searchlist") {
+					$scope.isSearchList = true;
+				}
+				if (parent.menubuttons[i].code == "sava") {
+					$scope.isSava = true;
+				}
+				if (parent.menubuttons[i].code == "post") {
+					$scope.isPost = true;
+				}
+				if (parent.menubuttons[i].code == "cancel") {
+					$scope.isCancel = true;
+				}
+				if (parent.menubuttons[i].code == "turncustomer") {
+					$scope.isTurncustomer = true;
+				}
+				if (parent.menubuttons[i].code == "updateresponsible") {
+					$scope.isUpdateresponsible = true;
+				}
+				if (parent.menubuttons[i].code == "export") {
+					$scope.isExport = true;
+				}
+				if (parent.menubuttons[i].code == "import") {
+					$scope.isImport = true;
+				}
+			}
+		}
 
-function response(status,result){
-	
-	//未登录
-	if(status==401){
-		parent.onLogin();
 	}
-	//异常
-	else if(status==500){
+
+})
+
+/* 请求失败响应处理 */
+function response(status) {
+	if (status == 401) {
 		parent.art.dialog({
-			content: '服务器异常，请稍后重试！',
-			lock:true,
-			time:2
+			content : '登陆用户已过期,请重新登陆系统！',
+			lock : true,
+			time : 2,
+			ok : function() {
+				parent.onLogin();
+			},
 		});
-	}/*
-	//资源未找到
-	else if(status==404){
-		
-	}
-	//插入出错
-	else if(status==460){
-		
-	}
-	//插入资源因为另一种原因出错
-	else if(status==461){
-		
-	}
-	//更新出错
-	else if(status==462){
-		
-	}
-	//请求的资源的当前资源之间存在冲突（资源已经被修改）
-	else if(status==463){
-		
-	}
-	//删除出错
-	else if(status==464){
-		
-	}
-	//删除因为条件不满足出错（有关联关系不可以删除）
-	else if(status==465){
-		
-	}*/
-	//回调
-	if (result != "" && result != null && result != undefined) {
-		result();
+		parent.onLogin();
+	} else if (status == 400) {
+		parent.art.dialog({
+			content : '请求资源地址错误，请联系网络管理员！',
+			lock : true,
+			time : 2,
+			ok : function() {
+			},
+		});
+	} else if (status == 404) {
+		parent.art.dialog({
+			content : '请求资源已经不存在，请联系网络管理员！',
+			lock : true,
+			time : 2,
+			ok : function() {
+			},
+		});
+	} else if (status == 405) {
+		parent.art.dialog({
+			content : '请求资源方法不正确，请联系网络管理员！',
+			lock : true,
+			time : 2,
+			ok : function() {
+			},
+		});
+	} else if (status == 406) {
+		parent.art.dialog({
+			content : '服务器不能理解的请求，请联系网络管理员！',
+			lock : true,
+			time : 2,
+			ok : function() {
+			},
+		});
+	} else if (status == 408) {
+		parent.art.dialog({
+			content : '请求超时，请联系网络管理员！',
+			lock : true,
+			time : 2,
+			ok : function() {
+			},
+		});
+	} else if (status == 415) {
+		parent.art.dialog({
+			content : '请求的参数格式错误，请联系网络管理员！',
+			lock : true,
+			time : 2,
+			ok : function() {
+			},
+		});
+	} else if (status == 500) {
+		parent.art.dialog({
+			content : '服务器出现异常了，请联系网络管理员！',
+			lock : true,
+			time : 2,
+			ok : function() {
+			},
+		});
 	}
 }
-/*
- * 请求成功响应处理
- * 0：成功
- * 1：失败
- * 2：存在关联
- */
-/*function responseSuccess(status,result){
-	
-	//回调
-	if (result != "" && result != null && result != undefined) {
-		result();
-	}
-}*/

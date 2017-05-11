@@ -1,178 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yt.app.api.v1.mapper.RoleMenuMapper">
-  <!-- 数据库列 -->
-  <sql id="Base_Column_List">
-     id,role_id,menu_id,version
-  </sql>
-  <!-- 基础返回对象封装 -->
-  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.RoleMenu">
-         <id property="id" column="id" />
-         <id property="role_id" column="role_id" />
-         <id property="menu_id" column="menu_id" />
-         <id property="version" column="version" />
-  </resultMap>
-  <!-- 默认新增 -->
-  <insert id="post" parameterType="com.yt.app.api.v1.entity.RoleMenu">
-  insert into role_menu (id,role_id,menu_id)
-         values (#{id},#{role_id},#{menu_id})
-  </insert>
-  <!-- 批量插入数据 -->
-   <insert id="insertRoleMenu" parameterType="java.util.List">
+	<!-- 数据库列 -->
+	<sql id="Base_Column_List">
+		id,role_id,menu_id,version
+	</sql>
+	<!-- 基础返回对象封装 -->
+	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.RoleMenu">
+		<id property="id" column="id" />
+		<id property="role_id" column="role_id" />
+		<id property="menu_id" column="menu_id" />
+		<id property="version" column="version" />
+	</resultMap>
+	<!-- 默认新增 -->
+	<insert id="post" parameterType="com.yt.app.api.v1.entity.RoleMenu">
+		insert into role_menu (id,role_id,menu_id)
+		values (#{id},#{role_id},#{menu_id})
+	</insert>
+	<!-- 批量插入数据 -->
+	<insert id="insertRoleMenu" parameterType="java.util.List">
 		<![CDATA[ 
 		insert into role_menu (id, role_id, menu_id)  values
 		]]>
-		   <foreach collection="list" item="item" index="index" separator="," >  
-             (#{item.id},#{item.role_id},#{item.menu_id})  
-           </foreach>  
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.id},#{item.role_id},#{item.menu_id})
+		</foreach>
 	</insert>
-  
-  <!-- 默认删除id对象-->
- <delete id="delete" parameterType="java.lang.String">
-     delete from role_menu 
-     where  id = #{id}            
- </delete>
- <!-- 默认删除roleid对象-->
- <delete id="deletebyroleid" parameterType="java.lang.String">
-     delete from role_menu 
-     where  role_id = #{role_id}            
- </delete>
- 
- <!-- 根据传递的不同参数来删除相应对象-->
- <delete id="deleteObject" parameterType="com.yt.app.api.v1.entity.RoleMenu">
-     delete from role_menu 
-     <where>
-        			1=1
-          <if test="id != null and id != null">
-           	and id = #{id}
-             </if>
-              <if test="role_id != null and role_id != null">
-           	and role_id = #{role_id}
-             </if> <if test="menu_id != null and menu_id != null">
-           	and menu_id = #{menu_id}
-             </if>
-       </where>
- </delete>
-  <!-- 默认更新id对象 -->
- <update id="put" parameterType="com.yt.app.api.v1.entity.RoleMenu">
-    update role_menu
-         <set>
-             <if test="role_id != null">
-                   role_id = #{role_id},
-             </if>
-             <if test="menu_id != null">
-                   menu_id = #{menu_id},
-             </if>
-             <if test="version != null">
-                   version = #{version}+1
-             </if>
-          </set>
-     where id = #{id} and  version = #{version}
- </update>
-  <!-- 默认获得id对象 -->
- <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
-     select
-        <include refid="Base_Column_List" />
-        from role_menu 
-        where id = #{id}
- </select>
- <!-- 默认获得roleid对象 -->
- <select id="getroleid" parameterType="java.lang.String" resultMap="ResultMap">
-     select
-        <include refid="Base_Column_List" />
-        from role_menu 
-        where role_id = #{role_id}
- </select>
-  <!-- 默认集合 -->
- <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
-       select
-        <include refid="Base_Column_List" />
-        from role_menu 
-        <where>
-        			1=1
-             <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
-             </if>
-             <if test="role_id != null and role_id != ''">
-           		and role_id =#{role_id}
-             </if>
-             <if test="orderby != null and dir != null">
-           		order by ${orderby} ${dir}
-             </if>
-             <if test="pageStart != null and pageEnd != null">
-           		LIMIT #{pageStart},#{pageEnd}
-             </if>
-        </where>
- </select>
-  <!-- 默认返回MAP集合 -->
- <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-       select
-        <include refid="Base_Column_List" />
-        from role_menu 
-        <where>
-        			1=1
-             <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
-             </if>
-             <if test="orderby != null and dir != null">
-           		order by ${orderby} ${dir}
-             </if>
-             <if test="pageStart != null and pageEnd != null">
-           		LIMIT #{pageStart},#{pageEnd}
-             </if>
-        </where>
- </select>
-  <!-- 默认集合统计 -->
- <select id="countlist" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from role_menu 
-        <where>
-        			1=1
-            
-             <if test="role_id != null and role_id != ''">
-           		and role_id like "%"#{role_id}"%"
-             </if>
-             <if test="menu_id != null and menu_id != ''">
-           		and menu_id like "%"#{menu_id}"%"
-             </if>
-        </where>
- </select>
-  <!-- 默认集合统计 -->
- <select id="countObject" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from role_menu 
-        <where>
-        			1=1
-            
-             <if test="role_id != null and role_id != ''">
-           		and role_id =#{role_id}
-             </if>
-             <if test="menu_id != null and menu_id != ''">
-           		and menu_id =#{menu_id}
-             </if>
-        </where>
- </select>
-  <!-- 默认返回MAP集合统计 -->
- <select id="countmap" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from role_menu 
-        <where>
-        			1=1
-             <if test="name != null and name != ''">
-           		and name like "%"#{name}"%"
-             </if>
-        </where>
- </select>
-  <!-- 默认获取Ids的对象 -->
- <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
-       select
-        <include refid="Base_Column_List" />
-        from role_menu 
-        <where>
-        1=1
-             <if test="array != null and array != ''">
-      		 	and id in
-        			<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-           			#{item}
-        			</foreach>
-             </if>
-        </where>
- </select>
+
+	<!-- 默认删除id对象 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from role_menu
+		where id = #{id}
+	</delete>
+	<!-- 默认删除roleid对象 -->
+	<delete id="deletebyroleid" parameterType="java.lang.String">
+		delete from role_menu
+		where role_id = #{role_id}
+	</delete>
+
+	<!-- 根据传递的不同参数来删除相应对象 -->
+	<delete id="deleteObject" parameterType="com.yt.app.api.v1.entity.RoleMenu">
+		delete from role_menu
+		<where>
+			1=1
+			<if test="id != null and id != null">
+				and id = #{id}
+			</if>
+			<if test="role_id != null and role_id != null">
+				and role_id = #{role_id}
+			</if>
+			<if test="menu_id != null and menu_id != null">
+				and menu_id = #{menu_id}
+			</if>
+		</where>
+	</delete>
+	<!-- 默认更新id对象 -->
+	<update id="put" parameterType="com.yt.app.api.v1.entity.RoleMenu">
+		update role_menu
+		<set>
+			<if test="role_id != null">
+				role_id = #{role_id},
+			</if>
+			<if test="menu_id != null">
+				menu_id = #{menu_id},
+			</if>
+			<if test="version != null">
+				version = #{version}+1
+			</if>
+		</set>
+		where id = #{id} and version = #{version}
+	</update>
+	<!-- 默认获得id对象 -->
+	<select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role_menu
+		where id = #{id}
+	</select>
+	<!-- 默认获得roleid对象 -->
+	<select id="getroleid" parameterType="java.lang.String"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role_menu
+		where role_id = #{role_id}
+	</select>
+	<!-- 默认集合 -->
+	<select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role_menu
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="role_id != null and role_id != ''">
+				and role_id =#{role_id}
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合 -->
+	<select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from role_menu
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认集合统计 -->
+	<select id="countlist" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from role_menu
+		<where>
+			1=1
+
+			<if test="role_id != null and role_id != ''">
+				and role_id like "%"#{role_id}"%"
+			</if>
+			<if test="menu_id != null and menu_id != ''">
+				and menu_id like "%"#{menu_id}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认集合统计 -->
+	<select id="countObject" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from role_menu
+		<where>
+			1=1
+
+			<if test="role_id != null and role_id != ''">
+				and role_id =#{role_id}
+			</if>
+			<if test="menu_id != null and menu_id != ''">
+				and menu_id =#{menu_id}
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合统计 -->
+	<select id="countmap" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from role_menu
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认获取Ids的对象 -->
+	<select id="listByArrayId" parameterType="java.util.HashMap"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role_menu
+		<where>
+			1=1
+			<if test="array != null and array != ''">
+				and id in
+				<foreach item="item" index="index" collection="array" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
 </mapper>

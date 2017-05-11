@@ -34,237 +34,357 @@
 <script src="../../../../resource/js/artDialog/artDialog.js"></script>
 <script src="../../../../resource/js/artDialog/plugins/iframeTools.js"></script>
 <script type="text/javascript">
-		var update = angular.module("update", []);
-		update.controller("updateController",function($scope, $http) {	
-			$scope.formData = {};
-			var sysId;
-			var sysId;
-				$http({
-					url:parent.getFunctionLinksHref("self"),
-					method:'GET',
-					dataType : "json",
-					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-					data: ''
-					}).success(function(data, status, headers, config){
-						//响应成功
-						$scope.formData = data;
-						sysId=data.sys_id;
-						$scope.onTree($scope.formData.id);
-						$scope.level = data.level;
-						$scope.setIsShow($scope.formData);//父类模块是否隐藏
-						$scope.onTreep($scope.formData.parent_id);
-						$scope.loadSys();
-					}).error(function(data, status, headers, config){
-						//处理响应失败
-						response(status);
-					});
-			
-			       $scope.loadSys=function(){
-			    	   /*加载系 统*/
-						$http.get(parent.getMenuLinksHref("menusys"),{headers:{'Content-Type': 'application/json;charset=UTF-8;'}}).success( function(response) {
-							$scope.syss = response;
-							 for(var i in $scope.syss){
-									if(sysId==$scope.syss[i].id){
-										$scope.formData.sys_id =$scope.syss[i].id;
-									}
-					               
-					            }  
-						});
-						/* 字典加载 */
-						$http({//菜单等级
+	var update = angular.module("update", []);
+	update
+			.controller(
+					"controller",
+					function($scope, $http) {
+						$scope.formData = {};
+						var sysId;
+						var sysId;
+						$http(
+								{
+									url : parent.getFunctionLinksHref("self"),
+									method : 'GET',
+									dataType : "json",
+									headers : {
+										'Content-Type' : 'application/json;charset=UTF-8;'
+									},
+									data : ''
+								}).success(
+								function(data, status, headers, config) {
+									//响应成功
+									$scope.formData = data;
+									sysId = data.sys_id;
+									$scope.onTree($scope.formData.id);
+									$scope.level = data.level;
+									$scope.setIsShow($scope.formData);//父类模块是否隐藏
+									$scope.onTreep($scope.formData.parent_id);
+									$scope.onButton(data.buttons);
+									$scope.loadSys();
+								}).error(
+								function(data, status, headers, config) {
+									//处理响应失败
+									response(status);
+								});
+
+						$scope.loadSys = function() {
+							/*加载系 统*/
+							$http
+									.get(
+											parent.getMenuLinksHref("menusys"),
+											{
+												headers : {
+													'Content-Type' : 'application/json;charset=UTF-8;'
+												}
+											})
+									.success(
+											function(response) {
+												$scope.syss = response;
+												for ( var i in $scope.syss) {
+													if (sysId == $scope.syss[i].id) {
+														$scope.formData.sys_id = $scope.syss[i].id;
+													}
+
+												}
+											});
+							/* 字典加载 */
+							$http(
+									{//菜单等级
+										url : parent
+												.getMenuLinksHref("admindictionarylist"),
+										method : 'POST',
+										dataType : "json",
+										headers : {
+											'Content-Type' : 'application/json;charset=UTF-8;'
+										},
+										withCredentials : true,
+										data : JSON.stringify({
+											"typecode" : 30
+										})
+									})
+									.success(
+											function(data, status, headers,
+													config) {
+												$scope.paytstaust = data;
+												for ( var i in $scope.paytstaust) {
+													if ($scope.level == $scope.paytstaust[i].dictionary.code) {
+														$scope.formData.level = $scope.paytstaust[i].dictionary.code;
+													}
+												}
+											}).error(
+											function(data, status, headers,
+													config) {
+												//处理响应失败
+												response(status);
+											});
+						}
+						//返回
+						$scope.onReturn = function() {
+							history.go(-1);
+						}
+						//保存
+						$scope.onPreserved = function() {
+							var isValid = $("#saveForm").valid();
+							$scope.checklinks();//处理页面上选择的关联链接数据
+							$scope.formData.links_id = linkIds;
+							$scope.checkbuttons();
+							$scope.formData.buttonIds = buttonIds;
+							if (pid != null && pid != "") {
+								$scope.formData.parent_id = pid;
+							}
+							if (isValid) {
+								$http(
+										{
+											url : parent
+													.getFunctionLinksHref("self"),
+											method : 'PUT',
+											dataType : "json",
+											headers : {
+												'Content-Type' : 'application/json;charset=UTF-8;'
+											},
+											data : JSON
+													.stringify($scope.formData)
+										})
+										.success(
+												function(data, status, headers,
+														config) {
+													location.href = "list.html";
+												}).error(
+												function(data, status, headers,
+														config) {
+													//处理响应失败
+													response(status);
+												})
+							}
+						}
+
+						/* 生成父级树 */
+						var settingp = {
+							check : {
+								enable : true,
+								chkStyle : "radio",
+								radioType : "all"
+							},
+							data : {
+								simpleData : {
+									enable : true
+								}
+							},
+							callback : {
+								onCheck : changeNodep
+							}
+						};
+
+						$scope.onTreep = function(pid) {
+							var zNodes;
+							$http(
+									{
+										url : parent
+												.getMenuLinksHref("menuptree"),
+										method : 'POST',
+										dataType : "json",
+										headers : {
+											'Content-Type' : 'application/json;charset=UTF-8;'
+										},
+										data : JSON.stringify($scope.formData)
+									})
+									.success(
+											function(data, status, headers,
+													config) {
+												zNodes = data;
+												if (pid != undefined) {
+													for (var i = 0; i < zNodes.length; i++) {
+														if (zNodes[i].id == pid) {
+															zNodes[i].checked = true;
+														}
+													}
+												}
+
+												zNodes[0].open = true;//默认打开第一个
+												$.fn.zTree.init($("#ptree"),
+														settingp, zNodes);
+											}).error(
+											function(data, status, headers,
+													config) {
+												//处理响应失败
+												response(status);
+											})
+
+						}
+						var pid = "";
+						function changeNodep() {
+							linkIds = "";//每次点选后重置重新获取
+							var zTree = $.fn.zTree.getZTreeObj("ptree");
+							var checkNode = zTree.getCheckedNodes();
+							pid = checkNode[0].id;
+
+						}
+
+						$scope.setIsShow = function(data) {
+							if ($scope.formData.level != '31') {//建立一级菜单则不展示父菜单树
+								$("#pt").show();
+							} else {
+								$("#pt").hide();
+							}
+						}
+
+						//搜索资源
+						$scope.onfind = function() {
+							art.dialog.open('../html/menu/linklist.html', {
+								title : '资源搜索',
+								width : 1000,
+								height : 600,
+								close : showWindow,
+								lock : true,
+								resize : false,
+								id : "showWindow",
+								lock : true
+							});
+							art.dialog.data("dialogId", "showWindow");//给弹出框赋值ID
+						}
+						//搜索资源
+						$scope.onfindbutton = function() {
+							art.dialog.open('../html/menu/buttonlist.html', {
+								title : '按钮搜索',
+								width : 1000,
+								height : 600,
+								close : showWindow1,
+								lock : true,
+								resize : false,
+								id : "showWindow1",
+								lock : true
+							});
+							art.dialog.data("dialogId1", "showWindow1");//给弹出框赋值ID
+						}
+
+						function showWindow() {
+							var data = art.dialog.data("data");
+							if (data != undefined) {
+								var html = "";
+								for (var i = 0; i < data.length; i++) {
+									var obj = angular.fromJson(data[i]);
+									html += '<label><i class="glyphicon glyphicon-remove"></i><span id="'+obj.link.id+'">'
+											+ obj.link.name + '</span></label>';
+
+								}
+								$(".panel").append(html);
+								art.dialog.removeData("data");
+							}
+
+						}
+
+						function showWindow1() {
+							var data = art.dialog.data("data");
+							if (data != undefined) {
+								var html = "";
+								for (var i = 0; i < data.length; i++) {
+									var obj = angular.fromJson(data[i]);
+									html += '<label><i class="glyphicon glyphicon-remove"></i><span id="'+obj.button.id+'">'
+											+ obj.button.name
+											+ '</span></label>';
+
+								}
+								$(".panelbutton").append(html);
+								art.dialog.removeData("data");
+							}
+
+						}
+						/* 处理多选链接 */
+						var linkIds = "";
+						$scope.checklinks = function() {
+							var ele = $(".panel").find("label>span");
+							for (var i = 0; i < ele.length; i++) {
+								linkIds += $(ele[i]).attr("id") + ",";
+							}
+						}
+						var buttonIds = "";
+						$scope.checkbuttons = function() {
+							var ele = $(".panelbutton").find("label>span");
+							for (var i = 0; i < ele.length; i++) {
+								if (i == 0) {
+									buttonIds += $(ele[i]).attr("id");
+								} else {
+									buttonIds += "," + $(ele[i]).attr("id");
+								}
+							}
+						}
+
+						/* 生成关联链显示区域 */
+						$scope.onButton = function(data) {
+							var html = "";
+							for (var i = 0; i < data.length; i++) {
+								var obj = angular.fromJson(data[i]);
+								html += '<label><i class="glyphicon glyphicon-remove"></i><span id="'+obj.id+'">'
+										+ obj.name + '</span></label>';
+							}
+							$(".panelbutton").append(html);
+						}
+						/* 生成关联链显示区域 */
+						$scope.onTree = function(id) {
+							var data = {
+								"menu_id" : id
+							};
+							$http(
+									{
+										url : parent
+												.getMenuLinksHref("menulistLinks"),
+										method : 'POST',
+										dataType : "json",
+										headers : {
+											'Content-Type' : 'application/json;charset=UTF-8;'
+										},
+										data : data
+									})
+									.success(
+											function(data, status, headers,
+													config) {
+												var html = "";
+												for (var i = 0; i < data.length; i++) {
+													var obj = angular
+															.fromJson(data[i]);
+													html += '<label><i class="glyphicon glyphicon-remove"></i><span id="'+obj.id+'">'
+															+ obj.name
+															+ '</span></label>';
+												}
+												$(".panel").append(html);
+											}).error(
+											function(data, status, headers,
+													config) {
+												//处理响应失败
+												response(status);
+											})
+
+						}
+						/* $http({//是否显示
 							url:parent.getMenuLinksHref("admindictionarylist"),
 							method:'POST',
 							dataType : "json",
 							headers: {'Content-Type': 'application/json;charset=UTF-8;'},
 							withCredentials: true,
-							data: JSON.stringify({"typecode":30})
+							data: JSON.stringify({"typecode":40})
 							}).success(function(data, status, headers, config){
-								$scope.paytstaust = data;
-								for(var i in $scope.paytstaust){
-									if($scope.level==$scope.paytstaust[i].dictionary.code){
-										$scope.formData.level =$scope.paytstaust[i].dictionary.code;
+								$scope.isShow = data;
+								for(var i in $scope.isShow){
+									if(paystatusid==$scope.isShow[i].dictionary.code){
+										$scope.formData.is_show =$scope.dictionary.code;
 									}
-					            }
+						           
+						        }
 							}).error(function(data, status, headers, config){
 								//处理响应失败
 								response(status);
-							});		   
-			}
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			//保存
-			$scope.onPreserved=function(){
-				var isValid = $("#saveForm").valid();
-				 $scope.checklinks();//处理页面上选择的关联链接数据
-				 $scope.formData.links_id=linkIds;
-				 if(pid!=null && pid!=""){
-					 $scope.formData.parent_id=pid;
-				 }
-				
-				if(isValid){
-					$http({
-						url:parent.getFunctionLinksHref("self"),
-    					method:'PUT',
-    					dataType : "json",
-    					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-    					data: JSON.stringify($scope.formData)
-			  		}).success(function(data, status, headers, config){
-    		  			location.href="list.html";
-    		  		}).error(function(data, status, headers, config){
-						//处理响应失败
-    		  			response(status);
+							});	 */
 					})
-				}
-			}
-			
-		
-				/* 生成父级树 */	
-				var settingp = {
-						check: {
-							enable: true,
-							chkStyle: "radio",
-							radioType: "all"
-						},
-						data: {
-							simpleData: {
-								enable: true
-							}
-						},
-						callback: {
-							onCheck: changeNodep
-						}
-					};
-						
-					$scope.onTreep=function(pid){
-						var zNodes;
-						$http({
-							url:parent.getMenuLinksHref("menuptree"),
-							method:'POST',
-							dataType : "json",
-							headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-							data: JSON.stringify($scope.formData)
-				  		}).success(function(data, status, headers, config){
-				  			zNodes=data;
-				  			if(pid != undefined){
-				  				for(var i=0;i<zNodes.length;i++){
-					  				if(zNodes[i].id==pid){
-					  					zNodes[i].checked=true;
-					  				}
-					  			}
-				  			}
-				  			
-				  			zNodes[0].open=true;//默认打开第一个
-				  			$.fn.zTree.init($("#ptree"), settingp, zNodes);
-				  		}).error(function(data, status, headers, config){
-							//处理响应失败
-				  			response(status);
-						})
-						
-					}
-					var pid="";
-					function changeNodep(){
-						linkIds="";//每次点选后重置重新获取
-						var zTree = $.fn.zTree.getZTreeObj("ptree");
-						var checkNode = zTree.getCheckedNodes(); 
-						pid=checkNode[0].id;
-						
-					}
-					
-					
-					$scope.setIsShow = function(data){
-						if($scope.formData.level != '31') {//建立一级菜单则不展示父菜单树
-							$("#pt").show();
-						} else {
-							$("#pt").hide();
-						}
-					}
-					
-					//搜索资源
-					$scope.onfind = function(){
-						art.dialog.open('../html/menu/linklist.html',
-								{
-									title : '资源搜索',
-									width : 1000,
-									height : 600,
-									close : showWindow,
-									lock:true,
-									resize:false,
-									id : "showWindow",
-									lock:true
-								});
-						art.dialog.data("dialogId", "showWindow");//给弹出框赋值ID
-					}
-					function showWindow(){
-						var data = art.dialog.data("data");	
-						if(data != undefined){
-							var html="";
-							for(var i = 0;i<data.length;i++){
-								 var obj = angular.fromJson(data[i]);  
-								 html +='<label><i class="glyphicon glyphicon-remove"></i><span id="'+obj.link.id+'">'+obj.link.name+'</span></label>';
-								
-							}
-							 $(".panel").append(html);
-							 art.dialog.removeData("data");
-						}
-						
-					}
-					/* 处理多选链接 */
-					var linkIds="";
-					$scope.checklinks = function(){
-						var ele = $(".panel").find("label>span");
-						for(var i = 0;i<ele.length;i++){
-							linkIds +=$(ele[i]).attr("id")+",";
-						} 
-					}
-					/* 生成关联链显示区域 */		
-					$scope.onTree=function(id){
-						var data = {"menu_id":id};
-						$http({
-							url:parent.getMenuLinksHref("menulistLinks"),
-							method:'POST',
-							dataType : "json",
-							headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-							data: data
-				  		}).success(function(data, status, headers, config){
-				  			var html="";
-				  			for(var i = 0;i<data.length;i++){
-								 var obj = angular.fromJson(data[i]);  
-								 html +='<label><i class="glyphicon glyphicon-remove"></i><span id="'+obj.id+'">'+obj.name+'</span></label>';	
-							}
-				  			 $(".panel").append(html);
-				  		}).error(function(data, status, headers, config){
-							//处理响应失败
-				  			response(status);
-						})
-						
-					}
-					/* $http({//是否显示
-						url:parent.getMenuLinksHref("admindictionarylist"),
-						method:'POST',
-						dataType : "json",
-						headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-						withCredentials: true,
-						data: JSON.stringify({"typecode":40})
-						}).success(function(data, status, headers, config){
-							$scope.isShow = data;
-							for(var i in $scope.isShow){
-								if(paystatusid==$scope.isShow[i].dictionary.code){
-									$scope.formData.is_show =$scope.dictionary.code;
-								}
-				               
-				            }
-						}).error(function(data, status, headers, config){
-							//处理响应失败
-							response(status);
-						});	 */
-		})
-		
-	</script>
+</script>
 <style type="text/css">
 .panel {
 	margin-bottom: -5px;
+}
+
+.panelbutton {
+	margin-bottom: -5px;
+	border: solid 1px #ccc;
 }
 
 .input-group-sm>i {
@@ -275,16 +395,16 @@
 </style>
 </head>
 
-<body ng-controller="updateController">
+<body ng-controller="controller">
 	<form method="post" id="saveForm" action="">
 
 		<!-- 操作按钮操作区 -->
 		<div class="col-lg-12 topActionPanel">
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-show="isPost">确 定</button>
 			</div>
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-show="isCancel">返 回</button>
 			</div>
 		</div>
 
@@ -315,6 +435,11 @@
 				<div class="panel" style="width: 500px; min-height: 150px; display: inline-block;"></div>
 				<i id="linkid" ng-click="onfind()" class="glyphicon glyphicon-search"></i>
 			</div>
+			<div class="input-group input-group-sm" style="position: relative; left: 0px;">
+				<span class="input-group-addon text-right spanwidth">关联按钮</span>
+				<div class="panelbutton" style="width: 500px; min-height: 150px; display: inline-block;"></div>
+				<i id="buttonid" ng-click="onfindbutton()" class="glyphicon glyphicon-search"></i>
+			</div>
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">菜单链接</span> <input class="form-control" style="height: 30px;" type="text" name="url"
 					ng-model="formData.url" maxlength="100">
@@ -339,12 +464,15 @@
 	</form>
 </body>
 <script type="text/javascript">
-  $(function(){
-		$(document).on("click",".panel>label>i",function(){//删除选中的值
+	$(function() {
+		$(document).on("click", ".panel>label>i", function() {//删除选中的值
 			var ele = $(this).parent();
 			$(ele).remove();
 		});
-		
+		$(document).on("click", ".panelbutton>label>i", function() {//删除选中的值
+			var ele = $(this).parent();
+			$(ele).remove();
+		});
 	})
-  </script>
+</script>
 </html>

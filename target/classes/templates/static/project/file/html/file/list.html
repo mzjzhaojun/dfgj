@@ -18,7 +18,7 @@
     <script type="text/javascript">
     	var flag = true;
 		var list = angular.module("list", []);
-		list.controller("listController",function($scope, $http) {		
+		list.controller("controller",function($scope, $http) {		
 			var ids = "";
 	
 			$scope.toInfo=function(task){
@@ -101,7 +101,7 @@
 		})
 		
 		function confirmDeletion(){
-			 var appElement = document.querySelector('[ng-controller=listController]');
+			 var appElement = document.querySelector('[ng-controller=controller]');
 			var $scope = angular.element(appElement).scope(); 
 			$scope.onDelete();
 		}
@@ -109,7 +109,7 @@
 	</script>
   </head>
   
-  <body ng-controller="listController">
+  <body ng-controller="controller">
   
   
     	<h5>	
@@ -144,8 +144,8 @@
 					<td  ng-dblclick="toInfo(task)">{{task.file.createtime}}</td>
 					<td>
 						<div  >
-						<h4 ng-click="toInfo(task)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" title="查看"></h4>
-	    		        <h4 ng-click="toDelete(task)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;" title="删除"></h4>
+						<h4 ng-click="toInfo(task)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ng-show="isShowInfo" title="查看"></h4>
+	    		        <h4 ng-click="toDelete(task)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;"  ng-show="isShowDelete" title="删除"></h4>
 				  		</div>
 					</td>
 				  </tr>

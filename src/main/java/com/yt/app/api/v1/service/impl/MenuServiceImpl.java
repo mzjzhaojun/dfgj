@@ -1,6 +1,7 @@
 package com.yt.app.api.v1.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -79,6 +80,19 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 			}
 		}
 		return i;
+	}
+
+	@Override
+	public Menu get(Long id) {
+		Menu m = mapper.get(id);
+		List<String> lists = Arrays.asList(m.getButtonIds().split(","));
+		List<Button> listb = new ArrayList<Button>();
+		for (String s : lists) {
+			Button b = buttonmapper.get(Long.valueOf(s));
+			listb.add(b);
+		}
+		m.setButtons(listb);
+		return m;
 	}
 
 	@Override

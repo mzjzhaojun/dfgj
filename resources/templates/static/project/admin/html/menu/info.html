@@ -1,252 +1,291 @@
 <!DOCTYPE html>
 <html ng-app="info">
-  <head>
-    <title>用户管理-查看</title>
-	
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="this is my page">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
-    <link rel="stylesheet" type="text/css" href="../../../../resource/css/font-awesome.css">
-    <link rel="stylesheet" href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
-    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/response.js"></script>
-    
-    <script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.core-3.5.js"></script>
-    <script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.excheck-3.5.js"></script>
-     
-    <script type="text/javascript">
-		var info = angular.module("info", []);
-		info.controller("infoController",function($scope, $http) {
-			var sysId;
-			$scope.tasks={};
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-			$http({
-					url:parent.getFunctionLinksHref("self"),
-					method:'GET',
-					dataType : "json",
-					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-					withCredentials: true,
-					data: ''
-					}).success(function(data, status, headers, config){
-						//响应成功
-						$scope.tasks= data;
-						sysId=data.sys_id;
-						$scope.onTree($scope.tasks.id);
-						if(data.level!=71){//不为一级时才有父级
-							$scope.onTreep($scope.tasks.parent_id);
-						}
-						$scope.loadSys();
-					}).error(function(data, status, headers, config){
-						//处理响应失败
-						response(status);
-					});
-			 $scope.loadSys=function(){
-		    	   /*加载系 统*/
-					$http.get(parent.getMenuLinksHref("menusys"),{headers:{'Content-Type': 'application/json;charset=UTF-8;'}}).success( function(response) {
-						$scope.syss = response;
-						 for(var i in $scope.syss){
-								if(sysId==$scope.syss[i].id){
-									$scope.tasks.sys_id =$scope.syss[i].id;
-								}
-				               
-				            }  
-					});
-		}
-			
-			/* 生成关联链显示区域 */		
-				$scope.onTree=function(id){
+<head>
+<title>用户管理-查看</title>
 
-					var data = {"menu_id":id};
-					$http({
-						url:parent.getMenuLinksHref("menulistLinks"),
-						method:'POST',
-						dataType : "json",
-						headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-						withCredentials: true,
-						data: data
-			  		}).success(function(data, status, headers, config){
-			  		var html="";
-		  			for(var i = 0;i<data.length;i++){
-						 var obj = angular.fromJson(data[i]);  
-						 html +='<label></i><span id="'+obj.id+'">'+obj.name+'</span></label>';	
-					}
-		  			 $(".panel").append(html);
-			  		}).error(function(data, status, headers, config){
-						//处理响应失败
-			  			response(status);
-					})
-					
-				}
-				
-				/* 生成父级树 */	
-				var settingp = {
-						check: {
-							enable: true,
-							chkStyle: "radio",
-							radioType: "all"
-						},
-						data: {
-							simpleData: {
-								enable: true
-							}
-						},
-						callback: {
-							onCheck: changeNodep
-						}
-					};
-						
-					$scope.onTreep=function(pid){
-						var zNodes;
-						$http({
-							url:parent.getMenuLinksHref("menuptree"),
-							method:'POST',
-							dataType : "json",
-							headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-							withCredentials: true,
-							data: JSON.stringify($scope.tasks)
-				  		}).success(function(data, status, headers, config){
-				  			zNodes=data;
-				  			/* for(var i=0;i<zNodes.length;i++){
-				  				zNodes[i].chkDisabled=true;
-				  				if(zNodes[i].id==pid){
-				  					zNodes[i].checked=true;
-				  				}
-				  			} */
-				  			zNodes[0].open=true;//默认打开第一个
-				  			$.fn.zTree.init($("#ptree"), settingp, zNodes);
-				  		}).error(function(data, status, headers, config){
-							//处理响应失败
-				  			response(status);
-						})
-						
-					}
-					var pid="";
-					function changeNodep(){
-						linkIds="";//每次点选后重置重新获取
-						var zTree = $.fn.zTree.getZTreeObj("ptree");
-						var checkNode = zTree.getCheckedNodes(); 
-						pid=checkNode[0].id;
-						var level = checkNode[0].level+1;
-						$("#level").val(checkNode[0].level+1);
-					}
-					/* 字典加载 */
-					$http({//菜单等级
-						url:parent.getMenuLinksHref("admindictionarylist"),
-						method:'POST',
-						dataType : "json",
-						headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-						withCredentials: true,
-						data: JSON.stringify({"typecode":30})
-						}).success(function(data, status, headers, config){
-							$scope.paytstaust = data;
-							/* for(var i in $scope.status){
-								if(paystatusid==$scope.status[i].dictionary.code){
-									$scope.formData.paystatus =$scope.dictionary.code;
-								}
-				               
-				            }  */
-						}).error(function(data, status, headers, config){
-							//处理响应失败
-							response(status);
-						});	
-					$http({//是否显示
-						url:parent.getMenuLinksHref("admindictionarylist"),
-						method:'POST',
-						dataType : "json",
-						headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-						withCredentials: true,
-						data: JSON.stringify({"typecode":40})
-						}).success(function(data, status, headers, config){
-							$scope.isShow = data;
-							/* for(var i in $scope.status){
-								if(paystatusid==$scope.status[i].dictionary.code){
-									$scope.formData.paystatus =$scope.dictionary.code;
-								}
-				               
-				            }  */
-						}).error(function(data, status, headers, config){
-							//处理响应失败
-							response(status);
-						});
-		})
-	</script>
-	<style type="text/css">
-		.panel{margin-bottom:-5px;}
-		.input-group-sm > i{
-			position:relative;
-			left:10px;
-			top:50px;
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/font-awesome.css">
+<link rel="stylesheet" href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+
+<script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.excheck-3.5.js"></script>
+
+<script type="text/javascript">
+	var info = angular.module("info", []);
+	info.controller("controller", function($scope, $http) {
+		var sysId;
+		$scope.tasks = {};
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
 		}
-	</style>
-  </head>
-  <body ng-controller="infoController">
-  		 <!-- 操作按钮操作区 -->
-  		 <div class="col-lg-12 topActionPanel">
-	        <div>
-	    	<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
-    		</div>
-    	</div>
-   		<div class="col-lg-6 viewFixedWidth">
-   		
-   		<div class="input-group input-group-sm">
-	            <span  class="input-group-addon text-right spanwidth">菜单名称：</span>
-	            <input type="text" class="form-control" value="{{tasks.name}}" disabled>
-	        </div>
-	        <div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统</span>
-				<select id="sysId" class="form-control" ng-model="tasks.sys_id" ng-options="sys.id as sys.name for sys in syss" disabled="none">
-					<option value="">请选择系统</option>
-				</select>
-	        </div>
-	        <div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">菜单等级</span>
-				<select class="form-control required" ng-model="tasks.level" id="level" name="level"  ng-options="dic.dictionary.code as dic.dictionary.name for dic in paytstaust" disabled>
-					<option value="">请选择菜单等级</option>
-				</select>
-	        </div>
-		    <div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">父级菜单：</span>
-				<ul id="ptree" class="ztree" style="width:260px; overflow:auto;height: 100px"></ul>
-	        </div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">关联链接：</span>
-				 <div class="panel" style="width:500px;min-height: 150px;display: inline-block;">
-			      
-			     </div>
-	        </div>
-			
+		$http({
+			url : parent.getFunctionLinksHref("self"),
+			method : 'GET',
+			dataType : "json",
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			withCredentials : true,
+			data : ''
+		}).success(function(data, status, headers, config) {
+			//响应成功
+			$scope.tasks = data;
+			sysId = data.sys_id;
+			$scope.onTree($scope.tasks.id);
+			if (data.level != 71) {//不为一级时才有父级
+				$scope.onTreep($scope.tasks.parent_id);
+			}
+			$scope.onButton(data.buttons);
+			$scope.loadSys();
+		}).error(function(data, status, headers, config) {
+			//处理响应失败
+			response(status);
+		});
+		$scope.loadSys = function() {
+			/*加载系 统*/
+			$http.get(parent.getMenuLinksHref("menusys"), {
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				}
+			}).success(function(response) {
+				$scope.syss = response;
+				for ( var i in $scope.syss) {
+					if (sysId == $scope.syss[i].id) {
+						$scope.tasks.sys_id = $scope.syss[i].id;
+					}
+
+				}
+			});
+		}
+
+		/* 生成关联链显示区域 */
+		$scope.onTree = function(id) {
+
+			var data = {
+				"menu_id" : id
+			};
+			$http({
+				url : parent.getMenuLinksHref("menulistLinks"),
+				method : 'POST',
+				dataType : "json",
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				withCredentials : true,
+				data : data
+			}).success(
+					function(data, status, headers, config) {
+						var html = "";
+						for (var i = 0; i < data.length; i++) {
+							var obj = angular.fromJson(data[i]);
+							html += '<label></i><span id="'+obj.id+'">'
+									+ obj.name + '</span></label>';
+						}
+						$(".panel").append(html);
+					}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+
+		}
+
+		/* 生成关联链显示区域 */
+		$scope.onButton = function(data) {
+			var html = "";
+			for (var i = 0; i < data.length; i++) {
+				var obj = angular.fromJson(data[i]);
+				html += '<label></i><span id="'+obj.id+'">' + obj.name
+						+ '</span></label>';
+			}
+			$(".panelbutton").append(html);
+		}
+
+		/* 生成父级树 */
+		var settingp = {
+			check : {
+				enable : true,
+				chkStyle : "radio",
+				radioType : "all"
+			},
+			data : {
+				simpleData : {
+					enable : true
+				}
+			},
+			callback : {
+				onCheck : changeNodep
+			}
+		};
+
+		$scope.onTreep = function(pid) {
+			var zNodes;
+			$http({
+				url : parent.getMenuLinksHref("menuptree"),
+				method : 'POST',
+				dataType : "json",
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				withCredentials : true,
+				data : JSON.stringify($scope.tasks)
+			}).success(function(data, status, headers, config) {
+				zNodes = data;
+				/* for(var i=0;i<zNodes.length;i++){
+					zNodes[i].chkDisabled=true;
+					if(zNodes[i].id==pid){
+						zNodes[i].checked=true;
+					}
+				} */
+				zNodes[0].open = true;//默认打开第一个
+				$.fn.zTree.init($("#ptree"), settingp, zNodes);
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			})
+
+		}
+		var pid = "";
+		function changeNodep() {
+			linkIds = "";//每次点选后重置重新获取
+			var zTree = $.fn.zTree.getZTreeObj("ptree");
+			var checkNode = zTree.getCheckedNodes();
+			pid = checkNode[0].id;
+			var level = checkNode[0].level + 1;
+			$("#level").val(checkNode[0].level + 1);
+		}
+		/* 字典加载 */
+		$http({//菜单等级
+			url : parent.getMenuLinksHref("admindictionarylist"),
+			method : 'POST',
+			dataType : "json",
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			withCredentials : true,
+			data : JSON.stringify({
+				"typecode" : 30
+			})
+		}).success(function(data, status, headers, config) {
+			$scope.paytstaust = data;
+			/* for(var i in $scope.status){
+				if(paystatusid==$scope.status[i].dictionary.code){
+					$scope.formData.paystatus =$scope.dictionary.code;
+				}
 			   
-			 <div class="input-group input-group-sm">
-	            <span  class="input-group-addon text-right spanwidth">菜单链接：</span>
-	        	<input type="text" class="form-control" value="{{tasks.url}}" disabled>
-	        </div>	
-		  <!--   <div class="input-group input-group-sm">
+			}  */
+		}).error(function(data, status, headers, config) {
+			//处理响应失败
+			response(status);
+		});
+		$http({//是否显示
+			url : parent.getMenuLinksHref("admindictionarylist"),
+			method : 'POST',
+			dataType : "json",
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			withCredentials : true,
+			data : JSON.stringify({
+				"typecode" : 40
+			})
+		}).success(function(data, status, headers, config) {
+			$scope.isShow = data;
+			/* for(var i in $scope.status){
+				if(paystatusid==$scope.status[i].dictionary.code){
+					$scope.formData.paystatus =$scope.dictionary.code;
+				}
+			   
+			}  */
+		}).error(function(data, status, headers, config) {
+			//处理响应失败
+			response(status);
+		});
+	})
+</script>
+<style type="text/css">
+.panel {
+	margin-bottom: -5px;
+}
+
+.panelbutton {
+	margin-bottom: -5px;
+	border: solid 1px #ccc;
+}
+
+.input-group-sm>i {
+	position: relative;
+	left: 10px;
+	top: 50px;
+}
+</style>
+</head>
+<body ng-controller="controller">
+	<!-- 操作按钮操作区 -->
+	<div class="col-lg-12 topActionPanel">
+		<div>
+			<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-show="isCancel">返 回</button>
+		</div>
+	</div>
+	<div class="col-lg-6 viewFixedWidth">
+
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">菜单名称：</span> <input type="text" class="form-control" value="{{tasks.name}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">系&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统</span> <select id="sysId"
+				class="form-control" ng-model="tasks.sys_id" ng-options="sys.id as sys.name for sys in syss" disabled="none">
+				<option value="">请选择系统</option>
+			</select>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">菜单等级</span> <select class="form-control required" ng-model="tasks.level" id="level" name="level"
+				ng-options="dic.dictionary.code as dic.dictionary.name for dic in paytstaust" disabled>
+				<option value="">请选择菜单等级</option>
+			</select>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">父级菜单：</span>
+			<ul id="ptree" class="ztree" style="width: 260px; overflow: auto; height: 100px"></ul>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">关联链接：</span>
+			<div class="panel" style="width: 500px; min-height: 150px; display: inline-block;"></div>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">关联按钮</span>
+			<div class="panelbutton" style="width: 500px; min-height: 150px; display: inline-block;"></div>
+		</div>
+
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">菜单链接：</span> <input type="text" class="form-control" value="{{tasks.url}}" disabled>
+		</div>
+		<!--   <div class="input-group input-group-sm">
 	            <span  class="input-group-addon text-right spanwidth">菜单图标：</span>
 	            <input type="text" class="form-control" value="{{tasks.icon}}" disabled>
 	            <img id="image" src="{{tasks.icon}}" style="height: 40px;width: 40px;border: solid 1px #ccc;">
 	        </div> -->
-	         
-	          <div class="input-group input-group-sm">
-	            <span  class="input-group-addon text-right spanwidth">同级顺序：</span>
-	        	<input type="text" class="form-control" value="{{tasks.order_no}}" disabled>
-	        </div>
-	          <div class="input-group input-group-sm">
-	            <span  class="input-group-addon text-right spanwidth">菜单顺序：</span>
-	        	<input type="text" class="form-control" value="{{tasks.sortno}}" disabled>
-	        </div>
-	         <div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">是否显示</span>
-				<select class="form-control required" ng-model="tasks.is_show"  name="is_show" ng-options="dic.dictionary.code as dic.dictionary.name for dic in isShow" disabled>
-					<option value="">请选择是否显示</option>
-				</select>
-	        </div>
-   	</div>
-  </body>
+
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">同级顺序：</span> <input type="text" class="form-control" value="{{tasks.order_no}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">菜单顺序：</span> <input type="text" class="form-control" value="{{tasks.sortno}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">是否显示</span> <select class="form-control required" ng-model="tasks.is_show" name="is_show"
+				ng-options="dic.dictionary.code as dic.dictionary.name for dic in isShow" disabled>
+				<option value="">请选择是否显示</option>
+			</select>
+		</div>
+	</div>
+</body>
 </html>

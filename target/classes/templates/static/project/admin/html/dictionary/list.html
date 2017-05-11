@@ -7,35 +7,23 @@
 <meta http-equiv="description" content="this is my page">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
-<link rel="stylesheet" type="text/css"
-	href="../../../../resource/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="../../../../resource/css/list.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/list.css">
 
-<link rel="stylesheet" type="text/css"
-	href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css">
-<link rel="stylesheet" type="text/css"
-	href="../../../../resource/css/zTree/sysmenu.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/zTreeStyle/zTreeStyle.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/zTree/sysmenu.css">
 
-<script type="text/javascript"
-	src="../../../../resource/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript"
-	src="../../../../resource/js/angular-1.0.1.min.js"></script>
-<script type="text/javascript"
-	src="../../../../resource/js/zTree/js/jquery.ztree.all-3.5.js"></script>
-<script type="text/javascript"
-	src="../../../../resource/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.all-3.5.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery.cookie.js"></script>
 
 <!-- 弹出框 -->
 
-<script type="text/javascript"
-	src="../../../../resource/js/artDialog/skins/js/artDialog.source.js"></script>
-<script type="text/javascript"
-	src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
-<script type="text/javascript"
-	src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
-<script type="text/javascript"
-	src="../../../../resource/js/getUrlParam.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+<script type="text/javascript" src="../../../../resource/js/getUrlParam.js"></script>
 
 <!-- 分页 -->
 <script type="text/javascript" src="../../../../resource/js/paging.js"></script>
@@ -44,7 +32,7 @@
 		var flag = true;
 		var list = angular.module("list", []);
 	
-		list.controller("listController",function($scope, $http) {	
+		list.controller("controller",function($scope, $http) {	
 			$scope.sys={};
 			$scope.sysinit = function(){					
 				var url =parent.getMenuLinksHref("menusys");
@@ -169,7 +157,7 @@
 		
 		
 		function confirmDeletion(){
-			var appElement = document.querySelector('[ng-controller=listController]');
+			var appElement = document.querySelector('[ng-controller=controller]');
 			var $scope = angular.element(appElement).scope();
 			$scope.onDelete();
 		}
@@ -207,7 +195,7 @@
 					var cityObj = $("#sysSel");
 					cityObj.attr("value", v);
 					//treeNode.linkUrl;
-					var appElement = document.querySelector('[ng-controller=listController]');
+					var appElement = document.querySelector('[ng-controller=controller]');
 					var $scope = angular.element(appElement).scope();
 					$scope.sys.linkUrl=treeNode.linkUrl;
 					$.cookie('sysName', v,{ path: '/' });
@@ -237,22 +225,15 @@
 	</script>
 </head>
 
-<body ng-controller="listController" style="color: #000;">
+<body ng-controller="controller" style="color: #000;">
 	<!-- 基本操作区 -->
 	<h5>
-		<span class="glyphicon glyphicon-search"
-			style="margin: 0px 5px; color: #99DFF8;"></span> <input type="text"
-			id="name" class="form-control" value="" placeholder="请输入需要查找的单项名称"
-			style="width: 20%; display: inline;"> <i
-			class="glyphicon glyphicon-remove" onclick="removeSearch()"></i>
-		&nbsp;&nbsp;系统： <select class="sysSel"
-			style="background-color: #fff; font-size: 12px;" id="linkUrl"
-			ng-model="linkUrl"
+		<span class="glyphicon glyphicon-search" style="margin:0px 5px;color:#99DFF8;"></span> <input type="text" id="name" class="form-control" value=""
+			placeholder="请输入需要查找的单项名称" style="width: 20%; display: inline;"> <i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i>
+		&nbsp;&nbsp;系统： <select class="sysSel" style="background-color: #fff; font-size: 12px;" id="linkUrl" ng-model="linkUrl"
 			ng-options="sys.linkUrl as sys.name for sys in datas">
-		</select> <a class="btn btn-primary" style="margin: 0px auto; width: 80px;"
-			href="#" role="button" ng-click="onsearch()">搜索</a> <a
-			class="btn btn-primary" style="margin: 0px auto; width: 80px;"
-			href="#" role="button" ng-click="onAdd()">添加字典</a>
+		</select> <a class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onSearch()" ng-show="isSearchList">搜索</a> <a class="btn btn-primary"
+			style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onAdd()" ng-show="isSava">添加字典</a>
 	</h5>
 	<!-- 列表区 -->
 	<table class="table">
@@ -268,8 +249,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="task in tasks" class='tr{{$index%2+2}}'
-				ng-class="{selected: $index==selectedRow}">
+			<tr ng-repeat="task in tasks" class='tr{{$index%2+2}}' ng-class="{selected: $index==selectedRow}">
 				<td>{{$index+1}}</td>
 				<td ng-dblclick="toInfo(task)">{{task.dictionary.code}}</td>
 				<td ng-dblclick="toInfo(task)">{{task.dictionary.name}}</td>
@@ -277,12 +257,9 @@
 				<td ng-dblclick="toInfo(task)">{{task.dictionary.typename}}</td>
 
 				<td>
-					<h4 ng-click="toInfo(task)" class="glyphicon glyphicon-search"
-						style="margin: 0px 5px; color: #99DFF8;" title="查看"></h4>
-					<h4 ng-click="toUpdate(task)" class="glyphicon glyphicon-pencil"
-						style="margin: 0px 5px; color: #99DFF8;" title="修改"></h4>
-					<h4 ng-click="toDelete(task)" class="glyphicon glyphicon-remove"
-						style="margin: 0px 5px; color: #99DFF8;" title="删除"></h4>
+					<h4 ng-click="toInfo(task)" class="glyphicon glyphicon-search" style="margin:0px 5px;color:#99DFF8;" ng-show="isShowInfo" title="查看"></h4>
+					<h4 ng-click="toUpdate(task)" class="glyphicon glyphicon-pencil" style="margin:0px 5px;color:#99DFF8;"  ng-show="isShowUpdate" title="修改"></h4>
+					<h4 ng-click="toDelete(task)" class="glyphicon glyphicon-remove" style="margin:0px 5px;color:#99DFF8;"  ng-show="isShowDelete" title="删除"></h4>
 				</td>
 			</tr>
 		</tbody>
@@ -290,24 +267,19 @@
 	<!-- 分页区 -->
 	<div class="pagepanel">
 		<div class="pagepanel">
-			<span class="text-info" style="position: relative; top: -10px;">共<label
-				id="totalCount"></label>条
+			<span class="text-info" style="position: relative; top: -10px;">共<label id="totalCount"></label>条
 			</span>
 			<ul class="pagination" style="margin: 0px 10px; padding: 0px;">
 			</ul>
-			<span class="text-info" style="position: relative; top: -10px;">第<label
-				id="pageNo"></label>页/共<label id="pageCount"></label>页
-			</span> <select id="pageSize" class="form-control"
-				style="width: 70px; float: right;">
+			<span class="text-info" style="position: relative; top: -10px;">第<label id="pageNo"></label>页/共<label id="pageCount"></label>页
+			</span> <select id="pageSize" class="form-control" style="width: 70px; float: right;">
 
 
 
-			</select> <span class="text-info"
-				style="position: relative; top: 6px; float: right; margin: 0px 5px;">每页显示</span>
+			</select> <span class="text-info" style="position: relative; top: 6px; float: right; margin: 0px 5px;">每页显示</span>
 		</div>
 	</div>
-	<div id="menuContent" class="menuContent"
-		style="display: none; position: absolute;">
+	<div id="menuContent" class="menuContent" style="display: none; position: absolute;">
 		<ul id="treeDemo" class="ztree" style="margin-top: 0; width: 160px;"></ul>
 	</div>
 </body>

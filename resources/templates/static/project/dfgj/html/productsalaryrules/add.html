@@ -31,7 +31,7 @@
 <!-- 初始化 -->
 <script type="text/javascript">
 	var add = angular.module("add", []);
-	add.controller("addController", function($scope, $http) {
+	add.controller("controller", function($scope, $http) {
 		$scope.formData = {};
 		//返回
 		$scope.onReturn = function() {
@@ -96,15 +96,15 @@
 </script>
 </head>
 
-<body ng-controller="addController">
+<body ng-controller="controller">
 	<form method="post" id="saveForm" action="">
 		<!-- 操作按钮操作区 -->
 		<div class="col-lg-12 topActionPanel">
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onPreserved()">确 定</button>
+				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-show="isPost">确 定</button>
 			</div>
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onReturn()">返 回</button>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-show="isCancel">返 回</button>
 			</div>
 		</div>
 		<div class="col-lg-6">

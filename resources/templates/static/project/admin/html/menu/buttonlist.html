@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html ng-app="list">
+  <head>
+    <title>链接管理-list</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../../resource/css/list.css">
+    <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+   <!-- 弹出框 -->
+   
+	<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
+    <script type="text/javascript" src="../../../../resource/js/getUrlParam.js"></script>
+    
+    <!-- 分页 -->
+		<script type="text/javascript" src="../../../../resource/js/paging.js"></script>
+	<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+	 
+    <script type="text/javascript">
+		var flag = true;
+		var list = angular.module("list", []);
+		list.controller("controller",function($scope, $http) {	
+			//搜索
+			$scope.onSearch=function(){
+				$scope.pageList();
+			}
+			//翻页	
+			$scope.changePage=function(){
+				$scope.pageList();
+			}
+			//新增
+			$scope.onAdd=function(){
+				location.href="add.html";
+			}
+			
+			$scope.pageList = function(){
+				pageNo = parent.currentPage;
+			    var data = {"name":$("#name").val()};
+				$http({
+					url:parent.getMenuLinksHref("buttonlist"),
+					method:'POST',
+					dataType : "json",
+					headers: {'Content-Type': 'application/json;charset=UTF-8;',"pageNo":pageNo,"pageSize":pageSize},//,"pageSize":"10"
+					withCredentials: true,
+					data: JSON.stringify(data)
+					}).success(function(data, status, headers, config){
+						//响应成功
+						totalCount = headers('totalCount');
+						pageCount = headers('pageCount');
+						$scope.tasks= data;
+						paging();
+						initPage();
+					}).error(function(data, status, headers, config){
+						//处理响应失败
+						response(status);
+					});
+			}
+			$scope.pageList();
+			var linksArr = [];
+			//保存
+    		$scope.onPreserved=function(){
+    			var tbody = $(".table").find("tbody");
+    			var tbody_tr = $(tbody).find("tr");
+    			var links = tbody_tr.find("td>div[class='checkbox1 checked1']");
+    			linksArr.length = 0;
+    			for(var i = 0;i<links.length;i++){
+    				 var ele = $(links[i]);
+    				 var link = ele.attr("links");
+    				 linksArr.push(link);
+    			} 
+    			art.dialog.data("data", linksArr);
+				var dialogId = art.dialog.data("dialogId1");
+				art.dialog.removeData("dialogId1");
+				art.dialog.close(dialogId);
+    		}
+			
+		})
+		
+		function confirmDeletion(){
+			var appElement = document.querySelector('[ng-controller=controller]');
+			var $scope = angular.element(appElement).scope();
+			$scope.onDelete();
+		}
+		$(function(){
+			$("#all").click(function(){
+				var className = $(this).attr("class");
+				if(className == "checkbox"){//全选
+					$(this).removeClass("checkbox").addClass("checked");
+					$(".checkbox1").addClass("checked1").removeClass("check_box");
+				}else{//全部取消
+					$(this).removeClass("checked").addClass("checkbox");
+					$(".checkbox1").addClass("check_box").removeClass("checked1");
+				}
+			})
+			$(document).on("click",".checkbox1",function(){
+				var className = $(this).attr("class");
+				if(className == "checkbox1 check_box"){//选中
+					$(this).removeClass("check_box").addClass("checked1");
+				}else{//取消
+					$(this).addClass("check_box").removeClass("checked1");
+				}
+			})
+		})
+		
+	</script>
+  </head>
+  
+  <body ng-controller="controller" style="color: #000;">
+  	<!-- 基本操作区 -->
+  	<h5>
+  		<span class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ></span>
+  		<input type="text" id="name" class="form-control" value="" placeholder="请输入需要查找的链接名" style="width: 20%;display: inline;">
+  		<i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i>
+  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onSearch()" ng-show="isSearchList">快速搜索</a>
+  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onPreserved()" ng-show="isPost">确认选择</a>
+  	</h5>
+  	<!-- 列表区 -->
+  	<table class="table">
+	  <thead>
+	    <tr  class="info">
+	      <th class="text-center"><div id="all" class="checkbox"></div></th>
+	      <th class="text-center">按钮名称</th>
+	      <th class="text-center">按钮编码</th>
+	      <th class="text-center">链接</th>
+	      <!-- <th class="text-center">相关操作</th> -->
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr ng-repeat="task in tasks"  class='tr{{$index%2+2}}'  ng-class="{selected: $index==selectedRow}">
+		    <td class="text-center"><div class="checkbox1 check_box" links="{{task}}"></div></td>
+			<td class="text-center">{{task.button.name}}</td>
+			<td class="text-center">{{task.button.code}}</td>
+			<td class="text-center">{{task.link.href}}</td>
+			<!-- <td class="text-center">
+	    		<h4 ng-click="toInfo(task.links)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ng-show="isShowInfo" title="查看"></h4>
+	    		<h4 ng-click="toUpdate(task.links)" class="glyphicon glyphicon-pencil"  style="margin:0px 5px;color:#99DFF8;"  ng-show="isShowUpdate" title="修改"></h4>
+	    		<h4 ng-click="toDelete(task.links)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;"  ng-show="isShowDelete" title="删除"></h4>
+			</td> -->
+	    </tr>
+	  </tbody>
+	</table>
+		<!-- 分页区 -->
+	<div class="pagepanel">
+		<span class="text-info" style="position:relative;top:-10px;">共<label id="totalCount"></label>条</span>
+		<ul class="pagination" style="margin: 0px 10px;padding:0px;">
+		</ul>
+		<span class="text-info" style="position:relative;top:-10px;">第<label id="pageNo"></label>页/共<label id="pageCount"></label>页</span>
+		<select id="pageSize" class="form-control" style="width: 70px;float: right;">
+		</select>
+		<span class="text-info" style="position:relative;top:6px;float: right;margin: 0px 5px;">每页显示</span>
+	</div>
+  </body>
+</html>

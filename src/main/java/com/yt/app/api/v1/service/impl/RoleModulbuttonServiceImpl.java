@@ -11,9 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.yt.app.api.v1.entity.Button;
 import com.yt.app.api.v1.entity.Menu;
+import com.yt.app.api.v1.entity.RoleMenu;
 import com.yt.app.api.v1.entity.RoleModulbutton;
 import com.yt.app.api.v1.mapper.ButtonMapper;
 import com.yt.app.api.v1.mapper.MenuMapper;
+import com.yt.app.api.v1.mapper.RoleMenuMapper;
 import com.yt.app.api.v1.mapper.RoleModulbuttonMapper;
 import com.yt.app.api.v1.service.RoleModulbuttonService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
@@ -35,9 +37,14 @@ public class RoleModulbuttonServiceImpl extends BaseServiceImpl<RoleModulbutton,
 	@Autowired
 	private ButtonMapper buttonMapper;
 
+	@Autowired
+	private RoleMenuMapper rolemenumapper;
+
 	@Override
 	public List<Menu> getModulsByRoleId(String roleId) {
-		List<Menu> listmodul = menumapper.list(null);
+		List<RoleMenu> listrolemenu = rolemenumapper.getroleid(Long.valueOf(roleId));
+		long[] mids = listrolemenu.stream().mapToLong(RoleMenu::getMenu_id).distinct().toArray();
+		List<Menu> listmodul = menumapper.listByArrayId(mids);
 		List<Button> listButton = buttonMapper.list(null);
 		List<Button> resultButton = new ArrayList<Button>();
 		Map<String, Object> param = new HashMap<String, Object>();
