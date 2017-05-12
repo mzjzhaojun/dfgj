@@ -50,7 +50,7 @@
 		<dependency>
 			<groupId>com.yt.app</groupId>
 			<artifactId>common</artifactId>
-			<version>5.0.1-RELEASES</version>
+			<version>5.1.1-RELEASES</version>
 		</dependency>
 		<!-- 图片处理 -->
 		<dependency>
