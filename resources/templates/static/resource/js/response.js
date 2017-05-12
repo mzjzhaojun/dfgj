@@ -1,6 +1,6 @@
 $(function() {
-	var appElement = document.querySelector('[ng-controller=controller]');
-	var $scope = angular.element(appElement).scope();
+	var controller = document.querySelector('[ng-controller=controller]');
+	var $scope = angular.element(controller).scope();
 	if ($scope != undefined) {
 		if (parent.menubuttons != undefined) {
 			for (var i = 0; i < parent.menubuttons.length; i++) {
@@ -38,10 +38,9 @@ $(function() {
 					$scope.isImport = true;
 				}
 			}
+			$scope.$apply()
 		}
-
 	}
-
 })
 
 /* 请求失败响应处理 */
@@ -50,12 +49,14 @@ function response(status) {
 		parent.art.dialog({
 			content : '登陆用户已过期,请重新登陆系统！',
 			lock : true,
-			time : 2,
+			time : 1800,
 			ok : function() {
 				parent.onLogin();
 			},
+			close : function() {
+				parent.onLogin();
+			}
 		});
-		parent.onLogin();
 	} else if (status == 400) {
 		parent.art.dialog({
 			content : '请求资源地址错误，请联系网络管理员！',

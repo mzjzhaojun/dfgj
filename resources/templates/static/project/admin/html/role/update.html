@@ -154,8 +154,8 @@
 
 <body ng-controller="controller">
 	<h5>
-		<span style="margin: 0px 10px;"></span> <a class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onPreserved()" ng-show="isPost">确认</a>
-		<a class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onReturn()" ng-show="isCancel">返回</a>
+		<span style="margin: 0px 10px;"></span> <a class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onPreserved()" ng-if="isPost">确认</a>
+		<a class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onReturn()" ng-if="isCancel">返回</a>
 		<div class="checkbox_all1">
 			<input type="checkbox" value="checkbox" id="allcheckbox" class="input" name="all" /> 选中全部
 		</div>

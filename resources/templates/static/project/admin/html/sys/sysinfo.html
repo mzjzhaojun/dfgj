@@ -15,138 +15,131 @@
 <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
-
 <script type="text/javascript" src="../../../../resource/js/zTree/js/jquery.ztree.all-3.5.js"></script>
-
 <script src="../../../../resource/js/date/js/eap.core.js"></script>
 <!-- 表单验证 -->
-
 <script type="text/javascript" src="../../../../resource/js/response.js"></script>
-<!-- 引用控制层插件样式 -->
 <link rel="stylesheet" href="../../../../resource/css/zyfile/control/css/zyUpload.css" type="text/css">
-<!-- 引用核心层插件 -->
 <script type="text/javascript" src="../../../../resource/js/zyfile/core/zyFile.js"></script>
-<!-- 引用控制层插件 -->
 <script type="text/javascript" src="../../../../resource/js/zyfile/control/js/zyUpload.js"></script>
 
 <script type="text/javascript">
-		
-		var info = angular.module("info", []);
-		info.controller("controller",function($scope, $http) {
-	//		var ids = UrlParm.parm("id");
-			// 获取一级数据
-			$scope.syslevel=function(){
+	var info = angular.module("info", []);
+	info.controller("controller", function($scope, $http) {
+		//		var ids = UrlParm.parm("id");
+		// 获取一级数据
+		$scope.syslevel = function() {
 			$http({
-					url:parent.getFunctionLinksHref("self"),
-					method:'GET',
-					dataType : "json",
-					withCredentials: true,
-					headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-					data: ''
-					}).success(function(data, status, headers, config){
-						//响应成功
-						$scope.formData = data.sys;
-						//$scope.leveldata = data.listsys;
-						if(data.listsys.length == 0){
-							$("#orhidden").hide();
-						}else{
-							for(var i=0;i<data.listsys.length;i++){
-								if((data.listsys[i]).id == data.sys.parent_id){
-									$scope.leveldata =data.listsys[i];
-								}
-							}
-						}
-						/* var icon = $scope.formData.icon != null ? $scope.formData.icon : '';
-						$("#demo").zyUpload({
-							width            :   "500px",                 // 宽度
-							height           :   "120px",                 // 宽度
-							itemWidth        :   "120px",                 // 文件项的宽度
-							itemHeight       :   "100px",                 // 文件项的高度
-							url              :   parent.sys.moreFileUrl,  // 上传文件的路径
-							multiple         :   true,                    // 是否可以多个文件上传
-							dragDrop         :   false,                    // 是否可以拖动上传文件
-							del              :   true,                    // 是否可以删除文件
-							finishDel        :   false, 				  // 是否在上传文件完成后删除预览
-							acitionType:"view", //info页面显示用的
-							uploadInput : $("#submit"),
-							onComplete : function(responseInfo) {
-								//submitForm(); // 上传完成的回调方法
-								$scope.onPreserved();
-							}
-						},{imgUrl:icon}); */
-					}).error(function(data, status, headers, config){
-						//处理响应失败
-						response(status);
-					});
-			}
-			$scope.syslevellist=function(){
-				$http({
-						url:parent.getMenuLinksHref("syslevellist"),
-						method:'GET',
-						dataType : "json",
-						withCredentials: true,
-						headers: {'Content-Type': 'application/json;charset=UTF-8;'},
-						data: ''
-						}).success(function(data, status, headers, config){
-							//响应成功
-							$scope.syss = data;
-						}).error(function(data, status, headers, config){
-							//处理响应失败					
-							response(status);
-						});
-				}
-			
-			
-			$scope.formData = {};
-			//返回
-			$scope.onReturn=function(){
-				history.go(-1);
-			}
-		
-			//判断是否可选类型
-			$scope.setIsShow = function(data){
-				if($scope.formData.level != '1') {
-					$("#orhidden").show();	
-					$http({
-						url:parent.getMenuLinksHref("syslevel"),
-						method:'GET',
-						dataType : "json",
-						data: ''
-						}).success(function(data, status, headers, config){
-							//响应成功
-							$scope.leveldata = data;
-						}).error(function(data, status, headers, config){
-							//处理响应失败
-							response(status);
-						});
-				} else {
+				url : parent.getFunctionLinksHref("self"),
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				//响应成功
+				$scope.formData = data.sys;
+				//$scope.leveldata = data.listsys;
+				if (data.listsys.length == 0) {
 					$("#orhidden").hide();
+				} else {
+					for (var i = 0; i < data.listsys.length; i++) {
+						if ((data.listsys[i]).id == data.sys.parent_id) {
+							$scope.leveldata = data.listsys[i];
+						}
+					}
 				}
-			}
-			$scope.syslevellist();
-			$scope.syslevel();
-		})
-		
-	
-		$(function(){
-			var expiration = new Date();
-			$("#createtime").val(expiration.formatDate("yyyy-MM-dd HH:mm:ss"));
-			$("#createtime").simpleDatepicker({
-				pattern:"yyyy-MM-dd HH:mm:ss"
-			 });
-			
-			$(function(){
-				var modifytime = new Date();
-				$("#modifytime").val(modifytime.formatDate("yyyy-MM-dd HH:mm:ss"));
-				$("#modifytime").simpleDatepicker({
-					pattern:"yyyy-MM-dd HH:mm:ss"
-				 });
-				
-				
+				/* var icon = $scope.formData.icon != null ? $scope.formData.icon : '';
+				$("#demo").zyUpload({
+					width            :   "500px",                 // 宽度
+					height           :   "120px",                 // 宽度
+					itemWidth        :   "120px",                 // 文件项的宽度
+					itemHeight       :   "100px",                 // 文件项的高度
+					url              :   parent.sys.moreFileUrl,  // 上传文件的路径
+					multiple         :   true,                    // 是否可以多个文件上传
+					dragDrop         :   false,                    // 是否可以拖动上传文件
+					del              :   true,                    // 是否可以删除文件
+					finishDel        :   false, 				  // 是否在上传文件完成后删除预览
+					acitionType:"view", //info页面显示用的
+					uploadInput : $("#submit"),
+					onComplete : function(responseInfo) {
+						//submitForm(); // 上传完成的回调方法
+						$scope.onPreserved();
+					}
+				},{imgUrl:icon}); */
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
 			});
+		}
+		$scope.syslevellist = function() {
+			$http({
+				url : parent.getMenuLinksHref("syslevellist"),
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				//响应成功
+				$scope.syss = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败					
+				response(status);
+			});
+		}
+
+		$scope.formData = {};
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+
+		//判断是否可选类型
+		$scope.setIsShow = function(data) {
+			if ($scope.formData.level != '1') {
+				$("#orhidden").show();
+				$http({
+					url : parent.getMenuLinksHref("syslevel"),
+					method : 'GET',
+					dataType : "json",
+					data : ''
+				}).success(function(data, status, headers, config) {
+					//响应成功
+					$scope.leveldata = data;
+				}).error(function(data, status, headers, config) {
+					//处理响应失败
+					response(status);
+				});
+			} else {
+				$("#orhidden").hide();
+			}
+		}
+		$scope.syslevellist();
+		$scope.syslevel();
+	})
+
+	/* $(function() {
+		var expiration = new Date();
+		$("#createtime").val(expiration.formatDate("yyyy-MM-dd HH:mm:ss"));
+		$("#createtime").simpleDatepicker({
+			pattern : "yyyy-MM-dd HH:mm:ss"
 		});
-		
-	</script>
+
+		$(function() {
+			var modifytime = new Date();
+			$("#modifytime").val(modifytime.formatDate("yyyy-MM-dd HH:mm:ss"));
+			$("#modifytime").simpleDatepicker({
+				pattern : "yyyy-MM-dd HH:mm:ss"
+			});
+
+		});
+	}); */
+</script>
 
 </head>
 
@@ -155,7 +148,7 @@
 		<!-- 操作按钮操作区 -->
 		<div class="col-lg-12 topActionPanel">
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-show="isCancel">返 回</button>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="isCancel">返 回</button>
 			</div>
 		</div>
 		<div class="col-lg-6">
@@ -180,11 +173,11 @@
 				<input type="hidden" id="icon" class="form-control inputchange" ng-model="formData.icon" />
 			</div> -->
 			<!--  创建日期 -->
-			<div class="input-group input-group-sm">
+			<!-- <div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">创建日期&nbsp;</span> <input style="width: 100%; height: 30px;" type="text"
 					value="{{formData.createtime}}" class="form-control dates" disabled="disabled">
 
-			</div>
+			</div> -->
 			<!--  修改日期   
 	       <div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">修改日期&nbsp;&nbsp;</span>

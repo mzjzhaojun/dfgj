@@ -94,8 +94,8 @@
   		<span class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ></span>
   		<input type="text" id="name" class="form-control" value="" placeholder="请输入需要查找的名称" style="width: 20%;display: inline;">
   		<i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i>
-  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onSearch()" ng-show="isSearchList">搜索</a>
-  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onAdd()" ng-show="isSava">添加</a>
+  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onSearch()" ng-if="isSearchList">搜索</a>
+  		<a class="btn btn-primary" style="margin: 0px auto;width: 80px;"  href="#" role="button" ng-click="onAdd()" ng-if="isSava">添加</a>
   	</h5>
   	<!-- 列表区 -->
   	<table class="table">
@@ -143,9 +143,9 @@
 			<td ng-dblclick="toInfo(data)">{{data.customerverifies.creatorname}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.customerverifies.createtime}}</td>
 			<td>
-	    		<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ng-show="isShowInfo" title="查看"></h4>
-	    		<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil"  style="margin:0px 5px;color:#99DFF8;"  ng-show="isShowUpdate" title="修改"></h4>
-	    		<h4 ng-click="toDelete(data)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;"  ng-show="isShowDelete" title="删除"></h4>
+	    		<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ng-if="isShowInfo" title="查看"></h4>
+	    		<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil"  style="margin:0px 5px;color:#99DFF8;"  ng-if="isShowUpdate" title="修改"></h4>
+	    		<h4 ng-click="toDelete(data)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;"  ng-if="isShowDelete" title="删除"></h4>
 			</td>
 	    </tr>
 	  </tbody>

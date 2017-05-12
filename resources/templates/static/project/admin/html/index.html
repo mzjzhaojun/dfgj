@@ -42,6 +42,7 @@
 				$.cookie('assetstoken', JSON.stringify(data), {
 					path : '/'
 				});
+				roleModul(configsys.sysUrl);
 			}).error(function(data, status, headers, config) {
 				response(status);
 			});
@@ -76,7 +77,7 @@
 				location.href = "/dfgj/static/project/login/html/index.html";
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
-				response(XMLHttpRequest.status);
+				location.href = "/dfgj/static/project/login/html/index.html";
 			}
 		});
 	}
@@ -470,7 +471,6 @@
 					}
 					rightArea();
 				});
-		roleModul(configsys.sysUrl);
 	})
 	function rightArea() {
 		var width = document.body.offsetWidth;
@@ -483,6 +483,7 @@
 		rightArea();
 	});
 	function getMenuLinks(menuname) {
+		menulinks = [];
 		var url;
 		$.each(menu, function(index, ele) {
 			if (ele.name == menuname) {
@@ -493,6 +494,7 @@
 		return url;
 	}
 	function getMenuButtons(menuname) {
+		menubuttons = [];
 		$.each(menu, function(index, ele) {
 			if (ele.name == menuname) {
 				menubuttons = ele.buttons;

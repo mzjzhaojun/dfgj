@@ -122,7 +122,7 @@
 				class="glyphicon glyphicon-th"></span></span>
 		</div>
 		<input type="hidden" id="dtp_input2" value="" /> <a class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button"
-			ng-click="onSearch()" ng-show="isSearchList">快速搜索</a>
+			ng-click="onSearch()" ng-if="isSearchList">快速搜索</a>
 	</h5>
 	<!-- 列表区 -->
 	<table class="table">
@@ -178,9 +178,9 @@
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.creatorname}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.modifiername}}</td>
 				<td>
-					<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search" style="margin:0px 5px;color:#99DFF8;" ng-show="isShowInfo" title="查看"></h4>
-					<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil" style="margin:0px 5px;color:#99DFF8;"  ng-show="isShowUpdate" title="修改"></h4>
-					<h4 ng-click="toDelete(data)" class="glyphicon glyphicon-remove" style="margin:0px 5px;color:#99DFF8;"  ng-show="isShowDelete" title="删除"></h4>
+					<h4 ng-click="toInfo(data)" class="glyphicon glyphicon-search" style="margin:0px 5px;color:#99DFF8;" ng-if="isShowInfo" title="查看"></h4>
+					<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil" style="margin:0px 5px;color:#99DFF8;"  ng-if="isShowUpdate" title="修改"></h4>
+					<h4 ng-click="toDelete(data)" class="glyphicon glyphicon-remove" style="margin:0px 5px;color:#99DFF8;"  ng-if="isShowDelete" title="删除"></h4>
 				</td>
 			</tr>
 		</tbody>

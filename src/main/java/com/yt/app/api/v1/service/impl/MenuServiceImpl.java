@@ -269,15 +269,15 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 		map.put("level", DictionaryResource.MENU_LEVLE_1);
 		map.put("sys_id", sys.getId());
 		map.put("array", ids);
-		List<Menu> menus = this.mapper.sysmenu(map);// 获取对应系统下所有一级菜单
-		if (!menus.isEmpty()) {// 加载对应的二级菜单
+		List<Menu> menus = this.mapper.sysmenu(map);
+		if (!menus.isEmpty()) {
 			map.put("level", DictionaryResource.MENU_LEVLE_2);
 			menus.stream().forEach(Menu -> {
-				Menu.setLinks(menuLinks(Menu.getId()));// 加载一级菜单下link
-					Menu.setButtons(menuButtons(Menu.getId(), roleid));
+				Menu.setLinks(menuLinks(Menu.getId()));
+				Menu.setButtons(menuButtons(Menu.getId(), roleid));
 					map.put("parent_id", Menu.getId());
-					List<Menu> child = this.mapper.sysmenu(map);// 获取对应子系统下对应一级菜单的子集菜单
-					if (!child.isEmpty()) {// 加载二级菜单下link
+					List<Menu> child = this.mapper.sysmenu(map);
+					if (!child.isEmpty()) {
 						child.stream().forEach(c -> {
 							c.setLinks(menuLinks(c.getId()));
 							c.setButtons(menuButtons(c.getId(), roleid));

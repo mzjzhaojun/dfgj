@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.yt.app.annotation.RedisCacheAnnotation;
 import com.yt.app.annotation.RedisCacheEvictAnnotation;
-import com.yt.app.api.v1.entity.AccountRole;
 import com.yt.app.api.v1.entity.Button;
 import com.yt.app.api.v1.entity.RoleModulbutton;
 import com.yt.app.common.base.IBaseMapper;
@@ -113,7 +112,7 @@ public interface RoleModulbuttonMapper extends IBaseMapper<RoleModulbutton> {
 	 * @param param
 	 * @return
 	 */
-	@RedisCacheAnnotation(classs = AccountRole.class)
+	@RedisCacheAnnotation(classs = RoleModulbutton.class)
 	List<RoleModulbutton> getModulGroupBy(Map<String, Object> param);
 
 	/**
@@ -122,7 +121,7 @@ public interface RoleModulbuttonMapper extends IBaseMapper<RoleModulbutton> {
 	 * @param param
 	 * @return
 	 */
-	@RedisCacheAnnotation(classs = AccountRole.class)
+	@RedisCacheAnnotation(classs = RoleModulbutton.class)
 	List<RoleModulbutton> getButtonByModul(Map<String, Object> param);
 
 	/**
@@ -131,7 +130,7 @@ public interface RoleModulbuttonMapper extends IBaseMapper<RoleModulbutton> {
 	 * @param param
 	 * @return
 	 */
-	@RedisCacheAnnotation(classs = AccountRole.class)
+	@RedisCacheAnnotation(classs = RoleModulbutton.class)
 	List<Button> getButtons(Map<String, Object> param);
 
 	/**
@@ -140,7 +139,7 @@ public interface RoleModulbuttonMapper extends IBaseMapper<RoleModulbutton> {
 	 * @param param
 	 * @return
 	 */
-	@RedisCacheAnnotation(classs = AccountRole.class)
+	@RedisCacheAnnotation(classs = RoleModulbutton.class)
 	RoleModulbutton getByRidMidBid(RoleModulbutton param);
 
 	/**
@@ -149,6 +148,6 @@ public interface RoleModulbuttonMapper extends IBaseMapper<RoleModulbutton> {
 	 * @param id
 	 * @return
 	 */
-	@RedisCacheEvictAnnotation(classs = AccountRole.class)
+	@RedisCacheEvictAnnotation(classs = RoleModulbutton.class)
 	Integer deleteByRoleId(String id);
 }
