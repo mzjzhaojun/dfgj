@@ -20,7 +20,7 @@ import com.yt.app.api.v1.entity.Button;
 import com.yt.app.api.v1.resource.ButtonResourceAssembler;
 import com.yt.app.api.v1.service.ButtonService;
 import com.yt.app.common.base.impl.BaseControllerImpl;
-import com.yt.app.frame.page.IPage;
+import com.yt.app.frame.m.IPage;
 
 /**
  * @author zj default test

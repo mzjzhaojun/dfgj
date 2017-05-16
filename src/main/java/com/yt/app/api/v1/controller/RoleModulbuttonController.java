@@ -26,7 +26,7 @@ import com.yt.app.api.v1.resource.MenuResourceAssembler;
 import com.yt.app.api.v1.resource.RoleModulbuttonResourceAssembler;
 import com.yt.app.api.v1.service.RoleModulbuttonService;
 import com.yt.app.common.base.impl.BaseControllerImpl;
-import com.yt.app.frame.page.IPage;
+import com.yt.app.frame.m.IPage;
 
 /**
  * @author zj default test

@@ -12,7 +12,7 @@ import com.yt.app.api.v1.service.RegionService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.api.v1.entity.Region;
 import com.yt.app.common.resource.DictionaryResource;
-import com.yt.app.frame.generate.GenerateId;
+import com.yt.app.frame.i.Ar;
 
 /**
  * @author huanghao
@@ -26,7 +26,7 @@ public class RegionServiceImpl extends BaseServiceImpl<Region, Long> implements 
 	@Autowired
 	private RegionMapper mapper;
 	@Autowired
-	private GenerateId idworker;
+	private Ar idworker;
 
 	@Override
 	public List<Region> getlist() {

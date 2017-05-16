@@ -17,9 +17,9 @@ import com.yt.app.api.v1.entity.Jobs;
 import com.yt.app.api.v1.entity.Orgbranches;
 import com.yt.app.api.v1.entity.Orgcampuses;
 import com.yt.app.api.v1.entity.Orgstaffjobs;
-import com.yt.app.frame.page.IPage;
-import com.yt.app.frame.page.PageBean;
-import com.yt.app.util.RequestUtil;
+import com.yt.app.frame.m.IPage;
+import com.yt.app.frame.m.PageBean;
+import com.yt.app.frame.p.RequestUtil;
 
 import java.util.List;
 import java.util.Map;

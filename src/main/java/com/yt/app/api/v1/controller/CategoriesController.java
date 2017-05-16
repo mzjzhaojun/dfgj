@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.yt.app.frame.page.IPage;
+import com.yt.app.frame.m.IPage;
 import io.swagger.annotations.ApiOperation;
 import com.yt.app.common.base.impl.BaseControllerImpl;
 import com.yt.app.api.v1.resource.CategoriesResourceAssembler;

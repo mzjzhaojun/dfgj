@@ -1,8 +1,10 @@
 package com.yt.app.api.v1.resource;
 
 import org.springframework.hateoas.ResourceSupport;
+
 import com.yt.app.api.v1.controller.FileController;
-import com.yt.app.modul.File;
+import com.yt.app.frame.k.File;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 /**

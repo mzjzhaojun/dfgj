@@ -12,9 +12,10 @@ import org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.yt.app.frame.config.AppConfig;
-import com.yt.app.frame.config.MySqlConfig;
-import com.yt.app.frame.config.RedisConfig;
+import com.yt.app.frame.c.AppConfig;
+import com.yt.app.frame.c.MySqlConfig;
+import com.yt.app.frame.c.RedisConfig;
+
 
 /**
  * Spring Boot main application class.

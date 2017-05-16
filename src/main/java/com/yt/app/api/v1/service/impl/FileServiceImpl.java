@@ -16,17 +16,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.yt.app.modul.File;
+import com.yt.app.frame.c.AppConfig;
+import com.yt.app.frame.i.Ar;
+import com.yt.app.frame.k.File;
 import com.yt.app.api.v1.entity.Potentialcustomers;
 import com.yt.app.api.v1.mapper.FileMapper;
 import com.yt.app.api.v1.mapper.PotentialcustomersMapper;
 import com.yt.app.api.v1.service.FileService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
-import com.yt.app.frame.config.AppConfig;
-import com.yt.app.frame.generate.GenerateId;
-import com.yt.app.util.DateTimeUtil;
-import com.yt.app.util.FileUtil;
+import com.yt.app.frame.p.DateTimeUtil;
+import com.yt.app.frame.p.FileUtil;
 
 /**
  * @author zj default
@@ -41,7 +41,7 @@ public class FileServiceImpl extends BaseServiceImpl<File, Long> implements File
 	@Autowired
 	private PotentialcustomersMapper potentialcustomersmapper;
 	@Autowired
-	private GenerateId generateid;
+	private Ar generateid;
 
 	@Autowired
 	AppConfig appConfig;

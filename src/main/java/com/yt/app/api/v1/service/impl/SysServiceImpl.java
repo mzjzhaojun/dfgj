@@ -13,8 +13,8 @@ import com.yt.app.api.v1.mapper.SysMapper;
 import com.yt.app.api.v1.service.SysService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
-import com.yt.app.frame.page.IPage;
-import com.yt.app.frame.page.PageBean;
+import com.yt.app.frame.m.IPage;
+import com.yt.app.frame.m.PageBean;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Sys;
 

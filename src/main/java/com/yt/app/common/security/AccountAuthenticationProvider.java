@@ -9,9 +9,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.yt.app.frame.config.AppConfig;
-import com.yt.app.frame.config.PasswordEncoders;
-import com.yt.app.frame.security.AccountAbstractUserDetailsAuthenticationProvider;
+import com.yt.app.frame.c.AppConfig;
+import com.yt.app.frame.d.Ah;
+import com.yt.app.frame.n.AccountAbstractUserDetailsAuthenticationProvider;
 
 /**
  * A Spring Security AuthenticationProvider which extends
@@ -39,7 +39,7 @@ public class AccountAuthenticationProvider extends AccountAbstractUserDetailsAut
 	 * A PasswordEncoder instance to hash clear test password values.
 	 */
 	@Autowired
-	private PasswordEncoders passwordEncoder;
+	private Ah passwordEncoder;
 
 	@Autowired
 	AppConfig appConfig;

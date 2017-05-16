@@ -8,9 +8,9 @@ import com.yt.app.api.v1.mapper.PosrecordsMapper;
 import com.yt.app.api.v1.service.PosrecordsService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.api.v1.entity.Posrecords;
-import com.yt.app.frame.page.IPage;
-import com.yt.app.frame.page.PageBean;
-import com.yt.app.util.RequestUtil;
+import com.yt.app.frame.m.IPage;
+import com.yt.app.frame.m.PageBean;
+import com.yt.app.frame.p.RequestUtil;
 import java.util.List;
 import java.util.Map;
 

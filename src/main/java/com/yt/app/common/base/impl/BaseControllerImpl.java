@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yt.app.common.base.IBaseController;
 import com.yt.app.common.base.IBaseService;
-import com.yt.app.frame.page.IPage;
+import com.yt.app.frame.m.IPage;
 
 import io.swagger.annotations.ApiOperation;
 

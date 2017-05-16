@@ -26,9 +26,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.yt.app.api.v1.resource.FileResourceAssembler;
 import com.yt.app.api.v1.service.FileService;
 import com.yt.app.common.base.impl.BaseControllerImpl;
-import com.yt.app.frame.page.IPage;
-import com.yt.app.modul.File;
-import com.yt.app.util.FileUtil;
+import com.yt.app.frame.m.IPage;
+import com.yt.app.frame.p.FileUtil;
+import com.yt.app.frame.k.File;
 
 /**
  * @author zj default test

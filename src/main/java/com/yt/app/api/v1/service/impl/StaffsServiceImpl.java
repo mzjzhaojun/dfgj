@@ -16,12 +16,12 @@ import com.yt.app.api.v1.mapper.StaffsMapper;
 import com.yt.app.api.v1.service.StaffsService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
-import com.yt.app.frame.config.PasswordEncoders;
-import com.yt.app.frame.page.IPage;
-import com.yt.app.frame.page.PageBean;
-import com.yt.app.util.DateTimeUtil;
-import com.yt.app.util.RequestUtil;
-import com.yt.app.util.StreamUtil;
+import com.yt.app.frame.d.Ah;
+import com.yt.app.frame.m.IPage;
+import com.yt.app.frame.m.PageBean;
+import com.yt.app.frame.p.DateTimeUtil;
+import com.yt.app.frame.p.RequestUtil;
+import com.yt.app.frame.p.StreamUtil;
 import com.yt.app.api.v1.entity.Account;
 import com.yt.app.api.v1.entity.AccountRole;
 import com.yt.app.api.v1.entity.Dictionary;
@@ -43,7 +43,7 @@ public class StaffsServiceImpl extends BaseServiceImpl<Staffs, Long> implements 
 	@Autowired
 	private AccountMapper accountmapper;
 	@Autowired
-	private PasswordEncoders passwordencoders;
+	private Ah passwordencoders;
 	@Autowired
 	private AccountRoleMapper accountrolemapper;
 

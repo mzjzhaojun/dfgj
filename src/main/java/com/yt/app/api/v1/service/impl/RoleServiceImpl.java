@@ -17,9 +17,9 @@ import com.yt.app.api.v1.mapper.SysMapper;
 import com.yt.app.api.v1.service.RoleService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
-import com.yt.app.frame.generate.GenerateId;
-import com.yt.app.frame.page.IPage;
-import com.yt.app.frame.page.PageBean;
+import com.yt.app.frame.i.Ar;
+import com.yt.app.frame.m.IPage;
+import com.yt.app.frame.m.PageBean;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Menu;
 import com.yt.app.api.v1.entity.Role;
@@ -46,7 +46,7 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 	@Autowired
 	private SysMapper sysMapper;
 	@Autowired
-	GenerateId idworker;
+	Ar idworker;
 
 	@Override
 	@Transactional

@@ -12,10 +12,10 @@ import com.yt.app.api.v1.mapper.OrganizationsMapper;
 import com.yt.app.api.v1.service.OrganizationsService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
-import com.yt.app.frame.page.IPage;
-import com.yt.app.frame.page.PageBean;
-import com.yt.app.util.RequestUtil;
-import com.yt.app.util.StreamUtil;
+import com.yt.app.frame.m.IPage;
+import com.yt.app.frame.m.PageBean;
+import com.yt.app.frame.p.RequestUtil;
+import com.yt.app.frame.p.StreamUtil;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Organizations;
 

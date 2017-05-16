@@ -13,9 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.yt.app.common.security.AccountAuthenticationProvider;
-import com.yt.app.frame.security.RESTAuthenticationEntryPoint;
-import com.yt.app.frame.security.RESTAuthenticationFailureHandler;
-import com.yt.app.frame.security.RESTAuthenticationSuccessHandler;
+import com.yt.app.frame.n.RESTAuthenticationEntryPoint;
+import com.yt.app.frame.n.RESTAuthenticationFailureHandler;
+import com.yt.app.frame.n.RESTAuthenticationSuccessHandler;
 
 /**
  * The SecurityConfiguration class provides a centralized location for

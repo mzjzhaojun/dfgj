@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.yt.app.frame.page.IPage;
+import com.yt.app.frame.m.IPage;
 
 import io.swagger.annotations.ApiOperation;
 

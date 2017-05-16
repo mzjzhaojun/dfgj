@@ -11,10 +11,10 @@ import com.yt.app.api.v1.service.TeacherteachingsService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Teacherteachings;
-import com.yt.app.frame.page.IPage;
-import com.yt.app.frame.page.PageBean;
-import com.yt.app.util.RequestUtil;
-import com.yt.app.util.StreamUtil;
+import com.yt.app.frame.m.IPage;
+import com.yt.app.frame.m.PageBean;
+import com.yt.app.frame.p.RequestUtil;
+import com.yt.app.frame.p.StreamUtil;
 
 import java.util.List;
 import java.util.Map;

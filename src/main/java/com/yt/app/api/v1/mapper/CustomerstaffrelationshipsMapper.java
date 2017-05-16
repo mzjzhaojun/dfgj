@@ -3,8 +3,8 @@ package com.yt.app.api.v1.mapper;
 import java.util.List;
 import java.util.Map;
 import com.yt.app.api.v1.entity.Customerstaffrelationships;
-import com.yt.app.annotation.RedisCacheAnnotation;
-import com.yt.app.annotation.RedisCacheEvictAnnotation;
+import com.yt.app.frame.b.RedisCacheAnnotation;
+import com.yt.app.frame.b.RedisCacheEvictAnnotation;
 import com.yt.app.common.base.IBaseMapper;
 
 /**

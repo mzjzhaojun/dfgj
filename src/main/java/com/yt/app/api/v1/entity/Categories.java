@@ -6,7 +6,8 @@ import lombok.Setter;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.yt.app.util.DateTimeUtil;
+//import com.yt.app.frame.p.DateTimeUtil;
+import com.yt.app.frame.p.DateTimeUtil;
 
 /**
  * @author zj default
