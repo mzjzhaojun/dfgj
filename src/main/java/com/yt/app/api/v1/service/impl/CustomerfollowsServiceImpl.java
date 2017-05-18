@@ -5,12 +5,14 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
 
+import com.yt.app.api.v1.mapper.CustomerMapper;
 import com.yt.app.api.v1.mapper.CustomerfollowsMapper;
 import com.yt.app.api.v1.mapper.DictionaryMapper;
 import com.yt.app.api.v1.mapper.PotentialcustomersMapper;
 import com.yt.app.api.v1.service.CustomerfollowsService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
+import com.yt.app.api.v1.entity.Customer;
 import com.yt.app.api.v1.entity.Customerfollows;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Potentialcustomers;
@@ -38,6 +40,8 @@ public class CustomerfollowsServiceImpl extends BaseServiceImpl<Customerfollows,
 	private DictionaryMapper dictionarymapper;
 	@Autowired
 	private PotentialcustomersMapper potentialcustomersmapper;
+	@Autowired
+	private CustomerMapper customermapper;
 
 	@Override
 	@Transactional
@@ -46,24 +50,26 @@ public class CustomerfollowsServiceImpl extends BaseServiceImpl<Customerfollows,
 		Integer i = mapper.post(t);
 		if (i > 0) {
 			Potentialcustomers pc = potentialcustomersmapper.get(t.getCustomerid());
-			// 不是潜在客户
-			if (t.getIspotential() != null && t.getIspotential().longValue() == DictionaryResource.STATUS_21) {
-				pc.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1972);
-			}else{
-				pc.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1973);
+			if (pc != null) {
+				// 不是潜在客户
+				if (t.getIspotential() != null && t.getIspotential().longValue() == DictionaryResource.STATUS_21) {
+					pc.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1972);
+				} else {
+					pc.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1973);
+				}
+				pc.setCustomerlevel(t.getCustomerlevel());
+				pc.setContacttype(t.getFollowtype());
+				pc.setFollowstage(t.getFollowstage());
+				pc.setFollowedcount(pc.getFollowedcount() + 1);
+				pc.setInvalidreason(t.getInvalidreason());
+				pc.setPurchaseintention(t.getPurchaseintention());
+				pc.setFollowtime(t.getPlanverifytime());
+				pc.setNextfollowtime(t.getNextfollowtime());
+				pc.setModifierid(t.getModifierid());
+				pc.setModifiername(t.getModifiername());
+				pc.setModifytime(new Date());
+				potentialcustomersmapper.put(pc);
 			}
-			pc.setCustomerlevel(t.getCustomerlevel());
-			pc.setContacttype(t.getFollowtype());
-			pc.setFollowstage(t.getFollowstage());
-			pc.setFollowedcount(pc.getFollowedcount() + 1);
-			pc.setInvalidreason(t.getInvalidreason());
-			pc.setPurchaseintention(t.getPurchaseintention());
-			pc.setFollowtime(t.getPlanverifytime());
-			pc.setNextfollowtime(t.getNextfollowtime());
-			pc.setModifierid(t.getModifierid());
-			pc.setModifiername(t.getModifiername());
-			pc.setModifytime(new Date());
-			potentialcustomersmapper.put(pc);
 		}
 		return i;
 	}
@@ -122,5 +128,29 @@ public class CustomerfollowsServiceImpl extends BaseServiceImpl<Customerfollows,
 	public Customerfollows get(Long id) {
 		Customerfollows t = mapper.get(id);
 		return t;
+	}
+
+	@Override
+	public Integer sava(Customerfollows t) {
+		t.setCreatetime(new Date());
+		Integer i = mapper.post(t);
+		if (i > 0) {
+			Customer c = customermapper.get(t.getCustomerid());
+			if (c != null) {
+				c.setCustomerlevel(t.getCustomerlevel());
+				c.setContacttype(t.getFollowtype());
+				c.setFollowstage(t.getFollowstage());
+				c.setFollowedcount(c.getFollowedcount() + 1);
+				c.setInvalidreason(t.getInvalidreason());
+				c.setPurchaseintention(t.getPurchaseintention());
+				c.setFollowtime(t.getPlanverifytime());
+				c.setNextfollowtime(t.getNextfollowtime());
+				c.setModifierid(t.getModifierid());
+				c.setModifiername(t.getModifiername());
+				c.setModifytime(new Date());
+				customermapper.put(c);
+			}
+		}
+		return i;
 	}
 }

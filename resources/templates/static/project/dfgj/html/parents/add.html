@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html ng-app="add">
+<head>
+<title>新增</title>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- 基础样式 -->
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css" />
+<!-- 基础js -->
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<!-- 表单验证 -->
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+<!-- datetime -->
+<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
+<!-- 初始化 -->
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add.controller("controller", function($scope, $http) {
+		$scope.formData = {};
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+
+		$http({
+			url : parent.getMenuLinksHref("listAll"),
+			method : 'POST',
+			dataType : "json",
+			withCredentials : true,
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			data : ""
+		}).success(function(data, status, headers, config) {
+			$scope.syss = data;
+
+		}).error(function(data, status, headers, config) {
+			//处理响应失败
+			response(status);
+		});
+
+		//保存
+		$scope.onPreserved = function() {
+			var isValid = $("#saveForm").valid();
+			if (isValid) {
+				$scope.formData.birthday = $("#birthday").val();
+				$scope.formData.creatorid = parent.getCookie('staffid');
+				$scope.formData.creatorname = parent.getCookie('staffname');
+				$http({
+					url : parent.getMenuLinksHref("parentspost"),
+					method : 'POST',
+					dataType : "json",
+					withCredentials : true,
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					data : JSON.stringify($scope.formData)
+				}).success(function(data, status, headers, config) {
+					if (data == 1) {
+						location.href = "list.html";
+					}
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		}
+		$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("dictionarylist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify([ 900, 820, 860, 1850 ])
+			}).success(function(data, status, headers, config) {
+				$scope.selects = data;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+		$scope.initselect();
+		$scope.select1 = function(data) {
+			$http(
+					{
+						url : parent.getMenuLinksHref("getbyparentid")
+								+ $scope.formData.province,
+						method : 'POST',
+						dataType : "json",
+						withCredentials : true,
+						headers : {
+							'Content-Type' : 'application/json;charset=UTF-8;'
+						},
+						data : ""
+					}).success(function(data, status, headers, config) {
+				$scope.syss2 = data;
+
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			});
+		}
+		$scope.select2 = function(data) {
+			$http(
+					{
+						url : parent.getMenuLinksHref("getbyparentid")
+								+ $scope.formData.city,
+						method : 'POST',
+						dataType : "json",
+						withCredentials : true,
+						headers : {
+							'Content-Type' : 'application/json;charset=UTF-8;'
+						},
+						data : ""
+					}).success(function(data, status, headers, config) {
+				$scope.syss3 = data;
+
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			});
+		}
+
+		$scope.select3 = function(data) {
+			$http(
+					{
+						url : parent.getMenuLinksHref("getbyparentid")
+								+ $scope.formData.county,
+						method : 'POST',
+						dataType : "json",
+						withCredentials : true,
+						headers : {
+							'Content-Type' : 'application/json;charset=UTF-8;'
+						},
+						data : ""
+					}).success(function(data, status, headers, config) {
+				$scope.syss4 = data;
+			}).error(function(data, status, headers, config) {
+				//处理响应失败
+				response(status);
+			});
+		}
+	})
+</script>
+</head>
+
+<body ng-controller="controller">
+	<form method="post" id="saveForm" action="">
+		<!-- 操作按钮操作区 -->
+		<div class="col-lg-12 topActionPanel">
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-if="isPost">确 定</button>
+			</div>
+			<div>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="isCancel">返 回</button>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">家长名称</span> <input type="text" class="form-control required" placeholder="请输入家长名称" name="parentname"
+					ng-model="formData.parentname" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">手机号</span> <input type="text" class="form-control required mobile" placeholder="请输入手机号" name="mp"
+					ng-model="formData.mp" maxlength="11"> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">性别</span> <select class="form-control" name="gender" ng-model="formData.gender"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '900'}">
+					<option value=''>请选择</option>
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">邮箱地址</span> <input type="text" class="form-control" placeholder="请输入" name="email"
+					ng-model="formData.email" maxlength="255">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">所属行业</span> <select class="form-control" name="industry" ng-model="formData.industry"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '860'}">
+					<option value=''>请选择</option>
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">从事职业</span> <select class="form-control" name="career" ng-model="formData.career"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '820'}">
+					<option value=''>请选择</option>
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">家庭年收入</span> <input type="text" class="form-control" placeholder="请输入家庭年收入" name="income"
+					ng-model="formData.income" maxlength="32">
+			</div>
+			<div class="input-group input-group-sm">
+				<div class="input-group input-group-sm" id="birthdayhidden">
+					<span class="input-group-addon text-right spanwidth">出生日期</span>
+					<div class="input-group date form_datetime" id="birthdaydate" style="width: 400px;" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input">
+						<input class="form-control" id="birthday" ng-model="formData.birthday" size="14" type="text" value="" readonly> <span class="input-group-addon"><span
+							class="glyphicon glyphicon-th"></span></span>
+					</div>
+					<input type="hidden" id="dtp_input" value="" />
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">证件类型</span> <select class="form-control" name="idtype" ng-model="formData.idtype"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '1850'}">
+					<option value=''>请选择</option>
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">证件号</span> <input type="text" class="form-control" placeholder="请输入证件号" name="idnumber"
+					ng-model="formData.idnumber" maxlength="20">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">省份</span> <select class="form-control " ng-change="select1(this)" ng-model="formData.province"
+					ng-options='sys.id as sys.name for sys in syss | filter: {region_grade: "2"}'>
+					<option value="">请选择</option>
+				</select>
+
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">市</span> <select class="form-control " ng-change="select2(this)" ng-model="formData.city"
+					ng-options='sys.id as sys.name for sys in syss2 | filter: {region_grade: "3"}'>
+					<option value="">请选择</option>
+				</select>
+
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">区县</span> <select class="form-control " ng-change="select3(this)" ng-model="formData.county"
+					ng-options='sys.id as sys.name for sys in syss3 | filter: {region_grade: "4"}'>
+					<option value="">请选择</option>
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">街道</span> <select class="form-control " ng-model="formData.streetname"
+					ng-options='sys.id as sys.name for sys in syss4 | filter: {region_grade: "5"}'>
+					<option value="">请选择</option>
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">完整详细地址</span> <input type="text" class="form-control" placeholder="请输入完整详细地址" name="addressdetail"
+					ng-model="formData.addressdetail" maxlength="500">
+			</div>
+		</div>
+	</form>
+</body>
+<script type="text/javascript">
+	$('#birthdaydate').datetimepicker({
+		format : 'yyyy-mm-dd',
+		language : 'cn',
+		weekStart : 1,
+		minView : "month",
+		todayBtn : 1,
+		initialDate : new Date(),
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		forceParse : 0,
+		showMeridian : 0
+	});
+</script>
+</html>

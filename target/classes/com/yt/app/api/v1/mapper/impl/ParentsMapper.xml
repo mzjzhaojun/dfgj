@@ -1,203 +1,213 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yt.app.api.v1.mapper.ParentsMapper">
-  <!-- 数据库列 -->
-  <sql id="Base_Column_List">
-     id,version,parentcode,parentname,gender,email,industry,career,income,birthday,idtype,idnumber,country,province,city,county,streetname,addressdetail,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode
-  </sql>
-  <!-- 基础返回对象封装 -->
-  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Parents">
-         <id property="id" column="id" />
-         <id property="version" column="version" />
-         <id property="parentcode" column="parentcode" />
-         <id property="parentname" column="parentname" />
-         <id property="gender" column="gender" />
-         <id property="email" column="email" />
-         <id property="industry" column="industry" />
-         <id property="career" column="career" />
-         <id property="income" column="income" />
-         <id property="birthday" column="birthday" />
-         <id property="idtype" column="idtype" />
-         <id property="idnumber" column="idnumber" />
-         <id property="country" column="country" />
-         <id property="province" column="province" />
-         <id property="city" column="city" />
-         <id property="county" column="county" />
-         <id property="streetname" column="streetname" />
-         <id property="addressdetail" column="addressdetail" />
-         <id property="creatorid" column="creatorid" />
-         <id property="creatorname" column="creatorname" />
-         <id property="createtime" column="createtime" />
-         <id property="modifierid" column="modifierid" />
-         <id property="modifiername" column="modifiername" />
-         <id property="modifytime" column="modifytime" />
-         <id property="tenantcode" column="tenantcode" />
-  </resultMap>
-  <!-- 默认新增 -->
-  <insert id="post" parameterType="com.yt.app.api.v1.entity.Parents">
-  insert into parents (id,parentcode,parentname,gender,email,industry,career,income,birthday,idtype,idnumber,country,province,city,county,streetname,addressdetail,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode)
-         values (#{id},#{parentcode},#{parentname},#{gender},#{email},#{industry},#{career},#{income},#{birthday},#{idtype},#{idnumber},#{country},#{province},#{city},#{county},#{streetname},#{addressdetail},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{tenantcode})
-  </insert>
-  <!-- 默认删除id对象 -->
- <delete id="delete" parameterType="java.lang.String">
-     delete from parents 
-     where id = #{id}
- </delete>
-  <!-- 默认更新id对象 -->
- <update id="put" parameterType="com.yt.app.api.v1.entity.Parents">
-    update parents
-         <set>
-             <if test="version != null">
-                   version = #{version}+1,
-             </if>
-             <if test="parentcode != null">
-                   parentcode = #{parentcode},
-             </if>
-             <if test="parentname != null">
-                   parentname = #{parentname},
-             </if>
-             <if test="gender != null">
-                   gender = #{gender},
-             </if>
-             <if test="email != null">
-                   email = #{email},
-             </if>
-             <if test="industry != null">
-                   industry = #{industry},
-             </if>
-             <if test="career != null">
-                   career = #{career},
-             </if>
-             <if test="income != null">
-                   income = #{income},
-             </if>
-             <if test="birthday != null">
-                   birthday = #{birthday},
-             </if>
-             <if test="idtype != null">
-                   idtype = #{idtype},
-             </if>
-             <if test="idnumber != null">
-                   idnumber = #{idnumber},
-             </if>
-             <if test="country != null">
-                   country = #{country},
-             </if>
-             <if test="province != null">
-                   province = #{province},
-             </if>
-             <if test="city != null">
-                   city = #{city},
-             </if>
-             <if test="county != null">
-                   county = #{county},
-             </if>
-             <if test="streetname != null">
-                   streetname = #{streetname},
-             </if>
-             <if test="addressdetail != null">
-                   addressdetail = #{addressdetail},
-             </if>
-             <if test="creatorid != null">
-                   creatorid = #{creatorid},
-             </if>
-             <if test="creatorname != null">
-                   creatorname = #{creatorname},
-             </if>
-             <if test="createtime != null">
-                   createtime = #{createtime},
-             </if>
-             <if test="modifierid != null">
-                   modifierid = #{modifierid},
-             </if>
-             <if test="modifiername != null">
-                   modifiername = #{modifiername},
-             </if>
-             <if test="modifytime != null">
-                   modifytime = #{modifytime},
-             </if>
-             <if test="tenantcode != null">
-                   tenantcode = #{tenantcode}
-             </if>
-          </set>
-     where id = #{id} and  version = #{version}
- </update>
-  <!-- 默认获得id对象 -->
- <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
-     select
-        <include refid="Base_Column_List" />
-        from parents 
-        where id = #{id}
- </select>
-  <!-- 默认集合 -->
- <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
-       select
-        <include refid="Base_Column_List" />
-        from parents 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-             <if test="orderby != null and dir != null">
-           order by ${orderby} ${dir}
-             </if>
-             <if test="pageStart != null and pageEnd != null">
-           LIMIT #{pageStart},#{pageEnd}
-             </if>
-        </where>
- </select>
-  <!-- 默认返回MAP集合 -->
- <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-       select
-        <include refid="Base_Column_List" />
-        from parents 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-             <if test="orderby != null and dir != null">
-           order by ${orderby} ${dir}
-             </if>
-             <if test="pageStart != null and pageEnd != null">
-           LIMIT #{pageStart},#{pageEnd}
-             </if>
-        </where>
- </select>
-  <!-- 默认集合统计 -->
- <select id="countlist" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from parents 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-        </where>
- </select>
-  <!-- 默认返回MAP集合统计 -->
- <select id="countmap" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from parents 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-        </where>
- </select>
-  <!-- 默认获取Ids的对象 -->
- <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
-       select
-        <include refid="Base_Column_List" />
-        from parents 
-        <where>
-        1=1
-             <if test="array != null and array != ''">
-       	and id in
-        	<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-           	#{item}
-        	</foreach>
-             </if>
-        </where>
- </select>
+	<!-- 数据库列 -->
+	<sql id="Base_Column_List">
+		id,version,parentcode,parentname,mp,gender,email,industry,career,income,birthday,idtype,idnumber,country,province,city,county,streetname,addressdetail,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode
+	</sql>
+	<!-- 基础返回对象封装 -->
+	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Parents">
+		<id property="id" column="id" />
+		<id property="version" column="version" />
+		<id property="parentcode" column="parentcode" />
+		<id property="mp" column="mp" />
+		<id property="parentname" column="parentname" />
+		<id property="gender" column="gender" />
+		<id property="email" column="email" />
+		<id property="industry" column="industry" />
+		<id property="career" column="career" />
+		<id property="income" column="income" />
+		<id property="birthday" column="birthday" />
+		<id property="idtype" column="idtype" />
+		<id property="idnumber" column="idnumber" />
+		<id property="country" column="country" />
+		<id property="province" column="province" />
+		<id property="city" column="city" />
+		<id property="county" column="county" />
+		<id property="streetname" column="streetname" />
+		<id property="addressdetail" column="addressdetail" />
+		<id property="creatorid" column="creatorid" />
+		<id property="creatorname" column="creatorname" />
+		<id property="createtime" column="createtime" />
+		<id property="modifierid" column="modifierid" />
+		<id property="modifiername" column="modifiername" />
+		<id property="modifytime" column="modifytime" />
+		<id property="tenantcode" column="tenantcode" />
+	</resultMap>
+	<!-- 默认新增 -->
+	<insert id="post" parameterType="com.yt.app.api.v1.entity.Parents">
+		insert into parents
+		(id,parentcode,parentname,mp,gender,email,industry,career,income,birthday,idtype,idnumber,country,province,city,county,streetname,addressdetail,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode)
+		values
+		(#{id},#{parentcode},#{parentname},#{mp},#{gender},#{email},#{industry},#{career},#{income},#{birthday},#{idtype},#{idnumber},#{country},#{province},#{city},#{county},#{streetname},#{addressdetail},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{tenantcode})
+	</insert>
+	<!-- 默认删除id对象 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from parents
+		where id = #{id}
+	</delete>
+	<!-- 默认更新id对象 -->
+	<update id="put" parameterType="com.yt.app.api.v1.entity.Parents">
+		update parents
+		<set>
+			<if test="version != null">
+				version = #{version}+1,
+			</if>
+			<if test="parentcode != null">
+				parentcode = #{parentcode},
+			</if>
+			<if test="parentname != null">
+				parentname = #{parentname},
+			</if>
+			<if test="mp != null">
+				mp = #{mp},
+			</if>
+			<if test="gender != null">
+				gender = #{gender},
+			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
+			<if test="industry != null">
+				industry = #{industry},
+			</if>
+			<if test="career != null">
+				career = #{career},
+			</if>
+			<if test="income != null">
+				income = #{income},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday},
+			</if>
+			<if test="idtype != null">
+				idtype = #{idtype},
+			</if>
+			<if test="idnumber != null">
+				idnumber = #{idnumber},
+			</if>
+			<if test="country != null">
+				country = #{country},
+			</if>
+			<if test="province != null">
+				province = #{province},
+			</if>
+			<if test="city != null">
+				city = #{city},
+			</if>
+			<if test="county != null">
+				county = #{county},
+			</if>
+			<if test="streetname != null">
+				streetname = #{streetname},
+			</if>
+			<if test="addressdetail != null">
+				addressdetail = #{addressdetail},
+			</if>
+			<if test="creatorid != null">
+				creatorid = #{creatorid},
+			</if>
+			<if test="creatorname != null">
+				creatorname = #{creatorname},
+			</if>
+			<if test="createtime != null">
+				createtime = #{createtime},
+			</if>
+			<if test="modifierid != null">
+				modifierid = #{modifierid},
+			</if>
+			<if test="modifiername != null">
+				modifiername = #{modifiername},
+			</if>
+			<if test="modifytime != null">
+				modifytime = #{modifytime},
+			</if>
+			<if test="tenantcode != null">
+				tenantcode = #{tenantcode}
+			</if>
+		</set>
+		where id = #{id} and version = #{version}
+	</update>
+	<!-- 默认获得id对象 -->
+	<select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from parents
+		where id = #{id}
+	</select>
+	<!-- 默认集合 -->
+	<select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+		select
+		id,version,parentcode,parentname,gender,email,industry,career,income,birthday,idtype,idnumber,country,province,city,county,streetname,addressdetail,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,tenantcode
+		from parents
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合 -->
+	<select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from parents
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认集合统计 -->
+	<select id="countlist" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from parents
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合统计 -->
+	<select id="countmap" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from parents
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认获取Ids的对象 -->
+	<select id="listByArrayId" parameterType="java.util.HashMap"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from parents
+		<where>
+			1=1
+			<if test="array != null and array != ''">
+				and id in
+				<foreach item="item" index="index" collection="array" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
 </mapper>

@@ -2,6 +2,7 @@ package com.yt.app.api.v1.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.yt.app.frame.m.IPage;
+
 import io.swagger.annotations.ApiOperation;
+
 import com.yt.app.common.base.impl.BaseControllerImpl;
 import com.yt.app.api.v1.resource.CustomerfollowsResourceAssembler;
 import com.yt.app.api.v1.service.CustomerfollowsService;
@@ -41,5 +45,12 @@ public class CustomerfollowsController extends BaseControllerImpl<Customerfollow
 		IPage<Customerfollows> pagebean = service.list(requestEntity);
 		return new ResponseEntity<Object>(new CustomerfollowsResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),
 				HttpStatus.OK);
+	}
+
+	@ApiOperation(value = "学员跟进保存", response = Customerfollows.class)
+	@RequestMapping(value = "/sava", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> sava(RequestEntity<Customerfollows> requestEntity, HttpServletRequest request, HttpServletResponse response) {
+		Integer i = service.sava(requestEntity.getBody());
+		return new ResponseEntity<Object>(i, HttpStatus.OK);
 	}
 }

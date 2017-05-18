@@ -2,7 +2,11 @@ package com.yt.app.api.v1.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.yt.app.frame.p.DateTimeUtil;
 
 /**
  * @author zj default
@@ -20,7 +24,8 @@ public class Discounts implements Serializable {
 	Integer version;
 	String discountcode;
 	String discountname;
-	String discountstatus;
+	Long discountstatus;
+	String discountstatusname;
 	java.util.Date applystartdate;
 	java.util.Date startdate;
 	Long branchid;
@@ -37,15 +42,17 @@ public class Discounts implements Serializable {
 	java.util.Date approvetime;
 	Long creatorid;
 	String creatorname;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date createtime;
 	Long modifierid;
 	String modifiername;
+	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date modifytime;
 
 	public Discounts() {
 	}
 
-	public Discounts(Long id, Integer version, String discountcode, String discountname, String discountstatus, java.util.Date applystartdate,
+	public Discounts(Long id, Integer version, String discountcode, String discountname, Long discountstatus, java.util.Date applystartdate,
 			java.util.Date startdate, Long branchid, String branchname, java.util.Date submittime, Long submitterid, String submittername,
 			Long submitterjobid, String submitterjobname, Long approverid, String approvername, Long approverjobid, String approverjobname,
 			java.util.Date approvetime, Long creatorid, String creatorname, java.util.Date createtime, Long modifierid, String modifiername,

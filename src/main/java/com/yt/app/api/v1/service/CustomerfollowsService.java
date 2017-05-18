@@ -11,4 +11,11 @@ import com.yt.app.common.base.IBaseService;
  */
 
 public interface CustomerfollowsService extends IBaseService<Customerfollows, Long> {
+	/**
+	 * 正是学员跟进信息保存
+	 * 
+	 * @param t
+	 * @return
+	 */
+	Integer sava(Customerfollows t);
 }

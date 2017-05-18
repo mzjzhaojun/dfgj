@@ -104,4 +104,15 @@ public interface DiscountitemsMapper extends IBaseMapper<Discountitems> {
 	 */
 	@RedisCacheAnnotation(classs = Discountitems.class)
 	public List<Discountitems> listByArrayId(long[] id);
+
+	/**
+	 * 删除指定的唯一标识符数组对应的持久化对象
+	 *
+	 * @param ids
+	 *            指定的唯一标识符数组
+	 * @return 删除的对象数量
+	 */
+	@RedisCacheEvictAnnotation(classs = { Discountitems.class })
+	public Integer deleteByDiscountId(Long id);
+
 }

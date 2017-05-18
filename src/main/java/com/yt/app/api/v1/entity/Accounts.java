@@ -23,7 +23,7 @@ public class Accounts implements Serializable {
 	String accounttype;
 	String accountmemo;
 	String accountstatus;
-	Object accountmoney;
+	float accountmoney;
 	Long discountid;
 	String discountcode;
 	Object discountrate;
@@ -43,7 +43,7 @@ public class Accounts implements Serializable {
 	}
 
 	public Accounts(Long id, Integer version, Long customerid, String accountcode, String accounttype, String accountmemo, String accountstatus,
-			Object accountmoney, Long discountid, String discountcode, Object discountrate, Object discountbase, Long chargeapplyid,
+			float accountmoney, Long discountid, String discountcode, Object discountrate, Object discountbase, Long chargeapplyid,
 			java.util.Date chargepaytime, java.util.Date firstchargepaytime, Long firstchargeapplyid, Long creatorid, String creatorname,
 			java.util.Date createtime, Long modifierid, String modifiername, java.util.Date modifytime) {
 		this.id = id;

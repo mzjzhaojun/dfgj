@@ -4,13 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
+
+import com.yt.app.api.v1.mapper.DictionaryMapper;
+import com.yt.app.api.v1.mapper.DiscountitemsMapper;
 import com.yt.app.api.v1.mapper.DiscountsMapper;
 import com.yt.app.api.v1.service.DiscountsService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
+import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Discounts;
 import com.yt.app.frame.m.IPage;
 import com.yt.app.frame.m.PageBean;
 import com.yt.app.frame.p.RequestUtil;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,11 +32,17 @@ public class DiscountsServiceImpl extends BaseServiceImpl<Discounts, Long> imple
 	@Autowired
 	private DiscountsMapper mapper;
 
-	@Override
+	@Autowired
+	private DiscountitemsMapper discountitemsmapper;
+
+	@Autowired
+	private DictionaryMapper DictionaryMapper;
+
 	@Transactional
-	public Integer post(Discounts t) {
-		Integer i = mapper.post(t);
-		return i;
+	public Long sava(Discounts t) {
+		t.setCreatetime(new Date());
+		mapper.post(t);
+		return t.getId();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -45,12 +57,40 @@ public class DiscountsServiceImpl extends BaseServiceImpl<Discounts, Long> imple
 			}
 		}
 		List<Discounts> list = mapper.list(param);
+		long[] dids = list.stream().mapToLong(Discounts::getDiscountstatus).distinct().toArray();
+		List<Dictionary> listd = DictionaryMapper.listByArrayId(dids);
+		list.forEach(t -> {
+			listd.forEach(d -> {
+				if (t.getDiscountstatus().longValue() == d.getCode().longValue()) {
+					t.setDiscountstatusname(d.getName());
+					return;
+				}
+			});
+		});
 		return new PageBean<Discounts>(param, list, count);
 	}
 
 	@Override
 	public Discounts get(Long id) {
 		Discounts t = mapper.get(id);
+		t.setDiscountstatusname(DictionaryMapper.getByCode(t.getDiscountstatus()).getName());
 		return t;
+	}
+
+	@Override
+	@Transactional
+	public Integer put(Discounts t) {
+		t.setModifytime(new Date());
+		return mapper.put(t);
+	}
+
+	@Override
+	@Transactional
+	public Integer delete(Long id) {
+		Integer i = mapper.delete(id);
+		if (i > 0) {
+			i = discountitemsmapper.deleteByDiscountId(id);
+		}
+		return i;
 	}
 }

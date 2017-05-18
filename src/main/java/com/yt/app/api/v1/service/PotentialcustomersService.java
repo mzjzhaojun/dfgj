@@ -25,4 +25,15 @@ public interface PotentialcustomersService extends IBaseService<Potentialcustome
 	 */
 	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
 	public Integer updatebatch(List<Long> list, Long id);
+	
+	
+	/**
+	 * 批量转为正式学员
+	 * 
+	 * @param list
+	 * @param id
+	 * @return
+	 */
+	@DataSourceAnnotation(datasource = DataSourceEnum.MASTER)
+	public Integer updatecustomerbatch(List<Long> list);
 }

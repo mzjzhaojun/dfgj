@@ -1,5 +1,7 @@
 package com.yt.app;
 
+import java.util.Arrays;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.yt.app.frame.c.AppConfig;
 import com.yt.app.frame.c.MySqlConfig;
 import com.yt.app.frame.c.RedisConfig;
-
+import com.yt.app.frame.i.Aq;
 
 /**
  * Spring Boot main application class.
@@ -82,40 +84,7 @@ public class DfgjApplication extends SpringBootServletInitializer {
 		System.out.println("                别人笑我忒疯癫，我笑自己命太贱；");
 		System.out.println("                不见满街漂亮妹，哪个归得程序员？");
 		System.out.println();
-//		List<String> tables = Arrays.asList("jobcode", "accountchargeallots", "accountchargeapplies", "accountchargeinvoices",
-//				"accountchargepayments", "accountdeductapplies", "accountrecords", "accountrefundallots", "accountrefundapplies",
-//				"accountrefundverifyings", "accountreturnapplies", "accounts", "accounttransferapplies", "assetconfirms", "assets",
-//				"assignconditions", "assignsaccompanies", "cachets", "campus_day_task", "campus_month_task", "campusassetsdetail",
-//				"campuschargestat", "campuscustomerweeklystat", "campuses", "campusincomestat", "campusincomeweeklystat", "campusrefundweeklystat",
-//				"campusrenewweeklystat", "campussalesweeklystat", "campustask", "campustaxrateconfig", "cashflowreport", "categories",
-//				"chargereport", "classes", "classlessonitems", "classlessons", "consultant_month_task", "consultbranchcrmdaysum",
-//				"consultbranchcrmmonthsum", "consultbranchperfdaysum", "consultbranchperfmonthsum", "consultcampusperfdaysum",
-//				"consultcampusperfmonthsum", "consultcountryperfdaysum", "consultcountryperfmonthsum", "consultstaffperfdaysum", "country_code",
-//				"customer", "customeraccountmonthlystat", "customerassetsdetail", "customerassetsdetailsource", "customerassigns",
-//				"customerbasestat", "customercourses", "customerexpenserelations", "customerfollowitems", "customerfollows", "customermeetingitems",
-//				"customermeetings", "customerparentrelations", "customerrefundalerts", "customerrefunds", "customerrelations", "customerreplies",
-//				"customerreturnmoney", "customerschoolrelations", "customerscoreitems", "customerscores", "customerserviceitems", "customerservices",
-//				"customerstaffcharges", "customerstaffrelationships", "customerstopalerts", "customerteacherassignapplies", "customerteachercharges",
-//				"customerteacherrelations", "customertransferaccounts", "customertransferapplies", "customertransferassets",
-//				"customertransferresources", "customerverifies", "customervisits", "debookorderitems", "debookorders", "discountitems",
-//				"discountpermissions", "discounts", "educatebranchcrmmonthsum", "educatebranchperfdaysum", "educatebranchperfmonthsum",
-//				"educatecampuscrmmonthsum", "educatecampusperfdaysum", "educatecampusperfmonthsum", "educatecountrycrmmonthsum",
-//				"educatecountryperfdaysum", "educatecountryperfmonthsum", "educatestaffcrmmonthsum", "educatestaffperfdaysum",
-//				"educatestaffperfmonthsum", "educator_day_task", "educator_week_task", "educatoreffectivecustomer", "educatorreport_org",
-//				"educatorreport_staff", "email_messages", "expensepermissions", "expenses", "financialassignmonthlyincome", "hr_a_charges",
-//				"incomereport", "jobs", "log_sys_info", "log_user_info", "operationlog", "orderdailyinfo", "orderitems", "orders", "orgstaffjobs",
-//				"otherproductincome", "otherproductincomeweekly", "parents", "perfindexreport", "phones", "pinyin", "posrecords",
-//				"potentialcustomers", "presentitems", "presents", "productclassstats", "productpermissions", "products", "productsalaryrules",
-//				"productsexofcourse", "ps_teacherteachings", "refundreport", "" + "repertories", "rooms", "schools", "staffbasestat",
-//				"staffchargestat", "staffrefundstat", "staffresources", "stafftask", "studentstatusreport", "" + "teachbranchcrmmonthsum",
-//				"teachbranchperfmonthsum", "teachcampuscrmmonthsum", "teachcampusperfmonthsum", "teachcountrycrmmonthsum",
-//				"teachcountryperfmonthsum", "teacher_day_task", "teacherchargeallots", "teacherjobs", "teacherrefundallots", "teacherreport_org",
-//				"teacherreport_staff", "teachers", "teachersearch", "teacherteachings", "teachgroupcrmmonthsum", "teachgroupperfmonthsum",
-//				"teachstaffcrmmonthsum", "teachstaffperfmonthsum", "user_operation_log", "user_task", "user_task_category");
-		// List<String> tables1 = Arrays.asList("jobcode");
 		SpringApplication.run(new Class[] { DfgjApplication.class }, args);
-		// GenerateCode.getInstance().crud(tables, false, true, true,
-		// "854616254684729344");
-		// GenerateCode.getInstance().crud(tables, true, true);
+//		Aq.u().p(Arrays.asList("refundreport_copy"), true, true, false, null);
 	}
 }

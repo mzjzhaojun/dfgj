@@ -281,7 +281,7 @@ public class FileServiceImpl extends BaseServiceImpl<File, Long> implements File
 				t.setCreatorid(Long.valueOf(staffid));
 				t.setCreatorname(staffname);
 				t.setCreatetime(new Date());
-				t.setNextfollowtime(new Date());
+				t.setModifytime(new Date());
 				t.setCustomerlevel(DictionaryResource.PATRIARCH_LEVEL_1951);
 				t.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1971);
 				t.setFollowstage(DictionaryResource.PATRIARCH_FLLOWSTATUS_571);

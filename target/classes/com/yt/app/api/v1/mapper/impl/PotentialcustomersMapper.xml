@@ -269,7 +269,7 @@
 		<include refid="Base_Column_List" />
 		from potentialcustomers
 		<where>
-			1=1
+			customerstatus in (1971,1972) 
 			<if test="customername != null and customername != ''">
 				and customername like "%"#{customername}"%"
 			</if>
@@ -310,7 +310,7 @@
 		resultType="int">
 		select count(*) from potentialcustomers
 		<where>
-			1=1
+			customerstatus in (1971,1972) 
 			<if test="customername != null and customername != ''">
 				and customername like "%"#{customername}"%"
 			</if>

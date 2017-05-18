@@ -57,4 +57,12 @@ public class PotentialcustomersController extends BaseControllerImpl<Potentialcu
 		Integer i = service.updatebatch(requestEntity.getBody(), id);
 		return new ResponseEntity<Object>(i, HttpStatus.OK);
 	}
+
+	@ApiOperation(value = "批量转为正式学员", response = Potentialcustomers.class)
+	@RequestMapping(value = "/batch", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> updatecustomerbatch(RequestEntity<List<Long>> requestEntity, HttpServletRequest request,
+			HttpServletResponse response) {
+		Integer i = service.updatecustomerbatch(requestEntity.getBody());
+		return new ResponseEntity<Object>(i, HttpStatus.OK);
+	}
 }

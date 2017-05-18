@@ -62,7 +62,7 @@
 					'Content-Type' : 'application/json;charset=UTF-8;',
 					"pageNo" : pageNo,
 					"pageSize" : pageSize,
-					"orderby" : "modifytime",
+					"orderby" : "id",
 					"dir" : "desc"
 				},
 				data : JSON.stringify(data)
@@ -140,6 +140,34 @@
 				});
 				return;
 			}
+			parent.art.dialog({
+				content: '确定要转成正式学员?',
+				lock:true,
+				time:1000,
+				ok: function () {
+					var data = idArr;
+					$.ajax({
+						type : "PUT",
+						url : parent.getMenuLinksHref("potentialcustomerslist")+"batch",
+						async : false,
+						dataType : 'json',
+						data : JSON.stringify(data),
+						headers : {
+							'Content-Type' : 'application/json;charset=UTF-8;'
+						},
+						success : function(data) {
+							var appElement = document.querySelector('[ng-controller=controller]');
+							var $scope = angular.element(appElement).scope();
+							$scope.pageList();
+						},
+						error : function(XMLHttpRequest, textStatus, errorThrown) {
+							response(XMLHttpRequest.status);
+						}
+					});
+				},
+				cancelVal: '关闭',
+				cancel: true
+			});
 		}
 		
 		$scope.selectStaff = function() {
@@ -211,7 +239,7 @@
 				<th class="text-center"><div id="all" class="checkbox"></div></th>
 				<th>序号</th>
 				<th>名称</th>
-				<th>公司</th>
+				<th>校区</th>
 				<th>来源</th>
 				<th>级别</th>
 				<th>状态</th>
@@ -238,7 +266,7 @@
 				<td class="text-center"><div class="checkbox1 check_box" data="{{data.potentialcustomers.id}}"></div></td>
 				<td ng-dblclick="toInfo(data)">{{$index+1}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.customername}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.orgname}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.campusname}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.sourcemaintypename}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.customerlevelname}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.potentialcustomers.customerstatusname}}</td>

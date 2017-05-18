@@ -11,4 +11,10 @@ import com.yt.app.common.base.IBaseService;
  */
 
 public interface DiscountsService extends IBaseService<Discounts, Long> {
+	/**
+	 * 
+	 * @param t
+	 * @return
+	 */
+	Long sava(Discounts t);
 }

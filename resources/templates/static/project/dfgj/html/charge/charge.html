@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app="add">
+<head>
+<title>新增</title>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- 基础样式 -->
+<link rel="icon" type="image/x-icon" href="../../../resource/img/logo.ico">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/list.css">
+<link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css" />
+<!-- 基础js -->
+<script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/paging.js"></script>
+<script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<!-- 表单验证 -->
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
+<script type="text/javascript" src="../../../../resource/js/validate/js/eap.validate.js"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.lang-zh_CN.js"></script>
+<!-- datetime -->
+<script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
+<!-- 初始化 -->
+<script type="text/javascript">
+	var add = angular.module("add", []);
+	add.controller("controller", function($scope, $http) {
+		$scope.formData = {};
+
+		//返回
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
+		//保存
+		$scope.onPreserved = function() {
+			var isValid = $("#saveForm").valid();
+			if (isValid) {
+				$scope.formData.branchid = parent.getCookie('branchid');
+				$scope.formData.branchname = parent.getCookie('branchname');
+				$scope.formData.creatorid = parent.getCookie('staffid');
+				$scope.formData.creatorname = parent.getCookie('staffname');
+				$http({
+					url : parent.getMenuLinksHref("discountspost"),
+					method : 'POST',
+					dataType : "json",
+					withCredentials : true,
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					data : JSON.stringify($scope.formData)
+				}).success(function(data, status, headers, config) {
+					$scope.formData.id = data;
+					$('#myTab li:eq(1) a').tab('show');
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		}
+	})
+</script>
+<style type="text/css">
+span {
+	font-size: 13px;
+	font-weight: bold;
+	color: red;
+}
+</style>
+</head>
+<body ng-controller="controller">
+	<div class="col-lg-12 topActionPanel">
+		<div>
+			<span>选择学员</span> > <span>选择课程</span> > <span>选择服务</span> > <span>折扣缴费</span> > <span>打印缴费单</span>
+		</div>
+	</div>
+	<div class="col-lg-12 topActionPanel1">
+		<ul id="myTab" class="nav nav-tabs">
+			<li class="active"><a href="#customer" data-toggle="tab">选择学员 </a></li>
+			<li><a href="#product" data-toggle="tab">选择课程</a></li>
+			<li><a href="#service" data-toggle="tab">选择服务</a></li>
+			<li><a href="#charge" data-toggle="tab">折扣缴费</a></li>
+			<li><a href="#print" data-toggle="tab">打印缴费单</a></li>
+		</ul>
+	</div>
+	<div id="myTabContent" class="tab-content">
+		<div class="tab-pane fade in active" id="customer">
+			<form method="post" id="saveForm1" action="">选择学员</form>
+		</div>
+		<div class="tab-pane fade" id="product">
+			<form method="post" id="saveForm2" action="">选择课程</form>
+		</div>
+		<div class="tab-pane fade" id="service">
+			<form method="post" id="saveForm3" action="">选择服务</form>
+		</div>
+		<div class="tab-pane fade" id="charge">
+			<form method="post" id="saveForm4" action="">折扣缴费</form>
+		</div>
+		<div class="tab-pane fade" id="print">
+			<form method="post" id="saveForm5" action="">折扣缴费</form>
+		</div>
+	</div>
+</body>
+</html>

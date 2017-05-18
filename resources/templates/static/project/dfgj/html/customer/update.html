@@ -138,6 +138,8 @@
 								$scope.formData.referralstaffname = $("#referralstaffname").val();
 								$scope.formData.referralcustomerid = $("#referralcustomerid").val();
 								$scope.formData.referralcustomername = $("#referralcustomername").val();
+								$scope.formData.parentid =$('#parentid').val();
+								$scope.formData.parentname = $('#parentname').val();
 								$http(
 										{
 											url : parent
@@ -207,12 +209,18 @@
 										response(status);
 									})
 						}
-
+						
+						$scope.selectParent =function(){
+							artdialogIframe("../../dfgj/html/customer/parentlist.html", null,
+									backfunctionparent, 1500, 800, true);
+						}
+						
 						$scope.selectStaff = function() {
 							artdialogIframe(
 									"../../dfgj/html/jobs/stafflist.html",
 									null, backfunctionstaff, 1024, 600, true);
 						}
+						
 						$scope.selectReferralCustomer = function() {
 							artdialogIframe(
 									"../../dfgj/html/potentialcustomers/customerlist.html",
@@ -291,8 +299,7 @@
 										.getCookie('staffname');
 								$http(
 										{
-											url : parent
-													.getMenuLinksHref("customerfollowspost"),
+											url : parent.getMenuLinksHref("customerfollowssava"),
 											method : 'POST',
 											dataType : "json",
 											withCredentials : true,
@@ -326,12 +333,23 @@
 		}
 		setDateChild({});
 	}
+	
 	function backfunctionreferralcustomer() {
 		if (parent.getDateChild().id != undefined) {
 			$("#referralcustomerid").val(parent.getDateChild().id);
 		}
 		if (parent.getDateChild().name != undefined) {
 			$("#referralcustomername").val(parent.getDateChild().name);
+		}
+		setDateChild({});
+	}
+	
+	function backfunctionparent() {
+		if (parent.getDateChild().id != undefined) {
+			$("#parentid").val(parent.getDateChild().id);
+		}
+		if (parent.getDateChild().name != undefined) {
+			$("#parentname").val(parent.getDateChild().name);
 		}
 		setDateChild({});
 	}
@@ -365,21 +383,27 @@
 							name="customername" ng-model="formData.customername" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">手机号</span> <input type="text" class="form-control required mobile" placeholder="请输入手机号" name="mp"
-							ng-model="formData.mp" maxlength="11"> <span class="input-group-addon verifyprompt">*</span>
-					</div>
-					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">客户来源</span> <select class="form-control required" name="sourcemaintype"
 							ng-model="formData.sourcemaintype" ng-options="data.code as data.name for data in selects  | filter: {typecode: '560'}">
 							<option value=''>请选择</option>
 						</select> <span class="input-group-addon verifyprompt">*</span>
 					</div>
-					<!-- <div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">无效客户理由</span> <select class="form-control" name="invalidreason" ng-model="formData.invalidreason"
-							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1960'}">
-							<option value=''>请选择</option>
-						</select>
-					</div> -->
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">学员手机号</span> <input type="text" class="form-control required mobile" placeholder="请输入手机号"
+							name="customerprimaryphonenumber" ng-model="formData.customerprimaryphonenumber" maxlength="11"> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">紧急联系号码</span> <input type="text" class="form-control mobile" placeholder="请输入手机号"
+							name="customersecondaryphonenumber" ng-model="formData.customersecondaryphonenumber" maxlength="11">
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">家长手机号</span> <input type="text" class="form-control mobile" placeholder="请输入手机号"
+							name="parentprimaryphonenumber" ng-model="formData.parentprimaryphonenumber" maxlength="11">
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">紧急联系号码</span> <input type="text" class="form-control mobile" placeholder="请输入手机号"
+							name="parentsecondaryphonenumber" ng-model="formData.parentsecondaryphonenumber" maxlength="11">
+					</div>
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">性别</span> <select class="form-control" name="gender" ng-model="formData.gender"
 							ng-options="data.code as data.name for data in selects  | filter: {typecode: '900'}">
@@ -455,6 +479,11 @@
 						</select>
 					</div>
 					<div class="input-group input-group-sm">
+						<input type="hidden" id="parentid" ng-model="formData.parentid" /> <span class="input-group-addon text-right spanwidth">家长监护人</span> <input
+							type="text" id="parentname" name="parentname" ng-model="formData.parentname" readonly="readonly" class="form-control">
+						<i ng-click="selectParent()" class="glyphicon glyphicon-search" title="选择"></i>
+					</div>
+					<div class="input-group input-group-sm">
 						<input type="hidden" id="referralstaffid" ng-model="formData.referralstaffid" /> <span class="input-group-addon text-right spanwidth">转介绍员工</span> <input
 							type="text" id="referralstaffname" name="referralstaffname" ng-model="formData.referralstaffname" readonly="readonly" class="form-control"> <i
 							ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i>
@@ -521,18 +550,6 @@
 							ng-model="formData2.talkmainresult" ng-options="data.code as data.name for data in selects  | filter: {typecode: '790'}">
 							<option value=''>请选择</option>
 						</select> <span class="input-group-addon verifyprompt">*</span>
-					</div>
-					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">是否潜在客户</span> <select class="form-control required" name="ispotential"
-							ng-model="formData2.ispotential" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-							<option value=''>请选择</option>
-						</select> <span class="input-group-addon verifyprompt">*</span>
-					</div>
-					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">无效客户理由</span> <select class="form-control" name="invalidreason" ng-model="formData2.invalidreason"
-							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1960'}">
-							<option value=''>请选择</option>
-						</select>
 					</div>
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">此次通话号码</span> <input type="text" class="form-control" placeholder="请输入此次通电号码" name="followphone"

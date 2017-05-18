@@ -5,12 +5,16 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
 
+import com.yt.app.api.v1.mapper.AccountsMapper;
+import com.yt.app.api.v1.mapper.CustomerMapper;
 import com.yt.app.api.v1.mapper.DictionaryMapper;
 import com.yt.app.api.v1.mapper.PotentialcustomersMapper;
 import com.yt.app.api.v1.mapper.StaffsMapper;
 import com.yt.app.api.v1.service.PotentialcustomersService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
+import com.yt.app.api.v1.entity.Accounts;
+import com.yt.app.api.v1.entity.Customer;
 import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Potentialcustomers;
 import com.yt.app.api.v1.entity.Staffs;
@@ -39,6 +43,10 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 	private DictionaryMapper dictionarymapper;
 	@Autowired
 	private StaffsMapper staffsmapper;
+	@Autowired
+	private CustomerMapper customermapper;
+	@Autowired
+	private AccountsMapper accountsmapper;
 
 	@Override
 	@Transactional
@@ -52,7 +60,7 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 	@Transactional
 	public Integer post(Potentialcustomers t) {
 		t.setCreatetime(new Date());
-		t.setNextfollowtime(new Date());
+		t.setModifytime(new Date());
 		t.setCustomerlevel(DictionaryResource.PATRIARCH_LEVEL_1951);
 		t.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1971);
 		t.setFollowstage(DictionaryResource.PATRIARCH_FLLOWSTATUS_571);
@@ -183,6 +191,65 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 			p.setPrincipalid(id);
 			p.setPrincipalname(s.getDisplayname());
 			i = mapper.put(p);
+		}
+		return i;
+	}
+
+	@Override
+	public Integer updatecustomerbatch(List<Long> list) {
+		Integer i = 0;
+		Customer c = null;
+		for (Long t : list) {
+			c = new Customer();
+			Potentialcustomers p = mapper.get(t);
+			p.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1974);
+			i = mapper.put(p);
+			c.setId(p.getId());
+			c.setCampusid(p.getCampusid());
+			c.setCampusname(p.getCampusname());
+			c.setCustomername(p.getCustomername());
+			c.setCustomerlevel(p.getCustomerlevel());
+			c.setCustomerstatus(p.getCustomerstatus());
+			c.setInvalidreason(p.getInvalidreason());
+			c.setBirthday(p.getBirthday());
+			c.setGender(p.getGender());
+			c.setEmail(p.getEmail());
+			c.setIdtype(p.getIdtype());
+			c.setIdnumber(p.getIdnumber());
+			c.setViptype(p.getViptype());
+			c.setViplevel(p.getViplevel());
+			c.setEntrancegrade(p.getEntrancegrade());
+			c.setGrade(p.getGrade());
+			c.setSchoolyear(p.getSchoolyear());
+			c.setSubjecttype(p.getSubjecttype());
+			c.setStudenttype(p.getStudenttype());
+			c.setContacttype(p.getContacttype());
+			c.setSourcemaintype(p.getSourcemaintype());
+			c.setReferralstaffid(p.getReferralstaffid());
+			c.setReferralstaffname(p.getReferralstaffname());
+			c.setReferralcustomerid(p.getReferralcustomerid());
+			c.setReferralcustomername(p.getReferralcustomername());
+			c.setPurchaseintention(p.getPurchaseintention());
+			c.setSchoolid(p.getSchoolid());
+			p.setSchoolname(p.getSchoolname());
+			c.setIsstudyagain(p.getIsstudyagain());
+			c.setFollowtime(p.getFollowtime());
+			c.setFollowstage(p.getFollowstage());
+			c.setFollowedcount(p.getFollowedcount());
+			c.setNextfollowtime(p.getNextfollowtime());
+			c.setCreatorid(p.getCreatorid());
+			c.setCreatorname(p.getCreatorname());
+			c.setCreatetime(p.getCreatetime());
+			c.setModifierid(p.getModifierid());
+			c.setModifiername(p.getModifiername());
+			c.setModifytime(p.getModifytime());
+			i = customermapper.post(c);
+			if (i > 0) {
+				Accounts ac = new Accounts();
+				ac.setCustomerid(c.getId());
+				ac.setAccountmoney(0);
+				accountsmapper.post(ac);
+			}
 		}
 		return i;
 	}
