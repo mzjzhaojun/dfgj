@@ -134,10 +134,14 @@
 							var isValid = $("#saveForm").valid();
 							if (isValid) {
 								$scope.formData.birthday = $("#birthday").val();
-								$scope.formData.referralstaffid = $("#referralstaffid").val();
-								$scope.formData.referralstaffname = $("#referralstaffname").val();
-								$scope.formData.referralcustomerid = $("#referralcustomerid").val();
-								$scope.formData.referralcustomername = $("#referralcustomername").val();
+								$scope.formData.referralstaffid = $(
+										"#referralstaffid").val();
+								$scope.formData.referralstaffname = $(
+										"#referralstaffname").val();
+								$scope.formData.referralcustomerid = $(
+										"#referralcustomerid").val();
+								$scope.formData.referralcustomername = $(
+										"#referralcustomername").val();
 								$http(
 										{
 											url : parent
@@ -216,7 +220,8 @@
 						$scope.selectReferralCustomer = function() {
 							artdialogIframe(
 									"../../dfgj/html/potentialcustomers/customerlist.html",
-									null, backfunctionreferralcustomer, 1024, 600, true);
+									null, backfunctionreferralcustomer, 1024,
+									600, true);
 						}
 						$scope.initdata();
 						$scope.initselect();
@@ -324,7 +329,7 @@
 		if (parent.getDateChild().name != undefined) {
 			$("#referralstaffname").val(parent.getDateChild().name);
 		}
-		setDateChild({});
+		parent.removeDateChild();
 	}
 	function backfunctionreferralcustomer() {
 		if (parent.getDateChild().id != undefined) {
@@ -333,7 +338,7 @@
 		if (parent.getDateChild().name != undefined) {
 			$("#referralcustomername").val(parent.getDateChild().name);
 		}
-		setDateChild({});
+		parent.removeDateChild();
 	}
 </script>
 </head>
@@ -342,7 +347,7 @@
 	<!-- 操作按钮操作区 -->
 	<div class="col-lg-12 topActionPanel">
 		<div>
-			<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="isCancel">返 回</button>
+			<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="buttons.cancel">返 回</button>
 		</div>
 	</div>
 	<div class="col-lg-12 topActionPanel1">
@@ -356,7 +361,7 @@
 			<form method="post" id="saveForm" action="">
 				<div class="col-lg-12 topActionPane2">
 					<div>
-						<button type="button" class="btn btn-primary" style="margin-left: 10px; width: 80px;" ng-click="onPreserved()" ng-if="isPost">确 定</button>
+						<button type="button" class="btn btn-primary" style="margin-left: 10px; width: 80px;" ng-click="onPreserved()" ng-if="buttons.post">确 定</button>
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -456,13 +461,13 @@
 					</div>
 					<div class="input-group input-group-sm">
 						<input type="hidden" id="referralstaffid" ng-model="formData.referralstaffid" /> <span class="input-group-addon text-right spanwidth">转介绍员工</span> <input
-							type="text" id="referralstaffname" name="referralstaffname" ng-model="formData.referralstaffname" readonly="readonly" class="form-control"> <i
-							ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i>
+							type="text" id="referralstaffname" name="referralstaffname" ng-model="formData.referralstaffname" readonly="readonly" class="form-control"
+							ng-click="selectStaff()"> <i ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i>
 					</div>
 					<div class="input-group input-group-sm">
-						<input type="hidden" id="referralcustomerid" ng-model="formData.referralcustomerid" /> <span class="input-group-addon text-right spanwidth">转介绍学员</span> <input
-							type="text" id="referralcustomername" name="referralcustomername" ng-model="formData.referralcustomername" readonly="readonly" class="form-control">
-						<i ng-click="selectReferralCustomer()" class="glyphicon glyphicon-search" title="选择"></i>
+						<input type="hidden" id="referralcustomerid" ng-model="formData.referralcustomerid" /> <span class="input-group-addon text-right spanwidth">转介绍学员</span>
+						<input type="text" id="referralcustomername" name="referralcustomername" ng-model="formData.referralcustomername" readonly="readonly"
+							class="form-control" ng-click="selectReferralCustomer()"> <i ng-click="selectReferralCustomer()" class="glyphicon glyphicon-search" title="选择"></i>
 					</div>
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">当前在读学校</span> <select class="form-control" name="schoolname" ng-model="formData.schoolname"
@@ -602,7 +607,7 @@
 						<span class="input-group-addon verifyprompt">*</span>
 					</div>
 				</div>
-				<div class="col-lg-6" style="top:4px;">
+				<div class="col-lg-6" style="top: 4px;">
 					<div class="searchHistory">
 						<div class="searchHistory_title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跟进记录</div>
 						<div class="history" ng-repeat="data in datalist">

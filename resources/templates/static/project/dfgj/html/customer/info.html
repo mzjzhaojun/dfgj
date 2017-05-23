@@ -41,7 +41,7 @@
 <body ng-controller="controller">
 	<div class="col-lg-12 topActionPanel">
 		<div>
-			<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="isCancel">返 回</button>
+			<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="buttons.cancel">返 回</button>
 		</div>
 	</div>
 	<div class="col-lg-6 viewFixedWidth">
@@ -55,16 +55,20 @@
 			<span class="input-group-addon text-right spanwidth">客户来源</span> <input type="text" class="form-control" value="{{formData.sourcemaintypename}}" disabled>
 		</div>
 		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">学员手机号</span> <input type="text" class="form-control" value="{{formData.customerprimaryphonenumber}}" disabled>
+			<span class="input-group-addon text-right spanwidth">学员手机号</span> <input type="text" class="form-control" value="{{formData.customerprimaryphonenumber}}"
+				disabled>
 		</div>
 		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">紧急联系号码</span> <input type="text" class="form-control" value="{{formData.customersecondaryphonenumber}}" disabled>
+			<span class="input-group-addon text-right spanwidth">紧急联系号码</span> <input type="text" class="form-control"
+				value="{{formData.customersecondaryphonenumber}}" disabled>
 		</div>
 		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">家长手机号</span> <input type="text" class="form-control" value="{{formData.parentprimaryphonenumber}}" disabled>
+			<span class="input-group-addon text-right spanwidth">家长手机号</span> <input type="text" class="form-control" value="{{formData.parentprimaryphonenumber}}"
+				disabled>
 		</div>
 		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">紧急联系号码</span> <input type="text" class="form-control" value="{{formData.parentsecondaryphonenumber}}" disabled>
+			<span class="input-group-addon text-right spanwidth">紧急联系号码</span> <input type="text" class="form-control" value="{{formData.parentsecondaryphonenumber}}"
+				disabled>
 		</div>
 		<div class="input-group input-group-sm">
 			<span class="input-group-addon text-right spanwidth">客户级别</span> <input type="text" class="form-control" value="{{formData.customerlevelname}}" disabled>
@@ -107,6 +111,97 @@
 		</div>
 		<div class="input-group input-group-sm">
 			<span class="input-group-addon text-right spanwidth">学生类型</span> <input type="text" class="form-control" value="{{formData.studenttypename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">排定1对1数量</span> <input type="text" class="form-control"
+				value="{{formData.assetonetooneassignedamount}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">排定班组数量</span> <input type="text" class="form-control" value="{{formData.assetclassassignedamount}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">排定1对1价值</span> <input type="text" class="form-control" value="{{formData.assetonetooneassignedmoney}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">排定班组价值</span> <input type="text" class="form-control" value="{{formData.assetclassassignedmoney}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">消耗1对1数量</span> <input type="text" class="form-control"
+				value="{{formData.assetonetooneconfirmedamount}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">消耗班组数量</span> <input type="text" class="form-control" value="{{formData.assetclassconfirmedamount}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">消耗其他数量</span> <input type="text" class="form-control" value="{{formData.assetotherconfirmedamount}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">消耗1对1价值</span> <input type="text" class="form-control"
+				value="{{formData.assetonetooneconfirmedmoney}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">消耗班组价值</span> <input type="text" class="form-control" value="{{formData.assetclassconfirmedmoney}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">消耗其他价值</span> <input type="text" class="form-control" value="{{formData.assetotherconfirmedmoney}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">消耗赠送数量</span> <input type="text" class="form-control" value="{{formData.assetpresentamount}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前订购日期</span> <input type="text" class="form-control" value="{{formData.ordertime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前退订日期</span> <input type="text" class="form-control" value="{{formData.debooktime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前排课日期</span> <input type="text" class="form-control" value="{{formData.assigntime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前上课时间</span> <input type="text" class="form-control" value="{{formData.starttime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">1对1上课时间</span> <input type="text" class="form-control" value="{{formData.starttimeofonetoone}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">班组上课时间</span> <input type="text" class="form-control" value="{{formData.starttimeofclass}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前确认时间</span> <input type="text" class="form-control" value="{{formData.confirmtime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">1对1确认时间</span> <input type="text" class="form-control" value="{{formData.confirmtimeofonetoone}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">班组确认时间</span> <input type="text" class="form-control" value="{{formData.confirmtimeofclass}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">月上课科目数量</span> <input type="text" class="form-control" value="{{formData.confirmedsubjectsofrecent}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">本月上课小时数</span> <input type="text" class="form-control" value="{{formData.confirmedhoursofthismonth}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">分派咨询师时间</span> <input type="text" class="form-control" value="{{formData.allocateconsultanttime}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">分配的教师数量</span> <input type="text" class="form-control" value="{{formData.allocateteachercount}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">是否扣减服务费</span> <input type="text" class="form-control" value="{{formData.hasexpense}}" disabled>
 		</div>
 	</div>
 	<div class="col-lg-6 viewFixedWidth">
@@ -163,9 +258,100 @@
 		<div class="input-group input-group-sm">
 			<span class="input-group-addon text-right spanwidth">最后修改时间</span> <input type="text" class="form-control" value="{{formData.modifytime}}" disabled>
 		</div>
+		<!-- 新增 -->
 		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">学生描述</span>
-			<textarea class="txtVal form-control" style="height: 90px;" disabled>{{formData.describes}}</textarea>
+			<span class="input-group-addon text-right spanwidth">首次签约人</span> <input type="text" class="form-control" value="{{formData.firstsignername}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">转介绍学员个数</span> <input type="text" class="form-control" value="{{formData.referralcount}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">咨询师姓名</span> <input type="text" class="form-control" value="{{formData.consultantname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">学管师姓名</span> <input type="text" class="form-control" value="{{formData.educatorname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">电销人员姓名</span> <input type="text" class="form-control" value="{{formData.callcentername}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">市场人员姓名</span> <input type="text" class="form-control" value="{{formData.marketingname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前账户余额</span> <input type="text" class="form-control" value="{{formData.accountmoney}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">账户折扣率</span> <input type="text" class="form-control" value="{{formData.accountdiscountrate}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">账户折扣基数</span> <input type="text" class="form-control" value="{{formData.accountdiscountbase}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前新签时间</span> <input type="text" class="form-control" value="{{formData.accountnewsigntime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前新签金额</span> <input type="text" class="form-control" value="{{formData.accountnewsignmoney}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前续费时间</span> <input type="text" class="form-control" value="{{formData.accountrenewsigntime}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前续费金额</span> <input type="text" class="form-control" value="{{formData.accountrenewsignmoney}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前充值时间</span> <input type="text" class="form-control" value="{{formData.accountchargetime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前充值金额</span> <input type="text" class="form-control" value="{{formData.accountchargemoney}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前退费时间</span> <input type="text" class="form-control" value="{{formData.accountrefundtime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">当前退费金额</span> <input type="text" class="form-control" value="{{formData.accountrefundmoney}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">累计签约金额</span> <input type="text" class="form-control" value="{{formData.signedmoney}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">累计签约次数</span> <input type="text" class="form-control" value="{{formData.signedcount}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">剩余1对1数量</span> <input type="text" class="form-control" value="{{formData.assetonetooneamount}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">剩余班组数量</span> <input type="text" class="form-control" value="{{formData.assetclassamount}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">剩余其他数量</span> <input type="text" class="form-control" value="{{formData.assetotheramount}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">剩余1对1金额</span> <input type="text" class="form-control" value="{{formData.assetonetoonemoney}}"
+				disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">剩余班组金额</span> <input type="text" class="form-control" value="{{formData.assetclassmoney}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">剩余其他金额</span> <input type="text" class="form-control" value="{{formData.assetothermoney}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">服务费扣减日期</span> <input type="text" class="form-control" value="{{formData.expensetime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">扣减服务费金额</span> <input type="text" class="form-control" value="{{formData.expensefee}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">结课时间</span> <input type="text" class="form-control" value="{{formData.completetime}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">服务首次创建时间</span> <input type="text" class="form-control" value="{{formData.servicecreatetime}}"
+				disabled>
 		</div>
 	</div>
 </body>

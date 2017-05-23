@@ -1,123 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yt.app.api.v1.mapper.PresentitemsMapper">
-  <!-- 数据库列 -->
-  <sql id="Base_Column_List">
-     id,version,presentid,presentvalue,presentstandard
-  </sql>
-  <!-- 基础返回对象封装 -->
-  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Presentitems">
-         <id property="id" column="id" />
-         <id property="version" column="version" />
-         <id property="presentid" column="presentid" />
-         <id property="presentvalue" column="presentvalue" />
-         <id property="presentstandard" column="presentstandard" />
-  </resultMap>
-  <!-- 默认新增 -->
-  <insert id="post" parameterType="com.yt.app.api.v1.entity.Presentitems">
-  insert into presentitems (id,presentid,presentvalue,presentstandard)
-         values (#{id},#{presentid},#{presentvalue},#{presentstandard})
-  </insert>
-  <!-- 默认删除id对象 -->
- <delete id="delete" parameterType="java.lang.String">
-     delete from presentitems 
-     where id = #{id}
- </delete>
-  <!-- 默认更新id对象 -->
- <update id="put" parameterType="com.yt.app.api.v1.entity.Presentitems">
-    update presentitems
-         <set>
-             <if test="version != null">
-                   version = #{version}+1,
-             </if>
-             <if test="presentid != null">
-                   presentid = #{presentid},
-             </if>
-             <if test="presentvalue != null">
-                   presentvalue = #{presentvalue},
-             </if>
-             <if test="presentstandard != null">
-                   presentstandard = #{presentstandard}
-             </if>
-          </set>
-     where id = #{id} and  version = #{version}
- </update>
-  <!-- 默认获得id对象 -->
- <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
-     select
-        <include refid="Base_Column_List" />
-        from presentitems 
-        where id = #{id}
- </select>
-  <!-- 默认集合 -->
- <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
-       select
-        <include refid="Base_Column_List" />
-        from presentitems 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-             <if test="orderby != null and dir != null">
-           order by ${orderby} ${dir}
-             </if>
-             <if test="pageStart != null and pageEnd != null">
-           LIMIT #{pageStart},#{pageEnd}
-             </if>
-        </where>
- </select>
-  <!-- 默认返回MAP集合 -->
- <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-       select
-        <include refid="Base_Column_List" />
-        from presentitems 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-             <if test="orderby != null and dir != null">
-           order by ${orderby} ${dir}
-             </if>
-             <if test="pageStart != null and pageEnd != null">
-           LIMIT #{pageStart},#{pageEnd}
-             </if>
-        </where>
- </select>
-  <!-- 默认集合统计 -->
- <select id="countlist" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from presentitems 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-        </where>
- </select>
-  <!-- 默认返回MAP集合统计 -->
- <select id="countmap" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from presentitems 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-        </where>
- </select>
-  <!-- 默认获取Ids的对象 -->
- <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
-       select
-        <include refid="Base_Column_List" />
-        from presentitems 
-        <where>
-        1=1
-             <if test="array != null and array != ''">
-       	and id in
-        	<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-           	#{item}
-        	</foreach>
-             </if>
-        </where>
- </select>
+	<!-- 数据库列 -->
+	<sql id="Base_Column_List">
+		id,version,presentid,presentvalue,presentstandard
+	</sql>
+	<!-- 基础返回对象封装 -->
+	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Presentitems">
+		<id property="id" column="id" />
+		<id property="version" column="version" />
+		<id property="presentid" column="presentid" />
+		<id property="presentvalue" column="presentvalue" />
+		<id property="presentstandard" column="presentstandard" />
+	</resultMap>
+	<!-- 默认新增 -->
+	<insert id="post" parameterType="com.yt.app.api.v1.entity.Presentitems">
+		insert into presentitems
+		(id,presentid,presentvalue,presentstandard)
+		values
+		(#{id},#{presentid},#{presentvalue},#{presentstandard})
+	</insert>
+	<!-- 默认删除id对象 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from presentitems
+		where
+		id = #{id}
+	</delete>
+	<delete id="deleteByPresentId" parameterType="java.lang.String">
+		delete from
+		presentitems
+		where presentid = #{id}
+	</delete>
+
+	<!-- 默认更新id对象 -->
+	<update id="put" parameterType="com.yt.app.api.v1.entity.Presentitems">
+		update presentitems
+		<set>
+			<if test="version != null">
+				version = #{version}+1,
+			</if>
+			<if test="presentid != null">
+				presentid = #{presentid},
+			</if>
+			<if test="presentvalue != null">
+				presentvalue = #{presentvalue},
+			</if>
+			<if test="presentstandard != null">
+				presentstandard = #{presentstandard}
+			</if>
+		</set>
+		where id = #{id} and version = #{version}
+	</update>
+	<!-- 默认获得id对象 -->
+	<select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from presentitems
+		where id = #{id}
+	</select>
+	<!-- 默认集合 -->
+	<select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from presentitems
+		<where>
+			1=1
+			<if test="presentid != null and presentid != ''">
+				and presentid = #{presentid}
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合 -->
+	<select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from presentitems
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认集合统计 -->
+	<select id="countlist" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from presentitems
+		<where>
+			1=1
+			<if test="presentid != null and presentid != ''">
+				and presentid = #{presentid}
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合统计 -->
+	<select id="countmap" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from presentitems
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认获取Ids的对象 -->
+	<select id="listByArrayId" parameterType="java.util.HashMap"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from presentitems
+		<where>
+			1=1
+			<if test="array != null and array != ''">
+				and id in
+				<foreach item="item" index="index" collection="array" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
 </mapper>

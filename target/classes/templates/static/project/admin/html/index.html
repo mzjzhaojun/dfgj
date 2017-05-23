@@ -526,6 +526,18 @@
 		})
 		return href;
 	}
+	
+	function getFunctionLinks(data,key) {
+		var href;
+		$.each(data, function(index, ele) {
+			var code = ele.rel == null ? index : ele.rel;
+			if (code == key) {
+				href = ele.href;
+			}
+		})
+		return href;
+	}
+	
 	function getCookie(key) {
 		var data = JSON.parse($.cookie('assetstoken'));
 		return data[key];

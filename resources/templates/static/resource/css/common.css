@@ -51,8 +51,10 @@
 /*图标字体*/
 .input-group>i {
 	position: relative;
-	top: 5px;
-	left: 5px;
+	top: 8px;
+	left: -18px;
+	width: 0px;
+	z-index: 100;
 }
 
 .input-group>.i {

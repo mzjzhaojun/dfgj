@@ -144,8 +144,8 @@
 					<td  ng-dblclick="toInfo(task)">{{task.file.createtime}}</td>
 					<td>
 						<div  >
-						<h4 ng-click="toInfo(task)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ng-if="isShowInfo" title="查看"></h4>
-	    		        <h4 ng-click="toDelete(task)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;"  ng-if="isShowDelete" title="删除"></h4>
+						<h4 ng-click="toInfo(task)" class="glyphicon glyphicon-search"  style="margin:0px 5px;color:#99DFF8;" ng-if="buttons.info" title="查看"></h4>
+	    		        <h4 ng-click="toDelete(task)" class="glyphicon glyphicon-remove"  style="margin:0px 5px;color:#99DFF8;"  ng-if="buttons.delete" title="删除"></h4>
 				  		</div>
 					</td>
 				  </tr>

@@ -11,12 +11,19 @@
 <link rel="stylesheet" type="text/css" href="../../../../resource/css/common.css">
 <link rel="stylesheet" type="text/css" href="../../../../resource/css/list.css">
 <link rel="stylesheet" type="text/css" href="../../../../resource/js/validate/css/validate.css" />
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/square/red.css" />
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/select2.min.css" />
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/select2.css" />
+<link rel="stylesheet" type="text/css" href="../../../../resource/css/selectize.default.css" />
 <!-- 基础js -->
 <script type="text/javascript" src="../../../../resource/js/angular-1.0.1.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../../resource/js/paging.js"></script>
 <script type="text/javascript" src="../../../../resource/js/response.js"></script>
+<script type="text/javascript" src="../../../../resource/js/icheck.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/select2.min.js"></script>
+<script type="text/javascript" src="../../../../resource/js/angular-sanitize.js"></script>
 <!-- 表单验证 -->
 <script type="text/javascript" src="../../../../resource/js/date/js/eap.core.js"></script>
 <script type="text/javascript" src="../../../../resource/js/validate/js/eap.tip.js"></script>
@@ -26,42 +33,275 @@
 <script type="text/javascript" src="../../../../resource/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../../../../resource/js/locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
 <script type="text/javascript" src="../../../../resource/js/date/js/eap.util.date.js"></script>
+<!-- dialog -->
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialog.source.js?skin=default"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/iframeTools.source.js"></script>
+<script type="text/javascript" src="../../../../resource/js/artDialog/skins/js/artDialogZJ.js"></script>
 <!-- 初始化 -->
 <script type="text/javascript">
-	var add = angular.module("add", []);
-	add.controller("controller", function($scope, $http) {
+	var app = angular.module("add", [ 'ngSanitize', 'ui.select' ]);
+
+	app.filter('propsFilter', function() {
+		return function(items, props) {
+			var out = [];
+			if (angular.isArray(items)) {
+				var keys = Object.keys(props);
+				items
+						.forEach(function(item) {
+							var itemMatches = false;
+							for (var i = 0; i < keys.length; i++) {
+								var prop = keys[i];
+								var text = props[prop].toLowerCase();
+								if (item[prop].toString().toLowerCase()
+										.indexOf(text) !== -1) {
+									itemMatches = true;
+									break;
+								}
+							}
+							if (itemMatches) {
+								out.push(item);
+							}
+						});
+			} else {
+				out = items;
+			}
+			return out;
+		};
+	});
+	app.controller("controller", function($scope, $http) {
 		$scope.formData = {};
+		$scope.formData2 = {};
+		$scope.formData3 = {};
+		$scope.datalist = [];
+		$scope.formData2.productprice = 0;
+		$scope.formData2.count = 1;
 
 		//返回
 		$scope.onReturn = function() {
 			history.go(-1);
 		}
-		//保存
-		$scope.onPreserved = function() {
-			var isValid = $("#saveForm").valid();
-			if (isValid) {
-				$scope.formData.branchid = parent.getCookie('branchid');
-				$scope.formData.branchname = parent.getCookie('branchname');
-				$scope.formData.creatorid = parent.getCookie('staffid');
-				$scope.formData.creatorname = parent.getCookie('staffname');
-				$http({
-					url : parent.getMenuLinksHref("discountspost"),
-					method : 'POST',
-					dataType : "json",
-					withCredentials : true,
-					headers : {
-						'Content-Type' : 'application/json;charset=UTF-8;'
+		$scope.initSelectCustomer = function() {
+			artdialogIframe(
+					"../../dfgj/html/potentialcustomers/customerlist.html",
+					null, backfunctionreferralcustomer, 1024, 600, true);
+		}
+		$scope.initCustomer = function() {
+			$http({
+				url : $scope.formData.url,
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				$scope.formData = data;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			});
+		}
+
+		$scope.onNext1 = function() {
+			if ($scope.formData.id == null || $scope.formData.id == undefined) {
+				parent.art.dialog({
+					content : '请先选择学员！',
+					lock : true,
+					ok : function() {
 					},
-					data : JSON.stringify($scope.formData)
-				}).success(function(data, status, headers, config) {
-					$scope.formData.id = data;
-					$('#myTab li:eq(1) a').tab('show');
-				}).error(function(data, status, headers, config) {
-					response(status);
+					time : 1
+				});
+			} else {
+				$('#myTab li:eq(1) a').tab('show');
+			}
+		}
+
+		$scope.onNext2 = function() {
+			if ($scope.datalist.length == 0) {
+				parent.art.dialog({
+					content : '请先加入选择课程！',
+					lock : true,
+					ok : function() {
+					},
+					time : 1
+				});
+			} else {
+				$('#myTab li:eq(2) a').tab('show');
+			}
+		}
+
+		$scope.onNext3 = function() {
+			if ($scope.formData.id == null || $scope.formData.id == undefined) {
+				parent.art.dialog({
+					content : '请先选择学员！',
+					lock : true,
+					ok : function() {
+					},
+					time : 1
+				});
+			} else if ($scope.datalist.length == 0) {
+				parent.art.dialog({
+					content : '请先加入选择课程！',
+					lock : true,
+					ok : function() {
+					},
+					time : 1
+				});
+			} else {
+				var str = "";
+				$('#myTab li:eq(3) a').tab('show');
+				$("input[name='checkbox']:checkbox:checked").each(function() {
+					str += $(this)[0].attributes.dataid.value;
 				})
 			}
 		}
+
+		/* $scope.initSelectCustomer(); */
+
+		////////////////////////////////////
+		$scope.initProduct = function() {
+			$http({
+				url : $scope.formData2.url,
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				$scope.formData2 = data;
+				$scope.formData2.count = 1;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			});
+		}
+
+		$scope.selectProduct = function() {
+			artdialogIframe(
+					"../../dfgj/html/productsalaryrules/productlist.html",
+					null, backfunctionProduct, 900, 600, true);
+		}
+
+		$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("dictionarylist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify([ 20 ])
+			}).success(function(data, status, headers, config) {
+				$scope.selects = data;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+
+		//保存
+		$scope.onPreserved = function() {
+			var isValid = $("#saveForm").valid();
+			var flag = false;
+			if (isValid) {
+				var list = $scope.datalist;
+				for (var i = 0; i < list.length; i++) {
+					if (list[i].id == $scope.formData2.id)
+						flag = true;
+				}
+				if (!flag) {
+					$scope.datalist.push($scope.formData2);
+				}
+			}
+		}
+
+		$scope.$watch('formData2.count', function(newValue, oldValue, scope) {
+			$scope.formData2.totalprices = $scope.formData2.productprice
+					* $scope.formData2.count;
+		});
+
+		$scope.$watch('formData2.productprice', function(newValue, oldValue,
+				scope) {
+			$scope.formData2.totalprices = $scope.formData2.productprice
+					* $scope.formData2.count;
+		});
+
+		$scope.toUpdate = function(data) {
+			$scope.formData2 = data;
+		}
+
+		//////////////////////////////////////////////////////////////
+		$http({
+			url : parent.getMenuLinksHref("expenseslist"),
+			method : 'POST',
+			dataType : "json",
+			withCredentials : true,
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			data : ''
+		}).success(function(data, status, headers, config) {
+			$scope.expenseslist = data;
+			setTimeout(initCheckStyle, 1000);
+		}).error(function(data, status, headers, config) {
+			response(status);
+		})
+
+		///////////////////////////////////////////////////////
+
+		$http({
+			url : parent.getMenuLinksHref("discountslist"),
+			method : 'POST',
+			dataType : "json",
+			withCredentials : true,
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			data : ''
+		}).success(function(data, status, headers, config) {
+			$scope.discountlist = data;
+		}).error(function(data, status, headers, config) {
+			response(status);
+		})
+
+		$scope.initselect();
 	})
+
+	function backfunctionreferralcustomer() {
+		var appElement = document.querySelector('[ng-controller=controller]');
+		var $scope = angular.element(appElement).scope();
+		$scope.formData = {};
+		$scope.formData.url = parent.getDateChild().url;
+		$scope.initCustomer();
+		parent.removeDateChild();
+	}
+
+	function backfunctionProduct() {
+		var appElement = document.querySelector('[ng-controller=controller]');
+		var $scope = angular.element(appElement).scope();
+		$scope.formData2 = {};
+		$scope.formData2.url = parent.getDateChild().url;
+		var flag = parent.getDateChild().caninput;
+		if (flag == "21") {
+			$scope.caninput1 = true;
+			$scope.caninput2 = false;
+		} else {
+			$scope.caninput2 = true;
+			$scope.caninput1 = false;
+		}
+		$("#productidname").val(parent.getDateChild().name);
+		$scope.initProduct();
+		parent.removeDateChild();
+	}
+
+	function initCheckStyle() {
+		$('input').iCheck({
+			checkboxClass : 'icheckbox_square-red',
+			radioClass : 'iradio_square-red',
+			increaseArea : '20%' // optional
+		});
+	}
 </script>
 <style type="text/css">
 span {
@@ -72,6 +312,8 @@ span {
 </style>
 </head>
 <body ng-controller="controller">
+	<input type="hidden" id="caninput1" ng-model="caninput1" />
+	<input type="hidden" id="caninput2" ng-model="caninput2" />
 	<div class="col-lg-12 topActionPanel">
 		<div>
 			<span>选择学员</span> > <span>选择课程</span> > <span>选择服务</span> > <span>折扣缴费</span> > <span>打印缴费单</span>
@@ -82,25 +324,466 @@ span {
 			<li class="active"><a href="#customer" data-toggle="tab">选择学员 </a></li>
 			<li><a href="#product" data-toggle="tab">选择课程</a></li>
 			<li><a href="#service" data-toggle="tab">选择服务</a></li>
-			<li><a href="#charge" data-toggle="tab">折扣缴费</a></li>
-			<li><a href="#print" data-toggle="tab">打印缴费单</a></li>
+			<li><a href="#discount" data-toggle="tab">选择优惠</a></li>
+			<li><a href="#charge" data-toggle="tab">缴费</a></li>
 		</ul>
 	</div>
 	<div id="myTabContent" class="tab-content">
 		<div class="tab-pane fade in active" id="customer">
-			<form method="post" id="saveForm1" action="">选择学员</form>
+			<!-- 操作按钮操作区 -->
+			<div class="col-lg-12 topActionPanel">
+				<div>
+					<button type="button" class="btn btn-primary" ng-click="initSelectCustomer()" ng-if="buttons.post">选择学员</button>
+				</div>
+				<div>
+					<button type="button" class="btn btn-primary" ng-click="onNext1()" ng-if="buttons.next">下一步</button>
+				</div>
+			</div>
+			<div class="col-lg-6 viewFixedWidth">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">校区名称</span> <input type="text" class="form-control" value="{{formData.campusname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">客户名称</span> <input type="text" class="form-control" value="{{formData.customername}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">客户来源</span> <input type="text" class="form-control" value="{{formData.sourcemaintypename}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">学员手机号</span> <input type="text" class="form-control" value="{{formData.customerprimaryphonenumber}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">紧急联系号码</span> <input type="text" class="form-control"
+						value="{{formData.customersecondaryphonenumber}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">家长手机号</span> <input type="text" class="form-control" value="{{formData.parentprimaryphonenumber}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">紧急联系号码</span> <input type="text" class="form-control"
+						value="{{formData.parentsecondaryphonenumber}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">客户级别</span> <input type="text" class="form-control" value="{{formData.customerlevelname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">客户状态</span> <input type="text" class="form-control" value="{{formData.customerstatusname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">无效客户理由</span> <input type="text" class="form-control" value="{{formData.invalidreasonname}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">仅登记一家长</span> <input type="text" class="form-control" value="{{formData.isoneparentname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">学生生日</span> <input type="text" class="form-control" value="{{formData.birthday}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">性别</span> <input type="text" class="form-control" value="{{formData.gendername}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">电子邮箱</span> <input type="text" class="form-control" value="{{formData.email}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">证件类型</span> <input type="text" class="form-control" value="{{formData.idtypename}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">证件号</span> <input type="text" class="form-control" value="{{formData.idnumber}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">入学年级</span> <input type="text" class="form-control" value="{{formData.entrancegradename}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前年级</span> <input type="text" class="form-control" value="{{formData.gradename}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">学年制</span> <input type="text" class="form-control" value="{{formData.schoolyearname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">文理科</span> <input type="text" class="form-control" value="{{formData.subjecttypename}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">学生类型</span> <input type="text" class="form-control" value="{{formData.studenttypename}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">排定1对1数量</span> <input type="text" class="form-control"
+						value="{{formData.assetonetooneassignedamount}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">排定班组数量</span> <input type="text" class="form-control" value="{{formData.assetclassassignedamount}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">排定1对1价值</span> <input type="text" class="form-control"
+						value="{{formData.assetonetooneassignedmoney}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">排定班组价值</span> <input type="text" class="form-control" value="{{formData.assetclassassignedmoney}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">消耗1对1数量</span> <input type="text" class="form-control"
+						value="{{formData.assetonetooneconfirmedamount}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">消耗班组数量</span> <input type="text" class="form-control" value="{{formData.assetclassconfirmedamount}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">消耗其他数量</span> <input type="text" class="form-control" value="{{formData.assetotherconfirmedamount}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">消耗1对1价值</span> <input type="text" class="form-control"
+						value="{{formData.assetonetooneconfirmedmoney}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">消耗班组价值</span> <input type="text" class="form-control" value="{{formData.assetclassconfirmedmoney}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">消耗其他价值</span> <input type="text" class="form-control" value="{{formData.assetotherconfirmedmoney}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">消耗赠送数量</span> <input type="text" class="form-control" value="{{formData.assetpresentamount}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前订购日期</span> <input type="text" class="form-control" value="{{formData.ordertime}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前退订日期</span> <input type="text" class="form-control" value="{{formData.debooktime}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前排课日期</span> <input type="text" class="form-control" value="{{formData.assigntime}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前上课时间</span> <input type="text" class="form-control" value="{{formData.starttime}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">1对1上课时间</span> <input type="text" class="form-control" value="{{formData.starttimeofonetoone}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">班组上课时间</span> <input type="text" class="form-control" value="{{formData.starttimeofclass}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前确认时间</span> <input type="text" class="form-control" value="{{formData.confirmtime}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">1对1确认时间</span> <input type="text" class="form-control" value="{{formData.confirmtimeofonetoone}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">班组确认时间</span> <input type="text" class="form-control" value="{{formData.confirmtimeofclass}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">月上课科目数量</span> <input type="text" class="form-control"
+						value="{{formData.confirmedsubjectsofrecent}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">本月上课小时数</span> <input type="text" class="form-control"
+						value="{{formData.confirmedhoursofthismonth}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">分派咨询师时间</span> <input type="text" class="form-control" value="{{formData.allocateconsultanttime}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">分配的教师数量</span> <input type="text" class="form-control" value="{{formData.allocateteachercount}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">是否扣减服务费</span> <input type="text" class="form-control" value="{{formData.hasexpense}}" disabled>
+				</div>
+			</div>
+			<div class="col-lg-6 viewFixedWidth">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">vip客户</span> <input type="text" class="form-control" value="{{formData.viptypename}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">vip客户等级</span> <input type="text" class="form-control" value="{{formData.viplevelname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">家长监护人</span> <input type="text" class="form-control" value="{{formData.parentname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">转介绍员工</span> <input type="text" class="form-control" value="{{formData.referralstaffname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">转介绍学员</span> <input type="text" class="form-control" value="{{formData.referralcustomername}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">购买意愿</span> <input type="text" class="form-control" value="{{formData.purchaseintentionname}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前在读学校</span> <input type="text" class="form-control" value="{{formData.schoolname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">是否复读</span> <input type="text" class="form-control" value="{{formData.isstudyagainname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">上门时间</span> <input type="text" class="form-control" value="{{formData.followtime}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">跟进方式</span> <input type="text" class="form-control" value="{{formData.contacttypename}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">跟进阶段</span> <input type="text" class="form-control" value="{{formData.followstagename}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">跟进次数</span> <input type="text" class="form-control" value="{{formData.followedcount}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">下次跟进时间</span> <input type="text" class="form-control" value="{{formData.nextfollowtime}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">创建者</span> <input type="text" class="form-control" value="{{formData.creatorname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">创建时间</span> <input type="text" class="form-control" value="{{formData.createtime}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">跟进人姓名</span> <input type="text" class="form-control" value="{{formData.modifiername}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">最后修改时间</span> <input type="text" class="form-control" value="{{formData.modifytime}}" disabled>
+				</div>
+				<!-- 新增 -->
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">首次签约人</span> <input type="text" class="form-control" value="{{formData.firstsignername}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">转介绍学员个数</span> <input type="text" class="form-control" value="{{formData.referralcount}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">咨询师姓名</span> <input type="text" class="form-control" value="{{formData.consultantname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">学管师姓名</span> <input type="text" class="form-control" value="{{formData.educatorname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">电销人员姓名</span> <input type="text" class="form-control" value="{{formData.callcentername}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">市场人员姓名</span> <input type="text" class="form-control" value="{{formData.marketingname}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前账户余额</span> <input type="text" class="form-control" value="{{formData.accountmoney}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">账户折扣率</span> <input type="text" class="form-control" value="{{formData.accountdiscountrate}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">账户折扣基数</span> <input type="text" class="form-control" value="{{formData.accountdiscountbase}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前新签时间</span> <input type="text" class="form-control" value="{{formData.accountnewsigntime}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前新签金额</span> <input type="text" class="form-control" value="{{formData.accountnewsignmoney}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前续费时间</span> <input type="text" class="form-control" value="{{formData.accountrenewsigntime}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前续费金额</span> <input type="text" class="form-control" value="{{formData.accountrenewsignmoney}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前充值时间</span> <input type="text" class="form-control" value="{{formData.accountchargetime}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前充值金额</span> <input type="text" class="form-control" value="{{formData.accountchargemoney}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前退费时间</span> <input type="text" class="form-control" value="{{formData.accountrefundtime}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">当前退费金额</span> <input type="text" class="form-control" value="{{formData.accountrefundmoney}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">累计签约金额</span> <input type="text" class="form-control" value="{{formData.signedmoney}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">累计签约次数</span> <input type="text" class="form-control" value="{{formData.signedcount}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">剩余1对1数量</span> <input type="text" class="form-control" value="{{formData.assetonetooneamount}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">剩余班组数量</span> <input type="text" class="form-control" value="{{formData.assetclassamount}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">剩余其他数量</span> <input type="text" class="form-control" value="{{formData.assetotheramount}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">剩余1对1金额</span> <input type="text" class="form-control" value="{{formData.assetonetoonemoney}}"
+						disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">剩余班组金额</span> <input type="text" class="form-control" value="{{formData.assetclassmoney}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">剩余其他金额</span> <input type="text" class="form-control" value="{{formData.assetothermoney}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">服务费扣减日期</span> <input type="text" class="form-control" value="{{formData.expensetime}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">扣减服务费金额</span> <input type="text" class="form-control" value="{{formData.expensefee}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">结课时间</span> <input type="text" class="form-control" value="{{formData.completetime}}" disabled>
+				</div>
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon text-right spanwidth">服务首次创建时间</span> <input type="text" class="form-control" value="{{formData.servicecreatetime}}"
+						disabled>
+				</div>
+			</div>
 		</div>
 		<div class="tab-pane fade" id="product">
-			<form method="post" id="saveForm2" action="">选择课程</form>
+			<form method="post" id="saveForm" action="">
+				<div class="col-lg-12 topActionPanel">
+					<div>
+						<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-if="buttons.post">加入选择</button>
+					</div>
+					<div>
+						<button type="button" class="btn btn-primary" ng-click="onNext2()" ng-if="buttons.next">下一步</button>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="input-group input-group-sm">
+						<input type="hidden" id="productid" ng-model="formData.productid" /> <span class="input-group-addon text-right spanwidth">课程</span> <input type="text"
+							id="productidname" name="productidname" ng-model="formData2.productidname" readonly="readonly" class="form-control required" ng-click="selectProduct()">
+						<i id="type_name" ng-click="selectProduct()" class="glyphicon glyphicon-search" title="选择"></i><span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">单价</span> <input type="text" class="form-control" value="{{formData2.productprice |currency:'￥'}}"
+							disabled> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm" ng-if="caninput1">
+						<span class="input-group-addon text-right spanwidth">数量</span> <input type="text" class="form-control required number" placeholder="请输入数量" name="count"
+							ng-model="formData2.count"> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm" ng-if="caninput2">
+						<span class="input-group-addon text-right spanwidth">数量</span> <input type="text" class="form-control required number" placeholder="请输入数量" name="count"
+							ng-model="formData2.count" disabled> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">总价</span> <input type="text" class="form-control required" placeholder="请输入数量" name="totalprices"
+							id="totalprices" ng-model="formData2.totalprices|currency:'￥'" disabled> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">学科</span> <input type="text" class="form-control" value="{{formData2.subjectname}}" disabled>
+						<span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">年级</span> <input type="text" class="form-control" value="{{formData2.gradename}}" disabled>
+						<span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">年度</span> <input type="text" class="form-control" value="{{formData2.yearname}}" disabled>
+						<span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">季度</span> <input type="text" class="form-control" value="{{formData2.seasonname}}" disabled>
+						<span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">产品描述</span> <input type="text" class="form-control" value="{{formData2.productmemo}}" disabled>
+						<span class="input-group-addon verifyprompt">*</span>
+					</div>
+				</div>
+				<div class="col-lg-6" style="top: 15px; left: 10px;">
+					<table class="table">
+						<thead>
+							<tr class="info">
+								<th>序号</th>
+								<th>名称</th>
+								<th>单价</th>
+								<th>科目</th>
+								<th>年级</th>
+								<th>年度</th>
+								<th>数量</th>
+								<th>总价</th>
+								<th>相关操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="data in datalist" class='tr{{$index%2+2}}' ng-class="{selected: $index==selectedRow}">
+								<td>{{$index+1}}</td>
+								<td>{{data.productname}}</td>
+								<td>{{data.productprice|currency:'￥'}}</td>
+								<td>{{data.subjectname}}</td>
+								<td>{{data.gradename}}</td>
+								<td>{{data.yearname}}</td>
+								<td>{{data.count}}</td>
+								<td>{{data.totalprices|currency:'￥'}}</td>
+								<td>
+									<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil" style="margin: 0px 5px; color: #99DFF8;" ng-if="buttons.update" title="修改"></h4>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
 		</div>
 		<div class="tab-pane fade" id="service">
-			<form method="post" id="saveForm3" action="">选择服务</form>
+			<form method="post" id="saveForm3" action="">
+				<div class="col-lg-12 topActionPanel">
+					<div>
+						<button type="button" class="btn btn-primary" ng-click="onNext3()" ng-if="buttons.next">下一步</button>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="input-group input-group-sm" ng-repeat="data in expenseslist">
+						<input type="checkbox" name="checkbox" dataid="{{data.expenses.id}}" val="{{data.expenses.expensevalue}}">&nbsp&nbsp&nbsp&nbsp&nbsp{{data.expenses.expensetypename}}&nbsp&nbsp&nbsp&nbsp&nbsp￥{{data.expenses.expensevalue}}
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="tab-pane fade" id="discount">
+			<form method="post" id="saveForm3" action="">
+				<div class="col-lg-12 topActionPanel">
+					<div>
+						<button type="button" class="btn btn-primary" ng-click="onNext3()" ng-if="buttons.next">下一步</button>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">选择折扣</span>
+						<ui-select ng-model="formData3.selected" theme="select2" style="min-width: 400px;" title="选择折扣"> 
+							<ui-select-match placeholder="请选择折扣" style="height:35px;" >{{$select.selected.name}}
+							</ui-select-match> 
+							<ui-select-choices group-by="'country'" repeat="person in discountlist | propsFilter: {name: $select.search, age: $select.search}">
+								<div ng-bind-html="person.name | highlight: $select.search"></div>
+								<small> email: {{person.email}} age: <span ng-bind-html="''+person.age | highlight: $select.search"></span></small> 
+							</ui-select-choices> 
+						</ui-select>
+					</div>
+				</div>
+			</form>
 		</div>
 		<div class="tab-pane fade" id="charge">
-			<form method="post" id="saveForm4" action="">折扣缴费</form>
-		</div>
-		<div class="tab-pane fade" id="print">
-			<form method="post" id="saveForm5" action="">折扣缴费</form>
+			<form method="post" id="saveForm5" action=""></form>
 		</div>
 	</div>
 </body>

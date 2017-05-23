@@ -91,7 +91,7 @@
 		if (parent.getDateChild().name != undefined) {
 			$("#productidname").val(parent.getDateChild().name);
 		}
-		setDateChild({});
+		parent.removeDateChild();
 	}
 </script>
 </head>
@@ -101,17 +101,17 @@
 		<!-- 操作按钮操作区 -->
 		<div class="col-lg-12 topActionPanel">
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-if="isPost">确 定</button>
+				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-if="buttons.post">确 定</button>
 			</div>
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="isCancel">返 回</button>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="buttons.cancel">返 回</button>
 			</div>
 		</div>
 		<div class="col-lg-6">
 			<div class="input-group input-group-sm">
 				<input type="hidden" id="productid" ng-model="formData.productid" /> <span class="input-group-addon text-right spanwidth">课程</span> <input type="text"
-					id="productidname" name="productidname" ng-model="formData.productidname" readonly="readonly" class="form-control required"> <i id="type_name"
-					ng-click="selectOrg()" class="glyphicon glyphicon-search" title="选择"></i>
+					id="productidname" name="productidname" ng-model="formData.productidname" readonly="readonly" class="form-control required" ng-click="selectOrg()"> <i id="type_name"
+					ng-click="selectOrg()" class="glyphicon glyphicon-search" title="选择"></i> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">提成对象</span> <select class="form-control required" name="ruleobject" ng-model="formData.ruleobject"

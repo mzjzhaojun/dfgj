@@ -11,4 +11,12 @@ import com.yt.app.common.base.IBaseService;
  */
 
 public interface PresentsService extends IBaseService<Presents, Long> {
+
+	/**
+	 * 重写新增
+	 * 
+	 * @param t
+	 * @return
+	 */
+	Long sava(Presents t);
 }

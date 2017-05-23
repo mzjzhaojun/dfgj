@@ -3,7 +3,6 @@ package com.yt.app.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -11,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.yt.app.common.security.AccountAuthenticationProvider;
 import com.yt.app.frame.n.RESTAuthenticationEntryPoint;
@@ -26,7 +26,6 @@ import com.yt.app.frame.n.RESTAuthenticationSuccessHandler;
  */
 @Configuration
 @EnableWebSecurity
-@Order(-20)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -82,7 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// 跨域攻击
 		http.csrf().disable();
 		// 禁用自动修改headers
-		http.headers().frameOptions().disable();
+		http.headers().frameOptions().disable().and().sessionManagement().maximumSessions(1);
 		// api
 		// http.authorizeRequests().antMatchers("/**").permitAll();
 
@@ -91,16 +90,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/v2/**").permitAll();
 		http.authorizeRequests().antMatchers("/error/**").permitAll();
 		http.authorizeRequests().antMatchers("/configuration/**").permitAll();
-		http.authorizeRequests().antMatchers("/app/v1/**").permitAll();
 		http.authorizeRequests().antMatchers("/rest/v1/file/**").permitAll();
-		http.authorizeRequests().antMatchers("/rest/v1/filevoice/**").permitAll();
+		http.authorizeRequests().antMatchers("/rest/v1/logout/logout").permitAll();
 		http.authorizeRequests().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
-				.formLogin().successHandler(authenticationSuccessHandler).and().formLogin().failureHandler(authenticationFailureHandler).and()
-				.logout().logoutSuccessUrl("/rest/v1/logout/logout");
+		.formLogin().successHandler(authenticationSuccessHandler).and().formLogin().failureHandler(authenticationFailureHandler).
+		and()
+		.logout().deleteCookies("JSESSIONID").logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/rest/v1/logout/logout");
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/swagger-ui.html", "/static/**");
+		web.ignoring().antMatchers("/swagger-ui.html", "/static/resource/**","/static/project/login/html/index.html");
 	}
 }

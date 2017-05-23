@@ -23,10 +23,12 @@
 	list.controller("controller", function($scope, $http) {
 		var ids = "";
 		var flag = true;
-		$scope.toselect = function(id, name) {
+		$scope.toselect = function(id, name,data) {
 			var parm = {};
 			parm.id = id;
 			parm.name = name;
+			parm.caninput = data.products.caninput;
+			parm.url = parent.getFunctionLinks(data.links == null ? data._links: data.links, "self");
 			setDateChild(parm);
 			artClose();
 		}
@@ -84,8 +86,8 @@
 	<h5>
 		<span class="glyphicon glyphicon-search" style="margin:0px 5px;color:#99DFF8;"></span> <input type="text" id="name" class="form-control" value=""
 			placeholder="请输入查找的校区名" style="width: 25%; display: inline;"> <i class="glyphicon glyphicon-remove" onclick="removeSearch()"></i> <a
-			class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onSearch()" ng-if="isSearchList">快速搜索</a> <a class="btn btn-primary"
-			style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onReturn()" ng-if="isCancel">返回</a>
+			class="btn btn-primary" style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onSearch()" ng-if="buttons.searchlist">快速搜索</a> <a class="btn btn-primary"
+			style="margin: 0px auto; width: 80px;" href="#" role="button" ng-click="onReturn()" ng-if="buttons.cancel">返回</a>
 	</h5>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table">
 		<tr class="info">
@@ -116,7 +118,7 @@
 			<td ng-dblclick="toInfo(data)">{{data.products.gradename}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.products.yearname}}</td>
 			<td ng-dblclick="toInfo(data)">{{data.products.seasonname}}</td>
-			<td><img ng-click="toselect(data.products.id,data.products.productname)" class="operationImg" src="../../../../resource/img/cms/search.png" title="选择"></td>
+			<td><img ng-click="toselect(data.products.id,data.products.productname,data)" class="operationImg" src="../../../../resource/img/cms/search.png" title="选择"></td>
 		</tr>
 	</table>
 	<!-- 分页区 -->

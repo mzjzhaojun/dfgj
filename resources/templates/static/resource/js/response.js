@@ -3,42 +3,12 @@ $(function() {
 	var $scope = angular.element(controller).scope();
 	if ($scope != undefined) {
 		if (parent.menubuttons != undefined) {
+			$scope.buttons = {};
 			for (var i = 0; i < parent.menubuttons.length; i++) {
-				if (parent.menubuttons[i].code == "info") {
-					$scope.isShowInfo = true;
-				}
-				if (parent.menubuttons[i].code == "update") {
-					$scope.isShowUpdate = true;
-				}
-				if (parent.menubuttons[i].code == "delete") {
-					$scope.isShowDelete = true;
-				}
-				if (parent.menubuttons[i].code == "searchlist") {
-					$scope.isSearchList = true;
-				}
-				if (parent.menubuttons[i].code == "sava") {
-					$scope.isSava = true;
-				}
-				if (parent.menubuttons[i].code == "post") {
-					$scope.isPost = true;
-				}
-				if (parent.menubuttons[i].code == "cancel") {
-					$scope.isCancel = true;
-				}
-				if (parent.menubuttons[i].code == "turncustomer") {
-					$scope.isTurncustomer = true;
-				}
-				if (parent.menubuttons[i].code == "updateresponsible") {
-					$scope.isUpdateresponsible = true;
-				}
-				if (parent.menubuttons[i].code == "export") {
-					$scope.isExport = true;
-				}
-				if (parent.menubuttons[i].code == "import") {
-					$scope.isImport = true;
-				}
+				var key = parent.menubuttons[i].code;
+				$scope.buttons[key] = true;
 			}
-			$scope.$apply()
+			$scope.$apply();
 		}
 	}
 })

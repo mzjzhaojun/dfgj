@@ -4,13 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
+
+import com.yt.app.api.v1.mapper.DictionaryMapper;
+import com.yt.app.api.v1.mapper.DiscountitemsMapper;
+import com.yt.app.api.v1.mapper.PresentitemsMapper;
 import com.yt.app.api.v1.mapper.PresentsMapper;
 import com.yt.app.api.v1.service.PresentsService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
+import com.yt.app.api.v1.entity.Dictionary;
 import com.yt.app.api.v1.entity.Presents;
 import com.yt.app.frame.m.IPage;
 import com.yt.app.frame.m.PageBean;
 import com.yt.app.frame.p.RequestUtil;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -26,11 +33,17 @@ public class PresentsServiceImpl extends BaseServiceImpl<Presents, Long> impleme
 	@Autowired
 	private PresentsMapper mapper;
 
-	@Override
+	@Autowired
+	private PresentitemsMapper presentitemsmapper;
+
+	@Autowired
+	private DictionaryMapper DictionaryMapper;
+
 	@Transactional
-	public Integer post(Presents t) {
-		Integer i = mapper.post(t);
-		return i;
+	public Long sava(Presents t) {
+		t.setCreatetime(new Date());
+		mapper.post(t);
+		return t.getId();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -45,12 +58,40 @@ public class PresentsServiceImpl extends BaseServiceImpl<Presents, Long> impleme
 			}
 		}
 		List<Presents> list = mapper.list(param);
+		long[] dids = list.stream().mapToLong(Presents::getPresentstatus).distinct().toArray();
+		List<Dictionary> listd = DictionaryMapper.listByArrayId(dids);
+		list.forEach(t -> {
+			listd.forEach(d -> {
+				if (t.getPresentstatus().longValue() == d.getCode().longValue()) {
+					t.setPresentstatusname(d.getName());
+					return;
+				}
+			});
+		});
 		return new PageBean<Presents>(param, list, count);
 	}
 
 	@Override
 	public Presents get(Long id) {
 		Presents t = mapper.get(id);
+		t.setPresentstatusname(DictionaryMapper.getByCode(t.getPresentstatus()).getName());
 		return t;
+	}
+
+	@Override
+	@Transactional
+	public Integer put(Presents t) {
+		t.setModifytime(new Date());
+		return mapper.put(t);
+	}
+
+	@Override
+	@Transactional
+	public Integer delete(Long id) {
+		Integer i = mapper.delete(id);
+		if (i > 0) {
+			i = presentitemsmapper.deleteByPresentId(id);
+		}
+		return i;
 	}
 }

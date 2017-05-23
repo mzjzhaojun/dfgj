@@ -77,6 +77,7 @@ public class ProductsServiceImpl extends BaseServiceImpl<Products, Long> impleme
 			listc.forEach(c -> {
 				if (t.getCatalog().longValue() == c.getId().longValue()) {
 					t.setCatalogname(c.getCategoryname());
+					t.setCaninput(c.getCaninput());
 					return;
 				}
 			});

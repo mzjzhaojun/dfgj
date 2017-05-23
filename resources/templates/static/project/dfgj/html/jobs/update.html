@@ -127,7 +127,7 @@
 		if (parent.getDateChild().name != undefined) {
 			$("#orgname").val(parent.getDateChild().name);
 		}
-		setDateChild({});
+		parent.removeDateChild();
 	}
 	
 	function backfunctionstaff() {
@@ -137,7 +137,7 @@
 		if (parent.getDateChild().name != undefined) {
 			$("#staffname").val(parent.getDateChild().name);
 		}
-		setDateChild({});
+		parent.removeDateChild();
 	}
 </script>
 </head>
@@ -147,10 +147,10 @@
 		<!-- 操作按钮操作区 -->
 		<div class="col-lg-12 topActionPanel">
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-if="isPost">确 定</button>
+				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-if="buttons.post">确 定</button>
 			</div>
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="isCancel">返 回</button>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="buttons.cancel">返 回</button>
 			</div>
 		</div>
 		<div class="col-lg-6">
@@ -160,13 +160,13 @@
 			</div>
 			<div class="input-group input-group-sm">
 				<input type="hidden" id="orgid" ng-model="formData.orgid" /> <span class="input-group-addon text-right spanwidth">公司</span> <input type="text"
-					id="orgname" name="orgname" ng-model="formData.orgidname" readonly="readonly" class="form-control required"> <i id="type_name"
-					ng-click="selectOrg()" class="glyphicon glyphicon-search" title="选择"></i>
+					id="orgname" name="orgname" ng-model="formData.orgname" readonly="readonly" class="form-control required" ng-click="selectOrg()"> <i id="type_name"
+					ng-click="selectOrg()" class="glyphicon glyphicon-search" title="选择"></i><span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<input type="hidden" id="staffid" ng-model="formData.orgid" /> <span class="input-group-addon text-right spanwidth">小组负责人</span> <input type="text"
-					id="staffname" name="staffname" ng-model="formData.staffidname" readonly="readonly" class="form-control required"> <i id="type_name"
-					ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i>
+				<input type="hidden" id="staffid" ng-model="formData.orgid" /> <span class="input-group-addon text-right spanwidth">选择小组负责人</span> <input type="text"
+					id="staffname" name="staffname" ng-model="formData.staffname" readonly="readonly" class="form-control required" ng-click="selectStaff()"> <i id="type_name"
+					ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i><span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">是否是主要学科组</span> <select class="form-control required" name="IsPrimary" ng-model="formData.isprimary"

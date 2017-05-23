@@ -37,6 +37,7 @@ public class Products implements Serializable {
 	String targetpricememo;
 	Long catalog;
 	String catalogname;
+	Long caninput;
 	Long subject;
 	String subjectname;
 	Long grade;

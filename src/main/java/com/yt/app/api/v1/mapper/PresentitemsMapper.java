@@ -54,7 +54,17 @@ public interface PresentitemsMapper extends IBaseMapper<Presentitems> {
 	 */
 	@RedisCacheEvictAnnotation(classs = { Presentitems.class })
 	public Integer delete(Long id);
-
+	
+	/**
+	 * 删除指定的唯一标识符数组对应的持久化对象
+	 *
+	 * @param ids
+	 *            指定的唯一标识符数组
+	 * @return 删除的对象数量
+	 */
+	@RedisCacheEvictAnnotation(classs = { Presentitems.class })
+	public Integer deleteByPresentId(Long id);
+	
 	/**
 	 * 获取满足查询参数条件的数据总数
 	 * 

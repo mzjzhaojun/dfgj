@@ -24,7 +24,7 @@
 				width:width,
 				height:height,
 				fixed: true,
-			    cancel: false,
+			    cancel: true,
 			    title:title,
 			    lock: isShade
 			}, false);
@@ -48,6 +48,16 @@
 			art.dialog.data("c"+key, param[key]);
 			parent.setDataChilds.push("c"+key);
 		}
+	}
+	//子页面添加数据供父页面获取
+	function removeDateChild(){
+		var par = setDataChilds;
+		if(par==null||par.length>0){
+			for(var i=0;i<par.length;i++){
+				art.dialog.removeData(par[i]);
+			}
+		}
+		setDataChilds = [];
 	}
 	//父页面获取子页面数据
 	function getDateChild(){

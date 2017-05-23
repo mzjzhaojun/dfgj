@@ -97,7 +97,7 @@
 			if (parent.getDateChild().name != undefined) {
 				$("#joborgname").val(parent.getDateChild().name);
 			}
-			setDateChild({});
+			parent.removeDateChild();
 		}
 
 		$scope.selectbTeacher = function() {
@@ -112,7 +112,7 @@
 			if (parent.getDateChild().name != undefined) {
 				$("#teacheridname").val(parent.getDateChild().name);
 			}
-			setDateChild({});
+			parent.removeDateChild();
 		}
 
 		$scope.selectCampus = function() {
@@ -127,7 +127,7 @@
 			if (parent.getDateChild().name != undefined) {
 				$("#campusidname").val(parent.getDateChild().name);
 			}
-			setDateChild({});
+			parent.removeDateChild();
 		}
 
 		$scope.initselect();
@@ -140,10 +140,10 @@
 		<!-- 操作按钮操作区 -->
 		<div class="col-lg-12 topActionPanel">
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-if="isPost">确 定</button>
+				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-if="buttons.post">确 定</button>
 			</div>
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="isCancel">返 回</button>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="buttons.cancel">返 回</button>
 			</div>
 		</div>
 		<div class="col-lg-6">
@@ -153,18 +153,18 @@
 			</div>
 			<div class="input-group input-group-sm">
 				<input type="hidden" id="joborgid" ng-model="formData.joborgid" /> <span class="input-group-addon text-right spanwidth">学科组</span> <input type="text"
-					id="joborgname" name="joborgname" ng-model="formData.joborgname" readonly="readonly" class="form-control required"> <i ng-click="selectbJobs()"
-					class="glyphicon glyphicon-search" title="选择"></i>
+					id="joborgname" name="joborgname" ng-model="formData.joborgname" readonly="readonly" class="form-control required" ng-click="selectbJobs()"> <i ng-click="selectbJobs()"
+					class="glyphicon glyphicon-search" title="选择"></i><span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
 				<input type="hidden" id="teacherid" ng-model="formData.teacherid" /> <span class="input-group-addon text-right spanwidth">教师</span> <input type="text"
-					id="teacheridname" name="teacheridname" ng-model="formData.teacheridname" readonly="readonly" class="form-control required"> <i
-					ng-click="selectbTeacher()" class="glyphicon glyphicon-search" title="选择"></i>
+					id="teacheridname" name="teacheridname" ng-model="formData.teacheridname" readonly="readonly" class="form-control required" ng-click="selectbTeacher()"> <i
+					ng-click="selectbTeacher()" class="glyphicon glyphicon-search" title="选择"></i><span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
 				<input type="hidden" id="campusid" ng-model="formData.campusid" /> <span class="input-group-addon text-right spanwidth">校区</span> <input type="text"
-					id="campusidname" name="campusidname" ng-model="formData.campusname" readonly="readonly" class="form-control required"> <i
-					ng-click="selectCampus()" class="glyphicon glyphicon-search" title="选择"></i>
+					id="campusidname" name="campusidname" ng-model="formData.campusidname" readonly="readonly" class="form-control required" ng-click="selectCampus()"> <i
+					ng-click="selectCampus()" class="glyphicon glyphicon-search" title="选择"></i><span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">全职/兼职</span> <select class="form-control required" name="jobstatus" ng-model="formData.jobstatus"

@@ -135,7 +135,7 @@
 		if (parent.getDateChild().name != undefined) {
 			$("#referralstaffname").val(parent.getDateChild().name);
 		}
-		setDateChild({});
+		parent.removeDateChild();
 	}
 	
 	function backfunctionreferralcustomer() {
@@ -145,7 +145,7 @@
 		if (parent.getDateChild().name != undefined) {
 			$("#referralcustomername").val(parent.getDateChild().name);
 		}
-		setDateChild({});
+		parent.removeDateChild();
 	}
 	
 	function backfunctionparent() {
@@ -155,7 +155,7 @@
 		if (parent.getDateChild().name != undefined) {
 			$("#parentname").val(parent.getDateChild().name);
 		}
-		setDateChild({});
+		parent.removeDateChild();
 	}
 </script>
 </head>
@@ -165,10 +165,10 @@
 		<!-- 操作按钮操作区 -->
 		<div class="col-lg-12 topActionPanel">
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-if="isPost">确 定</button>
+				<button type="button" class="btn btn-primary" ng-click="onPreserved()" ng-if="buttons.post">确 定</button>
 			</div>
 			<div>
-				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="isCancel">返 回</button>
+				<button type="button" class="btn btn-primary" ng-click="onReturn()" ng-if="buttons.cancel">返 回</button>
 			</div>
 		</div>
 		<div class="col-lg-6">
@@ -274,17 +274,17 @@
 			</div>
 			<div class="input-group input-group-sm">
 				<input type="hidden" id="parentid" ng-model="formData.parentid" /> <span class="input-group-addon text-right spanwidth">家长监护人</span> <input
-					type="text" id="parentname" name="parentname" ng-model="formData.parentname" readonly="readonly" class="form-control">
+					type="text" id="parentname" name="parentname" ng-model="formData.parentname" readonly="readonly" class="form-control" ng-click="selectParent()">
 				<i ng-click="selectParent()" class="glyphicon glyphicon-search" title="选择"></i>
 			</div>
 			<div class="input-group input-group-sm">
 				<input type="hidden" id="referralstaffid" ng-model="formData.referralstaffid" /> <span class="input-group-addon text-right spanwidth">转介绍员工</span> <input
-					type="text" id="referralstaffname" name="referralstaffname" ng-model="formData.referralstaffname" readonly="readonly" class="form-control">
+					type="text" id="referralstaffname" name="referralstaffname" ng-model="formData.referralstaffname" readonly="readonly" class="form-control" ng-click="selectStaff()">
 				<i ng-click="selectStaff()" class="glyphicon glyphicon-search" title="选择"></i>
 			</div>
 			<div class="input-group input-group-sm">
 				<input type="hidden" id="referralcustomerid" ng-model="formData.referralcustomerid" /> <span class="input-group-addon text-right spanwidth">转介绍学员</span> <input
-					type="text" id="referralcustomername" name="referralcustomername" ng-model="formData.referralcustomername" readonly="readonly" class="form-control">
+					type="text" id="referralcustomername" name="referralcustomername" ng-model="formData.referralcustomername" readonly="readonly" class="form-control" ng-click="selectReferralCustomer()">
 				<i ng-click="selectReferralCustomer()" class="glyphicon glyphicon-search" title="选择"></i>
 			</div>
 			<div class="input-group input-group-sm">
@@ -304,10 +304,6 @@
 					ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
 					<option value=''>请选择</option>
 				</select>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">学生描述</span>
-				<textarea class="txtVal form-control" style="height: 90px;" name="describes" ng-model="formData.describes" maxlength="500" /></textarea>
 			</div>
 		</div>
 	</form>
