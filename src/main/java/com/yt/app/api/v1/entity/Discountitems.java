@@ -19,6 +19,7 @@ public class Discountitems implements Serializable {
 	Long id;
 	Integer version;
 	Long discountid;
+	String discountidname;
 	Object discountvalue;
 	Object discountstandard;
 

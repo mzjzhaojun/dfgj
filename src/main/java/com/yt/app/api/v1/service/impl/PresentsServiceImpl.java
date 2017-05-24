@@ -6,7 +6,6 @@ import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
 
 import com.yt.app.api.v1.mapper.DictionaryMapper;
-import com.yt.app.api.v1.mapper.DiscountitemsMapper;
 import com.yt.app.api.v1.mapper.PresentitemsMapper;
 import com.yt.app.api.v1.mapper.PresentsMapper;
 import com.yt.app.api.v1.service.PresentsService;

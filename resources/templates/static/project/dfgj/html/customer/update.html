@@ -440,18 +440,6 @@
 						<span class="input-group-addon text-right spanwidth">电子邮箱</span> <input type="text" class="form-control" placeholder="请输入电子邮箱" name="email"
 							ng-model="formData.email" maxlength="255">
 					</div>
-					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">入学年级</span> <select class="form-control" name="entrancegrade" ng-model="formData.entrancegrade"
-							ng-options="data.code as data.name for data in selects  | filter: {typecode: '300'}">
-							<option value=''>请选择</option>
-						</select>
-					</div>
-					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">入学年级</span> <select class="form-control" name="grade" ng-model="formData.grade"
-							ng-options="data.code as data.name for data in selects  | filter: {typecode: '300'}">
-							<option value=''>请选择</option>
-						</select>
-					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="input-group input-group-sm">
@@ -463,6 +451,18 @@
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">vip客户</span> <select class="form-control" name="viplevel" ng-model="formData.viplevel"
 							ng-options="data.code as data.name for data in selects  | filter: {typecode: '1950'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">入学年级</span> <select class="form-control" name="entrancegrade" ng-model="formData.entrancegrade"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '300'}">
+							<option value=''>请选择</option>
+						</select>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">现在年级</span> <select class="form-control" name="grade" ng-model="formData.grade"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '300'}">
 							<option value=''>请选择</option>
 						</select>
 					</div>

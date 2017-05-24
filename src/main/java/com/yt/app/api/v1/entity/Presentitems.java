@@ -19,6 +19,7 @@ public class Presentitems implements Serializable {
 	Long id;
 	Integer version;
 	Long presentid;
+	String presentidname;
 	Object presentvalue;
 	Object presentstandard;
 
