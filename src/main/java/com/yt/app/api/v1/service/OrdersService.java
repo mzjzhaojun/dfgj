@@ -11,4 +11,11 @@ import com.yt.app.common.base.IBaseService;
  */
 
 public interface OrdersService extends IBaseService<Orders, Long> {
+
+	/**
+	 * 
+	 * @param t
+	 * @return
+	 */
+	Long sava(Orders t);
 }

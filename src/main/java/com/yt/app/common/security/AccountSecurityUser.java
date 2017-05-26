@@ -34,6 +34,7 @@ public class AccountSecurityUser extends User {
 	String campusname;
 	String branchname;
 	String staffjobname;
+
 	public AccountSecurityUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired,
 			boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);

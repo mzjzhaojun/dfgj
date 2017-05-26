@@ -1,5 +1,7 @@
 package com.yt.app.api.v1.service;
 
+import java.util.List;
+
 import com.yt.app.api.v1.entity.Orderitems;
 import com.yt.app.common.base.IBaseService;
 
@@ -11,4 +13,11 @@ import com.yt.app.common.base.IBaseService;
  */
 
 public interface OrderitemsService extends IBaseService<Orderitems, Long> {
+	/**
+	 * 批量插入
+	 * 
+	 * @param list
+	 * @return
+	 */
+	Integer sava(List<Orderitems> list);
 }

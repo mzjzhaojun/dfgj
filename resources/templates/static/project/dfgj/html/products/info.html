@@ -49,7 +49,10 @@
 			<span class="input-group-addon text-right spanwidth">公司</span> <input type="text" class="form-control" value="{{formData.rdorgname}}" disabled>
 		</div>
 		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">名称</span> <input type="text" class="form-control" value="{{formData.productname}}" disabled>
+			<span class="input-group-addon text-right spanwidth">课程名称</span> <input type="text" class="form-control" value="{{formData.productname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">课程类别</span> <input type="text" class="form-control" value="{{formData.catalogname}}" disabled>
 		</div>
 		<div class="input-group input-group-sm">
 			<span class="input-group-addon text-right spanwidth">描述</span> <input type="text" class="form-control" value="{{formData.productmemo}}" disabled>
@@ -70,9 +73,6 @@
 			<span class="input-group-addon text-right spanwidth">目标单价描述</span> <input type="text" class="form-control" value="{{formData.targetpricememo}}" disabled>
 		</div>
 		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">分类</span> <input type="text" class="form-control" value="{{formData.catalogname}}" disabled>
-		</div>
-		<div class="input-group input-group-sm">
 			<span class="input-group-addon text-right spanwidth">科目</span> <input type="text" class="form-control" value="{{formData.subjectname}}" disabled>
 		</div>
 		<div class="input-group input-group-sm">
@@ -91,16 +91,10 @@
 			<span class="input-group-addon text-right spanwidth">停售日期</span> <input type="text" class="form-control" value="{{formData.enddate}}" disabled>
 		</div>
 		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">允许特殊折扣</span> <input type="text" class="form-control" value="{{formData.specialallowed}}" disabled>
+			<span class="input-group-addon text-right spanwidth">允许买赠折扣</span> <input type="text" class="form-control" value="{{formData.presentallowedname}}" disabled>
 		</div>
 		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">允许拓路折扣</span> <input type="text" class="form-control" value="{{formData.tunlandallowed}}" disabled>
-		</div>
-		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">允许买赠折扣</span> <input type="text" class="form-control" value="{{formData.presentallowed}}" disabled>
-		</div>
-		<div class="input-group input-group-sm">
-			<span class="input-group-addon text-right spanwidth">允许促销优惠</span> <input type="text" class="form-control" value="{{formData.promotionallowed}}" disabled>
+			<span class="input-group-addon text-right spanwidth">允许促销优惠</span> <input type="text" class="form-control" value="{{formData.promotionallowedname}}" disabled>
 		</div>
 		<div class="input-group input-group-sm">
 			<span class="input-group-addon text-right spanwidth">促销优惠限额</span> <input type="text" class="form-control" value="{{formData.promotionquota}}" disabled>
@@ -116,6 +110,38 @@
 		</div>
 		<div class="input-group input-group-sm">
 			<span class="input-group-addon text-right spanwidth">最后修改时间</span> <input type="text" class="form-control" value="{{formData.modifytime}}" disabled>
+		</div>
+	</div>
+	<div class="col-lg-6 viewFixedWidth">
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">课次数量</span> <input type="text" class="form-control" value="{{formData.lessoncount}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">课时数量</span> <input type="text" class="form-control" value="{{formData.periodsoflesson}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">课次时长</span> <input type="text" class="form-control" value="{{formData.lessondurationvalue}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">课时时长</span> <input type="text" class="form-control" value="{{formData.perioddurationvalue}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">课程级别</span> <input type="text" class="form-control" value="{{formData.courselevelname}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">辅导类型</span> <input type="text" class="form-control" value="{{formData.coachtypename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">班组类型</span> <input type="text" class="form-control" value="{{formData.grouptypename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">班级类型</span> <input type="text" class="form-control" value="{{formData.classtypename}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">开班人数</span> <input type="text" class="form-control" value="{{formData.minpeoples}}" disabled>
+		</div>
+		<div class="input-group input-group-sm">
+			<span class="input-group-addon text-right spanwidth">满班人数</span> <input type="text" class="form-control" value="{{formData.maxpeoples}}" disabled>
 		</div>
 	</div>
 </body>

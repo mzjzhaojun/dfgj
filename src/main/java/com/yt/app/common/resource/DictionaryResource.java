@@ -243,4 +243,46 @@ public class DictionaryResource implements Serializable {
 	 * 转介绍
 	 */
 	public static final Long PATRIARCH_SOURCE_563 = 563L;
+
+	// 缴费类型
+	/**
+	 * 新签(定金)
+	 */
+	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2141 = 2141L;
+
+	/**
+	 * 新签回款
+	 */
+	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2142 = 2142L;
+
+	/**
+	 * 前期结课续费
+	 */
+	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2143 = 2143L;
+
+	/**
+	 * 前期非结课续费
+	 */
+	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2144 = 2144L;
+
+	/**
+	 * 后期结课续费
+	 */
+	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2145 = 2145L;
+
+	/**
+	 * 后期非结课续费
+	 */
+	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2146 = 2146L;
+
+	// 支付状态
+	/**
+	 * 已支付
+	 */
+	public static final Long ACCOUNTCHARGEAPPLIES_PAYSTATUS_2151 = 2151L;
+
+	/**
+	 * 未支付
+	 */
+	public static final Long ACCOUNTCHARGEAPPLIES_PAYSTATUS_2152 = 2152L;
 }

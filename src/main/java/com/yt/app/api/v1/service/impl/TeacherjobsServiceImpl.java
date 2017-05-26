@@ -83,7 +83,7 @@ public class TeacherjobsServiceImpl extends BaseServiceImpl<Teacherjobs, Long> i
 		t.setTeacheridname(teachersmapper.get(t.getTeacherid()).getTeachername());
 		return t;
 	}
-	
+
 	@Override
 	public Teacherjobs getByTeacherId(Long id) {
 		Teacherjobs t = mapper.getByTeacherId(id);

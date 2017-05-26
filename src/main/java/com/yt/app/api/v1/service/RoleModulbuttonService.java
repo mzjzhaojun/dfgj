@@ -14,7 +14,7 @@ import com.yt.app.frame.f.DataSourceEnum;
  * @version 1.1
  */
 
-public interface RoleModulbuttonService extends IBaseService<RoleModulbutton, Long > {
+public interface RoleModulbuttonService extends IBaseService<RoleModulbutton, Long> {
 
 	/**
 	 * 获取角色下所有模块功能

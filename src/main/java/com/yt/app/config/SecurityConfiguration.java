@@ -93,13 +93,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/rest/v1/file/**").permitAll();
 		http.authorizeRequests().antMatchers("/rest/v1/logout/logout").permitAll();
 		http.authorizeRequests().anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).and()
-		.formLogin().successHandler(authenticationSuccessHandler).and().formLogin().failureHandler(authenticationFailureHandler).
-		and()
-		.logout().deleteCookies("JSESSIONID").logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/rest/v1/logout/logout");
+				.formLogin().successHandler(authenticationSuccessHandler).and().formLogin().failureHandler(authenticationFailureHandler).and()
+				.logout().deleteCookies("JSESSIONID").logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/rest/v1/logout/logout");
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/swagger-ui.html", "/static/project/resource/**","/static/project/login/html/index.html");
+		web.ignoring().antMatchers("/swagger-ui.html", "/static/resource/**", "/static/project/login/html/index.html");
 	}
 }

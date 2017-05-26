@@ -44,7 +44,7 @@ public class RoleModulbuttonController extends BaseControllerImpl<RoleModulbutto
 
 	@Override
 	@ApiOperation(value = "列表", response = RoleModulbutton.class)
-	@RequestMapping(value = "/",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> list(RequestEntity<Object> requestEntity, HttpServletRequest request, HttpServletResponse response) {
 		IPage<RoleModulbutton> pagebean = service.list(requestEntity);
 		return new ResponseEntity<Object>(new RoleModulbuttonResourceAssembler().toResources(pagebean.getPageList()), pagebean.getHeaders(),

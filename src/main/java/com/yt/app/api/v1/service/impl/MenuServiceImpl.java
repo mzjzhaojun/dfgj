@@ -275,16 +275,16 @@ public class MenuServiceImpl extends BaseServiceImpl<Menu, Long> implements Menu
 			menus.stream().forEach(Menu -> {
 				Menu.setLinks(menuLinks(Menu.getId()));
 				Menu.setButtons(menuButtons(Menu.getId(), roleid));
-					map.put("parent_id", Menu.getId());
-					List<Menu> child = this.mapper.sysmenu(map);
-					if (!child.isEmpty()) {
-						child.stream().forEach(c -> {
-							c.setLinks(menuLinks(c.getId()));
-							c.setButtons(menuButtons(c.getId(), roleid));
-						});
-					}
-					Menu.setChild(child);
-				});
+				map.put("parent_id", Menu.getId());
+				List<Menu> child = this.mapper.sysmenu(map);
+				if (!child.isEmpty()) {
+					child.stream().forEach(c -> {
+						c.setLinks(menuLinks(c.getId()));
+						c.setButtons(menuButtons(c.getId(), roleid));
+					});
+				}
+				Menu.setChild(child);
+			});
 		}
 		return menus;
 	}

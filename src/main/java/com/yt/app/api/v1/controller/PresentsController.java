@@ -37,7 +37,7 @@ public class PresentsController extends BaseControllerImpl<Presents, Long> {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private PresentsService service;
-	
+
 	/**
 	 * 
 	 * 
@@ -50,7 +50,7 @@ public class PresentsController extends BaseControllerImpl<Presents, Long> {
 		Long i = service.sava(requestEntity.getBody());
 		return new ResponseEntity<Object>(i, HttpStatus.OK);
 	}
-	
+
 	@Override
 	@ApiOperation(value = "列表分页", response = Presents.class)
 	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

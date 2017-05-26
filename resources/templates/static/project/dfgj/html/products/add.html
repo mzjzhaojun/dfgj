@@ -48,6 +48,8 @@
 				$scope.formData.enddate = $("#enddate").val();
 				$scope.formData.creatorid = parent.getCookie('staffid');
 				$scope.formData.creatorname = parent.getCookie('staffname');
+				$scope.formData.perioddurationvalue = $("#periodduration option:selected").text();
+				$scope.formData.lessondurationvalue = $("#lessonduration option:selected").text();
 				$http({
 					url : parent.getMenuLinksHref("productspost"),
 					method : 'POST',
@@ -75,7 +77,7 @@
 				headers : {
 					'Content-Type' : 'application/json;charset=UTF-8;'
 				},
-				data : JSON.stringify([ 20, 300, 400, 1210, 1900 ])
+				data : JSON.stringify([ 20, 300, 400, 1210, 1900, 100, 2161, 2171, 2181, 2191 ])
 			}).success(function(data, status, headers, config) {
 				$scope.selects = data;
 			}).error(function(data, status, headers, config) {
@@ -100,8 +102,7 @@
 			})
 		}
 		$scope.selectOrg = function() {
-			artdialogIframe("../../dfgj/html/jobs/orglist.html", null,
-					backfunctionorg, 900, 600, true);
+			artdialogIframe("../../dfgj/html/jobs/orglist.html", null, backfunctionorg, 900, 600, true);
 		}
 
 		$scope.initselect();
@@ -134,12 +135,18 @@
 		<div class="col-lg-6">
 			<div class="input-group input-group-sm">
 				<input type="hidden" id="rdorgid" ng-model="formData.rdorgid" /> <span class="input-group-addon text-right spanwidth">公司</span> <input type="text"
-					id="rdorgname" name="rdorgname" ng-model="formData.rdorgname" readonly="readonly" class="form-control required" ng-click="selectOrg()"> <i id="type_name"
-					ng-click="selectOrg()" class="glyphicon glyphicon-search" title="选择"></i><span class="input-group-addon verifyprompt">*</span>
+					id="rdorgname" name="rdorgname" ng-model="formData.rdorgname" readonly="readonly" class="form-control required" ng-click="selectOrg()"> <i
+					id="type_name" ng-click="selectOrg()" class="glyphicon glyphicon-search" title="选择"></i><span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">产品名称</span> <input type="text" class="form-control required" placeholder="请输入产品名称" name="productname"
+				<span class="input-group-addon text-right spanwidth">课程名称</span> <input type="text" class="form-control required" placeholder="请输入产品名称" name="productname"
 					ng-model="formData.productname" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">课程类别</span> <select class="form-control required" name="catalog" ng-model="formData.catalog"
+					ng-options="data.categories.id as data.categories.categoryname for data in catalogs">
+					<option value=''>请选择</option>
+				</select> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">产品描述</span> <input type="text" class="form-control required" placeholder="请输入产品描述" name="productmemo"
@@ -166,12 +173,6 @@
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">目标单价描述</span> <input type="text" class="form-control required" placeholder="请输入目标单价描述"
 					name="targetpricememo" ng-model="formData.targetpricememo" maxlength="255"> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">类别</span> <select class="form-control required" name="catalog" ng-model="formData.catalog"
-					ng-options="data.categories.id as data.categories.categoryname for data in catalogs">
-					<option value=''>请选择</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">学科</span> <select class="form-control required" name="subject" ng-model="formData.subject"
@@ -215,32 +216,69 @@
 				<input type="hidden" id="dtp_input" value="" />
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">允许特殊折扣</span> <select class="form-control required" name="specialallowed"
-					ng-model="formData.specialallowed" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-					<option value=''>请选择</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">允许拓路折扣</span> <select class="form-control required" name="tunlandallowed"
-					ng-model="formData.tunlandallowed" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
-					<option value=''>请选择</option>
-				</select> <span class="input-group-addon verifyprompt">*</span>
-			</div>
-			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">允许买赠折扣</span> <select class="form-control required" name="presentallowed"
 					ng-model="formData.presentallowed" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
 					<option value=''>请选择</option>
 				</select> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">允许买赠折扣</span> <select class="form-control required" name="promotionallowed"
+				<span class="input-group-addon text-right spanwidth">允许优惠</span> <select class="form-control required" name="promotionallowed"
 					ng-model="formData.promotionallowed" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
 					<option value=''>请选择</option>
 				</select> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">促销优惠限额</span> <input type="text" class="form-control required number" placeholder="请输入促销优惠限额"
-					name="promotionquota" ng-model="formData.promotionquota" maxlength=""> <span class="input-group-addon verifyprompt">*</span>
+				<span class="input-group-addon text-right spanwidth">优惠限额</span> <input type="text" class="form-control number" placeholder="请输入优惠限额"
+					name="promotionquota" ng-model="formData.promotionquota" maxlength="11">
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">课次数量</span> <input type="text" class="form-control" placeholder="请输入课次数量" name="lessoncount"
+					ng-model="formData.lessoncount" maxlength="">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">课时数量</span> <input type="text" class="form-control" placeholder="请输入课次课时数" name="periodsoflesson"
+					ng-model="formData.periodsoflesson" maxlength="">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">课次时长</span> <select class="form-control" id="lessonduration" name="lessonduration"
+					ng-model="formData.lessonduration" ng-options="data.code as data.name for data in selects  | filter: {typecode: '100'}">
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">课时时长</span> <select class="form-control" id="periodduration" name="periodduration"
+					ng-model="formData.periodduration" ng-options="data.code as data.name for data in selects  | filter: {typecode: '100'}">
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">课程级别</span> <select class="form-control" name="courselevel" ng-model="formData.courselevel"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '2161'}">
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">辅导类型</span> <select class="form-control" name="coachtype" ng-model="formData.coachtype"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '2171'}">
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">班组类型</span> <select class="form-control" name="grouptype" ng-model="formData.grouptype"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '2181'}">
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">班级类型</span> <select class="form-control" name="classtype" ng-model="formData.classtype"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '2191'}">
+					<option value=''>请选择</option>
+				</select>
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">开班人数</span> <input type="text" class="form-control" placeholder="请输入开班人数（班组用）" name="minpeoples"
+					ng-model="formData.minpeoples" maxlength="">
+			</div>
+			<div class="input-group input-group-sm">
+				<span class="input-group-addon text-right spanwidth">满班人数</span> <input type="text" class="form-control" placeholder="请输入满班人数（班组用）" name="maxpeoples"
+					ng-model="formData.maxpeoples" maxlength="">
 			</div>
 		</div>
 	</form>

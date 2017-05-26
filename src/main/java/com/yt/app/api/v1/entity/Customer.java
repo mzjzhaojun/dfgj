@@ -227,7 +227,7 @@ public class Customer implements Serializable {
 	java.util.Date servicemodifytime;
 	String customersearchcontent;
 	String parentsearchcontent;
-
+	
 	public Customer() {
 	}
 

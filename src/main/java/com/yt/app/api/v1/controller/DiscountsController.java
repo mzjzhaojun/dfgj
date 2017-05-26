@@ -37,7 +37,7 @@ public class DiscountsController extends BaseControllerImpl<Discounts, Long> {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private DiscountsService service;
-	
+
 	/**
 	 * 
 	 * 

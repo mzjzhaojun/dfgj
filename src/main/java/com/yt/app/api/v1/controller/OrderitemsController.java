@@ -1,7 +1,10 @@
 package com.yt.app.api.v1.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.yt.app.frame.m.IPage;
+
 import io.swagger.annotations.ApiOperation;
+
 import com.yt.app.common.base.impl.BaseControllerImpl;
 import com.yt.app.api.v1.resource.OrderitemsResourceAssembler;
 import com.yt.app.api.v1.service.OrderitemsService;
@@ -33,6 +39,13 @@ public class OrderitemsController extends BaseControllerImpl<Orderitems, Long> {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private OrderitemsService service;
+
+	@ApiOperation(value = "添加")
+	@RequestMapping(value = "/savas", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> savalist(RequestEntity<List<Orderitems>> requestEntity, HttpServletRequest request, HttpServletResponse response) {
+		Integer i = service.sava(requestEntity.getBody());
+		return new ResponseEntity<Object>(i, HttpStatus.OK);
+	}
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Orderitems.class)

@@ -2,6 +2,7 @@ package com.yt.app.api.v1.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.yt.app.frame.m.IPage;
+
 import io.swagger.annotations.ApiOperation;
+
 import com.yt.app.common.base.impl.BaseControllerImpl;
 import com.yt.app.api.v1.resource.OrdersResourceAssembler;
 import com.yt.app.api.v1.service.OrdersService;
@@ -33,6 +37,14 @@ public class OrdersController extends BaseControllerImpl<Orders, Long> {
 	protected Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private OrdersService service;
+
+	@Override
+	@ApiOperation(value = "添加")
+	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> post(RequestEntity<Orders> requestEntity, HttpServletRequest request, HttpServletResponse response) {
+		Long i = service.sava(requestEntity.getBody());
+		return new ResponseEntity<Object>(i, HttpStatus.OK);
+	}
 
 	@Override
 	@ApiOperation(value = "列表分页", response = Orders.class)

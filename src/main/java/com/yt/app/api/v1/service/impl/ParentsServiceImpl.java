@@ -102,8 +102,8 @@ public class ParentsServiceImpl extends BaseServiceImpl<Parents, Long> implement
 		Parents t = mapper.get(id);
 		long[] dids = Arrays.asList(t.getGender(), t.getIndustry(), t.getCareer(), t.getIdtype()).stream().filter(Long -> Long != null)
 				.mapToLong(Long::longValue).toArray();
-		long[] rids = Arrays.asList(t.getProvince(), t.getCity(), t.getCounty(), t.getCounty(),t.getStreetname()).stream().filter(Long -> Long != null)
-				.mapToLong(Long::longValue).toArray();
+		long[] rids = Arrays.asList(t.getProvince(), t.getCity(), t.getCounty(), t.getCounty(), t.getStreetname()).stream()
+				.filter(Long -> Long != null).mapToLong(Long::longValue).toArray();
 		List<Dictionary> listd = dictionarymapper.listByArrayId(dids);
 		List<Region> listr = regionmapper.listByArrayId(rids);
 		listd.forEach(d -> {

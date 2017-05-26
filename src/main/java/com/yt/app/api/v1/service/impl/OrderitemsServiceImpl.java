@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
+
 import com.yt.app.api.v1.mapper.OrderitemsMapper;
 import com.yt.app.api.v1.service.OrderitemsService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
@@ -11,6 +12,7 @@ import com.yt.app.api.v1.entity.Orderitems;
 import com.yt.app.frame.m.IPage;
 import com.yt.app.frame.m.PageBean;
 import com.yt.app.frame.p.RequestUtil;
+
 import java.util.List;
 import java.util.Map;
 
@@ -52,5 +54,14 @@ public class OrderitemsServiceImpl extends BaseServiceImpl<Orderitems, Long> imp
 	public Orderitems get(Long id) {
 		Orderitems t = mapper.get(id);
 		return t;
+	}
+
+	@Override
+	public Integer sava(List<Orderitems> list) {
+		Integer i = 0;
+		for (Orderitems orderitems : list) {
+			i = mapper.post(orderitems);
+		}
+		return i;
 	}
 }

@@ -101,6 +101,7 @@ public class Potentialcustomers implements Serializable {
 	java.util.Date modifytime;
 	Long principalid;
 	String principalname;
+
 	public Potentialcustomers() {
 	}
 }

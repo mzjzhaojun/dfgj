@@ -15,6 +15,7 @@ import com.yt.app.frame.f.DataSourceEnum;
 public interface OrgstaffjobsService extends IBaseService<Orgstaffjobs, Long> {
 	/**
 	 * 重写get
+	 * 
 	 * @param id
 	 * @return
 	 */

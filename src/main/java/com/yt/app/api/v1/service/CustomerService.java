@@ -11,4 +11,10 @@ import com.yt.app.common.base.IBaseService;
  */
 
 public interface CustomerService extends IBaseService<Customer, Long> {
+	/**
+	 * 
+	 * @param t
+	 * @return
+	 */
+	Customer sava(Customer t);
 }

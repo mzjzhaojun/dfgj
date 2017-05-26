@@ -38,10 +38,10 @@ import com.yt.app.frame.p.FileUtil;
 public class FileServiceImpl extends BaseServiceImpl<File, Long> implements FileService {
 	@Autowired
 	private FileMapper mapper;
-	
+
 	@Autowired
 	private PotentialcustomersMapper potentialcustomersmapper;
-	
+
 	@Autowired
 	private Ar generateid;
 

@@ -183,4 +183,23 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
 		});
 		return t;
 	}
+
+	@Override
+	public Customer sava(Customer t) {
+		t.setCreatetime(new Date());
+		t.setModifytime(new Date());
+		t.setCustomerlevel(DictionaryResource.PATRIARCH_LEVEL_1951);
+		t.setCustomerstatus(DictionaryResource.PATRIARCH_STATUS_1974);
+		t.setFollowstage(DictionaryResource.PATRIARCH_FLLOWSTATUS_571);
+		t.setViptype(DictionaryResource.PATRIARCH_VIP_1993);
+		t.setFollowedcount(0);
+		Integer i = mapper.post(t);
+		if (i > 0) {
+			Accounts ac = new Accounts();
+			ac.setCustomerid(t.getId());
+			ac.setAccountmoney(0);
+			accountsmapper.post(ac);
+		}
+		return this.get(t.getId());
+	}
 }

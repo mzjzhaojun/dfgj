@@ -88,6 +88,25 @@ public class Products implements Serializable {
 	String modifiername;
 	@JsonFormat(pattern = DateTimeUtil.DEFAULT_DATE_FORMAT)
 	java.util.Date modifytime;
+	Integer lessoncount;
+	Long lessonduration;
+	Object lessondurationvalue;
+	Long periodduration;
+	Object perioddurationvalue;
+	String periodsoflesson;
+	Long courselevel;
+	Long coachtype;
+	Long grouptype;
+	Long classtype;
+	
+	String courselevelname;
+	String coachtypename;
+	String grouptypename;
+	String classtypename;
+	Integer minpeoples;
+	Integer maxpeoples;
+	String incomebelonging;
+	Integer iscrosscampus;
 
 	public Products() {
 	}

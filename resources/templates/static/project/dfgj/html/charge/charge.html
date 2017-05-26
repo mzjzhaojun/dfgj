@@ -46,425 +46,665 @@
 			var out = [];
 			if (angular.isArray(items)) {
 				var keys = Object.keys(props);
-				items
-						.forEach(function(item) {
-							var itemMatches = false;
-							for (var i = 0; i < keys.length; i++) {
-								var prop = keys[i];
-								var text = props[prop].toLowerCase();
-								if (item[prop].toString().toLowerCase()
-										.indexOf(text) !== -1) {
-									itemMatches = true;
-									break;
-								}
-							}
-							if (itemMatches) {
-								out.push(item);
-							}
-						});
+				items.forEach(function(item) {
+					var itemMatches = false;
+					for (var i = 0; i < keys.length; i++) {
+						var prop = keys[i];
+						var text = props[prop].toLowerCase();
+						if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+							itemMatches = true;
+							break;
+						}
+					}
+					if (itemMatches) {
+						out.push(item);
+					}
+				});
 			} else {
 				out = items;
 			}
 			return out;
 		};
 	});
-	app
-			.controller(
-					"controller",
-					function($scope, $http) {
-						$scope.formData = {};//学员
-						$scope.formData1 = {};//服务
-						$scope.formData2 = {};//课程
-						$scope.formData3 = {};//
-						$scope.formData4 = {};//折扣买赠
-						$scope.formData5 = {};//账户
-						$scope.datalist = [];
-						$scope.formData2.productprice = 0;
-						$scope.formData2.count = 1;
-						$scope.formData4.presentamount = 0;
-						$scope.formData4.chargeprice = 0;
-						$scope.formData4.serviceprice = 0;
-						$scope.formData4.discountprice = 0;
-						$scope.formData4.chargeprice = 0;
-						$scope.formData5.accountmoney = 0;
+	app.controller("controller", function($scope, $http) {
+		$scope.formData = {};
+		$scope.formData1 = {};
+		$scope.formData2 = {};
+		$scope.formData3 = {};
+		$scope.formData4 = {};
+		$scope.formData5 = {};
+		$scope.formOrder = {};
+		$scope.formOrderItem = {};
+		$scope.formAccountChargeApplies = {};
+		$scope.datalist = [];
+		$scope.formData2.productprice = 0;
+		$scope.formData2.count = 1;
+		$scope.formData4.presentamount = 0;
+		$scope.formData4.chargeprice = 0;
+		$scope.formData4.serviceprice = 0;
+		$scope.formData4.discountprice = 0;
+		$scope.formData4.chargeprice = 0;
+		$scope.formData5.accountmoney = 0;
 
-						//返回
-						$scope.onReturn = function() {
-							history.go(-1);
-						}
+		$scope.onReturn = function() {
+			history.go(-1);
+		}
 
-						//////////////////////////////////////////////////////////////////////
-						$scope.initCustomer = function() {
-							$http(
-									{
-										url : $scope.formData.url,
-										method : 'GET',
-										dataType : "json",
-										withCredentials : true,
-										headers : {
-											'Content-Type' : 'application/json;charset=UTF-8;'
-										},
-										data : ''
-									}).success(
-									function(data, status, headers, config) {
-										$scope.formData = data;
-									}).error(
-									function(data, status, headers, config) {
-										response(status);
-									});
-						}
+		//////////////////////////////////////////////////////////////////////
+		$scope.initCustomer = function() {
+			$http({
+				url : $scope.formData.url,
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				$scope.formData = data;
+				$scope.initAccounts($scope.formData.id);
+				$("#customerid").attr("disabled", "disabled");
+			}).error(function(data, status, headers, config) {
+				response(status);
+			});
+		}
+		$scope.initAccounts = function(id) {
+			$http({
+				url : parent.getMenuLinksHref("accountslist") + id,
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				$scope.formData5 = data;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			});
+		}
+		/////////////////////////////////////////////////////////////
+		$scope.onNext1 = function() {
+			var isValid = $("#saveForm1").valid();
+			if (!isValid) {
+				$('#myTab li:eq(0) a').tab('show');
+			} else {
+				$('#myTab li:eq(1) a').tab('show');
+			}
+		}
 
-						/////////////////////////////////////////////////////////////
-						$scope.onNext1 = function() {
-							var isValid = $("#customerForm").valid();
-							if (!isValid) {
-							} else {
-								$('#myTab li:eq(1) a').tab('show');
-							}
-						}
+		$scope.onNext2 = function() {
+			var isValid = $("#saveForm1").valid();
+			if (!isValid) {
+				$('#myTab li:eq(0) a').tab('show');
+			} else if ($scope.datalist.length == 0) {
+				parent.art.dialog({
+					content : '请先加入选择课程！',
+					lock : true,
+					ok : function() {
+					},
+					time : 2
+				});
+			} else {
+				$('#myTab li:eq(2) a').tab('show');
+			}
+		}
 
-						$scope.onNext2 = function() {
-							var isValid = $("#customerForm").valid();
-							if (!isValid) {
-							} else if ($scope.datalist.length == 0) {
-								parent.art.dialog({
-									content : '请先加入选择课程！',
-									lock : true,
-									ok : function() {
-									},
-									time : 2
-								});
-							} else {
-								$('#myTab li:eq(2) a').tab('show');
-							}
-						}
-
-						$scope.onNext3 = function() {
-							var isValid = $("#customerForm").valid();
-							if (!isValid) {
-
-							} else if ($scope.datalist.length == 0) {
-								parent.art.dialog({
-									content : '请先加入选择课程！',
-									lock : true,
-									ok : function() {
-									},
-									time : 2
-								});
-							} else {
-								$('#myTab li:eq(3) a').tab('show');
-								var serviceprice = 0;
-								$("input[name='checkbox']:checkbox:checked")
-										.each(
-												function() {
-													var v = parseInt($(this)[0].attributes.dataid.value);
-													serviceprice = serviceprice
-															+ v;
-												})
-								$scope.formData4.serviceprice = serviceprice;
-							}
-						}
-
-						$scope.onNext4 = function() {
-							var isValid = $("#saveForm3").valid();
-							if (isValid) {
-								$('#myTab li:eq(4) a').tab('show');
-							}
-						}
-
-						////////////////////////////////////
-						$scope.initProduct = function() {
-							$http(
-									{
-										url : $scope.formData2.url,
-										method : 'GET',
-										dataType : "json",
-										withCredentials : true,
-										headers : {
-											'Content-Type' : 'application/json;charset=UTF-8;'
-										},
-										data : ''
-									}).success(
-									function(data, status, headers, config) {
-										$scope.formData2 = data;
-										$scope.formData2.count = 1;
-									}).error(
-									function(data, status, headers, config) {
-										response(status);
-									});
-						}
-
-						///////////////////////////////////////////////////////////////////////////
-						$scope.initselect = function() {
-							$http(
-									{
-										url : parent
-												.getMenuLinksHref("dictionarylist"),
-										method : 'POST',
-										dataType : "json",
-										withCredentials : true,
-										headers : {
-											'Content-Type' : 'application/json;charset=UTF-8;'
-										},
-										data : JSON.stringify([ 20, 1950, 900,
-												1850, 2111, 300, 1990, 1950,
-												1300, 560, 2101, 2141 ])
-									}).success(
-									function(data, status, headers, config) {
-										$scope.selects = data;
-									}).error(
-									function(data, status, headers, config) {
-										response(status);
-									})
-						}
-						/////////////////////////////////////////////////////////////////
-						$scope.onSelected = function() {
-							var isValid = $("#saveForm").valid();
-							var flag = false;
-							if (isValid) {
-								var list = $scope.datalist;
-								for (var i = 0; i < list.length; i++) {
-									if (list[i].id == $scope.formData2.id)
-										flag = true;
-								}
-								if (!flag) {
-									$scope.datalist.push($scope.formData2);
-									$scope.calculate();
-								}
-							}
-						}
-
-						$scope.toUpdate = function(data) {
-							$scope.formData2 = data;
-						}
-						$scope.toDelete = function(data) {
-							var list = $scope.datalist;
-							for (var i = 0; i < list.length; i++) {
-								if (list[i].id == data.id) {
-									$scope.datalist.splice(i, 1);
-								}
-							}
-							$scope.calculate();
-						}
-
-						//////////////////////////////////////////////////////////////
-						$http(
-								{
-									url : parent
-											.getMenuLinksHref("expenseslist"),
-									method : 'POST',
-									dataType : "json",
-									withCredentials : true,
-									headers : {
-										'Content-Type' : 'application/json;charset=UTF-8;'
-									},
-									data : ''
-								}).success(
-								function(data, status, headers, config) {
-									$scope.expenseslist = data;
-									setTimeout(initCheckStyle, 1000);
-								}).error(
-								function(data, status, headers, config) {
-									response(status);
-								})
-
-						///////////////////////////////////////////////////////
-
-						$http(
-								{
-									url : parent
-											.getMenuLinksHref("discountitemssmap"),
-									method : 'POST',
-									dataType : "json",
-									withCredentials : true,
-									headers : {
-										'Content-Type' : 'application/json;charset=UTF-8;'
-									},
-									data : ''
-								}).success(
-								function(data, status, headers, config) {
-									$scope.discountlist = data;
-								}).error(
-								function(data, status, headers, config) {
-									response(status);
-								})
-
-						$http(
-								{
-									url : parent
-											.getMenuLinksHref("presentitemsmap"),
-									method : 'POST',
-									dataType : "json",
-									withCredentials : true,
-									headers : {
-										'Content-Type' : 'application/json;charset=UTF-8;'
-									},
-									data : ''
-								}).success(
-								function(data, status, headers, config) {
-									$scope.presentlist = data;
-								}).error(
-								function(data, status, headers, config) {
-									response(status);
-								})
-
-						////////////////////////////////////////////////////
-						$scope.calculate = function() {
-							var count = 0;
-							var list = $scope.datalist;
-							for (var i = 0; i < list.length; i++) {
-								count += list[i].totalprices;
-							}
-							$scope.formData3.sumprice = count;
-						}
-
-						$scope.calculatesum = function() {
-							$scope.formData4.chargeprice = ($scope.formData3.sumprice - $scope.formData4.discountprice)
-									+ $scope.formData4.serviceprice;
-						}
-
-						/////////////////////////////////////////////////////////
-
-						$scope
-								.$watch(
-										'formData3.discount',
-										function(newValue, oldValue, scope) {
-											if ($scope.formData3.sumprice >= newValue.discountstandard) {
-												$scope.formData4.discountprice = $scope.formData3.sumprice
-														* (newValue.discountvalue * 0.01);
-											} else {
-												parent.art.dialog({
-													content : '不符合的折扣项！',
-													lock : true,
-													ok : function() {
-													},
-													time : 2
-												});
-												$scope.formData4.discountprice = 0;
-											}
-										});
-						///////////////////////////////////////////////////////////////////////////
-						$scope
-								.$watch(
-										'formData2.count',
-										function(newValue, oldValue, scope) {
-											$scope.formData2.totalprices = $scope.formData2.productprice
-													* $scope.formData2.count;
-											$scope.calculate();
-										});
-
-						$scope
-								.$watch(
-										'formData2.productprice',
-										function(newValue, oldValue, scope) {
-											$scope.formData2.totalprices = $scope.formData2.productprice
-													* $scope.formData2.count;
-											$scope.calculate();
-										});
-
-						$scope.$watch('formData3.present', function(newValue,
-								oldValue, scope) {
-							var count = 0;
-							var list = $scope.datalist;
-							if (list.length == 0) {
-								return;
-							}
-							for (var i = 0; i < list.length; i++) {
-								if (list[i].count >= newValue.presentstandard) {
-									list[i].presents = newValue.presentvalue;
-									count = count + newValue.presentvalue;
-								}else{
-									list[i].presents = 0;
-								}
-							}
-							$scope.formData4.presentamount = count;
-						});
-
-						$scope.$watch('formData3.sumprice', function(newValue,
-								oldValue, scope) {
-							$scope.calculatesum();
-						});
-
-						$scope.$watch('formData4.discountprice', function(
-								newValue, oldValue, scope) {
-							$scope.calculatesum();
-						});
-
-						$scope.$watch('formData4.serviceprice', function(
-								newValue, oldValue, scope) {
-							$scope.calculatesum();
-						});
-
-						$scope.initselect();
-
-						//////////////////////////////////////////////////////////////////////////
-						$scope.initSelectCustomer = function() {
-							artdialogIframe(
-									"../../dfgj/html/potentialcustomers/customerlist.html",
-									null, backfunctionselectcustomer, 1024,
-									600, true);
-						}
-
-						$scope.selectParent = function() {
-							artdialogIframe(
-									"../../dfgj/html/customer/parentlist.html",
-									null, backfunctionparent, 1500, 800, true);
-						}
-
-						$scope.selectStaff = function() {
-							artdialogIframe(
-									"../../dfgj/html/jobs/stafflist.html",
-									null, backfunctionstaff, 1024, 600, true);
-						}
-
-						$scope.selectReferralCustomer = function() {
-							artdialogIframe(
-									"../../dfgj/html/potentialcustomers/customerlist.html",
-									null, backfunctionreferralcustomer, 1024,
-									600, true);
-						}
-
-						$scope.selectProduct = function() {
-							artdialogIframe(
-									"../../dfgj/html/productsalaryrules/productlist.html",
-									null, backfunctionProduct, 900, 600, true);
-						}
-
-						$scope.selectConsultant = function() {
-							artdialogIframe(
-									"../../dfgj/html/jobs/stafflist.html",
-									null, backfunctionconsultant, 1024, 600,
-									true);
-						}
-
-						$scope.selectEducator = function() {
-							artdialogIframe(
-									"../../dfgj/html/jobs/stafflist.html",
-									null, backfunctioneducator, 1024, 600, true);
-						}
-
-						$scope.selectMarketing = function() {
-							artdialogIframe(
-									"../../dfgj/html/jobs/stafflist.html",
-									null, backfunctionmarketing, 1024, 600,
-									true);
-						}
-
-						$scope.selectCallcenter = function() {
-							artdialogIframe(
-									"../../dfgj/html/jobs/stafflist.html",
-									null, backfunctioncallcenter, 1024, 600,
-									true);
-						}
+		$scope.onNext3 = function() {
+			var isValid = $("#saveForm1").valid();
+			if (!isValid) {
+				$('#myTab li:eq(0) a').tab('show');
+			} else if ($scope.datalist.length == 0) {
+				parent.art.dialog({
+					content : '请先加入选择课程！',
+					lock : true,
+					ok : function() {
+					},
+					time : 2
+				});
+			} else {
+				var isValid = $("#saveForm2").valid();
+				if (!isValid) {
+					$('#myTab li:eq(2) a').tab('show');
+				} else {
+					$('#myTab li:eq(3) a').tab('show');
+					var serviceprice = 0;
+					$("input[name='checkbox']:checkbox:checked").each(function() {
+						var v = parseInt($(this)[0].attributes.dataid.value);
+						serviceprice = serviceprice + v;
 					})
+					$scope.formData4.serviceprice = serviceprice;
+				}
+			}
+		}
+
+		$scope.onNext4 = function() {
+			var isValid = $("#saveForm3").valid();
+			if (isValid) {
+				$('#myTab li:eq(4) a').tab('show');
+			} else {
+				$('#myTab li:eq(3) a').tab('show');
+			}
+		}
+
+		////////////////////////////////////
+		$scope.initProduct = function(isflag) {
+			$http({
+				url : $scope.formData2.url,
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				var flag = false;
+				$scope.formData2 = data;
+				$scope.formData2.count = 1;
+				$scope.formData2.flag = isflag;
+				if (isflag == "21") {
+					$scope.caninput1 = true;
+					$scope.caninput2 = false;
+				} else {
+					$scope.caninput2 = true;
+					$scope.caninput1 = false;
+				}
+				var list = $scope.datalist;
+				for (var i = 0; i < list.length; i++) {
+					if (list[i].id == $scope.formData2.id)
+						flag = true;
+				}
+				if (!flag) {
+					$scope.datalist.push($scope.formData2);
+					$scope.calculate();
+				}
+			}).error(function(data, status, headers, config) {
+				response(status);
+			});
+		}
+
+		///////////////////////////////////////////////////////////////////////////
+		$scope.initselect = function() {
+			$http({
+				url : parent.getMenuLinksHref("dictionarylist"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify([ 20, 1950, 900, 1850, 2111, 300, 1990, 1950, 1300, 560, 2101, 2141, 650 ])
+			}).success(function(data, status, headers, config) {
+				$scope.selects = data;
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+		/////////////////////////////////////////////////////////////////
+		$scope.onSelected = function() {
+			var isValid = $("#saveForm").valid();
+			var flag = false;
+			if (isValid) {
+				var list = $scope.datalist;
+				for (var i = 0; i < list.length; i++) {
+					if (list[i].id == $scope.formData2.id)
+						flag = true;
+				}
+				if (!flag) {
+					$scope.datalist.push($scope.formData2);
+					$scope.calculate();
+				}
+			}
+		}
+
+		$scope.toUpdate = function(data) {
+			$scope.formData2 = data;
+			if ($scope.formData2.flag == "21") {
+				$scope.caninput1 = true;
+				$scope.caninput2 = false;
+			} else {
+				$scope.caninput2 = true;
+				$scope.caninput1 = false;
+			}
+		}
+		$scope.toDelete = function(data) {
+			var list = $scope.datalist;
+			for (var i = 0; i < list.length; i++) {
+				if (list[i].id == data.id) {
+					$scope.datalist.splice(i, 1);
+				}
+			}
+			$scope.calculate();
+		}
+
+		//////////////////////////////////////////////////////////////
+		$http({
+			url : parent.getMenuLinksHref("expenseslist"),
+			method : 'POST',
+			dataType : "json",
+			withCredentials : true,
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			data : ''
+		}).success(function(data, status, headers, config) {
+			$scope.expenseslist = data;
+			setTimeout(initCheckStyle, 1000);
+		}).error(function(data, status, headers, config) {
+			response(status);
+		})
+
+		///////////////////////////////////////////////////////
+
+		$http({
+			url : parent.getMenuLinksHref("discountitemssmap"),
+			method : 'POST',
+			dataType : "json",
+			withCredentials : true,
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			data : ''
+		}).success(function(data, status, headers, config) {
+			$scope.discountlist = data;
+		}).error(function(data, status, headers, config) {
+			response(status);
+		})
+
+		$http({
+			url : parent.getMenuLinksHref("presentitemsmap"),
+			method : 'POST',
+			dataType : "json",
+			withCredentials : true,
+			headers : {
+				'Content-Type' : 'application/json;charset=UTF-8;'
+			},
+			data : ''
+		}).success(function(data, status, headers, config) {
+			$scope.presentlist = data;
+		}).error(function(data, status, headers, config) {
+			response(status);
+		})
+
+		////////////////////////////////////////////////////
+		$scope.calculate = function() {
+			var count = 0;
+			var list = $scope.datalist;
+			for (var i = 0; i < list.length; i++) {
+				count += list[i].totalprices;
+			}
+			$scope.formData3.sumprice = count;
+		}
+
+		$scope.calculatesum = function() {
+			$scope.formData4.chargeprice = ($scope.formData3.sumprice - $scope.formData4.discountprice) + $scope.formData4.serviceprice;
+		}
+
+		///////////////////////////////////////////////////////////////////////////
+		$scope.payMents = function() {
+			if ($scope.formData.id == undefined) {
+				$('#myTab li:eq(0) a').tab('show');
+				return;
+			} else if ($scope.datalist.length == 0) {
+				parent.art.dialog({
+					content : '请先加入选择课程！',
+					lock : true,
+					ok : function() {
+					},
+					time : 2
+				});
+				$('#myTab li:eq(1) a').tab('show');
+				return;
+			} else if ($scope.formData1.consultantname == undefined) {
+				$('#myTab li:eq(2) a').tab('show');
+				return;
+			} else if (!($("#saveForm3").valid())) {
+				$('#myTab li:eq(3) a').tab('show');
+				return;
+			} else {
+				if ($scope.formData.id == undefined) {
+					$scope.savaCustomer();
+				} else {
+					$scope.savaAccountChargeApplies();
+				}
+			}
+		}
+
+		$scope.savaCustomer = function() {
+			var isValid = $("#saveForm").valid();
+			if (isValid) {
+				$scope.formData.birthday = $("#birthday").val();
+				$scope.formData.creatorid = parent.getCookie('staffid');
+				$scope.formData.creatorname = parent.getCookie('staffname');
+				$scope.formData.parentid = $('#parentid').val();
+				$scope.formData.parentname = $('#parentname').val();
+				$scope.formData.campusid = parent.getCookie('campusid');
+				$scope.formData.campusname = parent.getCookie('campusname');
+				$scope.formData.referralstaffid = $("#referralstaffid").val();
+				$scope.formData.referralstaffname = $("#referralstaffname").val();
+				$scope.formData.referralcustomerid = $("#referralcustomerid").val();
+				$scope.formData.referralcustomername = $("#referralcustomername").val();
+				$http({
+					url : parent.getMenuLinksHref("customersava"),
+					method : 'POST',
+					dataType : "json",
+					withCredentials : true,
+					headers : {
+						'Content-Type' : 'application/json;charset=UTF-8;'
+					},
+					data : JSON.stringify($scope.formData)
+				}).success(function(data, status, headers, config) {
+					$scope.formData = data;
+					$scope.getAccounts(data.id);
+				}).error(function(data, status, headers, config) {
+					response(status);
+				})
+			}
+		}
+		$scope.getAccounts = function(id) {
+			$http({
+				url : parent.getMenuLinksHref("accountslist") + id,
+				method : 'GET',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : ''
+			}).success(function(data, status, headers, config) {
+				$scope.formData5 = data;
+				$scope.savaAccountChargeApplies();
+			}).error(function(data, status, headers, config) {
+				response(status);
+			});
+		}
+
+		$scope.savaAccountChargeApplies = function() {
+			$scope.formAccountChargeApplies = {};
+			$scope.formAccountChargeApplies.creatorid = parent.getCookie('staffid');
+			$scope.formAccountChargeApplies.creatorname = parent.getCookie('staffname');
+			$scope.formAccountChargeApplies.campusid = parent.getCookie('campusid');
+			$scope.formAccountChargeApplies.campusname = parent.getCookie('campusname');
+			$scope.formAccountChargeApplies.submitterid = parent.getCookie('staffid');
+			$scope.formAccountChargeApplies.submittername = parent.getCookie('staffname');
+			$scope.formAccountChargeApplies.submitterjobid = parent.getCookie('staffjobid');
+			$scope.formAccountChargeApplies.submitterjobname = parent.getCookie('staffjobname');
+			$scope.formAccountChargeApplies.parentid = $scope.formData.parentid;
+			$scope.formAccountChargeApplies.parentname = $scope.formData.parentname;
+			$scope.formAccountChargeApplies.customerid = $scope.formData.id;
+			$scope.formAccountChargeApplies.customername = $scope.formData.customername;
+			$scope.formAccountChargeApplies.customergrade = $scope.formData.grade;
+			$scope.formAccountChargeApplies.accountid = $scope.formData5.id;
+			$scope.formAccountChargeApplies.chargetype = $scope.formData3.chargetype;
+			$scope.formAccountChargeApplies.consultantid = $("#consultantid").val();
+			$scope.formAccountChargeApplies.consultantname = $("#consultantname").val();
+			$scope.formAccountChargeApplies.educatorid = $("#educatorid").val();
+			$scope.formAccountChargeApplies.educatorname = $("#educatorname").val();
+			$scope.formAccountChargeApplies.thatdiscountid = $scope.formData5.discountid;
+			$scope.formAccountChargeApplies.thatdiscountbase = $scope.formData5.discountbase;
+			$scope.formAccountChargeApplies.thatdiscountrate = $scope.formData5.discountrate;
+			$scope.formAccountChargeApplies.thataccountmoney = $scope.formData5.accountmoney;
+			$scope.formAccountChargeApplies.thisdiscountid = $scope.formData4.thisdiscountid;
+			$scope.formAccountChargeApplies.thisdiscountbase = $scope.formData4.thisdiscountbase;
+			$scope.formAccountChargeApplies.thisdiscountrate = $scope.formData4.thisdiscountrate;
+			$scope.formAccountChargeApplies.chargemoney = $scope.formData4.chargeprice;
+			$scope.formAccountChargeApplies.paidmoney = $scope.formData4.paidprice;
+			$scope.formAccountChargeApplies.paytype = $scope.formData4.paytype;
+			$scope.formAccountChargeApplies.payticket = $scope.formData4.payticket;
+			$http({
+				url : parent.getMenuLinksHref("accountchargeappliespost"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify($scope.formAccountChargeApplies)
+			}).success(function(data, status, headers, config) {
+				$scope.formAccountChargeApplies = data;
+				$scope.savaOrder();
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+		//
+		$scope.savaOrder = function() {
+			$scope.formOrder = {};
+			$scope.formOrder.creatorid = parent.getCookie('staffid');
+			$scope.formOrder.creatorname = parent.getCookie('staffname');
+			$scope.formOrder.campusid = parent.getCookie('campusid');
+			$scope.formOrder.campusname = parent.getCookie('campusname');
+			$scope.formOrder.parentid = $scope.formData.parentid;
+			$scope.formOrder.parentname = $scope.formData.parentname;
+			$scope.formOrder.customerid = $scope.formData.id;
+			$scope.formOrder.customername = $scope.formData.customername;
+			$scope.formOrder.customergrade = $scope.formData.grade;
+			$scope.formOrder.customergradename = $scope.formData.gradename;
+			$scope.formOrder.accountid = $scope.formData5.id;
+			$scope.formOrder.consultantid = $("#consultantid").val();
+			$scope.formOrder.consultantname = $("#consultantname").val();
+			$scope.formOrder.educatorid = $("#educatorid").val();
+			$scope.formOrder.educatorname = $("#educatorname").val();
+			$scope.formOrder.chargeapplyid = $scope.formAccountChargeApplies.id;
+			$scope.formOrder.orderstatus = $scope.formData3.chargetype;
+			$http({
+				url : parent.getMenuLinksHref("orderspost"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify($scope.formOrder)
+			}).success(function(data, status, headers, config) {
+				$scope.formOrder = data;
+				$scope.savaOrderItem();
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+
+		$scope.savaOrderItem = function() {
+			var listdata = [];
+			var data = {};
+			var list = $scope.datalist;
+			for (var i = 0; i < list.length; i++) {
+				data = {};
+				data.orderid = $scope.formOrder;
+				data.productid = list[i].id;
+				data.productname = list[i].productname;
+				data.productcampusid = list[i].productcampusid;
+				data.productcampusname = list[i].productcampusname;
+				data.grade = list[i].grade;
+				data.gradename = list[i].gradename;
+				data.subject = list[i].subject;
+				data.subjectname = list[i].subjectname;
+				data.catalog = list[i].catalog;
+				data.catalogname = list[i].catalogname;
+				data.courselevel = list[i].courselevel;
+				data.courselevelname = list[i].courselevelname;
+				data.lessoncount = list[i].lessoncount;
+				data.lessonduration = list[i].lessonduration;
+				data.lessondurationvalue = list[i].lessondurationvalue;
+				data.periodduration = list[i].periodduration;
+				data.perioddurationvalue = list[i].perioddurationvalue;
+				data.periodsoflesson = list[i].periodsoflesson;
+				data.orderprice = list[i].totalprices;
+				data.orderamount = list[i].count;
+				data.presentid = list[i].presentid;
+				data.presentamount = list[i].presentamount;
+				data.discountrate = list[i].discountrate;
+				data.realprice = list[i].realprice;
+				data.realamount = list[i].realamount;
+				data.promotionquota = list[i].promotionquota;
+				listdata.push(data);
+			}
+			$http({
+				url : parent.getMenuLinksHref("orderitemssavas"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify(listdata)
+			}).success(function(data, status, headers, config) {
+
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+		/////////////////////////////////////////////////////////折扣
+		$scope.$watch('formData3.discount', function(newValue, oldValue, scope) {
+			var count = 0;
+			var list = $scope.datalist;
+			if (list.length > 0) {
+				for (var i = 0; i < list.length; i++) {
+					if (list[i].promotionallowed == "21") {
+						if (list[i].totalprices >= newValue.discountstandard) {
+							list[i].orderprice = list[i].totalprices;
+							list[i].discountrate = newValue.discountvalue;
+							var quota = list[i].totalprices * (newValue.discountvalue * 0.1);
+							if (list[i].promotionquota != undefined && quota > list[i].promotionquota)
+								quota = list[i].promotionquota;
+							list[i].realprice = list[i].totalprices - quota;
+							list[i].quota = quota;
+							count = count + quota;
+						} else {
+							list[i].orderprice = list[i].totalprices;
+							list[i].discountrate = 0;
+							list[i].realprice = list[i].totalprices;
+							list[i].quota = 0;
+						}
+					} else {
+						list[i].orderprice = list[i].totalprices;
+						list[i].discountrate = 0;
+						list[i].realprice = list[i].totalprices;
+						list[i].quota = 0;
+					}
+				}
+				$scope.formData4.discountprice = count;
+			} else if (list.length) {
+				parent.art.dialog({
+					content : '不符合的折扣项！',
+					lock : true,
+					ok : function() {
+					},
+					time : 2
+				});
+				$scope.formData4.discountprice = count;
+			}
+		});
+
+		//买赠
+		$scope.$watch('formData3.present', function(newValue, oldValue, scope) {
+			var count = 0;
+			var list = $scope.datalist;
+			if (list.length == 0) {
+				return;
+			}
+			for (var i = 0; i < list.length; i++) {
+				if (list[i].presentallowed == "21") {
+					if (list[i].count >= newValue.presentstandard) {
+						list[i].orderamount = list[i].count;
+						list[i].presents = newValue.presentvalue;
+						list[i].presentid = newValue.presentid;
+						list[i].presentamount = newValue.presentvalue;
+						list[i].realamount = parseInt(list[i].count) + newValue.presentvalue;
+						count = count + newValue.presentvalue;
+					} else {
+						list[i].orderamount = list[i].count;
+						list[i].presents = 0;
+						list[i].presentamount = 0;
+						list[i].realamount = list[i].count;
+					}
+				} else {
+					list[i].orderamount = list[i].count;
+					list[i].presents = 0;
+					list[i].presentamount = 0;
+					list[i].realamount = list[i].count;
+				}
+			}
+			$scope.formData4.presentamount = count;
+		});
+
+		//总价
+		$scope.$watch('formData2.count', function(newValue, oldValue, scope) {
+			$scope.formData2.totalprices = $scope.formData2.productprice * $scope.formData2.count;
+			$scope.calculate();
+		});
+
+		//总价
+		$scope.$watch('formData2.productprice', function(newValue, oldValue, scope) {
+			$scope.formData2.totalprices = $scope.formData2.productprice * $scope.formData2.count;
+			$scope.calculate();
+		});
+
+		//合计
+		$scope.$watch('formData3.sumprice', function(newValue, oldValue, scope) {
+			$scope.calculatesum();
+		});
+		//合计
+		$scope.$watch('formData4.discountprice', function(newValue, oldValue, scope) {
+			$scope.calculatesum();
+		});
+		//合计
+		$scope.$watch('formData4.serviceprice', function(newValue, oldValue, scope) {
+			$scope.calculatesum();
+		});
+
+		$scope.initselect();
+
+		//////////////////////////////////////////////////////////////////////////
+		$scope.initSelectCustomer = function() {
+			artdialogIframe("../../dfgj/html/potentialcustomers/customerlist.html", null, backfunctionselectcustomer, 1024, 600, true);
+		}
+
+		$scope.selectParent = function() {
+			artdialogIframe("../../dfgj/html/customer/parentlist.html", null, backfunctionparent, 1500, 800, true);
+		}
+
+		$scope.selectStaff = function() {
+			artdialogIframe("../../dfgj/html/jobs/stafflist.html", null, backfunctionstaff, 1024, 600, true);
+		}
+
+		$scope.selectReferralCustomer = function() {
+			artdialogIframe("../../dfgj/html/potentialcustomers/customerlist.html", null, backfunctionreferralcustomer, 1024, 600, true);
+		}
+
+		$scope.selectProduct = function() {
+			artdialogIframe("../../dfgj/html/charge/productlist.html", null, backfunctionProduct, 900, 600, true);
+		}
+
+		$scope.selectConsultant = function() {
+			artdialogIframe("../../dfgj/html/jobs/stafflist.html", null, backfunctionconsultant, 1024, 600, true);
+		}
+
+		$scope.selectEducator = function() {
+			artdialogIframe("../../dfgj/html/jobs/stafflist.html", null, backfunctioneducator, 1024, 600, true);
+		}
+
+		$scope.selectMarketing = function() {
+			artdialogIframe("../../dfgj/html/jobs/stafflist.html", null, backfunctionmarketing, 1024, 600, true);
+		}
+
+		$scope.selectCallcenter = function() {
+			artdialogIframe("../../dfgj/html/jobs/stafflist.html", null, backfunctioncallcenter, 1024, 600, true);
+		}
+	})
 	////////////////////////////////////////////////////////////////////
 	function backfunctionselectcustomer() {
 		var appElement = document.querySelector('[ng-controller=controller]');
 		var $scope = angular.element(appElement).scope();
 		$scope.formData = {};
-		$scope.formData.url = parent.getDateChild().url;
-		$scope.initCustomer();
-		parent.removeDateChild();
+		if (parent.getDateChild().url != undefined) {
+			$scope.formData.url = parent.getDateChild().url;
+			$scope.initCustomer();
+			parent.removeDateChild();
+		}
 	}
 
 	function backfunctionstaff() {
@@ -501,25 +741,23 @@
 		var appElement = document.querySelector('[ng-controller=controller]');
 		var $scope = angular.element(appElement).scope();
 		$scope.formData2 = {};
-		$scope.formData2.url = parent.getDateChild().url;
-		var flag = parent.getDateChild().caninput;
-		if (flag == "21") {
-			$scope.caninput1 = true;
-			$scope.caninput2 = false;
-		} else {
-			$scope.caninput2 = true;
-			$scope.caninput1 = false;
+		if (parent.getDateChild().url != undefined) {
+			$scope.formData2.url = parent.getDateChild().url;
+			var flag = parent.getDateChild().caninput;
+			$("#productidname").val(parent.getDateChild().name);
+			$scope.initProduct(flag);
+			parent.removeDateChild();
 		}
-		$("#productidname").val(parent.getDateChild().name);
-		$scope.initProduct();
-		parent.removeDateChild();
 	}
 
 	function backfunctionconsultant() {
+		var appElement = document.querySelector('[ng-controller=controller]');
+		var $scope = angular.element(appElement).scope();
 		if (parent.getDateChild().id != undefined) {
 			$("#consultantid").val(parent.getDateChild().id);
 		}
 		if (parent.getDateChild().name != undefined) {
+			$scope.formData1.consultantname = parent.getDateChild().name;
 			$("#consultantname").val(parent.getDateChild().name);
 		}
 		parent.removeDateChild();
@@ -563,23 +801,17 @@
 			increaseArea : '20%'
 		});
 
-		$('input')
-				.on(
-						'ifChanged',
-						function(event) {
-							var appElement = document
-									.querySelector('[ng-controller=controller]');
-							var $scope = angular.element(appElement).scope();
-							var serviceprice = 0;
-							$("input[name='checkbox']:checkbox:checked")
-									.each(
-											function() {
-												var v = parseInt($(this)[0].attributes.dataid.value);
-												serviceprice = serviceprice + v;
-											})
-							$scope.formData4.serviceprice = serviceprice;
-							$scope.$apply();
-						});
+		$('input').on('ifChanged', function(event) {
+			var appElement = document.querySelector('[ng-controller=controller]');
+			var $scope = angular.element(appElement).scope();
+			var serviceprice = 0;
+			$("input[name='checkbox']:checkbox:checked").each(function() {
+				var v = parseInt($(this)[0].attributes.dataid.value);
+				serviceprice = serviceprice + v;
+			})
+			$scope.formData4.serviceprice = serviceprice;
+			$scope.$apply();
+		});
 	}
 </script>
 <style type="text/css">
@@ -630,7 +862,7 @@
 	</div>
 	<div id="myTabContent" class="tab-content">
 		<div class="tab-pane fade in active" id="customer">
-			<form method="post" id="customerForm" action="">
+			<form method="post" id="saveForm1" action="">
 				<!-- 操作按钮操作区 -->
 				<div class="col-lg-12 topActionPanel">
 					<div>
@@ -642,7 +874,7 @@
 				</div>
 				<div class="col-lg-6 viewFixedWidth">
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">客户名称</span> <input type="text" class="form-control required" placeholder="请输入客户名称"
+						<span class="input-group-addon text-right spanwidth">客户名称</span> <input type="text" class="form-control required" placeholder="请输入客户名称" id="customerid"
 							name="customername" ng-model="formData.customername" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
@@ -781,7 +1013,7 @@
 			<form method="post" id="saveForm" action="">
 				<div class="col-lg-12 topActionPanel">
 					<div>
-						<button type="button" class="btn btn-primary" ng-click="onSelected()" ng-if="buttons.post">加入选择</button>
+						<button type="button" class="btn btn-primary" ng-click="selectProduct()" ng-if="buttons.post">选择课程</button>
 					</div>
 					<div>
 						<button type="button" class="btn btn-primary" ng-click="onNext2()" ng-if="buttons.next">下一步</button>
@@ -790,28 +1022,28 @@
 				<div class="col-lg-6">
 					<div class="input-group input-group-sm">
 						<input type="hidden" id="productid" ng-model="formData.productid" /> <span class="input-group-addon text-right spanwidth">课程</span> <input type="text"
-							id="productidname" name="productidname" ng-model="formData2.productidname" readonly="readonly" class="form-control required" ng-click="selectProduct()">
-						<i id="type_name" ng-click="selectProduct()" class="glyphicon glyphicon-search" title="选择"></i><span class="input-group-addon verifyprompt">*</span>
+							id="productidname" name="productidname" ng-model="formData2.productidname" readonly="readonly" class="form-control required"> <span
+							class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">课程类型</span> <input type="text" class="form-control" value="{{formData2.catalogname}}" disabled>
 						<span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">单价</span> <input type="text" class="form-control" value="{{formData2.productprice |currency:'￥'}}"
+						<span class="input-group-addon text-right spanwidth">单价</span> <input type="text" class="form-control" value="{{formData2.productprice |currency:'$'}}"
 							disabled> <span class="input-group-addon verifyprompt">*</span>
 					</div>
-					<div class="input-group input-group-sm" ng-if="caninput1">
+					<div class="input-group input-group-sm" ng-show="caninput1">
 						<span class="input-group-addon text-right spanwidth">数量</span> <input type="text" class="form-control required number" placeholder="请输入数量" name="count"
 							ng-model="formData2.count"> <span class="input-group-addon verifyprompt">*</span>
 					</div>
-					<div class="input-group input-group-sm" ng-if="caninput2">
+					<div class="input-group input-group-sm" ng-show="caninput2">
 						<span class="input-group-addon text-right spanwidth">数量</span> <input type="text" class="form-control required number" placeholder="请输入数量" name="count"
 							ng-model="formData2.count" disabled> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">总价</span> <input type="text" class="form-control required" placeholder="请输入数量" name="totalprices"
-							id="totalprices" ng-model="formData2.totalprices|currency:'￥'" disabled> <span class="input-group-addon verifyprompt">*</span>
+							id="totalprices" value="{{formData2.totalprices|currency:'$'}}" disabled> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
 						<span class="input-group-addon text-right spanwidth">学科</span> <input type="text" class="form-control" value="{{formData2.subjectname}}" disabled>
@@ -853,12 +1085,12 @@
 							<tr ng-repeat="data in datalist" class='tr{{$index%2+2}}' ng-class="{selected: $index==selectedRow}">
 								<td>{{$index+1}}</td>
 								<td>{{data.productname}}</td>
-								<td>{{data.productprice|currency:'￥'}}</td>
+								<td>{{data.productprice|currency:'$'}}</td>
 								<td>{{data.subjectname}}</td>
 								<td>{{data.gradename}}</td>
 								<td>{{data.yearname}}</td>
 								<td>{{data.count}}</td>
-								<td>{{data.totalprices|currency:'￥'}}</td>
+								<td>{{data.totalprices|currency:'$'}}</td>
 								<td>
 									<h4 ng-click="toUpdate(data)" class="glyphicon glyphicon-pencil" style="margin: 0px 5px; color: #99DFF8;" ng-if="buttons.update" title="修改"></h4>
 									<h4 ng-click="toDelete(data)" class="glyphicon glyphicon-remove" style="margin: 0px 5px; color: #99DFF8;" ng-if="buttons.delete" title="删除"></h4>
@@ -868,7 +1100,7 @@
 					</table>
 					<div style="height: 50px; width: 100%; right: 10">
 						<span style="position: absolute; left: 17px; font-weight: 500; font-size: 15px;">合计:</span> <span
-							style="position: absolute; left: 70px; font-size: 15px; color: red;">{{formData3.sumprice|currency:'￥'}}</span>
+							style="position: absolute; left: 70px; font-size: 15px; color: red;">{{formData3.sumprice|currency:'$'}}</span>
 					</div>
 				</div>
 			</form>
@@ -914,6 +1146,9 @@
 			<form method="post" id="saveForm3" action="">
 				<div class="col-lg-12 topActionPanel">
 					<div>
+						<button type="button" class="btn btn-primary" ng-click="payMents()" ng-if="buttons.next">缴费</button>
+					</div>
+					<div>
 						<button type="button" class="btn btn-primary" ng-click="onNext4()" ng-if="buttons.next">下一步</button>
 					</div>
 				</div>
@@ -939,46 +1174,44 @@
 							ng-bind-html="''+discount.presentvalue | highlight: $select.search"></span></small> </ui-select-choices> </ui-select>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">缴费类型</span> <select class="form-control required" name="grade" ng-model="formData3.chargetype"
+						<span class="input-group-addon text-right spanwidth">缴费类型</span> <select class="form-control required" name="chargetype" ng-model="formData3.chargetype"
 							ng-options="data.code as data.name for data in selects  | filter: {typecode: '2141'}">
 							<option value=''>请选择</option>
 						</select> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">支付方式</span> <select class="form-control required" name="grade" ng-model="formData3.chargetype"
-							ng-options="data.code as data.name for data in selects  | filter: {typecode: '2141'}">
+						<span class="input-group-addon text-right spanwidth">支付方式</span> <select class="form-control required" name="paytype" ng-model="formData3.paytype"
+							ng-options="data.code as data.name for data in selects  | filter: {typecode: '650'}">
 							<option value=''>请选择</option>
 						</select> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">发票号</span> <select class="form-control required" name="grade" ng-model="formData3.chargetype"
-							ng-options="data.code as data.name for data in selects  | filter: {typecode: '2141'}">
-							<option value=''>请选择</option>
-						</select> <span class="input-group-addon verifyprompt">*</span>
+						<span class="input-group-addon text-right spanwidth">发票编号</span> <input type="text" class="form-control required" placeholder="发票编号" name="payticket"
+							ng-model="formData3.payticket" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
+					</div>
+					<div class="input-group input-group-sm">
+						<span class="input-group-addon text-right spanwidth">付款卡号</span> <input type="text" class="form-control required" placeholder="付款卡号" name="customername"
+							ng-model="formData3.chargetype" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 				</div>
 				<div class="col-lg-6" style="top: 1px; left: 10px;">
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">课程费</span> <input type="text" class="form-control" value="{{formData3.sumprice|currency:'￥'}}"
+						<span class="input-group-addon text-right spanwidth">课程费</span> <input type="text" class="form-control" value="{{formData3.sumprice|currency:'$'}}"
 							disabled>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">赠送课时</span> <input type="text" class="form-control" value="{{formData4.presentamount}}" disabled>
+						<span class="input-group-addon text-right spanwidth">赠送合计</span> <input type="text" class="form-control" value="{{formData4.presentamount}}" disabled>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">服务费</span> <input type="text" class="form-control" value="{{formData4.serviceprice|currency:'￥'}}"
+						<span class="input-group-addon text-right spanwidth">服务费</span> <input type="text" class="form-control" value="{{formData4.serviceprice|currency:'$'}}"
 							disabled>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">折扣金额</span> <input type="text" class="form-control"
-							value="{{formData4.discountprice|currency:'￥'}}" disabled>
+						<span class="input-group-addon text-right spanwidth">折扣合计</span> <input type="text" class="form-control"
+							value="{{formData4.discountprice|currency:'$'}}" disabled>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">应缴金额</span> <input type="text" class="form-control" value="{{formData4.chargeprice|currency:'￥'}}"
-							disabled>
-					</div>
-					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">账户余额</span> <input type="text" class="form-control" value="{{formData5.accountmoney|currency:'￥'}}"
+						<span class="input-group-addon text-right spanwidth">应缴金额</span> <input type="text" class="form-control" value="{{formData4.chargeprice|currency:'$'}}"
 							disabled>
 					</div>
 					<div class="input-group input-group-sm">
@@ -986,13 +1219,65 @@
 							name="paidprice" ng-model="formData4.paidprice"><span class="input-group-addon verifyprompt">*</span>
 					</div>
 				</div>
+				<div class="col-lg-12" style="top: 15px; left: 10px;">
+					<table class="ments">
+						<tbody>
+							<tr>
+								<th>序号</th>
+								<th>名称</th>
+								<th>单价</th>
+								<th>科目</th>
+								<th>年级</th>
+								<th>年度</th>
+								<th>是否买赠</th>
+								<th>是否优惠</th>
+								<th>原始数量</th>
+								<th>赠送数量</th>
+								<th>合计数量</th>
+								<th>原始金额</th>
+								<th>折扣金额</th>
+								<th>合计金额</th>
+							</tr>
+							<tr ng-repeat="data in datalist" class='tr{{$index%2+2}}' ng-class="{selected: $index==selectedRow}">
+								<td>{{$index+1}}</td>
+								<td>{{data.productname}}</td>
+								<td>{{data.productprice|currency:'$'}}</td>
+								<td>{{data.subjectname}}</td>
+								<td>{{data.gradename}}</td>
+								<td>{{data.yearname}}</td>
+								<td>{{data.presentallowedname}}</td>
+								<td>{{data.promotionallowedname}}</td>
+								<td>{{data.orderamount}}</td>
+								<td>{{data.presentamount}}</td>
+								<td>{{data.realamount}}</td>
+								<td>{{data.orderprice|currency:'$'}}</td>
+								<td>{{data.quota|currency:'$'}}</td>
+								<td>{{data.realprice|currency:'$'}}</td>
+							</tr>
+							<tr>
+								<td>服务费</td>
+								<td colspan="1" style="text-align: left; padding-left: 5px;">{{formData4.serviceprice|currency:'$'}}</td>
+								<td>折扣合计</td>
+								<td colspan="1" style="text-align: left; padding-left: 5px;">{{formData4.discountprice|currency:'$'}}</td>
+								<td>赠送合计</td>
+								<td colspan="1" style="text-align: left; padding-left: 5px;">{{formData4.presentamount}}</td>
+								<td>账户余额</td>
+								<td colspan="1" style="text-align: left; padding-left: 5px;">{{formData5.accountmoney|currency:'$'}}</td>
+								<td>应缴金额</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">{{formData4.chargeprice|currency:'$'}}</td>
+								<td>实缴金额</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">{{formData4.paidprice|currency:'$'}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</form>
 		</div>
 		<div class="tab-pane fade" id="charge">
 			<form method="post" id="saveForm5" action="">
 				<div class="col-lg-12 topActionPanel">
 					<div>
-						<button type="button" class="btn btn-primary" ng-click="onSelected()" ng-if="buttons.post">完成</button>
+						<button type="button" class="btn btn-primary" ng-click="onSelected()" ng-if="buttons.post">打印</button>
 					</div>
 				</div>
 				<div class="col-lg-12" style="top: 15px; left: 10px;">
@@ -1001,23 +1286,23 @@
 						<tbody>
 							<tr>
 								<td>收款</td>
-								<td colspan="11" style="text-align: left;padding-left: 5px;">南京明素教育</td>
+								<td colspan="13" style="text-align: left; padding-left: 5px;">南京明素教育</td>
 							</tr>
 							<tr>
 								<td>学员姓名</td>
-								<td colspan="2" style="text-align: left;padding-left: 5px;">马小军</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">马小军</td>
 								<td>学员电话</td>
-								<td colspan="2" style="text-align: left;padding-left: 5px;">17602509185</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">17602509185</td>
 								<td>缴费日期</td>
-								<td colspan="6" style="text-align: left;padding-left: 5px;">2017-5-20</td>
+								<td colspan="7" style="text-align: left; padding-left: 5px;">2017-5-20</td>
 							</tr>
 							<tr>
 								<td>收款人</td>
-								<td colspan="2" style="text-align: left;padding-left: 5px;">财务王</td>
-								<td>收款方式</td>
-								<td colspan="2" style="text-align: left;padding-left: 5px;">支付宝</td>
-								<td>金额</td>
-								<td colspan="6" style="text-align: left;padding-left: 5px;">5000</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">财务王</td>
+								<td>缴费方式</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">支付宝</td>
+								<td>票据号</td>
+								<td colspan="7" style="text-align: left; padding-left: 5px;">12312312</td>
 							</tr>
 							<tr>
 								<th>序号</th>
@@ -1026,28 +1311,44 @@
 								<th>科目</th>
 								<th>年级</th>
 								<th>年度</th>
-								<th>数量</th>
+								<th>是否买赠</th>
+								<th>是否优惠</th>
+								<th>原始数量</th>
 								<th>赠送数量</th>
-								<th>总价</th>
+								<th>合计数量</th>
+								<th>原始金额</th>
+								<th>折扣金额</th>
+								<th>合计金额</th>
 							</tr>
 							<tr ng-repeat="data in datalist" class='tr{{$index%2+2}}' ng-class="{selected: $index==selectedRow}">
 								<td>{{$index+1}}</td>
 								<td>{{data.productname}}</td>
-								<td>{{data.productprice|currency:'￥'}}</td>
+								<td>{{data.productprice|currency:'$'}}</td>
 								<td>{{data.subjectname}}</td>
 								<td>{{data.gradename}}</td>
 								<td>{{data.yearname}}</td>
-								<td>{{data.count}}</td>
-								<td>{{data.presents}}</td>
-								<td>{{data.totalprices|currency:'￥'}}</td>
+								<td>{{data.presentallowedname}}</td>
+								<td>{{data.promotionallowedname}}</td>
+								<td>{{data.orderamount}}</td>
+								<td>{{data.presentamount}}</td>
+								<td>{{data.realamount}}</td>
+								<td>{{data.orderprice|currency:'$'}}</td>
+								<td>{{data.quota|currency:'$'}}</td>
+								<td>{{data.realprice|currency:'$'}}</td>
 							</tr>
 							<tr>
-								<td>折扣金额</td>
-								<td colspan="2" style="text-align: left;padding-left: 5px;">{{formData4.discountprice|currency:'￥'}}</td>
+								<td>服务费</td>
+								<td colspan="1" style="text-align: left; padding-left: 5px;">{{formData4.serviceprice|currency:'$'}}</td>
+								<td>折扣合计</td>
+								<td colspan="1" style="text-align: left; padding-left: 5px;">{{formData4.discountprice|currency:'$'}}</td>
+								<td>赠送合计</td>
+								<td colspan="1" style="text-align: left; padding-left: 5px;">{{formData4.presentamount}}</td>
+								<td>账户余额</td>
+								<td colspan="1" style="text-align: left; padding-left: 5px;">{{formData5.accountmoney|currency:'$'}}</td>
 								<td>应缴金额</td>
-								<td colspan="2" style="text-align: left;padding-left: 5px;">{{formData4.chargeprice|currency:'￥'}}</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">{{formData4.chargeprice|currency:'$'}}</td>
 								<td>实缴金额</td>
-								<td colspan="4" style="text-align: left;padding-left: 5px;">{{formData4.paidprice|currency:'￥'}}</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">{{formData4.paidprice|currency:'$'}}</td>
 							</tr>
 						</tbody>
 					</table>

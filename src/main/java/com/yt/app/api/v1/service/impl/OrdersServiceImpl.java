@@ -4,13 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.http.RequestEntity;
 import org.springframework.stereotype.Service;
+
 import com.yt.app.api.v1.mapper.OrdersMapper;
 import com.yt.app.api.v1.service.OrdersService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.api.v1.entity.Orders;
 import com.yt.app.frame.m.IPage;
 import com.yt.app.frame.m.PageBean;
+import com.yt.app.frame.p.NumberUtil;
 import com.yt.app.frame.p.RequestUtil;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,8 +33,18 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders, Long> implements 
 	@Override
 	@Transactional
 	public Integer post(Orders t) {
+		t.setCreatetime(new Date());
+		t.setOrderno(NumberUtil.getOrderNo());
 		Integer i = mapper.post(t);
 		return i;
+	}
+
+	@Transactional
+	public Long sava(Orders t) {
+		t.setCreatetime(new Date());
+		t.setOrderno(NumberUtil.getOrderNo());
+		mapper.post(t);
+		return t.getId();
 	}
 
 	@SuppressWarnings("unchecked")

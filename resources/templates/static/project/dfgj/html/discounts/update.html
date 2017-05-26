@@ -59,7 +59,7 @@
 				$scope.formData.modifierid = parent.getCookie('staffid');
 				$scope.formData.modifiername = parent.getCookie('staffname');
 				$http({
-					url : parent.getMenuLinksHref("discountspost"),
+					url : parent.getFunctionLinksHref("self"),
 					method : 'PUT',
 					dataType : "json",
 					withCredentials : true,

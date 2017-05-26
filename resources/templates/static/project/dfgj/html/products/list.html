@@ -116,12 +116,12 @@
 			<tr class="info">
 				<th>序号</th>
 				<th>公司</th>
-				<th>名称</th>
+				<th>课程名称</th>
+				<th>课程类别</th>
 				<th>是否可用</th>
 				<th>单价</th>
 				<th>成本</th>
 				<th>目标价格</th>
-				<th>分类</th>
 				<th>科目</th>
 				<th>年级</th>
 				<th>年度</th>
@@ -140,11 +140,11 @@
 				<td ng-dblclick="toInfo(data)">{{$index+1}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.products.rdorgname}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.products.productname}}</td>
+				<td ng-dblclick="toInfo(data)">{{data.products.catalogname}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.products.productstatusname}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.products.productprice}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.products.productcost}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.products.targetprice}}</td>
-				<td ng-dblclick="toInfo(data)">{{data.products.catalogname}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.products.subjectname}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.products.gradename}}</td>
 				<td ng-dblclick="toInfo(data)">{{data.products.yearname}}</td>

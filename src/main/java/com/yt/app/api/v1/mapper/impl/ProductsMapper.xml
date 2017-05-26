@@ -3,7 +3,7 @@
 <mapper namespace="com.yt.app.api.v1.mapper.ProductsMapper">
   <!-- 数据库列 -->
   <sql id="Base_Column_List">
-     id,version,rdorgid,rdorgname,productcode,productname,productmemo,productstatus,productversion,productprice,productcost,productunit,targetprice,targetpricememo,catalog,subject,grade,year,season,startdate,enddate,partnerid,partnerratio,partnername,specialallowed,tunlandallowed,presentallowed,promotionallowed,promotionquota,confirmstartdate,confirmenddate,confirmmode,confirmstaging,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime
+     id,version,rdorgid,rdorgname,productcode,productname,productmemo,productstatus,productversion,productprice,productcost,productunit,targetprice,targetpricememo,catalog,subject,grade,year,season,startdate,enddate,partnerid,partnerratio,partnername,specialallowed,tunlandallowed,presentallowed,promotionallowed,promotionquota,confirmstartdate,confirmenddate,confirmmode,confirmstaging,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,lessoncount,lessonduration,lessondurationvalue,periodduration,perioddurationvalue,periodsoflesson,courselevel,coachtype,grouptype,classtype,minpeoples,maxpeoples,incomebelonging,iscrosscampus
   </sql>
   <!-- 基础返回对象封装 -->
   <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Products">
@@ -56,11 +56,25 @@
          <id property="modifierid" column="modifierid" />
          <id property="modifiername" column="modifiername" />
          <id property="modifytime" column="modifytime" />
+          <id property="lessoncount" column="lessoncount" />
+         <id property="lessonduration" column="lessonduration" />
+         <id property="lessondurationvalue" column="lessondurationvalue" />
+         <id property="periodduration" column="periodduration" />
+         <id property="perioddurationvalue" column="perioddurationvalue" />
+         <id property="periodsoflesson" column="periodsoflesson" />
+         <id property="courselevel" column="courselevel" />
+         <id property="coachtype" column="coachtype" />
+         <id property="grouptype" column="grouptype" />
+         <id property="classtype" column="classtype" />
+         <id property="minpeoples" column="minpeoples" />
+         <id property="maxpeoples" column="maxpeoples" />
+         <id property="incomebelonging" column="incomebelonging" />
+         <id property="iscrosscampus" column="iscrosscampus" />
   </resultMap>
   <!-- 默认新增 -->
   <insert id="post" parameterType="com.yt.app.api.v1.entity.Products">
-  insert into products (id,rdorgid,rdorgname,productcode,productname,productmemo,productstatus,productversion,productprice,productcost,productunit,targetprice,targetpricememo,catalog,subject,grade,year,season,startdate,enddate,partnerid,partnerratio,partnername,specialallowed,tunlandallowed,presentallowed,promotionallowed,promotionquota,confirmstartdate,confirmenddate,confirmmode,confirmstaging,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime)
-         values (#{id},#{rdorgid},#{rdorgname},#{productcode},#{productname},#{productmemo},#{productstatus},#{productversion},#{productprice},#{productcost},#{productunit},#{targetprice},#{targetpricememo},#{catalog},#{subject},#{grade},#{year},#{season},#{startdate},#{enddate},#{partnerid},#{partnerratio},#{partnername},#{specialallowed},#{tunlandallowed},#{presentallowed},#{promotionallowed},#{promotionquota},#{confirmstartdate},#{confirmenddate},#{confirmmode},#{confirmstaging},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{submittime},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime})
+  insert into products (id,rdorgid,rdorgname,productcode,productname,productmemo,productstatus,productversion,productprice,productcost,productunit,targetprice,targetpricememo,catalog,subject,grade,year,season,startdate,enddate,partnerid,partnerratio,partnername,specialallowed,tunlandallowed,presentallowed,promotionallowed,promotionquota,confirmstartdate,confirmenddate,confirmmode,confirmstaging,submitterid,submittername,submitterjobid,submitterjobname,submittime,approverid,approvername,approverjobid,approverjobname,approvetime,creatorid,creatorname,createtime,modifierid,modifiername,modifytime,lessoncount,lessonduration,lessondurationvalue,periodduration,perioddurationvalue,periodsoflesson,courselevel,coachtype,grouptype,classtype,minpeoples,maxpeoples,incomebelonging,iscrosscampus)
+         values (#{id},#{rdorgid},#{rdorgname},#{productcode},#{productname},#{productmemo},#{productstatus},#{productversion},#{productprice},#{productcost},#{productunit},#{targetprice},#{targetpricememo},#{catalog},#{subject},#{grade},#{year},#{season},#{startdate},#{enddate},#{partnerid},#{partnerratio},#{partnername},#{specialallowed},#{tunlandallowed},#{presentallowed},#{promotionallowed},#{promotionquota},#{confirmstartdate},#{confirmenddate},#{confirmmode},#{confirmstaging},#{submitterid},#{submittername},#{submitterjobid},#{submitterjobname},#{submittime},#{approverid},#{approvername},#{approverjobid},#{approverjobname},#{approvetime},#{creatorid},#{creatorname},#{createtime},#{modifierid},#{modifiername},#{modifytime},#{lessoncount},#{lessonduration},#{lessondurationvalue},#{periodduration},#{perioddurationvalue},#{periodsoflesson},#{courselevel},#{coachtype},#{grouptype},#{classtype},#{minpeoples},#{maxpeoples},#{incomebelonging},#{iscrosscampus})
   </insert>
   <!-- 默认删除id对象 -->
  <delete id="delete" parameterType="java.lang.String">
@@ -213,7 +227,49 @@
                    modifiername = #{modifiername},
              </if>
              <if test="modifytime != null">
-                   modifytime = #{modifytime}
+                   modifytime = #{modifytime},
+             </if>
+             <if test="lessoncount != null">
+                   lessoncount = #{lessoncount},
+             </if>
+             <if test="lessonduration != null">
+                   lessonduration = #{lessonduration},
+             </if>
+             <if test="lessondurationvalue != null">
+                   lessondurationvalue = #{lessondurationvalue},
+             </if>
+             <if test="periodduration != null">
+                   periodduration = #{periodduration},
+             </if>
+             <if test="perioddurationvalue != null">
+                   perioddurationvalue = #{perioddurationvalue},
+             </if>
+             <if test="periodsoflesson != null">
+                   periodsoflesson = #{periodsoflesson},
+             </if>
+             <if test="courselevel != null">
+                   courselevel = #{courselevel},
+             </if>
+             <if test="coachtype != null">
+                   coachtype = #{coachtype},
+             </if>
+             <if test="grouptype != null">
+                   grouptype = #{grouptype},
+             </if>
+             <if test="classtype != null">
+                   classtype = #{classtype},
+             </if>
+             <if test="minpeoples != null">
+                   minpeoples = #{minpeoples},
+             </if>
+             <if test="maxpeoples != null">
+                   maxpeoples = #{maxpeoples},
+             </if>
+             <if test="incomebelonging != null">
+                   incomebelonging = #{incomebelonging},
+             </if>
+             <if test="iscrosscampus != null">
+                   iscrosscampus = #{iscrosscampus}
              </if>
           </set>
      where id = #{id} and  version = #{version}

@@ -147,9 +147,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 		}
 		List<Role> loglist = mapper.list(param);
 		long[] obj = loglist.stream().mapToLong(Role::getType).distinct().toArray();
-//		long[] objmanage = loglist.stream().mapToLong(Role::getIs_manage).distinct().toArray();
+		// long[] objmanage =
+		// loglist.stream().mapToLong(Role::getIs_manage).distinct().toArray();
 		List<Dictionary> listd = dictionarymapper.listByArrayId(obj);
-//		List<Dictionary> listd2 = dictionarymapper.listByArrayId(objmanage);
+		// List<Dictionary> listd2 = dictionarymapper.listByArrayId(objmanage);
 
 		loglist.stream().forEach(Role -> {
 			listd.stream().forEach(Dictionary -> {
@@ -160,14 +161,12 @@ public class RoleServiceImpl extends BaseServiceImpl<Role, Long> implements Role
 			});
 		});
 
-		/*loglist.stream().forEach(Role -> {
-			listd2.stream().forEach(Dictionary -> {
-				if (Role.getIs_manage().longValue() == Dictionary.getCode().longValue()) {
-					Role.setIs_managename(Dictionary.getName());
-					return;
-				}
-			});
-		});*/
+		/*
+		 * loglist.stream().forEach(Role -> { listd2.stream().forEach(Dictionary
+		 * -> { if (Role.getIs_manage().longValue() ==
+		 * Dictionary.getCode().longValue()) {
+		 * Role.setIs_managename(Dictionary.getName()); return; } }); });
+		 */
 		return new PageBean<Role>(param, loglist, count);
 
 	}

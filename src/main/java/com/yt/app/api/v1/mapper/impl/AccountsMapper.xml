@@ -115,7 +115,7 @@
      select
         <include refid="Base_Column_List" />
         from accounts 
-        where id = #{id}
+        where customerid = #{id}
  </select>
   <!-- 默认集合 -->
  <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">

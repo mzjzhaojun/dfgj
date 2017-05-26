@@ -106,8 +106,9 @@ public class ProductsServiceImpl extends BaseServiceImpl<Products, Long> impleme
 	public Products get(Long id) {
 		Products t = mapper.get(id);
 		long[] dids = Arrays
-				.asList(t.getProductstatus(), t.getSubject(), t.getGrade(), t.getYear(), t.getSeason(), t.getSpecialallowed(), t.getTunlandallowed(),
-						t.getPresentallowed(), t.getPromotionallowed()).stream().mapToLong(Long::longValue).toArray();
+				.asList(t.getProductstatus(), t.getSubject(), t.getGrade(), t.getYear(), t.getSeason(), t.getCourselevel(), t.getCoachtype(),
+						t.getPresentallowed(), t.getPromotionallowed(), t.getGrouptype(), t.getClasstype()).stream().filter(l -> l != null)
+				.mapToLong(Long::longValue).toArray();
 		List<Dictionary> listd = dictionarymapper.listByArrayId(dids);
 		t.setCatalogname(categoriesmapper.get(t.getCatalog()).getCategoryname());
 		listd.forEach(d -> {
@@ -126,11 +127,17 @@ public class ProductsServiceImpl extends BaseServiceImpl<Products, Long> impleme
 			if (t.getSeason().longValue() == d.getCode().longValue()) {
 				t.setSeasonname(d.getName());
 			}
-			if (t.getSpecialallowed().longValue() == d.getCode().longValue()) {
-				t.setSpecialallowedname(d.getName());
+			if (t.getCourselevel() != null && t.getCourselevel().longValue() == d.getCode().longValue()) {
+				t.setCourselevelname(d.getName());
 			}
-			if (t.getTunlandallowed().longValue() == d.getCode().longValue()) {
-				t.setTunlandallowedname(d.getName());
+			if (t.getCoachtype() != null && t.getCoachtype().longValue() == d.getCode().longValue()) {
+				t.setCoachtypename(d.getName());
+			}
+			if (t.getGrouptype() != null && t.getGrouptype().longValue() == d.getCode().longValue()) {
+				t.setGrouptypename(d.getName());
+			}
+			if (t.getClasstype() != null && t.getClasstype().longValue() == d.getCode().longValue()) {
+				t.setClasstypename(d.getName());
 			}
 			if (t.getPresentallowed().longValue() == d.getCode().longValue()) {
 				t.setPresentallowedname(d.getName());

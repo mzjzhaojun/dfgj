@@ -104,7 +104,7 @@ public interface OrgstaffjobsMapper extends IBaseMapper<Orgstaffjobs> {
 	 */
 	@RedisCacheAnnotation(classs = Orgstaffjobs.class)
 	public List<Orgstaffjobs> listByArrayId(long[] id);
-	
+
 	/**
 	 * 获取指定的唯一标识符对应的持久化对象
 	 *
@@ -114,5 +114,5 @@ public interface OrgstaffjobsMapper extends IBaseMapper<Orgstaffjobs> {
 	 */
 	@RedisCacheAnnotation(classs = Orgstaffjobs.class)
 	public Orgstaffjobs getByStaffId(Long id);
-	
+
 }
