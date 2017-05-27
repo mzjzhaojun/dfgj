@@ -69,6 +69,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
 			Accounts ac = new Accounts();
 			ac.setCustomerid(t.getId());
 			ac.setAccountmoney(0);
+			ac.setCreatorid(t.getCreatorid());
+			ac.setCreatetime(new Date());
+			ac.setCreatorname(t.getCreatorname());
 			accountsmapper.post(ac);
 		}
 		return i;
@@ -198,6 +201,9 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
 			Accounts ac = new Accounts();
 			ac.setCustomerid(t.getId());
 			ac.setAccountmoney(0);
+			ac.setCreatorid(t.getCreatorid());
+			ac.setCreatetime(new Date());
+			ac.setCreatorname(t.getCreatorname());
 			accountsmapper.post(ac);
 		}
 		return this.get(t.getId());

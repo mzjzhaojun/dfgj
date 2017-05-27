@@ -73,6 +73,7 @@
 		$scope.formData3 = {};
 		$scope.formData4 = {};
 		$scope.formData5 = {};
+		$scope.formData6 = {};
 		$scope.formOrder = {};
 		$scope.formOrderItem = {};
 		$scope.formAccountChargeApplies = {};
@@ -85,7 +86,9 @@
 		$scope.formData4.discountprice = 0;
 		$scope.formData4.chargeprice = 0;
 		$scope.formData5.accountmoney = 0;
-
+		$scope.formData6.createTime = new Date();
+		$scope.formData6.creatorname = parent.getCookie('staffname');
+		$scope.formData6.campusname = parent.getCookie('campusname');
 		$scope.onReturn = function() {
 			history.go(-1);
 		}
@@ -450,10 +453,12 @@
 			$scope.formAccountChargeApplies.thisdiscountid = $scope.formData4.thisdiscountid;
 			$scope.formAccountChargeApplies.thisdiscountbase = $scope.formData4.thisdiscountbase;
 			$scope.formAccountChargeApplies.thisdiscountrate = $scope.formData4.thisdiscountrate;
+			$scope.formAccountChargeApplies.thisaccountmoney =  $scope.formData5.accountmoney + $scope.formData4.paidprice;
 			$scope.formAccountChargeApplies.chargemoney = $scope.formData4.chargeprice;
 			$scope.formAccountChargeApplies.paidmoney = $scope.formData4.paidprice;
-			$scope.formAccountChargeApplies.paytype = $scope.formData4.paytype;
-			$scope.formAccountChargeApplies.payticket = $scope.formData4.payticket;
+			$scope.formAccountChargeApplies.paytype = $scope.formData3.paytype;
+			$scope.formAccountChargeApplies.payticket = $scope.formData3.payticket;
+			$scope.formAccountChargeApplies.paymemo = $scope.formData3.paymemo;
 			$http({
 				url : parent.getMenuLinksHref("accountchargeappliespost"),
 				method : 'POST',
@@ -489,7 +494,6 @@
 			$scope.formOrder.educatorid = $("#educatorid").val();
 			$scope.formOrder.educatorname = $("#educatorname").val();
 			$scope.formOrder.chargeapplyid = $scope.formAccountChargeApplies.id;
-			$scope.formOrder.orderstatus = $scope.formData3.chargetype;
 			$http({
 				url : parent.getMenuLinksHref("orderspost"),
 				method : 'POST',
@@ -552,6 +556,28 @@
 				},
 				data : JSON.stringify(listdata)
 			}).success(function(data, status, headers, config) {
+				$scope.savaCustomerStaffCharges();
+			}).error(function(data, status, headers, config) {
+				response(status);
+			})
+		}
+
+		$scope.savaCustomerStaffCharges = function() {
+			$scope.formData1.customerid = $scope.formData.id;
+			$scope.formData1.chargetype = $scope.formData3.chargetype;
+			$scope.formData1.paidprice = $scope.formData4.paidprice;
+			$scope.formData1.campusid = parent.getCookie('campusid');
+			$scope.formData1.orderid = $scope.formOrder;
+			$http({
+				url : parent.getMenuLinksHref("customerstaffchargessava"),
+				method : 'POST',
+				dataType : "json",
+				withCredentials : true,
+				headers : {
+					'Content-Type' : 'application/json;charset=UTF-8;'
+				},
+				data : JSON.stringify($scope.formData1)
+			}).success(function(data, status, headers, config) {
 
 			}).error(function(data, status, headers, config) {
 				response(status);
@@ -586,6 +612,9 @@
 						list[i].quota = 0;
 					}
 				}
+				$scope.formData4.thisdiscountid = newValue.discountid;
+				$scope.formData4.thisdiscountbase = newValue.discountstandard;
+				$scope.formData4.thisdiscountrate = newValue.discountvalue;
 				$scope.formData4.discountprice = count;
 			} else if (list.length) {
 				parent.art.dialog({
@@ -657,6 +686,12 @@
 		});
 
 		$scope.initselect();
+
+		///////////////////////////
+
+		$scope.paytypeChange = function(data) {
+			$scope.formData6.paytypename = $("#paytype").find("option:selected").text();
+		}
 
 		//////////////////////////////////////////////////////////////////////////
 		$scope.initSelectCustomer = function() {
@@ -754,6 +789,7 @@
 		var appElement = document.querySelector('[ng-controller=controller]');
 		var $scope = angular.element(appElement).scope();
 		if (parent.getDateChild().id != undefined) {
+			$scope.formData1.consultantid = parent.getDateChild().id;
 			$("#consultantid").val(parent.getDateChild().id);
 		}
 		if (parent.getDateChild().name != undefined) {
@@ -764,30 +800,42 @@
 	}
 
 	function backfunctioneducator() {
+		var appElement = document.querySelector('[ng-controller=controller]');
+		var $scope = angular.element(appElement).scope();
 		if (parent.getDateChild().id != undefined) {
+			$scope.formData1.educatorid = parent.getDateChild().id;
 			$("#educatorid").val(parent.getDateChild().id);
 		}
 		if (parent.getDateChild().name != undefined) {
+			$scope.formData1.educatorname = parent.getDateChild().name;
 			$("#educatorname").val(parent.getDateChild().name);
 		}
 		parent.removeDateChild();
 	}
 
 	function backfunctionmarketing() {
+		var appElement = document.querySelector('[ng-controller=controller]');
+		var $scope = angular.element(appElement).scope();
 		if (parent.getDateChild().id != undefined) {
+			$scope.formData1.marketingid = parent.getDateChild().id;
 			$("#marketingid").val(parent.getDateChild().id);
 		}
 		if (parent.getDateChild().name != undefined) {
+			$scope.formData1.marketingname = parent.getDateChild().name;
 			$("#marketingname").val(parent.getDateChild().name);
 		}
 		parent.removeDateChild();
 	}
 
 	function backfunctioncallcenter() {
+		var appElement = document.querySelector('[ng-controller=controller]');
+		var $scope = angular.element(appElement).scope();
 		if (parent.getDateChild().id != undefined) {
+			$scope.formData1.callcenterid = parent.getDateChild().id;
 			$("#callcenterid").val(parent.getDateChild().id);
 		}
 		if (parent.getDateChild().name != undefined) {
+			$scope.formData1.callcentername = parent.getDateChild().name;
 			$("#callcentername").val(parent.getDateChild().name);
 		}
 		parent.removeDateChild();
@@ -1180,18 +1228,18 @@
 						</select> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">支付方式</span> <select class="form-control required" name="paytype" ng-model="formData3.paytype"
-							ng-options="data.code as data.name for data in selects  | filter: {typecode: '650'}">
+						<span class="input-group-addon text-right spanwidth">支付方式</span> <select class="form-control required" id="paytype" name="paytype" ng-model="formData3.paytype"
+							ng-change="paytypeChange(formData3.paytype)" ng-options="data.code as data.name for data in selects  | filter: {typecode: '650'}">
 							<option value=''>请选择</option>
 						</select> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">发票编号</span> <input type="text" class="form-control required" placeholder="发票编号" name="payticket"
+						<span class="input-group-addon text-right spanwidth">发票编号</span> <input type="text" class="form-control required" placeholder="发票(小票)编号" name="payticket"
 							ng-model="formData3.payticket" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
 					</div>
 					<div class="input-group input-group-sm">
-						<span class="input-group-addon text-right spanwidth">付款卡号</span> <input type="text" class="form-control required" placeholder="付款卡号" name="customername"
-							ng-model="formData3.chargetype" maxlength="128"> <span class="input-group-addon verifyprompt">*</span>
+						<span class="input-group-addon text-right spanwidth">支付说明</span> <input type="text" class="form-control" placeholder="支付说明" name="paymemo"
+							ng-model="formData3.paymemo" maxlength="128">
 					</div>
 				</div>
 				<div class="col-lg-6" style="top: 1px; left: 10px;">
@@ -1286,23 +1334,23 @@
 						<tbody>
 							<tr>
 								<td>收款</td>
-								<td colspan="13" style="text-align: left; padding-left: 5px;">南京明素教育</td>
+								<td colspan="13" style="text-align: left; padding-left: 5px;">{{formData6.campusname}}</td>
 							</tr>
 							<tr>
 								<td>学员姓名</td>
-								<td colspan="2" style="text-align: left; padding-left: 5px;">马小军</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">{{formData.customername}}</td>
 								<td>学员电话</td>
-								<td colspan="2" style="text-align: left; padding-left: 5px;">17602509185</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">{{formData.customerprimaryphonenumber}}</td>
 								<td>缴费日期</td>
-								<td colspan="7" style="text-align: left; padding-left: 5px;">2017-5-20</td>
+								<td colspan="7" style="text-align: left; padding-left: 5px;">{{formData6.createTime|date:'yyyy/MM/dd HH:mm:ss'}}</td>
 							</tr>
 							<tr>
 								<td>收款人</td>
-								<td colspan="2" style="text-align: left; padding-left: 5px;">财务王</td>
-								<td>缴费方式</td>
-								<td colspan="2" style="text-align: left; padding-left: 5px;">支付宝</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">{{formData6.creatorname}}</td>
+								<td>支付方式</td>
+								<td colspan="2" style="text-align: left; padding-left: 5px;">{{formData6.paytypename}}</td>
 								<td>票据号</td>
-								<td colspan="7" style="text-align: left; padding-left: 5px;">12312312</td>
+								<td colspan="7" style="text-align: left; padding-left: 5px;">{{formData3.payticket}}</td>
 							</tr>
 							<tr>
 								<th>序号</th>

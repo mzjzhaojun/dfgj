@@ -97,6 +97,7 @@ public class Accountchargeapplies implements Serializable {
 	String allotsubjects;
 	Long paytype;
 	String payticket;
+	String paymemo;
 
 	public Accountchargeapplies() {
 	}

@@ -18,22 +18,22 @@ public class Customerstaffcharges implements Serializable {
 
 	Long id;
 	Integer version;
+	Long orderid;
 	Long customerid;
 	Long staffid;
 	java.util.Date statlocaldate;
 	Long campusid;
-	String relationtype;
-	Object newchargeamount;
-	Object renewamount;
-	Object refundamount;
+	Long relationtype;
+	float newchargeamount;
+	float renewamount;
+	float refundamount;
 
 	public Customerstaffcharges() {
 	}
 
-	public Customerstaffcharges(Long id, Integer version, Long customerid, Long staffid, java.util.Date statlocaldate, Long campusid,
-			String relationtype, Object newchargeamount, Object renewamount, Object refundamount) {
-		this.id = id;
-		this.version = version;
+	public Customerstaffcharges(Long orderid, Long customerid, Long staffid, java.util.Date statlocaldate, Long campusid, Long relationtype,
+			float newchargeamount, float renewamount, float refundamount) {
+		this.orderid = orderid;
 		this.customerid = customerid;
 		this.staffid = staffid;
 		this.statlocaldate = statlocaldate;

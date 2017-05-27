@@ -7,11 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.yt.app.api.v1.mapper.AccountchargeappliesMapper;
 import com.yt.app.api.v1.mapper.AccountchargepaymentsMapper;
+import com.yt.app.api.v1.mapper.AccountsMapper;
 import com.yt.app.api.v1.service.AccountchargeappliesService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
 import com.yt.app.common.resource.DictionaryResource;
 import com.yt.app.api.v1.entity.Accountchargeapplies;
 import com.yt.app.api.v1.entity.Accountchargepayments;
+import com.yt.app.api.v1.entity.Accounts;
 import com.yt.app.frame.m.IPage;
 import com.yt.app.frame.m.PageBean;
 import com.yt.app.frame.p.NumberUtil;
@@ -36,6 +38,9 @@ public class AccountchargeappliesServiceImpl extends BaseServiceImpl<Accountchar
 	@Autowired
 	private AccountchargepaymentsMapper accountchargepaymentsmapper;
 
+	@Autowired
+	private AccountsMapper accountsmapper;
+
 	@Override
 	@Transactional
 	public Integer post(Accountchargeapplies t) {
@@ -45,6 +50,19 @@ public class AccountchargeappliesServiceImpl extends BaseServiceImpl<Accountchar
 		t.setApplyno(NumberUtil.getOrderNo());
 		Integer i = mapper.post(t);
 		if (i > 0) {
+			Accounts ac = accountsmapper.get(t.getCustomerid());
+			if (t.getThisdiscountid() != null) {
+				ac.setDiscountid(t.getThisdiscountid());
+				ac.setDiscountbase(t.getThisdiscountbase());
+				ac.setDiscountrate(t.getThisdiscountrate());
+			}
+			if (ac.getFirstchargeapplyid() == null) {
+				ac.setFirstchargeapplyid(t.getId());
+				ac.setFirstchargepaytime(new Date());
+			}
+			ac.setChargeapplyid(t.getId());
+			ac.setChargepaytime(new Date());
+			accountsmapper.put(ac);
 			Accountchargepayments acpm = new Accountchargepayments();
 			acpm.setApplyid(t.getId());
 			acpm.setPayno(NumberUtil.getOrderNo());
@@ -61,6 +79,7 @@ public class AccountchargeappliesServiceImpl extends BaseServiceImpl<Accountchar
 			acpm.setCreatetime(new Date());
 			acpm.setCreatorid(t.getCreatorid());
 			acpm.setCreatorname(t.getCreatorname());
+			acpm.setPaymemo(t.getPaymemo());
 			accountchargepaymentsmapper.post(acpm);
 		}
 		return i;

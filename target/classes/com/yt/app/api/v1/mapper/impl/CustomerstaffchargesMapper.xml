@@ -1,143 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yt.app.api.v1.mapper.CustomerstaffchargesMapper">
-  <!-- 数据库列 -->
-  <sql id="Base_Column_List">
-     id,version,customerid,staffid,statlocaldate,campusid,relationtype,newchargeamount,renewamount,refundamount
-  </sql>
-  <!-- 基础返回对象封装 -->
-  <resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerstaffcharges">
-         <id property="id" column="id" />
-         <id property="version" column="version" />
-         <id property="customerid" column="customerid" />
-         <id property="staffid" column="staffid" />
-         <id property="statlocaldate" column="statlocaldate" />
-         <id property="campusid" column="campusid" />
-         <id property="relationtype" column="relationtype" />
-         <id property="newchargeamount" column="newchargeamount" />
-         <id property="renewamount" column="renewamount" />
-         <id property="refundamount" column="refundamount" />
-  </resultMap>
-  <!-- 默认新增 -->
-  <insert id="post" parameterType="com.yt.app.api.v1.entity.Customerstaffcharges">
-  insert into customerstaffcharges (id,customerid,staffid,statlocaldate,campusid,relationtype,newchargeamount,renewamount,refundamount)
-         values (#{id},#{customerid},#{staffid},#{statlocaldate},#{campusid},#{relationtype},#{newchargeamount},#{renewamount},#{refundamount})
-  </insert>
-  <!-- 默认删除id对象 -->
- <delete id="delete" parameterType="java.lang.String">
-     delete from customerstaffcharges 
-     where id = #{id}
- </delete>
-  <!-- 默认更新id对象 -->
- <update id="put" parameterType="com.yt.app.api.v1.entity.Customerstaffcharges">
-    update customerstaffcharges
-         <set>
-             <if test="version != null">
-                   version = #{version}+1,
-             </if>
-             <if test="customerid != null">
-                   customerid = #{customerid},
-             </if>
-             <if test="staffid != null">
-                   staffid = #{staffid},
-             </if>
-             <if test="statlocaldate != null">
-                   statlocaldate = #{statlocaldate},
-             </if>
-             <if test="campusid != null">
-                   campusid = #{campusid},
-             </if>
-             <if test="relationtype != null">
-                   relationtype = #{relationtype},
-             </if>
-             <if test="newchargeamount != null">
-                   newchargeamount = #{newchargeamount},
-             </if>
-             <if test="renewamount != null">
-                   renewamount = #{renewamount},
-             </if>
-             <if test="refundamount != null">
-                   refundamount = #{refundamount}
-             </if>
-          </set>
-     where id = #{id} and  version = #{version}
- </update>
-  <!-- 默认获得id对象 -->
- <select id="get" parameterType="java.lang.String" resultMap="ResultMap">
-     select
-        <include refid="Base_Column_List" />
-        from customerstaffcharges 
-        where id = #{id}
- </select>
-  <!-- 默认集合 -->
- <select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
-       select
-        <include refid="Base_Column_List" />
-        from customerstaffcharges 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-             <if test="orderby != null and dir != null">
-           order by ${orderby} ${dir}
-             </if>
-             <if test="pageStart != null and pageEnd != null">
-           LIMIT #{pageStart},#{pageEnd}
-             </if>
-        </where>
- </select>
-  <!-- 默认返回MAP集合 -->
- <select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-       select
-        <include refid="Base_Column_List" />
-        from customerstaffcharges 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-             <if test="orderby != null and dir != null">
-           order by ${orderby} ${dir}
-             </if>
-             <if test="pageStart != null and pageEnd != null">
-           LIMIT #{pageStart},#{pageEnd}
-             </if>
-        </where>
- </select>
-  <!-- 默认集合统计 -->
- <select id="countlist" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from customerstaffcharges 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-        </where>
- </select>
-  <!-- 默认返回MAP集合统计 -->
- <select id="countmap" parameterType="java.util.HashMap" resultType="int">
-       select count(*) from customerstaffcharges 
-        <where>
-        	1=1
-             <if test="name != null and name != ''">
-           and name like "%"#{name}"%"
-             </if>
-        </where>
- </select>
-  <!-- 默认获取Ids的对象 -->
- <select id="listByArrayId" parameterType="java.util.HashMap" resultMap="ResultMap">
-       select
-        <include refid="Base_Column_List" />
-        from customerstaffcharges 
-        <where>
-        1=1
-             <if test="array != null and array != ''">
-       	and id in
-        	<foreach item="item" index="index" collection="array" open="(" separator="," close=")">
-           	#{item}
-        	</foreach>
-             </if>
-        </where>
- </select>
+	<!-- 数据库列 -->
+	<sql id="Base_Column_List">
+		id,version,orderid,customerid,staffid,statlocaldate,campusid,relationtype,newchargeamount,renewamount,refundamount
+	</sql>
+	<!-- 基础返回对象封装 -->
+	<resultMap id="ResultMap" type="com.yt.app.api.v1.entity.Customerstaffcharges">
+		<id property="id" column="id" />
+		<id property="version" column="version" />
+		<id property="orderid" column="orderid" />
+		<id property="customerid" column="customerid" />
+		<id property="staffid" column="staffid" />
+		<id property="statlocaldate" column="statlocaldate" />
+		<id property="campusid" column="campusid" />
+		<id property="relationtype" column="relationtype" />
+		<id property="newchargeamount" column="newchargeamount" />
+		<id property="renewamount" column="renewamount" />
+		<id property="refundamount" column="refundamount" />
+	</resultMap>
+	<!-- 默认新增 -->
+	<insert id="post" parameterType="com.yt.app.api.v1.entity.Customerstaffcharges">
+		insert into customerstaffcharges
+		(id,orderid,customerid,staffid,statlocaldate,campusid,relationtype,newchargeamount,renewamount,refundamount)
+		values
+		(#{id},#{orderid},#{customerid},#{staffid},#{statlocaldate},#{campusid},#{relationtype},#{newchargeamount},#{renewamount},#{refundamount})
+	</insert>
+	<!-- 默认删除id对象 -->
+	<delete id="delete" parameterType="java.lang.String">
+		delete from
+		customerstaffcharges
+		where id = #{id}
+	</delete>
+	<!-- 默认更新id对象 -->
+	<update id="put" parameterType="com.yt.app.api.v1.entity.Customerstaffcharges">
+		update customerstaffcharges
+		<set>
+			<if test="version != null">
+				version = #{version}+1,
+			</if>
+			<if test="customerid != null">
+				customerid = #{customerid},
+			</if>
+			<if test="staffid != null">
+				staffid = #{staffid},
+			</if>
+			<if test="statlocaldate != null">
+				statlocaldate = #{statlocaldate},
+			</if>
+			<if test="campusid != null">
+				campusid = #{campusid},
+			</if>
+			<if test="relationtype != null">
+				relationtype = #{relationtype},
+			</if>
+			<if test="newchargeamount != null">
+				newchargeamount = #{newchargeamount},
+			</if>
+			<if test="renewamount != null">
+				renewamount = #{renewamount},
+			</if>
+			<if test="refundamount != null">
+				refundamount = #{refundamount}
+			</if>
+		</set>
+		where id = #{id} and version = #{version}
+	</update>
+	<!-- 默认获得id对象 -->
+	<select id="get" parameterType="java.lang.String" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from customerstaffcharges
+		where id = #{id}
+	</select>
+	<!-- 根据订单id查询 -->
+	<update id="putByOrderId" parameterType="com.yt.app.api.v1.entity.Customerstaffcharges">
+		update customerstaffcharges
+		<set>
+			<if test="version != null">
+				version = #{version}+1,
+			</if>
+			<if test="customerid != null">
+				customerid = #{customerid},
+			</if>
+			<if test="staffid != null">
+				staffid = #{staffid},
+			</if>
+			<if test="statlocaldate != null">
+				statlocaldate = #{statlocaldate},
+			</if>
+			<if test="campusid != null">
+				campusid = #{campusid},
+			</if>
+			<if test="relationtype != null">
+				relationtype = #{relationtype},
+			</if>
+			<if test="newchargeamount != null">
+				newchargeamount = #{newchargeamount},
+			</if>
+			<if test="renewamount != null">
+				renewamount = #{renewamount},
+			</if>
+			<if test="refundamount != null">
+				refundamount = #{refundamount}
+			</if>
+		</set>
+		where orderid = #{id} and version = #{version}
+	</update>
+	<!-- 默认集合 -->
+	<select id="list" parameterType="java.util.HashMap" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from customerstaffcharges
+		<where>
+			1=1
+			<if test="orderid != null and orderid != ''">
+				and orderid = #{orderid}
+			</if>
+			<if test="customerid != null and customerid != ''">
+				and customerid = #{customerid}
+			</if>
+			<if test="staffid != null and staffid != ''">
+				and staffid = #{staffid}
+			</if>
+			<if test="relationtype != null and relationtype != ''">
+				and relationtype = #{relationtype}
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合 -->
+	<select id="map" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select
+		<include refid="Base_Column_List" />
+		from customerstaffcharges
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+			<if test="orderby != null and dir != null">
+				order by ${orderby} ${dir}
+			</if>
+			<if test="pageStart != null and pageEnd != null">
+				LIMIT #{pageStart},#{pageEnd}
+			</if>
+		</where>
+	</select>
+	<!-- 默认集合统计 -->
+	<select id="countlist" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from customerstaffcharges
+		<where>
+			1=1
+			<if test="orderid != null and orderid != ''">
+				and orderid = #{orderid}
+			</if>
+			<if test="customerid != null and customerid != ''">
+				and customerid = #{customerid}
+			</if>
+			<if test="staffid != null and staffid != ''">
+				and staffid = #{staffid}
+			</if>
+			<if test="relationtype != null and relationtype != ''">
+				and relationtype = #{relationtype}
+			</if>
+		</where>
+	</select>
+	<!-- 默认返回MAP集合统计 -->
+	<select id="countmap" parameterType="java.util.HashMap"
+		resultType="int">
+		select count(*) from customerstaffcharges
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	<!-- 默认获取Ids的对象 -->
+	<select id="listByArrayId" parameterType="java.util.HashMap"
+		resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from customerstaffcharges
+		<where>
+			1=1
+			<if test="array != null and array != ''">
+				and id in
+				<foreach item="item" index="index" collection="array" open="("
+					separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
 </mapper>

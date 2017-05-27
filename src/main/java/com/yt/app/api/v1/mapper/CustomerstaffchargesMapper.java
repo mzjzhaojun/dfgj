@@ -104,4 +104,15 @@ public interface CustomerstaffchargesMapper extends IBaseMapper<Customerstaffcha
 	 */
 	@RedisCacheAnnotation(classs = Customerstaffcharges.class)
 	public List<Customerstaffcharges> listByArrayId(long[] id);
+
+	/**
+	 * 更新（持久化）对象
+	 * 
+	 * @param o
+	 *            要持久化的对象
+	 * @return 执行成功的记录个数
+	 */
+	@RedisCacheEvictAnnotation(classs = { Customerstaffcharges.class })
+	public Integer putByOrderId(Object t);
+
 }

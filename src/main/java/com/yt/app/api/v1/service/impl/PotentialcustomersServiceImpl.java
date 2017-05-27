@@ -248,6 +248,9 @@ public class PotentialcustomersServiceImpl extends BaseServiceImpl<Potentialcust
 				Accounts ac = new Accounts();
 				ac.setCustomerid(c.getId());
 				ac.setAccountmoney(0);
+				ac.setCreatorid(p.getCreatorid());
+				ac.setCreatetime(new Date());
+				ac.setCreatorname(p.getCreatorname());
 				accountsmapper.post(ac);
 			}
 		}

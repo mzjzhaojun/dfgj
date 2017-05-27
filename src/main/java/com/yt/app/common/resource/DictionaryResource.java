@@ -256,22 +256,22 @@ public class DictionaryResource implements Serializable {
 	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2142 = 2142L;
 
 	/**
-	 * 前期结课续费
+	 * 结课续费
 	 */
 	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2143 = 2143L;
 
 	/**
-	 * 前期非结课续费
+	 * 非结课续费
 	 */
 	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2144 = 2144L;
 
 	/**
-	 * 后期结课续费
+	 * 结课退费
 	 */
 	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2145 = 2145L;
 
 	/**
-	 * 后期非结课续费
+	 * 非结课退费
 	 */
 	public static final Long ACCOUNTCHARGEAPPLIES_CHARGETYPE_2146 = 2146L;
 
@@ -285,4 +285,30 @@ public class DictionaryResource implements Serializable {
 	 * 未支付
 	 */
 	public static final Long ACCOUNTCHARGEAPPLIES_PAYSTATUS_2152 = 2152L;
+
+	// 员工学员关系
+	/**
+	 * 咨询关系
+	 */
+	public static final Long CUSTOMERSTAFFCHARGES_RELATIONTYPE_2141 = 2201L;
+
+	/**
+	 * 教管关系
+	 */
+	public static final Long CUSTOMERSTAFFCHARGES_RELATIONTYPE_2142 = 2202L;
+
+	/**
+	 * 教学关系
+	 */
+	public static final Long CUSTOMERSTAFFCHARGES_RELATIONTYPE_2143 = 2203L;
+
+	/**
+	 * 电销关系
+	 */
+	public static final Long CUSTOMERSTAFFCHARGES_RELATIONTYPE_2144 = 2204L;
+
+	/**
+	 * 市场关系
+	 */
+	public static final Long CUSTOMERSTAFFCHARGES_RELATIONTYPE_2145 = 2205L;
 }

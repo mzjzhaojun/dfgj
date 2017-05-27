@@ -38,7 +38,7 @@
 	<logger name="org.springframework.session.data.redis.RedisSessionExpirationPolicy" level="info">
 		<appender-ref ref="Console" />
 	</logger>
-	<root level="debug">
+	<root level="error">
 		<appender-ref ref="Console" />
 	</root>
 </configuration>

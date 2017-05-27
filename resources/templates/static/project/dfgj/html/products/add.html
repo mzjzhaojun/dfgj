@@ -107,6 +107,15 @@
 
 		$scope.initselect();
 		$scope.initcatalog();
+
+		$scope.onChange = function(data) {
+			if (data == "21") {
+				$("#promotionquota").attr("disabled", false);
+			} else {
+				$("#promotionquota").attr("disabled", "disabled");
+			}
+
+		}
 	})
 
 	function backfunctionorg() {
@@ -223,13 +232,14 @@
 			</div>
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">允许优惠</span> <select class="form-control required" name="promotionallowed"
-					ng-model="formData.promotionallowed" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+					ng-model="formData.promotionallowed" ng-change="onChange(formData.promotionallowed)"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
 					<option value=''>请选择</option>
 				</select> <span class="input-group-addon verifyprompt">*</span>
 			</div>
 			<div class="input-group input-group-sm">
-				<span class="input-group-addon text-right spanwidth">优惠限额</span> <input type="text" class="form-control number" placeholder="请输入优惠限额"
-					name="promotionquota" ng-model="formData.promotionquota" maxlength="11">
+				<span class="input-group-addon text-right spanwidth">优惠限额</span> <input type="text" class="form-control number" placeholder="请输入优惠限额" id="promotionquota"
+					name="promotionquota" ng-model="formData.promotionquota" maxlength="11" disabled>
 			</div>
 		</div>
 		<div class="col-lg-6">

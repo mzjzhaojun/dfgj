@@ -60,8 +60,8 @@
 				$scope.formData.enddate = $("#enddate").val();
 				$scope.formData.modifierid = parent.getCookie('staffid');
 				$scope.formData.modifiername = parent.getCookie('staffname');
-				$scope.formData.perioddurationvalue =  $("#periodduration option:selected").text();
-				$scope.formData.lessondurationvalue =  $("#lessonduration option:selected").text();
+				$scope.formData.perioddurationvalue = $("#periodduration option:selected").text();
+				$scope.formData.lessondurationvalue = $("#lessonduration option:selected").text();
 				$http({
 					url : parent.getFunctionLinksHref("self"),
 					method : 'PUT',
@@ -119,6 +119,15 @@
 
 		$scope.initselect();
 		$scope.initcatalog();
+
+		$scope.onChange = function(data) {
+			if (data == "21") {
+				$("#promotionquota").attr("disabled", false);
+			} else {
+				$("#promotionquota").attr("disabled", "disabled");
+			}
+
+		}
 	})
 
 	function backfunctionorg() {
@@ -235,7 +244,8 @@
 			</div>
 			<div class="input-group input-group-sm">
 				<span class="input-group-addon text-right spanwidth">允许优惠</span> <select class="form-control required" name="promotionallowed"
-					ng-model="formData.promotionallowed" ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
+					ng-change="onChange(formData.promotionallowed)" ng-model="formData.promotionallowed"
+					ng-options="data.code as data.name for data in selects  | filter: {typecode: '20'}">
 					<option value=''>请选择</option>
 				</select> <span class="input-group-addon verifyprompt">*</span>
 			</div>

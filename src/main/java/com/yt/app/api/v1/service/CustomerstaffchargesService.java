@@ -1,5 +1,7 @@
 package com.yt.app.api.v1.service;
 
+import java.util.Map;
+
 import com.yt.app.api.v1.entity.Customerstaffcharges;
 import com.yt.app.common.base.IBaseService;
 
@@ -11,4 +13,11 @@ import com.yt.app.common.base.IBaseService;
  */
 
 public interface CustomerstaffchargesService extends IBaseService<Customerstaffcharges, Long> {
+
+	/**
+	 * 
+	 * @param parm
+	 * @return
+	 */
+	Integer sava(Map<String, Object> parm);
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yt.app.api.v1.mapper.OrdersMapper;
 import com.yt.app.api.v1.service.OrdersService;
 import com.yt.app.common.base.impl.BaseServiceImpl;
+import com.yt.app.common.resource.DictionaryResource;
 import com.yt.app.api.v1.entity.Orders;
 import com.yt.app.frame.m.IPage;
 import com.yt.app.frame.m.PageBean;
@@ -42,7 +43,9 @@ public class OrdersServiceImpl extends BaseServiceImpl<Orders, Long> implements 
 	@Transactional
 	public Long sava(Orders t) {
 		t.setCreatetime(new Date());
+		t.setOrdertime(new Date());
 		t.setOrderno(NumberUtil.getOrderNo());
+		t.setOrderstatus(DictionaryResource.ACCOUNTCHARGEAPPLIES_CHARGETYPE_2141);
 		mapper.post(t);
 		return t.getId();
 	}
